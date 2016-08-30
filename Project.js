@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Image,
   Linking,
   StyleSheet,
   Text,
@@ -9,7 +10,7 @@ import {
 
 class Project extends Component {
   handleClick() {
-    const zurl='http://zooniverse.org'
+    const zurl=`http://zooniverse.org/projects/${this.props.project.slug}`
     Linking.canOpenURL(zurl).then(supported => {
       if (supported) {
         Linking.openURL(zurl);
@@ -20,31 +21,52 @@ class Project extends Component {
   }
 
   render() {
+    const imageURI = `https://${this.props.project.avatar_src}`
     return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={this.handleClick}>
-          <Text style={styles.project}>{this.props.title}</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        onPress={this.handleClick.bind(this)}>
+        <View style={styles.container}>
+          <View style={styles.leftContainer}>
+            <Image source={{uri: imageURI}} style={styles.avatar} />
+            <Text style={styles.title}>{this.props.project.display_name}</Text>
+          </View>
+          <Text style={styles.arrow}> > </Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomColor: 'black',
+    flex: 1,
+    alignItems: 'center',
+    borderBottomColor: 'grey',
     borderBottomWidth: StyleSheet.hairlineWidth,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 12,
-    marginLeft: 5,
-    paddingLeft: 25,
-    paddingRight: 25,
+    paddingLeft: 15,
+    paddingRight: 15,
     paddingBottom: 10
   },
-  project: {
+  leftContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+  title: {
     color: '#F9F9F9',
     fontSize: 20,
   },
+  avatar: {
+    height: 40,
+    marginRight: 10,
+    width: 40,
+  },
+  arrow: {
+    color: 'white'
+  }
 });
 
 export default Project
