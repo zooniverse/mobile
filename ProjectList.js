@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   Animated,
+  Dimensions,
   ListView,
   StyleSheet,
   Text,
@@ -10,6 +11,8 @@ import Orientation from 'react-native-orientation'
 import apiClient from 'panoptes-client/lib/api-client'
 import Project from './Project'
 import {MOBILE_PROJECTS} from './constants/mobile_projects'
+
+var {height, width} = Dimensions.get('window');
 
 var ProjectList = React.createClass({
   getInitialState: function() {
@@ -22,7 +25,7 @@ var ProjectList = React.createClass({
 
   componentDidMount() {
     this.getProjects()
-    Orientation.lockToPortrait()
+    Orientation.lockToPortrait
   },
 
   getDataSource(projects: Array<any>): ListView.DataSource {
@@ -78,7 +81,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 10,
     paddingTop: 32,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: width
   },
   title: {
     color: '#F9F9F9',
