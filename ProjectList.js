@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Alert,
   Dimensions,
   ListView,
   StyleSheet,
@@ -43,7 +44,10 @@ var ProjectList = React.createClass({
         });
       })
       .catch((error) => {
-        console.error(error);
+        Alert.alert(
+          'Error',
+          'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,
+        )
       })
   },
 
