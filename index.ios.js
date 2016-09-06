@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import ProjectList from './ProjectList'
 
+var backgroundColor = '#3B424C'
+
 class ZooniverseMobile extends Component {
   render() {
     return (
@@ -25,7 +27,7 @@ class ZooniverseMobile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3B424C'
+    backgroundColor: backgroundColor
   },
 });
 

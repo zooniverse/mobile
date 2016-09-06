@@ -8,6 +8,10 @@ import {
   View
 } from 'react-native';
 
+var textColor = '#F9F9F9'
+var borderColor = 'grey'
+var arrowColor = 'white'
+
 class Project extends Component {
   handleClick() {
     const zurl=`http://zooniverse.org/projects/${this.props.project.slug}`
@@ -41,7 +45,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    borderBottomColor: 'grey',
+    borderBottomColor: borderColor,
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   title: {
-    color: '#F9F9F9',
+    color: textColor,
     fontSize: 20,
   },
   avatar: {
@@ -65,8 +69,9 @@ const styles = StyleSheet.create({
     width: 40,
   },
   arrow: {
-    color: 'white'
+    color: arrowColor
   }
 });
 
+Project.propTypes = { project: React.PropTypes.object.isRequired }
 export default Project

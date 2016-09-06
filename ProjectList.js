@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
-  Animated,
   Dimensions,
   ListView,
   StyleSheet,
@@ -13,6 +12,10 @@ import Project from './Project'
 import {MOBILE_PROJECTS} from './constants/mobile_projects'
 
 var {height, width} = Dimensions.get('window');
+
+var textColor = '#F9F9F9'
+var backgroundColor = '#202020'
+var borderColor = 'grey'
 
 var ProjectList = React.createClass({
   getInitialState: function() {
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   titleContainer: {
-    backgroundColor: '#202020',
+    backgroundColor: backgroundColor,
     justifyContent: 'center',
     paddingBottom: 10,
     paddingTop: 32,
@@ -85,16 +88,16 @@ const styles = StyleSheet.create({
     width: width
   },
   title: {
-    color: '#F9F9F9',
+    color: textColor,
     fontSize: 22
   },
   subtitleContainer: {
-    borderBottomColor: 'grey',
+    borderBottomColor: borderColor,
     borderBottomWidth: StyleSheet.hairlineWidth,
     marginBottom: 15
   },
   subtitle: {
-    color: '#F9F9F9',
+    color: textColor,
     fontSize: 24,
     padding: 15,
   }
