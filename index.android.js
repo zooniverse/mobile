@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
   View
 } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet'
 import ProjectList from './ProjectList'
-
-var backgroundColor = '#3B424C'
 
 class ZooniverseMobile extends Component {
   render() {
@@ -18,12 +16,12 @@ class ZooniverseMobile extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    backgroundColor: backgroundColor
+    backgroundColor: '$appBackgroundColor'
   },
 });
 
