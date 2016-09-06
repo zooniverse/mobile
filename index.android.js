@@ -6,6 +6,8 @@ import {
 } from 'react-native';
 import ProjectList from './ProjectList'
 
+var backgroundColor = '#3B424C'
+
 class ZooniverseMobile extends Component {
   render() {
     return (
@@ -21,7 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    backgroundColor: '#3B424C'
+    backgroundColor: backgroundColor
   },
 });
 
