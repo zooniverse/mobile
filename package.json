@@ -13,5 +13,13 @@
     "react-native-extended-stylesheet": "^0.3.0",
     "react-native-orientation": "^1.17.0",
     "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-react": "^6.2.0",
+    "eslint-plugin-react-native": "^2.0.0",
+    "eslint-plugin-standard": "^2.0.0"
   }
 }
