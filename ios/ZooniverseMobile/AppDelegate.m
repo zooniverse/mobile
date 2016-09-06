@@ -8,6 +8,7 @@
  */
 
 #import "AppDelegate.h"
+#import "Orientation.h"
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
@@ -34,4 +35,7 @@
   return YES;
 }
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
+}
 @end

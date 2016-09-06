@@ -1,6 +1,10 @@
 package com.zooniversemobile;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+
 import com.facebook.react.ReactActivity;
+
 
 public class MainActivity extends ReactActivity {
 
@@ -11,5 +15,11 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "ZooniverseMobile";
+    }
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Intent intent = new Intent("onConfigurationChanged");
+        intent.putExtra("newConfig", newConfig);
+        this.sendBroadcast(intent);
     }
 }

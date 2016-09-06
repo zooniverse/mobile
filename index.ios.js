@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
+  StatusBar,
   StyleSheet,
   View
 } from 'react-native';
@@ -10,6 +11,11 @@ class ZooniverseMobile extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar
+          barStyle="light-content"
+          hidden={false}
+          translucent={false}
+        />
         <ProjectList />
       </View>
     );
@@ -19,10 +25,7 @@ class ZooniverseMobile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    backgroundColor: '#3B424C',
-    paddingTop: 22
+    backgroundColor: '#3B424C'
   },
 });
 

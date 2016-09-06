@@ -7,12 +7,12 @@ import {
   Text,
   View
 } from 'react-native'
+import Orientation from 'react-native-orientation'
 import apiClient from 'panoptes-client/lib/api-client'
 import Project from './Project'
 import {MOBILE_PROJECTS} from './constants/mobile_projects'
 
-var width = Dimensions.get('window').width
-var height = Dimensions.get('window').height
+var {height, width} = Dimensions.get('window');
 
 var ProjectList = React.createClass({
   getInitialState: function() {
@@ -25,6 +25,7 @@ var ProjectList = React.createClass({
 
   componentDidMount() {
     this.getProjects()
+    Orientation.lockToPortrait
   },
 
   getDataSource(projects: Array<any>): ListView.DataSource {
@@ -32,7 +33,7 @@ var ProjectList = React.createClass({
   },
 
   getProjects(){
-    apiClient.type('projects').get(MOBILE_PROJECTS)
+    apiClient.type('projects').get({id: MOBILE_PROJECTS, cards: true, sort: 'display_name'})
       .then((projects) => {
         this.setState({
           dataSource: this.getDataSource(projects),
@@ -45,19 +46,23 @@ var ProjectList = React.createClass({
 
   renderRow(project) {
     return (
-      <Project title={project.title} />
+      <Project project={project}/>
     );
   },
 
   render() {
     return (
-      <View>
-        <Text style={styles.title}>
-          Zooniverse
-        </Text>
-        <Text style={styles.subtitle}>
-          Mobile-friendly Projects
-        </Text>
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>
+            Zooniverse
+          </Text>
+        </View>
+        <View style={styles.subtitleContainer}>
+          <Text style={styles.subtitle}>
+            Mobile-friendly Projects
+          </Text>
+        </View>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
@@ -68,18 +73,31 @@ var ProjectList = React.createClass({
 });
 
 const styles = StyleSheet.create({
-  title: {
+  container: {
+    flex: 1
+  },
+  titleContainer: {
     backgroundColor: '#202020',
-    color: '#F9F9F9',
-    fontSize: 28,
-    padding: 15,
+    justifyContent: 'center',
+    paddingBottom: 10,
+    paddingTop: 32,
+    alignItems: 'center',
     width: width
+  },
+  title: {
+    color: '#F9F9F9',
+    fontSize: 22
+  },
+  subtitleContainer: {
+    borderBottomColor: 'grey',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginBottom: 15
   },
   subtitle: {
     color: '#F9F9F9',
     fontSize: 24,
     padding: 15,
-  },
+  }
 });
 
 module.exports = ProjectList
