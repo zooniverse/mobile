@@ -2,11 +2,11 @@ import React from 'react'
 import {
   Dimensions,
   ListView,
+  NetInfo,
   StyleSheet,
   Text,
   View
 } from 'react-native'
-import Orientation from 'react-native-orientation'
 import apiClient from 'panoptes-client/lib/api-client'
 import Project from './Project'
 import {MOBILE_PROJECTS} from './constants/mobile_projects'
@@ -17,23 +17,53 @@ var textColor = '#F9F9F9'
 var backgroundColor = '#202020'
 var borderColor = 'grey'
 
-var ProjectList = React.createClass({
-  getInitialState: function() {
-    return {
+class ProjectList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
-      })
-    };
-  },
+      }),
+      isConnected: null
+    }
+  }
 
   componentDidMount() {
-    this.getProjects()
-    Orientation.lockToPortrait
-  },
+    NetInfo.isConnected.addEventListener(
+        'change',
+        this._handleConnectivityChange
+    );
+
+    //this is always being set to false (even when connected) in iOS
+    //so, getProjects() will be called in handleConnectionChange
+    //Open issue: https://github.com/facebook/react-native/issues/8469
+    NetInfo.isConnected.fetch().done(
+      (isConnected) => {
+        this.setState({isConnected})
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    NetInfo.isConnected.removeEventListener(
+        'change',
+        this._handleConnectivityChange
+    );
+  }
+
+  _handleConnectivityChange = (isConnected) => {
+    this.setState({
+      isConnected,
+    })
+
+    if ((isConnected === true) && (this.state.dataSource.getRowCount() === 0)){
+      this.getProjects()
+    }
+  }
 
   getDataSource(projects: Array<any>): ListView.DataSource {
     return this.state.dataSource.cloneWithRows(projects);
-  },
+  }
 
   getProjects(){
     apiClient.type('projects').get({id: MOBILE_PROJECTS, cards: true, sort: 'display_name'})
@@ -45,15 +75,26 @@ var ProjectList = React.createClass({
       .catch((error) => {
         console.error(error);
       })
-  },
+  }
 
   renderRow(project) {
     return (
       <Project project={project}/>
     );
-  },
+  }
 
   render() {
+    const projectList =
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderRow}
+      />
+
+    const noConnection =
+      <Text style={styles.message}>
+        You must have an internet connection to use Zooniverse Mobile
+      </Text>
+
     return (
       <View style={styles.container}>
         <View style={styles.titleContainer}>
@@ -66,14 +107,11 @@ var ProjectList = React.createClass({
             Mobile-friendly Projects
           </Text>
         </View>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
-        />
+        { this.state.isConnected ? projectList : noConnection }
       </View>
     );
   }
-});
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -100,7 +138,14 @@ const styles = StyleSheet.create({
     color: textColor,
     fontSize: 24,
     padding: 15,
+  },
+  message: {
+    color: textColor,
+    fontSize: 16,
+    fontStyle: 'italic',
+    lineHeight: 24,
+    padding: 15,
   }
 });
 
-module.exports = ProjectList
+export default ProjectList
