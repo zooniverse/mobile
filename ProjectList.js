@@ -6,16 +6,13 @@ import {
   Text,
   View
 } from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import Orientation from 'react-native-orientation'
 import apiClient from 'panoptes-client/lib/api-client'
 import Project from './Project'
 import {MOBILE_PROJECTS} from './constants/mobile_projects'
 
 var {height, width} = Dimensions.get('window');
-
-var textColor = '#F9F9F9'
-var backgroundColor = '#202020'
-var borderColor = 'grey'
 
 var ProjectList = React.createClass({
   getInitialState: function() {
@@ -75,12 +72,12 @@ var ProjectList = React.createClass({
   }
 });
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1
   },
   titleContainer: {
-    backgroundColor: backgroundColor,
+    backgroundColor: '$backgroundColor',
     justifyContent: 'center',
     paddingBottom: 10,
     paddingTop: 32,
@@ -88,16 +85,16 @@ const styles = StyleSheet.create({
     width: width
   },
   title: {
-    color: textColor,
+    color: '$textColor',
     fontSize: 22
   },
   subtitleContainer: {
-    borderBottomColor: borderColor,
+    borderBottomColor: '$borderColor',
     borderBottomWidth: StyleSheet.hairlineWidth,
     marginBottom: 15
   },
   subtitle: {
-    color: textColor,
+    color: '$textColor',
     fontSize: 24,
     padding: 15,
   }

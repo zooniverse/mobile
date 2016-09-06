@@ -7,10 +7,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-
-var textColor = '#F9F9F9'
-var borderColor = 'grey'
-var arrowColor = 'white'
+import EStyleSheet from 'react-native-extended-stylesheet'
 
 class Project extends Component {
   handleClick() {
@@ -41,11 +38,11 @@ class Project extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    borderBottomColor: borderColor,
+    borderBottomColor: '$borderColor',
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -60,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   title: {
-    color: textColor,
+    color: '$textColor',
     fontSize: 20,
   },
   avatar: {
@@ -69,7 +66,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
   arrow: {
-    color: arrowColor
+    color: '$arrowColor'
   }
 });
 
