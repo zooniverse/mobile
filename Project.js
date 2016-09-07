@@ -13,7 +13,7 @@ import GoogleAnalytics from 'react-native-google-analytics-bridge'
 
 class Project extends Component {
   handleClick() {
-    GoogleAnalytics.trackEvent('View Project', this.props.project.display_name);
+    GoogleAnalytics.trackEvent('view', this.props.project.display_name)
 
     const zurl=`http://zooniverse.org/projects/${this.props.project.slug}`
     Linking.canOpenURL(zurl).then(supported => {

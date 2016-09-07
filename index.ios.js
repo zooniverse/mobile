@@ -10,7 +10,7 @@ import theme from './theme'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 
 GoogleAnalytics.setTrackerId('UA-1224199-62')
-GoogleAnalytics.trackScreenView('Home')
+GoogleAnalytics.trackEvent('view', 'Home')
 
 class ZooniverseMobile extends Component {
   render() {
