@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ProjectList from './ProjectList'
+import theme from './theme'
 
 class ZooniverseMobile extends Component {
   render() {
@@ -25,4 +26,5 @@ const styles = EStyleSheet.create({
   },
 });
 
+EStyleSheet.build(theme);
 AppRegistry.registerComponent('ZooniverseMobile', () => ZooniverseMobile);
