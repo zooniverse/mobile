@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Alert,
   Image,
   Linking,
   StyleSheet,
@@ -16,7 +17,10 @@ class Project extends Component {
       if (supported) {
         Linking.openURL(zurl);
       } else {
-        console.log('Don\'t know how to open URI: ' + zurl);
+        Alert.alert(
+          'Error',
+          'Sorry, but it looks like you are unable to open the project in your default browser.',
+        )
       }
     });
   }
