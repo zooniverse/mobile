@@ -30,6 +30,7 @@ main.jsbundle
 .idea
 .gradle
 local.properties
+zooniverse-key.keystore
 
 # node.js
 #
