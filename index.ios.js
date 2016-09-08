@@ -6,7 +6,12 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ProjectList from './ProjectList'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import theme from './theme'
+import {GLOBALS} from './constants/globals'
+
+GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
+GoogleAnalytics.trackEvent('view', 'Home')
 
 class ZooniverseMobile extends Component {
   render() {

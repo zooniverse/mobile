@@ -1,0 +1,3 @@
+export const GLOBALS = {
+  GOOGLE_ANALYTICS_TRACKING: 'UA-1224199-62'
+}

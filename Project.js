@@ -9,9 +9,12 @@ import {
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 
 class Project extends Component {
   handleClick() {
+    GoogleAnalytics.trackEvent('view', this.props.project.display_name)
+
     const zurl=`http://zooniverse.org/projects/${this.props.project.slug}`
     Linking.canOpenURL(zurl).then(supported => {
       if (supported) {
