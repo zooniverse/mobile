@@ -10,7 +10,7 @@ import theme from './theme'
 import {GLOBALS} from './constants/globals'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
-GoogleAnalytics.trackScreenView('Home')
+GoogleAnalytics.trackEvent('view', 'Home')
 
 class ZooniverseMobile extends Component {
   render() {
