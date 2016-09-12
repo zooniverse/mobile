@@ -23,6 +23,7 @@ DerivedData
 project.xcworkspace
 main.jsbundle.meta
 main.jsbundle
+HockeySDK-iOS/
 
 # Android/IJ
 #
@@ -30,6 +31,7 @@ main.jsbundle
 .idea
 .gradle
 local.properties
+zooniverse-key.keystore
 
 # node.js
 #
