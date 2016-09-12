@@ -8,9 +8,11 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <Pusher/Pusher.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate :NSObject <UIApplicationDelegate, PTPusherDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) PTPusher *pusher;
 
 @end

@@ -20,7 +20,7 @@ To run in the simulator from the command line:
 react-native run-ios
 
 Using Xcode:
-Open iOS/ZooniverseMobile.xcodeproj in Xcode and press the run button (or `⌘-R`).
+Open iOS/ZooniverseMobile.xcworkspace in Xcode and press the run button (or `⌘-R`).
 
 ### Android
 To run in the simulator from the command line:

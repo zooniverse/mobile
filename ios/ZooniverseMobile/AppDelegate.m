@@ -13,12 +13,24 @@
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 
+#import <Pusher/Pusher.h>
+
 @import HockeySDK;
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  self.pusher = [PTPusher pusherWithKey:@"ed07dc711db7079f2401" delegate:self encrypted:YES];
+  
+  
+  UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+  UIUserNotificationSettings *pushNotificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories: NULL];
+  [application registerUserNotificationSettings:pushNotificationSettings];
+  [application registerForRemoteNotifications];
+  
+
   [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"a64221f0d73b46829478d405c90e6638"];
   // Do some additional configuration if needed here
   [[BITHockeyManager sharedHockeyManager] startManager];
@@ -46,4 +58,15 @@
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
   return [Orientation getOrientation];
 }
+
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  [[[self pusher] nativePusher] registerWithDeviceToken:deviceToken];
+  [[[self pusher] nativePusher] subscribe:@"general"];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
+  NSLog(@"Received remote notification: %@", notification);
+}
+
 @end
