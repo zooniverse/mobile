@@ -4,13 +4,8 @@ import {
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
-import theme from './src/theme'
-import {GLOBALS} from './src/constants/globals'
 import App from './src/containers/app'
-
-GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
-GoogleAnalytics.trackEvent('view', 'Home')
+import theme from './src/theme'
 
 class ZooniverseMobile extends Component {
   render() {
@@ -25,9 +20,6 @@ class ZooniverseMobile extends Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    backgroundColor: '$appBackgroundColor'
   },
 });
 

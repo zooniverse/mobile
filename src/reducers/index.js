@@ -1,14 +1,29 @@
 import { merge } from 'ramda'
 
 export const InitialState = {
-  userID: null
+  user: {},
+  isFetching: false,
+  errorMessage: null,
+  isConnected: null
 }
 
 export default function(state=InitialState, action) {
   switch (action.type) {
     case 'SET_USER':
       return merge(state, {
-        userID: action.id
+        user: action.user
+      })
+    case 'SET_IS_FETCHING':
+      return merge(state, {
+        isFetching: action.isFetching
+      })
+    case 'SET_ERROR':
+      return merge(state, {
+        errorMessage: action.errorMessage
+      })
+    case 'SET_IS_CONNECTED':
+      return merge(state, {
+        isConnected: action.isConnected
       })
     default:
       return InitialState;

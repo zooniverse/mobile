@@ -3,13 +3,13 @@ import {
   Alert,
   Image,
   Linking,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 class Project extends Component {
   handleClick() {
@@ -31,49 +31,65 @@ class Project extends Component {
   render() {
     const imageURI = `https://${this.props.project.avatar_src}`
     return (
-      <TouchableOpacity
-        onPress={this.handleClick.bind(this)}>
-        <View style={styles.container}>
-          <View style={styles.leftContainer}>
-            <Image source={{uri: imageURI}} style={styles.avatar} />
-            <Text style={styles.title}>{this.props.project.display_name}</Text>
+      <View style={styles.container}>
+        <Image source={{uri: imageURI}} style={styles.avatar} />
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={this.handleClick.bind(this)}
+          style={styles.touchContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title} numberOfLines={1} ellipsizeMode={"tail"}>{this.props.project.display_name}</Text>
+            <Icon name="angle-right" style={styles.icon} />
           </View>
-          <Text style={styles.arrow}> > </Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
 
 const styles = EStyleSheet.create({
+  $boxHeight: 220,
+  $titleHeight: 36,
+  $borderRadius: 4,
   container: {
-    flex: 1,
-    alignItems: 'center',
-    borderBottomColor: '$borderColor',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 12,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingBottom: 10
-  },
-  leftContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'flex-start'
-  },
-  title: {
-    color: '$textColor',
-    fontSize: 20,
+    height: '$boxHeight + 12',
+    marginLeft: 10,
+    marginRight: 10,
   },
   avatar: {
-    height: 40,
-    marginRight: 10,
-    width: 40,
+    borderRadius: '$borderRadius',
+    flex: 1,
+    height: '$boxHeight',
+    resizeMode: 'cover'
   },
-  arrow: {
-    color: '$arrowColor'
+  touchContainer: {
+    position: 'relative',
+    bottom: '$titleHeight - 1'
+  },
+  titleContainer: {
+    borderBottomLeftRadius: '$borderRadius',
+    borderBottomRightRadius: '$borderRadius',
+    backgroundColor: '$projectTitleColor',
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingLeft: 15,
+    paddingRight: 15,
+    height: '$titleHeight',
+  },
+  title: {
+    backgroundColor: '$transparent',
+    color: '$textColor',
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: 20,
+    width: '100% - 60'
+  },
+  icon: {
+    backgroundColor: '$transparent',
+    color: '$textColor',
+    fontSize: 30,
+    width: 60
   }
 });
 
