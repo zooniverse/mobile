@@ -1,0 +1,6 @@
+project './ZooniverseMobile.xcodeproj'
+
+target 'ZooniverseMobile' do
+  pod 'SocketRocket'
+  pod 'libPusher', git: 'https://github.com/pusher/libPusher.git', branch: 'push-notifications'
+end
