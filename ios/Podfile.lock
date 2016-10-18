@@ -1,4 +1,7 @@
 PODS:
+  - HockeySDK (4.1.0):
+    - HockeySDK/AllFeaturesLib (= 4.1.0)
+  - HockeySDK/AllFeaturesLib (4.1.0)
   - libPusher (1.6.1):
     - libPusher/Core (= 1.6.1)
   - libPusher/Core (1.6.1):
@@ -6,6 +9,7 @@ PODS:
   - SocketRocket (0.5.1)
 
 DEPENDENCIES:
+  - HockeySDK
   - libPusher (from `https://github.com/pusher/libPusher.git`, branch `push-notifications`)
   - SocketRocket
 
@@ -20,9 +24,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/pusher/libPusher.git
 
 SPEC CHECKSUMS:
+  HockeySDK: 1249d4f1b3a9ce537a1517805bcf6fe121099d16
   libPusher: 1736d345c679c20c1c5315ced3d7a783bc140ee4
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: 62fc53a3009b6491b1a4b069fb0639f2b3035545
+PODFILE CHECKSUM: 4075d9b04bc824026862afeac195e112cc5391f1
 
 COCOAPODS: 1.0.1
