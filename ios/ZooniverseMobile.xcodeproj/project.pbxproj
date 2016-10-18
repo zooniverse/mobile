@@ -26,8 +26,6 @@
 		14F7F9D4AAA6EEC2AF1F4830 /* libPods-ZooniverseMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 051453304969ED18A9A5693A /* libPods-ZooniverseMobile.a */; };
 		2202F9D9A1D04E919F02ECA5 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C73F506380064039B0EF4F34 /* libRCTOrientation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		99CCFA871D81CCE000DE62AA /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CCFA841D81CCE000DE62AA /* HockeySDK.framework */; };
-		99CCFA881D81CCE000DE62AA /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 99CCFA861D81CCE000DE62AA /* HockeySDKResources.bundle */; };
 		99E051D41D7F633400052983 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051D31D7F633400052983 /* CoreData.framework */; };
 		99E051D61D7F633F00052983 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051D51D7F633F00052983 /* SystemConfiguration.framework */; };
 		99E051D81D7F634900052983 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051D71D7F634900052983 /* libz.tbd */; };
@@ -156,8 +154,6 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		99B247C07D08CC4E84220651 /* Pods-ZooniverseMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooniverseMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZooniverseMobile/Pods-ZooniverseMobile.release.xcconfig"; sourceTree = "<group>"; };
 		99C686741D958DE000FF0CB2 /* ZooniverseMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ZooniverseMobile.entitlements; path = ZooniverseMobile/ZooniverseMobile.entitlements; sourceTree = "<group>"; };
-		99CCFA841D81CCE000DE62AA /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
-		99CCFA861D81CCE000DE62AA /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		99E051D31D7F633400052983 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		99E051D51D7F633F00052983 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		99E051D71D7F634900052983 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -196,7 +192,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				2202F9D9A1D04E919F02ECA5 /* libRCTOrientation.a in Frameworks */,
 				11F09CB859174EC788E83797 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
-				99CCFA871D81CCE000DE62AA /* HockeySDK.framework in Frameworks */,
 				14F7F9D4AAA6EEC2AF1F4830 /* libPods-ZooniverseMobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,7 +306,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				99CCFA831D81CCE000DE62AA /* HockeySDK.embeddedframework */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -369,24 +363,6 @@
 				99AC04511D7626D400E303A3 /* libRCTOrientation.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		99CCFA831D81CCE000DE62AA /* HockeySDK.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				99CCFA841D81CCE000DE62AA /* HockeySDK.framework */,
-				99CCFA851D81CCE000DE62AA /* Resources */,
-			);
-			name = HockeySDK.embeddedframework;
-			path = "HockeySDK-iOS/HockeySDK.embeddedframework";
-			sourceTree = "<group>";
-		};
-		99CCFA851D81CCE000DE62AA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				99CCFA861D81CCE000DE62AA /* HockeySDKResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		99E051C31D7F618600052983 /* Products */ = {
@@ -651,7 +627,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				99CCFA881D81CCE000DE62AA /* HockeySDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
