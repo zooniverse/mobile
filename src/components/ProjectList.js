@@ -11,7 +11,9 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import apiClient from 'panoptes-client/lib/api-client'
 import Project from './Project'
-import {MOBILE_PROJECTS} from './constants/mobile_projects'
+import {MOBILE_PROJECTS} from '../constants/mobile_projects'
+import { connect } from 'react-redux'
+import { setUser } from '../actions/index';
 
 var {height, width} = Dimensions.get('window')
 
@@ -85,6 +87,7 @@ class ProjectList extends React.Component {
   }
 
   render() {
+    this.props.setUser('TODO')
     const projectList =
       <ListView
         dataSource={this.state.dataSource}
@@ -149,4 +152,14 @@ const styles = EStyleSheet.create({
   }
 });
 
-export default ProjectList
+const mapStateToProps = (state) => ({
+  userID: state.userID
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setUser(id) {
+    dispatch(setUser(id))
+  },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList)
