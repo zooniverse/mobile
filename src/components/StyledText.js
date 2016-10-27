@@ -31,6 +31,10 @@ const styles = EStyleSheet.create({
   },
   link: {
     color: '$headerColor'
+  },
+  largeLink: {
+    color: '$darkTextColor',
+    fontSize: 20,
   }
 });
 

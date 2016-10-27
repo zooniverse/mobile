@@ -30,6 +30,10 @@ class NavBar extends Component {
     Actions.pop()
   }
 
+  handleSideDrawer(){
+    Actions.refresh({key: 'drawer', open: true })
+  }
+
   render() {
     const containerHeight = (this.props.showAvatar ? height + 70 : height )
     const logo = <Image source={require('../../images/logo.png')} style={styles.logo} />
@@ -53,11 +57,13 @@ class NavBar extends Component {
         <Icon name="angle-left" style={styles.icon} />
       </TouchableOpacity>
 
-    //TODO: Implement side drawer
     const drawer =
-      <Text style={styles.rightIcon}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={this.handleSideDrawer.bind(this)}
+        style={styles.rightIcon}>
         <Icon name="bars" style={[styles.icon, styles.iconBar]} />
-      </Text>
+      </TouchableOpacity>
 
     return (
       <View style={[styles.navBarContainer, {height: containerHeight}]}>
@@ -95,14 +101,14 @@ const styles = EStyleSheet.create({
   },
   rightIcon: {
     position: 'absolute',
-    right: 12,
-    top: topPadding + 8
+    right: 0,
+    top: topPadding + 8,
   },
   icon: {
     backgroundColor: '$transparent',
     color: '$textColor',
     fontSize: 30,
-    width: 60
+    width: 40
   },
   iconBar: {
     fontSize: 24

@@ -11,6 +11,7 @@ import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/ProjectList'
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import SignIn from '../components/SignIn'
+import SideDrawer from '../components/SideDrawer'
 
 const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer)
 
@@ -28,12 +29,14 @@ export default class App extends Component {
     store.dispatch(setUserFromStore())
     return (
       <Provider store={store}>
-        <Router>
-          <Scene key="root">
-            <Scene key="ZooniverseApp" component={ZooniverseApp} initial />
-            <Scene key="ProjectDisciplines" component={ProjectDisciplines} />
-            <Scene key="ProjectList" component={ProjectList} />
-            <Scene key="SignIn" hideNavBar={true} component={SignIn} type="reset" />
+        <Router ref="router">
+          <Scene ref="drawer" key="drawer" component={SideDrawer} open={false}>
+            <Scene key="main" tabs={false} >
+              <Scene key="SignIn" hideNavBar={true} component={SignIn} type="reset" />
+              <Scene key="ZooniverseApp" component={ZooniverseApp} initial />
+              <Scene key="ProjectDisciplines" component={ProjectDisciplines} />
+              <Scene key="ProjectList" component={ProjectList} />
+            </Scene>
           </Scene>
         </Router>
       </Provider>
