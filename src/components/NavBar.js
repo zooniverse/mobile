@@ -21,6 +21,11 @@ const mapStateToProps = (state) => ({
 })
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props)
+    this.handleOnBack = this.handleOnBack.bind(this)
+  }
+
   handleOnBack(){
     Actions.pop()
   }
@@ -43,7 +48,7 @@ class NavBar extends Component {
     const back =
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={this.handleOnBack.bind(this)}
+        onPress={this.handleOnBack}
         style={styles.leftIcon}>
         <Icon name="angle-left" style={styles.icon} />
       </TouchableOpacity>

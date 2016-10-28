@@ -12,6 +12,11 @@ import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 class Project extends Component {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   handleClick() {
     GoogleAnalytics.trackEvent('view', this.props.project.display_name)
 
@@ -35,7 +40,7 @@ class Project extends Component {
         <Image source={{uri: imageURI}} style={styles.avatar} />
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={this.handleClick.bind(this)}
+          onPress={this.handleClick}
           style={styles.touchContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title} numberOfLines={1} ellipsizeMode={"tail"}>{this.props.project.display_name}</Text>

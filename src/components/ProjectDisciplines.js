@@ -33,7 +33,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 class ProjectDisciplines extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.handleSignOut = this.handleSignOut.bind(this)
   }
 
   //this will be moved to the side drawer once implemented
@@ -70,7 +71,7 @@ class ProjectDisciplines extends React.Component {
       <View style={styles.container}>
         <View style={styles.subNavContainer}>
           <Text style={styles.userName}>{ this.props.user.display_name }</Text>
-          <TouchableOpacity onPress={this.handleSignOut.bind(this)} style={styles.signOut}>
+          <TouchableOpacity onPress={this.handleSignOut} style={styles.signOut}>
             <Text style={styles.signOutText}>LOG OUT</Text>
           </TouchableOpacity>
         </View>

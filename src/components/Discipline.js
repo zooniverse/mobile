@@ -11,6 +11,11 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import ZooIcon from './ZooIcon'
 
 class Discipline extends Component {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   handleClick() {
     GoogleAnalytics.trackEvent('view', this.props.tag)
     Actions.ProjectList({tag: this.props.tag})
@@ -19,7 +24,7 @@ class Discipline extends Component {
   render() {
     return (
       <TouchableOpacity
-        onPress={this.handleClick.bind(this)}>
+        onPress={this.handleClick}>
         <View style={[styles.titleContainer, { backgroundColor: this.props.color }]}>
           <View style={styles.zooIconContainer}>
             <ZooIcon iconName={this.props.icon} />
