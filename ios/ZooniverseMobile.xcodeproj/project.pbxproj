@@ -26,6 +26,18 @@
 		14F7F9D4AAA6EEC2AF1F4830 /* libPods-ZooniverseMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 051453304969ED18A9A5693A /* libPods-ZooniverseMobile.a */; };
 		2202F9D9A1D04E919F02ECA5 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C73F506380064039B0EF4F34 /* libRCTOrientation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		992180751D9B18E400F8BEDD /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 992180741D9B18E400F8BEDD /* FontAwesome.ttf */; };
+		999F9C831DB7B4FA002B6AF0 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C781DB7B4FA002B6AF0 /* OpenSans-Bold.ttf */; };
+		999F9C841DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C791DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf */; };
+		999F9C851DB7B4FA002B6AF0 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C7A1DB7B4FA002B6AF0 /* OpenSans-ExtraBold.ttf */; };
+		999F9C861DB7B4FA002B6AF0 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C7B1DB7B4FA002B6AF0 /* OpenSans-ExtraBoldItalic.ttf */; };
+		999F9C871DB7B4FA002B6AF0 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C7C1DB7B4FA002B6AF0 /* OpenSans-Italic.ttf */; };
+		999F9C881DB7B4FA002B6AF0 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C7D1DB7B4FA002B6AF0 /* OpenSans-Light.ttf */; };
+		999F9C891DB7B4FA002B6AF0 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C7E1DB7B4FA002B6AF0 /* OpenSans-LightItalic.ttf */; };
+		999F9C8A1DB7B4FA002B6AF0 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C7F1DB7B4FA002B6AF0 /* OpenSans-Regular.ttf */; };
+		999F9C8B1DB7B4FA002B6AF0 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C801DB7B4FA002B6AF0 /* OpenSans-Semibold.ttf */; };
+		999F9C8C1DB7B4FA002B6AF0 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C811DB7B4FA002B6AF0 /* OpenSans-SemiboldItalic.ttf */; };
+		999F9C8D1DB7B4FA002B6AF0 /* zoo-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C821DB7B4FA002B6AF0 /* zoo-font.ttf */; };
 		99E051D41D7F633400052983 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051D31D7F633400052983 /* CoreData.framework */; };
 		99E051D61D7F633F00052983 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051D51D7F633F00052983 /* SystemConfiguration.framework */; };
 		99E051D81D7F634900052983 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051D71D7F634900052983 /* libz.tbd */; };
@@ -152,6 +164,18 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7D809E115A6D18224A63B6FC /* libPods-ZooniverseMobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZooniverseMobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		992180741D9B18E400F8BEDD /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		999F9C781DB7B4FA002B6AF0 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		999F9C791DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		999F9C7A1DB7B4FA002B6AF0 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		999F9C7B1DB7B4FA002B6AF0 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		999F9C7C1DB7B4FA002B6AF0 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		999F9C7D1DB7B4FA002B6AF0 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		999F9C7E1DB7B4FA002B6AF0 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		999F9C7F1DB7B4FA002B6AF0 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		999F9C801DB7B4FA002B6AF0 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		999F9C811DB7B4FA002B6AF0 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		999F9C821DB7B4FA002B6AF0 /* zoo-font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "zoo-font.ttf"; sourceTree = "<group>"; };
 		99B247C07D08CC4E84220651 /* Pods-ZooniverseMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooniverseMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZooniverseMobile/Pods-ZooniverseMobile.release.xcconfig"; sourceTree = "<group>"; };
 		99C686741D958DE000FF0CB2 /* ZooniverseMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ZooniverseMobile.entitlements; path = ZooniverseMobile/ZooniverseMobile.entitlements; sourceTree = "<group>"; };
 		99E051D31D7F633400052983 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -333,6 +357,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				999F9C8E1DB7B57E002B6AF0 /* Resources */,
 				99E051D91D7F635700052983 /* libsqlite3.0.tbd */,
 				99E051D71D7F634900052983 /* libz.tbd */,
 				99E051D51D7F633F00052983 /* SystemConfiguration.framework */,
@@ -355,6 +380,25 @@
 				00E356EE1AD99517003FC87E /* ZooniverseMobileTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		999F9C8E1DB7B57E002B6AF0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				999F9C781DB7B4FA002B6AF0 /* OpenSans-Bold.ttf */,
+				999F9C791DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf */,
+				999F9C7A1DB7B4FA002B6AF0 /* OpenSans-ExtraBold.ttf */,
+				999F9C7B1DB7B4FA002B6AF0 /* OpenSans-ExtraBoldItalic.ttf */,
+				999F9C7C1DB7B4FA002B6AF0 /* OpenSans-Italic.ttf */,
+				999F9C7D1DB7B4FA002B6AF0 /* OpenSans-Light.ttf */,
+				999F9C7E1DB7B4FA002B6AF0 /* OpenSans-LightItalic.ttf */,
+				999F9C7F1DB7B4FA002B6AF0 /* OpenSans-Regular.ttf */,
+				999F9C801DB7B4FA002B6AF0 /* OpenSans-Semibold.ttf */,
+				999F9C811DB7B4FA002B6AF0 /* OpenSans-SemiboldItalic.ttf */,
+				999F9C821DB7B4FA002B6AF0 /* zoo-font.ttf */,
+				992180741D9B18E400F8BEDD /* FontAwesome.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		99AC04481D7626D400E303A3 /* Products */ = {
@@ -625,8 +669,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				999F9C8B1DB7B4FA002B6AF0 /* OpenSans-Semibold.ttf in Resources */,
+				999F9C8C1DB7B4FA002B6AF0 /* OpenSans-SemiboldItalic.ttf in Resources */,
+				992180751D9B18E400F8BEDD /* FontAwesome.ttf in Resources */,
+				999F9C8A1DB7B4FA002B6AF0 /* OpenSans-Regular.ttf in Resources */,
+				999F9C871DB7B4FA002B6AF0 /* OpenSans-Italic.ttf in Resources */,
+				999F9C861DB7B4FA002B6AF0 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				999F9C891DB7B4FA002B6AF0 /* OpenSans-LightItalic.ttf in Resources */,
+				999F9C8D1DB7B4FA002B6AF0 /* zoo-font.ttf in Resources */,
+				999F9C831DB7B4FA002B6AF0 /* OpenSans-Bold.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				999F9C881DB7B4FA002B6AF0 /* OpenSans-Light.ttf in Resources */,
+				999F9C841DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf in Resources */,
+				999F9C851DB7B4FA002B6AF0 /* OpenSans-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,6 +946,9 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 				);
+				INSTALL_GROUP = "";
+				INSTALL_MODE_FLAG = "";
+				INSTALL_OWNER = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -933,6 +992,9 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 				);
+				INSTALL_GROUP = "";
+				INSTALL_MODE_FLAG = "";
+				INSTALL_OWNER = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
