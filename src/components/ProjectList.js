@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Alert,
   ListView,
   View
 } from 'react-native'
@@ -9,7 +8,7 @@ import StyledText from './StyledText'
 import { MOBILE_PROJECTS } from '../constants/mobile_projects'
 import Project from './Project'
 import NavBar from './NavBar'
-import apiClient from 'panoptes-client/lib/api-client'
+import { fetchProjects, setProjectList } from '../actions/index'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 
@@ -17,42 +16,32 @@ GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  isConnected: state.isConnected
+  isConnected: state.isConnected,
+  dataSource: dataSource.cloneWithRows(state.projectList)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchProjects(parms) {
+    dispatch(fetchProjects(parms))
+  },
+  resetProjectList() {
+    dispatch(setProjectList([]))
+  },
+})
+
+const dataSource = new ListView.DataSource({
+  rowHasChanged: (r1, r2) => r1 !== r2,
 })
 
 class ProjectList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      })
-    }
+    const parms = {id: MOBILE_PROJECTS, cards: true, tags: this.props.tag, sort: 'display_name'}
+    this.props.fetchProjects(parms)
   }
 
-  componentDidMount() {
-    if (this.state.dataSource.getRowCount() === 0){
-      this.getProjects()
-    }
-  }
-
-  getDataSource(projects: Array<any>): ListView.DataSource {
-    return this.state.dataSource.cloneWithRows(projects);
-  }
-
-  getProjects(){
-    apiClient.type('projects').get({id: MOBILE_PROJECTS, cards: true, tags: this.props.tag, sort: 'display_name'})
-      .then((projects) => {
-        this.setState({
-          dataSource: this.getDataSource(projects),
-        });
-      })
-      .catch((error) => {
-        Alert.alert(
-          'Error',
-          'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,
-        )
-      })
+  componentWillUnmount() {
+    this.props.resetProjectList()
   }
 
   renderRow(project) {
@@ -68,7 +57,7 @@ class ProjectList extends React.Component {
   render() {
     const projectList =
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={this.props.dataSource}
         renderRow={this.renderRow}
         enableEmptySections={true}
       />
@@ -109,7 +98,9 @@ const styles = EStyleSheet.create({
 ProjectList.propTypes = {
   user: React.PropTypes.object,
   isConnected: React.PropTypes.bool,
-  tag: React.PropTypes.string
+  dataSource: React.PropTypes.object,
+  tag: React.PropTypes.string,
+  fetchProjects: React.PropTypes.func
 }
 
-export default connect(mapStateToProps)(ProjectList)
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList)

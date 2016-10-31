@@ -4,7 +4,8 @@ export const InitialState = {
   user: {},
   isFetching: false,
   errorMessage: null,
-  isConnected: null
+  isConnected: null,
+  projectList: []
 }
 
 export default function(state=InitialState, action) {
@@ -24,6 +25,10 @@ export default function(state=InitialState, action) {
     case 'SET_IS_CONNECTED':
       return merge(state, {
         isConnected: action.isConnected
+      })
+    case 'SET_PROJECT_LIST':
+      return merge(state, {
+        projectList: action.projectList
       })
     default:
       return InitialState;
