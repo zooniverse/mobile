@@ -9,7 +9,6 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
 import { addIndex, filter, map, propEq } from 'ramda'
-import { signOut } from '../actions/index'
 import { connect } from 'react-redux'
 import {GLOBALS} from '../constants/globals'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
@@ -25,21 +24,9 @@ const mapStateToProps = (state) => ({
   isFetching: state.isFetching
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  signOut() {
-    dispatch(signOut())
-  },
-})
-
 class ProjectDisciplines extends React.Component {
   constructor(props) {
-    super(props)
-    this.handleSignOut = this.handleSignOut.bind(this)
-  }
-
-  //this will be moved to the side drawer once implemented
-  handleSignOut() {
-    this.props.signOut()
+    super(props);
   }
 
   render() {
@@ -71,9 +58,6 @@ class ProjectDisciplines extends React.Component {
       <View style={styles.container}>
         <View style={styles.subNavContainer}>
           <Text style={styles.userName}>{ this.props.user.display_name }</Text>
-          <TouchableOpacity onPress={this.handleSignOut} style={styles.signOut}>
-            <Text style={styles.signOutText}>LOG OUT</Text>
-          </TouchableOpacity>
         </View>
         <View style={styles.innerContainer}>
           { this.props.isConnected ? DisciplineList : noConnection }
@@ -94,7 +78,7 @@ const styles = EStyleSheet.create({
     paddingTop: 140,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    height: 190
+    height: 180
   },
   userName: {
     color: '$darkTextColor',
@@ -124,4 +108,4 @@ ProjectDisciplines.propTypes = {
   signOut: React.PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)
+export default connect(mapStateToProps)(ProjectDisciplines)
