@@ -2,12 +2,14 @@ export const SET_USER = 'SET_USER'
 export const SET_ERROR = 'SET_ERROR'
 export const SET_IS_FETCHING = 'SET_IS_FETCHING'
 export const SET_IS_CONNECTED = 'SET_IS_CONNECTED'
+export const SET_PROJECT_LIST = 'SET_PROJECT_LIST'
 
 export const STORE_USER = 'STORE_USER'
 export const GET_USER_STORE = 'GET_USER_STORE'
 export const SIGN_IN = 'SIGN_IN'
 
 import auth from 'panoptes-client/lib/auth'
+import apiClient from 'panoptes-client/lib/api-client'
 import store from 'react-native-simple-store'
 import { NetInfo } from 'react-native'
 import { head } from 'ramda'
@@ -28,6 +30,10 @@ export function setError(errorMessage) {
 
 export function setIsConnected(isConnected) {
   return { type: SET_IS_CONNECTED, isConnected }
+}
+
+export function setProjectList(projectList) {
+  return { type: SET_PROJECT_LIST, projectList }
 }
 
 export function storeUser(user) {
@@ -93,5 +99,22 @@ export function signOut() {
     dispatch(setUser({}))
     dispatch(setError(null))
     Actions.SignIn()
+  }
+}
+
+export function fetchProjects(parms) {
+  return dispatch => {
+    dispatch(setError(''))
+    dispatch(setIsFetching(false))
+    apiClient.type('projects').get(parms)
+      .then((projects) => {
+        dispatch(setProjectList(projects))
+      })
+      .catch((error) => {
+        dispatch(setError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
+      })
+      .then(() => {
+        dispatch(setIsFetching(false))
+      })
   }
 }
