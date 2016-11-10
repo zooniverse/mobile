@@ -35,7 +35,11 @@ const styles = EStyleSheet.create({
   largeLink: {
     color: '$darkTextColor',
     fontSize: 20,
-  }
+  },
+  largeBold: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
 });
 
 StyledText.propTypes = {

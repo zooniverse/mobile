@@ -29,6 +29,7 @@ class SideDrawerContent extends Component {
     this.close = this.close.bind(this)
     this.goHome = this.goHome.bind(this)
     this.signOut = this.signOut.bind(this)
+    this.goToAbout = this.goToAbout.bind(this)
   }
 
   close() {
@@ -44,6 +45,11 @@ class SideDrawerContent extends Component {
   signOut(){
     this.close()
     this.props.signOut()
+  }
+
+  goToAbout(){
+    this.close()
+    Actions.About()
   }
 
   openSocialMediaLink(link) {
@@ -76,7 +82,7 @@ class SideDrawerContent extends Component {
             text={'Home'} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.goHome} style={styles.linkContainer}>
+        <TouchableOpacity onPress={this.goToAbout} style={styles.linkContainer}>
           <StyledText
             textStyle={'largeLink'}
             text={'About'} />
