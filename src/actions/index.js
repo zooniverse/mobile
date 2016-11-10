@@ -64,6 +64,15 @@ export function setUserFromStore() {
   }
 }
 
+export function continueAsGuest() {
+  return dispatch => {
+    var user = { isGuestUser: true }
+    dispatch(setState('user.isGuestUser', true))
+    dispatch(storeUser(user))
+    Actions.ZooniverseApp({type: ActionConst.RESET})
+  }
+}
+
 export function signIn(login, password) {
   return dispatch => {
     dispatch(setIsFetching(true))
@@ -80,6 +89,7 @@ export function signIn(login, password) {
                 user.avatar = {}
               })
               .then(() => {
+                user.isGuestUser = false
                 dispatch(setUser(user))
                 dispatch(storeUser(user))
                 dispatch(setIsFetching(false))

@@ -1,6 +1,8 @@
 export default {
   headerColor: 'rgba(0, 151, 157, 1)',
   buttonColor: 'rgba(70, 209, 120, 1)',
+  continueButtonColor: 'rgba(24, 128, 127, 1)',
+  registerButtonColor: 'rgba(81, 43, 173, 1)',
   disabledButtonColor: 'rgba(70, 209, 120, .35)',
   backgroundColor: 'white',
   projectTitleColor: 'rgba(70, 209, 120, 1)',

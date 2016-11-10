@@ -6,7 +6,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 const Button = (props) => {
-  const buttonStyle = ( props.disabled ? [styles.button, styles.disabledButton] : styles.button )
+  const buttonStyle = ( props.buttonStyle ? [styles.button, styles[props.buttonStyle]] : styles.button )
 
   return (
     <TouchableOpacity
@@ -26,7 +26,7 @@ const styles = EStyleSheet.create({
     fontSize: 14,
     color: 'white',
     alignSelf: 'center',
-    letterSpacing: 1.5
+    letterSpacing: 1.3
   },
   button: {
     borderRadius: 4,
@@ -40,11 +40,18 @@ const styles = EStyleSheet.create({
   disabledButton: {
     backgroundColor: '$disabledButtonColor'
   },
+  continueButton: {
+    backgroundColor: '$continueButtonColor'
+  },
+  registerButton: {
+    backgroundColor: '$registerButtonColor'
+  },
 });
 
 Button.propTypes = {
   handlePress: React.PropTypes.func.isRequired,
   disabled: React.PropTypes.bool,
+  buttonStyle: React.PropTypes.string,
   text: React.PropTypes.string
 }
 Button.defaultProps = { disabled: false }

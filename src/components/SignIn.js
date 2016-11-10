@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import { signIn } from '../actions/index'
+import { signIn, continueAsGuest } from '../actions/index'
 import { connect } from 'react-redux';
 import Button from './Button'
 import Input from './Input'
@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch) => ({
   signIn(login, password) {
     dispatch(signIn(login, password))
   },
+  continueAsGuest() {
+    dispatch(continueAsGuest())
+  },
 })
 
 class SignIn extends React.Component {
@@ -34,6 +37,7 @@ class SignIn extends React.Component {
     this.handleRegistration = this.handleRegistration.bind(this)
     this.handleResetPassword = this.handleResetPassword.bind(this)
     this.handleSignIn = this.handleSignIn.bind(this)
+    this.continueAsGuest = this.continueAsGuest.bind(this)
   }
 
   handleRegistration() {
@@ -71,22 +75,21 @@ class SignIn extends React.Component {
     this.props.signIn(this.state.login, this.state.password)
   }
 
+  continueAsGuest() {
+    this.props.continueAsGuest()
+  }
+
   render() {
     const signInDisabled = ( (this.state.login === '') || (this.state.password ===  '') ? true : false )
+    const errorMessage =
+      <StyledText
+      textStyle={'errorMessage'}
+      text={ this.props.errorMessage } />
 
     return (
       <View style={styles.container}>
         <NavBar showLogo={true} showDrawer={false} />
         <View style={styles.signInContainer}>
-          <Button
-            handlePress={this.handleRegistration}
-            text={'REGISTER FOR ACCOUNT'} />
-          <View style={styles.lined}>
-            <View style={styles.lineThrough} />
-            <Text style={styles.centerText}>OR</Text>
-            <View style={styles.lineThrough} />
-          </View>
-
           <StyledText
             textStyle={'headerText'}
             text={'SIGN IN'} />
@@ -97,9 +100,7 @@ class SignIn extends React.Component {
             labelText={'Password'}
             passwordField={true}
             handleOnChangeText={(password) => this.setState({password})} />
-          <StyledText
-            textStyle={'errorMessage'}
-            text={ this.props.errorMessage } />
+          { this.props.errorMessage ? errorMessage : null }
           <TouchableOpacity
             onPress={this.handleResetPassword}>
             <StyledText
@@ -110,7 +111,24 @@ class SignIn extends React.Component {
           <Button
             handlePress={this.handleSignIn}
             disabled={signInDisabled}
+            buttonStyle={ signInDisabled ? 'disabledButton' : null }
             text={'Sign In'} />
+
+          <View style={styles.lined}>
+            <View style={styles.lineThrough} />
+            <Text style={styles.centerText}>OR</Text>
+            <View style={styles.lineThrough} />
+          </View>
+
+          <Button
+            handlePress={this.continueAsGuest}
+            buttonStyle={'continueButton'}
+            text={'Continue without signing in'} />
+
+          <Button
+            handlePress={this.handleRegistration}
+            buttonStyle={'registerButton'}
+            text={'Register for account'} />
         </View>
         { this.props.isFetching ? <OverlaySpinner /> : null }
       </View>
@@ -134,6 +152,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
   },
   lineThrough: {
     flex: 1,
@@ -148,6 +167,7 @@ const styles = EStyleSheet.create({
 SignIn.propTypes = {
   isFetching: React.PropTypes.bool.isRequired,
   signIn: React.PropTypes.func.isRequired,
+  continueAsGuest: React.PropTypes.func.isRequired,
   errorMessage: React.PropTypes.string
 }
 
