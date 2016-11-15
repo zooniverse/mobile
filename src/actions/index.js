@@ -1,3 +1,4 @@
+export const SET_STATE = 'SET_STATE'
 export const SET_USER = 'SET_USER'
 export const SET_ERROR = 'SET_ERROR'
 export const SET_IS_FETCHING = 'SET_IS_FETCHING'
@@ -11,10 +12,14 @@ export const SIGN_IN = 'SIGN_IN'
 import auth from 'panoptes-client/lib/auth'
 import apiClient from 'panoptes-client/lib/api-client'
 import store from 'react-native-simple-store'
+import { PUBLICATIONS } from '../constants/publications'
 import { NetInfo } from 'react-native'
-import { head } from 'ramda'
+import { addIndex, forEach, head, keys, map } from 'ramda'
 import { Actions, ActionConst } from 'react-native-router-flux'
 
+export function setState(stateKey, value) {
+  return { type: SET_STATE, stateKey, value }
+}
 
 export function setUser(user) {
   return { type: SET_USER, user }
@@ -116,5 +121,31 @@ export function fetchProjects(parms) {
       .then(() => {
         dispatch(setIsFetching(false))
       })
+  }
+}
+
+
+export function fetchPublications() {
+  return dispatch => {
+    map((key) => {
+      addIndex(forEach)(
+        (project, idx) => {
+          dispatch(setState(`publications.${key}.projects.${idx}.publications`, project.publications))
+          dispatch(setState(`publications.${key}.projects.${idx}.slug`, project.slug))
+
+          if (project.slug) {
+            apiClient.type('projects').get({ slug: project.slug, cards: true }).then((project) => {
+              dispatch(setState(`publications.${key}.projects.${idx}.display_name`, head(project).display_name))
+              dispatch(setState(`publications.${key}.projects.${idx}.avatar_src`, head(project).avatar_src))
+            })
+          } else {
+            dispatch(setState(`publications.${key}.projects.${idx}.display_name`, 'Meta Studies'))
+            dispatch(setState(`publications.${key}.projects.${idx}.avatar_src`, ''))
+          }
+
+        },
+        PUBLICATIONS[key]
+      )
+    }, keys(PUBLICATIONS))
   }
 }
