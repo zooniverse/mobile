@@ -36,10 +36,22 @@ const styles = EStyleSheet.create({
     color: '$darkTextColor',
     fontSize: 20,
   },
+  large: {
+    fontSize: 20,
+  },
   largeBold: {
     fontSize: 20,
     fontWeight: 'bold'
   },
+  citation: {
+    color: 'grey',
+    fontStyle: 'italic',
+    fontSize: 12,
+    flex: 1,
+  },
+  fullHeight: {
+    height: '100%'
+  }
 });
 
 StyledText.propTypes = {

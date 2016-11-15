@@ -11,6 +11,7 @@ import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/ProjectList'
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import About from '../components/About'
+import PublicationList from '../components/PublicationList'
 import SignIn from '../components/SignIn'
 import SideDrawer from '../components/SideDrawer'
 
@@ -37,6 +38,7 @@ export default class App extends Component {
               <Scene key="ZooniverseApp" component={ZooniverseApp} initial />
               <Scene key="ProjectDisciplines" component={ProjectDisciplines} />
               <Scene key="About" component={About} />
+              <Scene key="Publications" component={PublicationList} />
               <Scene key="ProjectList" component={ProjectList} />
             </Scene>
           </Scene>
