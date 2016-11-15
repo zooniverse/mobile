@@ -35,14 +35,14 @@ class Publication extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <StyledText textStyle={'citation'} text={ this.props.publication.citation } />
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={this.handlePress}>
-              <Icon name="angle-right" style={styles.icon} />
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={this.handlePress}>
+          <View style={styles.titleContainer}>
+            <StyledText textStyle={'citation'} text={ this.props.publication.citation } />
+            <Icon name="angle-right" style={styles.icon} />
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
