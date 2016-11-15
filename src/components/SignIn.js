@@ -81,6 +81,8 @@ class SignIn extends React.Component {
 
   render() {
     const signInDisabled = ( (this.state.login === '') || (this.state.password ===  '') ? true : false )
+    const continueTinted = !signInDisabled
+
     const errorMessage =
       <StyledText
       textStyle={'errorMessage'}
@@ -122,7 +124,7 @@ class SignIn extends React.Component {
 
           <Button
             handlePress={this.continueAsGuest}
-            buttonStyle={'continueButton'}
+            buttonStyle={ continueTinted ? 'disabledButton' : null }
             text={'Continue without signing in'} />
 
           <Button

@@ -40,9 +40,6 @@ const styles = EStyleSheet.create({
   disabledButton: {
     backgroundColor: '$disabledButtonColor'
   },
-  continueButton: {
-    backgroundColor: '$continueButtonColor'
-  },
   registerButton: {
     backgroundColor: '$registerButtonColor'
   },
