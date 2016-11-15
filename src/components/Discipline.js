@@ -57,7 +57,7 @@ const styles = EStyleSheet.create({
     backgroundColor: '$transparent',
     color: '$textColor',
     fontSize: 22,
-    lineHeight: 24,
+    lineHeight: 30,
     width: '100% - 120'
   },
   icon: {

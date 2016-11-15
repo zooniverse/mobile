@@ -15,6 +15,8 @@ const Input = (props) => {
           style={styles.input}
           onChangeText={props.handleOnChangeText}
           secureTextEntry={props.passwordField}
+          returnKeyType={'next'}
+          underlineColorAndroid ={'white'}
         />
       </View>
     </View>
