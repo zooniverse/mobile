@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-class SignIn extends React.Component {
+export class SignIn extends React.Component {
   constructor(props) {
     super(props)
     this.state = {login: '', password: ''}
@@ -81,6 +81,10 @@ class SignIn extends React.Component {
 
   continueAsGuest() {
     this.props.continueAsGuest()
+  }
+
+  static renderNavigationBar() {
+    return <NavBar showLogo={true} showDrawer={false} />;
   }
 
   render() {

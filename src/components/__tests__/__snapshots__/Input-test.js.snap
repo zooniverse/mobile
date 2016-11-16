@@ -1,0 +1,48 @@
+exports[`test renders a label correctly 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={undefined}>
+    Ermahgerd Berks
+  </Text>
+  <View
+    style={undefined}>
+    <TextInput
+      onChangeText={undefined}
+      returnKeyType="next"
+      secureTextEntry={false}
+      style={undefined}
+      underlineColorAndroid="white" />
+  </View>
+</View>
+`;
+
+exports[`test renders password fields (using secureTextEntry) 1`] = `
+<View>
+  <View
+    style={undefined}>
+    <TextInput
+      onChangeText={undefined}
+      returnKeyType="next"
+      secureTextEntry={true}
+      style={undefined}
+      underlineColorAndroid="white" />
+  </View>
+</View>
+`;
+
+exports[`test renders with no label 1`] = `
+<View>
+  <View
+    style={undefined}>
+    <TextInput
+      onChangeText={undefined}
+      returnKeyType="next"
+      secureTextEntry={false}
+      style={undefined}
+      underlineColorAndroid="white" />
+  </View>
+</View>
+`;

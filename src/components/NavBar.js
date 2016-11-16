@@ -19,7 +19,7 @@ const mapStateToProps = (state) => ({
   user: state.user,
 })
 
-class NavBar extends Component {
+export class NavBar extends Component {
   constructor(props) {
     super(props)
     this.handleOnBack = this.handleOnBack.bind(this)
@@ -121,6 +121,7 @@ const styles = EStyleSheet.create({
   },
   logo: {
     width: '40%',
+    height: 50,
     resizeMode: 'contain',
     position: 'relative',
     top: 5

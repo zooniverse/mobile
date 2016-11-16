@@ -1,0 +1,47 @@
+exports[`test sets a new state 1`] = `
+Object {
+  "bobLoblaw": "Has a law blog",
+  "errorMessage": null,
+  "isConnected": null,
+  "isFetching": false,
+  "projectList": Array [],
+  "selectedDiscipline": null,
+  "user": Object {},
+}
+`;
+
+exports[`test sets state from initial state 1`] = `
+Object {
+  "errorMessage": null,
+  "isConnected": true,
+  "isFetching": false,
+  "projectList": Array [],
+  "selectedDiscipline": null,
+  "user": Object {},
+}
+`;
+
+exports[`test sets user 1`] = `
+Object {
+  "errorMessage": null,
+  "isConnected": null,
+  "isFetching": false,
+  "projectList": Array [],
+  "selectedDiscipline": null,
+  "user": Object {
+    "avatar": "Some avatar",
+    "display_name": "Me",
+  },
+}
+`;
+
+exports[`test unsets user 1`] = `
+Object {
+  "errorMessage": null,
+  "isConnected": null,
+  "isFetching": false,
+  "projectList": Array [],
+  "selectedDiscipline": null,
+  "user": Object {},
+}
+`;

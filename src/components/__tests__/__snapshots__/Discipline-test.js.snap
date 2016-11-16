@@ -1,0 +1,66 @@
+exports[`test renders with a title 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}>
+  <View
+    style={
+      Array [
+        undefined,
+        Object {
+          "backgroundColor": undefined,
+        },
+      ]
+    }>
+    <View
+      style={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "zoo-font",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Array [
+              undefined,
+              undefined,
+            ],
+          ]
+        }>
+        ?
+      </Text>
+    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+      style={undefined}>
+      O Hai!
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": undefined,
+            "fontFamily": "FontAwesome",
+            "fontSize": 12,
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          undefined,
+        ]
+      }>
+      
+    </Text>
+  </View>
+</TouchableOpacity>
+`;

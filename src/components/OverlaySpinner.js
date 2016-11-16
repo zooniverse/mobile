@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
   isFetching: state.isFetching
 })
 
-class OverlaySpinner extends Component {
+export class OverlaySpinner extends Component {
   render() {
     return (
       <View style={styles.container}>

@@ -1,0 +1,24 @@
+exports[`test renders styles as array when style passed in 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      undefined,
+      undefined,
+    ]
+  }>
+  O Hai!
+</Text>
+`;
+
+exports[`test renders text correctly 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={undefined}>
+  O Hai!
+</Text>
+`;

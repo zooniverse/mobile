@@ -43,3 +43,7 @@ To run in the emulator from the command line (you'll need device connected or em
 react-native run-android
 *Note* You need to have either a device emulator open already or a physical device plugged into your computer - otherwise you'll need to run through Android Studio
 *Note* If Android studio prompts you to update Gradle Files, you should do it
+
+### Testing
+Unit tests utilize Jests' Snapshots, located in src/****/__tests__ directories.  Mocks are located under root /__mocks__ directory.
+To run test suite, use `npm test`.  To update a snapshot (legimately changed) during development, use `npm test -- -u TESTNAME`.  Snapshots should be committed to the repo and any changes to snapshots should be reviewed along with their PRs.

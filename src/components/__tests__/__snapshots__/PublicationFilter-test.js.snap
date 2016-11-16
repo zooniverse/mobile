@@ -1,0 +1,140 @@
+exports[`test does not render when not connected 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      false,
+    ]
+  }>
+  <View
+    style={undefined}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={[Function]}
+      style={undefined}>
+      <View
+        style={undefined}>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={undefined}>
+          Choose Category
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontFamily": "FontAwesome",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              undefined,
+            ]
+          }>
+          
+        </Text>
+      </View>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`test renders correctly 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      false,
+    ]
+  }>
+  <View
+    style={undefined}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={[Function]}
+      style={undefined}>
+      <View
+        style={undefined}>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={undefined}>
+          Choose Category
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontFamily": "FontAwesome",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              undefined,
+            ]
+          }>
+          
+        </Text>
+      </View>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`test renders selected discipline 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      false,
+    ]
+  }>
+  <View
+    style={undefined}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={[Function]}
+      style={undefined}>
+      <View
+        style={undefined}>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={undefined}>
+          Viewing Science
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontFamily": "FontAwesome",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              undefined,
+            ]
+          }>
+          
+        </Text>
+      </View>
+    </TouchableOpacity>
+  </View>
+</View>
+`;

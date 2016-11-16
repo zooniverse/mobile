@@ -3,12 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
+  },
+  "jest": {
+    "preset": "jest-react-native"
   },
   "dependencies": {
     "panoptes-client": "^2.5.2",
     "ramda": "^0.22.1",
-    "react": "^15.3.2",
+    "react": "~15.3.1",
     "react-native": "^0.37.0",
     "react-native-browser-builtins": "^2.0.3",
     "react-native-drawer": "^2.3.0",
@@ -25,11 +30,16 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "babel-jest": "^17.0.2",
+    "babel-preset-react-native": "^1.9.0",
     "eslint": "^3.4.0",
     "eslint-config-standard": "^6.0.0",
-    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-react-native": "^2.0.0",
-    "eslint-plugin-standard": "^2.0.0"
+    "eslint-plugin-standard": "^2.0.0",
+    "jest": "^17.0.2",
+    "jest-react-native": "^17.0.2",
+    "react-test-renderer": "^15.3.2"
   }
 }
