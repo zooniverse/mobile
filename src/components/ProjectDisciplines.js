@@ -13,6 +13,7 @@ import {GLOBALS} from '../constants/globals'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import Discipline from './Discipline'
 import OverlaySpinner from './OverlaySpinner'
+import { setState } from '../actions/index'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
@@ -22,6 +23,12 @@ const mapStateToProps = (state) => ({
   isGuestUser: state.user.isGuestUser,
   isConnected: state.isConnected,
   isFetching: state.isFetching
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setSelectedProjectTag(tag) {
+    dispatch(setState('selectedProjectTag', tag))
+  },
 })
 
 class ProjectDisciplines extends React.Component {
@@ -37,7 +44,8 @@ class ProjectDisciplines extends React.Component {
           title={label}
           tag={value}
           key={idx}
-          color={color} /> )
+          color={color}
+          setSelectedProjectTag={() => {this.props.setSelectedProjectTag(value)}} /> )
     }
 
     const DisciplineList =
@@ -108,7 +116,7 @@ ProjectDisciplines.propTypes = {
   isGuestUser: React.PropTypes.bool,
   isConnected: React.PropTypes.bool,
   isFetching: React.PropTypes.bool,
-  signOut: React.PropTypes.func
+  setSelectedProjectTag: React.PropTypes.func,
 }
 
-export default connect(mapStateToProps)(ProjectDisciplines)
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)

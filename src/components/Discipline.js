@@ -18,7 +18,8 @@ class Discipline extends Component {
 
   handleClick() {
     GoogleAnalytics.trackEvent('view', this.props.tag)
-    Actions.ProjectList({tag: this.props.tag})
+    this.props.setSelectedProjectTag()
+    Actions.ProjectList()
   }
 
   render() {
@@ -29,7 +30,7 @@ class Discipline extends Component {
           <View style={styles.zooIconContainer}>
             <ZooIcon iconName={this.props.icon} />
           </View>
-          <Text style={styles.title} numberOfLines={1} ellipsizeMode={"tail"}>{this.props.title}</Text>
+          <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>{this.props.title}</Text>
           <Icon name="angle-right" style={styles.icon} />
         </View>
       </TouchableOpacity>
@@ -74,7 +75,8 @@ Discipline.propTypes = {
   icon: React.PropTypes.string.isRequired,
   title: React.PropTypes.string.isRequired,
   tag: React.PropTypes.string.isRequired,
-  color: React.PropTypes.string.isRequired
+  color: React.PropTypes.string.isRequired,
+  setSelectedProjectTag: React.PropTypes.func.isRequired
 }
 
 export default Discipline
