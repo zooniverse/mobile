@@ -9,9 +9,9 @@
 
 #import <UIKit/UIKit.h>
 #import <Pusher/Pusher.h>
-#import <UserNotifications/UserNotifications.h> 
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate :NSObject <UIApplicationDelegate, PTPusherDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, PTPusherDelegate, UNUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) PTPusher *pusher;

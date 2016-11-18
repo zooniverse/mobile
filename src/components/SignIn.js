@@ -154,7 +154,8 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 20,
+    marginBottom: 20
   },
   lineThrough: {
     flex: 1,
@@ -162,6 +163,8 @@ const styles = EStyleSheet.create({
     backgroundColor: 'black'
   },
   centerText: {
+    height: 20,
+    lineHeight: 20,
     margin: 20
   }
 });
@@ -172,5 +175,4 @@ SignIn.propTypes = {
   continueAsGuest: React.PropTypes.func.isRequired,
   errorMessage: React.PropTypes.string
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
