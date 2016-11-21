@@ -6,8 +6,9 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
+import com.horcrux.svg.RNSvgPackage;
+import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new GoogleAnalyticsBridgePackage(),
-          new WebViewBridgePackage()
+          new WebViewBridgePackage(),
+          new RNSvgPackage()
       );
     }
   };
