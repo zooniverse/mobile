@@ -43,9 +43,10 @@ export function setProjectList(projectList) {
   return { type: SET_PROJECT_LIST, projectList }
 }
 
-export function storeUser(user) {
-  return () => {
-    store.save('@zooniverse:user', {
+export function syncUserStore() {
+  return (dispatch, getState) => {
+    const user = getState().user
+    return store.save('@zooniverse:user', {
       user
     })
   }
@@ -53,25 +54,35 @@ export function storeUser(user) {
 
 export function setUserFromStore() {
   return dispatch => {
-    dispatch(setIsFetching(true))
-    store.get('@zooniverse:user')
-      .then(json => {
+    return new Promise ((resolve, reject) => {
+      store.get('@zooniverse:user').then(json => {
         dispatch(setUser(json.user))
-        dispatch(setIsFetching(false))
+        return resolve()
+      }).catch(() => {
+        return reject()
       })
-      .catch(() => { //nothing here, send user to login screen
-        Actions.SignIn()
-        dispatch(setIsFetching(false))
-      });
+    })
   }
 }
 
 export function continueAsGuest() {
   return dispatch => {
-    var user = { isGuestUser: true }
     dispatch(setState('user.isGuestUser', true))
-    dispatch(storeUser(user))
+    dispatch(syncUserStore())
     Actions.ZooniverseApp({type: ActionConst.RESET})
+  }
+}
+
+export function checkIsConnected() {
+  return () => {
+    return new Promise((resolve, reject) => {
+      NetInfo.isConnected.fetch().then(isConnected => {
+        if (!isConnected) {
+          return reject('Sorry, but you must be connected to the internet to use Zooniverse')
+        }
+        return resolve()
+      })
+    })
   }
 }
 
@@ -79,33 +90,71 @@ export function signIn(login, password) {
   return dispatch => {
     dispatch(setIsFetching(true))
     dispatch(setError(''))
-    NetInfo.isConnected.fetch().then(isConnected => {
-      if (isConnected) {
-        auth.signIn({login: login, password: password})
-          .then((user) => {
-            user.get('avatar')
-              .then((avatar) => {
-                user.avatar = head(avatar)
-              })
-              .catch(() => {
-                user.avatar = {}
-              })
-              .then(() => {
-                user.isGuestUser = false
-                dispatch(setUser(user))
-                dispatch(storeUser(user))
-                dispatch(setIsFetching(false))
-                Actions.ZooniverseApp({type: ActionConst.RESET})
-              })
-          })
-          .catch((error) => {
-            dispatch(setError(error.message))
-            dispatch(setIsFetching(false))
-          })
-      } else {
-        dispatch(setError('Sorry, but you must be connected to the internet to use Zooniverse'))
+    dispatch(checkIsConnected()).then(() => {
+      auth.signIn({login: login, password: password}).then((user) => {
+        user.isGuestUser = false
+        dispatch(setUser(user))
+
+        return Promise.all([
+          dispatch(loadUserAvatar()) //will have more added
+        ])
+      }).then(() => {
+        dispatch(syncUserStore())
         dispatch(setIsFetching(false))
+        Actions.ZooniverseApp({type: ActionConst.RESET})  // Go to home screen
+      }).catch((error) => {
+        dispatch(setError(error.message))
+        dispatch(setIsFetching(false))
+      })
+    }).catch((error) => {
+      dispatch(setError(error))
+      dispatch(setIsFetching(false))
+    })
+  }
+}
+
+export function getAuthUser() {
+  return () => {
+    return new Promise ((resolve, reject) => {
+      auth.checkCurrent().then ((user) => {
+        return resolve(user)
+      }).catch(() => {
+        return reject()
+      })
+    })
+  }
+}
+
+export function loadUserData() {
+  return (dispatch, getState) => {
+    dispatch(setUserFromStore()).then(() => {
+      if (getState().user.isGuestUser) {
+        return
+      } else {
+        return Promise.all([
+          dispatch(loadUserAvatar()), //will have more added
+        ])
       }
+    }).then(() => {
+      dispatch(syncUserStore())
+    }).catch(() => {
+      Actions.SignIn()
+    })
+  }
+}
+
+export function loadUserAvatar() {
+  return (dispatch) => {
+    return new Promise ((resolve) => {
+      dispatch(getAuthUser()).then((userResource) => {
+        userResource.get('avatar').then((avatar) => {
+          dispatch(setState('user.avatar', head(avatar)))
+        }).catch(() => {
+          dispatch(setState('user.avatar', {}))
+        }).then(() => {
+          return resolve()
+        })
+      })
     })
   }
 }
@@ -143,7 +192,6 @@ export function fetchProjectsByTag(tag) {
       })
   }
 }
-
 
 export function fetchPublications() {
   return dispatch => {

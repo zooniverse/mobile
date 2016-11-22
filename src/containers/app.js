@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import { NetInfo } from 'react-native'
+import { AppState, NetInfo } from 'react-native'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'
 import {Scene, Router} from 'react-native-router-flux'
-import { setIsConnected, setUserFromStore, fetchProjects } from '../actions/index'
+import { setIsConnected, loadUserData, fetchProjects } from '../actions/index'
 
 import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/ProjectList'
@@ -19,8 +19,16 @@ const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer)
 
 export default class App extends Component {
   componentDidMount() {
-    const dispatchConnected = isConnected => store.dispatch(setIsConnected(isConnected))
+    store.dispatch(loadUserData())
 
+    const handleAppStateChange = currentAppState => {
+      if (currentAppState === 'active') {
+        store.dispatch(loadUserData())
+      }
+    }
+    AppState.addEventListener('change', handleAppStateChange)
+
+    const dispatchConnected = isConnected => store.dispatch(setIsConnected(isConnected))
     NetInfo.isConnected.fetch().then(isConnected => {
       store.dispatch(setIsConnected(isConnected))
       NetInfo.isConnected.addEventListener('change', dispatchConnected)
@@ -30,7 +38,6 @@ export default class App extends Component {
   }
 
   render() {
-    store.dispatch(setUserFromStore())
     return (
       <Provider store={store}>
         <Router ref="router">
