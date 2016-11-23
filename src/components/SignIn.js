@@ -104,7 +104,7 @@ class SignIn extends React.Component {
             handleOnChangeText={(password) => this.setState({password})} />
           { this.props.errorMessage ? errorMessage : null }
           <TouchableOpacity
-            onPress={this.handleResetPassword}>
+            onPress={this.handleResetPassword} style={styles.forgotPasswordContainer}>
             <StyledText
               textStyle={'link'}
               text={ 'Forget your password?' } />
@@ -166,6 +166,10 @@ const styles = EStyleSheet.create({
     height: 20,
     lineHeight: 20,
     margin: 20
+  },
+  forgotPasswordContainer: {
+    paddingTop: 10,
+    paddingBottom: 10
   }
 });
 

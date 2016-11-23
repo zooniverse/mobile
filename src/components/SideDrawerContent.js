@@ -152,7 +152,6 @@ class SideDrawerContent extends Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    padding: 25,
     paddingTop: 80
   },
   closeIcon: {
@@ -166,18 +165,20 @@ const styles = EStyleSheet.create({
     padding: 10
   },
   linkContainer: {
-    height: 40
+    paddingLeft: 25,
+    paddingTop: 8,
+    paddingBottom: 8
   },
   socialMediaContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    paddingTop: 30
+    justifyContent: 'flex-start',
+    paddingTop: 15,
+    paddingLeft: 15
   },
   socialMediaIcon: {
     color: '$darkTextColor',
     fontSize: 18,
-    width: 50,
-    height: 30,
+    padding: 12,
   }
 });
 

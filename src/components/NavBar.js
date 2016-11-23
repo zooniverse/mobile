@@ -95,19 +95,20 @@ const styles = EStyleSheet.create({
   },
   leftIcon: {
     position: 'absolute',
-    left: 13,
-    top: topPadding + 4
+    left: 5,
+    top: topPadding - 2
   },
   rightIcon: {
     position: 'absolute',
-    right: 0,
-    top: topPadding + 8,
+    right: 10,
+    top: topPadding,
   },
   icon: {
     backgroundColor: '$transparent',
     color: '$textColor',
     fontSize: 30,
-    width: 40
+    width: 40,
+    padding: 10
   },
   iconBar: {
     fontSize: 24
