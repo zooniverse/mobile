@@ -5,14 +5,14 @@ import { OverlaySpinner } from '../OverlaySpinner'
 
 it('renders for isFetching', () => {
   const tree = renderer.create(
-    <OverlaySpinner isFetching={true} />
+    <OverlaySpinner isFetching={true} loadingText={'Loading!'} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
 
 it('renders nothing for isFetching false', () => {
   const tree = renderer.create(
-    <OverlaySpinner isFetching={false} />
+    <OverlaySpinner isFetching={false} loadingText={''} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

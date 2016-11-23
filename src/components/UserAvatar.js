@@ -7,15 +7,19 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 
 class UserAvatar extends Component {
   render() {
-    if (this.props.avatar) {
-      return (
-        <Image source={{uri: this.props.avatar}} style={styles.avatar} />
-      )
-    } else {
-      return (
-        <Image source={require('../../images/simple-avatar.jpg')} style={styles.avatar} />
-      )
-    }
+
+    const guestUserLogo =
+      <Image source={require('../../images/simple-avatar.png')} style={styles.avatar} />
+
+    const avatar = ( <Image style={styles.avatar} source={
+        this.props.avatar
+        ? {uri: this.props.avatar}
+        : require('../../images/simple-avatar.png') } /> )
+
+
+    return (
+      this.props.isGuestUser ? guestUserLogo : avatar
+    )
   }
 }
 
@@ -31,6 +35,7 @@ const styles = EStyleSheet.create({
 });
 
 UserAvatar.propTypes = {
+  isGuestUser: React.PropTypes.bool,
   avatar: React.PropTypes.string
 }
 

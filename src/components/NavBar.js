@@ -46,7 +46,7 @@ export class NavBar extends Component {
 
     const avatar =
       <View style={styles.userAvatarContainer}>
-        <UserAvatar avatar={ userAvatar }/>
+        <UserAvatar avatar={ userAvatar } isGuestUser={ this.props.user.isGuestUser } />
         <CircleRibbon />
       </View>
 
@@ -149,6 +149,7 @@ NavBar.propTypes = {
   showAvatar: React.PropTypes.bool,
   showBack: React.PropTypes.bool,
   showDrawer: React.PropTypes.bool,
+  onBack: React.PropTypes.func,
   user: React.PropTypes.object,
   title: React.PropTypes.string,
 }

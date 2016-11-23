@@ -9,7 +9,7 @@ it('renders correctly', () => {
     display_name: 'Nice project'
   }
   const tree = renderer.create(
-    <Project project={project}/>
+    <Project project={project} color={'#AFA48C'} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

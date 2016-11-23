@@ -12,8 +12,8 @@ const ZooIcon = (props) => {
 }
 
 const styles = EStyleSheet.create({
-    icon: {
-    fontSize: 30,
+  icon: {
+    fontSize: 40,
     color: '$textColor',
   },
   biology: {
