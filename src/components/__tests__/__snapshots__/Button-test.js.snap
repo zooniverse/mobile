@@ -2,7 +2,7 @@ exports[`test renders TouchableOpacity disabled when passed in 1`] = `
 <TouchableOpacity
   activeOpacity={0.5}
   disabled={true}
-  onPress={undefined}
+  onPress={[Function]}
   style={undefined}>
   <Text
     accessible={true}
@@ -16,7 +16,7 @@ exports[`test renders button text correctly 1`] = `
 <TouchableOpacity
   activeOpacity={0.5}
   disabled={false}
-  onPress={undefined}
+  onPress={[Function]}
   style={undefined}>
   <Text
     accessible={true}
@@ -32,7 +32,7 @@ exports[`test renders styles as array when special style is passed in 1`] = `
 <TouchableOpacity
   activeOpacity={0.5}
   disabled={false}
-  onPress={undefined}
+  onPress={[Function]}
   style={
     Array [
       undefined,

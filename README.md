@@ -46,4 +46,8 @@ react-native run-android
 
 ### Testing
 Unit tests utilize Jests' Snapshots, located in src/****/__tests__ directories.  Mocks are located under root /__mocks__ directory.
-To run test suite, use `npm test`.  To update a snapshot (legimately changed) during development, use `npm test -- -u TESTNAME`.  Snapshots should be committed to the repo and any changes to snapshots should be reviewed along with their PRs.
+To run the test suite, use `npm test`.  
+
+About Snapshots:  Facebook's native apps use a system called "snapshot testing":  a snapshot test system that renders UI components, takes a screenshot and subsequently compares a recorded screenshot with changes made by an engineer.  It is meant to make sure components don't change unexpectedly.  The first time a test is run, Jest will create a snapshot file that needs to be committed alongside code changes.  On subsequent test runs Jest will simply compare the rendered output with the previous snapshot. If they match, the test will pass. If they don't match, either the implementation has changed and the snapshot needs to be updated with `npm test -- -u TESTNAME` or it indicates there is a bug that needs to be fixed.
+
+Snapshots should be committed to the repo and any changes to snapshots should be reviewed along with their PRs.

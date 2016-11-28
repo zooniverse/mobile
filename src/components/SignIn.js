@@ -98,7 +98,6 @@ export class SignIn extends React.Component {
 
     return (
       <View style={styles.container}>
-        <NavBar showLogo={true} showDrawer={false} />
         <ScrollView>
           <View style={styles.signInContainer}>
             <StyledText
@@ -186,9 +185,9 @@ const styles = EStyleSheet.create({
 });
 
 SignIn.propTypes = {
-  isFetching: React.PropTypes.bool.isRequired,
-  signIn: React.PropTypes.func.isRequired,
-  continueAsGuest: React.PropTypes.func.isRequired,
+  isFetching: React.PropTypes.bool,
+  signIn: React.PropTypes.func,
+  continueAsGuest: React.PropTypes.func,
   errorMessage: React.PropTypes.string
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
