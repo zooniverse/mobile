@@ -13,8 +13,10 @@ import auth from 'panoptes-client/lib/auth'
 import apiClient from 'panoptes-client/lib/api-client'
 import store from 'react-native-simple-store'
 import { PUBLICATIONS } from '../constants/publications'
+import { MOBILE_PROJECTS } from '../constants/mobile_projects'
+import { GLOBALS } from '../constants/globals'
 import { NetInfo } from 'react-native'
-import { addIndex, forEach, head, keys, map } from 'ramda'
+import { addIndex, filter, forEach, head, keys, map, propEq } from 'ramda'
 import { Actions, ActionConst } from 'react-native-router-flux'
 
 export function setState(stateKey, value) {
@@ -117,13 +119,21 @@ export function signOut() {
   }
 }
 
-export function fetchProjects(parms) {
+export function fetchProjects() {
   return dispatch => {
     dispatch(setError(''))
-    dispatch(setIsFetching(false))
+    var callFetchProjects = tag => dispatch(fetchProjectsByTag(tag.value))
+    forEach(callFetchProjects, filter(propEq('display', true), GLOBALS.DISCIPLINES))
+  }
+}
+
+
+export function fetchProjectsByTag(tag) {
+  const parms = {id: MOBILE_PROJECTS, cards: true, tags: tag, sort: 'display_name'}
+  return dispatch => {
     apiClient.type('projects').get(parms)
       .then((projects) => {
-        dispatch(setProjectList(projects))
+        dispatch(setState(`projectList.${tag}`,projects))
       })
       .catch((error) => {
         dispatch(setError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))

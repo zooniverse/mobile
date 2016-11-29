@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'
 import {Scene, Router} from 'react-native-router-flux'
-import { setIsConnected, setUserFromStore } from '../actions/index'
+import { setIsConnected, setUserFromStore, fetchProjects } from '../actions/index'
 
 import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/ProjectList'
@@ -25,6 +25,8 @@ export default class App extends Component {
       store.dispatch(setIsConnected(isConnected))
       NetInfo.isConnected.addEventListener('change', dispatchConnected)
     })
+
+    store.dispatch(fetchProjects())
   }
 
   render() {
