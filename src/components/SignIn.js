@@ -2,6 +2,8 @@ import React from 'react'
 import {
   Alert,
   Linking,
+  Platform,
+  ScrollView,
   Text,
   TouchableOpacity,
   View
@@ -14,6 +16,8 @@ import Input from './Input'
 import NavBar from './NavBar'
 import OverlaySpinner from './OverlaySpinner'
 import StyledText from './StyledText'
+
+const topPadding = (Platform.OS === 'ios') ? 72 : 60
 
 const mapStateToProps = (state) => ({
   isFetching: state.isFetching,
@@ -91,47 +95,49 @@ class SignIn extends React.Component {
     return (
       <View style={styles.container}>
         <NavBar showLogo={true} showDrawer={false} />
-        <View style={styles.signInContainer}>
-          <StyledText
-            textStyle={'headerText'}
-            text={'SIGN IN'} />
-          <Input
-            labelText={'Username or Email Address'}
-            handleOnChangeText={(login) => this.setState({login})} />
-          <Input
-            labelText={'Password'}
-            passwordField={true}
-            handleOnChangeText={(password) => this.setState({password})} />
-          { this.props.errorMessage ? errorMessage : null }
-          <TouchableOpacity
-            onPress={this.handleResetPassword} style={styles.forgotPasswordContainer}>
+        <ScrollView>
+          <View style={styles.signInContainer}>
             <StyledText
-              textStyle={'link'}
-              text={ 'Forget your password?' } />
-          </TouchableOpacity>
+              textStyle={'headerText'}
+              text={'SIGN IN'} />
+            <Input
+              labelText={'Username or Email Address'}
+              handleOnChangeText={(login) => this.setState({login})} />
+            <Input
+              labelText={'Password'}
+              passwordField={true}
+              handleOnChangeText={(password) => this.setState({password})} />
+            { this.props.errorMessage ? errorMessage : null }
+            <TouchableOpacity
+              onPress={this.handleResetPassword} style={styles.forgotPasswordContainer}>
+              <StyledText
+                textStyle={'link'}
+                text={ 'Forget your password?' } />
+            </TouchableOpacity>
 
-          <Button
-            handlePress={this.handleSignIn}
-            disabled={signInDisabled}
-            buttonStyle={ signInDisabled ? 'disabledButton' : null }
-            text={'Sign In'} />
+            <Button
+              handlePress={this.handleSignIn}
+              disabled={signInDisabled}
+              buttonStyle={ signInDisabled ? 'disabledButton' : null }
+              text={'Sign In'} />
 
-          <View style={styles.lined}>
-            <View style={styles.lineThrough} />
-            <Text style={styles.centerText}>OR</Text>
-            <View style={styles.lineThrough} />
+            <View style={styles.lined}>
+              <View style={styles.lineThrough} />
+              <Text style={styles.centerText}>OR</Text>
+              <View style={styles.lineThrough} />
+            </View>
+
+            <Button
+              handlePress={this.continueAsGuest}
+              buttonStyle={ continueTinted ? 'disabledButton' : null }
+              text={'Continue without signing in'} />
+
+            <Button
+              handlePress={this.handleRegistration}
+              buttonStyle={'registerButton'}
+              text={'Register for account'} />
           </View>
-
-          <Button
-            handlePress={this.continueAsGuest}
-            buttonStyle={ continueTinted ? 'disabledButton' : null }
-            text={'Continue without signing in'} />
-
-          <Button
-            handlePress={this.handleRegistration}
-            buttonStyle={'registerButton'}
-            text={'Register for account'} />
-        </View>
+        </ScrollView>
         { this.props.isFetching ? <OverlaySpinner /> : null }
       </View>
     );
@@ -141,11 +147,12 @@ class SignIn extends React.Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: topPadding,
   },
   signInContainer: {
     backgroundColor: 'white',
     margin: 30,
+    marginTop: 20,
     paddingLeft: 15,
     paddingRight: 15,
   },
@@ -154,8 +161,9 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    height: 20,
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 10
   },
   lineThrough: {
     flex: 1,
