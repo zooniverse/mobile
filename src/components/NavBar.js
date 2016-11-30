@@ -126,9 +126,13 @@ const styles = EStyleSheet.create({
     top: 5
   },
   userAvatarContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     position: 'absolute',
     top: 36,
-    left: '50% - 50',
+    left: 60,
+    right: 60,
   }
 })
 
