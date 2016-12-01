@@ -32,6 +32,7 @@ HockeySDK-iOS/
 .gradle
 local.properties
 zooniverse-key.keystore
+gradle.properties
 
 # node.js
 #

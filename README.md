@@ -14,10 +14,17 @@ Android SDK Platform 23
 You may set up Android Studio following the instructions here:
 http://facebook.github.io/react-native/releases/0.23/docs/android-setup.html
 (up to the instructions to Install Genymotion)
+You'll also need to install the Google Play Services SDK for  Google Analytics and Firebase Messaging (Push Notifications).  To do this, go to SDK Manager (from the toolbar or Android Studio -> Preferences -> Android SDK) -> SDK Tools -> Check "Google Play Services" to install.
+
 You'll also need at least one emulator.  I've found the easiest way to add Virtual Device:
   *  Within Android Studio, open the "AVD Manager" -  in the toolbar click the icon with the purple device and small android (fourth from the right)
   *  Click 'Create Virtual Device' - bottom left-hand corner
   *  Create at least one using the latest Android Release (Nougat).  I have a few different size and Android Release configurations
+
+Also you'll need a Gradle properties file outside the project for keeping secrets that aren't checked into source control.  This should be in ~/.gradle/gradle.properties and contain the following:
+`MYAPP_RELEASE_STORE_FILE=
+MYAPP_RELEASE_KEY_ALIAS=
+PUSHER_API_KEY=`
 
 ## Run
 npm install
