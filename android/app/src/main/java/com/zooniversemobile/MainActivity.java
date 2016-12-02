@@ -1,8 +1,15 @@
 package com.zooniversemobile;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 
 import com.facebook.react.ReactActivity;
 import com.google.android.gms.common.ConnectionResult;
@@ -34,6 +41,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (playServicesAvailable()) {
             PusherAndroid pusher = new PusherAndroid(BuildConfig.PUSHER_API_KEY);
             final PushNotificationRegistration nativePusher = pusher.nativePusher();
@@ -61,16 +69,18 @@ public class MainActivity extends ReactActivity {
             nativePusher.setFCMListener(new FCMPushNotificationReceivedListener() {
                 @Override
                 public void onMessageReceived(RemoteMessage remoteMessage) {
-                    //https://firebase.google.com/docs/reference/android/com/google/firebase/messaging/RemoteMessage.Notification
-                    //String title = remoteMessage.getNotification().getTitle();
-
-                    //TODO: Use react native alert to display cross-platform alert here
-
+                String projectID = String.valueOf(remoteMessage.getData().get("project_id"));
+                sendNotification(
+                    remoteMessage.getNotification().getTitle(),
+                    remoteMessage.getNotification().getBody(),
+                    projectID
+                );
                 }
             });
 
         }
     }
+
 
     private boolean playServicesAvailable() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
@@ -87,6 +97,29 @@ public class MainActivity extends ReactActivity {
         return true;
     }
 
+    private void sendNotification(String messageTitle, String messageBody, String projectID) {
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.putExtra("title", messageTitle);
+        notificationIntent.putExtra("body", messageBody);
+        notificationIntent.putExtra("project_id", projectID);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, notificationIntent,
+                PendingIntent.FLAG_ONE_SHOT);
 
+        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(messageTitle)
+                .setContentText(messageBody)
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setLights(0xff00979D, 1000, 1000)
+                .setAutoCancel(true)
+                .setColor(0xff00979D)
+                .setContentIntent(pendingIntent);
 
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
 }
