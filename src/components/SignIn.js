@@ -16,6 +16,7 @@ import Input from './Input'
 import NavBar from './NavBar'
 import OverlaySpinner from './OverlaySpinner'
 import StyledText from './StyledText'
+import { Actions } from 'react-native-router-flux'
 
 const topPadding = (Platform.OS === 'ios') ? 72 : 60
 
@@ -45,17 +46,7 @@ export class SignIn extends React.Component {
   }
 
   handleRegistration() {
-    const zurl='https://www.zooniverse.org/accounts/register'
-    Linking.canOpenURL(zurl).then(supported => {
-      if (supported) {
-        Linking.openURL(zurl);
-      } else {
-        Alert.alert(
-          'Error',
-          'Sorry, but it looks like you are unable to open your default browser.',
-        )
-      }
-    });
+    Actions.Register()
   }
 
   handleResetPassword() {

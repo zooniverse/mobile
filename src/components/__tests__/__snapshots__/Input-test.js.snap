@@ -1,17 +1,24 @@
 exports[`test renders a label correctly 1`] = `
-<View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
+<View
+  style={undefined}>
+  <View
     style={undefined}>
-    Ermahgerd Berks
-  </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={undefined}>
+      Ermahgerd Berks
+    </Text>
+  </View>
   <View
     style={undefined}>
     <TextInput
+      autoCapitalize="none"
+      autoCorrect={false}
+      keyboardType="default"
       onChangeText={undefined}
-      returnKeyType="next"
+      returnKeyType="done"
       secureTextEntry={false}
       style={undefined}
       underlineColorAndroid="white" />
@@ -20,12 +27,16 @@ exports[`test renders a label correctly 1`] = `
 `;
 
 exports[`test renders password fields (using secureTextEntry) 1`] = `
-<View>
+<View
+  style={undefined}>
   <View
     style={undefined}>
     <TextInput
+      autoCapitalize="none"
+      autoCorrect={false}
+      keyboardType="default"
       onChangeText={undefined}
-      returnKeyType="next"
+      returnKeyType="done"
       secureTextEntry={true}
       style={undefined}
       underlineColorAndroid="white" />
@@ -34,12 +45,16 @@ exports[`test renders password fields (using secureTextEntry) 1`] = `
 `;
 
 exports[`test renders with no label 1`] = `
-<View>
+<View
+  style={undefined}>
   <View
     style={undefined}>
     <TextInput
+      autoCapitalize="none"
+      autoCorrect={false}
+      keyboardType="default"
       onChangeText={undefined}
-      returnKeyType="next"
+      returnKeyType="done"
       secureTextEntry={false}
       style={undefined}
       underlineColorAndroid="white" />

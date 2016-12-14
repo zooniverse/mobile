@@ -5,6 +5,9 @@ Object {
   "isConnected": null,
   "isFetching": false,
   "projectList": Array [],
+  "registration": Object {
+    "global_email_communication": true,
+  },
   "selectedDiscipline": null,
   "user": Object {},
 }
@@ -16,6 +19,9 @@ Object {
   "isConnected": true,
   "isFetching": false,
   "projectList": Array [],
+  "registration": Object {
+    "global_email_communication": true,
+  },
   "selectedDiscipline": null,
   "user": Object {},
 }
@@ -27,6 +33,9 @@ Object {
   "isConnected": null,
   "isFetching": false,
   "projectList": Array [],
+  "registration": Object {
+    "global_email_communication": true,
+  },
   "selectedDiscipline": null,
   "user": Object {
     "avatar": "Some avatar",
@@ -41,6 +50,9 @@ Object {
   "isConnected": null,
   "isFetching": false,
   "projectList": Array [],
+  "registration": Object {
+    "global_email_communication": true,
+  },
   "selectedDiscipline": null,
   "user": Object {},
 }

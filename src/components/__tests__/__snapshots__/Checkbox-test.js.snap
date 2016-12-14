@@ -1,0 +1,131 @@
+exports[`test renders 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={undefined}
+  onPress={[Function]}>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "padding": 20,
+      }
+    }>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "flex": 1,
+        }
+      } />
+    <TouchableOpacity
+      activeOpacity={0.2}
+      disabled={undefined}
+      onPress={[Function]}
+      style={
+        Array [
+          Object {
+            "borderColor": "#ddd",
+            "borderRadius": 5,
+            "borderWidth": 2,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "FontAwesome",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            undefined,
+          ]
+        }>
+        
+      </Text>
+    </TouchableOpacity>
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`test renders background color when checked 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={undefined}
+  onPress={[Function]}>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "padding": 20,
+      }
+    }>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "flex": 1,
+        }
+      } />
+    <TouchableOpacity
+      activeOpacity={0.2}
+      disabled={undefined}
+      onPress={[Function]}
+      style={
+        Array [
+          Object {
+            "borderColor": "#ddd",
+            "borderRadius": 5,
+            "borderWidth": 2,
+          },
+          Object {
+            "backgroundColor": "#1995ea",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "FontAwesome",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            undefined,
+          ]
+        }>
+        
+      </Text>
+    </TouchableOpacity>
+  </View>
+</TouchableOpacity>
+`;
