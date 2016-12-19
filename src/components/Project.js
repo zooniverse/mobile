@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
+import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 class Project extends Component {
@@ -19,11 +20,18 @@ class Project extends Component {
 
   handleClick() {
     GoogleAnalytics.trackEvent('view', this.props.project.display_name)
+    if (this.props.project.redirect) {
+      this.openURL(this.props.project.redirect)
+    } else {
+      Actions.ZooWebView({project: this.props.project})
+    }
 
-    const zurl=`http://zooniverse.org/projects/${this.props.project.slug}`
-    Linking.canOpenURL(zurl).then(supported => {
+  }
+
+  openURL(url){
+    Linking.canOpenURL(url).then(supported => {
       if (supported) {
-        Linking.openURL(zurl);
+        Linking.openURL(url);
       } else {
         Alert.alert(
           'Error',
@@ -43,7 +51,7 @@ class Project extends Component {
           onPress={this.handleClick}
           style={styles.touchContainer}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title} numberOfLines={1} ellipsizeMode={"tail"}>{this.props.project.display_name}</Text>
+            <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>{this.props.project.display_name}</Text>
             <Icon name="angle-right" style={styles.icon} />
           </View>
         </TouchableOpacity>

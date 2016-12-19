@@ -1,15 +1,13 @@
 package com.zooniversemobile;
 
-import android.app.Application;
-import android.util.Log;
 import android.support.multidex.MultiDexApplication;
 
 import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
+import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +24,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new GoogleAnalyticsBridgePackage()
+          new GoogleAnalyticsBridgePackage(),
+          new WebViewBridgePackage()
       );
     }
   };
