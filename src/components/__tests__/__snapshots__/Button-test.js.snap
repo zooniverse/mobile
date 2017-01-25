@@ -1,0 +1,48 @@
+exports[`test renders TouchableOpacity disabled when passed in 1`] = `
+<TouchableOpacity
+  activeOpacity={0.5}
+  disabled={true}
+  onPress={[Function]}
+  style={undefined}>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={undefined} />
+</TouchableOpacity>
+`;
+
+exports[`test renders button text correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.5}
+  disabled={false}
+  onPress={[Function]}
+  style={undefined}>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={undefined}>
+    O Hai!
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`test renders styles as array when special style is passed in 1`] = `
+<TouchableOpacity
+  activeOpacity={0.5}
+  disabled={false}
+  onPress={[Function]}
+  style={
+    Array [
+      undefined,
+      undefined,
+    ]
+  }>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={undefined} />
+</TouchableOpacity>
+`;

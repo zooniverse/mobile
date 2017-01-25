@@ -10,7 +10,7 @@ import StyledText from './StyledText'
 import Publication from './Publication'
 import PublicationFilter from './PublicationFilter'
 import NavBar from './NavBar'
-import { fetchPublications } from '../actions/index'
+import { fetchPublications, setState } from '../actions/index'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { addIndex, defaultTo, keys, map } from 'ramda'
@@ -29,9 +29,12 @@ const mapDispatchToProps = (dispatch) => ({
   fetchPublications() {
     dispatch(fetchPublications())
   },
+  setSelectedDiscipline(selected) {
+    dispatch(setState('selectedDiscipline', selected))
+  }
 })
 
-class PublicationList extends React.Component {
+export class PublicationList extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -115,7 +118,11 @@ class PublicationList extends React.Component {
     return (
       <View style={styles.container}>
         { this.props.isConnected ? scrollContainer : noConnection }
-        <PublicationFilter />
+        <PublicationFilter
+          selectDiscipline = {this.props.selectedDiscipline}
+          disciplines = {this.props.disciplines}
+          setSelectedDiscipline = {this.props.setSelectedDiscipline}
+        />
       </View>
     );
   }
@@ -158,7 +165,8 @@ PublicationList.propTypes = {
   disciplines: React.PropTypes.array,
   selectedDiscipline: React.PropTypes.string,
   publications: React.PropTypes.object,
-  fetchPublications: React.PropTypes.func
+  fetchPublications: React.PropTypes.func,
+  setSelectedDiscipline: React.PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicationList)

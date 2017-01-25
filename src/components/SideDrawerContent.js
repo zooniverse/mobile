@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-class SideDrawerContent extends Component {
+export class SideDrawerContent extends Component {
   constructor(props) {
     super(props)
     this.close = this.close.bind(this)

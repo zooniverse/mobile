@@ -1,0 +1,9 @@
+exports[`test renders correctly 1`] = `
+<Image
+  source={
+    Object {
+      "uri": "avatar",
+    }
+  }
+  style={undefined} />
+`;

@@ -1,0 +1,108 @@
+exports[`test renders correctly 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }>
+  <View
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      Array [
+        Object {
+          "borderWidth": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "height": 667,
+          "width": 378,
+        },
+      ]
+    }>
+    <DefaultRenderer
+      navigationState={Object {}}
+      onNavigate={[Function]} />
+    <View
+      pointerEvents="auto"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          undefined,
+        ]
+      } />
+  </View>
+  <View
+    elevation={0}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "white",
+          "borderWidth": 0,
+          "elevation": 3,
+          "position": "absolute",
+          "right": 0,
+          "shadowColor": "black",
+          "shadowOpacity": 0.8,
+          "shadowRadius": 3,
+          "top": 0,
+        },
+        Object {
+          "height": 667,
+          "width": 262.5,
+        },
+      ]
+    }>
+    <SideDrawerContent />
+    <View
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          undefined,
+        ]
+      } />
+  </View>
+</View>
+`;

@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-class ProjectDisciplines extends React.Component {
+export class ProjectDisciplines extends React.Component {
   constructor(props) {
     super(props);
   }

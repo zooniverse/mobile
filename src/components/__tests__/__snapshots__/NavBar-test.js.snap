@@ -1,0 +1,90 @@
+exports[`test renders correctly with defaults 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "height": 70,
+      },
+    ]
+  }>
+  <View
+    style={undefined}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
+      style={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "FontAwesome",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Array [
+              undefined,
+              undefined,
+            ],
+          ]
+        }>
+        
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`test renders correctly with title 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "height": 70,
+      },
+    ]
+  }>
+  <View
+    style={undefined}>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={undefined}>
+      OHai
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
+      style={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "FontAwesome",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Array [
+              undefined,
+              undefined,
+            ],
+          ]
+        }>
+        
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;

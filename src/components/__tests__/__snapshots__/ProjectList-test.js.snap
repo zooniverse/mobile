@@ -1,0 +1,52 @@
+exports[`test renders correctly 1`] = `
+<View
+  style={undefined}>
+  <View
+    style={undefined}>
+    <View
+      style={undefined}>
+      <Image
+        source={
+          Object {
+            "uri": "https://fake_avatar",
+          }
+        }
+        style={undefined} />
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={[Function]}
+        style={undefined}>
+        <View
+          style={undefined}>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            numberOfLines={1}
+            style={undefined}>
+            Nice project
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": undefined,
+                  "fontFamily": "FontAwesome",
+                  "fontSize": 12,
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                undefined,
+              ]
+            }>
+            
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </View>
+</View>
+`;

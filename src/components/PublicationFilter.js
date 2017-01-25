@@ -8,24 +8,9 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
-import { setState } from '../actions/index'
-import { connect } from 'react-redux'
 import { addIndex, compose, join, keys, length, lensIndex, map, over, toUpper } from 'ramda'
 import { PUBLICATIONS } from '../constants/publications'
 import Icon from 'react-native-vector-icons/FontAwesome'
-
-const mapStateToProps = (state) => ({
-  user: state.user,
-  isConnected: state.isConnected,
-  disciplines: keys(state.publications),
-  selectedDiscipline: state.selectedDiscipline || null,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  setSelectedDiscipline(selected) {
-    dispatch(setState('selectedDiscipline', selected))
-  },
-})
 
 class PublicationFilter extends React.Component {
   constructor(props) {
@@ -191,11 +176,9 @@ const styles = EStyleSheet.create({
 });
 
 PublicationFilter.propTypes = {
-  user: React.PropTypes.object,
-  isConnected: React.PropTypes.bool,
   selectedDiscipline: React.PropTypes.string,
   disciplines: React.PropTypes.array,
   setSelectedDiscipline: React.PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublicationFilter)
+export default PublicationFilter

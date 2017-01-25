@@ -22,7 +22,7 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
 })
 
-class ProjectList extends React.Component {
+export class ProjectList extends React.Component {
   constructor(props) {
     super(props)
   }

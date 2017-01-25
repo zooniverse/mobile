@@ -1,0 +1,187 @@
+exports[`test renders correctly 1`] = `
+<View
+  style={undefined}>
+  <TouchableOpacity
+    activeOpacity={0.5}
+    onPress={[Function]}
+    style={undefined}>
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": undefined,
+            "fontFamily": "FontAwesome",
+            "fontSize": 12,
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          undefined,
+        ]
+      }>
+      
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={undefined}>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      Home
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={undefined}>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      About
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={undefined}>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      Publications
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={undefined}>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      Sign Out
+    </Text>
+  </TouchableOpacity>
+  <View
+    style={undefined}>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "FontAwesome",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            undefined,
+          ]
+        }>
+        
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "FontAwesome",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            undefined,
+          ]
+        }>
+        
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "FontAwesome",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            undefined,
+          ]
+        }>
+        
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontFamily": "FontAwesome",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            undefined,
+          ]
+        }>
+        
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
