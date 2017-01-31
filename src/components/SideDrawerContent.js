@@ -9,7 +9,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import StyledText from './StyledText'
-import { signOut } from '../actions/index'
+import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 

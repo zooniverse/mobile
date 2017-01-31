@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import { signIn, continueAsGuest } from '../actions/index'
+import { signIn, continueAsGuest } from '../actions/auth'
 import { connect } from 'react-redux';
 import Button from './Button'
 import Input from './Input'
