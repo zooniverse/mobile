@@ -4,9 +4,13 @@ import {
   TouchableOpacity
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import { append } from 'ramda'
 
 const Button = (props) => {
-  const buttonStyle = ( props.buttonStyle ? [styles.button, styles[props.buttonStyle]] : styles.button )
+  var buttonStyle = ( props.buttonStyle ? [styles.button, styles[props.buttonStyle]] : styles.button )
+  buttonStyle = (props.additionalStyles ? append(props.additionalStyles, [buttonStyle]) : buttonStyle)
+
+  var textStyle = (props.additionalTextStyles ? append(props.additionalTextStyles, [styles.buttonText]) : styles.buttonText)
 
   return (
     <TouchableOpacity
@@ -14,7 +18,7 @@ const Button = (props) => {
       onPress={props.handlePress}
       disabled={props.disabled}
       activeOpacity={0.5}>
-      <Text style={styles.buttonText}>
+      <Text style={textStyle}>
         {props.text}
       </Text>
     </TouchableOpacity>
@@ -55,6 +59,8 @@ Button.propTypes = {
   handlePress: React.PropTypes.func.isRequired,
   disabled: React.PropTypes.bool,
   buttonStyle: React.PropTypes.string,
+  additionalStyles: React.PropTypes.array,
+  additionalTextStyles: React.PropTypes.array,
   text: React.PropTypes.string
 }
 Button.defaultProps = { disabled: false }

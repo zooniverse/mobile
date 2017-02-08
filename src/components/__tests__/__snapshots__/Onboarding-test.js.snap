@@ -1,0 +1,63 @@
+exports[`test renders 1`] = `
+<Image
+  source={1}
+  style={undefined}>
+  <View
+    style={undefined}>
+    <Image
+      source={1}
+      style={undefined} />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          undefined,
+          Array [
+            undefined,
+          ],
+        ]
+      }>
+      The Zooniverse enables everyone to take part in real cutting edge research in many fields across the sciences, humanities, and more.
+    </Text>
+  </View>
+  <View
+    style={undefined}>
+    <View
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        disabled={false}
+        onPress={[Function]}
+        style={
+          Array [
+            undefined,
+            Array [
+              undefined,
+            ],
+          ]
+        }>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ]
+          }>
+          Get Started
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Image>
+`;

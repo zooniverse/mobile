@@ -14,6 +14,7 @@ import {GLOBALS} from '../constants/globals'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import Discipline from './Discipline'
 import OverlaySpinner from './OverlaySpinner'
+import NavBar from '../components/NavBar'
 import { setState } from '../actions/index'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
@@ -37,6 +38,10 @@ const mapDispatchToProps = (dispatch) => ({
 export class ProjectDisciplines extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  static renderNavigationBar() {
+    return <NavBar showAvatar={true} />;
   }
 
   render() {

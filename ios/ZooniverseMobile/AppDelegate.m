@@ -30,7 +30,6 @@
 
   NSString *pusherKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"PUSHER_API_KEY"];
   self.pusher = [PTPusher pusherWithKey:pusherKey delegate:self encrypted:YES];
-  
   if( SYSTEM_VERSION_LESS_THAN( @"10.0" ) )
   {
     UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
@@ -64,6 +63,13 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  UIView* launchScreen =  [[[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil] objectAtIndex:0];
+  launchScreen.frame = [UIScreen mainScreen].bounds;
+  rootView.loadingView = launchScreen;
+  rootView.loadingViewFadeDelay = 0.30;
+  rootView.loadingViewFadeDuration = 0.30;
+
   return YES;
 }
 
