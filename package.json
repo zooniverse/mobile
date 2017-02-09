@@ -16,6 +16,7 @@
     "react": "~15.3.2",
     "react-native": "~0.37.0",
     "react-native-browser-builtins": "^2.0.3",
+    "react-native-checkbox-field": "^1.1.2",
     "react-native-drawer": "^2.3.0",
     "react-native-extended-stylesheet": "^0.3.0",
     "react-native-google-analytics-bridge": "^4.0.2",

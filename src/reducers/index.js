@@ -2,6 +2,7 @@ import { merge, lensPath, set } from 'ramda'
 
 export const InitialState = {
   user: {},
+  registration: { global_email_communication: true },
   isFetching: false,
   errorMessage: null,
   isConnected: null,
