@@ -27,7 +27,8 @@
   [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
   [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 
-  self.pusher = [PTPusher pusherWithKey:@"ed07dc711db7079f2401" delegate:self encrypted:YES];
+  NSString *pusherKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"PUSHER_API_KEY"];
+  self.pusher = [PTPusher pusherWithKey:pusherKey delegate:self encrypted:YES];
   
   if( SYSTEM_VERSION_LESS_THAN( @"10.0" ) )
   {

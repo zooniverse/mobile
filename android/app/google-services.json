@@ -1,31 +1,27 @@
 {
   "project_info": {
-    "project_number": "111613676220",
-    "firebase_url": "https://fir-zooniverse-mobile.firebaseio.com",
-    "project_id": "firebase-zooniverse-mobile",
-    "storage_bucket": "firebase-zooniverse-mobile.appspot.com"
+    "project_number": "598007709823",
+    "firebase_url": "https://zooniversemobiledev.firebaseio.com",
+    "project_id": "zooniversemobiledev",
+    "storage_bucket": "zooniversemobiledev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:111613676220:android:fb87f7b9896c4f38",
+        "mobilesdk_app_id": "1:598007709823:android:fb87f7b9896c4f38",
         "android_client_info": {
           "package_name": "com.zooniversemobile"
         }
       },
       "oauth_client": [
         {
-          "client_id": "111613676220-qa4kg0vf0uqal0776oihi7etlq4q8fac.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "111613676220-82lc3ftuiv3ajd5meqerpjo0kmgbe48i.apps.googleusercontent.com",
+          "client_id": "598007709823-ljil2kgb6squt3aifrnamiupb6gekf1k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC58DF-8Mq1bmVPPbRcER1PxtSk-SbxqJU"
+          "current_key": "AIzaSyDvo1Em0BRQZIEwrpboaBiGm-2SEtasnI0"
         }
       ],
       "services": {
