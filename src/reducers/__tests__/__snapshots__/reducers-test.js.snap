@@ -10,6 +10,7 @@ Object {
   },
   "selectedDiscipline": null,
   "user": Object {},
+  "webViewNavCounter": 0,
 }
 `;
 
@@ -24,6 +25,7 @@ Object {
   },
   "selectedDiscipline": null,
   "user": Object {},
+  "webViewNavCounter": 0,
 }
 `;
 
@@ -41,6 +43,7 @@ Object {
     "avatar": "Some avatar",
     "display_name": "Me",
   },
+  "webViewNavCounter": 0,
 }
 `;
 
@@ -55,5 +58,6 @@ Object {
   },
   "selectedDiscipline": null,
   "user": Object {},
+  "webViewNavCounter": 0,
 }
 `;
