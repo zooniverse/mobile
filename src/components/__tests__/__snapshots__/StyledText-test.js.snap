@@ -18,7 +18,11 @@ exports[`test renders text correctly 1`] = `
   accessible={true}
   allowFontScaling={true}
   ellipsizeMode="tail"
-  style={undefined}>
+  style={
+    Array [
+      undefined,
+    ]
+  }>
   O Hai!
 </Text>
 `;

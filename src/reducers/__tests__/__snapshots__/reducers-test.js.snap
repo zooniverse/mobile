@@ -4,6 +4,8 @@ Object {
   "errorMessage": null,
   "isConnected": null,
   "isFetching": false,
+  "notificationPayload": Object {},
+  "notificationProject": Object {},
   "projectList": Array [],
   "registration": Object {
     "global_email_communication": true,
@@ -19,6 +21,8 @@ Object {
   "errorMessage": null,
   "isConnected": true,
   "isFetching": false,
+  "notificationPayload": Object {},
+  "notificationProject": Object {},
   "projectList": Array [],
   "registration": Object {
     "global_email_communication": true,
@@ -34,6 +38,8 @@ Object {
   "errorMessage": null,
   "isConnected": null,
   "isFetching": false,
+  "notificationPayload": Object {},
+  "notificationProject": Object {},
   "projectList": Array [],
   "registration": Object {
     "global_email_communication": true,
@@ -52,6 +58,8 @@ Object {
   "errorMessage": null,
   "isConnected": null,
   "isFetching": false,
+  "notificationPayload": Object {},
+  "notificationProject": Object {},
   "projectList": Array [],
   "registration": Object {
     "global_email_communication": true,

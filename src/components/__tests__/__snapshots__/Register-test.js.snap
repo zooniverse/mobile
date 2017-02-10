@@ -12,7 +12,11 @@ exports[`test renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             User Name
           </Text>
         </View>
@@ -37,7 +41,11 @@ exports[`test renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             Email address
           </Text>
         </View>
@@ -64,7 +72,11 @@ exports[`test renders correctly 1`] = `
               accessible={true}
               allowFontScaling={true}
               ellipsizeMode="tail"
-              style={undefined}>
+              style={
+                Array [
+                  undefined,
+                ]
+              }>
               Password
             </Text>
             <Text
@@ -194,7 +206,11 @@ exports[`test renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             Real name
           </Text>
           <Text
@@ -384,7 +400,11 @@ exports[`test renders errors 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             User Name
           </Text>
         </View>
@@ -409,7 +429,11 @@ exports[`test renders errors 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             Email address
           </Text>
         </View>
@@ -436,7 +460,11 @@ exports[`test renders errors 1`] = `
               accessible={true}
               allowFontScaling={true}
               ellipsizeMode="tail"
-              style={undefined}>
+              style={
+                Array [
+                  undefined,
+                ]
+              }>
               Password
             </Text>
             <Text
@@ -566,7 +594,11 @@ exports[`test renders errors 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             Real name
           </Text>
           <Text
