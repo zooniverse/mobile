@@ -16,6 +16,7 @@ import PublicationList from '../components/PublicationList'
 import SignIn from '../components/SignIn'
 import Register from '../components/Register'
 import SideDrawer from '../components/SideDrawer'
+import ZooWebView from '../components/ZooWebView'
 
 const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer)
 
@@ -52,6 +53,7 @@ export default class App extends Component {
               <Scene key="Publications" component={PublicationList} />
               <Scene key="ProjectList" component={ProjectList} />
               <Scene key="Register" component={Register} />
+              <Scene key="ZooWebView" hideNavBar={true} component={ZooWebView} duration={0} />
             </Scene>
           </Scene>
         </Router>

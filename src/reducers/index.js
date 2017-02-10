@@ -8,6 +8,7 @@ export const InitialState = {
   isConnected: null,
   selectedDiscipline: null,
   projectList: [],
+  webViewNavCounter: 0,
 }
 
 export default function(state=InitialState, action) {
