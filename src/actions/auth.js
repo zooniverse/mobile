@@ -3,7 +3,7 @@ import store from 'react-native-simple-store'
 import { Actions, ActionConst } from 'react-native-router-flux'
 
 import { checkIsConnected, setState, setIsFetching } from '../actions/index'
-import { loadUserAvatar, syncUserStore } from '../actions/user'
+import { loadUserAvatar, loadUserProjects, syncUserStore } from '../actions/user'
 
 export function getAuthUser() {
   return () => {
@@ -27,7 +27,8 @@ export function signIn(login, password) {
         dispatch(setState('user', user))
 
         return Promise.all([
-          dispatch(loadUserAvatar()) //will have more added
+          dispatch(loadUserAvatar()),
+          dispatch(loadUserProjects())
         ])
       }).then(() => {
         dispatch(syncUserStore())
