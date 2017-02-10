@@ -4,8 +4,8 @@ language: node_js
 node_js:
   - "6"
 
+env:
+  - NODE_ENV=staging
+
 install:
   - npm install
-
-script:
-  - npm test
