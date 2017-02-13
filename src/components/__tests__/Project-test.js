@@ -13,3 +13,14 @@ it('renders correctly', () => {
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
+
+it('renders wallpaper if no avatar', () => {
+  const project = {
+    avatar_src: '',
+    display_name: 'Nice project'
+  }
+  const tree = renderer.create(
+    <Project project={project} color={'#AFA48C'} />
+  ).toJSON()
+  expect(tree).toMatchSnapshot()
+})

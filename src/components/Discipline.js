@@ -38,18 +38,27 @@ class Discipline extends Component {
   }
 }
 
+const widths = {
+  containerHorizontalPadding: 15,
+  containerHorizontalMargin: 10,
+  zooIconContainerWidth: 80,
+  rightIconWidth: 20,
+}
+
+const titleSurroundWidth = widths.rightIconWidth + widths.zooIconContainerWidth +
+  (widths.containerHorizontalMargin * 2) + (widths.containerHorizontalPadding * 2)
+
 const styles = EStyleSheet.create({
+  $titleSurroundWidth: titleSurroundWidth,
   titleContainer: {
     borderRadius: 4,
     flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingHorizontal: widths.containerHorizontalPadding,
     height: 90,
-    marginLeft: 10,
-    marginRight: 10,
+    marginHorizontal: widths.containerHorizontalMargin,
     marginTop: 10,
     marginBottom: 0
   },
@@ -59,15 +68,15 @@ const styles = EStyleSheet.create({
     color: '$textColor',
     fontSize: 28,
     lineHeight: 38,
-    width: '100% - 140'
+    width: '100% - $titleSurroundWidth'
   },
   icon: {
     fontSize: 30,
     color: '$textColor',
-    width: 20,
+    width: widths.rightIconWidth,
   },
   zooIconContainer:{
-    width: 80
+    width: widths.zooIconContainerWidth
   },
 });
 

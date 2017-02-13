@@ -58,14 +58,19 @@ class Project extends Component {
   }
 
   render() {
-    const imageURI = `https://${this.props.project.avatar_src}`
+    const avatar =
+      <Image source={{uri: `https://${this.props.project.avatar_src}`}} style={styles.avatar} onLoadEnd={ ()=>{ this.imageLoadEnd() } } />
+
+    const defaultAvatar =
+      <Image source={require('../../images/teal-wallpaper.png')} style={[styles.avatar, styles.defaultAvatar]} onLoadEnd={ ()=>{ this.imageLoadEnd() } } />
+
     return (
       <Animated.View style={{ opacity: this.state.fadeAnim }}>
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={this.handleClick}
           style={styles.container}>
-          <Image source={{uri: imageURI}} style={styles.avatar} onLoadEnd={ ()=>{ this.imageLoadEnd() } } />
+          { this.props.project.avatar_src ? avatar : defaultAvatar }
             <View style={styles.forBorderRadius} />
             <View style={styles.textContainer}>
               <View style={styles.titleContainer}>
@@ -92,8 +97,7 @@ const styles = EStyleSheet.create({
   $subtractTextWidth: '48 + $iconSize',
   container: {
     height: '$boxHeight + 12',
-    marginLeft: 10,
-    marginRight: 10,
+    marginHorizontal: 10,
     marginBottom: 25,
   },
   forBorderRadius: {
@@ -111,6 +115,10 @@ const styles = EStyleSheet.create({
     flex: 1,
     height: '$boxHeight',
     resizeMode: 'cover'
+  },
+  defaultAvatar: {
+    height: null,
+    width: null,
   },
   textContainer: {
     position: 'absolute',
