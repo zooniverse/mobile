@@ -10,8 +10,13 @@ export default {
   lightTransparent: 'rgba(0, 0, 0, .03)',
   transparent: 'rgba(0, 0, 0, 0)',
   darkTextColor: 'rgba(12, 71, 128, 1)',
+  darkGreyTextColor: 'rgba(0, 0, 0, .8)',
+  greyTextColor: 'rgba(0, 0, 0, .6)',
   lightGrey: 'rgba(240, 240, 240, 1)',
   grey: 'rgba(164, 164, 164, 1)',
   mediumGrey: 'rgba(216, 216, 216, 1)',
   navy: 'rgba(12, 72, 129, 1)',
+  lightGreyBackground: 'rgba(239, 242, 245, 1)',
+  greyBorder: 'rgba(0, 0, 0, .2)',
+  transluscentWhite: 'rgba(255, 255, 255, 0.8)',
 }

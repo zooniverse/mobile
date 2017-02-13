@@ -27,9 +27,9 @@ export class ProjectList extends React.Component {
     super(props)
   }
 
-  renderRow(project) {
+  renderRow(project, color) {
     return (
-      <Project project={project}/>
+      <Project project={project} color={color} />
     );
   }
 
@@ -41,7 +41,7 @@ export class ProjectList extends React.Component {
     const projectList =
       <ListView
         dataSource={this.props.dataSource}
-        renderRow={this.renderRow}
+        renderRow={(rowData) => this.renderRow(rowData, this.props.color)}
         enableEmptySections={true}
       />
 
@@ -65,6 +65,7 @@ const styles = EStyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 60,
+    backgroundColor: '$lightGreyBackground'
   },
   innerContainer: {
     flex: 1,
@@ -82,6 +83,9 @@ ProjectList.propTypes = {
   user: React.PropTypes.object,
   isConnected: React.PropTypes.bool,
   dataSource: React.PropTypes.object,
+  tag: React.PropTypes.string,
+  color: React.PropTypes.string,
+  fetchProjects: React.PropTypes.func
 }
 
 export default connect(mapStateToProps)(ProjectList)

@@ -72,7 +72,7 @@ export class PublicationList extends React.Component {
     }
 
     const defaultAvatar =
-      <Image source={require('../../images/simple-avatar.jpg')} style={styles.avatar} />
+      <Image source={require('../../images/teal-wallpaper.png')} style={styles.avatar} />
 
     const renderProjectGroup = (project, idx) => {
       return (

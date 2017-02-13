@@ -67,6 +67,7 @@ export function loadUserAvatar() {
 
 export function loadUserProjects() {
   return (dispatch) => {
+    dispatch(setState('loadingText', 'Loading Projects...'))
     return new Promise ((resolve, reject) => {
       dispatch(getAuthUser()).then((userResourse) => {
         userResourse.get('project_preferences').then((forCount) => {
@@ -93,6 +94,7 @@ export function loadUserProjects() {
             }, projects)
           }).then(() => {
             dispatch(calculateTotalClassifications())
+            dispatch(setState('loadingText', 'Loading...'))
             return resolve()
           })
         })

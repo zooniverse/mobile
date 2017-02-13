@@ -7,32 +7,32 @@ exports[`test renders for isFetching 1`] = `
     visible={true}>
     <View
       style={
-        Object {
-          "backgroundColor": "transparent",
-          "bottom": 0,
-          "flex": 1,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "flex": 1,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          },
+        ]
       }>
       <View
         style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "bottom": 0,
-              "justifyContent": "center",
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-            Object {
-              "backgroundColor": "rgba(0, 0, 0, 0.25)",
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
         }>
         <ActivityIndicator
           animating={true}
@@ -44,6 +44,37 @@ exports[`test renders for isFetching 1`] = `
               "flex": 1,
             }
           } />
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "bottom": 0,
+              "flex": 1,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "fontSize": 20,
+                  "fontWeight": "bold",
+                  "height": 50,
+                  "top": 80,
+                },
+                undefined,
+              ]
+            }>
+            Loading!
+          </Text>
+        </View>
       </View>
     </View>
   </Modal>

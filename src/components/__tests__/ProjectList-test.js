@@ -14,7 +14,7 @@ jest.mock('ListView', () => require('react').createClass({
         DataSource: require.requireActual('ListView').DataSource,
     },
     render() {
-        return <Project project={project} />
+        return <Project project={project} color={'#AFA48C'}/>
     },
 }))
 

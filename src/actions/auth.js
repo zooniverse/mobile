@@ -20,6 +20,7 @@ export function getAuthUser() {
 export function signIn(login, password) {
   return dispatch => {
     dispatch(setIsFetching(true))
+    dispatch(setState('loadingText', 'Signing In...'))
     dispatch(setState('errorMessage', null))
     dispatch(checkIsConnected()).then(() => {
       auth.signIn({login: login, password: password}).then((user) => {

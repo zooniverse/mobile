@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,6 +18,8 @@ import { setState } from '../actions/index'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
+
+const topPadding = (Platform.OS === 'ios') ? 10 : 0
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -85,10 +88,10 @@ const styles = EStyleSheet.create({
   subNavContainer: {
     borderBottomColor: '$lightGrey',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingTop: 140,
+    paddingTop: 136 + topPadding,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    height: 180
+    height: 184 + topPadding
   },
   userName: {
     color: '$darkTextColor',
