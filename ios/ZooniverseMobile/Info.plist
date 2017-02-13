@@ -15,6 +15,10 @@
 		<string>zoo-font.ttf</string>
 		<string>FontAwesome.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+	  <string>remote-notification</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

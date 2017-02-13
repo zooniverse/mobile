@@ -2,6 +2,7 @@ package com.zooniversemobile;
 
 import android.support.multidex.MultiDexApplication;
 
+import com.evollu.react.fcm.FIRMessagingPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -27,7 +28,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
           new MainReactPackage(),
           new GoogleAnalyticsBridgePackage(),
           new WebViewBridgePackage(),
-          new RNSvgPackage()
+          new RNSvgPackage(),
+          new FIRMessagingPackage()
       );
     }
   };

@@ -56,7 +56,7 @@ export function checkIsConnected() {
 export function fetchProjects() {
   return dispatch => {
     dispatch(setError(''))
-    var callFetchProjects = tag => dispatch(fetchProjectsByTag(tag.value))
+    let callFetchProjects = tag => dispatch(fetchProjectsByTag(tag.value))
     forEach(callFetchProjects, filter(propEq('display', true), GLOBALS.DISCIPLINES))
   }
 }
@@ -99,5 +99,15 @@ export function fetchPublications() {
         PUBLICATIONS[key]
       )
     }, keys(PUBLICATIONS))
+  }
+}
+
+export function fetchNotificationProject(projectID) {
+  return dispatch => {
+    apiClient.type('projects').get({id: projectID}).then((projects) => {
+      dispatch(setState('notificationProject', head(projects)))
+    }).catch((error) => {
+      dispatch(setError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
+    })
   }
 }

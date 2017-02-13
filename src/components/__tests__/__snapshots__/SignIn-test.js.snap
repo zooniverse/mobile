@@ -24,7 +24,11 @@ exports[`test renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             Username or Email Address
           </Text>
         </View>
@@ -49,7 +53,11 @@ exports[`test renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             Password
           </Text>
         </View>
@@ -177,7 +185,11 @@ exports[`test renders error message 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             Username or Email Address
           </Text>
         </View>
@@ -202,7 +214,11 @@ exports[`test renders error message 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+              ]
+            }>
             Password
           </Text>
         </View>

@@ -18,7 +18,11 @@ exports[`test does not render when not connected 1`] = `
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-          style={undefined}>
+          style={
+            Array [
+              undefined,
+            ]
+          }>
           Choose Category
         </Text>
         <Text
@@ -65,7 +69,11 @@ exports[`test renders correctly 1`] = `
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-          style={undefined}>
+          style={
+            Array [
+              undefined,
+            ]
+          }>
           Choose Category
         </Text>
         <Text
@@ -112,7 +120,11 @@ exports[`test renders selected discipline 1`] = `
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-          style={undefined}>
+          style={
+            Array [
+              undefined,
+            ]
+          }>
           Viewing Science
         </Text>
         <Text
