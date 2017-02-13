@@ -107,7 +107,7 @@ class NotificationModal extends Component {
 
         <Button
           handlePress={() => this.props.setVisibility(false)}
-          buttonStyle={'greyButton'}
+          buttonStyle={'navyButton'}
           text={'Close'} />
 
       </StyledModal>
