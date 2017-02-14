@@ -20,7 +20,7 @@ jest.mock('ListView', () => require('react').createClass({
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <ProjectList isConnected={true} fetchProjects={jest.fn} />
+    <ProjectList projects={[project]} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

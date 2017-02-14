@@ -4,9 +4,8 @@ import store from 'react-native-simple-store'
 import { Actions } from 'react-native-router-flux'
 import { add, addIndex, filter, head, keys, map, reduce } from 'ramda'
 
-import { setState } from '../actions/index'
+import { fetchProjectsByParms, setState } from '../actions/index'
 import { getAuthUser } from '../actions/auth'
-
 
 export function syncUserStore() {
   return (dispatch, getState) => {
@@ -94,6 +93,7 @@ export function loadUserProjects() {
             }, projects)
           }).then(() => {
             dispatch(calculateTotalClassifications())
+            dispatch(fetchProjectsByParms('recent'))
             dispatch(setState('loadingText', 'Loading...'))
             return resolve()
           })

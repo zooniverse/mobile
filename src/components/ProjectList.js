@@ -14,7 +14,7 @@ GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  isConnected: state.isConnected,
+  projects: state.projectList[state.selectedProjectTag] || [],
   dataSource: dataSource.cloneWithRows(state.projectList[state.selectedProjectTag])
 })
 
@@ -45,16 +45,15 @@ export class ProjectList extends React.Component {
         enableEmptySections={true}
       />
 
-    const noConnection =
-      <View style={styles.messageContainer}>
-        <StyledText textStyle={'errorMessage'}
-          text={'You must have an internet connection to use Zooniverse Mobile'} />
-      </View>
+    const emptyList =
+      <StyledText
+        additionalStyles={[styles.emptyList]}
+        text={'Sorry, but you have no mobile friendly projects to display'} />
 
     return (
       <View style={styles.container}>
         <View style={styles.innerContainer}>
-          { this.props.isConnected ? projectList : noConnection }
+          { this.props.projects.length > 0 ? projectList : emptyList }
         </View>
       </View>
     );
@@ -74,18 +73,20 @@ const styles = EStyleSheet.create({
   listStyle: {
     paddingTop: 90
   },
-  messageContainer: {
-    padding: 15,
-  },
+  emptyList: {
+    marginHorizontal: 20,
+    color: 'grey',
+    fontStyle: 'italic',
+    lineHeight: 24
+  }
 });
 
 ProjectList.propTypes = {
   user: React.PropTypes.object,
-  isConnected: React.PropTypes.bool,
   dataSource: React.PropTypes.object,
+  projects: React.PropTypes.array,
   tag: React.PropTypes.string,
   color: React.PropTypes.string,
-  fetchProjects: React.PropTypes.func
 }
 
 export default connect(mapStateToProps)(ProjectList)
