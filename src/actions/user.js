@@ -4,7 +4,7 @@ import store from 'react-native-simple-store'
 import { Actions } from 'react-native-router-flux'
 import { add, addIndex, filter, head, keys, map, reduce } from 'ramda'
 
-import { fetchProjectsByParms, setState } from '../actions/index'
+import { fetchProjectsByParms, loadNotificationSettings, setState } from '../actions/index'
 import { getAuthUser } from '../actions/auth'
 
 export function syncUserStore() {
@@ -33,11 +33,14 @@ export function loadUserData() {
   return (dispatch, getState) => {
     dispatch(setUserFromStore()).then(() => {
       if (getState().user.isGuestUser) {
-        return
+        return Promise.all([
+          dispatch(loadNotificationSettings())
+        ])
       } else {
         return Promise.all([
           dispatch(loadUserAvatar()),
-          dispatch(loadUserProjects())
+          dispatch(loadUserProjects()),
+          dispatch(loadNotificationSettings()),
         ])
       }
     }).then(() => {

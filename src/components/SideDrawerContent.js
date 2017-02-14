@@ -32,6 +32,7 @@ export class SideDrawerContent extends Component {
     this.signOut = this.signOut.bind(this)
     this.goToAbout = this.goToAbout.bind(this)
     this.goToPublications = this.goToPublications.bind(this)
+    this.notificationSettings = this.notificationSettings.bind(this)
     this.signIn = this.signIn.bind(this)
   }
 
@@ -63,6 +64,11 @@ export class SideDrawerContent extends Component {
   goToPublications(){
     this.close()
     Actions.Publications()
+  }
+
+  notificationSettings(){
+    this.close()
+    Actions.NotificationSettings()
   }
 
   openSocialMediaLink(link) {
@@ -121,6 +127,12 @@ export class SideDrawerContent extends Component {
           <StyledText
             textStyle={'largeLink'}
             text={'Publications'} />
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={this.notificationSettings} style={styles.linkContainer}>
+          <StyledText
+            textStyle={'largeLink'}
+            text={'Notification Settings'} />
         </TouchableOpacity>
 
         { this.props.isGuestUser ? null : signOut }
