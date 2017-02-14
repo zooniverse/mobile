@@ -65,12 +65,19 @@ export class ProjectDisciplines extends React.Component {
           text={'You must have an internet connection to use Zooniverse Mobile'} />
       </View>
 
+    const totalClassifications =
+      <StyledText
+        additionalStyles={[styles.totalClassifications]}
+        text={`${this.props.user.totalClassifications} total classifications`} />
+
     return (
       <View style={styles.container}>
         <View style={styles.subNavContainer}>
-          <Text style={styles.userName}>
-            { this.props.isGuestUser ? 'Guest User' : this.props.user.display_name }
-          </Text>
+            <StyledText additionalStyles={[styles.userName]}
+              text = { this.props.isGuestUser ? 'Guest User' : this.props.user.display_name } />
+            { this.props.user.totalClassifications > 0
+              ? totalClassifications
+              : null }
         </View>
         <View style={styles.innerContainer}>
           { this.props.isConnected ? DisciplineList : noConnection }
@@ -95,8 +102,10 @@ const styles = EStyleSheet.create({
   },
   userName: {
     color: '$darkTextColor',
-    fontSize: 14,
     fontWeight: 'bold'
+  },
+  totalClassifications: {
+    color: '$darkTextColor',
   },
   signOut: {
     backgroundColor: '$transparent',
