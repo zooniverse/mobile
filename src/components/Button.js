@@ -7,10 +7,10 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import { append } from 'ramda'
 
 const Button = (props) => {
-  var buttonStyle = ( props.buttonStyle ? [styles.button, styles[props.buttonStyle]] : styles.button )
+  let buttonStyle = ( props.buttonStyle ? [styles.button, styles[props.buttonStyle]] : styles.button )
   buttonStyle = (props.additionalStyles ? append(props.additionalStyles, [buttonStyle]) : buttonStyle)
 
-  var textStyle = (props.additionalTextStyles ? append(props.additionalTextStyles, [styles.buttonText]) : styles.buttonText)
+  const textStyle = (props.additionalTextStyles ? append(props.additionalTextStyles, [styles.buttonText]) : styles.buttonText)
 
   return (
     <TouchableOpacity
