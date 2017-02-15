@@ -3,7 +3,6 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -45,6 +44,7 @@ export class ProjectDisciplines extends React.Component {
   }
 
   render() {
+    const totalClassifications = this.props.user.totalClassifications
     const renderDiscipline = ({value, label, color}, idx) => {
       return (
         <Discipline
@@ -79,12 +79,18 @@ export class ProjectDisciplines extends React.Component {
           text={'You must have an internet connection to use Zooniverse Mobile'} />
       </View>
 
+    const pluralizeClassification = ( totalClassifications > 1 ? 's' : '' )
+    const totalClassificationsDisiplay =
+      <StyledText
+        additionalStyles={[styles.totalClassifications]}
+        text={`${totalClassifications} total classification${pluralizeClassification}`} />
+
     return (
       <View style={styles.container}>
         <View style={styles.subNavContainer}>
-          <Text style={styles.userName}>
-            { this.props.isGuestUser ? 'Guest User' : this.props.user.display_name }
-          </Text>
+            <StyledText additionalStyles={[styles.userName]}
+              text = { this.props.isGuestUser ? 'Guest User' : this.props.user.display_name } />
+            { totalClassifications > 0 ? totalClassificationsDisiplay : null }
         </View>
         <View style={styles.innerContainer}>
           { this.props.isConnected ? DisciplineList : noConnection }
@@ -109,8 +115,10 @@ const styles = EStyleSheet.create({
   },
   userName: {
     color: '$darkTextColor',
-    fontSize: 14,
     fontWeight: 'bold'
+  },
+  totalClassifications: {
+    color: '$darkTextColor',
   },
   signOut: {
     backgroundColor: '$transparent',

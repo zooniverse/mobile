@@ -7,7 +7,14 @@ exports[`test does not render when not connected 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-      style={undefined}>
+      style={
+        Array [
+          undefined,
+          Array [
+            undefined,
+          ],
+        ]
+      }>
       Fake User
     </Text>
   </View>
@@ -41,7 +48,14 @@ exports[`test renders correctly when connected 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-      style={undefined}>
+      style={
+        Array [
+          undefined,
+          Array [
+            undefined,
+          ],
+        ]
+      }>
       Fake User
     </Text>
   </View>
