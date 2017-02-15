@@ -89,6 +89,23 @@ exports[`test renders correctly 1`] = `
           undefined,
         ]
       }>
+      Notification Settings
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={undefined}>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
       Sign Out
     </Text>
   </TouchableOpacity>

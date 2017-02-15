@@ -2,7 +2,7 @@ import auth from 'panoptes-client/lib/auth'
 import store from 'react-native-simple-store'
 import { Actions, ActionConst } from 'react-native-router-flux'
 
-import { checkIsConnected, setState, setIsFetching } from '../actions/index'
+import { checkIsConnected, loadNotificationSettings, setState, setIsFetching } from '../actions/index'
 import { loadUserAvatar, loadUserProjects, syncUserStore } from '../actions/user'
 
 export function getAuthUser() {
@@ -29,7 +29,8 @@ export function signIn(login, password) {
 
         return Promise.all([
           dispatch(loadUserAvatar()),
-          dispatch(loadUserProjects())
+          dispatch(loadUserProjects()),
+          dispatch(loadNotificationSettings())
         ])
       }).then(() => {
         dispatch(syncUserStore())
@@ -88,8 +89,10 @@ export function signOut() {
 
 export function continueAsGuest() {
   return dispatch => {
-    dispatch(setState('user.isGuestUser', true))
-    dispatch(syncUserStore())
+    dispatch(loadNotificationSettings()).then(() => {
+      dispatch(setState('user.isGuestUser', true))
+      dispatch(syncUserStore())
+    })
     Actions.ZooniverseApp({type: ActionConst.RESET})
   }
 }

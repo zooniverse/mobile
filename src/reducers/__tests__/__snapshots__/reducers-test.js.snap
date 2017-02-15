@@ -6,7 +6,11 @@ Object {
   "isFetching": false,
   "notificationPayload": Object {},
   "notificationProject": Object {},
+  "notifications": Object {
+    "general": true,
+  },
   "projectList": Array [],
+  "pushEnabled": false,
   "registration": Object {
     "global_email_communication": true,
   },
@@ -23,7 +27,11 @@ Object {
   "isFetching": false,
   "notificationPayload": Object {},
   "notificationProject": Object {},
+  "notifications": Object {
+    "general": true,
+  },
   "projectList": Array [],
+  "pushEnabled": false,
   "registration": Object {
     "global_email_communication": true,
   },
@@ -40,7 +48,11 @@ Object {
   "isFetching": false,
   "notificationPayload": Object {},
   "notificationProject": Object {},
+  "notifications": Object {
+    "general": true,
+  },
   "projectList": Array [],
+  "pushEnabled": false,
   "registration": Object {
     "global_email_communication": true,
   },
@@ -60,7 +72,11 @@ Object {
   "isFetching": false,
   "notificationPayload": Object {},
   "notificationProject": Object {},
+  "notifications": Object {
+    "general": true,
+  },
   "projectList": Array [],
+  "pushEnabled": false,
   "registration": Object {
     "global_email_communication": true,
   },

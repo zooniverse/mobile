@@ -1,0 +1,43 @@
+exports[`test renders checked 1`] = `
+<View
+  style={undefined}>
+  <Switch
+    onTintColor="rgba(0, 151, 157, 1)"
+    onValueChange={[Function]}
+    style={undefined}
+    value={true} />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        undefined,
+      ]
+    }>
+    test
+  </Text>
+</View>
+`;
+
+exports[`test renders not checked 1`] = `
+<View
+  style={undefined}>
+  <Switch
+    onTintColor="rgba(0, 151, 157, 1)"
+    onValueChange={[Function]}
+    style={undefined}
+    value={false} />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        undefined,
+      ]
+    }>
+    test
+  </Text>
+</View>
+`;

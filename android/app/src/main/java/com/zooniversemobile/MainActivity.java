@@ -16,12 +16,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.messaging.RemoteMessage;
 import com.pusher.android.PusherAndroid;
-import com.pusher.android.notifications.PushNotificationRegistration;
 import com.pusher.android.notifications.fcm.FCMPushNotificationReceivedListener;
 import com.pusher.android.notifications.tokens.PushNotificationRegistrationListener;
 
 public class MainActivity extends ReactActivity {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static MainActivity mainActivity;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -31,6 +31,7 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "ZooniverseMobile";
     }
+    public MainActivity getInstance() { return mainActivity; }
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         Intent intent = new Intent("onConfigurationChanged");
@@ -44,13 +45,13 @@ public class MainActivity extends ReactActivity {
 
         if (playServicesAvailable()) {
             PusherAndroid pusher = new PusherAndroid(BuildConfig.PUSHER_API_KEY);
-            final PushNotificationRegistration nativePusher = pusher.nativePusher();
+            PusherProperty.getInstance().nativePusher = pusher.nativePusher();
 
             try {
-                nativePusher.registerFCM(this, new PushNotificationRegistrationListener() {
+                PusherProperty.getInstance().nativePusher.registerFCM(this, new PushNotificationRegistrationListener() {
                     @Override
                     public void onSuccessfulRegistration() {
-                        nativePusher.subscribe("general");
+                        PusherProperty.getInstance().nativePusher.subscribe("general");
                     }
 
                     @Override
@@ -66,7 +67,7 @@ public class MainActivity extends ReactActivity {
                 e.printStackTrace();
             }
 
-            nativePusher.setFCMListener(new FCMPushNotificationReceivedListener() {
+            PusherProperty.getInstance().nativePusher.setFCMListener(new FCMPushNotificationReceivedListener() {
                 @Override
                 public void onMessageReceived(RemoteMessage remoteMessage) {
                 String projectID = String.valueOf(remoteMessage.getData().get("project_id"));

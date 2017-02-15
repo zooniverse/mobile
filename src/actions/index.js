@@ -9,11 +9,12 @@ export const STORE_USER = 'STORE_USER'
 export const GET_USER_STORE = 'GET_USER_STORE'
 export const SIGN_IN = 'SIGN_IN'
 
+import store from 'react-native-simple-store'
 import apiClient from 'panoptes-client/lib/api-client'
 import { PUBLICATIONS } from '../constants/publications'
 import { MOBILE_PROJECTS } from '../constants/mobile_projects'
 import { GLOBALS } from '../constants/globals'
-import { NetInfo } from 'react-native'
+import { Platform, PushNotificationIOS, NativeModules, NetInfo } from 'react-native'
 import { addIndex, filter, forEach, head, intersection, keys, map, propEq } from 'ramda'
 
 export function setState(stateKey, value) {
@@ -38,6 +39,29 @@ export function setIsConnected(isConnected) {
 
 export function setProjectList(projectList) {
   return { type: SET_PROJECT_LIST, projectList }
+}
+
+
+export function syncNotificationStore() {
+  return (dispatch, getState) => {
+    const notifications = getState().notifications
+    return store.save('@zooniverse:notifications', {
+      notifications
+    })
+  }
+}
+
+export function setNotificationFromStore() {
+  return dispatch => {
+    return new Promise ((resolve) => {
+      store.get('@zooniverse:notifications').then(json => {
+        dispatch(setState('notifications', json.notifications))
+        return resolve()
+      }).catch(() => {
+        return resolve()
+      })
+    })
+  }
 }
 
 export function checkIsConnected() {
@@ -111,6 +135,70 @@ export function fetchNotificationProject(projectID) {
       dispatch(setState('notificationProject', head(projects)))
     }).catch((error) => {
       dispatch(setError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
+    })
+  }
+}
+
+export function loadNotificationSettings() {
+  return (dispatch, getState) => {
+    return new Promise((resolve) => {
+      dispatch(setNotificationFromStore()).then(() => {
+        forEach((projectID) => {
+          if (getState().notifications[projectID] === undefined) {
+            dispatch(setState(`notifications.${projectID}`, true))
+          }
+        })(MOBILE_PROJECTS)
+
+        dispatch(checkPushPermissions()).then(()=> {
+          if (getState().pushEnabled){
+            dispatch(syncInterestSubscriptions())
+          }
+        })
+        dispatch(syncNotificationStore())
+      })
+      return resolve()
+    })
+  }
+}
+
+export function syncInterestSubscriptions() {
+  return (dispatch, getState) => {
+    MOBILE_PROJECTS.reduce((promise, projectID) => {
+      return promise.then(() => {
+        var subscribed = getState().notifications[projectID]
+        return dispatch(updateInterestSubscription(projectID, subscribed))
+      })
+    }, Promise.resolve())
+  }
+}
+
+export function updateInterestSubscription(interest, subscribed) {
+  var NotificationSettings = NativeModules.NotificationSettings
+  return () => {
+    return new Promise((resolve) => {
+      NotificationSettings.setInterestSubscription(interest, subscribed).then((message) => {
+        //Timeout needed or crashes ios.  Open issue: https://github.com/pusher/libPusher/issues/230
+        setTimeout(()=> {
+          return resolve(message)
+        }, 500)
+      })
+
+    })
+  }
+}
+
+export function checkPushPermissions() {
+  return (dispatch) => {
+    return new Promise((resolve) => {
+      if (Platform.OS === 'ios') {
+        PushNotificationIOS.checkPermissions((permissions) => {
+          dispatch(setState('pushEnabled', (permissions.alert === 0) ? false : true))
+          return resolve()
+        })
+      } else {
+        dispatch(setState('pushEnabled', true))
+        return resolve()
+      }
     })
   }
 }
