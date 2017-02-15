@@ -56,8 +56,17 @@ export class ProjectDisciplines extends React.Component {
           setSelectedProjectTag={() => {this.props.setSelectedProjectTag(value)}} /> )
     }
 
+    const recent =
+      <Discipline
+        faIcon={'undo'}
+        title={'Recent'}
+        tag={'recent'}
+        color={'rgba(0, 151, 157, 1)'}
+        setSelectedProjectTag={() => {this.props.setSelectedProjectTag('recent')}} />
+
     const DisciplineList =
       <ScrollView>
+        { !this.props.isGuestUser ? recent : null }
         {addIndex(map)(
           (discipline, idx) => { return renderDiscipline(discipline, idx) },
           filter(propEq('display', true), GLOBALS.DISCIPLINES)

@@ -28,7 +28,9 @@ class Discipline extends Component {
         onPress={this.handleClick}>
         <View style={[styles.titleContainer, { backgroundColor: this.props.color }]}>
           <View style={styles.zooIconContainer}>
-            <ZooIcon iconName={this.props.icon} />
+            { this.props.faIcon
+              ? <Icon name={this.props.faIcon} style={[styles.icon, styles.faIcon, styles.zooIconContainer]} />
+              : <ZooIcon iconName={this.props.icon} /> }
           </View>
           <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>{this.props.title}</Text>
           <Icon name="angle-right" style={styles.icon} />
@@ -75,13 +77,17 @@ const styles = EStyleSheet.create({
     color: '$textColor',
     width: widths.rightIconWidth,
   },
+  faIcon: {
+    paddingLeft: 10
+  },
   zooIconContainer:{
     width: widths.zooIconContainerWidth
   },
 });
 
 Discipline.propTypes = {
-  icon: React.PropTypes.string.isRequired,
+  icon: React.PropTypes.string,
+  faIcon: React.PropTypes.string,
   title: React.PropTypes.string.isRequired,
   tag: React.PropTypes.string.isRequired,
   color: React.PropTypes.string.isRequired,
