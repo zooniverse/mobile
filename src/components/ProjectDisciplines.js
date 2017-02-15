@@ -3,7 +3,6 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -40,6 +39,7 @@ export class ProjectDisciplines extends React.Component {
   }
 
   render() {
+    const totalClassifications = this.props.user.totalClassifications
     const renderDiscipline = ({value, label, color}, idx) => {
       return (
         <Discipline
@@ -65,19 +65,18 @@ export class ProjectDisciplines extends React.Component {
           text={'You must have an internet connection to use Zooniverse Mobile'} />
       </View>
 
-    const totalClassifications =
+    const pluralizeClassification = ( totalClassifications > 1 ? 's' : '' )
+    const totalClassificationsDisiplay =
       <StyledText
         additionalStyles={[styles.totalClassifications]}
-        text={`${this.props.user.totalClassifications} total classifications`} />
+        text={`${totalClassifications} total classification${pluralizeClassification}`} />
 
     return (
       <View style={styles.container}>
         <View style={styles.subNavContainer}>
             <StyledText additionalStyles={[styles.userName]}
               text = { this.props.isGuestUser ? 'Guest User' : this.props.user.display_name } />
-            { this.props.user.totalClassifications > 0
-              ? totalClassifications
-              : null }
+            { totalClassifications > 0 ? totalClassificationsDisiplay : null }
         </View>
         <View style={styles.innerContainer}>
           { this.props.isConnected ? DisciplineList : noConnection }
