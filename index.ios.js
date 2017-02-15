@@ -18,7 +18,6 @@ class ZooniverseMobile extends Component {
           translucent={false}
         />
         <App />
-        <View style={styles.statusBar} />
       </View>
     );
   }
@@ -28,14 +27,6 @@ const styles = EStyleSheet.create({
   container: {
     flex: 1,
   },
-  statusBar:{
-    position: 'absolute',
-    backgroundColor: '$headerColor',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 22
-  }
 });
 
 EStyleSheet.build(theme);

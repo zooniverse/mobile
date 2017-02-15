@@ -7,6 +7,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
+import LaunchScreen from '../components/Launch'
 import NavBar from '../components/NavBar'
 import { connect } from 'react-redux'
 import { setState } from '../actions/index'
@@ -58,7 +59,7 @@ class ZooniverseApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        { this.props.isFetching ? null : <ProjectDisciplines /> }
+        { this.props.isFetching ? <LaunchScreen /> : <ProjectDisciplines /> }
         <NotificationModal
           isVisible={this.props.isModalVisible}
           setVisibility={this.props.setModalVisibility}/>

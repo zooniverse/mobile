@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { AppState, NetInfo } from 'react-native'
+import { AppState, Navigator, NetInfo } from 'react-native'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
@@ -17,6 +17,7 @@ import SignIn from '../components/SignIn'
 import Register from '../components/Register'
 import SideDrawer from '../components/SideDrawer'
 import ZooWebView from '../components/ZooWebView'
+import Onboarding from '../components/Onboarding'
 
 const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer)
 
@@ -46,7 +47,7 @@ export default class App extends Component {
         <Router ref="router">
           <Scene ref="drawer" key="drawer" component={SideDrawer} open={false}>
             <Scene key="main" tabs={false} >
-              <Scene key="SignIn" component={SignIn} type="reset" />
+              <Scene key="SignIn" component={SignIn} duration={0} type="reset" sceneConfig={Navigator.SceneConfigs.FloatFromLeft} />
               <Scene key="ZooniverseApp" component={ZooniverseApp} initial />
               <Scene key="ProjectDisciplines" component={ProjectDisciplines} />
               <Scene key="About" component={About} />
@@ -54,6 +55,7 @@ export default class App extends Component {
               <Scene key="ProjectList" component={ProjectList} />
               <Scene key="Register" component={Register} />
               <Scene key="ZooWebView" hideNavBar={true} component={ZooWebView} duration={0} />
+              <Scene key="Onboarding" component={Onboarding} duration={0} hideNavBar={true} sceneConfig={Navigator.SceneConfigs.FloatFromLeft} />
             </Scene>
           </Scene>
         </Router>

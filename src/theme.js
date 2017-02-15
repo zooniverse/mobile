@@ -19,4 +19,5 @@ export default {
   lightGreyBackground: 'rgba(239, 242, 245, 1)',
   greyBorder: 'rgba(0, 0, 0, .2)',
   transluscentWhite: 'rgba(255, 255, 255, 0.8)',
+  darkTeal: 'rgba(0, 116, 130, 1)',
 }

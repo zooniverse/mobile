@@ -44,7 +44,7 @@ export function loadUserData() {
     }).then(() => {
       dispatch(syncUserStore())
     }).catch(() => {
-      Actions.SignIn()
+      Actions.Onboarding()
     })
   }
 }
