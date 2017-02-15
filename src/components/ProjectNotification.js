@@ -27,7 +27,7 @@ export class ProjectNotification extends Component {
       <View style={styles.container}>
         <Switch
           value={this.props.notification}
-          style={styles.switch}
+          style={styles.switchComponent}
           onTintColor={theme.headerColor}
           onValueChange={(checked) => this.props.updateProjectNotification(checked)}
         />
@@ -44,7 +44,7 @@ const styles = EStyleSheet.create({
     padding: 8,
     alignItems: 'center'
   },
-  switch: {
+  switchComponent: {
     marginRight: 10
   },
 });

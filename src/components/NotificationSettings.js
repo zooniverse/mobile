@@ -51,12 +51,12 @@ export class NotificationSettings extends React.Component {
 
 
   render() {
-    var mobileProjects = flatten(
+    let mobileProjects = flatten(
       map((tag) => { return this.props.projectList[tag] }, keys(this.props.projectList))
     )
 
     const renderPreference = (id, idx) => {
-      var project = find(propEq('id', id))(mobileProjects)
+      let project = find(propEq('id', id))(mobileProjects)
 
       if (project === undefined) { //project may no longer exist
         return
@@ -87,7 +87,7 @@ export class NotificationSettings extends React.Component {
         <View style={styles.switchContainer}>
           <Switch
             value={this.props.notifications['general']}
-            style={styles.switch}
+            style={styles.switchComponent}
             onTintColor={theme.headerColor}
             onValueChange={(checked) => this.props.updateGeneralNotification(checked)}
           />
@@ -134,7 +134,7 @@ const styles = EStyleSheet.create({
     borderBottomColor: '$lightGrey',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  switch: {
+  switchComponent: {
     marginRight: 10,
   },
 });
