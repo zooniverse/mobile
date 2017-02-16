@@ -1096,7 +1096,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
 				PUSHER_API_KEY = e32fd02482840a2e13ad;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1129,7 +1129,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
 				PUSHER_API_KEY = ed07dc711db7079f2401;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
