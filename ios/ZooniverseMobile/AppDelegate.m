@@ -30,17 +30,7 @@
 
   NSString *pusherKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"PUSHER_API_KEY"];
   self.pusher = [PTPusher pusherWithKey:pusherKey delegate:self encrypted:YES];
-  if( SYSTEM_VERSION_LESS_THAN( @"10.0" ) )
-  {
-    UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-    UIUserNotificationSettings *pushNotificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories: NULL];
-    [application registerUserNotificationSettings:pushNotificationSettings];
-    [application registerForRemoteNotifications];
-  }
-  else
-  {
-    [self registerForRemoteNotifications];
-  }
+  
 
   [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"a64221f0d73b46829478d405c90e6638"];
   // Do some additional configuration if needed here
@@ -78,21 +68,15 @@
   return [Orientation getOrientation];
 }
 
-- (void)registerForRemoteNotifications {
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    center.delegate = self;
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
-      if(!error){
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-      }
-    }];
-
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];
 }
-
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   [[[self pusher] nativePusher] registerWithDeviceToken:deviceToken];
   [[[self pusher] nativePusher] subscribe:@"general"];
+  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 
