@@ -9,6 +9,9 @@ const project = {
   display_name: 'Nice project'
 }
 
+const selectedProjectTag = 'nature'
+const projectList = { nature: [project] }
+
 jest.mock('ListView', () => require('react').createClass({
     statics: {
         DataSource: require.requireActual('ListView').DataSource,
@@ -20,7 +23,7 @@ jest.mock('ListView', () => require('react').createClass({
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <ProjectList projects={[project]} />
+    <ProjectList projectList={projectList} selectedProjectTag={selectedProjectTag} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

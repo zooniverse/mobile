@@ -23,7 +23,6 @@ const topPadding = (Platform.OS === 'ios') ? 72 : 60
 const mapStateToProps = (state) => ({
   isFetching: state.isFetching,
   errorMessage: state.errorMessage,
-  isConnected: state.isConnected,
 })
 
 const mapDispatchToProps = (dispatch) => ({

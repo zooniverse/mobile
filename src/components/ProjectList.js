@@ -13,9 +13,8 @@ import GoogleAnalytics from 'react-native-google-analytics-bridge'
 GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state) => ({
-  user: state.user,
-  projects: state.projectList[state.selectedProjectTag] || [],
-  dataSource: dataSource.cloneWithRows(state.projectList[state.selectedProjectTag])
+  projectList: state.projectList || {},
+  selectedProjectTag: state.selectedProjectTag || ''
 })
 
 const dataSource = new ListView.DataSource({
@@ -23,10 +22,6 @@ const dataSource = new ListView.DataSource({
 })
 
 export class ProjectList extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   renderRow(project, color) {
     return (
       <Project project={project} color={color} />
@@ -38,9 +33,11 @@ export class ProjectList extends React.Component {
   }
 
   render() {
+    const projects = this.props.projectList[this.props.selectedProjectTag] || []
+
     const projectList =
       <ListView
-        dataSource={this.props.dataSource}
+        dataSource={dataSource.cloneWithRows(projects)}
         renderRow={(rowData) => this.renderRow(rowData, this.props.color)}
         enableEmptySections={true}
       />
@@ -53,7 +50,7 @@ export class ProjectList extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.innerContainer}>
-          { this.props.projects.length > 0 ? projectList : emptyList }
+          { projects.length > 0 ? projectList : emptyList }
         </View>
       </View>
     );
@@ -70,9 +67,6 @@ const styles = EStyleSheet.create({
     flex: 1,
     marginTop: 30
   },
-  listStyle: {
-    paddingTop: 90
-  },
   emptyList: {
     marginHorizontal: 20,
     color: 'grey',
@@ -82,10 +76,8 @@ const styles = EStyleSheet.create({
 });
 
 ProjectList.propTypes = {
-  user: React.PropTypes.object,
-  dataSource: React.PropTypes.object,
-  projects: React.PropTypes.array,
-  tag: React.PropTypes.string,
+  projectList: React.PropTypes.object,
+  selectedProjectTag: React.PropTypes.string,
   color: React.PropTypes.string,
 }
 
