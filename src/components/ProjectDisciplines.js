@@ -67,7 +67,7 @@ export class ProjectDisciplines extends React.Component {
           'Zooniverse would like to occasionally send you info about new projects or projects needing help.',
           [
             {text: 'Not Now', onPress: () => this.requestIOSPermissions(false)},
-            {text: 'Sure!', onPress: () => this.requestIOSPermissions(true)},
+            {text: 'OK', onPress: () => this.requestIOSPermissions(true)},
           ]
         )
       }
