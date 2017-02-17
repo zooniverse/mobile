@@ -1,45 +1,4 @@
-exports[`test does not render when not connected 1`] = `
-<View
-  style={undefined}>
-  <View
-    style={undefined}>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          undefined,
-          Array [
-            undefined,
-          ],
-        ]
-      }>
-      Fake User
-    </Text>
-  </View>
-  <View
-    style={undefined}>
-    <View
-      style={undefined}>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        You must have an internet connection to use Zooniverse Mobile
-      </Text>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`test renders correctly when connected 1`] = `
+exports[`test renders correctly 1`] = `
 <View
   style={undefined}>
   <View

@@ -115,12 +115,6 @@ export class ProjectDisciplines extends React.Component {
         )}
       </ScrollView>
 
-    const noConnection =
-      <View style={styles.messageContainer}>
-        <StyledText textStyle={'errorMessage'}
-          text={'You must have an internet connection to use Zooniverse Mobile'} />
-      </View>
-
     const pluralizeClassification = ( totalClassifications > 1 ? 's' : '' )
     const totalClassificationsDisiplay =
       <StyledText
@@ -135,7 +129,7 @@ export class ProjectDisciplines extends React.Component {
             { totalClassifications > 0 ? totalClassificationsDisiplay : null }
         </View>
         <View style={styles.innerContainer}>
-          { this.props.isConnected ? DisciplineList : noConnection }
+          { DisciplineList }
         </View>
         { this.props.isFetching ? <OverlaySpinner /> : null }
       </View>
@@ -181,7 +175,6 @@ const styles = EStyleSheet.create({
 ProjectDisciplines.propTypes = {
   user: React.PropTypes.object,
   isGuestUser: React.PropTypes.bool,
-  isConnected: React.PropTypes.bool,
   isFetching: React.PropTypes.bool,
   pushPrompted: React.PropTypes.bool,
   setSelectedProjectTag: React.PropTypes.func,
