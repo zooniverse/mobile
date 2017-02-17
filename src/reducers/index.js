@@ -13,6 +13,7 @@ export const InitialState = {
   notificationPayload: {},
   notifications: { general: true },
   pushEnabled: false,
+  pushPrompted: false,
 }
 
 export default function(state=InitialState, action) {

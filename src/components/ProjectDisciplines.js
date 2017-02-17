@@ -1,6 +1,8 @@
 import React from 'react'
 import {
+  AlertIOS,
   Platform,
+  PushNotificationIOS,
   ScrollView,
   StyleSheet,
   View
@@ -15,6 +17,7 @@ import Discipline from './Discipline'
 import OverlaySpinner from './OverlaySpinner'
 import NavBar from '../components/NavBar'
 import { setState } from '../actions/index'
+import { syncUserStore } from '../actions/user'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
@@ -25,18 +28,57 @@ const mapStateToProps = (state) => ({
   user: state.user,
   isGuestUser: state.user.isGuestUser,
   isConnected: state.isConnected,
-  isFetching: state.isFetching
+  isFetching: state.isFetching,
+  pushPrompted: state.user.pushPrompted
 })
 
 const mapDispatchToProps = (dispatch) => ({
   setSelectedProjectTag(tag) {
     dispatch(setState('selectedProjectTag', tag))
   },
+  setPushPrompted(value) {
+    dispatch(setState('user.pushPrompted', value))
+    dispatch(syncUserStore())
+  },
 })
 
 export class ProjectDisciplines extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    if (this.shouldPromptForPermissions()) {
+      setTimeout(()=> {
+        this.promptRequestPermissions()
+      }, 500)
+    }
+  }
+
+  shouldPromptForPermissions() {
+    return ((Platform.OS === 'ios') && (!this.props.user.pushPrompted))
+  }
+
+  promptRequestPermissions = () => {
+    PushNotificationIOS.checkPermissions((permissions) => {
+      if (permissions.alert === 0){
+        AlertIOS.alert(
+          'Allow Notifications?',
+          'Zooniverse would like to occasionally send you info about new projects or projects needing help.',
+          [
+            {text: 'Not Now', onPress: () => this.requestIOSPermissions(false)},
+            {text: 'OK', onPress: () => this.requestIOSPermissions(true)},
+          ]
+        )
+      }
+    })
+  }
+
+  requestIOSPermissions(accepted) {
+    if (accepted) {
+      PushNotificationIOS.requestPermissions()
+    }
+    this.props.setPushPrompted(true)
   }
 
   static renderNavigationBar() {
@@ -141,7 +183,9 @@ ProjectDisciplines.propTypes = {
   isGuestUser: React.PropTypes.bool,
   isConnected: React.PropTypes.bool,
   isFetching: React.PropTypes.bool,
+  pushPrompted: React.PropTypes.bool,
   setSelectedProjectTag: React.PropTypes.func,
+  setPushPrompted: React.PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)
