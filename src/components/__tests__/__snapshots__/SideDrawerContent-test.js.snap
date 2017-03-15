@@ -89,7 +89,7 @@ exports[`test renders correctly 1`] = `
           undefined,
         ]
       }>
-      Notification Settings
+      Settings
     </Text>
   </TouchableOpacity>
   <TouchableOpacity

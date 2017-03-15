@@ -37,6 +37,28 @@ export function setProjectList(projectList) {
   return { type: SET_PROJECT_LIST, projectList }
 }
 
+export function syncStore(name) {
+  return (dispatch, getState) => {
+    const contents = getState()[name]
+    return store.save(`@zooniverse:${name}`, {
+        contents
+    })
+  }
+}
+
+export function setFromStore(name) {
+  return dispatch => {
+    return new Promise ((resolve) => {
+      store.get(`@zooniverse:${name}`).then(json => {
+        dispatch(setState(name, json['contents']))
+        return resolve()
+      }).catch(() => { //default to redux store defaults
+        dispatch(syncStore(name))
+        return resolve()
+      })
+    })
+  }
+}
 
 export function syncNotificationStore() {
   return (dispatch, getState) => {
@@ -173,6 +195,27 @@ export function loadNotificationSettings() {
         dispatch(syncNotificationStore())
       })
       return resolve()
+    })
+  }
+}
+
+export function loadSettings() {
+  return (dispatch) => {
+    return new Promise((resolve) => {
+      dispatch(setFromStore('settings')).then(() => {
+        return resolve()
+      })
+    })
+  }
+}
+
+export function updateSetting(key, value) {
+  return (dispatch) => {
+    return new Promise((resolve) => {
+      dispatch(setState(`settings.${key}`, value))
+      dispatch(syncStore('settings'))
+      return resolve()
+
     })
   }
 }
