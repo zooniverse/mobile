@@ -3,6 +3,12 @@ exports[`test renders for isFetching 1`] = `
   style={undefined}>
   <Modal
     onRequestClose={[Function]}
+    supportedOrientations={
+      Array [
+        "landscape",
+        "portrait",
+      ]
+    }
     transparent={true}
     visible={true}>
     <View
