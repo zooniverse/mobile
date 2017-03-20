@@ -4,7 +4,10 @@ Object {
   "classifier": Object {
     "currentWorkflowID": 0,
     "isFetching": true,
+    "needsTutorial": Object {},
+    "project": Object {},
     "questionContainerHeight": Object {},
+    "tutorial": Object {},
     "workflow": Object {},
   },
   "errorMessage": null,
@@ -37,7 +40,10 @@ Object {
   "classifier": Object {
     "currentWorkflowID": 0,
     "isFetching": true,
+    "needsTutorial": Object {},
+    "project": Object {},
     "questionContainerHeight": Object {},
+    "tutorial": Object {},
     "workflow": Object {},
   },
   "errorMessage": null,
@@ -70,7 +76,10 @@ Object {
   "classifier": Object {
     "currentWorkflowID": 0,
     "isFetching": true,
+    "needsTutorial": Object {},
+    "project": Object {},
     "questionContainerHeight": Object {},
+    "tutorial": Object {},
     "workflow": Object {},
   },
   "errorMessage": null,
@@ -106,7 +115,10 @@ Object {
   "classifier": Object {
     "currentWorkflowID": 0,
     "isFetching": true,
+    "needsTutorial": Object {},
+    "project": Object {},
     "questionContainerHeight": Object {},
+    "tutorial": Object {},
     "workflow": Object {},
   },
   "errorMessage": null,

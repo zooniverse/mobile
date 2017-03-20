@@ -3,6 +3,50 @@ exports[`test renders correctly 1`] = `
   style={undefined}>
   <View
     style={undefined}>
+    <View
+      style={undefined}>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Array [
+            undefined,
+          ]
+        }>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              undefined,
+            ]
+          }>
+          QUESTION
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Array [
+            undefined,
+            undefined,
+          ]
+        }>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              undefined,
+            ]
+          }>
+          TUTORIAL
+        </Text>
+      </TouchableOpacity>
+    </View>
     <Question
       question="What was that?"
       workflowID="1" />
@@ -13,4 +57,12 @@ exports[`test renders correctly 1`] = `
 exports[`test renders spinner if fetching 1`] = `
 <OverlaySpinner
   overrideVisibility={true} />
+`;
+
+exports[`test renders tutorial if needed 1`] = `
+<Tutorial
+  finishTutorial={[Function]}
+  isInitialTutorial={true}
+  projectName="Awesome project"
+  tutorial={undefined} />
 `;

@@ -128,7 +128,8 @@ export function fetchProjectsByParms(tag) {
   return (dispatch, getState) => {
     let parms = {id: MOBILE_PROJECTS, cards: true, sort: 'display_name'}
     if (tag === 'recent') {
-      parms.id = intersection(MOBILE_PROJECTS, keys(getState().user.projects) )
+      let activeProjects = filter((project) => { return project.activity_count > 0 }, getState().user.projects)
+      parms.id = intersection(MOBILE_PROJECTS, keys(activeProjects) )
     } else {
       parms.tags = tag
     }

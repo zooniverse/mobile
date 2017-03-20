@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer'
 jest.mock('WebView', () => 'WebView')
 jest.mock('../OverlaySpinner', () => 'OverlaySpinner')
 jest.mock('../Question', () => 'Question')
+jest.mock('../Tutorial', () => 'Tutorial')
 
 import { SwipeClassifier } from '../SwipeClassifier'
 
@@ -17,12 +18,17 @@ const workflow = {
   }
 }
 
+const project = {
+  display_name: 'Awesome project'
+}
+
 it('renders correctly', () => {
   const tree = renderer.create(
     <SwipeClassifier
       isFetching={false}
       setIsFetching={jest.fn}
       startNewClassification={jest.fn}
+      project={project}
       workflow={workflow}
       workflowID={'1'} />
   ).toJSON()
@@ -35,6 +41,21 @@ it('renders spinner if fetching', () => {
       isFetching={true}
       setIsFetching={jest.fn}
       startNewClassification={jest.fn}
+      project={project}
+      workflow={workflow}
+      workflowID={'1'} />
+  ).toJSON()
+  expect(tree).toMatchSnapshot()
+})
+
+it('renders tutorial if needed', () => {
+  const tree = renderer.create(
+    <SwipeClassifier
+      isFetching={false}
+      setIsFetching={jest.fn}
+      startNewClassification={jest.fn}
+      needsTutorial={true}
+      project={project}
       workflow={workflow}
       workflowID={'1'} />
   ).toJSON()
