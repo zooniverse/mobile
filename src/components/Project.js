@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import WorkflowPrompt from './WorkflowPrompt'
 import Workflow from './Workflow'
 import PopupMessage from './PopupMessage'
-import { addIndex, length, map } from 'ramda'
+import { addIndex, head, length, map } from 'ramda'
 
 const DEFAULT_BOX_HEIGHT = 269
 const MARGIN_BOTTOM = 25
@@ -66,6 +66,8 @@ class Project extends Component {
 
     if ((hasMixedWorkflows && this.props.promptForWorkflow)) {
       this.setState({showWorkflowPrompt: true})
+    } else if (hasSingleMobileWorkflow) {
+      Actions.SwipeClassifier({ workflowID: head(this.props.mobileWorkflows).id })
     } else if (length(this.props.mobileWorkflows) > 1) {
       this.setState({ errorPopupVisible: true })
     } else {
@@ -95,7 +97,7 @@ class Project extends Component {
   }
 
   openMobileProject(workflowID) {
-    //TODO: Send to classify (next PR) Actions.Classify({ workflowID: workflowID })
+    Actions.SwipeClassifier({ workflowID: workflowID })
   }
 
   setHeight(height) {

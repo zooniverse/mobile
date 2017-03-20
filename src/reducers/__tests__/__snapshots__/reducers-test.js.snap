@@ -1,6 +1,12 @@
 exports[`test sets a new state 1`] = `
 Object {
   "bobLoblaw": "Has a law blog",
+  "classifier": Object {
+    "currentWorkflowID": 0,
+    "isFetching": true,
+    "questionContainerHeight": Object {},
+    "workflow": Object {},
+  },
   "errorMessage": null,
   "isConnected": null,
   "isFetching": false,
@@ -9,7 +15,7 @@ Object {
   "notifications": Object {
     "general": true,
   },
-  "projectList": Array [],
+  "projectList": Object {},
   "projectWorkflows": Object {},
   "pushEnabled": false,
   "pushPrompted": false,
@@ -28,6 +34,12 @@ Object {
 
 exports[`test sets state from initial state 1`] = `
 Object {
+  "classifier": Object {
+    "currentWorkflowID": 0,
+    "isFetching": true,
+    "questionContainerHeight": Object {},
+    "workflow": Object {},
+  },
   "errorMessage": null,
   "isConnected": true,
   "isFetching": false,
@@ -36,7 +48,7 @@ Object {
   "notifications": Object {
     "general": true,
   },
-  "projectList": Array [],
+  "projectList": Object {},
   "projectWorkflows": Object {},
   "pushEnabled": false,
   "pushPrompted": false,
@@ -55,6 +67,12 @@ Object {
 
 exports[`test sets user 1`] = `
 Object {
+  "classifier": Object {
+    "currentWorkflowID": 0,
+    "isFetching": true,
+    "questionContainerHeight": Object {},
+    "workflow": Object {},
+  },
   "errorMessage": null,
   "isConnected": null,
   "isFetching": false,
@@ -63,7 +81,7 @@ Object {
   "notifications": Object {
     "general": true,
   },
-  "projectList": Array [],
+  "projectList": Object {},
   "projectWorkflows": Object {},
   "pushEnabled": false,
   "pushPrompted": false,
@@ -85,6 +103,12 @@ Object {
 
 exports[`test unsets user 1`] = `
 Object {
+  "classifier": Object {
+    "currentWorkflowID": 0,
+    "isFetching": true,
+    "questionContainerHeight": Object {},
+    "workflow": Object {},
+  },
   "errorMessage": null,
   "isConnected": null,
   "isFetching": false,
@@ -93,7 +117,7 @@ Object {
   "notifications": Object {
     "general": true,
   },
-  "projectList": Array [],
+  "projectList": Object {},
   "projectWorkflows": Object {},
   "pushEnabled": false,
   "pushPrompted": false,

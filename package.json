@@ -13,6 +13,8 @@
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "panoptes-client": "^2.5.2",
+    "markdown-it": "^8.3.1",
+    "panoptes-client": "^2.5.2",
     "ramda": "^0.22.1",
     "react": "~15.3.2",
     "react-native": "~0.37.0",

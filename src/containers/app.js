@@ -20,6 +20,7 @@ import Settings from '../components/Settings'
 import SideDrawer from '../components/SideDrawer'
 import ZooWebView from '../components/ZooWebView'
 import Onboarding from '../components/Onboarding'
+import SwipeClassifier from '../components/SwipeClassifier'
 
 const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer)
 
@@ -40,8 +41,6 @@ export default class App extends Component {
       store.dispatch(setState('isConnected', isConnected))
       NetInfo.isConnected.addEventListener('change', dispatchConnected)
     })
-
-
     store.dispatch(fetchProjects())
   }
 
@@ -61,6 +60,7 @@ export default class App extends Component {
               <Scene key="Settings" component={Settings} />
               <Scene key="ZooWebView" hideNavBar={true} component={ZooWebView} duration={0} />
               <Scene key="Onboarding" component={Onboarding} duration={0} hideNavBar={true} sceneConfig={Navigator.SceneConfigs.FloatFromLeft} />
+              <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} />
             </Scene>
           </Scene>
         </Router>
