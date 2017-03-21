@@ -1,6 +1,7 @@
 import 'react-native'
 import { isValidEmail } from '../is-valid-email'
 import { isValidLogin } from '../is-valid-login'
+import { generateSessionID } from '../session'
 
 it('passes a good email', () => {
   let email = 'me@zooniverse.org'
@@ -40,4 +41,8 @@ it('fails a bad login - contains a dash', () => {
 it('fails a bad login - contains an apostrophe', () => {
   let login = `Bad'Login`
   expect(isValidLogin(login)).toBeFalsy()
+})
+
+it('generates a session ID of 64 chars using crypto', () => {
+  expect(generateSessionID().id).toHaveLength(64)
 })

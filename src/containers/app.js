@@ -7,6 +7,7 @@ import thunkMiddleware from 'redux-thunk'
 import {Scene, Router} from 'react-native-router-flux'
 import { setIsConnected, fetchProjects, setState } from '../actions/index'
 import { loadUserData } from '../actions/user'
+import { setSession } from '../actions/session'
 
 import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/ProjectList'
@@ -25,6 +26,7 @@ const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer)
 export default class App extends Component {
   componentDidMount() {
     store.dispatch(loadUserData())
+    store.dispatch(setSession())
 
     const handleAppStateChange = currentAppState => {
       if (currentAppState === 'active') {
