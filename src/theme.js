@@ -20,4 +20,7 @@ export default {
   greyBorder: 'rgba(0, 0, 0, .2)',
   transluscentWhite: 'rgba(255, 255, 255, 0.8)',
   darkTeal: 'rgba(0, 116, 130, 1)',
+  lightestGrey: '#EFF3F6',
+  darkGrey: '#5C5C5C',
+  disabledIconColor: '#D5DCE4',   
 }

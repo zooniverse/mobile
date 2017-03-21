@@ -13,9 +13,10 @@ import store from 'react-native-simple-store'
 import apiClient from 'panoptes-client/lib/api-client'
 import { PUBLICATIONS } from '../constants/publications'
 import { MOBILE_PROJECTS } from '../constants/mobile_projects'
+import { SWIPE_WORKFLOWS } from '../constants/mobile_projects'
 import { GLOBALS } from '../constants/globals'
 import { Alert, Platform, PushNotificationIOS, NativeModules } from 'react-native'
-import { addIndex, filter, forEach, head, intersection, keys, map, propEq } from 'ramda'
+import { addIndex, filter, find, forEach, head, intersection, keys, map, propEq } from 'ramda'
 
 export function setState(stateKey, value) {
   return { type: SET_STATE, stateKey, value }
@@ -134,10 +135,39 @@ export function fetchProjectsByParms(tag) {
     }
 
     apiClient.type('projects').get(parms).then((projects) => {
+      dispatch(fetchWorkflowsForMobile(projects))
       dispatch(setState(`projectList.${tag}`, projects))
       dispatch(syncProjectStore())
     }).catch((error) => {
       dispatch(displayError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
+    })
+  }
+}
+
+export function fetchWorkflowsForMobile(projects) {
+  return (dispatch) => {
+    return new Promise((resolve) => {
+      const swipeProjects = filter((proj) => { return find(propEq('projectID', proj.id), SWIPE_WORKFLOWS) }, projects)
+      const getWorkflows = (project) => {dispatch(fetchProjectWorkflows(project))}
+      forEach(getWorkflows, swipeProjects)
+      return resolve()
+    })
+  }
+}
+
+export function fetchProjectWorkflows(project) {
+  return dispatch => {
+    return new Promise((resolve) => {
+      apiClient.type('projects').get({id: project.id}).then((projects) => {
+        const project = head(projects)
+        project.get('workflows', {page_size: 100, active: true, fields: 'display_name'}).then((workflows) => {
+          dispatch(setState(`projectWorkflows.${project.id}`, workflows))
+          return resolve()
+        }).catch((error) => {
+          dispatch(setError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
+          return resolve()
+        })
+      })
     })
   }
 }

@@ -6,13 +6,21 @@ exports[`test renders correctly 1`] = `
     <View
       style={
         Object {
+          "height": 269,
           "opacity": 0,
         }
       }>
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={[Function]}
-        style={undefined}>
+        style={
+          Array [
+            undefined,
+            Object {
+              "height": 244,
+            },
+          ]
+        }>
         <Image
           onLoadEnd={[Function]}
           source={
@@ -20,55 +28,68 @@ exports[`test renders correctly 1`] = `
               "uri": "https://fake_avatar",
             }
           }
-          style={undefined} />
+          style={
+            Array [
+              undefined,
+              Object {
+                "height": 244,
+              },
+            ]
+          } />
         <View
           style={undefined} />
         <View
           style={undefined}>
           <View
             style={undefined}>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
+            <View
               style={undefined}>
-              Nice project
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={2}
-              style={undefined} />
-          </View>
-          <View
-            style={
-              Array [
-                undefined,
-                Object {
-                  "backgroundColor": "#AFA48C",
-                },
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              <View
+                style={undefined}>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={undefined}>
+                  Nice project
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={undefined} />
+            </View>
+            <View
               style={
                 Array [
-                  Object {
-                    "color": undefined,
-                    "fontFamily": "FontAwesome",
-                    "fontSize": 12,
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
                   undefined,
+                  Object {
+                    "backgroundColor": "#AFA48C",
+                  },
                 ]
               }>
-              
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": undefined,
+                      "fontFamily": "FontAwesome",
+                      "fontSize": 12,
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    undefined,
+                  ]
+                }>
+                
+              </Text>
+            </View>
           </View>
         </View>
       </TouchableOpacity>

@@ -8,6 +8,7 @@ export const InitialState = {
   isConnected: null,
   selectedDiscipline: null,
   projectList: [],
+  projectWorkflows: {},
   webViewNavCounter: 0,
   notificationProject: {},
   notificationPayload: {},
