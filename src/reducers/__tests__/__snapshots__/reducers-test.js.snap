@@ -16,6 +16,9 @@ Object {
     "global_email_communication": true,
   },
   "selectedDiscipline": null,
+  "settings": Object {
+    "promptForWorkflow": false,
+  },
   "user": Object {},
   "webViewNavCounter": 0,
 }
@@ -38,6 +41,9 @@ Object {
     "global_email_communication": true,
   },
   "selectedDiscipline": null,
+  "settings": Object {
+    "promptForWorkflow": false,
+  },
   "user": Object {},
   "webViewNavCounter": 0,
 }
@@ -60,6 +66,9 @@ Object {
     "global_email_communication": true,
   },
   "selectedDiscipline": null,
+  "settings": Object {
+    "promptForWorkflow": false,
+  },
   "user": Object {
     "avatar": "Some avatar",
     "display_name": "Me",
@@ -85,6 +94,9 @@ Object {
     "global_email_communication": true,
   },
   "selectedDiscipline": null,
+  "settings": Object {
+    "promptForWorkflow": false,
+  },
   "user": Object {},
   "webViewNavCounter": 0,
 }

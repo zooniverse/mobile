@@ -1,0 +1,214 @@
+exports[`test renders 1`] = `
+<View
+  style={undefined}>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        undefined,
+        undefined,
+      ]
+    } />
+  <ScrollView>
+    <View
+      style={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+            undefined,
+          ]
+        }>
+        General Settings
+      </Text>
+      <View
+        style={undefined}>
+        <Switch
+          onTintColor="rgba(0, 151, 157, 1)"
+          onValueChange={[Function]}
+          style={undefined}
+          value={true} />
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+              ]
+            }>
+            Prompt to see all project workflows
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }>
+            Note: This will include non-mobile workflows
+          </Text>
+        </View>
+      </View>
+    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      Notification Settings
+    </Text>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+          ]
+        }>
+        Zooniverse would like to occassionally send you updates about new projects or projects needing help.
+      </Text>
+      <View
+        style={undefined}>
+        <Switch
+          onTintColor="rgba(0, 151, 157, 1)"
+          onValueChange={[Function]}
+          style={undefined}
+          value={true} />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              undefined,
+            ]
+          }>
+          General Zooniverse notifications
+        </Text>
+      </View>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              undefined,
+              undefined,
+            ]
+          }>
+          Project-specific Notifications
+        </Text>
+      </View>
+    </View>
+  </ScrollView>
+</View>
+`;
+
+exports[`test renders message if push is disabled 1`] = `
+<View
+  style={undefined}>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        undefined,
+        undefined,
+      ]
+    } />
+  <ScrollView>
+    <View
+      style={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+            undefined,
+          ]
+        }>
+        General Settings
+      </Text>
+      <View
+        style={undefined}>
+        <Switch
+          onTintColor="rgba(0, 151, 157, 1)"
+          onValueChange={[Function]}
+          style={undefined}
+          value={true} />
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+              ]
+            }>
+            Prompt to see all project workflows
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }>
+            Note: This will include non-mobile workflows
+          </Text>
+        </View>
+      </View>
+    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      Notification Settings
+    </Text>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+          ]
+        }>
+        Push notifications are not enabled on your device!  Please go to Settings > Notifications > Zooniverse to allow them.
+      </Text>
+    </View>
+  </ScrollView>
+</View>
+`;
