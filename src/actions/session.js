@@ -16,7 +16,7 @@ export function setSession() {
     store.get('@zooniverse:session').then(json => {
       stored = json.session
       if (stored.ttl < Date.now()) {
-        stored = generateSessionID()
+        stored.id = generateSessionID().id
       } else {
         stored.ttl = fiveMinutesFromNow()
       }
