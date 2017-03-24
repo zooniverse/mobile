@@ -3,7 +3,6 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import Checkbox from '../Checkbox'
 
-
 it('renders', () => {
   const tree = renderer.create(
     <Checkbox />
