@@ -87,7 +87,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       NSObject *clientIdObj = [jsonDict objectForKey:@"id"];
       NSString *clientIdString = (NSString*) clientIdObj;
       clientId = clientIdString;
-      if ([[self delegate] respondsToSelector:@selector(nativePusher:didUnsubscribeFromInterest:)]) {
+      if ([[self delegate] respondsToSelector:@selector(nativePusher:didRegisterForPushNotificationsWithClientId:)]) {
         [[self delegate] nativePusher:self didRegisterForPushNotificationsWithClientId:clientId];
       }
       [self tryFlushOutbox];
@@ -122,7 +122,9 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
      subscriptionChange:change
      callback: ^(BOOL success) {
        if (success) {
-         [outbox removeObjectAtIndex:0];
+         if ([outbox containsObject:subscriptionChange]) {
+           [outbox removeObject:subscriptionChange];
+         }
        }
        [self tryFlushOutbox];
      }];

@@ -236,12 +236,8 @@ export function updateInterestSubscription(interest, subscribed) {
   return () => {
     return new Promise((resolve) => {
       NotificationSettings.setInterestSubscription(interest, subscribed).then((message) => {
-        //Timeout needed or crashes ios.  Open issue: https://github.com/pusher/libPusher/issues/230
-        setTimeout(()=> {
-          return resolve(message)
-        }, 500)
+        return resolve(message)
       })
-
     })
   }
 }
