@@ -7,172 +7,172 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02E304FDF6B4E2BEE98B1CB376B1C499 /* feedbackActivity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85A7123967D82A0037599B86BB45E1CE /* feedbackActivity@3x.png */; };
-		037CB1FD008DC854B3DDE6296CCE5684 /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 79DE7B7AF480FB31A18C624D915D4681 /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		04F30E1ED58F6CF57D720738DC844CCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABC45C2732A4ED943A7E8ECF24F14F7 /* Foundation.framework */; };
-		05A41DBFFF32B6F3539B39CB08CA4EA5 /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 7323D5497EE743FA39568264149FB290 /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099A423361FF80EEC63672D9880D1351 /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C40E6751AB89BC28DC3B02BC14904D8 /* PTPusherEvent.m */; };
-		0A02F4EB0DBBC92B221459C91C2E368E /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6544B5133840525D0E128C087749EA54 /* es.lproj */; };
-		0A1172DC8E6100D765734D9BFB1D2FFF /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 47FD81C715494E18395F2D8C89E344A6 /* PTPusherChannel_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		0B368DD95F6D7D1C406D114388FB9DA7 /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE297A3AA1D1A6FB7B68739B1083C1A /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0BB42B52BB3CFAB9691D32A88715AF8A /* iconCamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211BA8E17F0E1DC4C5DCD70DFACAC5 /* iconCamera@2x.png */; };
-		10C02C1DF5EB1C46F47C934647FE160D /* Rectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBFAEE53CC242F2F3711853B583C2558 /* Rectangle@2x.png */; };
-		16123269223B014A45DF85A400D846F9 /* Cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = EDED0E57DD255297F2CF79064481A6B0 /* Cancel.png */; };
-		17AF31A970B40E1BB9240FF192A09FB4 /* SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 64651D4EBEA638537F4C35B820C3DF0F /* SocketRocket-dummy.m */; };
-		1CD43A7A40813BD66639A86BC34ECBB5 /* feedbackActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DE440F8F6EF498D1D77617D8602067 /* feedbackActivity.png */; };
-		21DEAB911AA4CEA51CE76EAB99B52B15 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = DFE0872CEA65CC2B0810378DF577498D /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26035D03DD35459CE5EC042B76947A9C /* authorize_denied@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCE268B9771D765704087350BC91F056 /* authorize_denied@2x.png */; };
-		280DA857779FC1D5A702C2B980A8E725 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = EEA806DB9D713715BB9AAD7A52B755B5 /* ja.lproj */; };
-		2DCDFB8DE25721AEF30490982AD3DD42 /* buttonRoundedRegular.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA389E17D5166F51D918729A759CA72 /* buttonRoundedRegular.png */; };
-		2F3F729650FA09852EB43FF8E7946FBF /* PTPusherChannelAuthorizationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 464AC00E6FCB8097437BA4AC81737591 /* PTPusherChannelAuthorizationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3085363BC119F63865A9C6A4DE9BB65A /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F71C221D82CF1EA230EAF12E4DC190F /* PTTargetActionEventListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3779F0998FDE28B2206DCA752F42F5B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABC45C2732A4ED943A7E8ECF24F14F7 /* Foundation.framework */; };
-		394B0B24D6C42CB3530A9DDF5F6A47F7 /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F28905A63F4E529A83A68B6350222A2 /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3DCB8F7DE2F25257EF13C5CE71720E6D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CAF4AB1ECD042E4FED766B8370F6530 /* Security.framework */; };
-		3FFB1433898DC4F4C5A4E5002D579B82 /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = 525A9F23E3DB8A9CE118D1A5253790D4 /* NSString+Hashing.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		4534CD22129787E011DB2FD9E8021DEC /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 8CD517A07EFBFD0FA891CF75B5E8B560 /* en.lproj */; };
-		48824B3684D2DCB8076D47C04F09D832 /* hu.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C9CBD32B60C6DCF05D856BE8DAA5D831 /* hu.lproj */; };
-		495430AB5D7B4CF306379A6CA860741D /* Ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BD49E14CE41FB5F0B5F27103DB47FE /* Ok.png */; };
-		4AE349D22FDC8BE097A485BC55C13807 /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 46117DAD331256F824B6A85E879D3065 /* PTURLRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5036EF81EC18CDD90BEAE8D6E64C0F0C /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C372F4BF8BA9F35206B48DF49944C4A /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5760BD3BAD665071AE5A87E39C4D434F /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 964244630ED3293A571BA4C98F7A5297 /* Arrow.png */; };
-		5B1E22E7769562661636C4D0F841B6D2 /* Pods-ZooniverseMobile-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A74DE415BACBB27D736FACC1DA8773C /* Pods-ZooniverseMobile-dummy.m */; };
-		63645274736672804EC7714131E97457 /* buttonRoundedRegularHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6472C040484750693FA676168EB751B5 /* buttonRoundedRegularHighlighted@2x.png */; };
-		64CE17EFD325BEF72932AED0B099B5D8 /* PTNativePusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 97116F254A974390249D8C536691552D /* PTNativePusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6F17E89B8BBC7D1290534E82A81E5212 /* Rectangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C47211977C25AF6BA5110C7E9184E168 /* Rectangle@3x.png */; };
-		74047B2CDBBB23122851379740953006 /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF55395919C93B116D2FCC224FDF0A0 /* PTURLRequestOperation.m */; };
-		74B3B310C2671D132AF6E0A9E01BEA12 /* Ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 234561CAD943E945FE5648DA1F841C26 /* Ok@2x.png */; };
-		7651B7BF1DED35FAAC632B36721CDC53 /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 161F7BDCFF445CB821A502575A876879 /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		776EACDC46D04A74BE8D52C2E82C15D5 /* pt.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1BF62D9E68F771F04F2496A23B654AF2 /* pt.lproj */; };
-		77C3E84E939AB3190902B0B7681E1004 /* pt-PT.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1E47A9448468B3CE151F58AEF931CC19 /* pt-PT.lproj */; };
-		7CE1695800DC925157226554A2EA914F /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D25238FC0AD7FFB4FC6F1A5D61617F04 /* PTPusherAPI.m */; };
-		7CFB3ADE367D2692775C304F8709CCC2 /* hr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDB9BFF7566788F0DABE098010117 /* hr.lproj */; };
-		7D72A474FCE1E4F2553D13332103CA35 /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 48CFDEB74129819B7AF2C3520E6D83EA /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8262B4BEFB961A070ADC61A356F436F8 /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 111DB2C0791BC096F8A16E02FD5CF1E1 /* PTJSON.m */; };
-		82A7D2710E5A2CE76FDE4B7A709C95B7 /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039961C2D0660D1E09765B727F82418 /* PTPusher.m */; };
-		845B93E8A0133D894497177DFC407629 /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 509D3E7E6F21DCD711AC429712CAE299 /* NSDictionary+StringValue.m */; };
-		85FF21BD92EEA12FABF49B5FB6166994 /* Blur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 325D36FF73888B5CA1B2509E5A386841 /* Blur@2x.png */; };
-		8AE6C60F51AF9DEDFD73B95200C94D4B /* buttonRoundedRegular@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A6C746F05EFBA407D1EA4E12D48F2F8 /* buttonRoundedRegular@2x.png */; };
-		8DFA6DE155B6645198519ADCE672E008 /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EEEC3ED8980DCD71FD2F4145ED7A39 /* PTBlockEventListener.m */; };
-		8ED0654955869D7CD0501B5220685FF8 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6580A4E30927452BDE64E8271DFDBF1B /* fr.lproj */; };
-		91B611F8E5BB709FBE11A2D05598665C /* Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA33BF6D31EBE15E4565EC5F29889D /* Rectangle.png */; };
-		934F2CB7173DDECA58FAA31E003B48BC /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = E7CE7C9505EA19111901CE412B2C53E0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		93FD321E0174BE62F64114F2FE696144 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6372D686A35C043BD34A6F079B9C66 /* NSDictionary+QueryString.m */; };
-		988FA411D39DEE2528379B503C493AF8 /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 75DEE6FE98D9FDB2B99D6A7B84C24B9D /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		98A0252E126739B2C842686F7F9B17F1 /* Blur@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C053D70DD093C158EE3DC3EB28C57BA /* Blur@3x.png */; };
-		98A50D63C57EF1721AB05F78E35471F3 /* Ok@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D7BB5C42CA7B39C0963330490686BD /* Ok@3x.png */; };
-		98B88A9428B92CA06275E6589A2E9DC7 /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A2543F15D52A6DF4DB884F2C3A55C6 /* PTPusherEventDispatcher.m */; };
-		992D68F05AC21A08A7EB435858617908 /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEA6ECBADC32B65550CAF2BC3509563 /* PTTargetActionEventListener.m */; };
-		99F243DB52C2CBE3BB823A1D5146B119 /* IconGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 41728232AF7E12B1D7D197346266A19B /* IconGradient.png */; };
-		9B39830846DFF9B369BEB783C0203156 /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F841493013EDB997DB4FD683946BBB /* PTPusherChannelServerBasedAuthorization.m */; };
-		9B45C853EE8CFFC1B24721A6D58ECAE8 /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AB4C43DF8CA14E884AA199A5237C /* de.lproj */; };
-		9C35EF9D3E8D51FEF09F09AEE97B4635 /* buttonRoundedDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = 5369EAC8B95CFEEF0679F71830DD870E /* buttonRoundedDelete.png */; };
-		9D2ACA7621A21E6967B2F2C889E56BF4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5135EC14FA83C331E94D40C19DAB0764 /* CFNetwork.framework */; };
-		9D5769D0FF0390100B51D13B1B75CF6F /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A256E298836EBF17689EFE40DFFB77 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A0242CF0FE4CBA42446ECC19419B6620 /* authorize_denied@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49971B51649162D9AB984B0DBCD44824 /* authorize_denied@3x.png */; };
-		A213D8D5305A63E3304935EBB5E7BC66 /* Arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086FA73C05E5FEE72C6F4B4446BB6BE5 /* Arrow@3x.png */; };
-		A3F34902EC4FEF9CFDD1D4EF72D70965 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E662638A203CC13A337AD51BD9C249 /* NSDictionary+QueryString.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		A4DC6A053094C4A60FCC84313A52688B /* Blur.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F630A117903F798B4C77FD87B2F9B0 /* Blur.png */; };
-		A6AB69100A519BE50BF1ADD0ED64FFE4 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E7AA41D8825BEB3F6DA7DF46273E1A /* SRWebSocket.m */; };
-		A82E7E95C363836A50EE842C911BCE54 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 416DC85DB604EE53286BA9612D69AEFB /* bg.png */; };
-		A858537E94F0D8750DA4A791822A8DE1 /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = E67B1306D9E6AB021B4A3FEBD94C8FFD /* PTBlockEventListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		AACB77F4CA69250A9064D74FB96E4A8B /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED38DB861F2F9464367745D2770996D /* PTPusherMockConnection.m */; };
-		ABFB05BB62F3EAB85F9ADA7FCC02B4A6 /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FBDE3FD49BAB3F75D7B982F6F7A9BB5 /* PTPusherChannelServerBasedAuthorization.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE8D66F02A3958F8E8F2C6BAD097DA41 /* Cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D95206FB15F6ECA9A610B80458DA55 /* Cancel@3x.png */; };
-		B474B49BB5CFD5E6C258B996B0FC847A /* Cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DBC6D3CDDE8F0E52CB87CC19D7440FC /* Cancel@2x.png */; };
-		B72E57884669F28F5A241B7DC679AE32 /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D568C8204A2A65EEE33C1F02008CD6 /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB9FF87651BAC7FDC6719EF8E7780B3C /* feedbackActivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F08C1F7AC830248357AB6075F434B2EE /* feedbackActivity@2x.png */; };
-		C0EC1911C179156ECCA29E98DB1E09A7 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC58B0168ABFA7ED77ABE8AFD5EDA04D /* PTPusherChannel.m */; };
-		C1836B13373FEA8873C95DCA32C08D31 /* IconGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD289D014175321D17487B23EDDC893 /* IconGradient@2x.png */; };
-		C22367563F2D0F7FDD222BE38C985518 /* iconCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = D568B7EABD81780EE31C6AF9688EA035 /* iconCamera.png */; };
-		C64997671EBF857CE2E70F433E88F53F /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A7CFFA2F6C8056253CB233307CF6E4 /* PTPusherConnection.m */; };
-		CE1F550301BC25B511C5D9D8C6F68D92 /* zh-Hans.lproj in Resources */ = {isa = PBXBuildFile; fileRef = FAC53957A059B8A841A4423460DA34C4 /* zh-Hans.lproj */; };
-		CF5FBA16FBC024E8AA20FEECABF23631 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A4F8A0336F5790B05152BBE8387E825 /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D150B487AF49A40B7C779C1F5110AC5C /* authorize_denied.png in Resources */ = {isa = PBXBuildFile; fileRef = D11121CBF378B6265E9FB7E127479143 /* authorize_denied.png */; };
-		D314D03470A8897029D2E498BA67A6A0 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = 7714515F83D9046B62119271D9AFDF72 /* NSString+Hashing.m */; };
-		D3D2643461C742029D2045E5AE455C48 /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DC44CD6A7D2AD494BD3899E0CF15E1 /* PTJSON.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		D40E678909D768CAB95AFC80399A0689 /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ABDB76B5207895B68FF6552C418B146 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D493E398905E1C36441A15173E613D7D /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = BB24B6433F7B4EFA7A211521648D2764 /* PTEventListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D85D0C32D052557AAED9098655219240 /* Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A7B28AC90D5FAD50CA44805D8D16E3 /* Arrow@2x.png */; };
-		DB28BBD5CFB7C1454E5D3147F5B3EFD9 /* feedbackActivity@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 894B1F2591A3454CA1C8033AD86E053F /* feedbackActivity@2x~ipad.png */; };
-		DCD8737D8DF3A14F3442F1C3CA835D5C /* feedbackActivity~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D7312DBB50F7C0076AF7D1E4213D7503 /* feedbackActivity~ipad.png */; };
-		DD235009D978DC633896B932B72B0EE1 /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 66B3ADEF7E1AAA68434DF633C1CAB880 /* NSDictionary+StringValue.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		DFFA0BC503B39E027EBD6D9B1D934CA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABC45C2732A4ED943A7E8ECF24F14F7 /* Foundation.framework */; };
-		E0C0FB3FF317B9A48DD1EDC06218F9EF /* buttonRoundedDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8E08D5E20143D65CDA6308CA20698C6 /* buttonRoundedDeleteHighlighted@2x.png */; };
-		E4AD2499D5C860647FDD363B4ABBB806 /* libPusher-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E6188B82E07C74E8A2E4C583974061 /* libPusher-dummy.m */; };
-		E734D38194FF7C32820D03E55C4C4FE7 /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 8803432AD757CFB72AEA7B39DF820C45 /* nl.lproj */; };
-		EDEB5B8AD3AD0690DA0BFB1269199121 /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = DF7A310B9D97F264565DC46784A6A2C4 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F46372D08527C9E5B2D9829144388777 /* buttonRoundedRegularHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = A98F5916D23DED2A060AB89B5C23B6DA /* buttonRoundedRegularHighlighted.png */; };
-		F640777A57A5A43F6B052F3CB2D1227F /* buttonRoundedDelete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26608357F4B78BE033985EA272EB46A2 /* buttonRoundedDelete@2x.png */; };
-		F72530F0CF76B4DFCC4F35D5627EAC9F /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F99B895112EABA1DE9F61D15A6E1F /* PTNativePusher.m */; };
-		F72DD12B9FD770BD5C61B247C9BB35E6 /* buttonRoundedDeleteHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE223B2E554B4D45BA9222E486A678 /* buttonRoundedDeleteHighlighted.png */; };
-		FDB3A9D29603047D2F26DA0DE5285AF1 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = AA281C936B8691A8A95F77F593A90A25 /* ru.lproj */; };
-		FEDF6E6EDEC7D17CA8E2E5D478088D09 /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2E7A17776B8986EEC21CF95F0C817C06 /* it.lproj */; };
+		07CD5A9B39B3F7637D39E82222D717A7 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = DFE0872CEA65CC2B0810378DF577498D /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07EDE1C46E14BE9DF844DDCB5F9586C8 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6580A4E30927452BDE64E8271DFDBF1B /* fr.lproj */; };
+		09BA4BE53298BBB08CE185A03BC06601 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = 7714515F83D9046B62119271D9AFDF72 /* NSString+Hashing.m */; };
+		0A6B220707A634D146075049245C42E1 /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C40E6751AB89BC28DC3B02BC14904D8 /* PTPusherEvent.m */; };
+		165C656EF00FE569AEB376C074C6E291 /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2E7A17776B8986EEC21CF95F0C817C06 /* it.lproj */; };
+		1A936D6B7B8CDD61D32AD567E51BFCEA /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6372D686A35C043BD34A6F079B9C66 /* NSDictionary+QueryString.m */; };
+		1AF80644B3E769F40800F23830B56A13 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E7AA41D8825BEB3F6DA7DF46273E1A /* SRWebSocket.m */; };
+		20AC389E786F5FBB1C42D83F84DF9EB9 /* buttonRoundedDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8E08D5E20143D65CDA6308CA20698C6 /* buttonRoundedDeleteHighlighted@2x.png */; };
+		21D135F4449BE2360E47108CEA881087 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC58B0168ABFA7ED77ABE8AFD5EDA04D /* PTPusherChannel.m */; };
+		2438E36D323763C01FB7F3167B995FB8 /* PTNativePusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 97116F254A974390249D8C536691552D /* PTNativePusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		24AD79E99C0C500A4A07EAA97BF295F7 /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DC44CD6A7D2AD494BD3899E0CF15E1 /* PTJSON.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		27A9879767D17B550A0D8EF558A2D06D /* authorize_denied.png in Resources */ = {isa = PBXBuildFile; fileRef = D11121CBF378B6265E9FB7E127479143 /* authorize_denied.png */; };
+		2A8D3A0AC1F1A1E64E957991158EB93A /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = EEA806DB9D713715BB9AAD7A52B755B5 /* ja.lproj */; };
+		2AA499A4CF79FDA71488F3E13A6E19A7 /* SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 64651D4EBEA638537F4C35B820C3DF0F /* SocketRocket-dummy.m */; };
+		2AAE0498C67C0182C41E21F77B2601CC /* buttonRoundedDeleteHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE223B2E554B4D45BA9222E486A678 /* buttonRoundedDeleteHighlighted.png */; };
+		2BEF3DC887A54DEFCD26A14B2D942314 /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FBDE3FD49BAB3F75D7B982F6F7A9BB5 /* PTPusherChannelServerBasedAuthorization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CC40AB8785659F13EA64D18A635F572 /* iconCamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211BA8E17F0E1DC4C5DCD70DFACAC5 /* iconCamera@2x.png */; };
+		33F5DA3F695D7FA88815909F6237EBB3 /* Blur@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C053D70DD093C158EE3DC3EB28C57BA /* Blur@3x.png */; };
+		37A853B23F6864AD68679994B441BB6F /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EEEC3ED8980DCD71FD2F4145ED7A39 /* PTBlockEventListener.m */; };
+		3815B41D3A15AAA8937FEBD8045583E2 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = AA281C936B8691A8A95F77F593A90A25 /* ru.lproj */; };
+		39F5348B4505D7343827529CADB120DE /* buttonRoundedRegularHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = A98F5916D23DED2A060AB89B5C23B6DA /* buttonRoundedRegularHighlighted.png */; };
+		3DA452544CBB1252D91E2CF50E7C1CEE /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A4F8A0336F5790B05152BBE8387E825 /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		419EDDCC7F60D3148409D5289994EF57 /* hr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDB9BFF7566788F0DABE098010117 /* hr.lproj */; };
+		41A74BC6FE1B1737321C92B0C3DE9484 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 898EE84856EB5E52F00A964689E9F67E /* CFNetwork.framework */; };
+		41E4858FBCD6FC368D88D589FBE97DE9 /* Blur.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F630A117903F798B4C77FD87B2F9B0 /* Blur.png */; };
+		4751750DD321152F2B916B9237AB84D5 /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A2543F15D52A6DF4DB884F2C3A55C6 /* PTPusherEventDispatcher.m */; };
+		496D7F08C8860D58852BBBE410382E6E /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039961C2D0660D1E09765B727F82418 /* PTPusher.m */; };
+		4A62D006CD7AFF119192621BC07078EF /* Cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DBC6D3CDDE8F0E52CB87CC19D7440FC /* Cancel@2x.png */; };
+		4C65AC64079599FD175F8A2076A4F023 /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF55395919C93B116D2FCC224FDF0A0 /* PTURLRequestOperation.m */; };
+		4D16954E1477ABC465FAFB942ED8F713 /* Cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D95206FB15F6ECA9A610B80458DA55 /* Cancel@3x.png */; };
+		4D78B0FB4CAAF0BE17A88F0A140A51CD /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = DF7A310B9D97F264565DC46784A6A2C4 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E979D110580D700C6CEEC0B6253F1E0 /* feedbackActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DE440F8F6EF498D1D77617D8602067 /* feedbackActivity.png */; };
+		4F7A61679C4650212FDE6B8EAF25ED6B /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AB4C43DF8CA14E884AA199A5237C /* de.lproj */; };
+		53B14761A74DB5EA41207ADD43FC16F7 /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 79DE7B7AF480FB31A18C624D915D4681 /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55FD810C7B142943EF644934C0ADA97F /* Rectangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C47211977C25AF6BA5110C7E9184E168 /* Rectangle@3x.png */; };
+		575C8043D095873AFA2EA086763C591A /* IconGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 41728232AF7E12B1D7D197346266A19B /* IconGradient.png */; };
+		5F4F704CAB369B796DAAD83DD3FB8521 /* Ok@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D7BB5C42CA7B39C0963330490686BD /* Ok@3x.png */; };
+		5FF861C7A128C5835B8FB1B87A6C8FF6 /* Arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086FA73C05E5FEE72C6F4B4446BB6BE5 /* Arrow@3x.png */; };
+		62C7BE7B231B215BCA21A59DB9923C99 /* PTPusherChannelAuthorizationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 464AC00E6FCB8097437BA4AC81737591 /* PTPusherChannelAuthorizationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		669BC61B9CEC400DD6915A9F290D38C5 /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F71C221D82CF1EA230EAF12E4DC190F /* PTTargetActionEventListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6D038269AAFEAB076FEBC9B920CF7AE9 /* buttonRoundedDelete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26608357F4B78BE033985EA272EB46A2 /* buttonRoundedDelete@2x.png */; };
+		6E23F38026AB80A24178A5441CD43D67 /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = BB24B6433F7B4EFA7A211521648D2764 /* PTEventListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E45E06F240BE9CDFC814E798E2C099A /* feedbackActivity@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 894B1F2591A3454CA1C8033AD86E053F /* feedbackActivity@2x~ipad.png */; };
+		6F31011052205DFD3CBAFAAFBE6E5A4B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76A27B6AC5FF40DBB7B0E2B8BF8014 /* Security.framework */; };
+		715A48953215EBFDA3AFD4D238ED66ED /* Ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 234561CAD943E945FE5648DA1F841C26 /* Ok@2x.png */; };
+		793A69B024BFF91850979EB6756CD791 /* pt-PT.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1E47A9448468B3CE151F58AEF931CC19 /* pt-PT.lproj */; };
+		7A9099806786E7EFF2B0FAB578CBF948 /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEA6ECBADC32B65550CAF2BC3509563 /* PTTargetActionEventListener.m */; };
+		7B0CD6752F901105879934E8C7ED3249 /* Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A7B28AC90D5FAD50CA44805D8D16E3 /* Arrow@2x.png */; };
+		7B9B2EA147CD6217F15AD67FCE61A8BF /* buttonRoundedRegular@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A6C746F05EFBA407D1EA4E12D48F2F8 /* buttonRoundedRegular@2x.png */; };
+		7F5BA2671957486A431368E724AA603D /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 509D3E7E6F21DCD711AC429712CAE299 /* NSDictionary+StringValue.m */; };
+		806734D8A9144D0DEF6AFFF2AB39C25F /* hu.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C9CBD32B60C6DCF05D856BE8DAA5D831 /* hu.lproj */; };
+		82834DE4C2CEB8717DC633707D50EEEA /* Blur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 325D36FF73888B5CA1B2509E5A386841 /* Blur@2x.png */; };
+		83CA693CB36D470D6F9134671949BDCA /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6544B5133840525D0E128C087749EA54 /* es.lproj */; };
+		850ED68F1779BED501E9C81D296EA8D5 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 8CD517A07EFBFD0FA891CF75B5E8B560 /* en.lproj */; };
+		8C5A900A70F74799AC59B9B9EBBDC5BE /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F841493013EDB997DB4FD683946BBB /* PTPusherChannelServerBasedAuthorization.m */; };
+		901E7E8DFD82F74F0BF95976A9D2ABB3 /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 111DB2C0791BC096F8A16E02FD5CF1E1 /* PTJSON.m */; };
+		91AC57CF6F1C5C3A39AD85F0D81AD6AD /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 8803432AD757CFB72AEA7B39DF820C45 /* nl.lproj */; };
+		9365923F65ACA748DFFFD6285C90D884 /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D568C8204A2A65EEE33C1F02008CD6 /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93CE3E792E8C91BACAC715EABDA35CBD /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A7CFFA2F6C8056253CB233307CF6E4 /* PTPusherConnection.m */; };
+		95CBBC164CD0E784D3A418425EFCAA7E /* feedbackActivity~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D7312DBB50F7C0076AF7D1E4213D7503 /* feedbackActivity~ipad.png */; };
+		96D0FDF9C1CF9D962AAB5E6236869FF9 /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE297A3AA1D1A6FB7B68739B1083C1A /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		96F4115E62331CFCE6081E52867DDAC0 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 964244630ED3293A571BA4C98F7A5297 /* Arrow.png */; };
+		992765B53E6BEFD9021FED8D70B7FB7B /* libPusher-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E6188B82E07C74E8A2E4C583974061 /* libPusher-dummy.m */; };
+		9D5D70E17FA312EBFF9C0002D9EA2354 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E662638A203CC13A337AD51BD9C249 /* NSDictionary+QueryString.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		A2B50F0065CD734892FA99E2926043F5 /* zh-Hans.lproj in Resources */ = {isa = PBXBuildFile; fileRef = FAC53957A059B8A841A4423460DA34C4 /* zh-Hans.lproj */; };
+		A39606938B4AA36DF9ECEEF7E00AD89F /* Cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = EDED0E57DD255297F2CF79064481A6B0 /* Cancel.png */; };
+		A58BD2E3DBA5BBCE10741320628C82E3 /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 161F7BDCFF445CB821A502575A876879 /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A619F53478250DEE3679C7D6DF3BFB75 /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 66B3ADEF7E1AAA68434DF633C1CAB880 /* NSDictionary+StringValue.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		A7E86AB98B2ECDB69AF0B9B6E4FB4C1D /* IconGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD289D014175321D17487B23EDDC893 /* IconGradient@2x.png */; };
+		B194A46FBC13B12994DDDDF68E70C251 /* buttonRoundedRegularHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6472C040484750693FA676168EB751B5 /* buttonRoundedRegularHighlighted@2x.png */; };
+		B5650071E67B095AD687A64C8AF08554 /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F99B895112EABA1DE9F61D15A6E1F /* PTNativePusher.m */; };
+		B8B2E5A11D5EFAEBCC1D1FE97B7DDF34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D67AC30769732F1FF0BD1854B2E225 /* Foundation.framework */; };
+		B8E82C17AF3367CDD7F20D4B97BA165D /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 47FD81C715494E18395F2D8C89E344A6 /* PTPusherChannel_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B906FC88C45D001A22F19352FC0BA7E5 /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ABDB76B5207895B68FF6552C418B146 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B9143A621D76388F87F339A1CD795BC2 /* Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA33BF6D31EBE15E4565EC5F29889D /* Rectangle.png */; };
+		B9D0B89ACF4797839AE5A0E76378DC4B /* authorize_denied@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCE268B9771D765704087350BC91F056 /* authorize_denied@2x.png */; };
+		BBB3692D7C726644495F68F7C9835632 /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = 525A9F23E3DB8A9CE118D1A5253790D4 /* NSString+Hashing.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C6E42E829F6FB15E9084D02CCF9E3AD5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D67AC30769732F1FF0BD1854B2E225 /* Foundation.framework */; };
+		C77A95B63E2296019BDEB99F96733146 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 416DC85DB604EE53286BA9612D69AEFB /* bg.png */; };
+		C902BDB84A56AB2EF4B0D85529ABF5EE /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED38DB861F2F9464367745D2770996D /* PTPusherMockConnection.m */; };
+		CD22D73BD7B178C09A7DD257254BDFE1 /* feedbackActivity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85A7123967D82A0037599B86BB45E1CE /* feedbackActivity@3x.png */; };
+		CD499B07E01FE9D86FD6112AD503B0FD /* feedbackActivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F08C1F7AC830248357AB6075F434B2EE /* feedbackActivity@2x.png */; };
+		CFBBE170ACE974F5C47B44F23160EB98 /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A256E298836EBF17689EFE40DFFB77 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3394102F360FB2E68CE666137873BDF /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 46117DAD331256F824B6A85E879D3065 /* PTURLRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D9126ABBA66FDDDC2F4444C4C35AADC5 /* Pods-ZooniverseMobile-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A74DE415BACBB27D736FACC1DA8773C /* Pods-ZooniverseMobile-dummy.m */; };
+		D93D7AF9A803D088B16FADD05A65C326 /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 75DEE6FE98D9FDB2B99D6A7B84C24B9D /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA220EA6C5CF07304ABEB6BD9A01BEE3 /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 7323D5497EE743FA39568264149FB290 /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC45F853C0766FA3EA60A3F242EE1CC5 /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 48CFDEB74129819B7AF2C3520E6D83EA /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DD13621C0D0BAC7B5B36D1262621BBA2 /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = E67B1306D9E6AB021B4A3FEBD94C8FFD /* PTBlockEventListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		DFF6F0E147ADBE97422778271647EE38 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D67AC30769732F1FF0BD1854B2E225 /* Foundation.framework */; };
+		E176755DF3A2BC6D72FE0AFE833E425B /* iconCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = D568B7EABD81780EE31C6AF9688EA035 /* iconCamera.png */; };
+		E34CFBF4AA6CE181866447774E43340F /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C372F4BF8BA9F35206B48DF49944C4A /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E40E15D6148B1A98E1CD4000214FC407 /* buttonRoundedRegular.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA389E17D5166F51D918729A759CA72 /* buttonRoundedRegular.png */; };
+		E4624FED3DA5268B743FBB7CA4954F03 /* Ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BD49E14CE41FB5F0B5F27103DB47FE /* Ok.png */; };
+		E9258D4A3FD5C57B0330DC7D983576F6 /* Rectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBFAEE53CC242F2F3711853B583C2558 /* Rectangle@2x.png */; };
+		EBAEDEC8ABA52FF199D0146076939742 /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D25238FC0AD7FFB4FC6F1A5D61617F04 /* PTPusherAPI.m */; };
+		EC0BB7DB2D3696F9CA443FEF1DBAD633 /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F28905A63F4E529A83A68B6350222A2 /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F1D5B88E00332E9B62D7B1E544B5E46A /* pt.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1BF62D9E68F771F04F2496A23B654AF2 /* pt.lproj */; };
+		F77F8C972B4A85C791CFDB7F9AAC68A4 /* authorize_denied@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49971B51649162D9AB984B0DBCD44824 /* authorize_denied@3x.png */; };
+		F7E26A454ED6498BA2EB61CC68A62B51 /* buttonRoundedDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = 5369EAC8B95CFEEF0679F71830DD870E /* buttonRoundedDelete.png */; };
+		FE7331B096E38DEC6D266CD65ADF1FC8 /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = E7CE7C9505EA19111901CE412B2C53E0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2AEC0C1B330DEC0E4FD225DA570605F2 /* PBXContainerItemProxy */ = {
+		2CB2EA1AA5FCD2D20FBB13FA50FCF22F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D20BD31CF3635820F8DED85A75B8B1AF;
-			remoteInfo = SocketRocket;
-		};
-		6288F0997B3D7A87833EE9066503B582 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D20BD31CF3635820F8DED85A75B8B1AF;
-			remoteInfo = SocketRocket;
-		};
-		877073AFA5ADAE92E755BC99F4BC7187 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C014F737BF0E4D82F49D1E8DBB98C79;
+			remoteGlobalIDString = 385C8ADB38F71BC30D6B7381629D49B1;
 			remoteInfo = "HockeySDK-HockeySDKResources";
 		};
-		D1597491E4127C41E2FECF361479CBA5 /* PBXContainerItemProxy */ = {
+		5EEDB7B6828A4B1933D5206143E58471 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E3AA5A03CD6E9FCC6584EDA4F1E51751;
+			remoteGlobalIDString = 0944A5B41A468FA69A502F113BAC0074;
+			remoteInfo = SocketRocket;
+		};
+		BD64B5693C692CF5854E7BB08A4A558E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0944A5B41A468FA69A502F113BAC0074;
+			remoteInfo = SocketRocket;
+		};
+		CA735DFF1333F5EECA9D5C3C27F25F52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D6B6A80C6761C611B5D466E7A4591C5F;
 			remoteInfo = libPusher;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		086FA73C05E5FEE72C6F4B4446BB6BE5 /* Arrow@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Arrow@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Arrow@3x.png"; sourceTree = "<group>"; };
-		09056A24F28BE36EE687AF5697EDFBB5 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HockeySDKResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		10BD49E14CE41FB5F0B5F27103DB47FE /* Ok.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = Ok.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Ok.png"; sourceTree = "<group>"; };
+		086FA73C05E5FEE72C6F4B4446BB6BE5 /* Arrow@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Arrow@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Arrow@3x.png"; sourceTree = "<group>"; };
+		09056A24F28BE36EE687AF5697EDFBB5 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = HockeySDKResources.bundle; path = HockeySDKResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		10BD49E14CE41FB5F0B5F27103DB47FE /* Ok.png */ = {isa = PBXFileReference; includeInIndex = 1; name = Ok.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Ok.png"; sourceTree = "<group>"; };
 		111DB2C0791BC096F8A16E02FD5CF1E1 /* PTJSON.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTJSON.m; path = Library/PTJSON.m; sourceTree = "<group>"; };
 		13DC44CD6A7D2AD494BD3899E0CF15E1 /* PTJSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTJSON.h; path = "Library/Private Headers/PTJSON.h"; sourceTree = "<group>"; };
 		161F7BDCFF445CB821A502575A876879 /* PTPusherMockConnection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherMockConnection.h; path = Library/PTPusherMockConnection.h; sourceTree = "<group>"; };
 		1A8F2AED93E48661F0680F2809F91B80 /* Pods-ZooniverseMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZooniverseMobile.debug.xcconfig"; sourceTree = "<group>"; };
-		1AD289D014175321D17487B23EDDC893 /* IconGradient@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "IconGradient@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/IconGradient@2x.png"; sourceTree = "<group>"; };
-		1BF62D9E68F771F04F2496A23B654AF2 /* pt.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pt.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/pt.lproj"; sourceTree = "<group>"; };
-		1E47A9448468B3CE151F58AEF931CC19 /* pt-PT.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "pt-PT.lproj"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/pt-PT.lproj"; sourceTree = "<group>"; };
+		1AD289D014175321D17487B23EDDC893 /* IconGradient@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "IconGradient@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/IconGradient@2x.png"; sourceTree = "<group>"; };
+		1BF62D9E68F771F04F2496A23B654AF2 /* pt.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = pt.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/pt.lproj"; sourceTree = "<group>"; };
+		1E47A9448468B3CE151F58AEF931CC19 /* pt-PT.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "pt-PT.lproj"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/pt-PT.lproj"; sourceTree = "<group>"; };
 		1ED38DB861F2F9464367745D2770996D /* PTPusherMockConnection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherMockConnection.m; path = Library/PTPusherMockConnection.m; sourceTree = "<group>"; };
 		1FE6F23A07085D65FFB1AAB903B8AC47 /* ResourceBundle-HockeySDKResources-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-HockeySDKResources-Info.plist"; sourceTree = "<group>"; };
-		234561CAD943E945FE5648DA1F841C26 /* Ok@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Ok@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Ok@2x.png"; sourceTree = "<group>"; };
-		26608357F4B78BE033985EA272EB46A2 /* buttonRoundedDelete@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "buttonRoundedDelete@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedDelete@2x.png"; sourceTree = "<group>"; };
+		234561CAD943E945FE5648DA1F841C26 /* Ok@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Ok@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Ok@2x.png"; sourceTree = "<group>"; };
+		26608357F4B78BE033985EA272EB46A2 /* buttonRoundedDelete@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "buttonRoundedDelete@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedDelete@2x.png"; sourceTree = "<group>"; };
 		281F99B895112EABA1DE9F61D15A6E1F /* PTNativePusher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTNativePusher.m; path = Library/PTNativePusher.m; sourceTree = "<group>"; };
 		2C40E6751AB89BC28DC3B02BC14904D8 /* PTPusherEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherEvent.m; path = Library/PTPusherEvent.m; sourceTree = "<group>"; };
-		2E7A17776B8986EEC21CF95F0C817C06 /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = it.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/it.lproj"; sourceTree = "<group>"; };
-		325D36FF73888B5CA1B2509E5A386841 /* Blur@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Blur@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Blur@2x.png"; sourceTree = "<group>"; };
-		3AEA33BF6D31EBE15E4565EC5F29889D /* Rectangle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = Rectangle.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Rectangle.png"; sourceTree = "<group>"; };
+		2E7A17776B8986EEC21CF95F0C817C06 /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = it.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/it.lproj"; sourceTree = "<group>"; };
+		325D36FF73888B5CA1B2509E5A386841 /* Blur@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Blur@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Blur@2x.png"; sourceTree = "<group>"; };
+		3AEA33BF6D31EBE15E4565EC5F29889D /* Rectangle.png */ = {isa = PBXFileReference; includeInIndex = 1; name = Rectangle.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Rectangle.png"; sourceTree = "<group>"; };
 		3F71C221D82CF1EA230EAF12E4DC190F /* PTTargetActionEventListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTTargetActionEventListener.h; path = "Library/Private Headers/PTTargetActionEventListener.h"; sourceTree = "<group>"; };
 		3FE297A3AA1D1A6FB7B68739B1083C1A /* PTPusherErrors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherErrors.h; path = Library/PTPusherErrors.h; sourceTree = "<group>"; };
-		408C1EEB705775DF864BE8D58F368B12 /* libPods-ZooniverseMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZooniverseMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		416DC85DB604EE53286BA9612D69AEFB /* bg.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = bg.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/bg.png"; sourceTree = "<group>"; };
-		41728232AF7E12B1D7D197346266A19B /* IconGradient.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = IconGradient.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/IconGradient.png"; sourceTree = "<group>"; };
-		4590745687468C3AE2C69702E13D038B /* libSocketRocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSocketRocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		408C1EEB705775DF864BE8D58F368B12 /* libPods-ZooniverseMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ZooniverseMobile.a"; path = "libPods-ZooniverseMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		416DC85DB604EE53286BA9612D69AEFB /* bg.png */ = {isa = PBXFileReference; includeInIndex = 1; name = bg.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/bg.png"; sourceTree = "<group>"; };
+		41728232AF7E12B1D7D197346266A19B /* IconGradient.png */ = {isa = PBXFileReference; includeInIndex = 1; name = IconGradient.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/IconGradient.png"; sourceTree = "<group>"; };
+		4590745687468C3AE2C69702E13D038B /* libSocketRocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSocketRocket.a; path = libSocketRocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46117DAD331256F824B6A85E879D3065 /* PTURLRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTURLRequestOperation.h; path = Library/PTURLRequestOperation.h; sourceTree = "<group>"; };
 		464AC00E6FCB8097437BA4AC81737591 /* PTPusherChannelAuthorizationDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherChannelAuthorizationDelegate.h; path = Library/PTPusherChannelAuthorizationDelegate.h; sourceTree = "<group>"; };
 		47FD81C715494E18395F2D8C89E344A6 /* PTPusherChannel_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherChannel_Private.h; path = "Library/Private Headers/PTPusherChannel_Private.h"; sourceTree = "<group>"; };
 		48CFDEB74129819B7AF2C3520E6D83EA /* PTPusherEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherEvent.h; path = Library/PTPusherEvent.h; sourceTree = "<group>"; };
 		48F841493013EDB997DB4FD683946BBB /* PTPusherChannelServerBasedAuthorization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherChannelServerBasedAuthorization.m; path = Library/PTPusherChannelServerBasedAuthorization.m; sourceTree = "<group>"; };
-		49971B51649162D9AB984B0DBCD44824 /* authorize_denied@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "authorize_denied@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/authorize_denied@3x.png"; sourceTree = "<group>"; };
+		49971B51649162D9AB984B0DBCD44824 /* authorize_denied@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "authorize_denied@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/authorize_denied@3x.png"; sourceTree = "<group>"; };
 		49DF6A38AB998448FF3BA0381D64E587 /* Pods-ZooniverseMobile-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZooniverseMobile-resources.sh"; sourceTree = "<group>"; };
 		4BEA6ECBADC32B65550CAF2BC3509563 /* PTTargetActionEventListener.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTTargetActionEventListener.m; path = Library/PTTargetActionEventListener.m; sourceTree = "<group>"; };
 		4C372F4BF8BA9F35206B48DF49944C4A /* Pusher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Pusher.h; path = Library/Pusher.h; sourceTree = "<group>"; };
@@ -180,117 +180,117 @@
 		4DCA7A5AD3559F5C73C4661795C577C1 /* Pods-ZooniverseMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZooniverseMobile.release.xcconfig"; sourceTree = "<group>"; };
 		5039961C2D0660D1E09765B727F82418 /* PTPusher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusher.m; path = Library/PTPusher.m; sourceTree = "<group>"; };
 		509D3E7E6F21DCD711AC429712CAE299 /* NSDictionary+StringValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+StringValue.m"; path = "Library/NSDictionary+StringValue.m"; sourceTree = "<group>"; };
-		5135EC14FA83C331E94D40C19DAB0764 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		51E04DC962AEC078BF6028DB9068708D /* SocketRocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SocketRocket.xcconfig; sourceTree = "<group>"; };
 		525A9F23E3DB8A9CE118D1A5253790D4 /* NSString+Hashing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+Hashing.h"; path = "Library/Private Headers/NSString+Hashing.h"; sourceTree = "<group>"; };
-		5369EAC8B95CFEEF0679F71830DD870E /* buttonRoundedDelete.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = buttonRoundedDelete.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedDelete.png"; sourceTree = "<group>"; };
-		60DE440F8F6EF498D1D77617D8602067 /* feedbackActivity.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = feedbackActivity.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity.png"; sourceTree = "<group>"; };
+		5369EAC8B95CFEEF0679F71830DD870E /* buttonRoundedDelete.png */ = {isa = PBXFileReference; includeInIndex = 1; name = buttonRoundedDelete.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedDelete.png"; sourceTree = "<group>"; };
+		60DE440F8F6EF498D1D77617D8602067 /* feedbackActivity.png */ = {isa = PBXFileReference; includeInIndex = 1; name = feedbackActivity.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity.png"; sourceTree = "<group>"; };
 		61E6188B82E07C74E8A2E4C583974061 /* libPusher-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "libPusher-dummy.m"; sourceTree = "<group>"; };
 		63169B6D16BDF5827FAA125F2C31C671 /* libPusher-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "libPusher-prefix.pch"; sourceTree = "<group>"; };
 		64651D4EBEA638537F4C35B820C3DF0F /* SocketRocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SocketRocket-dummy.m"; sourceTree = "<group>"; };
-		6472C040484750693FA676168EB751B5 /* buttonRoundedRegularHighlighted@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "buttonRoundedRegularHighlighted@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedRegularHighlighted@2x.png"; sourceTree = "<group>"; };
+		6472C040484750693FA676168EB751B5 /* buttonRoundedRegularHighlighted@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "buttonRoundedRegularHighlighted@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedRegularHighlighted@2x.png"; sourceTree = "<group>"; };
 		64B1E60A39B878808057D673DD449218 /* Pods-ZooniverseMobile-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ZooniverseMobile-acknowledgements.plist"; sourceTree = "<group>"; };
 		64E7AA41D8825BEB3F6DA7DF46273E1A /* SRWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
-		6544B5133840525D0E128C087749EA54 /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = es.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/es.lproj"; sourceTree = "<group>"; };
-		6580A4E30927452BDE64E8271DFDBF1B /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fr.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/fr.lproj"; sourceTree = "<group>"; };
+		6544B5133840525D0E128C087749EA54 /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = es.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/es.lproj"; sourceTree = "<group>"; };
+		6580A4E30927452BDE64E8271DFDBF1B /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = fr.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/fr.lproj"; sourceTree = "<group>"; };
 		66B3ADEF7E1AAA68434DF633C1CAB880 /* NSDictionary+StringValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+StringValue.h"; path = "Library/Private Headers/NSDictionary+StringValue.h"; sourceTree = "<group>"; };
 		68A7CFFA2F6C8056253CB233307CF6E4 /* PTPusherConnection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherConnection.m; path = Library/PTPusherConnection.m; sourceTree = "<group>"; };
-		68C4AB4C43DF8CA14E884AA199A5237C /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = de.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/de.lproj"; sourceTree = "<group>"; };
+		68C4AB4C43DF8CA14E884AA199A5237C /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = de.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/de.lproj"; sourceTree = "<group>"; };
 		6A74DE415BACBB27D736FACC1DA8773C /* Pods-ZooniverseMobile-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZooniverseMobile-dummy.m"; sourceTree = "<group>"; };
 		6ABDB76B5207895B68FF6552C418B146 /* PTPusherMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherMacros.h; path = Library/PTPusherMacros.h; sourceTree = "<group>"; };
-		6C1FDB9BFF7566788F0DABE098010117 /* hr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = hr.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/hr.lproj"; sourceTree = "<group>"; };
+		6C1FDB9BFF7566788F0DABE098010117 /* hr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = hr.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/hr.lproj"; sourceTree = "<group>"; };
 		71E662638A203CC13A337AD51BD9C249 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+QueryString.h"; path = "Library/Private Headers/NSDictionary+QueryString.h"; sourceTree = "<group>"; };
 		7323D5497EE743FA39568264149FB290 /* PTPusherEventDispatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherEventDispatcher.h; path = Library/PTPusherEventDispatcher.h; sourceTree = "<group>"; };
 		75DEE6FE98D9FDB2B99D6A7B84C24B9D /* PTPusherPresenceChannelDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherPresenceChannelDelegate.h; path = Library/PTPusherPresenceChannelDelegate.h; sourceTree = "<group>"; };
-		76D7BB5C42CA7B39C0963330490686BD /* Ok@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Ok@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Ok@3x.png"; sourceTree = "<group>"; };
+		76D7BB5C42CA7B39C0963330490686BD /* Ok@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Ok@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Ok@3x.png"; sourceTree = "<group>"; };
 		7714515F83D9046B62119271D9AFDF72 /* NSString+Hashing.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+Hashing.m"; path = "Library/NSString+Hashing.m"; sourceTree = "<group>"; };
-		77AE223B2E554B4D45BA9222E486A678 /* buttonRoundedDeleteHighlighted.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = buttonRoundedDeleteHighlighted.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedDeleteHighlighted.png"; sourceTree = "<group>"; };
+		77AE223B2E554B4D45BA9222E486A678 /* buttonRoundedDeleteHighlighted.png */ = {isa = PBXFileReference; includeInIndex = 1; name = buttonRoundedDeleteHighlighted.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedDeleteHighlighted.png"; sourceTree = "<group>"; };
 		79DE7B7AF480FB31A18C624D915D4681 /* PTPusherChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherChannel.h; path = Library/PTPusherChannel.h; sourceTree = "<group>"; };
-		7CAF4AB1ECD042E4FED766B8370F6530 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		7DBC6D3CDDE8F0E52CB87CC19D7440FC /* Cancel@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Cancel@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Cancel@2x.png"; sourceTree = "<group>"; };
-		81A7B28AC90D5FAD50CA44805D8D16E3 /* Arrow@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Arrow@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Arrow@2x.png"; sourceTree = "<group>"; };
+		7DBC6D3CDDE8F0E52CB87CC19D7440FC /* Cancel@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Cancel@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Cancel@2x.png"; sourceTree = "<group>"; };
+		81A7B28AC90D5FAD50CA44805D8D16E3 /* Arrow@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Arrow@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Arrow@2x.png"; sourceTree = "<group>"; };
 		82A2543F15D52A6DF4DB884F2C3A55C6 /* PTPusherEventDispatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherEventDispatcher.m; path = Library/PTPusherEventDispatcher.m; sourceTree = "<group>"; };
-		85A7123967D82A0037599B86BB45E1CE /* feedbackActivity@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "feedbackActivity@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity@3x.png"; sourceTree = "<group>"; };
+		85A7123967D82A0037599B86BB45E1CE /* feedbackActivity@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "feedbackActivity@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity@3x.png"; sourceTree = "<group>"; };
 		8700521F22BF16BF37EE858EBDA9AF96 /* Pods-ZooniverseMobile-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZooniverseMobile-acknowledgements.markdown"; sourceTree = "<group>"; };
-		8803432AD757CFB72AEA7B39DF820C45 /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nl.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/nl.lproj"; sourceTree = "<group>"; };
-		894B1F2591A3454CA1C8033AD86E053F /* feedbackActivity@2x~ipad.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "feedbackActivity@2x~ipad.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity@2x~ipad.png"; sourceTree = "<group>"; };
-		8A6C746F05EFBA407D1EA4E12D48F2F8 /* buttonRoundedRegular@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "buttonRoundedRegular@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedRegular@2x.png"; sourceTree = "<group>"; };
+		8803432AD757CFB72AEA7B39DF820C45 /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = nl.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/nl.lproj"; sourceTree = "<group>"; };
+		894B1F2591A3454CA1C8033AD86E053F /* feedbackActivity@2x~ipad.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "feedbackActivity@2x~ipad.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity@2x~ipad.png"; sourceTree = "<group>"; };
+		898EE84856EB5E52F00A964689E9F67E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		8A6C746F05EFBA407D1EA4E12D48F2F8 /* buttonRoundedRegular@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "buttonRoundedRegular@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedRegular@2x.png"; sourceTree = "<group>"; };
 		8BF55395919C93B116D2FCC224FDF0A0 /* PTURLRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTURLRequestOperation.m; path = Library/PTURLRequestOperation.m; sourceTree = "<group>"; };
-		8C053D70DD093C158EE3DC3EB28C57BA /* Blur@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Blur@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Blur@3x.png"; sourceTree = "<group>"; };
-		8CD517A07EFBFD0FA891CF75B5E8B560 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = en.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/en.lproj"; sourceTree = "<group>"; };
+		8C053D70DD093C158EE3DC3EB28C57BA /* Blur@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Blur@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Blur@3x.png"; sourceTree = "<group>"; };
+		8CD517A07EFBFD0FA891CF75B5E8B560 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = en.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/en.lproj"; sourceTree = "<group>"; };
 		8F28905A63F4E529A83A68B6350222A2 /* PTPusher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusher.h; path = Library/PTPusher.h; sourceTree = "<group>"; };
 		8FBDE3FD49BAB3F75D7B982F6F7A9BB5 /* PTPusherChannelServerBasedAuthorization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherChannelServerBasedAuthorization.h; path = Library/PTPusherChannelServerBasedAuthorization.h; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		964244630ED3293A571BA4C98F7A5297 /* Arrow.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = Arrow.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Arrow.png"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		964244630ED3293A571BA4C98F7A5297 /* Arrow.png */ = {isa = PBXFileReference; includeInIndex = 1; name = Arrow.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Arrow.png"; sourceTree = "<group>"; };
 		97116F254A974390249D8C536691552D /* PTNativePusher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTNativePusher.h; path = Library/PTNativePusher.h; sourceTree = "<group>"; };
 		99356F414EA481EDFB36A033C552FEDF /* libPusher.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = libPusher.xcconfig; sourceTree = "<group>"; };
 		9A4F8A0336F5790B05152BBE8387E825 /* SocketRocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SocketRocket.h; path = SocketRocket/SocketRocket.h; sourceTree = "<group>"; };
-		A2211BA8E17F0E1DC4C5DCD70DFACAC5 /* iconCamera@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "iconCamera@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/iconCamera@2x.png"; sourceTree = "<group>"; };
+		A2211BA8E17F0E1DC4C5DCD70DFACAC5 /* iconCamera@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "iconCamera@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/iconCamera@2x.png"; sourceTree = "<group>"; };
 		A5EEEC3ED8980DCD71FD2F4145ED7A39 /* PTBlockEventListener.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTBlockEventListener.m; path = Library/PTBlockEventListener.m; sourceTree = "<group>"; };
-		A98F5916D23DED2A060AB89B5C23B6DA /* buttonRoundedRegularHighlighted.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = buttonRoundedRegularHighlighted.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedRegularHighlighted.png"; sourceTree = "<group>"; };
-		AA281C936B8691A8A95F77F593A90A25 /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ru.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/ru.lproj"; sourceTree = "<group>"; };
+		A98F5916D23DED2A060AB89B5C23B6DA /* buttonRoundedRegularHighlighted.png */ = {isa = PBXFileReference; includeInIndex = 1; name = buttonRoundedRegularHighlighted.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedRegularHighlighted.png"; sourceTree = "<group>"; };
+		AA281C936B8691A8A95F77F593A90A25 /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = ru.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/ru.lproj"; sourceTree = "<group>"; };
 		B5A256E298836EBF17689EFE40DFFB77 /* PTPusherDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherDelegate.h; path = Library/PTPusherDelegate.h; sourceTree = "<group>"; };
-		B8E08D5E20143D65CDA6308CA20698C6 /* buttonRoundedDeleteHighlighted@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "buttonRoundedDeleteHighlighted@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedDeleteHighlighted@2x.png"; sourceTree = "<group>"; };
+		B5D67AC30769732F1FF0BD1854B2E225 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B8E08D5E20143D65CDA6308CA20698C6 /* buttonRoundedDeleteHighlighted@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "buttonRoundedDeleteHighlighted@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedDeleteHighlighted@2x.png"; sourceTree = "<group>"; };
 		BB24B6433F7B4EFA7A211521648D2764 /* PTEventListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTEventListener.h; path = Library/PTEventListener.h; sourceTree = "<group>"; };
-		BBFAEE53CC242F2F3711853B583C2558 /* Rectangle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Rectangle@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Rectangle@2x.png"; sourceTree = "<group>"; };
-		BEA389E17D5166F51D918729A759CA72 /* buttonRoundedRegular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = buttonRoundedRegular.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedRegular.png"; sourceTree = "<group>"; };
-		C47211977C25AF6BA5110C7E9184E168 /* Rectangle@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Rectangle@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Rectangle@3x.png"; sourceTree = "<group>"; };
+		BBFAEE53CC242F2F3711853B583C2558 /* Rectangle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Rectangle@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Rectangle@2x.png"; sourceTree = "<group>"; };
+		BC76A27B6AC5FF40DBB7B0E2B8BF8014 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		BEA389E17D5166F51D918729A759CA72 /* buttonRoundedRegular.png */ = {isa = PBXFileReference; includeInIndex = 1; name = buttonRoundedRegular.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/buttonRoundedRegular.png"; sourceTree = "<group>"; };
+		C47211977C25AF6BA5110C7E9184E168 /* Rectangle@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Rectangle@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Rectangle@3x.png"; sourceTree = "<group>"; };
 		C5D568C8204A2A65EEE33C1F02008CD6 /* PTPusherAPI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherAPI.h; path = Library/PTPusherAPI.h; sourceTree = "<group>"; };
-		C9CBD32B60C6DCF05D856BE8DAA5D831 /* hu.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = hu.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/hu.lproj"; sourceTree = "<group>"; };
+		C9CBD32B60C6DCF05D856BE8DAA5D831 /* hu.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = hu.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/hu.lproj"; sourceTree = "<group>"; };
 		D0769FC636A19229A2EDF0C090FD719F /* SocketRocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-prefix.pch"; sourceTree = "<group>"; };
-		D11121CBF378B6265E9FB7E127479143 /* authorize_denied.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = authorize_denied.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/authorize_denied.png"; sourceTree = "<group>"; };
+		D11121CBF378B6265E9FB7E127479143 /* authorize_denied.png */ = {isa = PBXFileReference; includeInIndex = 1; name = authorize_denied.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/authorize_denied.png"; sourceTree = "<group>"; };
 		D25238FC0AD7FFB4FC6F1A5D61617F04 /* PTPusherAPI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherAPI.m; path = Library/PTPusherAPI.m; sourceTree = "<group>"; };
-		D568B7EABD81780EE31C6AF9688EA035 /* iconCamera.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = iconCamera.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/iconCamera.png"; sourceTree = "<group>"; };
-		D7312DBB50F7C0076AF7D1E4213D7503 /* feedbackActivity~ipad.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "feedbackActivity~ipad.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity~ipad.png"; sourceTree = "<group>"; };
+		D568B7EABD81780EE31C6AF9688EA035 /* iconCamera.png */ = {isa = PBXFileReference; includeInIndex = 1; name = iconCamera.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/iconCamera.png"; sourceTree = "<group>"; };
+		D7312DBB50F7C0076AF7D1E4213D7503 /* feedbackActivity~ipad.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "feedbackActivity~ipad.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity~ipad.png"; sourceTree = "<group>"; };
 		D97E802605BF67B385E063FD8309B30F /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		DB1355E87939044D1B6E2CAE671E9FA6 /* Pods-ZooniverseMobile-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZooniverseMobile-frameworks.sh"; sourceTree = "<group>"; };
 		DC58B0168ABFA7ED77ABE8AFD5EDA04D /* PTPusherChannel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherChannel.m; path = Library/PTPusherChannel.m; sourceTree = "<group>"; };
-		DCE268B9771D765704087350BC91F056 /* authorize_denied@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "authorize_denied@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/authorize_denied@2x.png"; sourceTree = "<group>"; };
+		DCE268B9771D765704087350BC91F056 /* authorize_denied@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "authorize_denied@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/authorize_denied@2x.png"; sourceTree = "<group>"; };
 		DF7A310B9D97F264565DC46784A6A2C4 /* PTPusherEventPublisher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherEventPublisher.h; path = Library/PTPusherEventPublisher.h; sourceTree = "<group>"; };
 		DFE0872CEA65CC2B0810378DF577498D /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
-		E1F630A117903F798B4C77FD87B2F9B0 /* Blur.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = Blur.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Blur.png"; sourceTree = "<group>"; };
+		E1F630A117903F798B4C77FD87B2F9B0 /* Blur.png */ = {isa = PBXFileReference; includeInIndex = 1; name = Blur.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Blur.png"; sourceTree = "<group>"; };
 		E67B1306D9E6AB021B4A3FEBD94C8FFD /* PTBlockEventListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTBlockEventListener.h; path = "Library/Private Headers/PTBlockEventListener.h"; sourceTree = "<group>"; };
 		E7CE7C9505EA19111901CE412B2C53E0 /* PTPusherConnection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherConnection.h; path = Library/PTPusherConnection.h; sourceTree = "<group>"; };
-		EABC45C2732A4ED943A7E8ECF24F14F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		EDED0E57DD255297F2CF79064481A6B0 /* Cancel.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = Cancel.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Cancel.png"; sourceTree = "<group>"; };
-		EEA806DB9D713715BB9AAD7A52B755B5 /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ja.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/ja.lproj"; sourceTree = "<group>"; };
-		F08C1F7AC830248357AB6075F434B2EE /* feedbackActivity@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "feedbackActivity@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity@2x.png"; sourceTree = "<group>"; };
-		F3D95206FB15F6ECA9A610B80458DA55 /* Cancel@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Cancel@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Cancel@3x.png"; sourceTree = "<group>"; };
-		F3DF297ABB786D76867675C35B544EDA /* liblibPusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibPusher.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAC53957A059B8A841A4423460DA34C4 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "zh-Hans.lproj"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/zh-Hans.lproj"; sourceTree = "<group>"; };
+		EDED0E57DD255297F2CF79064481A6B0 /* Cancel.png */ = {isa = PBXFileReference; includeInIndex = 1; name = Cancel.png; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Cancel.png"; sourceTree = "<group>"; };
+		EEA806DB9D713715BB9AAD7A52B755B5 /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = ja.lproj; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/ja.lproj"; sourceTree = "<group>"; };
+		F08C1F7AC830248357AB6075F434B2EE /* feedbackActivity@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "feedbackActivity@2x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/feedbackActivity@2x.png"; sourceTree = "<group>"; };
+		F3D95206FB15F6ECA9A610B80458DA55 /* Cancel@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "Cancel@3x.png"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/Cancel@3x.png"; sourceTree = "<group>"; };
+		F3DF297ABB786D76867675C35B544EDA /* liblibPusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = liblibPusher.a; path = liblibPusher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAC53957A059B8A841A4423460DA34C4 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "zh-Hans.lproj"; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle/zh-Hans.lproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1200304C992976776B2355ED6676C428 /* Frameworks */ = {
+		137822C875BF3BA2A11BC3C373750D32 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFFA0BC503B39E027EBD6D9B1D934CA7 /* Foundation.framework in Frameworks */,
+				C6E42E829F6FB15E9084D02CCF9E3AD5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		32DE38A732B7C00AFE7B3AB55DF2758F /* Frameworks */ = {
+		256BC99696206018CA423BF1512BE05E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D2ACA7621A21E6967B2F2C889E56BF4 /* CFNetwork.framework in Frameworks */,
-				04F30E1ED58F6CF57D720738DC844CCC /* Foundation.framework in Frameworks */,
-				3DCB8F7DE2F25257EF13C5CE71720E6D /* Security.framework in Frameworks */,
+				41A74BC6FE1B1737321C92B0C3DE9484 /* CFNetwork.framework in Frameworks */,
+				B8B2E5A11D5EFAEBCC1D1FE97B7DDF34 /* Foundation.framework in Frameworks */,
+				6F31011052205DFD3CBAFAAFBE6E5A4B /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		72076A1CAED4953848CFF922CC55053B /* Frameworks */ = {
+		8B1C289C24F4000B50AF78ADDAFF5667 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3779F0998FDE28B2206DCA752F42F5B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		94D81D36BFD6B9DEE92D5A60AF290DB7 /* Frameworks */ = {
+		B9BCAA3F1031613E959684782E7E5948 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFF6F0E147ADBE97422778271647EE38 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,20 +353,10 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		1178F420F04662BB9B205EF659BBA2AB /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				5135EC14FA83C331E94D40C19DAB0764 /* CFNetwork.framework */,
-				EABC45C2732A4ED943A7E8ECF24F14F7 /* Foundation.framework */,
-				7CAF4AB1ECD042E4FED766B8370F6530 /* Security.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1178F420F04662BB9B205EF659BBA2AB /* iOS */,
+				4A9D6FF81BFBB1B195CCEBC8D335E2CF /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -445,6 +435,16 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
+		4A9D6FF81BFBB1B195CCEBC8D335E2CF /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				898EE84856EB5E52F00A964689E9F67E /* CFNetwork.framework */,
+				B5D67AC30769732F1FF0BD1854B2E225 /* Foundation.framework */,
+				BC76A27B6AC5FF40DBB7B0E2B8BF8014 /* Security.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		507A4E8B3A432C8E135FFC78E3F34334 /* Pods-ZooniverseMobile */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +498,7 @@
 				2C1501966B1ED6410A1183EF7C0962AF /* Core */,
 				6DDA968A98D852779DB7D765019CBA63 /* Support Files */,
 			);
+			name = libPusher;
 			path = libPusher;
 			sourceTree = "<group>";
 		};
@@ -539,6 +540,7 @@
 				64E7AA41D8825BEB3F6DA7DF46273E1A /* SRWebSocket.m */,
 				B0FFF58BD55CA1D5E26080CEF49306FA /* Support Files */,
 			);
+			name = SocketRocket;
 			path = SocketRocket;
 			sourceTree = "<group>";
 		};
@@ -548,99 +550,64 @@
 				1B66AEE6337050A037E176DE385BF44A /* AllFeaturesLib */,
 				286A3D9B3AA2F8EF90C5D26BE80269B7 /* Support Files */,
 			);
+			name = HockeySDK;
 			path = HockeySDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		18FF8A994580A7BFD71803053E1B2E80 /* Headers */ = {
+		A6F4D679025B5094F0836DB8D794B9E0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3F34902EC4FEF9CFDD1D4EF72D70965 /* NSDictionary+QueryString.h in Headers */,
-				DD235009D978DC633896B932B72B0EE1 /* NSDictionary+StringValue.h in Headers */,
-				3FFB1433898DC4F4C5A4E5002D579B82 /* NSString+Hashing.h in Headers */,
-				A858537E94F0D8750DA4A791822A8DE1 /* PTBlockEventListener.h in Headers */,
-				D493E398905E1C36441A15173E613D7D /* PTEventListener.h in Headers */,
-				D3D2643461C742029D2045E5AE455C48 /* PTJSON.h in Headers */,
-				64CE17EFD325BEF72932AED0B099B5D8 /* PTNativePusher.h in Headers */,
-				394B0B24D6C42CB3530A9DDF5F6A47F7 /* PTPusher.h in Headers */,
-				B72E57884669F28F5A241B7DC679AE32 /* PTPusherAPI.h in Headers */,
-				037CB1FD008DC854B3DDE6296CCE5684 /* PTPusherChannel.h in Headers */,
-				0A1172DC8E6100D765734D9BFB1D2FFF /* PTPusherChannel_Private.h in Headers */,
-				2F3F729650FA09852EB43FF8E7946FBF /* PTPusherChannelAuthorizationDelegate.h in Headers */,
-				ABFB05BB62F3EAB85F9ADA7FCC02B4A6 /* PTPusherChannelServerBasedAuthorization.h in Headers */,
-				934F2CB7173DDECA58FAA31E003B48BC /* PTPusherConnection.h in Headers */,
-				9D5769D0FF0390100B51D13B1B75CF6F /* PTPusherDelegate.h in Headers */,
-				0B368DD95F6D7D1C406D114388FB9DA7 /* PTPusherErrors.h in Headers */,
-				7D72A474FCE1E4F2553D13332103CA35 /* PTPusherEvent.h in Headers */,
-				05A41DBFFF32B6F3539B39CB08CA4EA5 /* PTPusherEventDispatcher.h in Headers */,
-				EDEB5B8AD3AD0690DA0BFB1269199121 /* PTPusherEventPublisher.h in Headers */,
-				D40E678909D768CAB95AFC80399A0689 /* PTPusherMacros.h in Headers */,
-				7651B7BF1DED35FAAC632B36721CDC53 /* PTPusherMockConnection.h in Headers */,
-				988FA411D39DEE2528379B503C493AF8 /* PTPusherPresenceChannelDelegate.h in Headers */,
-				3085363BC119F63865A9C6A4DE9BB65A /* PTTargetActionEventListener.h in Headers */,
-				4AE349D22FDC8BE097A485BC55C13807 /* PTURLRequestOperation.h in Headers */,
-				5036EF81EC18CDD90BEAE8D6E64C0F0C /* Pusher.h in Headers */,
+				9D5D70E17FA312EBFF9C0002D9EA2354 /* NSDictionary+QueryString.h in Headers */,
+				A619F53478250DEE3679C7D6DF3BFB75 /* NSDictionary+StringValue.h in Headers */,
+				BBB3692D7C726644495F68F7C9835632 /* NSString+Hashing.h in Headers */,
+				DD13621C0D0BAC7B5B36D1262621BBA2 /* PTBlockEventListener.h in Headers */,
+				6E23F38026AB80A24178A5441CD43D67 /* PTEventListener.h in Headers */,
+				24AD79E99C0C500A4A07EAA97BF295F7 /* PTJSON.h in Headers */,
+				2438E36D323763C01FB7F3167B995FB8 /* PTNativePusher.h in Headers */,
+				EC0BB7DB2D3696F9CA443FEF1DBAD633 /* PTPusher.h in Headers */,
+				9365923F65ACA748DFFFD6285C90D884 /* PTPusherAPI.h in Headers */,
+				53B14761A74DB5EA41207ADD43FC16F7 /* PTPusherChannel.h in Headers */,
+				B8E82C17AF3367CDD7F20D4B97BA165D /* PTPusherChannel_Private.h in Headers */,
+				62C7BE7B231B215BCA21A59DB9923C99 /* PTPusherChannelAuthorizationDelegate.h in Headers */,
+				2BEF3DC887A54DEFCD26A14B2D942314 /* PTPusherChannelServerBasedAuthorization.h in Headers */,
+				FE7331B096E38DEC6D266CD65ADF1FC8 /* PTPusherConnection.h in Headers */,
+				CFBBE170ACE974F5C47B44F23160EB98 /* PTPusherDelegate.h in Headers */,
+				96D0FDF9C1CF9D962AAB5E6236869FF9 /* PTPusherErrors.h in Headers */,
+				DC45F853C0766FA3EA60A3F242EE1CC5 /* PTPusherEvent.h in Headers */,
+				DA220EA6C5CF07304ABEB6BD9A01BEE3 /* PTPusherEventDispatcher.h in Headers */,
+				4D78B0FB4CAAF0BE17A88F0A140A51CD /* PTPusherEventPublisher.h in Headers */,
+				B906FC88C45D001A22F19352FC0BA7E5 /* PTPusherMacros.h in Headers */,
+				A58BD2E3DBA5BBCE10741320628C82E3 /* PTPusherMockConnection.h in Headers */,
+				D93D7AF9A803D088B16FADD05A65C326 /* PTPusherPresenceChannelDelegate.h in Headers */,
+				669BC61B9CEC400DD6915A9F290D38C5 /* PTTargetActionEventListener.h in Headers */,
+				D3394102F360FB2E68CE666137873BDF /* PTURLRequestOperation.h in Headers */,
+				E34CFBF4AA6CE181866447774E43340F /* Pusher.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		76E0B4644E8DEFBE0A098E43F561F0B3 /* Headers */ = {
+		F93A8F07DA27A62CE84C6D377746AAD8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF5FBA16FBC024E8AA20FEECABF23631 /* SocketRocket.h in Headers */,
-				21DEAB911AA4CEA51CE76EAB99B52B15 /* SRWebSocket.h in Headers */,
+				3DA452544CBB1252D91E2CF50E7C1CEE /* SocketRocket.h in Headers */,
+				07CD5A9B39B3F7637D39E82222D717A7 /* SRWebSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		224AD3193E51631407EC9A6625A98275 /* Pods-ZooniverseMobile */ = {
+		0944A5B41A468FA69A502F113BAC0074 /* SocketRocket */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4E2FFA1FEF50F046771DA0990A0B57C /* Build configuration list for PBXNativeTarget "Pods-ZooniverseMobile" */;
+			buildConfigurationList = 7B7E23ED1D719C2F2C6556D09C657BE8 /* Build configuration list for PBXNativeTarget "SocketRocket" */;
 			buildPhases = (
-				182BCDF6918CE2E50EBFFF8D1FC66110 /* Sources */,
-				72076A1CAED4953848CFF922CC55053B /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				409AF3A4C1959E4C9E7872FD60628E25 /* PBXTargetDependency */,
-				AD49F9998C862022783E98EB404780AA /* PBXTargetDependency */,
-				02806FF22832CF357F25B89BCA00DE74 /* PBXTargetDependency */,
-			);
-			name = "Pods-ZooniverseMobile";
-			productName = "Pods-ZooniverseMobile";
-			productReference = 408C1EEB705775DF864BE8D58F368B12 /* libPods-ZooniverseMobile.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		3C014F737BF0E4D82F49D1E8DBB98C79 /* HockeySDK-HockeySDKResources */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C2A43A27B3D62A3BD4388B91C909AE5 /* Build configuration list for PBXNativeTarget "HockeySDK-HockeySDKResources" */;
-			buildPhases = (
-				12ED99C14D43EBE6496C8574C02B147D /* Sources */,
-				94D81D36BFD6B9DEE92D5A60AF290DB7 /* Frameworks */,
-				A510653F52BE12202CC218C408B334AE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "HockeySDK-HockeySDKResources";
-			productName = "HockeySDK-HockeySDKResources";
-			productReference = 09056A24F28BE36EE687AF5697EDFBB5 /* HockeySDKResources.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
-		D20BD31CF3635820F8DED85A75B8B1AF /* SocketRocket */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E29602007165EBBB5A1E111A1A228EA1 /* Build configuration list for PBXNativeTarget "SocketRocket" */;
-			buildPhases = (
-				684750BFBB13579560E36D98036AE9EE /* Sources */,
-				32DE38A732B7C00AFE7B3AB55DF2758F /* Frameworks */,
-				76E0B4644E8DEFBE0A098E43F561F0B3 /* Headers */,
+				6FE677D7CAFC3060BEAA45421F0EB95F /* Sources */,
+				256BC99696206018CA423BF1512BE05E /* Frameworks */,
+				F93A8F07DA27A62CE84C6D377746AAD8 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -651,18 +618,54 @@
 			productReference = 4590745687468C3AE2C69702E13D038B /* libSocketRocket.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		E3AA5A03CD6E9FCC6584EDA4F1E51751 /* libPusher */ = {
+		1664E86E1BABC6231180A5B691BA19D4 /* Pods-ZooniverseMobile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58E38699E0699658E8E987DE9104DC7E /* Build configuration list for PBXNativeTarget "libPusher" */;
+			buildConfigurationList = B7E34AE539E8E41487F67815EE9836D3 /* Build configuration list for PBXNativeTarget "Pods-ZooniverseMobile" */;
 			buildPhases = (
-				28E7218F45C2F41EFCE13B72C5F3CB24 /* Sources */,
-				1200304C992976776B2355ED6676C428 /* Frameworks */,
-				18FF8A994580A7BFD71803053E1B2E80 /* Headers */,
+				EBFB60D1FCC77CFBA070787A66855592 /* Sources */,
+				137822C875BF3BA2A11BC3C373750D32 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E91922951415DB77DF1773BB8CE20174 /* PBXTargetDependency */,
+				9B181BFA27F2780BBDFECBD69FA43836 /* PBXTargetDependency */,
+				B89737FF7AD9180FDE0B984C15F973A8 /* PBXTargetDependency */,
+				D6E48EB0CC6D32DB925C73B9E0954ADB /* PBXTargetDependency */,
+			);
+			name = "Pods-ZooniverseMobile";
+			productName = "Pods-ZooniverseMobile";
+			productReference = 408C1EEB705775DF864BE8D58F368B12 /* libPods-ZooniverseMobile.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		385C8ADB38F71BC30D6B7381629D49B1 /* HockeySDK-HockeySDKResources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6109129EC8D9ABA7699488D5DE296E8A /* Build configuration list for PBXNativeTarget "HockeySDK-HockeySDKResources" */;
+			buildPhases = (
+				B37303228F99F26916F2ECC693992874 /* Sources */,
+				8B1C289C24F4000B50AF78ADDAFF5667 /* Frameworks */,
+				8B359E783A91FA2CCC451BB850CEEAD4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HockeySDK-HockeySDKResources";
+			productName = "HockeySDK-HockeySDKResources";
+			productReference = 09056A24F28BE36EE687AF5697EDFBB5 /* HockeySDKResources.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D6B6A80C6761C611B5D466E7A4591C5F /* libPusher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67DA5900B4754EFE6CA22A7270D4B770 /* Build configuration list for PBXNativeTarget "libPusher" */;
+			buildPhases = (
+				EB10D5D14C7338C108667F7F940C63B6 /* Sources */,
+				B9BCAA3F1031613E959684782E7E5948 /* Frameworks */,
+				A6F4D679025B5094F0836DB8D794B9E0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8DF183AA52F6BE5CB98A0B24D311C5F2 /* PBXTargetDependency */,
 			);
 			name = libPusher;
 			productName = libPusher;
@@ -690,178 +693,205 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3C014F737BF0E4D82F49D1E8DBB98C79 /* HockeySDK-HockeySDKResources */,
-				E3AA5A03CD6E9FCC6584EDA4F1E51751 /* libPusher */,
-				224AD3193E51631407EC9A6625A98275 /* Pods-ZooniverseMobile */,
-				D20BD31CF3635820F8DED85A75B8B1AF /* SocketRocket */,
+				385C8ADB38F71BC30D6B7381629D49B1 /* HockeySDK-HockeySDKResources */,
+				D6B6A80C6761C611B5D466E7A4591C5F /* libPusher */,
+				1664E86E1BABC6231180A5B691BA19D4 /* Pods-ZooniverseMobile */,
+				0944A5B41A468FA69A502F113BAC0074 /* SocketRocket */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A510653F52BE12202CC218C408B334AE /* Resources */ = {
+		8B359E783A91FA2CCC451BB850CEEAD4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5760BD3BAD665071AE5A87E39C4D434F /* Arrow.png in Resources */,
-				D85D0C32D052557AAED9098655219240 /* Arrow@2x.png in Resources */,
-				A213D8D5305A63E3304935EBB5E7BC66 /* Arrow@3x.png in Resources */,
-				D150B487AF49A40B7C779C1F5110AC5C /* authorize_denied.png in Resources */,
-				26035D03DD35459CE5EC042B76947A9C /* authorize_denied@2x.png in Resources */,
-				A0242CF0FE4CBA42446ECC19419B6620 /* authorize_denied@3x.png in Resources */,
-				A82E7E95C363836A50EE842C911BCE54 /* bg.png in Resources */,
-				A4DC6A053094C4A60FCC84313A52688B /* Blur.png in Resources */,
-				85FF21BD92EEA12FABF49B5FB6166994 /* Blur@2x.png in Resources */,
-				98A0252E126739B2C842686F7F9B17F1 /* Blur@3x.png in Resources */,
-				9C35EF9D3E8D51FEF09F09AEE97B4635 /* buttonRoundedDelete.png in Resources */,
-				F640777A57A5A43F6B052F3CB2D1227F /* buttonRoundedDelete@2x.png in Resources */,
-				F72DD12B9FD770BD5C61B247C9BB35E6 /* buttonRoundedDeleteHighlighted.png in Resources */,
-				E0C0FB3FF317B9A48DD1EDC06218F9EF /* buttonRoundedDeleteHighlighted@2x.png in Resources */,
-				2DCDFB8DE25721AEF30490982AD3DD42 /* buttonRoundedRegular.png in Resources */,
-				8AE6C60F51AF9DEDFD73B95200C94D4B /* buttonRoundedRegular@2x.png in Resources */,
-				F46372D08527C9E5B2D9829144388777 /* buttonRoundedRegularHighlighted.png in Resources */,
-				63645274736672804EC7714131E97457 /* buttonRoundedRegularHighlighted@2x.png in Resources */,
-				16123269223B014A45DF85A400D846F9 /* Cancel.png in Resources */,
-				B474B49BB5CFD5E6C258B996B0FC847A /* Cancel@2x.png in Resources */,
-				AE8D66F02A3958F8E8F2C6BAD097DA41 /* Cancel@3x.png in Resources */,
-				9B45C853EE8CFFC1B24721A6D58ECAE8 /* de.lproj in Resources */,
-				4534CD22129787E011DB2FD9E8021DEC /* en.lproj in Resources */,
-				0A02F4EB0DBBC92B221459C91C2E368E /* es.lproj in Resources */,
-				1CD43A7A40813BD66639A86BC34ECBB5 /* feedbackActivity.png in Resources */,
-				BB9FF87651BAC7FDC6719EF8E7780B3C /* feedbackActivity@2x.png in Resources */,
-				DB28BBD5CFB7C1454E5D3147F5B3EFD9 /* feedbackActivity@2x~ipad.png in Resources */,
-				02E304FDF6B4E2BEE98B1CB376B1C499 /* feedbackActivity@3x.png in Resources */,
-				DCD8737D8DF3A14F3442F1C3CA835D5C /* feedbackActivity~ipad.png in Resources */,
-				8ED0654955869D7CD0501B5220685FF8 /* fr.lproj in Resources */,
-				7CFB3ADE367D2692775C304F8709CCC2 /* hr.lproj in Resources */,
-				48824B3684D2DCB8076D47C04F09D832 /* hu.lproj in Resources */,
-				C22367563F2D0F7FDD222BE38C985518 /* iconCamera.png in Resources */,
-				0BB42B52BB3CFAB9691D32A88715AF8A /* iconCamera@2x.png in Resources */,
-				99F243DB52C2CBE3BB823A1D5146B119 /* IconGradient.png in Resources */,
-				C1836B13373FEA8873C95DCA32C08D31 /* IconGradient@2x.png in Resources */,
-				FEDF6E6EDEC7D17CA8E2E5D478088D09 /* it.lproj in Resources */,
-				280DA857779FC1D5A702C2B980A8E725 /* ja.lproj in Resources */,
-				E734D38194FF7C32820D03E55C4C4FE7 /* nl.lproj in Resources */,
-				495430AB5D7B4CF306379A6CA860741D /* Ok.png in Resources */,
-				74B3B310C2671D132AF6E0A9E01BEA12 /* Ok@2x.png in Resources */,
-				98A50D63C57EF1721AB05F78E35471F3 /* Ok@3x.png in Resources */,
-				77C3E84E939AB3190902B0B7681E1004 /* pt-PT.lproj in Resources */,
-				776EACDC46D04A74BE8D52C2E82C15D5 /* pt.lproj in Resources */,
-				91B611F8E5BB709FBE11A2D05598665C /* Rectangle.png in Resources */,
-				10C02C1DF5EB1C46F47C934647FE160D /* Rectangle@2x.png in Resources */,
-				6F17E89B8BBC7D1290534E82A81E5212 /* Rectangle@3x.png in Resources */,
-				FDB3A9D29603047D2F26DA0DE5285AF1 /* ru.lproj in Resources */,
-				CE1F550301BC25B511C5D9D8C6F68D92 /* zh-Hans.lproj in Resources */,
+				96F4115E62331CFCE6081E52867DDAC0 /* Arrow.png in Resources */,
+				7B0CD6752F901105879934E8C7ED3249 /* Arrow@2x.png in Resources */,
+				5FF861C7A128C5835B8FB1B87A6C8FF6 /* Arrow@3x.png in Resources */,
+				27A9879767D17B550A0D8EF558A2D06D /* authorize_denied.png in Resources */,
+				B9D0B89ACF4797839AE5A0E76378DC4B /* authorize_denied@2x.png in Resources */,
+				F77F8C972B4A85C791CFDB7F9AAC68A4 /* authorize_denied@3x.png in Resources */,
+				C77A95B63E2296019BDEB99F96733146 /* bg.png in Resources */,
+				41E4858FBCD6FC368D88D589FBE97DE9 /* Blur.png in Resources */,
+				82834DE4C2CEB8717DC633707D50EEEA /* Blur@2x.png in Resources */,
+				33F5DA3F695D7FA88815909F6237EBB3 /* Blur@3x.png in Resources */,
+				F7E26A454ED6498BA2EB61CC68A62B51 /* buttonRoundedDelete.png in Resources */,
+				6D038269AAFEAB076FEBC9B920CF7AE9 /* buttonRoundedDelete@2x.png in Resources */,
+				2AAE0498C67C0182C41E21F77B2601CC /* buttonRoundedDeleteHighlighted.png in Resources */,
+				20AC389E786F5FBB1C42D83F84DF9EB9 /* buttonRoundedDeleteHighlighted@2x.png in Resources */,
+				E40E15D6148B1A98E1CD4000214FC407 /* buttonRoundedRegular.png in Resources */,
+				7B9B2EA147CD6217F15AD67FCE61A8BF /* buttonRoundedRegular@2x.png in Resources */,
+				39F5348B4505D7343827529CADB120DE /* buttonRoundedRegularHighlighted.png in Resources */,
+				B194A46FBC13B12994DDDDF68E70C251 /* buttonRoundedRegularHighlighted@2x.png in Resources */,
+				A39606938B4AA36DF9ECEEF7E00AD89F /* Cancel.png in Resources */,
+				4A62D006CD7AFF119192621BC07078EF /* Cancel@2x.png in Resources */,
+				4D16954E1477ABC465FAFB942ED8F713 /* Cancel@3x.png in Resources */,
+				4F7A61679C4650212FDE6B8EAF25ED6B /* de.lproj in Resources */,
+				850ED68F1779BED501E9C81D296EA8D5 /* en.lproj in Resources */,
+				83CA693CB36D470D6F9134671949BDCA /* es.lproj in Resources */,
+				4E979D110580D700C6CEEC0B6253F1E0 /* feedbackActivity.png in Resources */,
+				CD499B07E01FE9D86FD6112AD503B0FD /* feedbackActivity@2x.png in Resources */,
+				6E45E06F240BE9CDFC814E798E2C099A /* feedbackActivity@2x~ipad.png in Resources */,
+				CD22D73BD7B178C09A7DD257254BDFE1 /* feedbackActivity@3x.png in Resources */,
+				95CBBC164CD0E784D3A418425EFCAA7E /* feedbackActivity~ipad.png in Resources */,
+				07EDE1C46E14BE9DF844DDCB5F9586C8 /* fr.lproj in Resources */,
+				419EDDCC7F60D3148409D5289994EF57 /* hr.lproj in Resources */,
+				806734D8A9144D0DEF6AFFF2AB39C25F /* hu.lproj in Resources */,
+				E176755DF3A2BC6D72FE0AFE833E425B /* iconCamera.png in Resources */,
+				2CC40AB8785659F13EA64D18A635F572 /* iconCamera@2x.png in Resources */,
+				575C8043D095873AFA2EA086763C591A /* IconGradient.png in Resources */,
+				A7E86AB98B2ECDB69AF0B9B6E4FB4C1D /* IconGradient@2x.png in Resources */,
+				165C656EF00FE569AEB376C074C6E291 /* it.lproj in Resources */,
+				2A8D3A0AC1F1A1E64E957991158EB93A /* ja.lproj in Resources */,
+				91AC57CF6F1C5C3A39AD85F0D81AD6AD /* nl.lproj in Resources */,
+				E4624FED3DA5268B743FBB7CA4954F03 /* Ok.png in Resources */,
+				715A48953215EBFDA3AFD4D238ED66ED /* Ok@2x.png in Resources */,
+				5F4F704CAB369B796DAAD83DD3FB8521 /* Ok@3x.png in Resources */,
+				793A69B024BFF91850979EB6756CD791 /* pt-PT.lproj in Resources */,
+				F1D5B88E00332E9B62D7B1E544B5E46A /* pt.lproj in Resources */,
+				B9143A621D76388F87F339A1CD795BC2 /* Rectangle.png in Resources */,
+				E9258D4A3FD5C57B0330DC7D983576F6 /* Rectangle@2x.png in Resources */,
+				55FD810C7B142943EF644934C0ADA97F /* Rectangle@3x.png in Resources */,
+				3815B41D3A15AAA8937FEBD8045583E2 /* ru.lproj in Resources */,
+				A2B50F0065CD734892FA99E2926043F5 /* zh-Hans.lproj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		12ED99C14D43EBE6496C8574C02B147D /* Sources */ = {
+		6FE677D7CAFC3060BEAA45421F0EB95F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AA499A4CF79FDA71488F3E13A6E19A7 /* SocketRocket-dummy.m in Sources */,
+				1AF80644B3E769F40800F23830B56A13 /* SRWebSocket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B37303228F99F26916F2ECC693992874 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		182BCDF6918CE2E50EBFFF8D1FC66110 /* Sources */ = {
+		EB10D5D14C7338C108667F7F940C63B6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B1E22E7769562661636C4D0F841B6D2 /* Pods-ZooniverseMobile-dummy.m in Sources */,
+				992765B53E6BEFD9021FED8D70B7FB7B /* libPusher-dummy.m in Sources */,
+				1A936D6B7B8CDD61D32AD567E51BFCEA /* NSDictionary+QueryString.m in Sources */,
+				7F5BA2671957486A431368E724AA603D /* NSDictionary+StringValue.m in Sources */,
+				09BA4BE53298BBB08CE185A03BC06601 /* NSString+Hashing.m in Sources */,
+				37A853B23F6864AD68679994B441BB6F /* PTBlockEventListener.m in Sources */,
+				901E7E8DFD82F74F0BF95976A9D2ABB3 /* PTJSON.m in Sources */,
+				B5650071E67B095AD687A64C8AF08554 /* PTNativePusher.m in Sources */,
+				496D7F08C8860D58852BBBE410382E6E /* PTPusher.m in Sources */,
+				EBAEDEC8ABA52FF199D0146076939742 /* PTPusherAPI.m in Sources */,
+				21D135F4449BE2360E47108CEA881087 /* PTPusherChannel.m in Sources */,
+				8C5A900A70F74799AC59B9B9EBBDC5BE /* PTPusherChannelServerBasedAuthorization.m in Sources */,
+				93CE3E792E8C91BACAC715EABDA35CBD /* PTPusherConnection.m in Sources */,
+				0A6B220707A634D146075049245C42E1 /* PTPusherEvent.m in Sources */,
+				4751750DD321152F2B916B9237AB84D5 /* PTPusherEventDispatcher.m in Sources */,
+				C902BDB84A56AB2EF4B0D85529ABF5EE /* PTPusherMockConnection.m in Sources */,
+				7A9099806786E7EFF2B0FAB578CBF948 /* PTTargetActionEventListener.m in Sources */,
+				4C65AC64079599FD175F8A2076A4F023 /* PTURLRequestOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		28E7218F45C2F41EFCE13B72C5F3CB24 /* Sources */ = {
+		EBFB60D1FCC77CFBA070787A66855592 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4AD2499D5C860647FDD363B4ABBB806 /* libPusher-dummy.m in Sources */,
-				93FD321E0174BE62F64114F2FE696144 /* NSDictionary+QueryString.m in Sources */,
-				845B93E8A0133D894497177DFC407629 /* NSDictionary+StringValue.m in Sources */,
-				D314D03470A8897029D2E498BA67A6A0 /* NSString+Hashing.m in Sources */,
-				8DFA6DE155B6645198519ADCE672E008 /* PTBlockEventListener.m in Sources */,
-				8262B4BEFB961A070ADC61A356F436F8 /* PTJSON.m in Sources */,
-				F72530F0CF76B4DFCC4F35D5627EAC9F /* PTNativePusher.m in Sources */,
-				82A7D2710E5A2CE76FDE4B7A709C95B7 /* PTPusher.m in Sources */,
-				7CE1695800DC925157226554A2EA914F /* PTPusherAPI.m in Sources */,
-				C0EC1911C179156ECCA29E98DB1E09A7 /* PTPusherChannel.m in Sources */,
-				9B39830846DFF9B369BEB783C0203156 /* PTPusherChannelServerBasedAuthorization.m in Sources */,
-				C64997671EBF857CE2E70F433E88F53F /* PTPusherConnection.m in Sources */,
-				099A423361FF80EEC63672D9880D1351 /* PTPusherEvent.m in Sources */,
-				98B88A9428B92CA06275E6589A2E9DC7 /* PTPusherEventDispatcher.m in Sources */,
-				AACB77F4CA69250A9064D74FB96E4A8B /* PTPusherMockConnection.m in Sources */,
-				992D68F05AC21A08A7EB435858617908 /* PTTargetActionEventListener.m in Sources */,
-				74047B2CDBBB23122851379740953006 /* PTURLRequestOperation.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		684750BFBB13579560E36D98036AE9EE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				17AF31A970B40E1BB9240FF192A09FB4 /* SocketRocket-dummy.m in Sources */,
-				A6AB69100A519BE50BF1ADD0ED64FFE4 /* SRWebSocket.m in Sources */,
+				D9126ABBA66FDDDC2F4444C4C35AADC5 /* Pods-ZooniverseMobile-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		02806FF22832CF357F25B89BCA00DE74 /* PBXTargetDependency */ = {
+		8DF183AA52F6BE5CB98A0B24D311C5F2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = libPusher;
-			target = E3AA5A03CD6E9FCC6584EDA4F1E51751 /* libPusher */;
-			targetProxy = D1597491E4127C41E2FECF361479CBA5 /* PBXContainerItemProxy */;
+			name = SocketRocket;
+			target = 0944A5B41A468FA69A502F113BAC0074 /* SocketRocket */;
+			targetProxy = BD64B5693C692CF5854E7BB08A4A558E /* PBXContainerItemProxy */;
 		};
-		409AF3A4C1959E4C9E7872FD60628E25 /* PBXTargetDependency */ = {
+		9B181BFA27F2780BBDFECBD69FA43836 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "HockeySDK-HockeySDKResources";
-			target = 3C014F737BF0E4D82F49D1E8DBB98C79 /* HockeySDK-HockeySDKResources */;
-			targetProxy = 877073AFA5ADAE92E755BC99F4BC7187 /* PBXContainerItemProxy */;
+			target = 385C8ADB38F71BC30D6B7381629D49B1 /* HockeySDK-HockeySDKResources */;
+			targetProxy = 2CB2EA1AA5FCD2D20FBB13FA50FCF22F /* PBXContainerItemProxy */;
 		};
-		AD49F9998C862022783E98EB404780AA /* PBXTargetDependency */ = {
+		B89737FF7AD9180FDE0B984C15F973A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SocketRocket;
-			target = D20BD31CF3635820F8DED85A75B8B1AF /* SocketRocket */;
-			targetProxy = 2AEC0C1B330DEC0E4FD225DA570605F2 /* PBXContainerItemProxy */;
+			target = 0944A5B41A468FA69A502F113BAC0074 /* SocketRocket */;
+			targetProxy = 5EEDB7B6828A4B1933D5206143E58471 /* PBXContainerItemProxy */;
 		};
-		E91922951415DB77DF1773BB8CE20174 /* PBXTargetDependency */ = {
+		D6E48EB0CC6D32DB925C73B9E0954ADB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SocketRocket;
-			target = D20BD31CF3635820F8DED85A75B8B1AF /* SocketRocket */;
-			targetProxy = 6288F0997B3D7A87833EE9066503B582 /* PBXContainerItemProxy */;
+			name = libPusher;
+			target = D6B6A80C6761C611B5D466E7A4591C5F /* libPusher */;
+			targetProxy = CA735DFF1333F5EECA9D5C3C27F25F52 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		21EA80428D584673A69443BBCEA0D1A2 /* Release */ = {
+		11CEE1233FA6A16E556E9E3434CDEA96 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DCA7A5AD3559F5C73C4661795C577C1 /* Pods-ZooniverseMobile.release.xcconfig */;
+			baseConfigurationReference = 51E04DC962AEC078BF6028DB9068708D /* SocketRocket.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
+				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		339A6E8F0AAF651A377C1210FE72900A /* Debug */ = {
+		554172AA58A8AADE190DD442B5EA62BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 99356F414EA481EDFB36A033C552FEDF /* libPusher.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/libPusher/libPusher-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		5FDC2965E07070C2AB6F516DCC8131C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99356F414EA481EDFB36A033C552FEDF /* libPusher.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -878,7 +908,7 @@
 			};
 			name = Debug;
 		};
-		3FA2475660FFC880302AD18E29B2E5FC /* Debug */ = {
+		79B0C2E66EFA9917ED6EDDB8FC6A7684 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -896,6 +926,86 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		850D5AD0ED7CFB54BB68344E924C2669 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51E04DC962AEC078BF6028DB9068708D /* SocketRocket.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8F7C4497CC731B6B7D7482FCA29D37F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/HockeySDK";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/HockeySDK/ResourceBundle-HockeySDKResources-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = HockeySDKResources;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		CF7953F66E785E8876EB4D370D777D50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -913,32 +1023,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INSTALL_GROUP = "";
-				INSTALL_OWNER = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		57FCDC26BB19A14B883BD1DAA05727D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/HockeySDK";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/HockeySDK/ResourceBundle-HockeySDKResources-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = HockeySDKResources;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		8A23B408E91BDEE4C3BA1C6CAE10AEE0 /* Release */ = {
+		E2980CE94300E7119DD5DE5D6029E2DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/HockeySDK";
@@ -954,32 +1047,36 @@
 			};
 			name = Release;
 		};
-		B90FD3F674BB64627A52E636800811A0 /* Release */ = {
+		E75D5290681BEA47F5434076F6D744BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51E04DC962AEC078BF6028DB9068708D /* SocketRocket.xcconfig */;
+			baseConfigurationReference = 4DCA7A5AD3559F5C73C4661795C577C1 /* Pods-ZooniverseMobile.release.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		CABA3E4C8B58D029935CE7A9D1FD3CFA /* Debug */ = {
+		E7B5C55903B38FC395ACCB37ACBD5DC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1A8F2AED93E48661F0680F2809F91B80 /* Pods-ZooniverseMobile.debug.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -996,132 +1093,50 @@
 			};
 			name = Debug;
 		};
-		D2CCBD1C495412A678D633479A7E6E94 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51E04DC962AEC078BF6028DB9068708D /* SocketRocket.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		EDEC8DCA5D9910B3CAA1D1756E1D86B3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99356F414EA481EDFB36A033C552FEDF /* libPusher.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/libPusher/libPusher-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		F325026B55060D3B22BEC0BAB5FA7344 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INSTALL_GROUP = "";
-				INSTALL_OWNER = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3FA2475660FFC880302AD18E29B2E5FC /* Debug */,
-				F325026B55060D3B22BEC0BAB5FA7344 /* Release */,
+				CF7953F66E785E8876EB4D370D777D50 /* Debug */,
+				79B0C2E66EFA9917ED6EDDB8FC6A7684 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3C2A43A27B3D62A3BD4388B91C909AE5 /* Build configuration list for PBXNativeTarget "HockeySDK-HockeySDKResources" */ = {
+		6109129EC8D9ABA7699488D5DE296E8A /* Build configuration list for PBXNativeTarget "HockeySDK-HockeySDKResources" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				57FCDC26BB19A14B883BD1DAA05727D1 /* Debug */,
-				8A23B408E91BDEE4C3BA1C6CAE10AEE0 /* Release */,
+				8F7C4497CC731B6B7D7482FCA29D37F1 /* Debug */,
+				E2980CE94300E7119DD5DE5D6029E2DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58E38699E0699658E8E987DE9104DC7E /* Build configuration list for PBXNativeTarget "libPusher" */ = {
+		67DA5900B4754EFE6CA22A7270D4B770 /* Build configuration list for PBXNativeTarget "libPusher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				339A6E8F0AAF651A377C1210FE72900A /* Debug */,
-				EDEC8DCA5D9910B3CAA1D1756E1D86B3 /* Release */,
+				5FDC2965E07070C2AB6F516DCC8131C6 /* Debug */,
+				554172AA58A8AADE190DD442B5EA62BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B4E2FFA1FEF50F046771DA0990A0B57C /* Build configuration list for PBXNativeTarget "Pods-ZooniverseMobile" */ = {
+		7B7E23ED1D719C2F2C6556D09C657BE8 /* Build configuration list for PBXNativeTarget "SocketRocket" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CABA3E4C8B58D029935CE7A9D1FD3CFA /* Debug */,
-				21EA80428D584673A69443BBCEA0D1A2 /* Release */,
+				850D5AD0ED7CFB54BB68344E924C2669 /* Debug */,
+				11CEE1233FA6A16E556E9E3434CDEA96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E29602007165EBBB5A1E111A1A228EA1 /* Build configuration list for PBXNativeTarget "SocketRocket" */ = {
+		B7E34AE539E8E41487F67815EE9836D3 /* Build configuration list for PBXNativeTarget "Pods-ZooniverseMobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2CCBD1C495412A678D633479A7E6E94 /* Debug */,
-				B90FD3F674BB64627A52E636800811A0 /* Release */,
+				E7B5C55903B38FC395ACCB37ACBD5DC5 /* Debug */,
+				E75D5290681BEA47F5434076F6D744BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

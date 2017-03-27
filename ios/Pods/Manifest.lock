@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   libPusher:
-    :commit: 77d0f8a006d1fe7cb244164441739681d0804d6b
+    :commit: 46aff21de81003c00fa34155472b91d74a5c6db4
     :git: https://github.com/pusher/libPusher.git
 
 SPEC CHECKSUMS:
@@ -30,4 +30,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4075d9b04bc824026862afeac195e112cc5391f1
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0.beta.1
