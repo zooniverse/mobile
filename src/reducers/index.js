@@ -12,6 +12,7 @@ export const InitialState = {
   notificationProject: {},
   notificationPayload: {},
   notifications: { general: true },
+  session: {},
   settings: { promptForWorkflow: false },
   pushEnabled: false,
   pushPrompted: false,

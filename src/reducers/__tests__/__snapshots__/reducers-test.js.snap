@@ -16,6 +16,7 @@ Object {
     "global_email_communication": true,
   },
   "selectedDiscipline": null,
+  "session": Object {},
   "settings": Object {
     "promptForWorkflow": false,
   },
@@ -41,6 +42,7 @@ Object {
     "global_email_communication": true,
   },
   "selectedDiscipline": null,
+  "session": Object {},
   "settings": Object {
     "promptForWorkflow": false,
   },
@@ -66,6 +68,7 @@ Object {
     "global_email_communication": true,
   },
   "selectedDiscipline": null,
+  "session": Object {},
   "settings": Object {
     "promptForWorkflow": false,
   },
@@ -94,6 +97,7 @@ Object {
     "global_email_communication": true,
   },
   "selectedDiscipline": null,
+  "session": Object {},
   "settings": Object {
     "promptForWorkflow": false,
   },
