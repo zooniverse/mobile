@@ -66,8 +66,6 @@ class Project extends Component {
 
     if ((hasMixedWorkflows && this.props.promptForWorkflow)) {
       this.setState({showWorkflowPrompt: true})
-    } else if (hasSingleMobileWorkflow) {
-      //Actions.Classify({ workflowID: head(this.props.mobileWorkflows).id })
     } else if (length(this.props.mobileWorkflows) > 1) {
       this.setState({ errorPopupVisible: true })
     } else {
