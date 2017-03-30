@@ -10,6 +10,7 @@ Object {
     "general": true,
   },
   "projectList": Array [],
+  "projectWorkflows": Object {},
   "pushEnabled": false,
   "pushPrompted": false,
   "registration": Object {
@@ -36,6 +37,7 @@ Object {
     "general": true,
   },
   "projectList": Array [],
+  "projectWorkflows": Object {},
   "pushEnabled": false,
   "pushPrompted": false,
   "registration": Object {
@@ -62,6 +64,7 @@ Object {
     "general": true,
   },
   "projectList": Array [],
+  "projectWorkflows": Object {},
   "pushEnabled": false,
   "pushPrompted": false,
   "registration": Object {
@@ -91,6 +94,7 @@ Object {
     "general": true,
   },
   "projectList": Array [],
+  "projectWorkflows": Object {},
   "pushEnabled": false,
   "pushPrompted": false,
   "registration": Object {
