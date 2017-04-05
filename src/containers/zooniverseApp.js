@@ -10,8 +10,8 @@ import NotificationModal from '../components/NotificationModal'
 import LaunchScreen from '../components/Launch'
 import NavBar from '../components/NavBar'
 import { connect } from 'react-redux'
-import { setState } from '../actions/index'
-import { isEmpty } from 'ramda'
+import { setState, syncInterestSubscriptions } from '../actions/index'
+import { isEmpty, pathOr } from 'ramda'
 import FCM from 'react-native-fcm'
 
 const mapStateToProps = (state) => ({
@@ -29,6 +29,9 @@ const mapDispatchToProps = (dispatch) => ({
   setNotificationPayload(value) {
     dispatch(setState('notificationPayload', value))
   },
+  syncInterestSubscriptions() {
+    dispatch(syncInterestSubscriptions())
+  },
 })
 
 class ZooniverseApp extends Component {
@@ -39,18 +42,30 @@ class ZooniverseApp extends Component {
   componentDidMount() {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.addEventListener('notification', this.onRemoteNotification)
+      PushNotificationIOS.addEventListener('register', this.onPushRegistration)
     } else {
       FCM.on('notification', this.onRemoteNotification)
     }
   }
 
   componentWillUnmount() {
-    PushNotificationIOS.removeEventListener('notification', this.onRemoteNotificationIOS);
+    PushNotificationIOS.removeEventListener('notification', this.onRemoteNotification);
+    PushNotificationIOS.removeEventListener('register', this.onPushRegistration)
   }
 
   onRemoteNotification = (notification) => {
-    this.props.setNotificationPayload(notification)
-    this.props.setModalVisibility(true)
+    //this is called on iOS < 10 when registered, so make sure it's a valid push notification
+    var isValidIOS = Platform.OS === 'ios' && !pathOr(false, ['_data', 'pusher_token_validation'], notification)
+    var isValidAndroid = Platform.OS === 'android' && notification.title
+
+    if (isValidIOS || isValidAndroid) {
+      this.props.setNotificationPayload(notification)
+      this.props.setModalVisibility(true)
+    }
+  }
+
+  onPushRegistration = () => {
+    this.props.syncInterestSubscriptions()
   }
 
   static renderNavigationBar() {
@@ -82,6 +97,7 @@ ZooniverseApp.propTypes = {
   isModalVisible: React.PropTypes.bool,
   setModalVisibility: React.PropTypes.func,
   setNotificationPayload: React.PropTypes.func,
+  syncInterestSubscriptions: React.PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZooniverseApp)
