@@ -95,7 +95,7 @@ export function setProjectListFromStore() {
   return dispatch => {
     return new Promise ((resolve, reject) => {
       store.get('@zooniverse:projects').then(json => {
-        dispatch(setProjectList(json.projects))
+        dispatch(setProjectList(json.projectList))
         return resolve()
       }).catch(() => {
         return reject()
