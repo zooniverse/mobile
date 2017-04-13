@@ -55,8 +55,8 @@ class ZooniverseApp extends Component {
 
   onRemoteNotification = (notification) => {
     //this is called on iOS < 10 when registered, so make sure it's a valid push notification
-    var isValidIOS = Platform.OS === 'ios' && !pathOr(false, ['_data', 'pusher_token_validation'], notification)
-    var isValidAndroid = Platform.OS === 'android' && notification.title
+    let isValidIOS = Platform.OS === 'ios' && !pathOr(false, ['_data', 'pusher_token_validation'], notification)
+    let isValidAndroid = Platform.OS === 'android' && notification.title
 
     if (isValidIOS || isValidAndroid) {
       this.props.setNotificationPayload(notification)
