@@ -6,6 +6,7 @@ import { add, addIndex, filter, head, keys, map, reduce } from 'ramda'
 
 import { fetchProjectsByParms,
   loadNotificationSettings,
+  loadProjectWorkflows,
   loadSettings,
   setState } from '../actions/index'
 import { getAuthUser } from '../actions/auth'
@@ -39,6 +40,7 @@ export function loadUserData() {
         return Promise.all([
           dispatch(loadNotificationSettings()),
           dispatch(loadSettings()),
+          dispatch(loadProjectWorkflows()),
         ])
       } else {
         return Promise.all([
@@ -46,6 +48,7 @@ export function loadUserData() {
           dispatch(loadUserProjects()),
           dispatch(loadNotificationSettings()),
           dispatch(loadSettings()),
+          dispatch(loadProjectWorkflows()),
         ])
       }
     }).then(() => {

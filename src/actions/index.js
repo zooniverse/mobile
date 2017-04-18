@@ -161,11 +161,22 @@ export function fetchProjectWorkflows(project) {
         const project = head(projects)
         project.get('workflows', {page_size: 100, active: true, fields: 'display_name'}).then((workflows) => {
           dispatch(setState(`projectWorkflows.${project.id}`, workflows))
+          dispatch(syncStore('projectWorkflows'))
           return resolve()
         }).catch((error) => {
           dispatch(setError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
           return resolve()
         })
+      })
+    })
+  }
+}
+
+export function loadProjectWorkflows() {
+  return (dispatch) => {
+    return new Promise((resolve) => {
+      dispatch(setFromStore('projectWorkflows')).then(() => {
+        return resolve()
       })
     })
   }
