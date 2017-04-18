@@ -43,13 +43,18 @@ export function loadUserData() {
           dispatch(loadProjectWorkflows()),
         ])
       } else {
-        return Promise.all([
-          dispatch(loadUserAvatar()),
-          dispatch(loadUserProjects()),
-          dispatch(loadNotificationSettings()),
-          dispatch(loadSettings()),
-          dispatch(loadProjectWorkflows()),
-        ])
+        dispatch(getAuthUser()).then(() => {
+          return Promise.all([
+            dispatch(loadUserAvatar()),
+            dispatch(loadUserProjects()),
+            dispatch(loadNotificationSettings()),
+            dispatch(loadSettings()),
+            dispatch(loadProjectWorkflows()),
+          ])
+        }).catch(() => {
+          dispatch(setState('errorMessage', ''))
+          Actions.SignIn()
+        })
       }
     }).then(() => {
       dispatch(syncUserStore())
