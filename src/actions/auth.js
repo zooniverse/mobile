@@ -11,6 +11,10 @@ import {
 import { loadUserAvatar, loadUserProjects, syncUserStore } from '../actions/user'
 
 export function getAuthUser() {
+  //prevent red screen of death thrown by a console.error in javascript-client
+  /* eslint-disable no-console */
+  console.reportErrorsAsExceptions = false
+
   return () => {
     return new Promise ((resolve, reject) => {
       auth.checkCurrent().then ((user) => {
