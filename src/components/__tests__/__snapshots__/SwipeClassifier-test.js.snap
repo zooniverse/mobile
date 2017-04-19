@@ -49,6 +49,7 @@ exports[`test renders correctly 1`] = `
     </View>
     <Question
       question="What was that?"
+      taskHelp={undefined}
       workflowID="1" />
   </View>
 </View>
