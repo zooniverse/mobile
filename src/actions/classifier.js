@@ -103,9 +103,7 @@ export function setupProjectPreferences(workflowID) {
         return resolve()
       }
 
-      dispatch(getAuthUser()).then((userResource) => {
-        return userResource
-      }).then((userResource)=> {
+      dispatch(getAuthUser()).then((userResource)=> {
         userResource.get('project_preferences', {project_id: projectID}).then (([projectPreferences]) => {
           //Before being able to classify on a project, the user needs to have their preference created if it doesn't exist
           if (projectPreferences) {
