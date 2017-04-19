@@ -96,6 +96,7 @@ export function fetchProject(workflowID) {
 export function setupProjectPreferences(workflowID) {
   return (dispatch, getState) => {
     const workflow = getState().classifier.workflow[workflowID]
+    const project = getState().classifier.project[workflowID]
     const projectID = workflow.links.project
 
     return new Promise ((resolve, reject) => {
@@ -114,20 +115,17 @@ export function setupProjectPreferences(workflowID) {
             links: { project: projectID },
             preferences: {}
           }
-          apiClient.type('project_preferences').create(projectPreference).save().then((projectPreferenceResource) => {
-            return projectPreferenceResource
-          }).then((projectPreferenceResource) => {
-            projectPreferenceResource.get('project').then((project) => {
-              dispatch(setState(`user.projects.${projectID}`, {
-                  name: project.display_name,
-                  slug: project.slug,
-                  activity_count: 0,
-                  sort_order: '',
-                  tutorials_completed_at: {}
-                }
-              ))
-              return resolve()
-            })
+
+          apiClient.type('project_preferences').create(projectPreference).save().then(() => {
+            dispatch(setState(`user.projects.${projectID}`, {
+                name: project.display_name,
+                slug: project.slug,
+                activity_count: 0,
+                sort_order: '',
+                tutorials_completed_at: {}
+              }
+            ))
+            return resolve()
           }).catch(() => {
             return reject()
           })
