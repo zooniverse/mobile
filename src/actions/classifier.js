@@ -174,15 +174,8 @@ export function setTutorialCompleted() {
         if (!projectPreferences.preferences.tutorials_completed_at) {
           projectPreferences.preferences.tutorials_completed_at = {}
         }
-        const completed = {
-          [tutorialID]: now
-        }
-        projectPreferences.update({
-          preferences: {
-            tutorials_completed_at: completed
-          }
-        }).save()
-        dispatch(setState(`user.projects.${projectID}.tutorials_completed_at`, completed))
+        projectPreferences.update({[`preferences.tutorials_completed_at.${tutorialID}`]: now}).save()
+        dispatch(setState(`user.projects.${projectID}.tutorials_completed_at.${tutorialID}`, now))
       })
     })
   }
