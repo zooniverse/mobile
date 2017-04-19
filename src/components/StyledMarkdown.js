@@ -21,6 +21,27 @@ class StyledMarkdown extends React.Component {
     this.state = { height: 0 }
   }
 
+  onShouldStartLoadWithRequest = (event) => {
+    if (event.url.indexOf('http') >= 0 ) {
+      this.refs[WEBVIEW_REF].stopLoading()
+      Linking.openURL(event.url)
+      return false
+    } else {
+      return true
+    }
+  }
+
+  onNavigationStateChange = (navState) => {
+    if (Platform.OS === 'android') {
+      this.onShouldStartLoadWithRequest(navState)
+    }
+    if (Number(navState.title) > 0) {
+      const htmlHeight = Number(navState.title) //convert to number
+      this.setState({height: htmlHeight})
+      this.props.onReceivedHeight(htmlHeight)
+    }
+  }
+
   render() {
     //Markdownz uses markdown-it-imsize for image sizes, however this package
     //requires fs, which is a node core module and not available natively
@@ -55,27 +76,6 @@ class StyledMarkdown extends React.Component {
       resultHTML ? webviewComponent : null
     )
   }
-
-  onShouldStartLoadWithRequest = (event) => {
-    if (event.url.indexOf('http') >= 0 ) {
-      this.refs[WEBVIEW_REF].stopLoading()
-      Linking.openURL(event.url)
-      return false
-    } else {
-      return true
-    }
-  }
-
-  onNavigationStateChange = (navState) => {
-    if (Platform.OS === 'android') {
-      this.onShouldStartLoadWithRequest(navState)
-    }
-    if (Number(navState.title) > 0) {
-      const htmlHeight = Number(navState.title) //convert to number
-      this.setState({height: htmlHeight})
-      this.props.onResize(htmlHeight)
-    }
-  }
 }
 
 const styles = EStyleSheet.create({
@@ -86,7 +86,7 @@ const styles = EStyleSheet.create({
 
 StyledMarkdown.propTypes = {
   markdown: React.PropTypes.string,
-  onResize: React.PropTypes.func,
+  onReceivedHeight: React.PropTypes.func,
   extraCSS: React.PropTypes.string,
   width: React.PropTypes.number,
 }
@@ -94,7 +94,7 @@ StyledMarkdown.propTypes = {
 StyledMarkdown.defaultProps = {
   markdown: '',
   extraCSS: '',
-  onResize: () => {},
+  onReceivedHeight: () => {},
 }
 
 export default StyledMarkdown

@@ -31,7 +31,7 @@ export class Question extends Component {
             extraCSS={ 'p {font-size: 14px; font-weight: 500; margin: 5px 0 0;}' }
             markdown={ this.props.question }
             width={ Dimensions.get('window').width - 100 }
-            onResize={ (newHeight) => this.props.setQuestionContainerHeight(newHeight) }
+            onReceivedHeight={ (newHeight) => this.props.setQuestionContainerHeight(newHeight) }
           />
         </View>
       </View>
