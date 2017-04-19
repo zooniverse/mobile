@@ -7,7 +7,7 @@ export const InitialState = {
   errorMessage: null,
   isConnected: null,
   selectedDiscipline: null,
-  projectList: [],
+  projectList: {},
   projectWorkflows: {},
   webViewNavCounter: 0,
   notificationProject: {},
@@ -17,6 +17,12 @@ export const InitialState = {
   settings: { promptForWorkflow: false },
   pushEnabled: false,
   pushPrompted: false,
+  classifier: { //key is workflow ID for each
+    isFetching: true,
+    currentWorkflowID: 0,
+    workflow: {},
+    questionContainerHeight: {},
+  },
 }
 
 export default function(state=InitialState, action) {

@@ -16,7 +16,11 @@ export class OverlaySpinner extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Spinner visible={this.props.isFetching} textContent={this.props.loadingText} textStyle={styles.text} />
+        <Spinner
+          visible={this.props.isFetching || this.props.overrideVisibility}
+          textContent={this.props.loadingText}
+          textStyle={styles.text}
+        />
       </View>
     );
   }
@@ -37,6 +41,11 @@ const styles = EStyleSheet.create({
 OverlaySpinner.propTypes = {
   isFetching: React.PropTypes.bool,
   loadingText: React.PropTypes.string,
+  overrideVisibility: React.PropTypes.bool
+}
+
+OverlaySpinner.defaultProps = {
+  overrideVisibility: false
 }
 
 export default connect(mapStateToProps)(OverlaySpinner)

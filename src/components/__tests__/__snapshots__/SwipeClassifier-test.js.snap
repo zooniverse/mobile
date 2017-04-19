@@ -1,0 +1,16 @@
+exports[`test renders correctly 1`] = `
+<View
+  style={undefined}>
+  <View
+    style={undefined}>
+    <Question
+      question="What was that?"
+      workflowID="1" />
+  </View>
+</View>
+`;
+
+exports[`test renders spinner if fetching 1`] = `
+<OverlaySpinner
+  overrideVisibility={true} />
+`;

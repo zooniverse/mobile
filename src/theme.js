@@ -22,5 +22,5 @@ export default {
   darkTeal: 'rgba(0, 116, 130, 1)',
   lightestGrey: '#EFF3F6',
   darkGrey: '#5C5C5C',
-  disabledIconColor: '#D5DCE4',   
+  disabledIconColor: '#D5DCE4',
 }
