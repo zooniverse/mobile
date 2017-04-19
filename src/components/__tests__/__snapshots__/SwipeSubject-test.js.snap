@@ -1,0 +1,226 @@
+exports[`test renders already seen if already_seen is on subject 1`] = `
+<View
+  style={
+    Object {
+      "opacity": 0,
+      "top": 0,
+      "transform": Array [
+        Object {
+          "translateY": -10,
+        },
+        Object {
+          "scale": 0.8,
+        },
+      ],
+    }
+  }>
+  <View
+    style={
+      Array [
+        undefined,
+        Object {
+          "height": 100,
+          "width": 100,
+        },
+        Object {
+          "elevation": 1,
+        },
+      ]
+    }>
+    <Image
+      onLoadEnd={[Function]}
+      source={
+        Object {
+          "uri": "blah.jpg",
+        }
+      }
+      style={
+        Array [
+          undefined,
+          Object {
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      } />
+    <View
+      style={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+            Array [
+              undefined,
+            ],
+          ]
+        }>
+        ALREADY SEEN!
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`test renders already seen if it was seen this session 1`] = `
+<View
+  style={
+    Object {
+      "opacity": 0,
+      "top": 0,
+      "transform": Array [
+        Object {
+          "translateY": -10,
+        },
+        Object {
+          "scale": 0.8,
+        },
+      ],
+    }
+  }>
+  <View
+    style={
+      Array [
+        undefined,
+        Object {
+          "height": 100,
+          "width": 100,
+        },
+        Object {
+          "elevation": 1,
+        },
+      ]
+    }>
+    <Image
+      onLoadEnd={[Function]}
+      source={
+        Object {
+          "uri": "blah.jpg",
+        }
+      }
+      style={
+        Array [
+          undefined,
+          Object {
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      } />
+    <View
+      style={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+            Array [
+              undefined,
+            ],
+          ]
+        }>
+        ALREADY SEEN!
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`test renders back subject position correctly 1`] = `
+<View
+  style={
+    Object {
+      "opacity": 0,
+      "top": 0,
+      "transform": Array [
+        Object {
+          "translateY": -10,
+        },
+        Object {
+          "scale": 0.8,
+        },
+      ],
+    }
+  }>
+  <View
+    style={
+      Array [
+        undefined,
+        Object {
+          "height": 100,
+          "width": 100,
+        },
+        Object {
+          "elevation": 1,
+        },
+      ]
+    }>
+    <Image
+      onLoadEnd={[Function]}
+      source={
+        Object {
+          "uri": "blah.jpg",
+        }
+      }
+      style={
+        Array [
+          undefined,
+          Object {
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      } />
+  </View>
+</View>
+`;
+
+exports[`test renders front subject position correctly 1`] = `
+<View
+  style={
+    Object {
+      "opacity": 0,
+      "top": 0,
+      "transform": Array [
+        Object {
+          "scale": 0.9,
+        },
+      ],
+    }
+  }>
+  <View
+    style={
+      Array [
+        undefined,
+        Object {
+          "height": 100,
+          "width": 100,
+        },
+        Object {
+          "elevation": 3,
+        },
+      ]
+    }>
+    <Image
+      onLoadEnd={[Function]}
+      source={
+        Object {
+          "uri": "blah.jpg",
+        }
+      }
+      style={
+        Array [
+          undefined,
+          Object {
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      } />
+  </View>
+</View>
+`;

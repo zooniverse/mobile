@@ -1,8 +1,15 @@
 import React from 'react'
+import {
+  StyleSheet,
+  View
+} from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
 import ClassificationPanel from './ClassificationPanel'
 import Question from './Question'
 import Tutorial from './Tutorial'
+import Swipeable from './Swipeable'
+import SwipeSubject from './SwipeSubject'
 import OverlaySpinner from './OverlaySpinner'
 import NavBar from './NavBar'
 import { setState } from '../actions/index'
@@ -15,6 +22,10 @@ const mapStateToProps = (state, ownProps) => ({
   project: state.classifier.project[ownProps.workflowID] || {},
   tutorial: state.classifier.tutorial[ownProps.workflowID] || {},
   needsTutorial: state.classifier.needsTutorial[ownProps.workflowID] || false,
+  subject: state.classifier.subject[ownProps.workflowID] || {},
+  nextSubject: state.classifier.nextSubject[ownProps.workflowID] || {},
+  subjectSizes: state.classifier.subjectSizes[ownProps.workflowID] || {},
+  seenThisSession: state.classifier.seenThisSession[ownProps.workflowID] || [],
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -61,12 +72,32 @@ export class SwipeClassifier extends React.Component {
       const key = this.props.workflow.first_task //always just one task
       const task = this.props.workflow.tasks[key]
 
-      const classifier =
-        <Question
-          question={task.question}
-          workflowID={this.props.workflowID}
-          taskHelp={task.help}
+      const backSubject =
+        <SwipeSubject
+          inFront={false}
+          subject={this.props.nextSubject}
+          subjectSizes={this.props.subjectSizes}
+          seenThisSession={this.props.seenThisSession}
+          setImageSizes={() => {}}
         />
+
+      const classification =
+        <View>
+          <Question
+            question={task.question}
+            workflowID={this.props.workflowID}
+            taskHelp={task.help}
+          />
+          <View style={[styles.subjectContainer, { width: this.props.subjectSizes.resizedWidth, height: this.props.subjectSizes.resizedHeight }]}>
+            { isEmpty(this.props.nextSubject) ? null : backSubject }
+          </View>
+        </View>
+
+        const swipeableSubject =
+          <Swipeable
+            key={this.props.subject.id}
+            workflowID={this.props.workflowID}
+          />
 
       const tutorial =
         <Tutorial
@@ -75,17 +106,20 @@ export class SwipeClassifier extends React.Component {
           tutorial={this.props.tutorial}
           finishTutorial={() => this.finishTutorial()} />
 
-      const classifierOrTutorial = this.state.isQuestionVisible ? classifier : tutorial
-
+      //swipeable subject needs to be outside the Classification Panel because of Android
+      //the swipeable area is cut off to the panel otherwise
       const classificationPanel =
-        <ClassificationPanel
-          isFetching={ this.props.isFetching }
-          hasTutorial = { !isEmpty(this.props.tutorial) }
-          isQuestionVisible = {this.state.isQuestionVisible }
-          setQuestionVisibility = { this.setQuestionVisibility }>
-          { classifierOrTutorial }
-        </ClassificationPanel>
+        <View style={{...StyleSheet.absoluteFillObject}}>
+          <ClassificationPanel
+            hasTutorial = { !isEmpty(this.props.tutorial) }
+            isQuestionVisible = {this.state.isQuestionVisible }
+            setQuestionVisibility = { this.setQuestionVisibility }>
+            { this.state.isQuestionVisible ? classification : tutorial }
+          </ClassificationPanel>
+          { this.state.isQuestionVisible ? swipeableSubject : null }
+        </View>
 
+      //needsTutorial is for the first time a guest or user visits this project
       return (
         this.props.needsTutorial ? tutorial : classificationPanel
       )
@@ -97,6 +131,15 @@ export class SwipeClassifier extends React.Component {
   }
 }
 
+const styles = EStyleSheet.create({
+  subjectContainer: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+})
+
 SwipeClassifier.propTypes = {
   isFetching: React.PropTypes.bool,
   workflowID: React.PropTypes.string,
@@ -104,6 +147,14 @@ SwipeClassifier.propTypes = {
     first_task: React.PropTypes.string,
     tasks: React.PropTypes.object,
   }),
+  subject: React.PropTypes.shape({
+    id: React.PropTypes.string,
+  }),
+  nextSubject: React.PropTypes.shape({
+    id: React.PropTypes.string
+  }),
+  subjectSizes: React.PropTypes.object,
+  seenThisSession: React.PropTypes.array,
   startNewClassification: React.PropTypes.func,
   setIsFetching: React.PropTypes.func,
   project: React.PropTypes.shape({

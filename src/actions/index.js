@@ -1,4 +1,5 @@
 export const SET_STATE = 'SET_STATE'
+export const ADD_STATE = 'ADD_STATE'
 export const SET_USER = 'SET_USER'
 export const SET_ERROR = 'SET_ERROR'
 export const SET_IS_FETCHING = 'SET_IS_FETCHING'
@@ -19,6 +20,10 @@ import { addIndex, filter, find, forEach, head, intersection, keys, map, propEq 
 
 export function setState(stateKey, value) {
   return { type: SET_STATE, stateKey, value }
+}
+
+export function addState(stateKey, value) {
+  return { type: ADD_STATE, stateKey, value }
 }
 
 export function setUser(user) {

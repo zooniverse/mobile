@@ -2,6 +2,7 @@ import 'react-native'
 import { isValidEmail } from '../is-valid-email'
 import { isValidLogin } from '../is-valid-login'
 import { generateSessionID } from '../session'
+import getSubjectLocation from '../get-subject-location'
 
 it('passes a good email', () => {
   let email = 'me@zooniverse.org'
@@ -45,4 +46,16 @@ it('fails a bad login - contains an apostrophe', () => {
 
 it('generates a session ID of 64 chars using crypto', () => {
   expect(generateSessionID().id).toHaveLength(64)
+})
+
+it('gets a subject location ', () => {
+  let subject = {
+    locations: [ { 'image/jpeg': 'https://kitty.org/cat.jpg' }]
+  }
+  let returnSubject = {
+    type: 'image',
+    format: 'jpeg',
+    src: 'https://kitty.org/cat.jpg'
+  }
+  expect(getSubjectLocation(subject)).toEqual(returnSubject)
 })

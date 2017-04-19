@@ -1,57 +1,94 @@
 exports[`test renders correctly 1`] = `
 <View
-  style={undefined}>
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }>
   <View
     style={undefined}>
     <View
       style={undefined}>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
-          ]
-        }>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+      <View
+        style={undefined}>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
           style={
             Array [
               undefined,
             ]
           }>
-          QUESTION
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+              ]
+            }>
+            QUESTION
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
           style={
             Array [
               undefined,
+              undefined,
             ]
           }>
-          TUTORIAL
-        </Text>
-      </TouchableOpacity>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+              ]
+            }>
+            TUTORIAL
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <Question
+          question="What was that?"
+          taskHelp={undefined}
+          workflowID="1" />
+        <View
+          style={
+            Array [
+              undefined,
+              Object {
+                "height": 100,
+                "width": 100,
+              },
+            ]
+          }>
+          <SwipeSubject
+            inFront={false}
+            seenThisSession={Array []}
+            setImageSizes={[Function]}
+            subject={undefined}
+            subjectSizes={
+              Object {
+                "resizedHeight": 100,
+                "resizedWidth": 100,
+              }
+            } />
+        </View>
+      </View>
     </View>
-    <Question
-      question="What was that?"
-      taskHelp={undefined}
-      workflowID="1" />
   </View>
+  <Swipeable
+    workflowID="1" />
 </View>
 `;
 
