@@ -13,17 +13,18 @@ import { removeMDTab } from '../utils/remove-md-tab'
 const MarkdownIt = require('markdown-it'),
     md = new MarkdownIt({ linkify: true, breaks: true }).use(removeMDTab)
 
-const WEBVIEW_REF = 'WEBVIEW_REF'
-
 class StyledMarkdown extends React.Component {
+  webview = null
+
   constructor(props) {
     super(props)
     this.state = { height: 0 }
+
   }
 
   onShouldStartLoadWithRequest = (event) => {
     if (event.url.indexOf('http') >= 0 ) {
-      this.refs[WEBVIEW_REF].stopLoading()
+      this.webview.stopLoading()
       Linking.openURL(event.url)
       return false
     } else {
@@ -58,7 +59,7 @@ class StyledMarkdown extends React.Component {
 
     const webviewComponent =
       <WebView
-        ref={WEBVIEW_REF}
+        ref={webview => { this.webview = webview }}
         style={ [styles.webview, { height: this.state.height, width: displayWidth }] }
 				source={{
 					html: resultHTML,
