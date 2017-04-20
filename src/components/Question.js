@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledMarkdown from './StyledMarkdown'
+import TaskHelp from './TaskHelp'
 import { connect } from 'react-redux'
 import { setState } from '../actions/index'
 
@@ -34,6 +35,7 @@ export class Question extends Component {
             onReceivedHeight={ (newHeight) => this.props.setQuestionContainerHeight(newHeight) }
           />
         </View>
+        { this.props.taskHelp ? <TaskHelp text={this.props.taskHelp} /> : null }
       </View>
     )
   }
@@ -48,14 +50,16 @@ const styles = EStyleSheet.create({
     marginHorizontal: 20,
   },
   question: {
+    backgroundColor: 'transparent',
     flex: 1,
-    width: '100%',
+    width: '100% - 80',
   },
 })
 
 Question.propTypes = {
   question: React.PropTypes.string,
   workflowID: React.PropTypes.string,
+  taskHelp: React.PropTypes.string,
   setQuestionContainerHeight: React.PropTypes.func,
   questionContainerHeight: React.PropTypes.number,
 }

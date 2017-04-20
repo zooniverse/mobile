@@ -62,7 +62,11 @@ export class SwipeClassifier extends React.Component {
       const task = this.props.workflow.tasks[key]
 
       const classifier =
-        <Question question={task.question} workflowID={this.props.workflowID} />
+        <Question
+          question={task.question}
+          workflowID={this.props.workflowID}
+          taskHelp={task.help}
+        />
 
       const tutorial =
         <Tutorial
