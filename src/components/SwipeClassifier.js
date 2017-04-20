@@ -87,9 +87,8 @@ export class SwipeClassifier extends React.Component {
       )
     }
 
-    const renderSpinner = this.props.isFetching || this.props.workflow === undefined
     return (
-      renderSpinner ? <OverlaySpinner overrideVisibility={renderSpinner} /> : renderClassifierOrTutorial()
+      this.props.isFetching ? <OverlaySpinner overrideVisibility={this.props.isFetching} /> : renderClassifierOrTutorial()
     )
   }
 }
