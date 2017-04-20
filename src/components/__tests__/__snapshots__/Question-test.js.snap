@@ -262,7 +262,8 @@ exports[`test renders correctly with task help 1`] = `
         <View
           style={undefined}>
           <ScrollView
-            contentContainerStyle={undefined}>
+            contentContainerStyle={undefined}
+            style={undefined}>
             <View
               style={undefined}>
               <WebView

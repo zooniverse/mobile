@@ -8,7 +8,8 @@ exports[`test passes false to Modal when not visible 1`] = `
     <View
       style={undefined}>
       <ScrollView
-        contentContainerStyle={undefined}>
+        contentContainerStyle={undefined}
+        style={undefined}>
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -229,7 +230,8 @@ exports[`test renders correctly when visible 1`] = `
     <View
       style={undefined}>
       <ScrollView
-        contentContainerStyle={undefined}>
+        contentContainerStyle={undefined}
+        style={undefined}>
         <Text
           accessible={true}
           allowFontScaling={true}

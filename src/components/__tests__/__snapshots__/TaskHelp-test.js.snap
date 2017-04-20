@@ -36,7 +36,8 @@ exports[`test goes visible 1`] = `
       <View
         style={undefined}>
         <ScrollView
-          contentContainerStyle={undefined}>
+          contentContainerStyle={undefined}
+          style={undefined}>
           <View
             style={undefined}>
             <WebView
@@ -225,7 +226,8 @@ exports[`test renders 1`] = `
       <View
         style={undefined}>
         <ScrollView
-          contentContainerStyle={undefined}>
+          contentContainerStyle={undefined}
+          style={undefined}>
           <View
             style={undefined}>
             <WebView
