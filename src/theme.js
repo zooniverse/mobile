@@ -23,4 +23,5 @@ export default {
   lightestGrey: '#EFF3F6',
   darkGrey: '#5C5C5C',
   disabledIconColor: '#D5DCE4',
+  orange: '#F0B101',
 }

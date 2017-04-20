@@ -1,0 +1,17 @@
+exports[`test renders 1`] = `
+<Image
+  defaultSource={1}
+  onLoadEnd={[Function]}
+  source={
+    Object {
+      "uri": "https://placekitten.com/200/300",
+    }
+  }
+  style={
+    Object {
+      "height": 0,
+      "opacity": 0,
+      "width": 0,
+    }
+  } />
+`;

@@ -21,6 +21,9 @@ export const InitialState = {
     isFetching: true,
     currentWorkflowID: 0,
     workflow: {},
+    project: {},
+    tutorial: {},
+    needsTutorial: {},
     questionContainerHeight: {},
   },
 }

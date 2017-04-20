@@ -2,7 +2,7 @@
 import apiClient from 'panoptes-client/lib/api-client'
 import store from 'react-native-simple-store'
 import { Actions } from 'react-native-router-flux'
-import { add, addIndex, filter, head, keys, map, reduce } from 'ramda'
+import { add, addIndex, filter, fromPairs, head, isNil, keys, map, reduce } from 'ramda'
 
 import { fetchProjectsByParms,
   loadNotificationSettings,
@@ -90,12 +90,13 @@ export function loadUserProjects() {
         }).then((preferenceCount) => {
           return userResourse.get('project_preferences', {page_size: preferenceCount, sort: '-updated_at'})
         }).then((projectPreferences) => {
-          const activePreferences = filterActivePreferences(projectPreferences)
-          const projectIDs = map((pref) => { return pref.links.project }, activePreferences)
-          const classifications = classificationCounts(activePreferences)
-          const sortOrders = orderProjects(activePreferences)
+          const sortedPreferences = sortPreferences(projectPreferences)
+          const projectIDs = map((pref) => { return pref.links.project }, sortedPreferences)
+          const classifications = classificationCounts(sortedPreferences)
+          const sortOrders = orderProjects(sortedPreferences)
+          const completedTutorials = getCompletedTutorials(sortedPreferences)
 
-          return apiClient.type('projects').get({ id: projectIDs, page_size: activePreferences.length }).catch(() => {
+          return apiClient.type('projects').get({ id: projectIDs, page_size: sortedPreferences.length }).catch(() => {
             return null
           }).then((projects) => {
             map((project) => {
@@ -103,7 +104,8 @@ export function loadUserProjects() {
                   name: project.display_name,
                   slug: project.slug,
                   activity_count: classifications[project.id],
-                  sort_order: sortOrders[project.id]
+                  sort_order: sortOrders[project.id],
+                  tutorials_completed_at: completedTutorials[project.id] || {}
                 }
               ))
             }, projects)
@@ -130,13 +132,17 @@ export function calculateTotalClassifications() {
   }
 }
 
-function filterActivePreferences(projectPreferences){
-    let activePreferences = filter((pref) => { return pref.activity_count > 0 }, projectPreferences)
-    activePreferences = addIndex(map)((preference, i) => {
+function sortPreferences(projectPreferences){
+    return addIndex(map)((preference, i) => {
       preference.sort_order = i
       return preference
-    }, activePreferences)
-    return activePreferences
+    }, projectPreferences)
+}
+
+function getCompletedTutorials(projectPreferences){
+  const preferencesWithTutorials = filter((pref) => { return !isNil(pref.preferences.tutorials_completed_at) }, projectPreferences)
+  const extractPreference = (pref) => { return [ pref.links.project, pref.preferences.tutorials_completed_at ] }
+  return fromPairs(map(extractPreference, preferencesWithTutorials))
 }
 
 function classificationCounts(projectPreferences) {

@@ -14,11 +14,13 @@ class ClassificationPanel extends Component {
     const tabs =
       <View style={styles.tabContainer}>
         <TouchableOpacity
-          style={[styles.tab]}>
+          onPress={ () => { this.props.setQuestionVisibility(true) } }
+          style={ this.props.isQuestionVisible ? [styles.tab] : [styles.tab, styles.deselectedTab] }>
           <StyledText text={ 'QUESTION' } />
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.tab, styles.deselectedTab]}>
+          onPress={ () => { this.props.setQuestionVisibility(false) } }
+          style={ this.props.isQuestionVisible ? [styles.tab, styles.deselectedTab] : [styles.tab] }>
           <StyledText text={ 'TUTORIAL' } />
         </TouchableOpacity>
       </View>
@@ -71,6 +73,8 @@ const styles = EStyleSheet.create({
 ClassificationPanel.propTypes = {
   isFetching: React.PropTypes.bool,
   hasTutorial: React.PropTypes.bool,
-  children: React.PropTypes.node
+  children: React.PropTypes.node,
+  isQuestionVisible: React.PropTypes.bool,
+  setQuestionVisibility: React.PropTypes.func,
 }
 export default ClassificationPanel
