@@ -1,0 +1,140 @@
+exports[`test renders correctly 1`] = `
+<View
+  style={undefined}>
+  <View
+    style={
+      Object {
+        "height": 0,
+      }
+    }>
+    <ScrollView>
+      <View
+        onLayout={[Function]}>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={undefined}>
+          <Image
+            source={
+              Object {
+                "uri": "fake_icon.jpg",
+              }
+            }
+            style={undefined} />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            numberOfLines={1}
+            style={
+              Array [
+                undefined,
+                Array [
+                  undefined,
+                ],
+              ]
+            }>
+            fake_avatar
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={undefined}>
+          <Image
+            source={
+              Object {
+                "uri": "fake_icon.jpg",
+              }
+            }
+            style={undefined} />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            numberOfLines={1}
+            style={
+              Array [
+                undefined,
+                Array [
+                  undefined,
+                ],
+              ]
+            }>
+            fake_avatar2
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+    <View
+      style={
+        Object {
+          "paddingBottom": 0,
+        }
+      }>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={[Function]}
+        style={undefined}>
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontFamily": "FontAwesome",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              undefined,
+            ]
+          }>
+          
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+  <View
+    hitSlop={
+      Object {
+        "bottom": 10,
+        "left": 0,
+        "right": 0,
+        "top": 10,
+      }
+    }
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      Object {
+        "bottom": 0,
+      }
+    }>
+    <View
+      style={undefined} />
+    <View
+      style={undefined}>
+      <View
+        style={undefined}>
+        <View
+          style={undefined} />
+        <View
+          style={undefined} />
+      </View>
+    </View>
+  </View>
+</View>
+`;

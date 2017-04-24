@@ -1,0 +1,29 @@
+exports[`test renders correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={undefined}
+  style={undefined}>
+  <Image
+    source={
+      Object {
+        "uri": "fake_icon.jpg",
+      }
+    }
+    style={undefined} />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      Array [
+        undefined,
+        Array [
+          undefined,
+        ],
+      ]
+    }>
+    fake_avatar
+  </Text>
+</TouchableOpacity>
+`;

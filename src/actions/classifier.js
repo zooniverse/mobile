@@ -25,6 +25,11 @@ export function startNewClassification(workflowID) {
     }).then(() => {
       return dispatch(setNeedsTutorial())
     }).then(() => {
+      if (getState().classifier.guide[workflowID] !== undefined) {
+        return
+      }
+      return dispatch(fetchFieldGuide(workflowID))
+    }).then(() => {
       dispatch(setState('loadingText', 'Loading Subjects...'))
       return dispatch(loadSubjects())
     }).then(() => {
@@ -125,6 +130,29 @@ export function fetchWorkflow(workflowID) {
         return reject(e)
       })
    })
+  }
+}
+
+export function fetchFieldGuide(workflowID) {
+  return (dispatch, getState) => {
+    const projectID = getState().classifier.workflow[workflowID].links.project
+    return new Promise ((resolve) => {
+      apiClient.type('field_guides').get({project_id: projectID}).then(([guide]) => {
+        if (isEmpty(guide.items)) { //no items (clicked add but didn't add anything)
+          return resolve()
+        } else {
+          dispatch(setState(`classifier.guide.${workflowID}`, guide))
+          let icons = {}
+          guide.get('attached_images').then((images) => {
+            forEach((image) => icons[image.id] = image, images)
+            dispatch(setState(`classifier.guide.${workflowID}.icons`, icons))
+            return resolve()
+          })
+        }
+      }).catch(() => { //does not exist for this project
+        return resolve()
+      })
+    })
   }
 }
 

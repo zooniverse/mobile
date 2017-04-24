@@ -27,4 +27,5 @@ export default {
   darkOrange: '#ff4500',
   swipeLeft: '#E45950',
   swipeRight: '#00979D',
+  dragBarColor: '#B3B1B3',
 }
