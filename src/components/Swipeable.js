@@ -98,7 +98,7 @@ export class Swipeable extends Component {
     })
   }
 
-  onAnswered = (answer) => {
+  onAnswered(answer){
     this.props.saveAnnotation(this.props.workflow.first_task, answer)
     this.props.saveThenStartNewClassification()
   }
@@ -206,7 +206,7 @@ Swipeable.propTypes = {
     id: React.PropTypes.string
   }),
   subjectSizes: React.PropTypes.object,
-  seenThisSession: React.PropTypes.array,
+  seenThisSession: React.PropTypes.arrayOf(React.PropTypes.string),
   workflow: React.PropTypes.shape({
     first_task: React.PropTypes.string,
     tasks: React.PropTypes.object,

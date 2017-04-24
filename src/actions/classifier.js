@@ -31,8 +31,8 @@ export function startNewClassification(workflowID) {
       return dispatch(setSubjectsToDisplay())
     }).then(() => {
       //now we can create the first classification!!
-      let subject = getState().classifier.subject[workflowID]
-      let workflow = getState().classifier.workflow[workflowID]
+      const subject = getState().classifier.subject[workflowID]
+      const workflow = getState().classifier.workflow[workflowID]
       return apiClient.type('classifications').create({
         annotations: [],
         metadata: {
@@ -52,8 +52,7 @@ export function startNewClassification(workflowID) {
     }).then((classification) => {
       dispatch(setState(`classifier.classification.${workflowID}`, classification))
       dispatch(setState('classifier.isFetching', false))
-    }).catch((e) => {
-      console.log('Error in catch! ', e)
+    }).catch(() => {
       Alert.alert('Error', 'Sorry, but there was an error loading this workflow.  Please try again later.',
         [{text: 'Go Back', onPress: () => { Actions.pop()}}]
       )
