@@ -36,7 +36,7 @@ export class SwipeTabs extends Component {
       />
 
     return (
-      <View style={{...StyleSheet.absoluteFillObject}}>
+      <View>
         <View style={styles.container}>
           { length(this.props.guide.items) > 0 ? fieldGuideButton : null }
         </View>

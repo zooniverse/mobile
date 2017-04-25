@@ -275,7 +275,14 @@ const styles = EStyleSheet.create({
 })
 
 FieldGuide.propTypes = {
-  guide: React.PropTypes.object,
+  guide: React.PropTypes.shape({
+    items: React.PropTypes.arrayOf(React.PropTypes.shape({
+      title: React.PropTypes.string,
+      content: React.PropTypes.string,
+      icon: React.PropTypes.string,
+    })),
+    icons: React.PropTypes.object,
+  }),
   isVisible: React.PropTypes.bool,
   onClose: React.PropTypes.func,
 }
