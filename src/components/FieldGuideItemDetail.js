@@ -9,7 +9,7 @@ import StyledText from './StyledText'
 import SizedImage from './SizedImage'
 import Button from './Button'
 
-const ITEM_ICON_HEIGHT = 100
+const ITEM_ICON_RADIUS = 50
 
 const FieldGuideItemDetail = (props) => {
   return (
@@ -18,7 +18,7 @@ const FieldGuideItemDetail = (props) => {
         { props.icons[props.item.icon].src
           ? <SizedImage
               source={{ uri: props.icons[props.item.icon].src }}
-              maxHeight={ ITEM_ICON_HEIGHT }
+              maxHeight={ ITEM_ICON_RADIUS * 2 }
               additionalStyles = {[styles.itemDetailIcon]}
             />
           : null
@@ -44,9 +44,9 @@ const styles = EStyleSheet.create({
   },
   itemDetailIcon: {
     alignSelf: 'center',
-    maxWidth: ITEM_ICON_HEIGHT,
-    maxHeight: ITEM_ICON_HEIGHT,
-    borderRadius: ITEM_ICON_HEIGHT * .5
+    maxWidth: ITEM_ICON_RADIUS * 2,
+    maxHeight: ITEM_ICON_RADIUS * 2,
+    borderRadius: ITEM_ICON_RADIUS
   },
   itemDetailTitle: {
     marginTop: 5,
