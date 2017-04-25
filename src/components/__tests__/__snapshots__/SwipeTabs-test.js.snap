@@ -1,14 +1,5 @@
 exports[`test renders a button if there is a field guide 1`] = `
-<View
-  style={
-    Object {
-      "bottom": 0,
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
-  }>
+<View>
   <View
     style={undefined}>
     <TouchableOpacity
@@ -53,16 +44,7 @@ exports[`test renders a button if there is a field guide 1`] = `
 `;
 
 exports[`test renders no button if no field guide 1`] = `
-<View
-  style={
-    Object {
-      "bottom": 0,
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
-  }>
+<View>
   <View
     style={undefined} />
 </View>
