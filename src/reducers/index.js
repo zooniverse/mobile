@@ -1,4 +1,4 @@
-import { merge, lensPath, set } from 'ramda'
+import { append, merge, lensPath, set, view } from 'ramda'
 
 export const InitialState = {
   user: {},
@@ -25,6 +25,13 @@ export const InitialState = {
     tutorial: {},
     needsTutorial: {},
     questionContainerHeight: {},
+    classification: {},
+    subject: {},
+    nextSubject: {},
+    subjectSizes: {},
+    annotations: [],
+    upcomingSubjects: {},
+    seenThisSession: {},
   },
 }
 
@@ -32,6 +39,12 @@ export default function(state=InitialState, action) {
   switch (action.type) {
     case 'SET_STATE':
       return set(lensPath(action.stateKey.split('.')), action.value, state)
+    case 'ADD_STATE':
+      return set(lensPath(action.stateKey.split('.')),
+        append(
+          action.value, view(lensPath(action.stateKey.split('.')),
+          state)
+        ), state)
     case 'SET_USER':
       return merge(state, {
         user: action.user

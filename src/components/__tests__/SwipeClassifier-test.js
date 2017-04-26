@@ -6,6 +6,8 @@ jest.mock('WebView', () => 'WebView')
 jest.mock('../OverlaySpinner', () => 'OverlaySpinner')
 jest.mock('../Question', () => 'Question')
 jest.mock('../Tutorial', () => 'Tutorial')
+jest.mock('../Swipeable', () => 'Swipeable')
+jest.mock('../SwipeSubject', () => 'SwipeSubject')
 
 import { SwipeClassifier } from '../SwipeClassifier'
 
@@ -22,6 +24,10 @@ const project = {
   display_name: 'Awesome project'
 }
 
+const subjectSizes={resizedWidth: 100, resizedHeight: 100}
+
+const seenThisSession=[]
+
 it('renders correctly', () => {
   const tree = renderer.create(
     <SwipeClassifier
@@ -30,7 +36,10 @@ it('renders correctly', () => {
       startNewClassification={jest.fn}
       project={project}
       workflow={workflow}
-      workflowID={'1'} />
+      workflowID={'1'}
+      subject={{id: '23432432'}}
+      subjectSizes={subjectSizes}
+      seenThisSession={seenThisSession} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -43,7 +52,10 @@ it('renders spinner if fetching', () => {
       startNewClassification={jest.fn}
       project={project}
       workflow={workflow}
-      workflowID={'1'} />
+      workflowID={'1'}
+      subject={{id: '23432432'}}
+      subjectSizes={subjectSizes}
+      seenThisSession={seenThisSession} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -57,7 +69,10 @@ it('renders tutorial if needed', () => {
       needsTutorial={true}
       project={project}
       workflow={workflow}
-      workflowID={'1'} />
+      workflowID={'1'}
+      subject={{id: '23432432'}}
+      subjectSizes={subjectSizes}
+      seenThisSession={seenThisSession} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

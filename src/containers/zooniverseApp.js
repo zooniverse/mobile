@@ -11,6 +11,7 @@ import LaunchScreen from '../components/Launch'
 import NavBar from '../components/NavBar'
 import { connect } from 'react-redux'
 import { setState, syncInterestSubscriptions } from '../actions/index'
+import { setDimensions } from '../actions/device'
 import { isEmpty, pathOr } from 'ramda'
 import FCM from 'react-native-fcm'
 
@@ -32,6 +33,9 @@ const mapDispatchToProps = (dispatch) => ({
   syncInterestSubscriptions() {
     dispatch(syncInterestSubscriptions())
   },
+  setDimensions() {
+    dispatch(setDimensions())
+  },
 })
 
 class ZooniverseApp extends Component {
@@ -40,6 +44,8 @@ class ZooniverseApp extends Component {
   }
 
   componentDidMount() {
+    this.props.setDimensions()
+
     if (Platform.OS === 'ios') {
       PushNotificationIOS.addEventListener('notification', this.onRemoteNotification)
       PushNotificationIOS.addEventListener('register', this.onPushRegistration)
@@ -98,6 +104,7 @@ ZooniverseApp.propTypes = {
   setModalVisibility: React.PropTypes.func,
   setNotificationPayload: React.PropTypes.func,
   syncInterestSubscriptions: React.PropTypes.func,
+  setDimensions: React.PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZooniverseApp)

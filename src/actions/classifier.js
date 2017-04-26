@@ -1,13 +1,13 @@
 import apiClient from 'panoptes-client/lib/api-client'
-import { forEach, isEmpty, isNil } from 'ramda'
-import { setState } from '../actions/index'
-import { getAuthUser } from '../actions/auth'
+import { forEach, isEmpty, isNil, map, remove, toPairs } from 'ramda'
+import { addState, setState } from '../actions/index'
 import { Actions } from 'react-native-router-flux'
-import { Alert } from 'react-native'
+import { Alert, Platform } from 'react-native'
+import { getAuthUser } from '../actions/auth'
+import { loadSubjects, setSubjectsToDisplay } from '../actions/subject'
 
 export function startNewClassification(workflowID) {
   return (dispatch, getState) => {
-    dispatch(setState('classifier.isFetching', true))
     dispatch(setState('loadingText', 'Loading Workflow...'))
     dispatch(setState('classifier.currentWorkflowID', workflowID))
     dispatch(fetchWorkflow(workflowID)).then(() => {
@@ -25,6 +25,32 @@ export function startNewClassification(workflowID) {
     }).then(() => {
       return dispatch(setNeedsTutorial())
     }).then(() => {
+      dispatch(setState('loadingText', 'Loading Subjects...'))
+      return dispatch(loadSubjects())
+    }).then(() => {
+      return dispatch(setSubjectsToDisplay())
+    }).then(() => {
+      //now we can create the first classification!!
+      const subject = getState().classifier.subject[workflowID]
+      const workflow = getState().classifier.workflow[workflowID]
+      return apiClient.type('classifications').create({
+        annotations: [],
+        metadata: {
+          workflow_version: workflow.version,
+          started_at: (new Date).toISOString(),
+          user_agent: `${Platform.OS} Mobile App`,
+          user_language: 'en', //TODO: Will be fixed subsequent PR
+          utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
+          subject_dimensions: []
+        },
+        links: {
+          project: workflow.links.project,
+          workflow: workflow.id,
+          subjects: [subject.id]
+        }
+      })
+    }).then((classification) => {
+      dispatch(setState(`classifier.classification.${workflowID}`, classification))
       dispatch(setState('classifier.isFetching', false))
     }).catch(() => {
       Alert.alert('Error', 'Sorry, but there was an error loading this workflow.  Please try again later.',
@@ -34,20 +60,70 @@ export function startNewClassification(workflowID) {
   }
 }
 
+export function saveAnnotation(task, value) {
+  return (dispatch, getState) => {
+    const workflowID = getState().classifier.currentWorkflowID
+    dispatch(setState(`classifier.annotations.${workflowID}.${task}`, value))
+  }
+}
+
+export function saveThenStartNewClassification() {
+  return (dispatch, getState) => {
+    const classifier = getState().classifier
+    const workflowID = classifier.currentWorkflowID
+    const classification = classifier.classification[workflowID]
+    const subject = classifier.subject[workflowID]
+    const subjectSizes = classifier.subjectSizes[workflowID]
+
+    const structureAnnotation = (a) => { return { task: a[0], value: a[1] } }
+    const annotations = map(structureAnnotation, toPairs(classifier.annotations[workflowID]))
+
+    const subjectDimensions = {
+      naturalWidth: subjectSizes.actualWidth,
+      naturalHeight: subjectSizes.actualHeight,
+      clientWidth: subjectSizes.resizedWidth,
+      clientHeight: subjectSizes.resizedHeight
+    }
+    const updates = {
+      annotations: annotations,
+      completed: true,
+      'metadata.session': getState().session.id,
+      'metadata.finished_at': (new Date).toISOString(),
+      'metadata.viewport': { width: getState().device.width, height: getState().device.height},
+      'metadata.subject_dimensions.0': subjectDimensions
+    }
+
+    classification.update(updates)
+
+    classification.save().then(() => {
+      //Remove this subject just saved from upcoming subjects
+      const workflowID = getState().classifier.currentWorkflowID
+      const oldSubjectList = getState().classifier.upcomingSubjects[workflowID]
+      const newSubjectList = remove(0, 1, oldSubjectList)
+      dispatch(setState(`classifier.upcomingSubjects.${workflowID}`, newSubjectList))
+      //Mark this subject as seen
+      dispatch(addState(`classifier.seenThisSession.${workflowID}`, subject.id))
+      dispatch(startNewClassification(workflowID))
+
+      dispatch(setState(`classifier.annotations.${workflowID}`, {}))
+    })
+  }
+}
+
 export function fetchWorkflow(workflowID) {
   return (dispatch, getState) => {
     return new Promise ((resolve, reject) => {
-      if (isNil(getState().classifier.workflow[workflowID])) {
-        return apiClient.type('workflows').get({id: workflowID}).then(([workflow]) => {
-          dispatch(setState(`classifier.workflow.${workflowID}`, workflow))
-          dispatch(setState(`classifier.tasks.${workflowID}`, workflow.tasks))
-          return resolve()
-        }).catch((e) => {
-          return reject(e)
-        })
-      } else {
+      if (!isNil(getState().classifier.workflow[workflowID])) {
         return resolve()
       }
+
+      return apiClient.type('workflows').get({id: workflowID}).then(([workflow]) => {
+        dispatch(setState(`classifier.workflow.${workflowID}`, workflow))
+        dispatch(setState(`classifier.tasks.${workflowID}`, workflow.tasks))
+        return resolve()
+      }).catch((e) => {
+        return reject(e)
+      })
    })
   }
 }
