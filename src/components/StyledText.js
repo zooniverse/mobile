@@ -9,8 +9,11 @@ const StyledText = (props) => {
   let textStyle = ( props.textStyle ? [styles.defaultText, styles[props.textStyle]] : [styles.defaultText] )
   textStyle = (props.additionalStyles ? append(props.additionalStyles, textStyle) : textStyle)
 
+  const { numberOfLines, ellipsizeMode } = props
+  const ellipsisProps = (props.numberOfLines > 0 ? {numberOfLines, ellipsizeMode} : null)
+
   return (
-    <Text style={textStyle}>
+    <Text style={textStyle} {...ellipsisProps}>
       {props.text}
     </Text>
   )
@@ -72,6 +75,8 @@ StyledText.propTypes = {
   text: React.PropTypes.string,
   textStyle: React.PropTypes.string,
   additionalStyles: React.PropTypes.array,
+  numberOfLines: React.PropTypes.number,
+  ellipsizeMode: React.PropTypes.string,
 }
 
 export default StyledText

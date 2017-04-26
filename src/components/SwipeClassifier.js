@@ -10,6 +10,7 @@ import Question from './Question'
 import Tutorial from './Tutorial'
 import Swipeable from './Swipeable'
 import SwipeSubject from './SwipeSubject'
+import SwipeTabs from './SwipeTabs'
 import OverlaySpinner from './OverlaySpinner'
 import NavBar from './NavBar'
 import { setState } from '../actions/index'
@@ -20,6 +21,7 @@ const mapStateToProps = (state, ownProps) => ({
   isFetching: state.classifier.isFetching,
   workflow: state.classifier.workflow[ownProps.workflowID] || {},
   project: state.classifier.project[ownProps.workflowID] || {},
+  guide: state.classifier.guide[ownProps.workflowID] || {},
   tutorial: state.classifier.tutorial[ownProps.workflowID] || {},
   needsTutorial: state.classifier.needsTutorial[ownProps.workflowID] || false,
   subject: state.classifier.subject[ownProps.workflowID] || {},
@@ -93,30 +95,33 @@ export class SwipeClassifier extends React.Component {
           </View>
         </View>
 
-        const swipeableSubject =
-          <Swipeable
-            key={this.props.subject.id}
-            workflowID={this.props.workflowID}
-          />
+      const swipeableSubject =
+        <Swipeable
+          key={this.props.subject.id}
+          workflowID={this.props.workflowID}
+        />
 
       const tutorial =
         <Tutorial
           projectName={this.props.project.display_name}
           isInitialTutorial={this.props.needsTutorial}
           tutorial={this.props.tutorial}
-          finishTutorial={() => this.finishTutorial()} />
+          finishTutorial={() => this.finishTutorial()}
+        />
 
       //swipeable subject needs to be outside the Classification Panel because of Android
       //the swipeable area is cut off to the panel otherwise
       const classificationPanel =
         <View style={{...StyleSheet.absoluteFillObject}}>
           <ClassificationPanel
+            isFetching={ this.props.isFetching }
             hasTutorial = { !isEmpty(this.props.tutorial) }
             isQuestionVisible = {this.state.isQuestionVisible }
             setQuestionVisibility = { this.setQuestionVisibility }>
             { this.state.isQuestionVisible ? classification : tutorial }
           </ClassificationPanel>
           { this.state.isQuestionVisible ? swipeableSubject : null }
+          { this.state.isQuestionVisible ? <SwipeTabs guide={this.props.guide} /> : null }
         </View>
 
       //needsTutorial is for the first time a guest or user visits this project
@@ -162,6 +167,7 @@ SwipeClassifier.propTypes = {
   }),
   tutorial: React.PropTypes.object,
   needsTutorial: React.PropTypes.bool,
+  guide: React.PropTypes.object,
   setTutorialCompleted: React.PropTypes.func,
 }
 

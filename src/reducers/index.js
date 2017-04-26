@@ -23,6 +23,7 @@ export const InitialState = {
     workflow: {},
     project: {},
     tutorial: {},
+    guide: {},
     needsTutorial: {},
     questionContainerHeight: {},
     classification: {},
