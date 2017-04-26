@@ -40,7 +40,9 @@ exports[`test renders correctly 1`] = `
           "width": 100,
         }
       }>
-      <View
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={undefined}
         style={
           Object {
             "height": 110,
@@ -126,7 +128,7 @@ exports[`test renders correctly 1`] = `
             Yes
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   </View>
 </View>

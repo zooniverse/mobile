@@ -18,6 +18,16 @@ const workflow = {
     T0: {
       question: 'What was that?'
     }
+  },
+  configuration: {
+    pan_and_zoom: true
+  }
+}
+
+const subject = {
+  id: '23432432',
+  display: {
+    src: 'blah.jpg'
   }
 }
 
@@ -38,7 +48,7 @@ it('renders correctly', () => {
       project={project}
       workflow={workflow}
       workflowID={'1'}
-      subject={{id: '23432432'}}
+      subject={subject}
       subjectSizes={subjectSizes}
       seenThisSession={seenThisSession} />
   ).toJSON()
@@ -54,7 +64,7 @@ it('renders spinner if fetching', () => {
       project={project}
       workflow={workflow}
       workflowID={'1'}
-      subject={{id: '23432432'}}
+      subject={subject}
       subjectSizes={subjectSizes}
       seenThisSession={seenThisSession} />
   ).toJSON()
@@ -71,7 +81,7 @@ it('renders tutorial if needed', () => {
       project={project}
       workflow={workflow}
       workflowID={'1'}
-      subject={{id: '23432432'}}
+      subject={subject}
       subjectSizes={subjectSizes}
       seenThisSession={seenThisSession} />
   ).toJSON()

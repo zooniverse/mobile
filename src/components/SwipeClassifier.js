@@ -13,6 +13,7 @@ import SwipeSubject from './SwipeSubject'
 import SwipeTabs from './SwipeTabs'
 import OverlaySpinner from './OverlaySpinner'
 import NavBar from './NavBar'
+import FullScreenImage from './FullScreenImage'
 import { setState } from '../actions/index'
 import { startNewClassification, setTutorialCompleted } from '../actions/classifier'
 import { isEmpty } from 'ramda'
@@ -48,6 +49,7 @@ export class SwipeClassifier extends React.Component {
     this.setQuestionVisibility = this.setQuestionVisibility.bind(this)
     this.state = {
       isQuestionVisible: true,
+      showFullSize: false,
     }
     this.props.setIsFetching(true)
     this.props.startNewClassification(this.props.workflowID)
@@ -73,6 +75,7 @@ export class SwipeClassifier extends React.Component {
     const renderClassifierOrTutorial = () => {
       const key = this.props.workflow.first_task //always just one task
       const task = this.props.workflow.tasks[key]
+      const allowPanAndZoom = this.props.workflow.configuration.pan_and_zoom
 
       const backSubject =
         <SwipeSubject
@@ -95,11 +98,12 @@ export class SwipeClassifier extends React.Component {
           </View>
         </View>
 
-      const swipeableSubject =
-        <Swipeable
-          key={this.props.subject.id}
-          workflowID={this.props.workflowID}
-        />
+        const swipeableSubject =
+          <Swipeable
+            key={this.props.subject.id}
+            workflowID={this.props.workflowID}
+            showFullSize={() => this.setState({showFullSize: true})}
+          />
 
       const tutorial =
         <Tutorial
@@ -122,6 +126,11 @@ export class SwipeClassifier extends React.Component {
           </ClassificationPanel>
           { this.state.isQuestionVisible ? swipeableSubject : null }
           { this.state.isQuestionVisible ? <SwipeTabs guide={this.props.guide} /> : null }
+          <FullScreenImage
+            source={{uri: this.props.subject.display.src}}
+            isVisible={this.state.showFullSize}
+            allowPanAndZoom={allowPanAndZoom}
+            handlePress={() => this.setState({ showFullSize: false })} />
         </View>
 
       //needsTutorial is for the first time a guest or user visits this project
@@ -151,9 +160,13 @@ SwipeClassifier.propTypes = {
   workflow: React.PropTypes.shape({
     first_task: React.PropTypes.string,
     tasks: React.PropTypes.object,
+    configuration: React.PropTypes.object,
   }),
   subject: React.PropTypes.shape({
     id: React.PropTypes.string,
+    display: React.PropTypes.shape({
+      src: React.PropTypes.string
+    })
   }),
   nextSubject: React.PropTypes.shape({
     id: React.PropTypes.string

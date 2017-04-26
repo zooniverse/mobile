@@ -3,6 +3,7 @@ import {
   Animated,
   PanResponder,
   Platform,
+  TouchableOpacity,
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -132,7 +133,10 @@ export class Swipeable extends Component {
             style={[styles.imageContainer, animatedCardStyles, swipeableSize]}
             {...this._panResponder.panHandlers}>
 
-            <View style={swipeableSize}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={swipeableSize}
+              onPress={this.props.showFullSize}>
               <SwipeSubject
                 inFront={true}
                 subject={this.props.subject}
@@ -149,7 +153,7 @@ export class Swipeable extends Component {
               <Animated.View style={[styles.overlayContainer, rightOverlayTextStyle, imageSizeStyle]}>
                 <StyledText additionalStyles={[styles.answerOverlayText]} text={ answers[1].label } />
               </Animated.View>
-            </View>
+            </TouchableOpacity>
           </Animated.View>
         </View>
       </View>
@@ -216,6 +220,7 @@ Swipeable.propTypes = {
   saveAnnotation: React.PropTypes.func,
   questionContainerHeight: React.PropTypes.number,
   setNextSubject: React.PropTypes.func,
+  showFullSize: React.PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Swipeable)

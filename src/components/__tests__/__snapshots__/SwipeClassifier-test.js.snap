@@ -88,9 +88,143 @@ exports[`test renders correctly 1`] = `
     </View>
   </View>
   <Swipeable
+    showFullSize={[Function]}
     workflowID="1" />
   <SwipeTabs
     guide={undefined} />
+  <Modal
+    animationType="fade"
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}>
+    <View
+      style={undefined}>
+      <View
+        onMoveShouldSetResponder={[Function]}
+        onMoveShouldSetResponderCapture={[Function]}
+        onResponderEnd={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderReject={[Function]}
+        onResponderRelease={[Function]}
+        onResponderStart={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onStartShouldSetResponderCapture={[Function]}
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "justifyContent": "center",
+              "overflow": "hidden",
+            },
+            Object {
+              "height": 667,
+              "width": 375,
+            },
+          ]
+        }>
+        <View
+          style={
+            Object {
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+                Object {
+                  "translateX": 0,
+                },
+                Object {
+                  "translateY": 0,
+                },
+              ],
+            }
+          }>
+          <View
+            onLayout={[Function]}
+            style={
+              Object {
+                "height": 0,
+                "width": 0,
+              }
+            }>
+            <Image
+              source={
+                Object {
+                  "uri": "blah.jpg",
+                }
+              }
+              style={
+                Object {
+                  "height": 0,
+                  "width": 0,
+                }
+              } />
+          </View>
+        </View>
+      </View>
+      <View
+        style={undefined}>
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontFamily": "FontAwesome",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              undefined,
+            ]
+          }>
+          
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ]
+          }>
+          You can zoom into this image
+        </Text>
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={[Function]}
+        style={undefined}>
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontFamily": "FontAwesome",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              undefined,
+            ]
+          }>
+          
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </Modal>
 </View>
 `;
 
