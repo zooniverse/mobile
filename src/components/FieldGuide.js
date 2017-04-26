@@ -4,6 +4,7 @@ import {
   Dimensions,
   Easing,
   PanResponder,
+  Platform,
   ScrollView,
   TouchableOpacity,
   View
@@ -14,8 +15,9 @@ import FieldGuideItemRow from './FieldGuideItemRow'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { addIndex, isEmpty, map } from 'ramda'
 
-const MAX_HEIGHT = Dimensions.get('window').height * .6
+const MAX_DEFAULT_HEIGHT = Dimensions.get('window').height * .6
 const MIN_HEIGHT = 33
+const MAX_DRAG_HEIGHT = Dimensions.get('window').height - (Platform.OS === 'ios' ? 100 : 110)
 
 export class FieldGuide extends Component {
   constructor(props) {
@@ -53,18 +55,23 @@ export class FieldGuide extends Component {
 
         if (this.state.heightAnim._value < 20) {
           this.close()
-        } else if (this.state.heightAnim._value < MIN_HEIGHT) {
-          Animated.timing(this.state.heightAnim, {
-            toValue: MIN_HEIGHT,
-            easing: Easing.out(Easing.ease),
-            duration: 100
-          }).start()
-        } else if (this.state.heightAnim._value > this.state.height) {
-          Animated.timing(this.state.heightAnim, {
-            toValue: this.state.height,
-            easing: Easing.out(Easing.ease),
-            duration: 100
-          }).start()
+        } else {
+          let adjustToHeight = false
+          if (this.state.heightAnim._value < MIN_HEIGHT) {
+            adjustToHeight = MIN_HEIGHT
+          } else if (this.state.heightAnim._value > this.state.height) {
+            adjustToHeight = this.state.height
+          } else if (this.state.heightAnim._value > MAX_DRAG_HEIGHT) {
+            adjustToHeight = MAX_DRAG_HEIGHT
+          }
+
+          if (adjustToHeight) {
+            Animated.timing(this.state.heightAnim, {
+              toValue: adjustToHeight,
+              easing: Easing.out(Easing.ease),
+              duration: 100
+            }).start()
+          }
         }
       },
     })
@@ -113,7 +120,7 @@ export class FieldGuide extends Component {
   setHeight(height) {
     const newHeight = height + this.state.headerHeight
     this.setState({height: newHeight})
-    this.animateHeight(newHeight < MAX_HEIGHT ? newHeight : MAX_HEIGHT)
+    this.animateHeight(newHeight < MAX_DEFAULT_HEIGHT ? newHeight : MAX_DEFAULT_HEIGHT)
   }
 
   render() {
