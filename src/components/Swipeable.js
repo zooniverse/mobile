@@ -112,7 +112,7 @@ export class Swipeable extends Component {
     let rightOverlayTextStyle = {opacity: opacityRightText}
 
     return (
-      <View style={[styles.container, {top: toTop + this.props.questionContainerHeight}]}>
+      <View style={[styles.container, {top: toTop + this.props.questionContainerHeight, height: this.props.subjectSizes.resizedHeight + 40}]}>
         <View style={styles.subjectContainer}>
           <Animated.View
             style={[styles.imageContainer, animatedCardStyles, swipeableSize]}
@@ -151,7 +151,6 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     right: 0,
     left: 0,
-    bottom: 0,
     backgroundColor: 'transparent',
     flex: 1,
     paddingVertical: 10,

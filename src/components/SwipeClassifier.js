@@ -14,17 +14,20 @@ import SwipeTabs from './SwipeTabs'
 import OverlaySpinner from './OverlaySpinner'
 import NavBar from './NavBar'
 import FullScreenImage from './FullScreenImage'
+import UnlinkedTask from './UnlinkedTask'
 import { setState } from '../actions/index'
 import {
   startNewClassification,
   setTutorialCompleted,
   saveAnnotation,
-  saveThenStartNewClassification
+  saveThenStartNewClassification,
+  removeAnnotationValue
 } from '../actions/classifier'
-import { isEmpty, reverse } from 'ramda'
+import { append, contains, isEmpty, reverse, uniq } from 'ramda'
 
 const mapStateToProps = (state, ownProps) => ({
   isFetching: state.classifier.isFetching,
+  annotations: state.classifier.annotations[ownProps.workflowID] || {},
   workflow: state.classifier.workflow[ownProps.workflowID] || {},
   project: state.classifier.project[ownProps.workflowID] || {},
   guide: state.classifier.guide[ownProps.workflowID] || {},
@@ -51,6 +54,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   saveThenStartNewClassification(answerIndex) {
     dispatch(saveThenStartNewClassification(answerIndex))
+  },
+  removeAnnotationValue(task, value) {
+    dispatch(removeAnnotationValue(task, value))
   },
 })
 
@@ -83,6 +89,15 @@ export class SwipeClassifier extends React.Component {
     this.props.saveThenStartNewClassification()
   }
 
+  onUnlinkedTaskAnswered = (task, value) => {
+    const taskAnnotations = this.props.annotations[task] || []
+    if (contains(value, taskAnnotations)) {
+      this.props.removeAnnotationValue(task, value)
+    } else {
+      this.props.saveAnnotation(task, uniq(append(value, taskAnnotations)))
+    }
+  }
+
   static renderNavigationBar() {
     return <NavBar title={'Classify'} showBack={true} />;
   }
@@ -93,6 +108,14 @@ export class SwipeClassifier extends React.Component {
       const task = this.props.workflow.tasks[key]
       const answers = reverse(task.answers)  //Yes is listed first in project, but we need No listed first (on left)
       const allowPanAndZoom = this.props.workflow.configuration.pan_and_zoom
+
+      const unlinkedTask = task.unlinkedTask
+        ? <UnlinkedTask
+            unlinkedTaskKey={ task.unlinkedTask }
+            unlinkedTask={ this.props.workflow.tasks[task.unlinkedTask] }
+            annotation={ this.props.annotations[task.unlinkedTask] }
+            onAnswered={ this.onUnlinkedTaskAnswered }/>
+        : null
 
       const backSubject =
         <SwipeSubject
@@ -149,6 +172,7 @@ export class SwipeClassifier extends React.Component {
             isQuestionVisible = {this.state.isQuestionVisible }
             setQuestionVisibility = { this.setQuestionVisibility }>
             { this.state.isQuestionVisible ? classification : tutorial }
+            { this.state.isQuestionVisible ? unlinkedTask :null }
           </ClassificationPanel>
           { this.state.isQuestionVisible ? swipeableSubject : null }
           { this.state.isQuestionVisible ? swipeTabs : null }
@@ -182,6 +206,7 @@ const styles = EStyleSheet.create({
 
 SwipeClassifier.propTypes = {
   isFetching: React.PropTypes.bool,
+  annotations: React.PropTypes.object,
   workflowID: React.PropTypes.string,
   workflow: React.PropTypes.shape({
     first_task: React.PropTypes.string,
@@ -202,6 +227,7 @@ SwipeClassifier.propTypes = {
   startNewClassification: React.PropTypes.func,
   saveThenStartNewClassification: React.PropTypes.func,
   saveAnnotation: React.PropTypes.func,
+  removeAnnotationValue:  React.PropTypes.func,
   setIsFetching: React.PropTypes.func,
   project: React.PropTypes.shape({
     display_name: React.PropTypes.string,

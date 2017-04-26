@@ -1,6 +1,6 @@
 import apiClient from 'panoptes-client/lib/api-client'
 import { forEach, isEmpty, isNil, map, remove, toPairs } from 'ramda'
-import { addState, setState } from '../actions/index'
+import { addState, removeState, setState } from '../actions/index'
 import { Actions } from 'react-native-router-flux'
 import { Alert, Platform } from 'react-native'
 import { getAuthUser } from '../actions/auth'
@@ -69,6 +69,13 @@ export function saveAnnotation(task, value) {
   return (dispatch, getState) => {
     const workflowID = getState().classifier.currentWorkflowID
     dispatch(setState(`classifier.annotations.${workflowID}.${task}`, value))
+  }
+}
+
+export function removeAnnotationValue(task, value) {
+  return (dispatch, getState) => {
+    const workflowID = getState().classifier.currentWorkflowID
+    dispatch(removeState(`classifier.annotations.${workflowID}.${task}`, value))
   }
 }
 
