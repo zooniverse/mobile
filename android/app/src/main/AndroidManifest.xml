@@ -27,6 +27,7 @@
         android:label="Zooniverse"
         android:launchMode="singleTop"
         android:showOnLockScreen="true"
+        android:screenOrientation="portrait"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
