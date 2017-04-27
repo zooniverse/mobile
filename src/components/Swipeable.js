@@ -11,8 +11,7 @@ import theme from '../theme'
 import { connect } from 'react-redux'
 import StyledText from './StyledText'
 import SwipeSubject from './SwipeSubject'
-import { clamp, reverse } from 'ramda'
-import { saveAnnotation, saveThenStartNewClassification } from '../actions/classifier'
+import { clamp } from 'ramda'
 import { setNextSubject } from '../actions/subject'
 
 //needs to be absolutely positioned below the question, otherwise it covers up
@@ -33,12 +32,6 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  saveAnnotation(task, value) {
-    dispatch(saveAnnotation(task, value))
-  },
-  saveThenStartNewClassification(answerIndex) {
-    dispatch(saveThenStartNewClassification(answerIndex))
-  },
   setNextSubject() {
     dispatch(setNextSubject())
   },
@@ -88,7 +81,7 @@ export class Swipeable extends Component {
         Animated.decay(this.state.pan, {
           velocity: {x: velocity, y: vy},
           deceleration: 0.98
-        }).start(this.onAnswered(answer))
+        }).start(this.props.onAnswered(answer))
       } else {
         Animated.spring(this.state.pan, {
           toValue: {x: 0, y: 0},
@@ -99,15 +92,7 @@ export class Swipeable extends Component {
     })
   }
 
-  onAnswered(answer){
-    this.props.saveAnnotation(this.props.workflow.first_task, answer)
-    this.props.saveThenStartNewClassification()
-  }
-
   render() {
-    const key = this.props.workflow.first_task //always just one task
-    const task = this.props.workflow.tasks[key]
-    const answers = reverse(task.answers)  //Yes is listed first in project, but we need No listed first (on left)
     const imageSizeStyle = { width: this.props.subjectSizes.resizedWidth, height: this.props.subjectSizes.resizedHeight }
     const swipeableSize = { width: this.props.subjectSizes.resizedWidth, height: this.props.subjectSizes.resizedHeight + 10 }
     let pan = this.state.pan
@@ -146,12 +131,12 @@ export class Swipeable extends Component {
               />
               <Animated.View style={[styles.overlayContainer, leftOverlayStyle, imageSizeStyle]} />
               <Animated.View style={[styles.overlayContainer, leftOverlayTextStyle, imageSizeStyle]}>
-                <StyledText additionalStyles={[styles.answerOverlayText]} text={ answers[0].label } />
+                <StyledText additionalStyles={[styles.answerOverlayText]} text={ this.props.answers[0].label } />
               </Animated.View>
 
               <Animated.View style={[styles.overlayContainer, rightOverlayStyle, imageSizeStyle]} />
               <Animated.View style={[styles.overlayContainer, rightOverlayTextStyle, imageSizeStyle]}>
-                <StyledText additionalStyles={[styles.answerOverlayText]} text={ answers[1].label } />
+                <StyledText additionalStyles={[styles.answerOverlayText]} text={ this.props.answers[1].label } />
               </Animated.View>
             </TouchableOpacity>
           </Animated.View>
@@ -216,11 +201,10 @@ Swipeable.propTypes = {
     tasks: React.PropTypes.object,
   }),
   onAnswered: React.PropTypes.func,
-  saveThenStartNewClassification: React.PropTypes.func,
-  saveAnnotation: React.PropTypes.func,
   questionContainerHeight: React.PropTypes.number,
   setNextSubject: React.PropTypes.func,
   showFullSize: React.PropTypes.func,
+  answers: React.PropTypes.arrayOf(React.PropTypes.object),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Swipeable)

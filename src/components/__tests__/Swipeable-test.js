@@ -24,6 +24,12 @@ const subject = {
 const nextSubject = {
     id: '234'
 }
+
+const answers=[
+  { label: 'No' },
+  { label: 'Yes' },
+]
+
 it('renders correctly', () => {
   const tree = renderer.create(
     <Swipeable
@@ -33,7 +39,9 @@ it('renders correctly', () => {
       subjectSizes={subjectSizes}
       subject={subject}
       nextSubject={nextSubject}
-      />
+      onAnswered={jest.fn}
+      answers={answers}
+    />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
