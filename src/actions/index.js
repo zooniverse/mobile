@@ -13,10 +13,9 @@ export const SIGN_IN = 'SIGN_IN'
 import store from 'react-native-simple-store'
 import apiClient from 'panoptes-client/lib/api-client'
 import { PUBLICATIONS } from '../constants/publications'
-import { MOBILE_PROJECTS, SWIPE_WORKFLOWS } from '../constants/mobile_projects'
-import { GLOBALS } from '../constants/globals'
 import { Alert, Platform, PushNotificationIOS, NativeModules } from 'react-native'
-import { addIndex, filter, find, forEach, head, intersection, keys, map, propEq } from 'ramda'
+import { addIndex, filter, forEach, head, intersection, keys, map, merge, prop, sortBy } from 'ramda'
+import { isValidSwipeWorkflow } from '../utils/is-valid-swipe-workflow'
 
 export function setState(stateKey, value) {
   return { type: SET_STATE, stateKey, value }
@@ -87,28 +86,6 @@ export function setNotificationFromStore() {
   }
 }
 
-export function syncProjectStore() {
-  return (dispatch, getState) => {
-    const projectList = getState().projectList
-    return store.save('@zooniverse:projects', {
-      projectList
-    })
-  }
-}
-
-export function setProjectListFromStore() {
-  return dispatch => {
-    return new Promise ((resolve, reject) => {
-      store.get('@zooniverse:projects').then(json => {
-        dispatch(setProjectList(json.projectList))
-        return resolve()
-      }).catch(() => {
-        return reject()
-      })
-    })
-  }
-}
-
 export function checkIsConnected() {
   return (dispatch, getState) => {
     return new Promise((resolve, reject) => {
@@ -121,71 +98,74 @@ export function checkIsConnected() {
   }
 }
 
-export function fetchProjects() {
-  return dispatch => {
-    dispatch(setProjectListFromStore())
-    let callFetchProjects = tag => dispatch(fetchProjectsByParms(tag.value))
-    forEach(callFetchProjects, filter(propEq('display', true), GLOBALS.DISCIPLINES))
-  }
-}
-
-export function fetchProjectsByParms(tag) {
+export function fetchAllProjects() {
   return (dispatch, getState) => {
-    let parms = {id: MOBILE_PROJECTS, cards: true, sort: 'display_name'}
-    if (tag === 'recent') {
-      let activeProjects = filter((project) => { return project.activity_count > 0 }, getState().user.projects)
-      parms.id = intersection(MOBILE_PROJECTS, keys(activeProjects) )
-    } else {
-      parms.tags = tag
-    }
+    dispatch(setFromStore('projectList')).then(() => {
 
-    apiClient.type('projects').get(parms).then((projects) => {
-      dispatch(fetchWorkflowsForMobile(projects))
-      dispatch(setState(`projectList.${tag}`, projects))
-      dispatch(syncProjectStore())
-    }).catch((error) => {
-      dispatch(displayError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
-    })
-  }
-}
-
-export function fetchWorkflowsForMobile(projects) {
-  return (dispatch) => {
-    return new Promise((resolve) => {
-      const swipeProjects = filter((proj) => { return find(propEq('projectID', proj.id), SWIPE_WORKFLOWS) }, projects)
-      const getWorkflows = (project) => {dispatch(fetchProjectWorkflows(project))}
-      forEach(getWorkflows, swipeProjects)
-      return resolve()
-    })
-  }
-}
-
-export function fetchProjectWorkflows(project) {
-  return dispatch => {
-    return new Promise((resolve) => {
-      apiClient.type('projects').get({id: project.id}).then((projects) => {
-        const project = head(projects)
-        project.get('workflows', {page_size: 100, active: true, fields: 'display_name'}).then((workflows) => {
-          dispatch(setState(`projectWorkflows.${project.id}`, workflows))
-          dispatch(syncStore('projectWorkflows'))
-          return resolve()
-        }).catch((error) => {
-          dispatch(setError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
-          return resolve()
-        })
+      dispatch(setState('projectListHolding', []))
+      dispatch(loadRecents())
+      dispatch(fetchProjects({mobile_friendly: true}, 'projectListHolding')).then(() => {
+        dispatch(setState('projectList', sortBy(prop('display_name'), getState().projectListHolding)))
+        dispatch(syncStore('projectList'))
+      }).catch((error) => {
+        dispatch(displayError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
       })
     })
   }
 }
 
-export function loadProjectWorkflows() {
-  return (dispatch) => {
+export function fetchRecentProjects() {
+  return (dispatch, getState) => {
+    //using holding so that the state doesn't disappear for the user during fetching
+    dispatch(setState('recentsListHolding', []))
+
+    const mobileIDs = map((p) => p.id, getState().projectList)
+    let activeProjects = filter((project) => { return project.activity_count > 0 }, getState().user.projects)
+    dispatch(fetchProjects({id: intersection(mobileIDs, keys(activeProjects) )}, 'recentsListHolding')).then(() => {
+      dispatch(setState('recentsList', sortBy(prop('display_name'), getState().recentsListHolding)))
+      dispatch(syncStore('recentsList'))
+    })
+  }
+}
+
+export function fetchProjects(parms, stateKey) {
+  return dispatch => {
     return new Promise((resolve) => {
-      dispatch(setFromStore('projectWorkflows')).then(() => {
+      const allParms = merge(parms, {include: 'avatar', sort: 'display_name'})
+
+      apiClient.type('projects').get(allParms).then((projects) => {
+        return new Promise((resolve) => {
+          let promises = []
+          forEach((project) => {
+            const promise = apiClient.type('avatars').get(project.links.avatar.id).then((avatar) => {
+              project.avatar_src = avatar.src
+            }).then(() => {
+              return project.get('workflows', {page_size: 100, active: true})
+            }).then((workflows) => {
+              project.workflows = tagSwipeFriendly(workflows)
+              return dispatch(addState(stateKey, project))
+            }).catch(() => {
+              return dispatch(addState(stateKey, project))
+            })
+            promises.push(promise)
+          }, projects)
+
+          Promise.all(promises).then(() => {
+            return resolve()
+          })
+        })
+      }).then(() => {
         return resolve()
       })
     })
   }
+}
+
+function tagSwipeFriendly(workflows) {
+  return map((workflow) => {
+    workflow.swipe_verified = !!workflow.configuration.swipe_enabled && isValidSwipeWorkflow(workflow)
+    return workflow
+  }, workflows)
 }
 
 export function fetchPublications() {
@@ -226,12 +206,13 @@ export function fetchNotificationProject(projectID) {
 export function loadNotificationSettings() {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
+      const mobileIDs = map((p) => p.id, getState().projectList)
       dispatch(setNotificationFromStore()).then(() => {
         forEach((projectID) => {
           if (getState().notifications[projectID] === undefined) {
             dispatch(setState(`notifications.${projectID}`, true))
           }
-        })(MOBILE_PROJECTS)
+        })(mobileIDs)
 
         dispatch(checkPushPermissions()).then(()=> {
           if (getState().pushEnabled){
@@ -255,6 +236,17 @@ export function loadSettings() {
   }
 }
 
+
+export function loadRecents() {
+  return (dispatch) => {
+    return new Promise((resolve) => {
+      dispatch(setFromStore('recentsList')).then(() => {
+        return resolve()
+      })
+    })
+  }
+}
+
 export function updateSetting(key, value) {
   return (dispatch) => {
     return new Promise((resolve) => {
@@ -268,10 +260,10 @@ export function updateSetting(key, value) {
 
 export function syncInterestSubscriptions() {
   return (dispatch, getState) => {
-    MOBILE_PROJECTS.reduce((promise, projectID) => {
+    getState().projectList.reduce((promise, project) => {
       return promise.then(() => {
-        var subscribed = getState().notifications[projectID]
-        return dispatch(updateInterestSubscription(projectID, subscribed))
+        var subscribed = getState().notifications[project.id]
+        return dispatch(updateInterestSubscription(project.id, subscribed))
       })
     }, Promise.resolve())
   }

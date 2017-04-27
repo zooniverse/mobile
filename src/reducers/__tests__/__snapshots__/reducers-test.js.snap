@@ -26,10 +26,12 @@ Object {
   "notifications": Object {
     "general": true,
   },
-  "projectList": Object {},
-  "projectWorkflows": Object {},
+  "projectList": Array [],
+  "projectListHolding": Array [],
   "pushEnabled": false,
   "pushPrompted": false,
+  "recentsList": Array [],
+  "recentsListHolding": Array [],
   "registration": Object {
     "global_email_communication": true,
   },
@@ -70,10 +72,12 @@ Object {
   "notifications": Object {
     "general": true,
   },
-  "projectList": Object {},
-  "projectWorkflows": Object {},
+  "projectList": Array [],
+  "projectListHolding": Array [],
   "pushEnabled": false,
   "pushPrompted": false,
+  "recentsList": Array [],
+  "recentsListHolding": Array [],
   "registration": Object {
     "global_email_communication": true,
   },
@@ -114,10 +118,12 @@ Object {
   "notifications": Object {
     "general": true,
   },
-  "projectList": Object {},
-  "projectWorkflows": Object {},
+  "projectList": Array [],
+  "projectListHolding": Array [],
   "pushEnabled": false,
   "pushPrompted": false,
+  "recentsList": Array [],
+  "recentsListHolding": Array [],
   "registration": Object {
     "global_email_communication": true,
   },
@@ -161,10 +167,12 @@ Object {
   "notifications": Object {
     "general": true,
   },
-  "projectList": Object {},
-  "projectWorkflows": Object {},
+  "projectList": Array [],
+  "projectListHolding": Array [],
   "pushEnabled": false,
   "pushPrompted": false,
+  "recentsList": Array [],
+  "recentsListHolding": Array [],
   "registration": Object {
     "global_email_communication": true,
   },

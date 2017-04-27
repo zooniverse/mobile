@@ -11,8 +11,7 @@ import StyledText from './StyledText'
 import Button from './Button'
 import { connect } from 'react-redux'
 import { fetchNotificationProject } from '../actions/index'
-import { MOBILE_PROJECTS } from '../constants/mobile_projects'
-import { indexOf, isEmpty } from 'ramda'
+import { isEmpty, findIndex, propEq } from 'ramda'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 
 
@@ -20,7 +19,8 @@ let notificationTitle, notificationBody, projectID
 
 const mapStateToProps = (state) => ({
   notificationProject: state.notificationProject,
-  notificationPayload: state.notificationPayload
+  notificationPayload: state.notificationPayload,
+  projectList: state.projectList || [],
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -57,7 +57,7 @@ class NotificationModal extends Component {
   }
 
   isMobileProject(projectID) {
-    return indexOf(projectID, MOBILE_PROJECTS) >= 0
+    return findIndex(()=>propEq('id', projectID), this.props.projectList) >= 0
   }
 
   handleClick() {
@@ -136,6 +136,7 @@ const styles = EStyleSheet.create({
 NotificationModal.propTypes = {
   notificationPayload: React.PropTypes.object,
   notificationProject: React.PropTypes.object,
+  projectList: React.PropTypes.array,
   isVisible: React.PropTypes.bool,
   setVisibility: React.PropTypes.func,
   fetchNotificationProject: React.PropTypes.func,

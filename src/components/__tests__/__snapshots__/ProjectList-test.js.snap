@@ -25,7 +25,7 @@ exports[`test renders correctly 1`] = `
           onLoadEnd={[Function]}
           source={
             Object {
-              "uri": "https://fake_avatar",
+              "uri": "fake_avatar",
             }
           }
           style={
