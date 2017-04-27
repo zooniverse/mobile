@@ -131,7 +131,7 @@ export class SwipeClassifier extends React.Component {
     }
 
     return (
-      this.props.isFetching ? <OverlaySpinner overrideVisibility={this.props.isFetching} /> : renderClassifierOrTutorial()
+      this.props.isFetching || isEmpty(this.props.workflow) ? <OverlaySpinner overrideVisibility={this.props.isFetching} /> : renderClassifierOrTutorial()
     )
   }
 }
