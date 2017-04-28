@@ -8,7 +8,6 @@
  */
 
 #import "AppDelegate.h"
-#import "Orientation.h"
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
@@ -61,11 +60,6 @@
   rootView.loadingViewFadeDuration = 0.30;
 
   return YES;
-}
-
-
-- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-  return [Orientation getOrientation];
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
