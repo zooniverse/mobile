@@ -6,11 +6,13 @@ import Project from '../Project'
 
 const project = {
   avatar_src: 'fake_avatar',
-  display_name: 'Nice project'
+  display_name: 'Nice project',
+  workflows: [{swipe_verified: true}],
+  tags: ['nature']
 }
 
 const selectedProjectTag = 'nature'
-const projectList = { nature: [project] }
+const projectList = [project]
 
 jest.mock('ListView', () => require('react').createClass({
     statics: {

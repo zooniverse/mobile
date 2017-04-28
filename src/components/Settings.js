@@ -27,7 +27,7 @@ GoogleAnalytics.trackEvent('view', 'Notification Settings')
 const mapStateToProps = (state) => ({
   notifications: state.notifications,
   settings: state.settings,
-  projectList: state.projectList,
+  projectList: state.projectList || [],
   isFetching: state.isFetching,
   errorMessage: state.errorMessage,
   pushEnabled: state.pushEnabled
@@ -60,12 +60,8 @@ export class Settings extends React.Component {
   }
 
   render() {
-    let mobileProjects = flatten(
-      map((tag) => { return this.props.projectList[tag] }, keys(this.props.projectList))
-    )
-
     const renderPreference = (id, idx) => {
-      let project = find(propEq('id', id))(mobileProjects)
+      let project = find(propEq('id', id))(this.props.projectList)
 
       if (project === undefined) { //project may no longer exist
         return
@@ -185,7 +181,7 @@ Settings.propTypes = {
   settings: React.PropTypes.shape({
     promptForWorkflow: React.PropTypes.bool,
   }),
-  projectList: React.PropTypes.object,
+  projectList: React.PropTypes.array,
   isFetching: React.PropTypes.bool,
   pushEnabled: React.PropTypes.bool,
   errorMessage: React.PropTypes.string,

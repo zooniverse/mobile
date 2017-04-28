@@ -4,9 +4,9 @@ import store from 'react-native-simple-store'
 import { Actions } from 'react-native-router-flux'
 import { add, addIndex, filter, fromPairs, head, isNil, keys, map, reduce } from 'ramda'
 
-import { fetchProjectsByParms,
+import {
+  fetchRecentProjects,
   loadNotificationSettings,
-  loadProjectWorkflows,
   loadSettings,
   setState } from '../actions/index'
 import { getAuthUser } from '../actions/auth'
@@ -40,7 +40,6 @@ export function loadUserData() {
         return Promise.all([
           dispatch(loadNotificationSettings()),
           dispatch(loadSettings()),
-          dispatch(loadProjectWorkflows()),
         ])
       } else {
         dispatch(getAuthUser()).then(() => {
@@ -49,7 +48,6 @@ export function loadUserData() {
             dispatch(loadUserProjects()),
             dispatch(loadNotificationSettings()),
             dispatch(loadSettings()),
-            dispatch(loadProjectWorkflows()),
           ])
         }).catch(() => {
           dispatch(setState('errorMessage', ''))
@@ -111,7 +109,7 @@ export function loadUserProjects() {
             }, projects)
           }).then(() => {
             dispatch(calculateTotalClassifications())
-            dispatch(fetchProjectsByParms('recent'))
+            dispatch(fetchRecentProjects())
             dispatch(setState('loadingText', 'Loading...'))
             return resolve()
           })

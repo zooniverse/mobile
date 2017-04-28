@@ -110,7 +110,7 @@ class Project extends Component {
     const isMobileProject = length(this.props.mobileWorkflows) > 0
 
     const avatar =
-      <Image source={{uri: `https://${this.props.project.avatar_src}`}} style={[styles.avatar, { height: this.state.boxHeight-MARGIN_BOTTOM }]} onLoadEnd={ ()=>{ this.imageLoadEnd() } } />
+      <Image source={{uri: this.props.project.avatar_src}} style={[styles.avatar, { height: this.state.boxHeight-MARGIN_BOTTOM }]} onLoadEnd={ ()=>{ this.imageLoadEnd() } } />
 
     const defaultAvatar =
       <Image source={require('../../images/teal-wallpaper.png')} style={[styles.avatar, styles.defaultAvatar, { height: this.state.boxHeight-MARGIN_BOTTOM }]} onLoadEnd={ ()=>{ this.imageLoadEnd() } } />

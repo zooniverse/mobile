@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'
 import {Scene, Router} from 'react-native-router-flux'
-import { setIsConnected, fetchProjects, setState } from '../actions/index'
+import { setIsConnected, fetchAllProjects, setState } from '../actions/index'
 import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
 
@@ -41,7 +41,7 @@ export default class App extends Component {
       store.dispatch(setState('isConnected', isConnected))
       NetInfo.isConnected.addEventListener('change', dispatchConnected)
     })
-    store.dispatch(fetchProjects())
+    store.dispatch(fetchAllProjects())
   }
 
   render() {

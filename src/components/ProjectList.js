@@ -9,15 +9,14 @@ import Project from './Project'
 import NavBar from './NavBar'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
-import { filter, find, propEq } from 'ramda'
-import { SWIPE_WORKFLOWS } from '../constants/mobile_projects'
+import { contains, filter } from 'ramda'
 
 GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state) => ({
-  projectList: state.projectList || {},
+  projectList: state.projectList || [],
+  recentsList: state.recentsList || [],
   selectedProjectTag: state.selectedProjectTag || '',
-  projectWorkflows: state.projectWorkflows || {},
   promptForWorkflow: state.settings.promptForWorkflow || false,
 })
 
@@ -27,9 +26,9 @@ const dataSource = new ListView.DataSource({
 
 export class ProjectList extends React.Component {
   renderRow(project, color) {
-    const workflows = this.props.projectWorkflows[project.id] ? this.props.projectWorkflows[project.id] : []
-    const filterNonSwipe = (workflow) => { return !find(propEq('workflowID', workflow.id), SWIPE_WORKFLOWS) }
-    const filterSwipe = (workflow) => { return find(propEq('workflowID', workflow.id), SWIPE_WORKFLOWS) }
+    const workflows = project.workflows || []
+    const filterNonSwipe = (workflow) => { return workflow.swipe_verified === false }
+    const filterSwipe = (workflow) => { return workflow.swipe_verified === true }
     const nonMobileWorkflows = filter(filterNonSwipe, workflows)
     const mobileWorkflows = filter(filterSwipe, workflows)
 
@@ -49,7 +48,14 @@ export class ProjectList extends React.Component {
   }
 
   render() {
-    const projects = this.props.projectList[this.props.selectedProjectTag] || []
+    const selectedtag = this.props.selectedProjectTag
+    let projects = []
+    if (selectedtag === 'recent') {
+      projects = this.props.recentsList || []
+    } else {
+      const filterByTag = (project) => { return contains(selectedtag, project.tags) }
+      projects = filter(filterByTag, this.props.projectList) || []
+    }
 
     const projectList =
       <ListView
@@ -92,7 +98,8 @@ const styles = EStyleSheet.create({
 });
 
 ProjectList.propTypes = {
-  projectList: React.PropTypes.object,
+  projectList: React.PropTypes.array,
+  recentsList: React.PropTypes.array,
   selectedProjectTag: React.PropTypes.string,
   color: React.PropTypes.string,
   promptForWorkflow: React.PropTypes.bool,
