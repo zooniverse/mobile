@@ -1,0 +1,68 @@
+exports[`test renders correctly 1`] = `
+<View
+  onMoveShouldSetResponder={[Function]}
+  onMoveShouldSetResponderCapture={[Function]}
+  onResponderEnd={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderReject={[Function]}
+  onResponderRelease={[Function]}
+  onResponderStart={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "justifyContent": "center",
+        "overflow": "hidden",
+      },
+      Object {
+        "height": 667,
+        "width": 375,
+      },
+    ]
+  }>
+  <View
+    style={
+      Object {
+        "transform": Array [
+          Object {
+            "scale": 1,
+          },
+          Object {
+            "translateX": 0,
+          },
+          Object {
+            "translateY": 0,
+          },
+        ],
+      }
+    }>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": 0,
+          "width": 0,
+        }
+      }>
+      <Image
+        source={
+          Object {
+            "uri": "https://placekitten.com/200/300",
+          }
+        }
+        style={
+          Object {
+            "height": 0,
+            "width": 0,
+          }
+        } />
+    </View>
+  </View>
+</View>
+`;
