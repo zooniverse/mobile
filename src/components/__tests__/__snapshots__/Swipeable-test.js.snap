@@ -4,6 +4,7 @@ exports[`test renders correctly 1`] = `
     Array [
       undefined,
       Object {
+        "height": 140,
         "top": NaN,
       },
     ]

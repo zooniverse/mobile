@@ -1,5 +1,6 @@
 export const SET_STATE = 'SET_STATE'
 export const ADD_STATE = 'ADD_STATE'
+export const REMOVE_STATE = 'REMOVE_STATE'
 export const SET_USER = 'SET_USER'
 export const SET_ERROR = 'SET_ERROR'
 export const SET_IS_FETCHING = 'SET_IS_FETCHING'
@@ -23,6 +24,10 @@ export function setState(stateKey, value) {
 
 export function addState(stateKey, value) {
   return { type: ADD_STATE, stateKey, value }
+}
+
+export function removeState(stateKey, value) {
+  return { type: REMOVE_STATE, stateKey, value }
 }
 
 export function setUser(user) {
