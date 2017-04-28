@@ -16,7 +16,11 @@ const workflow = {
   first_task: 'T0',
   tasks: {
     T0: {
-      question: 'What was that?'
+      question: 'What was that?',
+      answers: [
+        { label: 'Yes' },
+        { label: 'No' },
+      ]
     }
   },
   configuration: {
@@ -45,6 +49,8 @@ it('renders correctly', () => {
       isFetching={false}
       setIsFetching={jest.fn}
       startNewClassification={jest.fn}
+      saveThenStartNewClassification={jest.fn}
+      saveAnnotation={jest.fn}
       project={project}
       workflow={workflow}
       workflowID={'1'}

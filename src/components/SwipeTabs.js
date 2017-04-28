@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  Image,
   StyleSheet,
   TouchableOpacity,
   View
@@ -19,6 +20,25 @@ export class SwipeTabs extends Component {
     }
   }
   render() {
+    const leftButton =
+      <TouchableOpacity
+        onPress={this.props.onAnswered.bind(this, 1)}
+        activeOpacity={0.5}
+        style={ [styles.button, styles.tealButton] }>
+        <Image source={require('../../images/swipe-left.png')} style={styles.swipeIcon} />
+        <StyledText additionalStyles={[styles.tealButtonText]} text={ this.props.answers[0].label } />
+      </TouchableOpacity>
+
+
+    const rightButton =
+      <TouchableOpacity
+        onPress={this.props.onAnswered.bind(this, 0)}
+        activeOpacity={0.5}
+        style={ [styles.button, styles.tealButton] }>
+        <Image source={require('../../images/swipe-right.png')} style={styles.swipeIcon} />
+        <StyledText additionalStyles={[styles.tealButtonText]} text={ this.props.answers[1].label } />
+      </TouchableOpacity>
+
     const fieldGuideButton =
       <TouchableOpacity
         onPress={() => this.setState({isFieldGuideVisible: true})}
@@ -38,7 +58,9 @@ export class SwipeTabs extends Component {
     return (
       <View>
         <View style={styles.container}>
+          { leftButton }
           { length(this.props.guide.items) > 0 ? fieldGuideButton : null }
+          { rightButton }
         </View>
         { this.state.isFieldGuideVisible ? fieldGuide : null }
       </View>
@@ -74,16 +96,29 @@ const styles = EStyleSheet.create({
   buttonText: {
     color: '$darkGrey',
   },
+  tealButton: {
+    backgroundColor: '$buttonColor'
+  },
+  tealButtonText: {
+    color: 'white'
+  },
   icon: {
     fontSize: 16,
     color: '$darkGrey',
     padding: 3,
     marginRight: 5
   },
+  swipeIcon: {
+    height: 27,
+    width: 20,
+    marginRight: 10,
+  },
 })
 
 SwipeTabs.propTypes = {
   guide: React.PropTypes.object,
+  onAnswered: React.PropTypes.func,
+  answers: React.PropTypes.arrayOf(React.PropTypes.object)
 }
 
 export default SwipeTabs

@@ -22,16 +22,21 @@ const guide = {
   }
 }
 
-it('renders no button if no field guide', () => {
+const answers=[
+  { label: 'Yes' },
+  { label: 'No' },
+]
+
+it('renders correctly and with no button if no field guide', () => {
   const tree = renderer.create(
-    <SwipeTabs guide={{ }} />
+    <SwipeTabs guide={{ }} onAnswered={jest.fn} answers={answers} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
 
 it('renders a button if there is a field guide', () => {
   const tree = renderer.create(
-    <SwipeTabs guide={guide} />
+    <SwipeTabs guide={guide} onAnswered={jest.fn} answers={answers} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

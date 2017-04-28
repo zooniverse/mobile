@@ -88,10 +88,32 @@ exports[`test renders correctly 1`] = `
     </View>
   </View>
   <Swipeable
+    answers={
+      Array [
+        Object {
+          "label": "No",
+        },
+        Object {
+          "label": "Yes",
+        },
+      ]
+    }
+    onAnswered={[Function]}
     showFullSize={[Function]}
     workflowID="1" />
   <SwipeTabs
-    guide={undefined} />
+    answers={
+      Array [
+        Object {
+          "label": "No",
+        },
+        Object {
+          "label": "Yes",
+        },
+      ]
+    }
+    guide={undefined}
+    onAnswered={[Function]} />
   <Modal
     animationType="fade"
     onRequestClose={[Function]}

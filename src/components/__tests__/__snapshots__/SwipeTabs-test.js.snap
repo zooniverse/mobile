@@ -5,6 +5,33 @@ exports[`test renders a button if there is a field guide 1`] = `
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={[Function]}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      <Image
+        source={1}
+        style={undefined} />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+            Array [
+              undefined,
+            ],
+          ]
+        }>
+        Yes
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
       style={undefined}>
       <Text
         accessible={true}
@@ -39,13 +66,95 @@ exports[`test renders a button if there is a field guide 1`] = `
         Field Guide
       </Text>
     </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      <Image
+        source={1}
+        style={undefined} />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+            Array [
+              undefined,
+            ],
+          ]
+        }>
+        No
+      </Text>
+    </TouchableOpacity>
   </View>
 </View>
 `;
 
-exports[`test renders no button if no field guide 1`] = `
+exports[`test renders correctly and with no button if no field guide 1`] = `
 <View>
   <View
-    style={undefined} />
+    style={undefined}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      <Image
+        source={1}
+        style={undefined} />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+            Array [
+              undefined,
+            ],
+          ]
+        }>
+        Yes
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }>
+      <Image
+        source={1}
+        style={undefined} />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            undefined,
+            Array [
+              undefined,
+            ],
+          ]
+        }>
+        No
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
