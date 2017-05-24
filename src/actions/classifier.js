@@ -250,7 +250,8 @@ export function setNeedsTutorial() {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
       const workflowID = getState().classifier.currentWorkflowID
-      if (!getState().classifier.tutorial[workflowID]) {
+      if (isEmpty(getState().classifier.tutorial[workflowID])) {
+        dispatch(setState(`classifier.needsTutorial.${workflowID}`, false))
         return resolve()
       }
 
