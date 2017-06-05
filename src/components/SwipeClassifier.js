@@ -183,7 +183,6 @@ export class SwipeClassifier extends React.Component {
             handlePress={() => this.setState({ showFullSize: false })} />
         </View>
 
-      //needsTutorial is for the first time a guest or user visits this project
       return (
         this.props.needsTutorial ? tutorial : classificationPanel
       )
