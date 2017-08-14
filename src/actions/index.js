@@ -168,7 +168,7 @@ export function fetchProjects(parms, stateKey) {
 
 function tagSwipeFriendly(workflows) {
   return map((workflow) => {
-    workflow.swipe_verified = !!workflow.configuration.swipe_enabled && isValidSwipeWorkflow(workflow)
+    workflow.swipe_verified = !!workflow.configuration.swipe_enabled || !!workflow.swipe_enabled && isValidSwipeWorkflow(workflow)
     return workflow
   }, workflows)
 }
