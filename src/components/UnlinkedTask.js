@@ -47,7 +47,7 @@ const UnlinkedTask = (props) => {
 const styles = EStyleSheet.create({
   container: {
     alignSelf: 'flex-start',
-    margin: 10,
+    margin: 15,
     position: 'absolute',
     bottom: 65
   },
