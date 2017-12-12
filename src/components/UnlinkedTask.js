@@ -47,23 +47,25 @@ const UnlinkedTask = (props) => {
 const styles = EStyleSheet.create({
   container: {
     alignSelf: 'flex-start',
-    margin: 20
+    margin: 15,
+    position: 'absolute',
+    bottom: 65
   },
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    width: '85%',
   },
   switchComponent: {
     margin: 3
   },
   answerContainer: {
+    flex: 1
   },
   answer: {
-    alignSelf: 'center',
     flexWrap: 'wrap',
-    textAlign: 'center',
-    fontSize: 13,
+    margin: 3,
+    fontSize: 10,
   }
 });
 
