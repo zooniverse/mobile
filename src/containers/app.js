@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { AppState, Navigator, NetInfo } from 'react-native'
 import { createStore, applyMiddleware, compose } from 'redux'
+import { composeWithDevTools } from 'remote-redux-devtools';
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'
@@ -22,7 +23,7 @@ import ZooWebView from '../components/ZooWebView'
 import Onboarding from '../components/Onboarding'
 import SwipeClassifier from '../components/SwipeClassifier'
 
-const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer)
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
 
 export default class App extends Component {
   componentDidMount() {
