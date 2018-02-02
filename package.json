@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "panoptes-client": "^2.5.2",
+    "panoptes-client": "^2.9.1",
     "markdown-it": "^8.3.1",
     "ramda": "^0.22.1",
     "react": "~15.3.2",
