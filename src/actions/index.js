@@ -109,7 +109,7 @@ export function fetchAllProjects() {
 
       dispatch(setState('projectListHolding', []))
       dispatch(loadRecents())
-      dispatch(fetchProjects({mobile_friendly: true}, 'projectListHolding')).then(() => {
+      dispatch(fetchProjects({mobile_friendly: true, launch_approved: true}, 'projectListHolding')).then(() => {
         dispatch(setState('projectList', sortBy(prop('display_name'), getState().projectListHolding)))
         dispatch(syncStore('projectList'))
       }).catch((error) => {
