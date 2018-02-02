@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { AppState, Navigator, NetInfo } from 'react-native'
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'remote-redux-devtools';
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
