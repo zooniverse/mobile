@@ -52,3 +52,8 @@ To run the test suite, use `npm test`.
 About Snapshots:  Facebook's native apps use a system called "snapshot testing":  a snapshot test system that renders UI components, takes a screenshot and subsequently compares a recorded screenshot with changes made by an engineer.  It is meant to make sure components don't change unexpectedly.  The first time a test is run, Jest will create a snapshot file that needs to be committed alongside code changes.  On subsequent test runs Jest will simply compare the rendered output with the previous snapshot. If they match, the test will pass. If they don't match, either the implementation has changed and the snapshot needs to be updated with `npm test -- -u TESTNAME` or it indicates there is a bug that needs to be fixed.
 
 Snapshots should be committed to the repo and any changes to snapshots should be reviewed along with their PRs.
+
+### Debugging 
+If you want to setup redux debugging and monitoring, the app is equipped with [`remote-redux-devtools`](https://github.com/zalmoxisus/remote-redux-devtools). If you want to monitor redux through the app, check out their list of [monitoring options](https://github.com/zalmoxisus/remote-redux-devtools#monitoring). This is not required to run the app, it is just a development tool.
+
+This tool tends to be a little finicky. If you are having trouble setting it up, try restarting the simulator.
