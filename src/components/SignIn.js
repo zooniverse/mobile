@@ -89,7 +89,7 @@ export class SignIn extends React.Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView style={styles.scrollView}>
           <View style={styles.signInContainer}>
             <StyledText
               textStyle={'headerText'}
@@ -139,12 +139,15 @@ export class SignIn extends React.Component {
 }
 
 const styles = EStyleSheet.create({
+  scrollView: {
+    backgroundColor: 'white',
+  },
   container: {
     flex: 1,
     paddingTop: topPadding,
   },
   signInContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     margin: 30,
     marginTop: 20,
     paddingLeft: 15,
