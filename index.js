@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
+  Platform,
   StatusBar,
   View
 } from 'react-native';
@@ -10,17 +11,28 @@ import theme from './src/theme'
 
 class ZooniverseMobile extends Component {
   render() {
+    
     return (
       <View style={styles.container}>
-        <StatusBar
-          barStyle="light-content"
-          hidden={false}
-          translucent={false}
-        />
+        <PlatformSpecificStatusBar />
         <App />
       </View>
     );
   }
+}
+
+const PlatformSpecificStatusBar = () => {
+  if (Platform.OS === 'ios') {
+    return (
+      <StatusBar
+        barStyle="light-content"
+        hidden={false}
+        translucent={false}
+      />
+    );
+  }
+
+  return null;
 }
 
 const styles = EStyleSheet.create({
