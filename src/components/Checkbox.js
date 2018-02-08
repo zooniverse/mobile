@@ -2,6 +2,7 @@ import React from 'react'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { CheckboxField } from 'react-native-checkbox-field'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 
 const Checkbox = (props) => {
   const containerStyle = ( props.leftAligned ? [styles.checkboxContainerStyle, styles.leftAligned] : styles.checkboxContainerStyle )
@@ -44,9 +45,9 @@ const styles = EStyleSheet.create({
 })
 
 Checkbox.propTypes = {
-  onSelect: React.PropTypes.func,
-  selected: React.PropTypes.bool,
-  leftAligned: React.PropTypes.bool,
+  onSelect: PropTypes.func,
+  selected: PropTypes.bool,
+  leftAligned: PropTypes.bool,
 }
 
 export default Checkbox

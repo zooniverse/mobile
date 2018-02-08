@@ -4,6 +4,7 @@ import {
   PushNotificationIOS,
   View
 } from 'react-native'
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
@@ -97,14 +98,14 @@ const styles = EStyleSheet.create({
 });
 
 ZooniverseApp.propTypes = {
-  user: React.PropTypes.object,
-  isFetching: React.PropTypes.bool.isRequired,
-  isConnected: React.PropTypes.bool,
-  isModalVisible: React.PropTypes.bool,
-  setModalVisibility: React.PropTypes.func,
-  setNotificationPayload: React.PropTypes.func,
-  syncInterestSubscriptions: React.PropTypes.func,
-  setDimensions: React.PropTypes.func,
+  user: PropTypes.object,
+  isFetching: PropTypes.bool.isRequired,
+  isConnected: PropTypes.bool,
+  isModalVisible: PropTypes.bool,
+  setModalVisibility: PropTypes.func,
+  setNotificationPayload: PropTypes.func,
+  syncInterestSubscriptions: PropTypes.func,
+  setDimensions: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZooniverseApp)

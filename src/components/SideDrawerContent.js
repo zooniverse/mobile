@@ -12,6 +12,7 @@ import StyledText from './StyledText'
 import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
+import PropTypes from 'prop-types';
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -195,9 +196,9 @@ const styles = EStyleSheet.create({
 });
 
 SideDrawerContent.propTypes = {
-  user: React.PropTypes.object,
-  isGuestUser: React.PropTypes.bool,
-  signOut: React.PropTypes.func
+  user: PropTypes.object,
+  isGuestUser: PropTypes.bool,
+  signOut: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideDrawerContent)

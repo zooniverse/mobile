@@ -5,6 +5,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import StyledText from './StyledText'
 
 const FieldGuideItemRow = (props) => {
@@ -53,15 +54,15 @@ const styles = EStyleSheet.create({
 });
 
 FieldGuideItemRow.propTypes = {
-  item: React.PropTypes.shape({
-    title: React.PropTypes.string,
-    content: React.PropTypes.string,
-    icon: React.PropTypes.string,
+  item: PropTypes.shape({
+    title: PropTypes.string,
+    content: PropTypes.string,
+    icon: PropTypes.string,
   }),
-  icons: React.PropTypes.object,
-  setContentHeight: React.PropTypes.func,
-  setHeaderHeight: React.PropTypes.func,
-  onPress: React.PropTypes.func,
+  icons: PropTypes.object,
+  setContentHeight: PropTypes.func,
+  setHeaderHeight: PropTypes.func,
+  onPress: PropTypes.func,
 }
 
 export default FieldGuideItemRow

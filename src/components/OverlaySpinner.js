@@ -5,6 +5,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 
 
 const mapStateToProps = (state) => ({
@@ -39,9 +40,9 @@ const styles = EStyleSheet.create({
 })
 
 OverlaySpinner.propTypes = {
-  isFetching: React.PropTypes.bool,
-  loadingText: React.PropTypes.string,
-  overrideVisibility: React.PropTypes.bool
+  isFetching: PropTypes.bool,
+  loadingText: PropTypes.string,
+  overrideVisibility: PropTypes.bool
 }
 
 OverlaySpinner.defaultProps = {

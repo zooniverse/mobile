@@ -3,6 +3,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { append } from 'ramda'
 
@@ -30,7 +31,8 @@ const styles = EStyleSheet.create({
     fontSize: 14,
     color: 'white',
     alignSelf: 'center',
-    letterSpacing: 1.3
+    letterSpacing: 1.3,
+    flex: 1,
   },
   button: {
     borderRadius: 4,
@@ -56,12 +58,12 @@ const styles = EStyleSheet.create({
 });
 
 Button.propTypes = {
-  handlePress: React.PropTypes.func.isRequired,
-  disabled: React.PropTypes.bool,
-  buttonStyle: React.PropTypes.string,
-  additionalStyles: React.PropTypes.array,
-  additionalTextStyles: React.PropTypes.array,
-  text: React.PropTypes.string
+  handlePress: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  buttonStyle: PropTypes.string,
+  additionalStyles: PropTypes.array,
+  additionalTextStyles: PropTypes.array,
+  text: PropTypes.string
 }
 Button.defaultProps = { disabled: false }
 

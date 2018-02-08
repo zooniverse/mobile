@@ -5,6 +5,7 @@ import {
   Easing,
   Image,
 } from 'react-native'
+import PropTypes from 'prop-types';
 
 class SizedImage extends React.Component {
   constructor(props) {
@@ -76,10 +77,10 @@ class SizedImage extends React.Component {
 }
 
 SizedImage.propTypes = {
-  source: React.PropTypes.object,
-  maxWidth: React.PropTypes.number,
-  maxHeight: React.PropTypes.number,
-  additionalStyles: React.PropTypes.array
+  source: PropTypes.object,
+  maxWidth: PropTypes.number,
+  maxHeight: PropTypes.number,
+  additionalStyles: PropTypes.array
 }
 
 export default SizedImage

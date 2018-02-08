@@ -13,6 +13,7 @@ import StyledText from './StyledText'
 import SwipeSubject from './SwipeSubject'
 import { clamp } from 'ramda'
 import { setNextSubject } from '../actions/subject'
+import PropTypes from 'prop-types';
 
 //needs to be absolutely positioned below the question, otherwise it covers up
 //everything above and prevents it from being touchable
@@ -187,23 +188,23 @@ const styles = EStyleSheet.create({
 })
 
 Swipeable.propTypes = {
-  subject: React.PropTypes.shape({
-    id: React.PropTypes.string
+  subject: PropTypes.shape({
+    id: PropTypes.string
   }),
-  nextSubject: React.PropTypes.shape({
-    id: React.PropTypes.string
+  nextSubject: PropTypes.shape({
+    id: PropTypes.string
   }),
-  subjectSizes: React.PropTypes.object,
-  seenThisSession: React.PropTypes.arrayOf(React.PropTypes.string),
-  workflow: React.PropTypes.shape({
-    first_task: React.PropTypes.string,
-    tasks: React.PropTypes.object,
+  subjectSizes: PropTypes.object,
+  seenThisSession: PropTypes.arrayOf(PropTypes.string),
+  workflow: PropTypes.shape({
+    first_task: PropTypes.string,
+    tasks: PropTypes.object,
   }),
-  onAnswered: React.PropTypes.func,
-  questionContainerHeight: React.PropTypes.number,
-  setNextSubject: React.PropTypes.func,
-  showFullSize: React.PropTypes.func,
-  answers: React.PropTypes.arrayOf(React.PropTypes.object),
+  onAnswered: PropTypes.func,
+  questionContainerHeight: PropTypes.number,
+  setNextSubject: PropTypes.func,
+  showFullSize: PropTypes.func,
+  answers: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Swipeable)

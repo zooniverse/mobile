@@ -7,6 +7,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ZoomableImage from './ZoomableImage'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 import StyledText from './StyledText'
 
 class FullScreenImage extends React.Component {
@@ -79,10 +80,10 @@ const styles = EStyleSheet.create({
 })
 
 FullScreenImage.propTypes = {
-  source: React.PropTypes.object,
-  isVisible: React.PropTypes.bool,
-  handlePress: React.PropTypes.func,
-  allowPanAndZoom: React.PropTypes.bool
+  source: PropTypes.object,
+  isVisible: PropTypes.bool,
+  handlePress: PropTypes.func,
+  allowPanAndZoom: PropTypes.bool
 }
 
 export default FullScreenImage

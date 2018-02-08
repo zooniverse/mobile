@@ -13,6 +13,7 @@ import { addIndex, filter, map, propEq } from 'ramda'
 import { connect } from 'react-redux'
 import {GLOBALS} from '../constants/globals'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
+import PropTypes from 'prop-types';
 import Discipline from './Discipline'
 import OverlaySpinner from './OverlaySpinner'
 import NavBar from '../components/NavBar'
@@ -173,12 +174,12 @@ const styles = EStyleSheet.create({
 });
 
 ProjectDisciplines.propTypes = {
-  user: React.PropTypes.object,
-  isGuestUser: React.PropTypes.bool,
-  isFetching: React.PropTypes.bool,
-  pushPrompted: React.PropTypes.bool,
-  setSelectedProjectTag: React.PropTypes.func,
-  setPushPrompted: React.PropTypes.func,
+  user: PropTypes.object,
+  isGuestUser: PropTypes.bool,
+  isFetching: PropTypes.bool,
+  pushPrompted: PropTypes.bool,
+  setSelectedProjectTag: PropTypes.func,
+  setPushPrompted: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)

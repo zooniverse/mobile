@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
+import PropTypes from 'prop-types';
 
 const topPadding = (Platform.OS === 'ios') ? 10 : 0
 
@@ -71,10 +72,10 @@ const styles = EStyleSheet.create({
 })
 
 ClassificationPanel.propTypes = {
-  isFetching: React.PropTypes.bool,
-  hasTutorial: React.PropTypes.bool,
-  children: React.PropTypes.node,
-  isQuestionVisible: React.PropTypes.bool,
-  setQuestionVisibility: React.PropTypes.func,
+  isFetching: PropTypes.bool,
+  hasTutorial: PropTypes.bool,
+  children: PropTypes.node,
+  isQuestionVisible: PropTypes.bool,
+  setQuestionVisibility: PropTypes.func,
 }
 export default ClassificationPanel

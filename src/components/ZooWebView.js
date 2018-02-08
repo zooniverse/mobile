@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import WebViewBridge from 'react-native-webview-bridge'
 import OverlaySpinner from './OverlaySpinner'
+import PropTypes from 'prop-types';
 
 const WEBVIEW_REF = 'WEBVIEW_REF'
 const zooniverseURL = 'https://www.zooniverse.org/projects/'
@@ -159,10 +160,10 @@ const styles = EStyleSheet.create({
 
 
 ZooWebView.propTypes = {
-  project: React.PropTypes.object,
-  webViewNavCounter: React.PropTypes.number,
-  updateNavCounter: React.PropTypes.func,
-  setIsFetching: React.PropTypes.func
+  project: PropTypes.object,
+  webViewNavCounter: PropTypes.number,
+  updateNavCounter: PropTypes.func,
+  setIsFetching: PropTypes.func
 }
 
 

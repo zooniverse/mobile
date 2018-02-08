@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 
 const top = (Platform.OS === 'ios') ? 10 : 0
 
@@ -70,9 +71,9 @@ const styles = EStyleSheet.create({
 })
 
 StyledModal.propTypes = {
-  children: React.PropTypes.array,
-  isVisible: React.PropTypes.bool,
-  setVisibility: React.PropTypes.func
+  children: PropTypes.array,
+  isVisible: PropTypes.bool,
+  setVisibility: PropTypes.func
 }
 
 export default StyledModal

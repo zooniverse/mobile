@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
 import FieldGuide from './FieldGuide'
@@ -116,9 +117,9 @@ const styles = EStyleSheet.create({
 })
 
 SwipeTabs.propTypes = {
-  guide: React.PropTypes.object,
-  onAnswered: React.PropTypes.func,
-  answers: React.PropTypes.arrayOf(React.PropTypes.object)
+  guide: PropTypes.object,
+  onAnswered: PropTypes.func,
+  answers: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default SwipeTabs

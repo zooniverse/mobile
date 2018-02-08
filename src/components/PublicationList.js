@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View
 } from 'react-native'
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
 import Publication from './Publication'
@@ -152,11 +153,11 @@ const styles = EStyleSheet.create({
 });
 
 PublicationList.propTypes = {
-  disciplines: React.PropTypes.array,
-  selectedDiscipline: React.PropTypes.string,
-  publications: React.PropTypes.object,
-  fetchPublications: React.PropTypes.func,
-  setSelectedDiscipline: React.PropTypes.func
+  disciplines: PropTypes.array,
+  selectedDiscipline: PropTypes.string,
+  publications: PropTypes.object,
+  fetchPublications: PropTypes.func,
+  setSelectedDiscipline: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicationList)

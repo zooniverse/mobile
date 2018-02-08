@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import { signIn, continueAsGuest } from '../actions/auth'
 import { connect } from 'react-redux';
 import Button from './Button'
@@ -175,9 +176,9 @@ const styles = EStyleSheet.create({
 });
 
 SignIn.propTypes = {
-  isFetching: React.PropTypes.bool,
-  signIn: React.PropTypes.func,
-  continueAsGuest: React.PropTypes.func,
-  errorMessage: React.PropTypes.string
+  isFetching: PropTypes.bool,
+  signIn: PropTypes.func,
+  continueAsGuest: PropTypes.func,
+  errorMessage: PropTypes.string
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

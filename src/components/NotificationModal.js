@@ -6,6 +6,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import StyledModal from './StyledModal'
 import StyledText from './StyledText'
 import Button from './Button'
@@ -134,12 +135,12 @@ const styles = EStyleSheet.create({
 })
 
 NotificationModal.propTypes = {
-  notificationPayload: React.PropTypes.object,
-  notificationProject: React.PropTypes.object,
-  projectList: React.PropTypes.array,
-  isVisible: React.PropTypes.bool,
-  setVisibility: React.PropTypes.func,
-  fetchNotificationProject: React.PropTypes.func,
+  notificationPayload: PropTypes.object,
+  notificationProject: PropTypes.object,
+  projectList: PropTypes.array,
+  isVisible: PropTypes.bool,
+  setVisibility: PropTypes.func,
+  fetchNotificationProject: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationModal)

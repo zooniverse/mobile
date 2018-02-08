@@ -5,6 +5,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import StyledText from './StyledText'
 import { addIndex, contains, map } from 'ramda'
 import theme from '../theme'
@@ -70,10 +71,10 @@ const styles = EStyleSheet.create({
 });
 
 UnlinkedTask.propTypes = {
-  unlinkedTask: React.PropTypes.object.isRequired,
-  onAnswered: React.PropTypes.func.isRequired,
-  annotation: React.PropTypes.array,
-  unlinkedTaskKey: React.PropTypes.string.isRequired,
+  unlinkedTask: PropTypes.object.isRequired,
+  onAnswered: PropTypes.func.isRequired,
+  annotation: PropTypes.array,
+  unlinkedTaskKey: PropTypes.string.isRequired,
 }
 
 export default UnlinkedTask

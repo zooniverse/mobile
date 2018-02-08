@@ -7,6 +7,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import getColorFromString from '../utils/color-from-string'
 import { connect } from 'react-redux'
 import { addIndex, filter, keys, map, sort } from 'ramda'
+import PropTypes from 'prop-types';
 
 const size = 120
 const position = size / 2
@@ -105,8 +106,8 @@ const styles = EStyleSheet.create({
 });
 
 CircleRibbon.propTypes = {
-  projects: React.PropTypes.object,
-  totalClassifications: React.PropTypes.number
+  projects: PropTypes.object,
+  totalClassifications: PropTypes.number
 }
 
 export default connect(mapStateToProps)(CircleRibbon)
