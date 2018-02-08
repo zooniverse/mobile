@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Animated,
   Image,
+  ImageBackground,
   StatusBar,
   View
 } from 'react-native'
@@ -59,7 +60,7 @@ class Onboarding extends React.Component {
     var requiredImage = this.getRandomImage(images)
 
     return (
-      <Image source={requiredImage} style={styles.container}>
+      <ImageBackground source={requiredImage} style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={require('../../images/logo.png')} style={styles.logo} />
           <StyledText
@@ -75,8 +76,7 @@ class Onboarding extends React.Component {
               text={'Get Started'} />
           </Animated.View>
         </View>
-
-      </Image>
+      </ImageBackground>
     );
   }
 }
@@ -85,8 +85,6 @@ const styles = EStyleSheet.create({
   container: {
     backgroundColor: 'black',
     flex: 1,
-    width: null,
-    height: null,
   },
   logoContainer: {
     flex: 1,
@@ -112,8 +110,8 @@ const styles = EStyleSheet.create({
     width: '80%',
   },
   footerContainer: {
-    position: 'absolute',
-    bottom: 50,
+    alignSelf: 'flex-end',
+    paddingBottom: 50,
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
@@ -131,7 +129,8 @@ const styles = EStyleSheet.create({
     color: '$darkTeal',
     fontFamily: 'OpenSans-Semibold',
     fontSize: 22,
-    letterSpacing: 1
+    letterSpacing: 1,
+    textAlign: 'center',
   }
 
 
