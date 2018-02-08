@@ -2,6 +2,7 @@ import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
 import SwipeSubject from '../SwipeSubject'
+jest.useFakeTimers();
 
 const subjectSizes = {
   resizedWidth: 100,

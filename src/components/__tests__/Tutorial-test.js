@@ -1,10 +1,10 @@
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
+import { Tutorial } from '../Tutorial'
 
 jest.mock('WebView', () => 'WebView')
-
-import { Tutorial } from '../Tutorial'
+jest.mock('../SizedImage', () => 'SizedImage');
 
 const tutorial = {
   steps:
