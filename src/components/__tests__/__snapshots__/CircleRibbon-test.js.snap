@@ -1,112 +1,132 @@
-exports[`test renders correctly with 1 classification 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with 1 classification 1`] = `
 <View
-  style={undefined}>
-  <svg
+  style={undefined}
+>
+  <Svg
     height={120}
-    width={120}>
-    <path
+    width={120}
+  >
+    <Path
       d="
-                M 60 10
-                A 50 50 0 1 1 59.99999999999999, 10
-              "
+            M 60 10
+            A 50 50 0 1 1 59.99999999999999, 10
+          "
       fill="transparent"
       stroke="hsl(277, 57%, 50%)"
-      strokeWidth={10} />
-  </svg>
+      strokeWidth={10}
+    />
+  </Svg>
 </View>
 `;
 
-exports[`test renders correctly with 1 project 1`] = `
+exports[`renders correctly with 1 project 1`] = `
 <View
-  style={undefined}>
-  <svg
+  style={undefined}
+>
+  <Svg
     height={120}
-    width={120}>
-    <path
+    width={120}
+  >
+    <Path
       d="
-                M 60 10
-                A 50 50 0 1 1 59.99999999999999, 10
-              "
+            M 60 10
+            A 50 50 0 1 1 59.99999999999999, 10
+          "
       fill="transparent"
       stroke="hsl(277, 57%, 50%)"
-      strokeWidth={10} />
-  </svg>
+      strokeWidth={10}
+    />
+  </Svg>
 </View>
 `;
 
-exports[`test renders correctly with a majority project 1`] = `
+exports[`renders correctly with a majority project 1`] = `
 <View
-  style={undefined}>
-  <svg
+  style={undefined}
+>
+  <Svg
     height={120}
-    width={120}>
-    <path
+    width={120}
+  >
+    <Path
       d="
-                M 60 10
-                A 50 50 0 1 1 20.23535643632868, 29.688729451668095
-              "
+            M 60 10
+            A 50 50 0 1 1 20.23535643632868, 29.688729451668095
+          "
       fill="transparent"
       stroke="hsl(189, 79%, 50%)"
-      strokeWidth={10} />
-    <path
+      strokeWidth={10}
+    />
+    <Path
       d="
-                M 20.23535643632868 29.688729451668095
-                A 50 50 0 0 1 41.309146407961514, 13.624877444895283
-              "
+            M 20.23535643632868 29.688729451668095
+            A 50 50 0 0 1 41.309146407961514, 13.624877444895283
+          "
       fill="transparent"
       stroke="hsl(22, 82%, 50%)"
-      strokeWidth={10} />
-    <path
+      strokeWidth={10}
+    />
+    <Path
       d="
-                M 41.309146407961514 13.624877444895283
-                A 50 50 0 0 1 59.99999999999999, 10
-              "
+            M 41.309146407961514 13.624877444895283
+            A 50 50 0 0 1 59.99999999999999, 10
+          "
       fill="transparent"
       stroke="hsl(277, 57%, 50%)"
-      strokeWidth={10} />
-  </svg>
+      strokeWidth={10}
+    />
+  </Svg>
 </View>
 `;
 
-exports[`test renders correctly with no projects 1`] = `
+exports[`renders correctly with no projects 1`] = `
 <View
-  style={undefined}>
-  <svg
+  style={undefined}
+>
+  <Svg
     height={120}
-    width={120} />
+    width={120}
+  />
 </View>
 `;
 
-exports[`test renders correctly with projects 1`] = `
+exports[`renders correctly with projects 1`] = `
 <View
-  style={undefined}>
-  <svg
+  style={undefined}
+>
+  <Svg
     height={120}
-    width={120}>
-    <path
+    width={120}
+  >
+    <Path
       d="
-                M 60 10
-                A 50 50 0 0 1 96.78619553365658, 93.86407858128705
-              "
+            M 60 10
+            A 50 50 0 0 1 96.78619553365658, 93.86407858128705
+          "
       fill="transparent"
       stroke="hsl(189, 79%, 50%)"
-      strokeWidth={10} />
-    <path
+      strokeWidth={10}
+    />
+    <Path
       d="
-                M 96.78619553365658 93.86407858128705
-                A 50 50 0 0 1 10.170775349666506, 64.12896727361664
-              "
+            M 96.78619553365658 93.86407858128705
+            A 50 50 0 0 1 10.170775349666506, 64.12896727361664
+          "
       fill="transparent"
       stroke="hsl(22, 82%, 50%)"
-      strokeWidth={10} />
-    <path
+      strokeWidth={10}
+    />
+    <Path
       d="
-                M 10.170775349666506 64.12896727361664
-                A 50 50 0 0 1 59.99999999999999, 10
-              "
+            M 10.170775349666506 64.12896727361664
+            A 50 50 0 0 1 59.99999999999999, 10
+          "
       fill="transparent"
       stroke="hsl(277, 57%, 50%)"
-      strokeWidth={10} />
-  </svg>
+      strokeWidth={10}
+    />
+  </Svg>
 </View>
 `;

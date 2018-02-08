@@ -1,19 +1,39 @@
-exports[`test renders a button if there is a field guide 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a button if there is a field guide 1`] = `
 <View>
   <View
-    style={undefined}>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
+    style={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          undefined,
-          undefined,
-        ]
-      }>
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Image
         source={1}
-        style={undefined} />
+        style={undefined}
+      />
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -25,14 +45,36 @@ exports[`test renders a button if there is a field guide 1`] = `
               undefined,
             ],
           ]
-        }>
+        }
+      >
         Yes
       </Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
-      style={undefined}>
+    </View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={false}
@@ -41,14 +83,17 @@ exports[`test renders a button if there is a field guide 1`] = `
           Array [
             Object {
               "color": undefined,
-              "fontFamily": "FontAwesome",
               "fontSize": 12,
+            },
+            undefined,
+            Object {
+              "fontFamily": "FontAwesome",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            undefined,
           ]
-        }>
+        }
+      >
         
       </Text>
       <Text
@@ -62,22 +107,40 @@ exports[`test renders a button if there is a field guide 1`] = `
               undefined,
             ],
           ]
-        }>
+        }
+      >
         Field Guide
       </Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
+    </View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          undefined,
-          undefined,
-        ]
-      }>
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Image
         source={1}
-        style={undefined} />
+        style={undefined}
+      />
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -89,30 +152,49 @@ exports[`test renders a button if there is a field guide 1`] = `
               undefined,
             ],
           ]
-        }>
+        }
+      >
         No
       </Text>
-    </TouchableOpacity>
+    </View>
   </View>
 </View>
 `;
 
-exports[`test renders correctly and with no button if no field guide 1`] = `
+exports[`renders correctly and with no button if no field guide 1`] = `
 <View>
   <View
-    style={undefined}>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
+    style={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          undefined,
-          undefined,
-        ]
-      }>
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Image
         source={1}
-        style={undefined} />
+        style={undefined}
+      />
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -124,22 +206,40 @@ exports[`test renders correctly and with no button if no field guide 1`] = `
               undefined,
             ],
           ]
-        }>
+        }
+      >
         Yes
       </Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
+    </View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          undefined,
-          undefined,
-        ]
-      }>
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Image
         source={1}
-        style={undefined} />
+        style={undefined}
+      />
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -151,10 +251,11 @@ exports[`test renders correctly and with no button if no field guide 1`] = `
               undefined,
             ],
           ]
-        }>
+        }
+      >
         No
       </Text>
-    </TouchableOpacity>
+    </View>
   </View>
 </View>
 `;

@@ -1,11 +1,15 @@
-exports[`test renders checked 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders checked 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <Switch
-    onTintColor="rgba(0, 151, 157, 1)"
+    onTintColor={undefined}
     onValueChange={[Function]}
     style={undefined}
-    value={true} />
+    value={true}
+  />
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -14,20 +18,23 @@ exports[`test renders checked 1`] = `
       Array [
         undefined,
       ]
-    }>
+    }
+  >
     test
   </Text>
 </View>
 `;
 
-exports[`test renders not checked 1`] = `
+exports[`renders not checked 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <Switch
-    onTintColor="rgba(0, 151, 157, 1)"
+    onTintColor={undefined}
     onValueChange={[Function]}
     style={undefined}
-    value={false} />
+    value={false}
+  />
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -36,7 +43,8 @@ exports[`test renders not checked 1`] = `
       Array [
         undefined,
       ]
-    }>
+    }
+  >
     test
   </Text>
 </View>

@@ -1,83 +1,16 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
-  style={undefined}>
-  <ScrollView>
-    <View
-      style={undefined}>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        SIGN IN
-      </Text>
+  style={undefined}
+>
+  <RCTScrollView
+    style={undefined}
+  >
+    <View>
       <View
-        style={undefined}>
-        <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            Username or Email Address
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={false}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-      </View>
-      <View
-        style={undefined}>
-        <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            Password
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={true}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-      </View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -87,170 +20,256 @@ exports[`test renders correctly 1`] = `
               undefined,
               undefined,
             ]
-          }>
-          Forget your password?
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={true}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          Sign In
-        </Text>
-      </TouchableOpacity>
-      <View
-        style={undefined}>
-        <View
-          style={undefined} />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          OR
+          }
+        >
+          SIGN IN
         </Text>
         <View
-          style={undefined} />
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Username or Email Address
+            </Text>
+          </View>
+          <View
+            style={undefined}
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              returnKeyType="done"
+              secureTextEntry={false}
+              style={undefined}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Password
+            </Text>
+          </View>
+          <View
+            style={undefined}
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              returnKeyType="done"
+              secureTextEntry={true}
+              style={undefined}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            Forget your password?
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            Sign In
+          </Text>
+        </View>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            OR
+          </Text>
+          <View
+            style={undefined}
+          />
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            Continue without signing in
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            Register for account
+          </Text>
+        </View>
       </View>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={false}
-        onPress={[Function]}
-        style={undefined}>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          Continue without signing in
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={false}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          Register for account
-        </Text>
-      </TouchableOpacity>
     </View>
-  </ScrollView>
+  </RCTScrollView>
 </View>
 `;
 
-exports[`test renders error message 1`] = `
+exports[`renders error message 1`] = `
 <View
-  style={undefined}>
-  <ScrollView>
-    <View
-      style={undefined}>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        SIGN IN
-      </Text>
+  style={undefined}
+>
+  <RCTScrollView
+    style={undefined}
+  >
+    <View>
       <View
-        style={undefined}>
-        <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            Username or Email Address
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={false}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-      </View>
-      <View
-        style={undefined}>
-        <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            Password
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={true}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-      </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        does not compute
-      </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -260,74 +279,254 @@ exports[`test renders error message 1`] = `
               undefined,
               undefined,
             ]
-          }>
-          Forget your password?
+          }
+        >
+          SIGN IN
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={true}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Username or Email Address
+            </Text>
+          </View>
+          <View
+            style={undefined}
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              returnKeyType="done"
+              secureTextEntry={false}
+              style={undefined}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Password
+            </Text>
+          </View>
+          <View
+            style={undefined}
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              returnKeyType="done"
+              secureTextEntry={true}
+              style={undefined}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-          style={undefined}>
-          Sign In
+          style={
+            Array [
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          does not compute
         </Text>
-      </TouchableOpacity>
-      <View
-        style={undefined}>
         <View
-          style={undefined} />
-        <Text
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
           accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          OR
-        </Text>
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            Forget your password?
+          </Text>
+        </View>
         <View
-          style={undefined} />
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            Sign In
+          </Text>
+        </View>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            OR
+          </Text>
+          <View
+            style={undefined}
+          />
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            Continue without signing in
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            Register for account
+          </Text>
+        </View>
       </View>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={false}
-        onPress={[Function]}
-        style={undefined}>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          Continue without signing in
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={false}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          Register for account
-        </Text>
-      </TouchableOpacity>
     </View>
-  </ScrollView>
+  </RCTScrollView>
 </View>
 `;

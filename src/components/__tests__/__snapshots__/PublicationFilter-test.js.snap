@@ -1,19 +1,45 @@
-exports[`test does not render when not connected 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`does not render when not connected 1`] = `
 <View
   style={
     Array [
       undefined,
       false,
     ]
-  }>
+  }
+>
   <View
-    style={undefined}>
-    <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={[Function]}
-      style={undefined}>
+    style={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -22,7 +48,8 @@ exports[`test does not render when not connected 1`] = `
             Array [
               undefined,
             ]
-          }>
+          }
+        >
           Choose Category
         </Text>
         <Text
@@ -33,38 +60,65 @@ exports[`test does not render when not connected 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   </View>
 </View>
 `;
 
-exports[`test renders correctly 1`] = `
+exports[`renders correctly 1`] = `
 <View
   style={
     Array [
       undefined,
       false,
     ]
-  }>
+  }
+>
   <View
-    style={undefined}>
-    <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={[Function]}
-      style={undefined}>
+    style={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -73,7 +127,8 @@ exports[`test renders correctly 1`] = `
             Array [
               undefined,
             ]
-          }>
+          }
+        >
           Choose Category
         </Text>
         <Text
@@ -84,38 +139,65 @@ exports[`test renders correctly 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   </View>
 </View>
 `;
 
-exports[`test renders selected discipline 1`] = `
+exports[`renders selected discipline 1`] = `
 <View
   style={
     Array [
       undefined,
       false,
     ]
-  }>
+  }
+>
   <View
-    style={undefined}>
-    <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={[Function]}
-      style={undefined}>
+    style={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -124,7 +206,8 @@ exports[`test renders selected discipline 1`] = `
             Array [
               undefined,
             ]
-          }>
+          }
+        >
           Viewing Science
         </Text>
         <Text
@@ -135,18 +218,21 @@ exports[`test renders selected discipline 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   </View>
 </View>
 `;

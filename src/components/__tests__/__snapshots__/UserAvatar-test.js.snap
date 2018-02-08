@@ -1,4 +1,6 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <Image
   defaultSource={1}
   source={
@@ -6,5 +8,6 @@ exports[`test renders correctly 1`] = `
       "uri": "avatar",
     }
   }
-  style={undefined} />
+  style={undefined}
+/>
 `;

@@ -1,5 +1,8 @@
-exports[`test renders already seen if already_seen is on subject 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders already seen if already_seen is on subject 1`] = `
 <View
+  collapsable={undefined}
   style={
     Object {
       "opacity": 0,
@@ -13,7 +16,8 @@ exports[`test renders already seen if already_seen is on subject 1`] = `
         },
       ],
     }
-  }>
+  }
+>
   <View
     style={
       Array [
@@ -26,7 +30,8 @@ exports[`test renders already seen if already_seen is on subject 1`] = `
           "elevation": 1,
         },
       ]
-    }>
+    }
+  >
     <Image
       onLoadEnd={[Function]}
       source={
@@ -42,9 +47,11 @@ exports[`test renders already seen if already_seen is on subject 1`] = `
             "width": 100,
           },
         ]
-      } />
+      }
+    />
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -56,7 +63,8 @@ exports[`test renders already seen if already_seen is on subject 1`] = `
               undefined,
             ],
           ]
-        }>
+        }
+      >
         ALREADY SEEN!
       </Text>
     </View>
@@ -64,8 +72,9 @@ exports[`test renders already seen if already_seen is on subject 1`] = `
 </View>
 `;
 
-exports[`test renders already seen if it was seen this session 1`] = `
+exports[`renders already seen if it was seen this session 1`] = `
 <View
+  collapsable={undefined}
   style={
     Object {
       "opacity": 0,
@@ -79,7 +88,8 @@ exports[`test renders already seen if it was seen this session 1`] = `
         },
       ],
     }
-  }>
+  }
+>
   <View
     style={
       Array [
@@ -92,7 +102,8 @@ exports[`test renders already seen if it was seen this session 1`] = `
           "elevation": 1,
         },
       ]
-    }>
+    }
+  >
     <Image
       onLoadEnd={[Function]}
       source={
@@ -108,9 +119,11 @@ exports[`test renders already seen if it was seen this session 1`] = `
             "width": 100,
           },
         ]
-      } />
+      }
+    />
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -122,7 +135,8 @@ exports[`test renders already seen if it was seen this session 1`] = `
               undefined,
             ],
           ]
-        }>
+        }
+      >
         ALREADY SEEN!
       </Text>
     </View>
@@ -130,8 +144,9 @@ exports[`test renders already seen if it was seen this session 1`] = `
 </View>
 `;
 
-exports[`test renders back subject position correctly 1`] = `
+exports[`renders back subject position correctly 1`] = `
 <View
+  collapsable={undefined}
   style={
     Object {
       "opacity": 0,
@@ -145,7 +160,8 @@ exports[`test renders back subject position correctly 1`] = `
         },
       ],
     }
-  }>
+  }
+>
   <View
     style={
       Array [
@@ -158,7 +174,8 @@ exports[`test renders back subject position correctly 1`] = `
           "elevation": 1,
         },
       ]
-    }>
+    }
+  >
     <Image
       onLoadEnd={[Function]}
       source={
@@ -174,13 +191,15 @@ exports[`test renders back subject position correctly 1`] = `
             "width": 100,
           },
         ]
-      } />
+      }
+    />
   </View>
 </View>
 `;
 
-exports[`test renders front subject position correctly 1`] = `
+exports[`renders front subject position correctly 1`] = `
 <View
+  collapsable={undefined}
   style={
     Object {
       "opacity": 0,
@@ -191,7 +210,8 @@ exports[`test renders front subject position correctly 1`] = `
         },
       ],
     }
-  }>
+  }
+>
   <View
     style={
       Array [
@@ -204,7 +224,8 @@ exports[`test renders front subject position correctly 1`] = `
           "elevation": 3,
         },
       ]
-    }>
+    }
+  >
     <Image
       onLoadEnd={[Function]}
       source={
@@ -220,7 +241,8 @@ exports[`test renders front subject position correctly 1`] = `
             "width": 100,
           },
         ]
-      } />
+      }
+    />
   </View>
 </View>
 `;

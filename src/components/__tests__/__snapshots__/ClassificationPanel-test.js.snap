@@ -1,7 +1,11 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <View
-    style={undefined} />
+    style={undefined}
+  />
 </View>
 `;

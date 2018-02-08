@@ -1,4 +1,6 @@
-exports[`test sets a new state 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sets a new state 1`] = `
 Object {
   "bobLoblaw": "Has a law blog",
   "classifier": Object {
@@ -45,7 +47,7 @@ Object {
 }
 `;
 
-exports[`test sets state from initial state 1`] = `
+exports[`sets state from initial state 1`] = `
 Object {
   "classifier": Object {
     "annotations": Array [],
@@ -91,7 +93,7 @@ Object {
 }
 `;
 
-exports[`test sets user 1`] = `
+exports[`sets user 1`] = `
 Object {
   "classifier": Object {
     "annotations": Array [],
@@ -140,7 +142,7 @@ Object {
 }
 `;
 
-exports[`test unsets user 1`] = `
+exports[`unsets user 1`] = `
 Object {
   "classifier": Object {
     "annotations": Array [],

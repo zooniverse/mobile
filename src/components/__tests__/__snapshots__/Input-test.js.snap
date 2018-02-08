@@ -1,8 +1,12 @@
-exports[`test renders a label correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a label correctly 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <View
-    style={undefined}>
+    style={undefined}
+  >
     <Text
       accessible={true}
       allowFontScaling={true}
@@ -11,13 +15,16 @@ exports[`test renders a label correctly 1`] = `
         Array [
           undefined,
         ]
-      }>
+      }
+    >
       Ermahgerd Berks
     </Text>
   </View>
   <View
-    style={undefined}>
+    style={undefined}
+  >
     <TextInput
+      allowFontScaling={true}
       autoCapitalize="none"
       autoCorrect={false}
       keyboardType="default"
@@ -25,17 +32,21 @@ exports[`test renders a label correctly 1`] = `
       returnKeyType="done"
       secureTextEntry={false}
       style={undefined}
-      underlineColorAndroid="white" />
+      underlineColorAndroid="white"
+    />
   </View>
 </View>
 `;
 
-exports[`test renders password fields (using secureTextEntry) 1`] = `
+exports[`renders password fields (using secureTextEntry) 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <View
-    style={undefined}>
+    style={undefined}
+  >
     <TextInput
+      allowFontScaling={true}
       autoCapitalize="none"
       autoCorrect={false}
       keyboardType="default"
@@ -43,17 +54,21 @@ exports[`test renders password fields (using secureTextEntry) 1`] = `
       returnKeyType="done"
       secureTextEntry={true}
       style={undefined}
-      underlineColorAndroid="white" />
+      underlineColorAndroid="white"
+    />
   </View>
 </View>
 `;
 
-exports[`test renders with no label 1`] = `
+exports[`renders with no label 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <View
-    style={undefined}>
+    style={undefined}
+  >
     <TextInput
+      allowFontScaling={true}
       autoCapitalize="none"
       autoCorrect={false}
       keyboardType="default"
@@ -61,7 +76,8 @@ exports[`test renders with no label 1`] = `
       returnKeyType="done"
       secureTextEntry={false}
       style={undefined}
-      underlineColorAndroid="white" />
+      underlineColorAndroid="white"
+    />
   </View>
 </View>
 `;

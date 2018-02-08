@@ -1,68 +1,28 @@
-exports[`test renders correctly 1`] = `
-<View
-  onMoveShouldSetResponder={[Function]}
-  onMoveShouldSetResponderCapture={[Function]}
-  onResponderEnd={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderReject={[Function]}
-  onResponderRelease={[Function]}
-  onResponderStart={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  onStartShouldSetResponderCapture={[Function]}
-  style={
-    Array [
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<ImageZoom
+  cropHeight={1334}
+  cropWidth={750}
+  imageHeight={0}
+  imageWidth={0}
+  longPressTime={300}
+  onLongPress={[Function]}
+  panToMove={true}
+  pinchToZoom={true}
+>
+  <Image
+    source={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "transparent",
-        "justifyContent": "center",
-        "overflow": "hidden",
-      },
-      Object {
-        "height": 667,
-        "width": 375,
-      },
-    ]
-  }>
-  <View
+        "uri": "https://placekitten.com/200/300",
+      }
+    }
     style={
       Object {
-        "transform": Array [
-          Object {
-            "scale": 1,
-          },
-          Object {
-            "translateX": 0,
-          },
-          Object {
-            "translateY": 0,
-          },
-        ],
+        "height": 0,
+        "width": 0,
       }
-    }>
-    <View
-      onLayout={[Function]}
-      style={
-        Object {
-          "height": 0,
-          "width": 0,
-        }
-      }>
-      <Image
-        source={
-          Object {
-            "uri": "https://placekitten.com/200/300",
-          }
-        }
-        style={
-          Object {
-            "height": 0,
-            "width": 0,
-          }
-        } />
-    </View>
-  </View>
-</View>
+    }
+  />
+</ImageZoom>
 `;
