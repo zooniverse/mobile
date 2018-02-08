@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 import { setState, syncInterestSubscriptions } from '../actions/index'
 import { setDimensions } from '../actions/device'
 import { isEmpty, pathOr } from 'ramda'
-import FCM from 'react-native-fcm'
+import FCM, { FCMEvent } from 'react-native-fcm'
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -51,7 +51,7 @@ class ZooniverseApp extends Component {
       PushNotificationIOS.addEventListener('notification', this.onRemoteNotification)
       PushNotificationIOS.addEventListener('register', this.onPushRegistration)
     } else {
-      FCM.on('notification', this.onRemoteNotification)
+      FCM.on(FCMEvent.Notification, this.onRemoteNotification)
     }
   }
 
