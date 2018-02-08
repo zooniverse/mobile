@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import { AppState, Navigator, NetInfo } from 'react-native'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'remote-redux-devtools';
+import { AppState, NetInfo } from 'react-native'
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'
-import {Scene, Router} from 'react-native-router-flux'
+import {Scene, Router, Drawer} from 'react-native-router-flux'
 import { setIsConnected, fetchAllProjects, setState } from '../actions/index'
 import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
@@ -18,7 +18,7 @@ import PublicationList from '../components/PublicationList'
 import SignIn from '../components/SignIn'
 import Register from '../components/Register'
 import Settings from '../components/Settings'
-import SideDrawer from '../components/SideDrawer'
+import SideDrawerContent from '../components/SideDrawerContent'
 import ZooWebView from '../components/ZooWebView'
 import Onboarding from '../components/Onboarding'
 import SwipeClassifier from '../components/SwipeClassifier'
@@ -40,7 +40,7 @@ export default class App extends Component {
     const dispatchConnected = isConnected => store.dispatch(setIsConnected(isConnected))
     NetInfo.isConnected.fetch().then(isConnected => {
       store.dispatch(setState('isConnected', isConnected))
-      NetInfo.isConnected.addEventListener('change', dispatchConnected)
+      NetInfo.isConnected.addEventListener('connectionChange', dispatchConnected)
     })
     store.dispatch(fetchAllProjects())
   }
@@ -48,22 +48,22 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router ref="router">
-          <Scene ref="drawer" key="drawer" component={SideDrawer} open={false}>
-            <Scene key="main" tabs={false} >
-              <Scene key="SignIn" component={SignIn} duration={0} type="reset" sceneConfig={Navigator.SceneConfigs.FloatFromLeft} />
-              <Scene key="ZooniverseApp" component={ZooniverseApp} initial />
-              <Scene key="ProjectDisciplines" component={ProjectDisciplines} />
-              <Scene key="About" component={About} />
-              <Scene key="Publications" component={PublicationList} />
-              <Scene key="ProjectList" component={ProjectList} />
-              <Scene key="Register" component={Register} />
-              <Scene key="Settings" component={Settings} />
-              <Scene key="ZooWebView" hideNavBar={true} component={ZooWebView} duration={0} />
-              <Scene key="Onboarding" component={Onboarding} duration={0} hideNavBar={true} sceneConfig={Navigator.SceneConfigs.FloatFromLeft} />
-              <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} />
+        <Router>
+          <Drawer ref="drawer" key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
+            <Scene key="main" tabs={false}>
+              <Scene key="SignIn" component={SignIn} duration={0} type="reset" navBar={SignIn.renderNavigationBar} />
+              <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} initial />
+              <Scene key="ProjectDisciplines" component={ProjectDisciplines} navBar={ProjectDisciplines.renderNavigationBar} />
+              <Scene key="About" component={About} navBar={About.renderNavigationBar}/>
+              <Scene key="Publications" component={PublicationList} navBar={PublicationList.renderNavigationBar} />
+              <Scene key="ProjectList" component={ProjectList} navBar={ProjectList.renderNavigationBar} />
+              <Scene key="Register" component={Register} navBar={Register.renderNavigationBar} />
+              <Scene key="Settings" component={Settings} navBar={Settings.renderNavigationBar} />
+              <Scene key="ZooWebView" hideNavBar={true} component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
+              <Scene key="Onboarding" component={Onboarding} duration={0} hideNavBar={true} />
+              <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
             </Scene>
-          </Scene>
+          </Drawer>
         </Router>
       </Provider>
     );

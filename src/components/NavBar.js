@@ -37,7 +37,7 @@ export class NavBar extends Component {
   }
 
   handleSideDrawer(){
-    Actions.refresh({key: 'drawer', open: true })
+    Actions.drawerOpen()
   }
 
   render() {

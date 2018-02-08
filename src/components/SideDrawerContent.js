@@ -38,8 +38,7 @@ export class SideDrawerContent extends Component {
   }
 
   close() {
-    //Timeout used due to open issue:  https://github.com/aksonov/react-native-router-flux/issues/1125
-    setTimeout(() => Actions.refresh({key: 'drawer', open: false }), 0)
+    Actions.drawerClose();
   }
 
   goHome(){
