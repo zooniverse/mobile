@@ -3,14 +3,14 @@ import {
   Alert,
   Linking,
   Platform,
-  View
+  View,
+  WebView
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import NavBar from './NavBar'
 import { setState, setIsFetching } from '../actions/index'
 import { connect } from 'react-redux'
 import {Actions} from 'react-native-router-flux'
-import WebViewBridge from 'react-native-webview-bridge'
 import OverlaySpinner from './OverlaySpinner'
 import PropTypes from 'prop-types';
 
@@ -67,9 +67,8 @@ class ZooWebView extends React.Component {
     return (
       <View style={styles.container}>
         <NavBar title={this.props.project.display_name} showBack={true} onBack={()=> {this.onBack()}} />
-        <WebViewBridge
+        <WebView
           ref={WEBVIEW_REF}
-          onBridgeMessage={this.onBridgeMessage.bind(this)}
           source={{uri: zurl}}
           onLoadEnd={this.onLoadEnd}
           injectedJavaScript={jsCode}
@@ -137,7 +136,6 @@ class ZooWebView extends React.Component {
 
   onLoadEnd  = () => {
     this.props.setIsFetching(false)
-    setTimeout(() => { this.refs[WEBVIEW_REF].sendToBridge('get-links') }, 1500)
   }
 
   handleExternalLink(url) {
