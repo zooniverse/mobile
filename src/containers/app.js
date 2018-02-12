@@ -49,7 +49,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Drawer ref="drawer" key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
+          <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
             <Scene key="main" tabs={false}>
               <Scene key="SignIn" component={SignIn} duration={0} type="reset" navBar={SignIn.renderNavigationBar} />
               <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} initial />

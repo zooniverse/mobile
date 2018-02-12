@@ -9,7 +9,7 @@ jest.mock('Image', () => {
   const React = require('react');
   class MockImage extends React.Component {
 
-    static getSize(a, b) {
+    static getSize() {
       return 40;
     }
   
