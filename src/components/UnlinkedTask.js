@@ -24,9 +24,9 @@ const UnlinkedTask = (props) => {
         />
 
         <TouchableOpacity
-          style={styles.answerContainer}
           onPress={ ()=>props.onAnswered(props.unlinkedTaskKey, idx) }
-          activeOpacity={0.5}>
+          activeOpacity={0.5}
+        >
           <StyledText additionalStyles={[styles.answer]} text={ answer.label } />
         </TouchableOpacity>
       </View>
@@ -59,9 +59,6 @@ const styles = EStyleSheet.create({
   },
   switchComponent: {
     margin: 3
-  },
-  answerContainer: {
-    flex: 1
   },
   answer: {
     flexWrap: 'wrap',
