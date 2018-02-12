@@ -94,7 +94,7 @@ export class Settings extends React.Component {
           <Switch
             value={this.props.notifications['general']}
             style={styles.switchComponent}
-            onTintColor={theme.headerColor}
+            onTintColor={theme.$headerColor}
             onValueChange={(checked) => this.props.updateGeneralNotification(checked)}
           />
           <StyledText text="General Zooniverse notifications" />
@@ -120,7 +120,7 @@ export class Settings extends React.Component {
             <Switch
               value={this.props.settings.promptForWorkflow}
               style={styles.switchComponent}
-              onTintColor={theme.headerColor}
+              onTintColor={theme.$headerColor}
               onValueChange={(checked) => this.props.updateSetting('promptForWorkflow', checked)}
             />
             <View>

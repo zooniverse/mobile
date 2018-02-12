@@ -19,8 +19,8 @@ import PropTypes from 'prop-types';
 //everything above and prevents it from being touchable
 const toTop = (Platform.OS === 'ios') ? 135 : 125
 const SWIPE_THRESHOLD = 90
-const leftOverlayColor = theme.swipeLeft
-const rightOverlayColor = theme.swipeRight
+const leftOverlayColor = theme.$swipeLeft
+const rightOverlayColor = theme.$swipeRight
 
 const mapStateToProps = (state, ownProps) => ({
   workflow: state.classifier.workflow[ownProps.workflowID] || {},

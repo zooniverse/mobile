@@ -29,7 +29,7 @@ export class ProjectNotification extends Component {
         <Switch
           value={this.props.notification}
           style={styles.switchComponent}
-          onTintColor={theme.headerColor}
+          onTintColor={theme.$headerColor}
           onValueChange={(checked) => this.props.updateProjectNotification(checked)}
         />
 

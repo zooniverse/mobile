@@ -94,7 +94,7 @@ exports[`renders correctly 1`] = `
           collapsable={undefined}
           style={
             Object {
-              "backgroundColor": undefined,
+              "backgroundColor": "#E45950",
               "height": 100,
               "opacity": 0,
               "width": 100,
@@ -131,7 +131,7 @@ exports[`renders correctly 1`] = `
           collapsable={undefined}
           style={
             Object {
-              "backgroundColor": undefined,
+              "backgroundColor": "#00979D",
               "height": 100,
               "opacity": 0,
               "width": 100,

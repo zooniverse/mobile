@@ -37,7 +37,7 @@ exports[`renders 1`] = `
           style={undefined}
         >
           <Switch
-            onTintColor={undefined}
+            onTintColor="rgba(0, 151, 157, 1)"
             onValueChange={[Function]}
             style={undefined}
             value={true}
@@ -101,7 +101,7 @@ exports[`renders 1`] = `
           style={undefined}
         >
           <Switch
-            onTintColor={undefined}
+            onTintColor="rgba(0, 151, 157, 1)"
             onValueChange={[Function]}
             style={undefined}
             value={true}
@@ -177,7 +177,7 @@ exports[`renders message if push is disabled 1`] = `
           style={undefined}
         >
           <Switch
-            onTintColor={undefined}
+            onTintColor="rgba(0, 151, 157, 1)"
             onValueChange={[Function]}
             style={undefined}
             value={true}

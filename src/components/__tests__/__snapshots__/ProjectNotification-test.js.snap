@@ -5,7 +5,7 @@ exports[`renders checked 1`] = `
   style={undefined}
 >
   <Switch
-    onTintColor={undefined}
+    onTintColor="rgba(0, 151, 157, 1)"
     onValueChange={[Function]}
     style={undefined}
     value={true}
@@ -30,7 +30,7 @@ exports[`renders not checked 1`] = `
   style={undefined}
 >
   <Switch
-    onTintColor={undefined}
+    onTintColor="rgba(0, 151, 157, 1)"
     onValueChange={[Function]}
     style={undefined}
     value={false}
