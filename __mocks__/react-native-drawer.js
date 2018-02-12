@@ -1,4 +1,4 @@
 import { createMockComponent } from './mockUtils'
 
-export const Drawer = createMockComponent('Drawer');
+const Drawer = createMockComponent('Drawer');
 export default Drawer;
