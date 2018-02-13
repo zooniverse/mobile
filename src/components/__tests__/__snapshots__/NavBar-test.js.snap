@@ -1,4 +1,6 @@
-exports[`test renders correctly with defaults 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with defaults 1`] = `
 <View
   style={
     Array [
@@ -7,13 +9,36 @@ exports[`test renders correctly with defaults 1`] = `
         "height": 70,
       },
     ]
-  }>
+  }
+>
   <View
-    style={undefined}>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
-      style={undefined}>
+    style={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={false}
@@ -22,25 +47,28 @@ exports[`test renders correctly with defaults 1`] = `
           Array [
             Object {
               "color": undefined,
-              "fontFamily": "FontAwesome",
               "fontSize": 12,
-              "fontStyle": "normal",
-              "fontWeight": "normal",
             },
             Array [
               undefined,
               undefined,
             ],
+            Object {
+              "fontFamily": "FontAwesome",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
           ]
-        }>
+        }
+      >
         
       </Text>
-    </TouchableOpacity>
+    </View>
   </View>
 </View>
 `;
 
-exports[`test renders correctly with title 1`] = `
+exports[`renders correctly with title 1`] = `
 <View
   style={
     Array [
@@ -49,20 +77,44 @@ exports[`test renders correctly with title 1`] = `
         "height": 70,
       },
     ]
-  }>
+  }
+>
   <View
-    style={undefined}>
+    style={undefined}
+  >
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-      style={undefined}>
+      style={undefined}
+    >
       OHai
     </Text>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
-      style={undefined}>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={false}
@@ -71,20 +123,23 @@ exports[`test renders correctly with title 1`] = `
           Array [
             Object {
               "color": undefined,
-              "fontFamily": "FontAwesome",
               "fontSize": 12,
-              "fontStyle": "normal",
-              "fontWeight": "normal",
             },
             Array [
               undefined,
               undefined,
             ],
+            Object {
+              "fontFamily": "FontAwesome",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
           ]
-        }>
+        }
+      >
         
       </Text>
-    </TouchableOpacity>
+    </View>
   </View>
 </View>
 `;

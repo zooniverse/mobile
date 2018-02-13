@@ -1,4 +1,6 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
   style={
     Object {
@@ -8,21 +10,42 @@ exports[`test renders correctly 1`] = `
       "right": 0,
       "top": 0,
     }
-  }>
+  }
+>
   <View
-    style={undefined}>
+    style={undefined}
+  >
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <View
-        style={undefined}>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          onPress={[Function]}
+        style={undefined}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              undefined,
-            ]
-          }>
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -31,19 +54,36 @@ exports[`test renders correctly 1`] = `
               Array [
                 undefined,
               ]
-            }>
+            }
+          >
             QUESTION
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          onPress={[Function]}
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              undefined,
-              undefined,
-            ]
-          }>
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -52,16 +92,18 @@ exports[`test renders correctly 1`] = `
               Array [
                 undefined,
               ]
-            }>
+            }
+          >
             TUTORIAL
           </Text>
-        </TouchableOpacity>
+        </View>
       </View>
       <View>
         <Question
           question="What was that?"
           taskHelp={undefined}
-          workflowID="1" />
+          workflowID="1"
+        />
         <View
           style={
             Array [
@@ -71,7 +113,8 @@ exports[`test renders correctly 1`] = `
                 "width": 100,
               },
             ]
-          }>
+          }
+        >
           <SwipeSubject
             inFront={false}
             seenThisSession={Array []}
@@ -82,7 +125,8 @@ exports[`test renders correctly 1`] = `
                 "resizedHeight": 100,
                 "resizedWidth": 100,
               }
-            } />
+            }
+          />
         </View>
       </View>
     </View>
@@ -100,7 +144,8 @@ exports[`test renders correctly 1`] = `
     }
     onAnswered={[Function]}
     showFullSize={[Function]}
-    workflowID="1" />
+    workflowID="1"
+  />
   <SwipeTabs
     answers={
       Array [
@@ -113,82 +158,45 @@ exports[`test renders correctly 1`] = `
       ]
     }
     guide={undefined}
-    onAnswered={[Function]} />
+    onAnswered={[Function]}
+  />
   <Modal
     animationType="fade"
+    hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
-    visible={false}>
+    visible={false}
+  >
     <View
-      style={undefined}>
-      <View
-        onMoveShouldSetResponder={[Function]}
-        onMoveShouldSetResponderCapture={[Function]}
-        onResponderEnd={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderReject={[Function]}
-        onResponderRelease={[Function]}
-        onResponderStart={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        onStartShouldSetResponderCapture={[Function]}
-        style={
-          Array [
+      style={undefined}
+    >
+      <ImageZoom
+        cropHeight={1334}
+        cropWidth={750}
+        imageHeight={0}
+        imageWidth={0}
+        longPressTime={300}
+        onLongPress={[Function]}
+        panToMove={true}
+        pinchToZoom={true}
+      >
+        <Image
+          source={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "transparent",
-              "justifyContent": "center",
-              "overflow": "hidden",
-            },
-            Object {
-              "height": 667,
-              "width": 375,
-            },
-          ]
-        }>
-        <View
+              "uri": "blah.jpg",
+            }
+          }
           style={
             Object {
-              "transform": Array [
-                Object {
-                  "scale": 1,
-                },
-                Object {
-                  "translateX": 0,
-                },
-                Object {
-                  "translateY": 0,
-                },
-              ],
+              "height": 0,
+              "width": 0,
             }
-          }>
-          <View
-            onLayout={[Function]}
-            style={
-              Object {
-                "height": 0,
-                "width": 0,
-              }
-            }>
-            <Image
-              source={
-                Object {
-                  "uri": "blah.jpg",
-                }
-              }
-              style={
-                Object {
-                  "height": 0,
-                  "width": 0,
-                }
-              } />
-          </View>
-        </View>
-      </View>
+          }
+        />
+      </ImageZoom>
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -197,14 +205,17 @@ exports[`test renders correctly 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
         <Text
@@ -218,14 +229,36 @@ exports[`test renders correctly 1`] = `
                 undefined,
               ],
             ]
-          }>
+          }
+        >
           You can zoom into this image
         </Text>
       </View>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        onPress={[Function]}
-        style={undefined}>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -234,31 +267,36 @@ exports[`test renders correctly 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
+      </View>
     </View>
   </Modal>
 </View>
 `;
 
-exports[`test renders spinner if fetching 1`] = `
+exports[`renders spinner if fetching 1`] = `
 <OverlaySpinner
-  overrideVisibility={true} />
+  overrideVisibility={true}
+/>
 `;
 
-exports[`test renders tutorial if needed 1`] = `
+exports[`renders tutorial if needed 1`] = `
 <Tutorial
   finishTutorial={[Function]}
   isInitialTutorial={true}
   projectName="Awesome project"
-  tutorial={undefined} />
+  tutorial={undefined}
+/>
 `;

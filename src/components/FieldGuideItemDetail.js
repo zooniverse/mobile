@@ -4,6 +4,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import StyledMarkdown from './StyledMarkdown'
 import StyledText from './StyledText'
 import SizedImage from './SizedImage'
@@ -62,15 +63,15 @@ const styles = EStyleSheet.create({
 });
 
 FieldGuideItemDetail.propTypes = {
-  item: React.PropTypes.shape({
-    title: React.PropTypes.string,
-    content: React.PropTypes.string,
-    icon: React.PropTypes.string,
+  item: PropTypes.shape({
+    title: PropTypes.string,
+    content: PropTypes.string,
+    icon: PropTypes.string,
   }),
-  icons: React.PropTypes.object,
-  setContentHeight: React.PropTypes.func,
-  setHeaderHeight: React.PropTypes.func,
-  onClose: React.PropTypes.func,
+  icons: PropTypes.object,
+  setContentHeight: PropTypes.func,
+  setHeaderHeight: PropTypes.func,
+  onClose: PropTypes.func,
 }
 
 export default FieldGuideItemDetail

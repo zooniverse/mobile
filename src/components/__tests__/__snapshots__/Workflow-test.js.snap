@@ -1,8 +1,31 @@
-exports[`test renders correctly 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  onPress={[Function]}
-  style={undefined}>
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  collapsable={undefined}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -11,7 +34,8 @@ exports[`test renders correctly 1`] = `
       Array [
         undefined,
       ]
-    }>
+    }
+  >
     Nice workflow
   </Text>
   <View
@@ -22,7 +46,8 @@ exports[`test renders correctly 1`] = `
           "backgroundColor": "#AFA48C",
         },
       ]
-    }>
+    }
+  >
     <Text
       accessible={true}
       allowFontScaling={false}
@@ -31,16 +56,19 @@ exports[`test renders correctly 1`] = `
         Array [
           Object {
             "color": undefined,
-            "fontFamily": "FontAwesome",
             "fontSize": 12,
+          },
+          undefined,
+          Object {
+            "fontFamily": "FontAwesome",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
-          undefined,
         ]
-      }>
+      }
+    >
       
     </Text>
   </View>
-</TouchableOpacity>
+</View>
 `;

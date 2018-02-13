@@ -4,6 +4,7 @@ import {
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import StyledMarkdown from './StyledMarkdown'
 import TaskHelp from './TaskHelp'
 import { connect } from 'react-redux'
@@ -57,11 +58,11 @@ const styles = EStyleSheet.create({
 })
 
 Question.propTypes = {
-  question: React.PropTypes.string,
-  workflowID: React.PropTypes.string,
-  taskHelp: React.PropTypes.string,
-  setQuestionContainerHeight: React.PropTypes.func,
-  questionContainerHeight: React.PropTypes.number,
+  question: PropTypes.string,
+  workflowID: PropTypes.string,
+  taskHelp: PropTypes.string,
+  setQuestionContainerHeight: PropTypes.func,
+  questionContainerHeight: PropTypes.number,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question)

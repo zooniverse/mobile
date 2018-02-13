@@ -2,6 +2,8 @@ import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
 import Project from '../Project'
+jest.useFakeTimers();
+
 
 const project = {
   avatar_src: 'fake_avatar',

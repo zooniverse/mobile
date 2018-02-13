@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { setState } from '../actions/index'
 import { register } from '../actions/auth'
@@ -218,12 +219,12 @@ const styles = EStyleSheet.create({
 });
 
 Register.propTypes = {
-  isFetching: React.PropTypes.bool.isRequired,
-  register: React.PropTypes.func.isRequired,
-  setField: React.PropTypes.func.isRequired,
-  setError: React.PropTypes.func.isRequired,
-  errorMessage: React.PropTypes.string,
-  registration: React.PropTypes.object
+  isFetching: PropTypes.bool.isRequired,
+  register: PropTypes.func.isRequired,
+  setField: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+  registration: PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

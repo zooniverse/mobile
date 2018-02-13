@@ -2,6 +2,7 @@ import React from 'react'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {GLOBALS} from '../constants/globals'
 import { createIconSet } from 'react-native-vector-icons'
+import PropTypes from 'prop-types';
 
 const ZooIconSet = createIconSet(GLOBALS.GLYPHMAP, 'zoo-font', 'zoo-font.ttf')
 
@@ -22,7 +23,7 @@ const styles = EStyleSheet.create({
 });
 
 ZooIcon.propTypes = {
-  iconName: React.PropTypes.string.isRequired,
+  iconName: PropTypes.string.isRequired,
 }
 
 export default ZooIcon

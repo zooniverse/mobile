@@ -1,202 +1,303 @@
-exports[`test passes false to Modal when not visible 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`passes false to Modal when not visible 1`] = `
 <View>
   <Modal
     animationType="fade"
+    hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
-    visible={false}>
+    visible={false}
+  >
     <View
-      style={undefined}>
-      <ScrollView
+      style={undefined}
+    >
+      <RCTScrollView
         contentContainerStyle={undefined}
-        style={undefined}>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              undefined,
-              Array [
-                undefined,
-              ],
-            ]
-          }>
-          Please Choose Workflow
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              undefined,
-              undefined,
-              Array [
-                undefined,
-              ],
-            ]
-          }>
-          FOR MOBILE
-        </Text>
-        <View
-          style={undefined}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            disabled={false}
-            onPress={[Function]}
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  Array [
-                    undefined,
-                  ],
-                ]
-              }>
-              Mobile 1
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            disabled={false}
-            onPress={[Function]}
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  Array [
-                    undefined,
-                  ],
-                ]
-              }>
-              Mobile 2
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              undefined,
-              undefined,
-              Array [
-                undefined,
-              ],
-            ]
-          }>
-          OTHER WORKFLOWS
-        </Text>
-        <View
-          style={undefined}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            disabled={false}
-            onPress={[Function]}
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  Array [
-                    undefined,
-                  ],
-                ]
-              }>
-              Non 1
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            disabled={false}
-            onPress={[Function]}
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  Array [
-                    undefined,
-                  ],
-                ]
-              }>
-              Non 2
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          disabled={false}
-          onPress={[Function]}
-          style={
-            Array [
-              Array [
-                undefined,
-                undefined,
-              ],
-              Array [
-                undefined,
-              ],
-            ]
-          }>
+        style={undefined}
+      >
+        <View>
           <Text
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
-            Cancel
+            style={
+              Array [
+                undefined,
+                Array [
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Please Choose Workflow
           </Text>
-        </TouchableOpacity>
-      </ScrollView>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+                undefined,
+                Array [
+                  undefined,
+                ],
+              ]
+            }
+          >
+            FOR MOBILE
+          </Text>
+          <View
+            style={undefined}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    Array [
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Mobile 1
+              </Text>
+            </View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    Array [
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Mobile 2
+              </Text>
+            </View>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+                undefined,
+                Array [
+                  undefined,
+                ],
+              ]
+            }
+          >
+            OTHER WORKFLOWS
+          </Text>
+          <View
+            style={undefined}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    Array [
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Non 1
+              </Text>
+            </View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    Array [
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Non 2
+              </Text>
+            </View>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={undefined}
+            >
+              Cancel
+            </Text>
+          </View>
+        </View>
+      </RCTScrollView>
     </View>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
-      style={undefined}>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={false}
@@ -205,220 +306,322 @@ exports[`test passes false to Modal when not visible 1`] = `
           Array [
             Object {
               "color": undefined,
-              "fontFamily": "FontAwesome",
               "fontSize": 12,
+            },
+            undefined,
+            Object {
+              "fontFamily": "FontAwesome",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            undefined,
           ]
-        }>
+        }
+      >
         
       </Text>
-    </TouchableOpacity>
+    </View>
   </Modal>
 </View>
 `;
 
-exports[`test renders correctly when visible 1`] = `
+exports[`renders correctly when visible 1`] = `
 <View>
   <Modal
     animationType="fade"
+    hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
-    visible={true}>
+    visible={true}
+  >
     <View
-      style={undefined}>
-      <ScrollView
+      style={undefined}
+    >
+      <RCTScrollView
         contentContainerStyle={undefined}
-        style={undefined}>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              undefined,
-              Array [
-                undefined,
-              ],
-            ]
-          }>
-          Please Choose Workflow
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              undefined,
-              undefined,
-              Array [
-                undefined,
-              ],
-            ]
-          }>
-          FOR MOBILE
-        </Text>
-        <View
-          style={undefined}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            disabled={false}
-            onPress={[Function]}
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  Array [
-                    undefined,
-                  ],
-                ]
-              }>
-              Mobile 1
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            disabled={false}
-            onPress={[Function]}
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  Array [
-                    undefined,
-                  ],
-                ]
-              }>
-              Mobile 2
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              undefined,
-              undefined,
-              Array [
-                undefined,
-              ],
-            ]
-          }>
-          OTHER WORKFLOWS
-        </Text>
-        <View
-          style={undefined}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            disabled={false}
-            onPress={[Function]}
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  Array [
-                    undefined,
-                  ],
-                ]
-              }>
-              Non 1
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            disabled={false}
-            onPress={[Function]}
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  Array [
-                    undefined,
-                  ],
-                ]
-              }>
-              Non 2
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          disabled={false}
-          onPress={[Function]}
-          style={
-            Array [
-              Array [
-                undefined,
-                undefined,
-              ],
-              Array [
-                undefined,
-              ],
-            ]
-          }>
+        style={undefined}
+      >
+        <View>
           <Text
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}>
-            Cancel
+            style={
+              Array [
+                undefined,
+                Array [
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Please Choose Workflow
           </Text>
-        </TouchableOpacity>
-      </ScrollView>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+                undefined,
+                Array [
+                  undefined,
+                ],
+              ]
+            }
+          >
+            FOR MOBILE
+          </Text>
+          <View
+            style={undefined}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    Array [
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Mobile 1
+              </Text>
+            </View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    Array [
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Mobile 2
+              </Text>
+            </View>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                undefined,
+                undefined,
+                Array [
+                  undefined,
+                ],
+              ]
+            }
+          >
+            OTHER WORKFLOWS
+          </Text>
+          <View
+            style={undefined}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    Array [
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Non 1
+              </Text>
+            </View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    Array [
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Non 2
+              </Text>
+            </View>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={undefined}
+            >
+              Cancel
+            </Text>
+          </View>
+        </View>
+      </RCTScrollView>
     </View>
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={[Function]}
-      style={undefined}>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={false}
@@ -427,17 +630,20 @@ exports[`test renders correctly when visible 1`] = `
           Array [
             Object {
               "color": undefined,
-              "fontFamily": "FontAwesome",
               "fontSize": 12,
+            },
+            undefined,
+            Object {
+              "fontFamily": "FontAwesome",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            undefined,
           ]
-        }>
+        }
+      >
         
       </Text>
-    </TouchableOpacity>
+    </View>
   </Modal>
 </View>
 `;

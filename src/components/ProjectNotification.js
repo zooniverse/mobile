@@ -4,6 +4,7 @@ import {
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import theme from '../theme'
 import StyledText from './StyledText'
 import { connect } from 'react-redux'
@@ -28,7 +29,7 @@ export class ProjectNotification extends Component {
         <Switch
           value={this.props.notification}
           style={styles.switchComponent}
-          onTintColor={theme.headerColor}
+          onTintColor={theme.$headerColor}
           onValueChange={(checked) => this.props.updateProjectNotification(checked)}
         />
 
@@ -50,10 +51,10 @@ const styles = EStyleSheet.create({
 });
 
 ProjectNotification.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  notification: React.PropTypes.bool.isRequired,
-  updateProjectNotification: React.PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  notification: PropTypes.bool.isRequired,
+  updateProjectNotification: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectNotification)

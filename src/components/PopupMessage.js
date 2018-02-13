@@ -6,6 +6,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 
 export class PopupMessage extends Component {
   constructor(props) {
@@ -90,10 +91,10 @@ const styles = EStyleSheet.create({
 });
 
 PopupMessage.propTypes = {
-  text: React.PropTypes.string,
-  setHidden: React.PropTypes.func,
-  workflowSelectionHeight: React.PropTypes.number,
-  isVisible: React.PropTypes.bool,
+  text: PropTypes.string,
+  setHidden: PropTypes.func,
+  workflowSelectionHeight: PropTypes.number,
+  isVisible: PropTypes.bool,
 }
 
 export default PopupMessage

@@ -3,15 +3,16 @@ import {
   Alert,
   Linking,
   Platform,
-  View
+  View,
+  WebView
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import NavBar from './NavBar'
 import { setState, setIsFetching } from '../actions/index'
 import { connect } from 'react-redux'
 import {Actions} from 'react-native-router-flux'
-import WebViewBridge from 'react-native-webview-bridge'
 import OverlaySpinner from './OverlaySpinner'
+import PropTypes from 'prop-types';
 
 const WEBVIEW_REF = 'WEBVIEW_REF'
 const zooniverseURL = 'https://www.zooniverse.org/projects/'
@@ -66,9 +67,8 @@ class ZooWebView extends React.Component {
     return (
       <View style={styles.container}>
         <NavBar title={this.props.project.display_name} showBack={true} onBack={()=> {this.onBack()}} />
-        <WebViewBridge
+        <WebView
           ref={WEBVIEW_REF}
-          onBridgeMessage={this.onBridgeMessage.bind(this)}
           source={{uri: zurl}}
           onLoadEnd={this.onLoadEnd}
           injectedJavaScript={jsCode}
@@ -136,7 +136,6 @@ class ZooWebView extends React.Component {
 
   onLoadEnd  = () => {
     this.props.setIsFetching(false)
-    setTimeout(() => { this.refs[WEBVIEW_REF].sendToBridge('get-links') }, 1500)
   }
 
   handleExternalLink(url) {
@@ -159,10 +158,10 @@ const styles = EStyleSheet.create({
 
 
 ZooWebView.propTypes = {
-  project: React.PropTypes.object,
-  webViewNavCounter: React.PropTypes.number,
-  updateNavCounter: React.PropTypes.func,
-  setIsFetching: React.PropTypes.func
+  project: PropTypes.object,
+  webViewNavCounter: PropTypes.number,
+  updateNavCounter: PropTypes.func,
+  setIsFetching: PropTypes.func
 }
 
 

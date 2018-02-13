@@ -1,22 +1,41 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
+  collapsable={undefined}
   style={
     Object {
       "height": 269,
       "opacity": 0,
     }
-  }>
-  <TouchableOpacity
-    activeOpacity={0.9}
-    onPress={[Function]}
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        undefined,
-        Object {
-          "height": 244,
-        },
-      ]
-    }>
+      Object {
+        "height": 244,
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
     <Image
       onLoadEnd={[Function]}
       source={
@@ -31,23 +50,30 @@ exports[`test renders correctly 1`] = `
             "height": 244,
           },
         ]
-      } />
+      }
+    />
     <View
-      style={undefined} />
+      style={undefined}
+    />
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <View
-          style={undefined}>
+          style={undefined}
+        >
           <View
-            style={undefined}>
+            style={undefined}
+          >
             <Text
               accessible={true}
               allowFontScaling={true}
               ellipsizeMode="tail"
               numberOfLines={1}
-              style={undefined}>
+              style={undefined}
+            >
               Nice project
             </Text>
           </View>
@@ -56,7 +82,8 @@ exports[`test renders correctly 1`] = `
             allowFontScaling={true}
             ellipsizeMode="tail"
             numberOfLines={2}
-            style={undefined} />
+            style={undefined}
+          />
         </View>
         <View
           style={
@@ -66,7 +93,8 @@ exports[`test renders correctly 1`] = `
                 "backgroundColor": "#AFA48C",
               },
             ]
-          }>
+          }
+        >
           <Text
             accessible={true}
             allowFontScaling={false}
@@ -75,42 +103,62 @@ exports[`test renders correctly 1`] = `
               Array [
                 Object {
                   "color": undefined,
-                  "fontFamily": "FontAwesome",
                   "fontSize": 12,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "FontAwesome",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                undefined,
               ]
-            }>
+            }
+          >
             
           </Text>
         </View>
       </View>
     </View>
-  </TouchableOpacity>
+  </View>
 </View>
 `;
 
-exports[`test renders mobile icon for mobile projects 1`] = `
+exports[`renders mobile icon for mobile projects 1`] = `
 <View
+  collapsable={undefined}
   style={
     Object {
       "height": 269,
       "opacity": 0,
     }
-  }>
-  <TouchableOpacity
-    activeOpacity={0.9}
-    onPress={[Function]}
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        undefined,
-        Object {
-          "height": 244,
-        },
-      ]
-    }>
+      Object {
+        "height": 244,
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
     <Image
       onLoadEnd={[Function]}
       source={
@@ -125,27 +173,35 @@ exports[`test renders mobile icon for mobile projects 1`] = `
             "height": 244,
           },
         ]
-      } />
+      }
+    />
     <View
-      style={undefined} />
+      style={undefined}
+    />
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Image
           resizeMode="cover"
           source={1}
-          style={undefined} />
+          style={undefined}
+        />
         <View
-          style={undefined}>
+          style={undefined}
+        >
           <View
-            style={undefined}>
+            style={undefined}
+          >
             <Text
               accessible={true}
               allowFontScaling={true}
               ellipsizeMode="tail"
               numberOfLines={1}
-              style={undefined}>
+              style={undefined}
+            >
               Nice project
             </Text>
           </View>
@@ -154,7 +210,8 @@ exports[`test renders mobile icon for mobile projects 1`] = `
             allowFontScaling={true}
             ellipsizeMode="tail"
             numberOfLines={2}
-            style={undefined} />
+            style={undefined}
+          />
         </View>
         <View
           style={
@@ -164,7 +221,8 @@ exports[`test renders mobile icon for mobile projects 1`] = `
                 "backgroundColor": "#AFA48C",
               },
             ]
-          }>
+          }
+        >
           <Text
             accessible={true}
             allowFontScaling={false}
@@ -173,42 +231,62 @@ exports[`test renders mobile icon for mobile projects 1`] = `
               Array [
                 Object {
                   "color": undefined,
-                  "fontFamily": "FontAwesome",
                   "fontSize": 12,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "FontAwesome",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                undefined,
               ]
-            }>
+            }
+          >
             
           </Text>
         </View>
       </View>
     </View>
-  </TouchableOpacity>
+  </View>
 </View>
 `;
 
-exports[`test renders wallpaper if no avatar 1`] = `
+exports[`renders wallpaper if no avatar 1`] = `
 <View
+  collapsable={undefined}
   style={
     Object {
       "height": 269,
       "opacity": 0,
     }
-  }>
-  <TouchableOpacity
-    activeOpacity={0.9}
-    onPress={[Function]}
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        undefined,
-        Object {
-          "height": 244,
-        },
-      ]
-    }>
+      Object {
+        "height": 244,
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
     <Image
       onLoadEnd={[Function]}
       source={1}
@@ -220,23 +298,30 @@ exports[`test renders wallpaper if no avatar 1`] = `
             "height": 244,
           },
         ]
-      } />
+      }
+    />
     <View
-      style={undefined} />
+      style={undefined}
+    />
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <View
-          style={undefined}>
+          style={undefined}
+        >
           <View
-            style={undefined}>
+            style={undefined}
+          >
             <Text
               accessible={true}
               allowFontScaling={true}
               ellipsizeMode="tail"
               numberOfLines={1}
-              style={undefined}>
+              style={undefined}
+            >
               Nice project
             </Text>
           </View>
@@ -245,7 +330,8 @@ exports[`test renders wallpaper if no avatar 1`] = `
             allowFontScaling={true}
             ellipsizeMode="tail"
             numberOfLines={2}
-            style={undefined} />
+            style={undefined}
+          />
         </View>
         <View
           style={
@@ -255,7 +341,8 @@ exports[`test renders wallpaper if no avatar 1`] = `
                 "backgroundColor": "#AFA48C",
               },
             ]
-          }>
+          }
+        >
           <Text
             accessible={true}
             allowFontScaling={false}
@@ -264,42 +351,62 @@ exports[`test renders wallpaper if no avatar 1`] = `
               Array [
                 Object {
                   "color": undefined,
-                  "fontFamily": "FontAwesome",
                   "fontSize": 12,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "FontAwesome",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                undefined,
               ]
-            }>
+            }
+          >
             
           </Text>
         </View>
       </View>
     </View>
-  </TouchableOpacity>
+  </View>
 </View>
 `;
 
-exports[`test renders workflow rows for multi mobile projects 1`] = `
+exports[`renders workflow rows for multi mobile projects 1`] = `
 <View
+  collapsable={undefined}
   style={
     Object {
       "height": 269,
       "opacity": 0,
     }
-  }>
-  <TouchableOpacity
-    activeOpacity={0.9}
-    onPress={[Function]}
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        undefined,
-        Object {
-          "height": 244,
-        },
-      ]
-    }>
+      Object {
+        "height": 244,
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
     <Image
       onLoadEnd={[Function]}
       source={
@@ -314,27 +421,35 @@ exports[`test renders workflow rows for multi mobile projects 1`] = `
             "height": 244,
           },
         ]
-      } />
+      }
+    />
     <View
-      style={undefined} />
+      style={undefined}
+    />
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Image
           resizeMode="cover"
           source={1}
-          style={undefined} />
+          style={undefined}
+        />
         <View
-          style={undefined}>
+          style={undefined}
+        >
           <View
-            style={undefined}>
+            style={undefined}
+          >
             <Text
               accessible={true}
               allowFontScaling={true}
               ellipsizeMode="tail"
               numberOfLines={1}
-              style={undefined}>
+              style={undefined}
+            >
               Nice project
             </Text>
           </View>
@@ -343,21 +458,45 @@ exports[`test renders workflow rows for multi mobile projects 1`] = `
             allowFontScaling={true}
             ellipsizeMode="tail"
             numberOfLines={2}
-            style={undefined} />
+            style={undefined}
+          />
         </View>
         <View
           style={
             Array [
               undefined,
             ]
-          } />
+          }
+        />
       </View>
       <View
-        onLayout={[Function]}>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          onPress={[Function]}
-          style={undefined}>
+        onLayout={[Function]}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -366,7 +505,8 @@ exports[`test renders workflow rows for multi mobile projects 1`] = `
               Array [
                 undefined,
               ]
-            } />
+            }
+          />
           <View
             style={
               Array [
@@ -375,7 +515,8 @@ exports[`test renders workflow rows for multi mobile projects 1`] = `
                   "backgroundColor": "#AFA48C",
                 },
               ]
-            }>
+            }
+          >
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -384,22 +525,46 @@ exports[`test renders workflow rows for multi mobile projects 1`] = `
                 Array [
                   Object {
                     "color": undefined,
-                    "fontFamily": "FontAwesome",
                     "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "FontAwesome",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  undefined,
                 ]
-              }>
+              }
+            >
               
             </Text>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          onPress={[Function]}
-          style={undefined}>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -408,7 +573,8 @@ exports[`test renders workflow rows for multi mobile projects 1`] = `
               Array [
                 undefined,
               ]
-            } />
+            }
+          />
           <View
             style={
               Array [
@@ -417,7 +583,8 @@ exports[`test renders workflow rows for multi mobile projects 1`] = `
                   "backgroundColor": "#AFA48C",
                 },
               ]
-            }>
+            }
+          >
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -426,20 +593,23 @@ exports[`test renders workflow rows for multi mobile projects 1`] = `
                 Array [
                   Object {
                     "color": undefined,
-                    "fontFamily": "FontAwesome",
                     "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "FontAwesome",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  undefined,
                 ]
-              }>
+              }
+            >
               
             </Text>
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
-  </TouchableOpacity>
+  </View>
 </View>
 `;

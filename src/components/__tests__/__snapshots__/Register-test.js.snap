@@ -1,73 +1,20 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
-  style={undefined}>
-  <ScrollView>
-    <View
-      style={undefined}>
+  style={undefined}
+>
+  <RCTScrollView>
+    <View>
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            User Name
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={false}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-      </View>
-      <View
-        style={undefined}>
-        <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            Email address
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={false}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-      </View>
-      <View
-        style={undefined}>
-        <View
-          style={undefined}>
+          style={undefined}
+        >
           <View
-            style={undefined}>
+            style={undefined}
+          >
             <Text
               accessible={true}
               allowFontScaling={true}
@@ -76,30 +23,16 @@ exports[`test renders correctly 1`] = `
                 Array [
                   undefined,
                 ]
-              }>
-              Password
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  undefined,
-                ]
-              }>
-                Min 8 chars
+              }
+            >
+              User Name
             </Text>
           </View>
           <View
-            style={
-              Array [
-                undefined,
-                undefined,
-              ]
-            }>
+            style={undefined}
+          >
             <TextInput
+              allowFontScaling={true}
               autoCapitalize="none"
               autoCorrect={false}
               keyboardType="default"
@@ -107,82 +40,16 @@ exports[`test renders correctly 1`] = `
               returnKeyType="done"
               secureTextEntry={false}
               style={undefined}
-              underlineColorAndroid="white" />
+              underlineColorAndroid="white"
+            />
           </View>
         </View>
         <View
-          style={
-            Array [
-              undefined,
-              undefined,
-            ]
-          }>
-          <TouchableOpacity
-            activeOpacity={0.2}
-            disabled={undefined}
-            onPress={[Function]}>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "flexDirection": "row",
-                  "padding": 20,
-                }
-              }>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "flex": 1,
-                  }
-                } />
-              <TouchableOpacity
-                activeOpacity={0.2}
-                disabled={undefined}
-                onPress={[Function]}
-                style={
-                  Array [
-                    Object {
-                      "borderColor": "#ddd",
-                      "borderRadius": 5,
-                      "borderWidth": 2,
-                    },
-                    Object {
-                      "backgroundColor": "#1995ea",
-                    },
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                  ]
-                }>
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": undefined,
-                        "fontFamily": "FontAwesome",
-                        "fontSize": 12,
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      undefined,
-                    ]
-                  }>
-                  
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={[Function]}>
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
             <Text
               accessible={true}
               allowFontScaling={true}
@@ -190,109 +57,100 @@ exports[`test renders correctly 1`] = `
               style={
                 Array [
                   undefined,
+                ]
+              }
+            >
+              Email address
+            </Text>
+          </View>
+          <View
+            style={undefined}
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
+              onChangeText={[Function]}
+              returnKeyType="done"
+              secureTextEntry={false}
+              style={undefined}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
+            <View
+              style={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                  ]
+                }
+              >
+                Password
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                  Min 8 chars
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  undefined,
                   undefined,
                 ]
-              }>
-              Show password
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View
-        style={undefined}>
-        <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            Real name
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-                undefined,
-              ]
-            }>
-              Optional
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={false}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              undefined,
-              undefined,
-            ]
-          }>
-          We\'ll use this to give you credit in scientific papers, etc.
-        </Text>
-      </View>
-      <View
-        style={undefined}>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          disabled={undefined}
-          onPress={[Function]}>
+              }
+            >
+              <TextInput
+                allowFontScaling={true}
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="default"
+                onChangeText={[Function]}
+                returnKeyType="done"
+                secureTextEntry={false}
+                style={undefined}
+                underlineColorAndroid="white"
+              />
+            </View>
+          </View>
           <View
             style={
               Array [
                 undefined,
                 undefined,
               ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "flex": 1,
-                }
-              } />
-            <TouchableOpacity
-              activeOpacity={0.2}
-              disabled={undefined}
-              onPress={[Function]}
-              style={
-                Array [
-                  Object {
-                    "borderColor": "#ddd",
-                    "borderRadius": 5,
-                    "borderWidth": 2,
-                  },
-                  Object {
-                    "backgroundColor": "white",
-                  },
-                  Object {
-                    "alignItems": "center",
-                    "justifyContent": "center",
-                  },
-                ]
-              }>
+            }
+          >
+            <CheckboxField
+              checkboxStyle={undefined}
+              containerStyle={undefined}
+              defaultColor="white"
+              onSelect={[Function]}
+              selected={true}
+              selectedColor="#1995ea"
+            >
               <Text
                 accessible={true}
                 allowFontScaling={false}
@@ -301,22 +159,108 @@ exports[`test renders correctly 1`] = `
                   Array [
                     Object {
                       "color": undefined,
-                      "fontFamily": "FontAwesome",
                       "fontSize": 12,
+                    },
+                    undefined,
+                    Object {
+                      "fontFamily": "FontAwesome",
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
-                    undefined,
                   ]
-                }>
+                }
+              >
                 
               </Text>
-            </TouchableOpacity>
+            </CheckboxField>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Show password
+              </Text>
+            </View>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={[Function]}>
+        </View>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Real name
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+                Optional
+            </Text>
+          </View>
+          <View
+            style={undefined}
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              returnKeyType="done"
+              secureTextEntry={false}
+              style={undefined}
+              underlineColorAndroid="white"
+            />
+          </View>
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -326,47 +270,126 @@ exports[`test renders correctly 1`] = `
                 undefined,
                 undefined,
               ]
-            }>
-            It’s okay to send me email occasionally.
+            }
+          >
+            We'll use this to give you credit in scientific papers, etc.
           </Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={true}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        <Text
+        </View>
+        <View
+          style={undefined}
+        >
+          <CheckboxField
+            checkboxStyle={undefined}
+            containerStyle={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }
+            defaultColor="white"
+            onSelect={[Function]}
+            selected={undefined}
+            selectedColor="#1995ea"
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": undefined,
+                    "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "FontAwesome",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </CheckboxField>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              It’s okay to send me email occasionally.
+            </Text>
+          </View>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
           accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          Register
-        </Text>
-      </TouchableOpacity>
-      <View
-        style={undefined}>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              undefined,
-              undefined,
-            ]
-          }>
-          By signing up, I agree to Zooniverse\'s 
-        </Text>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={[Function]}
-          style={undefined}>
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            Register
+          </Text>
+        </View>
+        <View
+          style={undefined}
+        >
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -376,86 +399,71 @@ exports[`test renders correctly 1`] = `
                 undefined,
                 undefined,
               ]
-            }>
-            Privacy Policy
+            }
+          >
+            By signing up, I agree to Zooniverse's 
           </Text>
-        </TouchableOpacity>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              Privacy Policy
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
-  </ScrollView>
+  </RCTScrollView>
 </View>
 `;
 
-exports[`test renders errors 1`] = `
+exports[`renders errors 1`] = `
 <View
-  style={undefined}>
-  <ScrollView>
-    <View
-      style={undefined}>
+  style={undefined}
+>
+  <RCTScrollView>
+    <View>
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            User Name
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={false}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-      </View>
-      <View
-        style={undefined}>
-        <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            Email address
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={false}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-      </View>
-      <View
-        style={undefined}>
-        <View
-          style={undefined}>
+          style={undefined}
+        >
           <View
-            style={undefined}>
+            style={undefined}
+          >
             <Text
               accessible={true}
               allowFontScaling={true}
@@ -464,30 +472,16 @@ exports[`test renders errors 1`] = `
                 Array [
                   undefined,
                 ]
-              }>
-              Password
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  undefined,
-                  undefined,
-                ]
-              }>
-                Min 8 chars
+              }
+            >
+              User Name
             </Text>
           </View>
           <View
-            style={
-              Array [
-                undefined,
-                undefined,
-              ]
-            }>
+            style={undefined}
+          >
             <TextInput
+              allowFontScaling={true}
               autoCapitalize="none"
               autoCorrect={false}
               keyboardType="default"
@@ -495,82 +489,16 @@ exports[`test renders errors 1`] = `
               returnKeyType="done"
               secureTextEntry={false}
               style={undefined}
-              underlineColorAndroid="white" />
+              underlineColorAndroid="white"
+            />
           </View>
         </View>
         <View
-          style={
-            Array [
-              undefined,
-              undefined,
-            ]
-          }>
-          <TouchableOpacity
-            activeOpacity={0.2}
-            disabled={undefined}
-            onPress={[Function]}>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "flexDirection": "row",
-                  "padding": 20,
-                }
-              }>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "flex": 1,
-                  }
-                } />
-              <TouchableOpacity
-                activeOpacity={0.2}
-                disabled={undefined}
-                onPress={[Function]}
-                style={
-                  Array [
-                    Object {
-                      "borderColor": "#ddd",
-                      "borderRadius": 5,
-                      "borderWidth": 2,
-                    },
-                    Object {
-                      "backgroundColor": "#1995ea",
-                    },
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                  ]
-                }>
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": undefined,
-                        "fontFamily": "FontAwesome",
-                        "fontSize": 12,
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      undefined,
-                    ]
-                  }>
-                  
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={[Function]}>
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
             <Text
               accessible={true}
               allowFontScaling={true}
@@ -578,109 +506,100 @@ exports[`test renders errors 1`] = `
               style={
                 Array [
                   undefined,
+                ]
+              }
+            >
+              Email address
+            </Text>
+          </View>
+          <View
+            style={undefined}
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
+              onChangeText={[Function]}
+              returnKeyType="done"
+              secureTextEntry={false}
+              style={undefined}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
+            <View
+              style={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                  ]
+                }
+              >
+                Password
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                  Min 8 chars
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  undefined,
                   undefined,
                 ]
-              }>
-              Show password
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View
-        style={undefined}>
-        <View
-          style={undefined}>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-              ]
-            }>
-            Real name
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-                undefined,
-              ]
-            }>
-              Optional
-          </Text>
-        </View>
-        <View
-          style={undefined}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={[Function]}
-            returnKeyType="done"
-            secureTextEntry={false}
-            style={undefined}
-            underlineColorAndroid="white" />
-        </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              undefined,
-              undefined,
-            ]
-          }>
-          We\'ll use this to give you credit in scientific papers, etc.
-        </Text>
-      </View>
-      <View
-        style={undefined}>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          disabled={undefined}
-          onPress={[Function]}>
+              }
+            >
+              <TextInput
+                allowFontScaling={true}
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="default"
+                onChangeText={[Function]}
+                returnKeyType="done"
+                secureTextEntry={false}
+                style={undefined}
+                underlineColorAndroid="white"
+              />
+            </View>
+          </View>
           <View
             style={
               Array [
                 undefined,
                 undefined,
               ]
-            }>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "flex": 1,
-                }
-              } />
-            <TouchableOpacity
-              activeOpacity={0.2}
-              disabled={undefined}
-              onPress={[Function]}
-              style={
-                Array [
-                  Object {
-                    "borderColor": "#ddd",
-                    "borderRadius": 5,
-                    "borderWidth": 2,
-                  },
-                  Object {
-                    "backgroundColor": "white",
-                  },
-                  Object {
-                    "alignItems": "center",
-                    "justifyContent": "center",
-                  },
-                ]
-              }>
+            }
+          >
+            <CheckboxField
+              checkboxStyle={undefined}
+              containerStyle={undefined}
+              defaultColor="white"
+              onSelect={[Function]}
+              selected={true}
+              selectedColor="#1995ea"
+            >
               <Text
                 accessible={true}
                 allowFontScaling={false}
@@ -689,22 +608,108 @@ exports[`test renders errors 1`] = `
                   Array [
                     Object {
                       "color": undefined,
-                      "fontFamily": "FontAwesome",
                       "fontSize": 12,
+                    },
+                    undefined,
+                    Object {
+                      "fontFamily": "FontAwesome",
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
-                    undefined,
                   ]
-                }>
+                }
+              >
                 
               </Text>
-            </TouchableOpacity>
+            </CheckboxField>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Show password
+              </Text>
+            </View>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={[Function]}>
+        </View>
+        <View
+          style={undefined}
+        >
+          <View
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Real name
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+                Optional
+            </Text>
+          </View>
+          <View
+            style={undefined}
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              returnKeyType="done"
+              secureTextEntry={false}
+              style={undefined}
+              underlineColorAndroid="white"
+            />
+          </View>
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -714,43 +719,89 @@ exports[`test renders errors 1`] = `
                 undefined,
                 undefined,
               ]
-            }>
-            It’s okay to send me email occasionally.
+            }
+          >
+            We'll use this to give you credit in scientific papers, etc.
           </Text>
-        </TouchableOpacity>
-      </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        Wrong!
-      </Text>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={true}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
-            undefined,
-          ]
-        }>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={undefined}>
-          Register
-        </Text>
-      </TouchableOpacity>
-      <View
-        style={undefined}>
+        </View>
+        <View
+          style={undefined}
+        >
+          <CheckboxField
+            checkboxStyle={undefined}
+            containerStyle={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }
+            defaultColor="white"
+            onSelect={[Function]}
+            selected={undefined}
+            selectedColor="#1995ea"
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": undefined,
+                    "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "FontAwesome",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </CheckboxField>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              It’s okay to send me email occasionally.
+            </Text>
+          </View>
+        </View>
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -760,13 +811,47 @@ exports[`test renders errors 1`] = `
               undefined,
               undefined,
             ]
-          }>
-          By signing up, I agree to Zooniverse\'s 
+          }
+        >
+          Wrong!
         </Text>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={[Function]}
-          style={undefined}>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={undefined}
+          >
+            Register
+          </Text>
+        </View>
+        <View
+          style={undefined}
+        >
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -776,12 +861,52 @@ exports[`test renders errors 1`] = `
                 undefined,
                 undefined,
               ]
-            }>
-            Privacy Policy
+            }
+          >
+            By signing up, I agree to Zooniverse's 
           </Text>
-        </TouchableOpacity>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              Privacy Policy
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
-  </ScrollView>
+  </RCTScrollView>
 </View>
 `;

@@ -1,153 +1,170 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
-  style={undefined}>
-  <ScrollView
-    style={undefined}>
-    <Image
-      defaultSource={1}
-      onLoadEnd={[Function]}
-      source={
-        Object {
-          "uri": "http://notvalid",
-        }
-      }
-      style={
-        Object {
-          "height": 0,
-          "opacity": 0,
-          "width": 0,
-        }
-      } />
-    <WebView
-      automaticallyAdjustContentInsets={true}
-      domStorageEnabled={true}
-      javaScriptEnabled={true}
-      onNavigationStateChange={[Function]}
-      onShouldStartLoadWithRequest={[Function]}
-      scalesPageToFit={true}
-      source={
-        Object {
-          "baseUrl": "about:blank",
-          "html": "<!DOCTYPE html>
-        <html>
-            <head>
-                <meta charset=\"utf-8\">
-                <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-                <meta name=\"viewport\" content=\"initial-scale=1, maximum-scale=1\">
-                <meta name=\"format-detection\" content=\"telephone=no\">
-                <meta name=\"format-detection\" content=\"date=no\">
-                <meta name=\"format-detection\" content=\"address=no\">
-                <meta name=\"format-detection\" content=\"email=no\">
-        
-                <title></title>
-        
-        
-                <style type=\"text/css\">
-                    body, html, #height-wrapper {
-                        margin: 0;
-                        padding: 0;
-                    }
-                    #height-wrapper {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                    }
-                    body {
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                    }
-                    b, strong {
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                        font-weight: bold;
-                    }
-                    h1, h2, h3, h4, h5, h6 {
-                        margin-top: 10px;
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                        font-weight: 500;
-                    }
-                    img {
-                      height: auto;
-                      width: auto;
-                      max-width: 300px;
-                      max-height: 300px;
-                    }
-                    p {
-                      margin: 0;
-                    }
-                    
-                </style>
-            </head>
-            <body>
-                <h3>Welcome to Planet Four: Ridges</h3>
-        <hr>
-        <p>This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars\' past.</p>
-        
-        
-            <script>
-        
-            ;(function() {
-            var wrapper = document.createElement(\"div\");
-            wrapper.id = \"height-wrapper\";
-            while (document.body.firstChild) {
-                wrapper.appendChild(document.body.firstChild);
-            }
-            document.body.appendChild(wrapper);
-            var i = 0;
-            function updateHeight() {
-                document.title = wrapper.clientHeight;
-                window.location.hash = ++i;
-            }
-            updateHeight();
-            window.addEventListener(\"load\", function() {
-                updateHeight();
-                setTimeout(updateHeight, 1000);
-            });
-            window.addEventListener(\"resize\", updateHeight);
-            }());
-        
-            </script>
-            </body>
-        </html>",
-        }
-      }
-      style={
-        Array [
-          undefined,
+  style={undefined}
+>
+  <RCTScrollView
+    style={undefined}
+  >
+    <View>
+      <SizedImage
+        source={
           Object {
-            "height": 0,
-            "width": 295,
-          },
-        ]
-      } />
-  </ScrollView>
-  <View
-    style={undefined}>
-    <View
-      style={undefined} />
-    <TouchableOpacity
-      activeOpacity={0.5}
-      disabled={false}
-      onPress={[Function]}
-      style={
-        Array [
-          undefined,
+            "uri": "http://notvalid",
+          }
+        }
+      />
+      <WebView
+        automaticallyAdjustContentInsets={true}
+        domStorageEnabled={true}
+        javaScriptEnabled={true}
+        onNavigationStateChange={[Function]}
+        onShouldStartLoadWithRequest={[Function]}
+        scalesPageToFit={true}
+        source={
+          Object {
+            "baseUrl": "about:blank",
+            "html": "<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=\\"utf-8\\">
+        <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+        <meta name=\\"viewport\\" content=\\"initial-scale=1, maximum-scale=1\\">
+        <meta name=\\"format-detection\\" content=\\"telephone=no\\">
+        <meta name=\\"format-detection\\" content=\\"date=no\\">
+        <meta name=\\"format-detection\\" content=\\"address=no\\">
+        <meta name=\\"format-detection\\" content=\\"email=no\\">
+
+        <title></title>
+
+
+        <style type=\\"text/css\\">
+            body, html, #height-wrapper {
+                margin: 0;
+                padding: 0;
+            }
+            #height-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+            body {
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+            }
+            b, strong {
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+                font-weight: bold;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 10px;
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+                font-weight: 500;
+            }
+            img {
+              height: auto;
+              width: auto;
+              max-width: 300px;
+              max-height: 300px;
+            }
+            p {
+              margin: 0;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h3>Welcome to Planet Four: Ridges</h3>
+<hr>
+<p>This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past.</p>
+
+
+    <script>
+
+    ;(function() {
+    var wrapper = document.createElement(\\"div\\");
+    wrapper.id = \\"height-wrapper\\";
+    while (document.body.firstChild) {
+        wrapper.appendChild(document.body.firstChild);
+    }
+    document.body.appendChild(wrapper);
+    var i = 0;
+    function updateHeight() {
+        document.title = wrapper.clientHeight;
+        window.location.hash = ++i;
+    }
+    updateHeight();
+    window.addEventListener(\\"load\\", function() {
+        updateHeight();
+        setTimeout(updateHeight, 1000);
+    });
+    window.addEventListener(\\"resize\\", updateHeight);
+    }());
+
+    </script>
+    </body>
+</html>",
+          }
+        }
+        style={
           Array [
             undefined,
-          ],
-        ]
-      }>
+            Object {
+              "height": 0,
+              "width": 670,
+            },
+          ]
+        }
+      />
+    </View>
+  </RCTScrollView>
+  <View
+    style={undefined}
+  >
+    <View
+      style={undefined}
+    />
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
-        style={undefined}>
+        style={undefined}
+      >
         Continue
       </Text>
-    </TouchableOpacity>
+    </View>
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -156,23 +173,48 @@ exports[`test renders correctly 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
-                "fontStyle": "normal",
-                "fontWeight": "normal",
               },
               Array [
                 undefined,
                 undefined,
               ],
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
             ]
-          }>
+          }
+        >
           
         </Text>
       </View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -181,20 +223,45 @@ exports[`test renders correctly 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -203,20 +270,45 @@ exports[`test renders correctly 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -225,21 +317,45 @@ exports[`test renders correctly 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-        style={undefined}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -248,25 +364,29 @@ exports[`test renders correctly 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
+      </View>
     </View>
   </View>
 </View>
 `;
 
-exports[`test renders header if initial tutorial 1`] = `
+exports[`renders header if initial tutorial 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -278,156 +398,171 @@ exports[`test renders header if initial tutorial 1`] = `
           undefined,
         ],
       ]
-    }>
+    }
+  >
     Awesome project - Tutorial
   </Text>
-  <ScrollView
-    style={undefined}>
-    <Image
-      defaultSource={1}
-      onLoadEnd={[Function]}
-      source={
-        Object {
-          "uri": "http://notvalid",
-        }
-      }
-      style={
-        Object {
-          "height": 0,
-          "opacity": 0,
-          "width": 0,
-        }
-      } />
-    <WebView
-      automaticallyAdjustContentInsets={true}
-      domStorageEnabled={true}
-      javaScriptEnabled={true}
-      onNavigationStateChange={[Function]}
-      onShouldStartLoadWithRequest={[Function]}
-      scalesPageToFit={true}
-      source={
-        Object {
-          "baseUrl": "about:blank",
-          "html": "<!DOCTYPE html>
-        <html>
-            <head>
-                <meta charset=\"utf-8\">
-                <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-                <meta name=\"viewport\" content=\"initial-scale=1, maximum-scale=1\">
-                <meta name=\"format-detection\" content=\"telephone=no\">
-                <meta name=\"format-detection\" content=\"date=no\">
-                <meta name=\"format-detection\" content=\"address=no\">
-                <meta name=\"format-detection\" content=\"email=no\">
-        
-                <title></title>
-        
-        
-                <style type=\"text/css\">
-                    body, html, #height-wrapper {
-                        margin: 0;
-                        padding: 0;
-                    }
-                    #height-wrapper {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                    }
-                    body {
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                    }
-                    b, strong {
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                        font-weight: bold;
-                    }
-                    h1, h2, h3, h4, h5, h6 {
-                        margin-top: 10px;
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                        font-weight: 500;
-                    }
-                    img {
-                      height: auto;
-                      width: auto;
-                      max-width: 300px;
-                      max-height: 300px;
-                    }
-                    p {
-                      margin: 0;
-                    }
-                    
-                </style>
-            </head>
-            <body>
-                <h3>Welcome to Planet Four: Ridges</h3>
-        <hr>
-        <p>This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars\' past.</p>
-        
-        
-            <script>
-        
-            ;(function() {
-            var wrapper = document.createElement(\"div\");
-            wrapper.id = \"height-wrapper\";
-            while (document.body.firstChild) {
-                wrapper.appendChild(document.body.firstChild);
-            }
-            document.body.appendChild(wrapper);
-            var i = 0;
-            function updateHeight() {
-                document.title = wrapper.clientHeight;
-                window.location.hash = ++i;
-            }
-            updateHeight();
-            window.addEventListener(\"load\", function() {
-                updateHeight();
-                setTimeout(updateHeight, 1000);
-            });
-            window.addEventListener(\"resize\", updateHeight);
-            }());
-        
-            </script>
-            </body>
-        </html>",
-        }
-      }
-      style={
-        Array [
-          undefined,
+  <RCTScrollView
+    style={undefined}
+  >
+    <View>
+      <SizedImage
+        source={
           Object {
-            "height": 0,
-            "width": 295,
-          },
-        ]
-      } />
-  </ScrollView>
-  <View
-    style={undefined}>
-    <View
-      style={undefined} />
-    <TouchableOpacity
-      activeOpacity={0.5}
-      disabled={false}
-      onPress={[Function]}
-      style={
-        Array [
-          undefined,
+            "uri": "http://notvalid",
+          }
+        }
+      />
+      <WebView
+        automaticallyAdjustContentInsets={true}
+        domStorageEnabled={true}
+        javaScriptEnabled={true}
+        onNavigationStateChange={[Function]}
+        onShouldStartLoadWithRequest={[Function]}
+        scalesPageToFit={true}
+        source={
+          Object {
+            "baseUrl": "about:blank",
+            "html": "<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=\\"utf-8\\">
+        <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+        <meta name=\\"viewport\\" content=\\"initial-scale=1, maximum-scale=1\\">
+        <meta name=\\"format-detection\\" content=\\"telephone=no\\">
+        <meta name=\\"format-detection\\" content=\\"date=no\\">
+        <meta name=\\"format-detection\\" content=\\"address=no\\">
+        <meta name=\\"format-detection\\" content=\\"email=no\\">
+
+        <title></title>
+
+
+        <style type=\\"text/css\\">
+            body, html, #height-wrapper {
+                margin: 0;
+                padding: 0;
+            }
+            #height-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+            body {
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+            }
+            b, strong {
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+                font-weight: bold;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 10px;
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+                font-weight: 500;
+            }
+            img {
+              height: auto;
+              width: auto;
+              max-width: 300px;
+              max-height: 300px;
+            }
+            p {
+              margin: 0;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h3>Welcome to Planet Four: Ridges</h3>
+<hr>
+<p>This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past.</p>
+
+
+    <script>
+
+    ;(function() {
+    var wrapper = document.createElement(\\"div\\");
+    wrapper.id = \\"height-wrapper\\";
+    while (document.body.firstChild) {
+        wrapper.appendChild(document.body.firstChild);
+    }
+    document.body.appendChild(wrapper);
+    var i = 0;
+    function updateHeight() {
+        document.title = wrapper.clientHeight;
+        window.location.hash = ++i;
+    }
+    updateHeight();
+    window.addEventListener(\\"load\\", function() {
+        updateHeight();
+        setTimeout(updateHeight, 1000);
+    });
+    window.addEventListener(\\"resize\\", updateHeight);
+    }());
+
+    </script>
+    </body>
+</html>",
+          }
+        }
+        style={
           Array [
             undefined,
-          ],
-        ]
-      }>
+            Object {
+              "height": 0,
+              "width": 670,
+            },
+          ]
+        }
+      />
+    </View>
+  </RCTScrollView>
+  <View
+    style={undefined}
+  >
+    <View
+      style={undefined}
+    />
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
-        style={undefined}>
+        style={undefined}
+      >
         Continue
       </Text>
-    </TouchableOpacity>
+    </View>
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -436,23 +571,48 @@ exports[`test renders header if initial tutorial 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
-                "fontStyle": "normal",
-                "fontWeight": "normal",
               },
               Array [
                 undefined,
                 undefined,
               ],
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
             ]
-          }>
+          }
+        >
           
         </Text>
       </View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -461,20 +621,45 @@ exports[`test renders header if initial tutorial 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -483,20 +668,45 @@ exports[`test renders header if initial tutorial 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -505,21 +715,45 @@ exports[`test renders header if initial tutorial 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-        style={undefined}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -528,157 +762,183 @@ exports[`test renders header if initial tutorial 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
+      </View>
     </View>
   </View>
 </View>
 `;
 
-exports[`test renders with no media 1`] = `
+exports[`renders with no media 1`] = `
 <View
-  style={undefined}>
-  <ScrollView
-    style={undefined}>
-    <WebView
-      automaticallyAdjustContentInsets={true}
-      domStorageEnabled={true}
-      javaScriptEnabled={true}
-      onNavigationStateChange={[Function]}
-      onShouldStartLoadWithRequest={[Function]}
-      scalesPageToFit={true}
-      source={
-        Object {
-          "baseUrl": "about:blank",
-          "html": "<!DOCTYPE html>
-        <html>
-            <head>
-                <meta charset=\"utf-8\">
-                <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-                <meta name=\"viewport\" content=\"initial-scale=1, maximum-scale=1\">
-                <meta name=\"format-detection\" content=\"telephone=no\">
-                <meta name=\"format-detection\" content=\"date=no\">
-                <meta name=\"format-detection\" content=\"address=no\">
-                <meta name=\"format-detection\" content=\"email=no\">
-        
-                <title></title>
-        
-        
-                <style type=\"text/css\">
-                    body, html, #height-wrapper {
-                        margin: 0;
-                        padding: 0;
-                    }
-                    #height-wrapper {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                    }
-                    body {
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                    }
-                    b, strong {
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                        font-weight: bold;
-                    }
-                    h1, h2, h3, h4, h5, h6 {
-                        margin-top: 10px;
-                        font-family: \"Open Sans\", \"Gill Sans\", Arial, sans-serif;
-                        font-weight: 500;
-                    }
-                    img {
-                      height: auto;
-                      width: auto;
-                      max-width: 300px;
-                      max-height: 300px;
-                    }
-                    p {
-                      margin: 0;
-                    }
-                    
-                </style>
-            </head>
-            <body>
-                <h3>Welcome to Planet Four: Ridges</h3>
-        <hr>
-        <p>This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars\' past.</p>
-        
-        
-            <script>
-        
-            ;(function() {
-            var wrapper = document.createElement(\"div\");
-            wrapper.id = \"height-wrapper\";
-            while (document.body.firstChild) {
-                wrapper.appendChild(document.body.firstChild);
-            }
-            document.body.appendChild(wrapper);
-            var i = 0;
-            function updateHeight() {
-                document.title = wrapper.clientHeight;
-                window.location.hash = ++i;
-            }
-            updateHeight();
-            window.addEventListener(\"load\", function() {
-                updateHeight();
-                setTimeout(updateHeight, 1000);
-            });
-            window.addEventListener(\"resize\", updateHeight);
-            }());
-        
-            </script>
-            </body>
-        </html>",
-        }
-      }
-      style={
-        Array [
-          undefined,
+  style={undefined}
+>
+  <RCTScrollView
+    style={undefined}
+  >
+    <View>
+      <WebView
+        automaticallyAdjustContentInsets={true}
+        domStorageEnabled={true}
+        javaScriptEnabled={true}
+        onNavigationStateChange={[Function]}
+        onShouldStartLoadWithRequest={[Function]}
+        scalesPageToFit={true}
+        source={
           Object {
-            "height": 0,
-            "width": 295,
-          },
-        ]
-      } />
-  </ScrollView>
-  <View
-    style={undefined}>
-    <View
-      style={undefined} />
-    <TouchableOpacity
-      activeOpacity={0.5}
-      disabled={false}
-      onPress={[Function]}
-      style={
-        Array [
-          undefined,
+            "baseUrl": "about:blank",
+            "html": "<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=\\"utf-8\\">
+        <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+        <meta name=\\"viewport\\" content=\\"initial-scale=1, maximum-scale=1\\">
+        <meta name=\\"format-detection\\" content=\\"telephone=no\\">
+        <meta name=\\"format-detection\\" content=\\"date=no\\">
+        <meta name=\\"format-detection\\" content=\\"address=no\\">
+        <meta name=\\"format-detection\\" content=\\"email=no\\">
+
+        <title></title>
+
+
+        <style type=\\"text/css\\">
+            body, html, #height-wrapper {
+                margin: 0;
+                padding: 0;
+            }
+            #height-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+            body {
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+            }
+            b, strong {
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+                font-weight: bold;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 10px;
+                font-family: \\"Open Sans\\", \\"Gill Sans\\", Arial, sans-serif;
+                font-weight: 500;
+            }
+            img {
+              height: auto;
+              width: auto;
+              max-width: 300px;
+              max-height: 300px;
+            }
+            p {
+              margin: 0;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h3>Welcome to Planet Four: Ridges</h3>
+<hr>
+<p>This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past.</p>
+
+
+    <script>
+
+    ;(function() {
+    var wrapper = document.createElement(\\"div\\");
+    wrapper.id = \\"height-wrapper\\";
+    while (document.body.firstChild) {
+        wrapper.appendChild(document.body.firstChild);
+    }
+    document.body.appendChild(wrapper);
+    var i = 0;
+    function updateHeight() {
+        document.title = wrapper.clientHeight;
+        window.location.hash = ++i;
+    }
+    updateHeight();
+    window.addEventListener(\\"load\\", function() {
+        updateHeight();
+        setTimeout(updateHeight, 1000);
+    });
+    window.addEventListener(\\"resize\\", updateHeight);
+    }());
+
+    </script>
+    </body>
+</html>",
+          }
+        }
+        style={
           Array [
             undefined,
-          ],
-        ]
-      }>
+            Object {
+              "height": 0,
+              "width": 670,
+            },
+          ]
+        }
+      />
+    </View>
+  </RCTScrollView>
+  <View
+    style={undefined}
+  >
+    <View
+      style={undefined}
+    />
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
-        style={undefined}>
+        style={undefined}
+      >
         Continue
       </Text>
-    </TouchableOpacity>
+    </View>
     <View
-      style={undefined}>
+      style={undefined}
+    >
       <View
-        style={undefined}>
+        style={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -687,23 +947,48 @@ exports[`test renders with no media 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
-                "fontStyle": "normal",
-                "fontWeight": "normal",
               },
               Array [
                 undefined,
                 undefined,
               ],
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
             ]
-          }>
+          }
+        >
           
         </Text>
       </View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -712,20 +997,45 @@ exports[`test renders with no media 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -734,20 +1044,45 @@ exports[`test renders with no media 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -756,21 +1091,45 @@ exports[`test renders with no media 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-        style={undefined}>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
         <Text
           accessible={true}
           allowFontScaling={false}
@@ -779,17 +1138,20 @@ exports[`test renders with no media 1`] = `
             Array [
               Object {
                 "color": undefined,
-                "fontFamily": "FontAwesome",
                 "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              undefined,
             ]
-          }>
+          }
+        >
           
         </Text>
-      </TouchableOpacity>
+      </View>
     </View>
   </View>
 </View>

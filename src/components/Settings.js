@@ -5,6 +5,7 @@ import {
   Switch,
   View
 } from 'react-native'
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import theme from '../theme'
 import StyledText from './StyledText'
@@ -93,7 +94,7 @@ export class Settings extends React.Component {
           <Switch
             value={this.props.notifications['general']}
             style={styles.switchComponent}
-            onTintColor={theme.headerColor}
+            onTintColor={theme.$headerColor}
             onValueChange={(checked) => this.props.updateGeneralNotification(checked)}
           />
           <StyledText text="General Zooniverse notifications" />
@@ -119,7 +120,7 @@ export class Settings extends React.Component {
             <Switch
               value={this.props.settings.promptForWorkflow}
               style={styles.switchComponent}
-              onTintColor={theme.headerColor}
+              onTintColor={theme.$headerColor}
               onValueChange={(checked) => this.props.updateSetting('promptForWorkflow', checked)}
             />
             <View>
@@ -175,20 +176,20 @@ const styles = EStyleSheet.create({
 });
 
 Settings.propTypes = {
-  notifications: React.PropTypes.shape({
-    general: React.PropTypes.bool,
+  notifications: PropTypes.shape({
+    general: PropTypes.bool,
   }),
-  settings: React.PropTypes.shape({
-    promptForWorkflow: React.PropTypes.bool,
+  settings: PropTypes.shape({
+    promptForWorkflow: PropTypes.bool,
   }),
-  projectList: React.PropTypes.array,
-  isFetching: React.PropTypes.bool,
-  pushEnabled: React.PropTypes.bool,
-  errorMessage: React.PropTypes.string,
-  setState: React.PropTypes.func,
-  updateGeneralNotification: React.PropTypes.func,
-  updateSetting: React.PropTypes.func,
-  checkPushPermissions: React.PropTypes.func,
+  projectList: PropTypes.array,
+  isFetching: PropTypes.bool,
+  pushEnabled: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  setState: PropTypes.func,
+  updateGeneralNotification: PropTypes.func,
+  updateSetting: PropTypes.func,
+  checkPushPermissions: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)

@@ -3,6 +3,7 @@ import {
   Image
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 
 
 class UserAvatar extends Component {
@@ -37,8 +38,8 @@ const styles = EStyleSheet.create({
 });
 
 UserAvatar.propTypes = {
-  isGuestUser: React.PropTypes.bool,
-  avatar: React.PropTypes.string
+  isGuestUser: PropTypes.bool,
+  avatar: PropTypes.string
 }
 
 export default UserAvatar

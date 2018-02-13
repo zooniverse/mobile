@@ -8,6 +8,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 import ZooIcon from './ZooIcon'
 
 class Discipline extends Component {
@@ -86,12 +87,12 @@ const styles = EStyleSheet.create({
 });
 
 Discipline.propTypes = {
-  icon: React.PropTypes.string,
-  faIcon: React.PropTypes.string,
-  title: React.PropTypes.string.isRequired,
-  tag: React.PropTypes.string.isRequired,
-  color: React.PropTypes.string.isRequired,
-  setSelectedProjectTag: React.PropTypes.func.isRequired
+  icon: PropTypes.string,
+  faIcon: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  setSelectedProjectTag: PropTypes.func.isRequired
 }
 
 export default Discipline

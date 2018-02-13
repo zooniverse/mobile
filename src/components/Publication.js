@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
@@ -69,5 +70,5 @@ const styles = EStyleSheet.create({
   }
 });
 
-Publication.propTypes = { publication: React.PropTypes.object }
+Publication.propTypes = { publication: PropTypes.object }
 export default Publication

@@ -1,10 +1,10 @@
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
-
-jest.mock('WebView', () => 'WebView')
-
 import FieldGuideItemDetail from '../FieldGuideItemDetail'
+
+jest.mock('../SizedImage', () => 'SizedImage');
+jest.mock('WebView', () => 'WebView');
 
 const item = {
   title: 'fake_avatar',

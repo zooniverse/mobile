@@ -13,6 +13,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import FieldGuideItemDetail from './FieldGuideItemDetail'
 import FieldGuideItemRow from './FieldGuideItemRow'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 import { addIndex, isEmpty, map } from 'ramda'
 
 const MAX_DEFAULT_HEIGHT = Dimensions.get('window').height * .6
@@ -282,16 +283,16 @@ const styles = EStyleSheet.create({
 })
 
 FieldGuide.propTypes = {
-  guide: React.PropTypes.shape({
-    items: React.PropTypes.arrayOf(React.PropTypes.shape({
-      title: React.PropTypes.string,
-      content: React.PropTypes.string,
-      icon: React.PropTypes.string,
+  guide: PropTypes.shape({
+    items: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string,
+      content: PropTypes.string,
+      icon: PropTypes.string,
     })),
-    icons: React.PropTypes.object,
+    icons: PropTypes.object,
   }),
-  isVisible: React.PropTypes.bool,
-  onClose: React.PropTypes.func,
+  isVisible: PropTypes.bool,
+  onClose: PropTypes.func,
 }
 
 FieldGuide.defaultProps = {

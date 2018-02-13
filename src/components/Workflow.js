@@ -7,6 +7,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 
 class Workflow extends Component {
   render() {
@@ -51,12 +52,12 @@ const styles = EStyleSheet.create({
 })
 
 Workflow.propTypes = {
-  workflow: React.PropTypes.shape({
-    display_name: React.PropTypes.string,
-    id: React.PropTypes.string
+  workflow: PropTypes.shape({
+    display_name: PropTypes.string,
+    id: PropTypes.string
   }),
-  color: React.PropTypes.string,
-  openMobileProject: React.PropTypes.func
+  color: PropTypes.string,
+  openMobileProject: PropTypes.func
 }
 
 export default Workflow

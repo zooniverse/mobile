@@ -7,6 +7,7 @@ import StyledModal from './StyledModal'
 import StyledText from './StyledText'
 import Button from './Button'
 import { addIndex, map } from 'ramda'
+import PropTypes from 'prop-types';
 
 export class WorkflowPrompt extends Component {
   render() {
@@ -114,12 +115,12 @@ const styles = EStyleSheet.create({
 });
 
 WorkflowPrompt.propTypes = {
-  mobileWorkflows: React.PropTypes.array,
-  nonMobileWorkflows: React.PropTypes.array,
-  isVisible: React.PropTypes.bool,
-  openMobileProject: React.PropTypes.func.isRequired,
-  openExternalProject: React.PropTypes.func.isRequired,
-  hideWorkflowPrompt: React.PropTypes.func.isRequired,
+  mobileWorkflows: PropTypes.array,
+  nonMobileWorkflows: PropTypes.array,
+  isVisible: PropTypes.bool,
+  openMobileProject: PropTypes.func.isRequired,
+  openExternalProject: PropTypes.func.isRequired,
+  hideWorkflowPrompt: PropTypes.func.isRequired,
 }
 
 export default WorkflowPrompt

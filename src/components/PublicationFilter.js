@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View
 } from 'react-native'
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
 import { addIndex, compose, join, keys, length, lensIndex, map, over, toUpper } from 'ramda'
@@ -176,9 +177,9 @@ const styles = EStyleSheet.create({
 });
 
 PublicationFilter.propTypes = {
-  selectedDiscipline: React.PropTypes.string,
-  disciplines: React.PropTypes.array,
-  setSelectedDiscipline: React.PropTypes.func
+  selectedDiscipline: PropTypes.string,
+  disciplines: PropTypes.array,
+  setSelectedDiscipline: PropTypes.func
 }
 
 export default PublicationFilter

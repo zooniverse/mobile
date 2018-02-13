@@ -8,6 +8,7 @@ import StyledModal from './StyledModal'
 import StyledMarkdown from './StyledMarkdown'
 import Button from './Button'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 
 
 export class TaskHelp extends Component {
@@ -69,7 +70,7 @@ const styles = EStyleSheet.create({
 })
 
 TaskHelp.propTypes = {
-  text: React.PropTypes.string,
+  text: PropTypes.string,
 }
 
 export default TaskHelp

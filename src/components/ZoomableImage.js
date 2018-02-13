@@ -4,6 +4,7 @@ import {
   Image
 } from 'react-native'
 import ImageZoom from 'react-native-image-pan-zoom'
+import PropTypes from 'prop-types';
 
 class ZoomableImage extends React.Component {
   constructor(props) {
@@ -47,13 +48,13 @@ class ZoomableImage extends React.Component {
 
 
 ZoomableImage.propTypes = {
-  source: React.PropTypes.shape({
-    uri: React.PropTypes.string,
+  source: PropTypes.shape({
+    uri: PropTypes.string,
   }),
-  handlePress: React.PropTypes.func,
-  imageWidth: React.PropTypes.number,
-  imageHeight: React.PropTypes.number,
-  allowPanAndZoom: React.PropTypes.bool,
+  handlePress: PropTypes.func,
+  imageWidth: PropTypes.number,
+  imageHeight: PropTypes.number,
+  allowPanAndZoom: PropTypes.bool,
 }
 
 export default ZoomableImage

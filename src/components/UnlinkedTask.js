@@ -5,6 +5,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import StyledText from './StyledText'
 import { addIndex, contains, map } from 'ramda'
 import theme from '../theme'
@@ -18,14 +19,14 @@ const UnlinkedTask = (props) => {
         <Switch
           value={contains(idx, annotationValues)}
           style={styles.switchComponent}
-          onTintColor={theme.headerColor}
+          onTintColor={theme.$headerColor}
           onValueChange={()=>props.onAnswered(props.unlinkedTaskKey, idx)}
         />
 
         <TouchableOpacity
-          style={styles.answerContainer}
           onPress={ ()=>props.onAnswered(props.unlinkedTaskKey, idx) }
-          activeOpacity={0.5}>
+          activeOpacity={0.5}
+        >
           <StyledText additionalStyles={[styles.answer]} text={ answer.label } />
         </TouchableOpacity>
       </View>
@@ -59,9 +60,6 @@ const styles = EStyleSheet.create({
   switchComponent: {
     margin: 3
   },
-  answerContainer: {
-    flex: 1
-  },
   answer: {
     flexWrap: 'wrap',
     margin: 3,
@@ -70,10 +68,10 @@ const styles = EStyleSheet.create({
 });
 
 UnlinkedTask.propTypes = {
-  unlinkedTask: React.PropTypes.object.isRequired,
-  onAnswered: React.PropTypes.func.isRequired,
-  annotation: React.PropTypes.array,
-  unlinkedTaskKey: React.PropTypes.string.isRequired,
+  unlinkedTask: PropTypes.object.isRequired,
+  onAnswered: PropTypes.func.isRequired,
+  annotation: PropTypes.array,
+  unlinkedTaskKey: PropTypes.string.isRequired,
 }
 
 export default UnlinkedTask

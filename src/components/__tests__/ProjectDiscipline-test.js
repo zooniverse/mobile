@@ -3,6 +3,8 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { ProjectDisciplines } from '../ProjectDisciplines'
 
+jest.useFakeTimers();
+
 it('renders correctly', () => {
   const user ={ display_name: 'Fake User' }
   const tree = renderer.create(

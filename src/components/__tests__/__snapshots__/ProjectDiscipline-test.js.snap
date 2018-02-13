@@ -1,8 +1,12 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <View
-    style={undefined}>
+    style={undefined}
+  >
     <Text
       accessible={true}
       allowFontScaling={true}
@@ -14,27 +18,89 @@ exports[`test renders correctly 1`] = `
             undefined,
           ],
         ]
-      }>
+      }
+    >
       Fake User
     </Text>
   </View>
   <View
-    style={undefined}>
-    <ScrollView>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
+    style={undefined}
+  >
+    <RCTScrollView>
+      <View>
         <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              undefined,
-              Object {
-                "backgroundColor": "rgba(0, 151, 157, 1)",
-              },
-            ]
-          }>
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
           <View
-            style={undefined}>
+            style={
+              Array [
+                undefined,
+                Object {
+                  "backgroundColor": "rgba(0, 151, 157, 1)",
+                },
+              ]
+            }
+          >
+            <View
+              style={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": undefined,
+                      "fontSize": 12,
+                    },
+                    Array [
+                      undefined,
+                      undefined,
+                      undefined,
+                    ],
+                    Object {
+                      "fontFamily": "FontAwesome",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={undefined}
+            >
+              Recent
+            </Text>
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -43,63 +109,93 @@ exports[`test renders correctly 1`] = `
                 Array [
                   Object {
                     "color": undefined,
+                    "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
                     "fontFamily": "FontAwesome",
-                    "fontSize": 12,
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Array [
-                    undefined,
-                    undefined,
-                    undefined,
-                  ],
                 ]
-              }>
-              
+              }
+            >
+              
             </Text>
           </View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            numberOfLines={1}
-            style={undefined}>
-            Recent
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={false}
-            ellipsizeMode="tail"
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
             style={
               Array [
-                Object {
-                  "color": undefined,
-                  "fontFamily": "FontAwesome",
-                  "fontSize": 12,
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
                 undefined,
+                Object {
+                  "backgroundColor": "#18807F",
+                },
               ]
-            }>
-            
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
-        <View
-          style={
-            Array [
-              undefined,
-              Object {
-                "backgroundColor": "#18807F",
-              },
-            ]
-          }>
-          <View
-            style={undefined}>
+            }
+          >
+            <View
+              style={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": undefined,
+                      "fontSize": 12,
+                    },
+                    Array [
+                      undefined,
+                      undefined,
+                    ],
+                    Object {
+                      "fontFamily": "zoo-font",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={undefined}
+            >
+              Biology
+            </Text>
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -108,62 +204,93 @@ exports[`test renders correctly 1`] = `
                 Array [
                   Object {
                     "color": undefined,
-                    "fontFamily": "zoo-font",
                     "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "FontAwesome",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Array [
-                    undefined,
-                    undefined,
-                  ],
                 ]
-              }>
-              
+              }
+            >
+              
             </Text>
           </View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            numberOfLines={1}
-            style={undefined}>
-            Biology
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={false}
-            ellipsizeMode="tail"
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
             style={
               Array [
-                Object {
-                  "color": undefined,
-                  "fontFamily": "FontAwesome",
-                  "fontSize": 12,
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
                 undefined,
+                Object {
+                  "backgroundColor": "#46D178",
+                },
               ]
-            }>
-            
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
-        <View
-          style={
-            Array [
-              undefined,
-              Object {
-                "backgroundColor": "#46D178",
-              },
-            ]
-          }>
-          <View
-            style={undefined}>
+            }
+          >
+            <View
+              style={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": undefined,
+                      "fontSize": 12,
+                    },
+                    Array [
+                      undefined,
+                      undefined,
+                    ],
+                    Object {
+                      "fontFamily": "zoo-font",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={undefined}
+            >
+              Nature
+            </Text>
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -172,62 +299,93 @@ exports[`test renders correctly 1`] = `
                 Array [
                   Object {
                     "color": undefined,
-                    "fontFamily": "zoo-font",
                     "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "FontAwesome",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Array [
-                    undefined,
-                    undefined,
-                  ],
                 ]
-              }>
-              
+              }
+            >
+              
             </Text>
           </View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            numberOfLines={1}
-            style={undefined}>
-            Nature
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={false}
-            ellipsizeMode="tail"
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
             style={
               Array [
-                Object {
-                  "color": undefined,
-                  "fontFamily": "FontAwesome",
-                  "fontSize": 12,
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
                 undefined,
+                Object {
+                  "backgroundColor": "#512BAD",
+                },
               ]
-            }>
-            
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}>
-        <View
-          style={
-            Array [
-              undefined,
-              Object {
-                "backgroundColor": "#512BAD",
-              },
-            ]
-          }>
-          <View
-            style={undefined}>
+            }
+          >
+            <View
+              style={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": undefined,
+                      "fontSize": 12,
+                    },
+                    Array [
+                      undefined,
+                      undefined,
+                    ],
+                    Object {
+                      "fontFamily": "zoo-font",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={undefined}
+            >
+              Space
+            </Text>
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -236,49 +394,23 @@ exports[`test renders correctly 1`] = `
                 Array [
                   Object {
                     "color": undefined,
-                    "fontFamily": "zoo-font",
                     "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "FontAwesome",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Array [
-                    undefined,
-                    undefined,
-                  ],
                 ]
-              }>
-              
+              }
+            >
+              
             </Text>
           </View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            numberOfLines={1}
-            style={undefined}>
-            Space
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={false}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": undefined,
-                  "fontFamily": "FontAwesome",
-                  "fontSize": 12,
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                undefined,
-              ]
-            }>
-            
-          </Text>
         </View>
-      </TouchableOpacity>
-    </ScrollView>
+      </View>
+    </RCTScrollView>
   </View>
 </View>
 `;

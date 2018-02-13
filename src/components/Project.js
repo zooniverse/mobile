@@ -13,6 +13,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 import WorkflowPrompt from './WorkflowPrompt'
 import Workflow from './Workflow'
 import PopupMessage from './PopupMessage'
@@ -292,11 +293,11 @@ const styles = EStyleSheet.create({
 });
 
 Project.propTypes = {
-  project: React.PropTypes.object.isRequired,
-  color:  React.PropTypes.string.isRequired,
-  mobileWorkflows: React.PropTypes.array,
-  nonMobileWorkflows: React.PropTypes.array,
-  promptForWorkflow: React.PropTypes.bool
+  project: PropTypes.object.isRequired,
+  color:  PropTypes.string.isRequired,
+  mobileWorkflows: PropTypes.array,
+  nonMobileWorkflows: PropTypes.array,
+  promptForWorkflow: PropTypes.bool
 }
 
 Project.defaultProps = {

@@ -1,99 +1,150 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
-  style={undefined}>
+  style={undefined}
+>
   <View
-    style={undefined}>
-    <View
-      style={
-        Object {
-          "height": 269,
-          "opacity": 0,
+    style={undefined}
+  >
+    <RCTScrollView
+      dataSource={
+        ListViewDataSource {
+          "items": 1,
         }
-      }>
-      <TouchableOpacity
-        activeOpacity={0.9}
-        onPress={[Function]}
-        style={
-          Array [
-            undefined,
+      }
+      enableEmptySections={true}
+      renderRow={[Function]}
+      renderScrollComponent={[Function]}
+    >
+      <View>
+        <View
+          collapsable={undefined}
+          style={
             Object {
-              "height": 244,
-            },
-          ]
-        }>
-        <Image
-          onLoadEnd={[Function]}
-          source={
-            Object {
-              "uri": "fake_avatar",
+              "height": 269,
+              "opacity": 0,
             }
           }
-          style={
-            Array [
-              undefined,
+        >
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
               Object {
                 "height": 244,
-              },
-            ]
-          } />
-        <View
-          style={undefined} />
-        <View
-          style={undefined}>
-          <View
-            style={undefined}>
-            <View
-              style={undefined}>
-              <View
-                style={undefined}>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  numberOfLines={1}
-                  style={undefined}>
-                  Nice project
-                </Text>
-              </View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                numberOfLines={2}
-                style={undefined} />
-            </View>
-            <View
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              onLoadEnd={[Function]}
+              source={
+                Object {
+                  "uri": "fake_avatar",
+                }
+              }
               style={
                 Array [
                   undefined,
                   Object {
-                    "backgroundColor": "#AFA48C",
+                    "height": 244,
                   },
                 ]
-              }>
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": undefined,
-                      "fontFamily": "FontAwesome",
-                      "fontSize": 12,
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    undefined,
-                  ]
-                }>
-                
-              </Text>
+              }
+            />
+            <View
+              style={undefined}
+            />
+            <View
+              style={undefined}
+            >
+              <View
+                style={undefined}
+              >
+                <Image
+                  resizeMode="cover"
+                  source={1}
+                  style={undefined}
+                />
+                <View
+                  style={undefined}
+                >
+                  <View
+                    style={undefined}
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={undefined}
+                    >
+                      Nice project
+                    </Text>
+                  </View>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    numberOfLines={2}
+                    style={undefined}
+                  />
+                </View>
+                <View
+                  style={
+                    Array [
+                      undefined,
+                      Object {
+                        "backgroundColor": "#AFA48C",
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": undefined,
+                          "fontSize": 12,
+                        },
+                        undefined,
+                        Object {
+                          "fontFamily": "FontAwesome",
+                          "fontStyle": "normal",
+                          "fontWeight": "normal",
+                        },
+                      ]
+                    }
+                  >
+                    
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
         </View>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </RCTScrollView>
   </View>
 </View>
 `;

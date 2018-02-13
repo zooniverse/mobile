@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Drawer from 'react-native-drawer'
 import SideDrawerContent from './SideDrawerContent'
 import {Actions, DefaultRenderer} from 'react-native-router-flux'
+import PropTypes from 'prop-types';
 
 class SideDrawer extends Component {
   render () {
@@ -43,8 +44,8 @@ const drawerStyles = {
 }
 
 SideDrawer.propTypes = {
-  onNavigate: React.PropTypes.func,
-  navigationState: React.PropTypes.object,
+  onNavigate: PropTypes.func,
+  navigationState: PropTypes.object,
 }
 
 export default SideDrawer

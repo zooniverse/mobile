@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import StyledMarkdown from './StyledMarkdown'
 import StyledText from './StyledText'
 import SizedImage from './SizedImage'
@@ -194,10 +195,10 @@ const styles = EStyleSheet.create({
 })
 
 Tutorial.propTypes = {
-  tutorial: React.PropTypes.object,
-  projectName: React.PropTypes.string,
-  finishTutorial: React.PropTypes.func,
-  isInitialTutorial: React.PropTypes.bool,
+  tutorial: PropTypes.object,
+  projectName: PropTypes.string,
+  finishTutorial: PropTypes.func,
+  isInitialTutorial: PropTypes.bool,
 }
 
 export default Tutorial

@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import { signIn, continueAsGuest } from '../actions/auth'
 import { connect } from 'react-redux';
 import Button from './Button'
@@ -88,7 +89,7 @@ export class SignIn extends React.Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView style={styles.scrollView}>
           <View style={styles.signInContainer}>
             <StyledText
               textStyle={'headerText'}
@@ -138,12 +139,15 @@ export class SignIn extends React.Component {
 }
 
 const styles = EStyleSheet.create({
+  scrollView: {
+    backgroundColor: 'white',
+  },
   container: {
     flex: 1,
     paddingTop: topPadding,
   },
   signInContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     margin: 30,
     marginTop: 20,
     paddingLeft: 15,
@@ -175,9 +179,9 @@ const styles = EStyleSheet.create({
 });
 
 SignIn.propTypes = {
-  isFetching: React.PropTypes.bool,
-  signIn: React.PropTypes.func,
-  continueAsGuest: React.PropTypes.func,
-  errorMessage: React.PropTypes.string
+  isFetching: PropTypes.bool,
+  signIn: PropTypes.func,
+  continueAsGuest: PropTypes.func,
+  errorMessage: PropTypes.string
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

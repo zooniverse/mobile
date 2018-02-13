@@ -10,6 +10,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types';
 import UserAvatar from './UserAvatar'
 import CircleRibbon from './CircleRibbon'
 
@@ -36,7 +37,7 @@ export class NavBar extends Component {
   }
 
   handleSideDrawer(){
-    Actions.refresh({key: 'drawer', open: true })
+    Actions.drawerOpen()
   }
 
   render() {
@@ -145,13 +146,13 @@ const styles = EStyleSheet.create({
 })
 
 NavBar.propTypes = {
-  showLogo: React.PropTypes.bool,
-  showAvatar: React.PropTypes.bool,
-  showBack: React.PropTypes.bool,
-  showDrawer: React.PropTypes.bool,
-  onBack: React.PropTypes.func,
-  user: React.PropTypes.object,
-  title: React.PropTypes.string,
+  showLogo: PropTypes.bool,
+  showAvatar: PropTypes.bool,
+  showBack: PropTypes.bool,
+  showDrawer: PropTypes.bool,
+  onBack: PropTypes.func,
+  user: PropTypes.object,
+  title: PropTypes.string,
 }
 NavBar.defaultProps = {
   showLogo: false,

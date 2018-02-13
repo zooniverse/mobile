@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import defaultHTML from '../utils/default-md-html'
+import PropTypes from 'prop-types';
 
 import { removeMDTab } from '../utils/remove-md-tab'
 
@@ -86,10 +87,10 @@ const styles = EStyleSheet.create({
 })
 
 StyledMarkdown.propTypes = {
-  markdown: React.PropTypes.string,
-  onReceivedHeight: React.PropTypes.func,
-  extraCSS: React.PropTypes.string,
-  width: React.PropTypes.number,
+  markdown: PropTypes.string,
+  onReceivedHeight: PropTypes.func,
+  extraCSS: PropTypes.string,
+  width: PropTypes.number,
 }
 
 StyledMarkdown.defaultProps = {

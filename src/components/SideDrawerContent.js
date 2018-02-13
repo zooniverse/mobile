@@ -12,6 +12,7 @@ import StyledText from './StyledText'
 import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
+import PropTypes from 'prop-types';
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -37,8 +38,7 @@ export class SideDrawerContent extends Component {
   }
 
   close() {
-    //Timeout used due to open issue:  https://github.com/aksonov/react-native-router-flux/issues/1125
-    setTimeout(() => Actions.refresh({key: 'drawer', open: false }), 0)
+    Actions.drawerClose();
   }
 
   goHome(){
@@ -195,9 +195,9 @@ const styles = EStyleSheet.create({
 });
 
 SideDrawerContent.propTypes = {
-  user: React.PropTypes.object,
-  isGuestUser: React.PropTypes.bool,
-  signOut: React.PropTypes.func
+  user: PropTypes.object,
+  isGuestUser: PropTypes.bool,
+  signOut: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideDrawerContent)

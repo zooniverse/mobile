@@ -3,6 +3,7 @@ import {
   Text
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
 import { append } from 'ramda'
 
 const StyledText = (props) => {
@@ -72,11 +73,11 @@ const styles = EStyleSheet.create({
 });
 
 StyledText.propTypes = {
-  text: React.PropTypes.string,
-  textStyle: React.PropTypes.string,
-  additionalStyles: React.PropTypes.array,
-  numberOfLines: React.PropTypes.number,
-  ellipsizeMode: React.PropTypes.string,
+  text: PropTypes.string,
+  textStyle: PropTypes.string,
+  additionalStyles: PropTypes.array,
+  numberOfLines: PropTypes.number,
+  ellipsizeMode: PropTypes.string,
 }
 
 export default StyledText

@@ -5,6 +5,7 @@ import {
   Image,
   View
 } from 'react-native';
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
 import { indexOf } from 'ramda'
@@ -132,20 +133,20 @@ const styles = EStyleSheet.create({
 })
 
 SwipeSubject.propTypes = {
-  inFront: React.PropTypes.bool,
-  subject: React.PropTypes.shape({
-    id: React.PropTypes.string,
-    already_seen: React.PropTypes.bool,
-    display: React.PropTypes.shape({
-      src: React.PropTypes.string
+  inFront: PropTypes.bool,
+  subject: PropTypes.shape({
+    id: PropTypes.string,
+    already_seen: PropTypes.bool,
+    display: PropTypes.shape({
+      src: PropTypes.string
     }),
   }),
-  subjectSizes: React.PropTypes.shape({
-    resizedWidth: React.PropTypes.number,
-    resizedHeight: React.PropTypes.number,
+  subjectSizes: PropTypes.shape({
+    resizedWidth: PropTypes.number,
+    resizedHeight: PropTypes.number,
   }),
-  seenThisSession: React.PropTypes.array,
-  setNextSubject: React.PropTypes.func
+  seenThisSession: PropTypes.array,
+  setNextSubject: PropTypes.func
 }
 
 export default SwipeSubject

@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View
 } from 'react-native'
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
 import ClassificationPanel from './ClassificationPanel'
@@ -204,37 +205,37 @@ const styles = EStyleSheet.create({
 })
 
 SwipeClassifier.propTypes = {
-  isFetching: React.PropTypes.bool,
-  annotations: React.PropTypes.object,
-  workflowID: React.PropTypes.string,
-  workflow: React.PropTypes.shape({
-    first_task: React.PropTypes.string,
-    tasks: React.PropTypes.object,
-    configuration: React.PropTypes.object,
+  isFetching: PropTypes.bool,
+  annotations: PropTypes.object,
+  workflowID: PropTypes.string,
+  workflow: PropTypes.shape({
+    first_task: PropTypes.string,
+    tasks: PropTypes.object,
+    configuration: PropTypes.object,
   }),
-  subject: React.PropTypes.shape({
-    id: React.PropTypes.string,
-    display: React.PropTypes.shape({
-      src: React.PropTypes.string
+  subject: PropTypes.shape({
+    id: PropTypes.string,
+    display: PropTypes.shape({
+      src: PropTypes.string
     })
   }),
-  nextSubject: React.PropTypes.shape({
-    id: React.PropTypes.string
+  nextSubject: PropTypes.shape({
+    id: PropTypes.string
   }),
-  subjectSizes: React.PropTypes.object,
-  seenThisSession: React.PropTypes.array,
-  startNewClassification: React.PropTypes.func,
-  saveThenStartNewClassification: React.PropTypes.func,
-  saveAnnotation: React.PropTypes.func,
-  removeAnnotationValue:  React.PropTypes.func,
-  setIsFetching: React.PropTypes.func,
-  project: React.PropTypes.shape({
-    display_name: React.PropTypes.string,
+  subjectSizes: PropTypes.object,
+  seenThisSession: PropTypes.array,
+  startNewClassification: PropTypes.func,
+  saveThenStartNewClassification: PropTypes.func,
+  saveAnnotation: PropTypes.func,
+  removeAnnotationValue:  PropTypes.func,
+  setIsFetching: PropTypes.func,
+  project: PropTypes.shape({
+    display_name: PropTypes.string,
   }),
-  tutorial: React.PropTypes.object,
-  needsTutorial: React.PropTypes.bool,
-  guide: React.PropTypes.object,
-  setTutorialCompleted: React.PropTypes.func,
+  tutorial: PropTypes.object,
+  needsTutorial: PropTypes.bool,
+  guide: PropTypes.object,
+  setTutorialCompleted: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SwipeClassifier)

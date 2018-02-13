@@ -9,6 +9,7 @@ import Project from './Project'
 import NavBar from './NavBar'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
+import PropTypes from 'prop-types';
 import { contains, filter } from 'ramda'
 
 GoogleAnalytics.trackEvent('view', 'Project')
@@ -98,12 +99,12 @@ const styles = EStyleSheet.create({
 });
 
 ProjectList.propTypes = {
-  projectList: React.PropTypes.array,
-  recentsList: React.PropTypes.array,
-  selectedProjectTag: React.PropTypes.string,
-  color: React.PropTypes.string,
-  promptForWorkflow: React.PropTypes.bool,
-  projectWorkflows: React.PropTypes.object,
+  projectList: PropTypes.array,
+  recentsList: PropTypes.array,
+  selectedProjectTag: PropTypes.string,
+  color: PropTypes.string,
+  promptForWorkflow: PropTypes.bool,
+  projectWorkflows: PropTypes.object,
 }
 
 export default connect(mapStateToProps)(ProjectList)

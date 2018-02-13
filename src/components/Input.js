@@ -4,6 +4,7 @@ import {
   TextInput,
   View
 } from 'react-native'
+import PropTypes from 'prop-types';
 import StyledText from './StyledText'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
@@ -80,13 +81,13 @@ const styles = EStyleSheet.create({
 });
 
 Input.propTypes = {
-  handleOnChangeText: React.PropTypes.func,
-  labelText: React.PropTypes.string,
-  passwordField: React.PropTypes.bool,
-  keyboardType: React.PropTypes.string,
-  inputStyle: React.PropTypes.string,
-  subLabelText: React.PropTypes.string,
-  addLabel: React.PropTypes.string
+  handleOnChangeText: PropTypes.func,
+  labelText: PropTypes.string,
+  passwordField: PropTypes.bool,
+  keyboardType: PropTypes.string,
+  inputStyle: PropTypes.string,
+  subLabelText: PropTypes.string,
+  addLabel: PropTypes.string
 }
 
 Input.defaultProps = { labelText: '', passwordField: false, required: false };
