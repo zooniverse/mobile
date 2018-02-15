@@ -145,7 +145,7 @@ export function fetchProjects(parms, stateKey) {
             const promise = apiClient.type('avatars').get(project.links.avatar.id).then((avatar) => {
               project.avatar_src = avatar.src
             }).then(() => {
-              return project.get('workflows', {page_size: 100, active: true})
+              return project.get('workflows', {mobile_friendly: true, active: true})
             }).then((workflows) => {
               project.workflows = tagSwipeFriendly(workflows)
               return dispatch(addState(stateKey, project))
@@ -168,7 +168,7 @@ export function fetchProjects(parms, stateKey) {
 
 function tagSwipeFriendly(workflows) {
   return map((workflow) => {
-    workflow.swipe_verified = !!workflow.configuration.swipe_enabled && isValidSwipeWorkflow(workflow)
+    workflow.swipe_verified = workflow.mobile_friendly && isValidSwipeWorkflow(workflow)
     return workflow
   }, workflows)
 }
