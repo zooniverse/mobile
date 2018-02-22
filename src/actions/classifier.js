@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux'
 import { Alert, Platform } from 'react-native'
 import { getAuthUser } from '../actions/auth'
 import { loadSubjects, setSubjectsToDisplay } from '../actions/subject'
+import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 
 export function startNewClassification(workflowID) {
   return (dispatch, getState) => {
@@ -228,14 +229,14 @@ export function setupProjectPreferences(workflowID) {
           }
 
           apiClient.type('project_preferences').create(projectPreference).save().then(() => {
-            dispatch(setState(`user.projects.${projectID}`, {
-                name: project.display_name,
-                slug: project.slug,
-                activity_count: 0,
-                sort_order: '',
-                tutorials_completed_at: {}
-              }
-            ))
+            const projectData = {
+              name: project.display_name,
+              slug: project.slug,
+              activity_count: 0,
+              sort_order: '',
+              tutorials_completed_at: {}
+            };
+            dispatch(setUserProjectData(projectID, projectData));
             return resolve()
           }).catch(() => {
             return reject()
@@ -287,7 +288,7 @@ export function setTutorialCompleted() {
           projectPreferences.preferences.tutorials_completed_at = {}
         }
         projectPreferences.update({[`preferences.tutorials_completed_at.${tutorialID}`]: now}).save()
-        dispatch(setState(`user.projects.${projectID}.tutorials_completed_at.${tutorialID}`, now))
+        dispatch(saveTutorialAsComplete(projectID, tutorialID, now));
       })
     })
   }

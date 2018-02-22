@@ -1,5 +1,4 @@
 import auth from 'panoptes-client/lib/auth'
-import store from 'react-native-simple-store'
 import { Actions, ActionConst } from 'react-native-router-flux'
 import {
   checkIsConnected,
@@ -8,7 +7,8 @@ import {
   setState,
   setIsFetching
 } from '../actions/index'
-import { loadUserAvatar, loadUserProjects, syncUserStore } from '../actions/user'
+import { loadUserAvatar, loadUserProjects, syncUserStore, setIsGuestUser, setUser } from '../actions/user'
+import * as ActionConstants from '../constants/actions'
 
 export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
@@ -72,7 +72,7 @@ export function register() {
       auth.register(values).then((user) => {
         user.avatar = {}
         user.isGuestUser = false
-        dispatch(setState('user', user))
+        dispatch(setUser(user))
         dispatch(syncUserStore())
         dispatch(setIsFetching(false))
         Actions.ZooniverseApp({type: ActionConst.RESET})
@@ -90,8 +90,7 @@ export function register() {
 
 export function signOut() {
   return dispatch => {
-    store.delete('@zooniverse:user')
-    dispatch(setState('user', {}))
+    dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
     Actions.SignIn()
   }
@@ -101,7 +100,7 @@ export function continueAsGuest() {
   return dispatch => {
     dispatch(loadNotificationSettings()).then(() => {
       dispatch(loadSettings()),
-      dispatch(setState('user.isGuestUser', true))
+      dispatch(setIsGuestUser(true))
       dispatch(syncUserStore())
     })
     Actions.ZooniverseApp({type: ActionConst.RESET})
