@@ -216,7 +216,7 @@ export function setupProjectPreferences(workflowID) {
         return resolve()
       }
 
-      dispatch(getAuthUser()).then((userResource)=> {
+      getAuthUser().then((userResource)=> {
         userResource.get('project_preferences', {project_id: projectID}).then (([projectPreferences]) => {
           //Before being able to classify on a project, the user needs to have their preference created if it doesn't exist
           if (projectPreferences) {
@@ -282,7 +282,7 @@ export function setTutorialCompleted() {
     const tutorialID = getState().main.classifier.tutorial[workflowID].id
     const projectID = getState().main.classifier.workflow[workflowID].links.project
 
-    dispatch(getAuthUser()).then((userResourse) => {
+    getAuthUser().then((userResourse) => {
       userResourse.get('project_preferences', {project_id: projectID}).then (([projectPreferences]) => {
         if (!projectPreferences.preferences.tutorials_completed_at) {
           projectPreferences.preferences.tutorials_completed_at = {}

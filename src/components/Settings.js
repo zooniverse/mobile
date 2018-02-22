@@ -20,7 +20,7 @@ import {
   updateSetting,
   syncNotificationStore
 } from '../actions/index'
-import { addIndex, find, keys, map, flatten, propEq, without } from 'ramda'
+import { addIndex, find, keys, map, propEq, without } from 'ramda'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 
 GoogleAnalytics.trackEvent('view', 'Notification Settings')

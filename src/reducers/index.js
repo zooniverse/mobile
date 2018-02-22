@@ -1,4 +1,4 @@
-import { append, equals, lensPath, merge, reject, set, view } from 'ramda'
+import { append, equals, lensPath, merge, reject, set, view } from 'ramda';
 import { combineReducers } from 'redux';
 import user from './userReducer';
 

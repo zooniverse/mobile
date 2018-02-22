@@ -57,13 +57,13 @@ export function syncStore(name) {
 
 export function setFromStore(name) {
   return dispatch => {
-    return new Promise ((resolve) => {
+    return new Promise ((resolve, reject) => {
       store.get(`@zooniverse:${name}`).then(json => {
         dispatch(setState(name, json['contents']))
         return resolve()
       }).catch(() => { //default to redux store defaults
         dispatch(syncStore(name))
-        return resolve()
+        return reject()
       })
     })
   }

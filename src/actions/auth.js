@@ -14,16 +14,7 @@ export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
   /* eslint-disable no-console */
   console.reportErrorsAsExceptions = false
-
-  return () => {
-    return new Promise ((resolve, reject) => {
-      auth.checkCurrent().then ((user) => {
-        return resolve(user)
-      }).catch(() => {
-        return reject()
-      })
-    })
-  }
+  return auth.checkCurrent();
 }
 
 export function signIn(login, password) {
@@ -34,8 +25,7 @@ export function signIn(login, password) {
     dispatch(checkIsConnected()).then(() => {
       auth.signIn({login: login, password: password}).then((user) => {
         user.isGuestUser = false
-        dispatch(setState('user', user))
-
+        dispatch(setUser(user));
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),
