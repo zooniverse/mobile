@@ -11,12 +11,12 @@ export function startNewClassification(workflowID) {
     dispatch(setState('loadingText', 'Loading Workflow...'))
     dispatch(setState('classifier.currentWorkflowID', workflowID))
     dispatch(fetchWorkflow(workflowID)).then(() => {
-      if (getState().classifier.tutorial[workflowID] !== undefined) {
+      if (getState().main.classifier.tutorial[workflowID] !== undefined) {
         return
       }
       return dispatch(fetchTutorials(workflowID))
     }).then(() => {
-      if (getState().classifier.project[workflowID] !== undefined) {
+      if (getState().main.classifier.project[workflowID] !== undefined) {
         return
       }
       return dispatch(fetchProject(workflowID))
@@ -25,8 +25,8 @@ export function startNewClassification(workflowID) {
     }).then(() => {
       return dispatch(setNeedsTutorial())
     }).then(() => {
-      if (getState().classifier.guide[workflowID] !== undefined) {
-        return
+      if (getState().main.classifier.guide[workflowID] !== undefined) {
+        return 
       }
       return dispatch(fetchFieldGuide(workflowID))
     }).then(() => {
@@ -36,8 +36,8 @@ export function startNewClassification(workflowID) {
       return dispatch(setSubjectsToDisplay())
     }).then(() => {
       //now we can create the first classification!!
-      const subject = getState().classifier.subject[workflowID]
-      const workflow = getState().classifier.workflow[workflowID]
+      const subject = getState().main.classifier.subject[workflowID]
+      const workflow = getState().main.classifier.workflow[workflowID]
       return apiClient.type('classifications').create({
         annotations: [],
         metadata: {
@@ -67,21 +67,21 @@ export function startNewClassification(workflowID) {
 
 export function saveAnnotation(task, value) {
   return (dispatch, getState) => {
-    const workflowID = getState().classifier.currentWorkflowID
+    const workflowID = getState().main.classifier.currentWorkflowID
     dispatch(setState(`classifier.annotations.${workflowID}.${task}`, value))
   }
 }
 
 export function removeAnnotationValue(task, value) {
   return (dispatch, getState) => {
-    const workflowID = getState().classifier.currentWorkflowID
+    const workflowID = getState().main.classifier.currentWorkflowID
     dispatch(removeState(`classifier.annotations.${workflowID}.${task}`, value))
   }
 }
 
 export function saveThenStartNewClassification() {
   return (dispatch, getState) => {
-    const classifier = getState().classifier
+    const classifier = getState().main.classifier
     const workflowID = classifier.currentWorkflowID
     const classification = classifier.classification[workflowID]
     const subject = classifier.subject[workflowID]
@@ -99,9 +99,9 @@ export function saveThenStartNewClassification() {
     const updates = {
       annotations: annotations,
       completed: true,
-      'metadata.session': getState().session.id,
+      'metadata.session': getState().main.session.id,
       'metadata.finished_at': (new Date).toISOString(),
-      'metadata.viewport': { width: getState().device.width, height: getState().device.height},
+      'metadata.viewport': { width: getState().main.device.width, height: getState().main.device.height},
       'metadata.subject_dimensions.0': subjectDimensions
     }
 
@@ -109,8 +109,8 @@ export function saveThenStartNewClassification() {
 
     classification.save().then(() => {
       //Remove this subject just saved from upcoming subjects
-      const workflowID = getState().classifier.currentWorkflowID
-      const oldSubjectList = getState().classifier.upcomingSubjects[workflowID]
+      const workflowID = getState().main.classifier.currentWorkflowID
+      const oldSubjectList = getState().main.classifier.upcomingSubjects[workflowID]
       const newSubjectList = remove(0, 1, oldSubjectList)
       dispatch(setState(`classifier.upcomingSubjects.${workflowID}`, newSubjectList))
       //Mark this subject as seen
@@ -125,7 +125,7 @@ export function saveThenStartNewClassification() {
 export function fetchWorkflow(workflowID) {
   return (dispatch, getState) => {
     return new Promise ((resolve, reject) => {
-      if (!isNil(getState().classifier.workflow[workflowID])) {
+      if (!isNil(getState().main.classifier.workflow[workflowID])) {
         return resolve()
       }
 
@@ -142,7 +142,7 @@ export function fetchWorkflow(workflowID) {
 
 export function fetchFieldGuide(workflowID) {
   return (dispatch, getState) => {
-    const projectID = getState().classifier.workflow[workflowID].links.project
+    const projectID = getState().main.classifier.workflow[workflowID].links.project
     return new Promise ((resolve) => {
       apiClient.type('field_guides').get({project_id: projectID}).then(([guide]) => {
         if (isEmpty(guide.items)) { //no items (clicked add but didn't add anything)
@@ -191,7 +191,7 @@ export function fetchTutorials(workflowID) {
 
 export function fetchProject(workflowID) {
   return (dispatch, getState) => {
-    const workflow = getState().classifier.workflow[workflowID]
+    const workflow = getState().main.classifier.workflow[workflowID]
     const projectID = workflow.links.project
     return new Promise ((resolve, reject) => {
       apiClient.type('projects').get({id: projectID}).then(([project]) => {
@@ -206,8 +206,8 @@ export function fetchProject(workflowID) {
 
 export function setupProjectPreferences(workflowID) {
   return (dispatch, getState) => {
-    const workflow = getState().classifier.workflow[workflowID]
-    const project = getState().classifier.project[workflowID]
+    const workflow = getState().main.classifier.workflow[workflowID]
+    const project = getState().main.classifier.project[workflowID]
     const projectID = workflow.links.project
 
     return new Promise ((resolve, reject) => {
@@ -249,15 +249,15 @@ export function setupProjectPreferences(workflowID) {
 export function setNeedsTutorial() {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
-      const workflowID = getState().classifier.currentWorkflowID
-      if (isEmpty(getState().classifier.tutorial[workflowID])) {
+      const workflowID = getState().main.classifier.currentWorkflowID
+      if (isEmpty(getState().main.classifier.tutorial[workflowID])) {
         dispatch(setState(`classifier.needsTutorial.${workflowID}`, false))
         return resolve()
       }
 
-      const projectID = getState().classifier.workflow[workflowID].links.project
-      const tutorialID = getState().classifier.tutorial[workflowID].id
-      let needsTutorial = getState().classifier.needsTutorial[workflowID] !== undefined ? getState().classifier.needsTutorial[workflowID] : true
+      const projectID = getState().main.classifier.workflow[workflowID].links.project
+      const tutorialID = getState().main.classifier.tutorial[workflowID].id
+      let needsTutorial = getState().main.classifier.needsTutorial[workflowID] !== undefined ? getState().main.classifier.needsTutorial[workflowID] : true
 
       if ((!getState().user.isGuestUser) && (getState().user.projects[projectID])) {
         needsTutorial = !getState().user.projects[projectID]['tutorials_completed_at'][tutorialID]
@@ -271,15 +271,15 @@ export function setNeedsTutorial() {
 
 export function setTutorialCompleted() {
   return (dispatch, getState) => {
-    const workflowID = getState().classifier.currentWorkflowID
+    const workflowID = getState().main.classifier.currentWorkflowID
     dispatch(setState(`classifier.needsTutorial.${workflowID}`, false))
 
     if (getState().user.isGuestUser) {
       return
     }
     const now = new Date().toISOString()
-    const tutorialID = getState().classifier.tutorial[workflowID].id
-    const projectID = getState().classifier.workflow[workflowID].links.project
+    const tutorialID = getState().main.classifier.tutorial[workflowID].id
+    const projectID = getState().main.classifier.workflow[workflowID].links.project
 
     dispatch(getAuthUser()).then((userResourse) => {
       userResourse.get('project_preferences', {project_id: projectID}).then (([projectPreferences]) => {

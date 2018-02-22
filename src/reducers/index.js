@@ -1,7 +1,8 @@
 import { append, equals, lensPath, merge, reject, set, view } from 'ramda'
+import { combineReducers } from 'redux';
+import user from './userReducer';
 
 export const InitialState = {
-  user: {},
   registration: { global_email_communication: true },
   isFetching: false,
   errorMessage: null,
@@ -38,7 +39,7 @@ export const InitialState = {
   },
 }
 
-export default function(state=InitialState, action) {
+ function main(state=InitialState, action) {
   switch (action.type) {
     case 'SET_STATE':
       return set(lensPath(action.stateKey.split('.')), action.value, state)
@@ -72,6 +73,11 @@ export default function(state=InitialState, action) {
         projectList: action.projectList
       })
     default:
-      return InitialState;
+      return state;
   }
 }
+
+export default combineReducers({
+  main,
+  user
+})

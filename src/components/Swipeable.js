@@ -23,13 +23,13 @@ const leftOverlayColor = theme.$swipeLeft
 const rightOverlayColor = theme.$swipeRight
 
 const mapStateToProps = (state, ownProps) => ({
-  workflow: state.classifier.workflow[ownProps.workflowID] || {},
-  subject: state.classifier.subject[ownProps.workflowID] || {},
-  classification: state.classifier.classification[ownProps.workflowID] || {},
-  annotations: state.classifier.annotations[ownProps.workflowID] || {},
-  subjectSizes: state.classifier.subjectSizes[ownProps.workflowID] || {},
-  seenThisSession: state.classifier.seenThisSession[ownProps.workflowID] || [],
-  questionContainerHeight: state.classifier.questionContainerHeight[ownProps.workflowID] || 0,
+  workflow: state.main.classifier.workflow[ownProps.workflowID] || {},
+  subject: state.main.classifier.subject[ownProps.workflowID] || {},
+  classification: state.main.classifier.classification[ownProps.workflowID] || {},
+  annotations: state.main.classifier.annotations[ownProps.workflowID] || {},
+  subjectSizes: state.main.classifier.subjectSizes[ownProps.workflowID] || {},
+  seenThisSession: state.main.classifier.seenThisSession[ownProps.workflowID] || [],
+  questionContainerHeight: state.main.classifier.questionContainerHeight[ownProps.workflowID] || 0,
 })
 
 const mapDispatchToProps = (dispatch) => ({

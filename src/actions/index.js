@@ -48,7 +48,7 @@ export function setProjectList(projectList) {
 
 export function syncStore(name) {
   return (dispatch, getState) => {
-    const contents = getState()[name]
+    const contents = getState().main[name]
     return store.save(`@zooniverse:${name}`, {
         contents
     })
@@ -71,7 +71,7 @@ export function setFromStore(name) {
 
 export function syncNotificationStore() {
   return (dispatch, getState) => {
-    const notifications = getState().notifications
+    const notifications = getState().main.notifications
     return store.save('@zooniverse:notifications', {
       notifications
     })
@@ -94,7 +94,7 @@ export function setNotificationFromStore() {
 export function checkIsConnected() {
   return (dispatch, getState) => {
     return new Promise((resolve, reject) => {
-      if (getState().isConnected) {
+      if (getState().main.isConnected) {
         return resolve()
       } else {
         return reject('Sorry, but you must be connected to the internet to use Zooniverse')
@@ -110,7 +110,7 @@ export function fetchAllProjects() {
       dispatch(setState('projectListHolding', []))
       dispatch(loadRecents())
       dispatch(fetchProjects({mobile_friendly: true, launch_approved: true}, 'projectListHolding')).then(() => {
-        dispatch(setState('projectList', sortBy(prop('display_name'), getState().projectListHolding)))
+        dispatch(setState('projectList', sortBy(prop('display_name'), getState().main.projectListHolding)))
         dispatch(syncStore('projectList'))
       }).catch((error) => {
         dispatch(displayError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
@@ -124,10 +124,10 @@ export function fetchRecentProjects() {
     //using holding so that the state doesn't disappear for the user during fetching
     dispatch(setState('recentsListHolding', []))
 
-    const mobileIDs = map((p) => p.id, getState().projectList)
+    const mobileIDs = map((p) => p.id, getState().main.projectList)
     let activeProjects = filter((project) => { return project.activity_count > 0 }, getState().user.projects)
     dispatch(fetchProjects({id: intersection(mobileIDs, keys(activeProjects) )}, 'recentsListHolding')).then(() => {
-      dispatch(setState('recentsList', sortBy(prop('display_name'), getState().recentsListHolding)))
+      dispatch(setState('recentsList', sortBy(prop('display_name'), getState().main.recentsListHolding)))
       dispatch(syncStore('recentsList'))
     })
   }
@@ -211,16 +211,16 @@ export function fetchNotificationProject(projectID) {
 export function loadNotificationSettings() {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      const mobileIDs = map((p) => p.id, getState().projectList)
+      const mobileIDs = map((p) => p.id, getState().main.projectList)
       dispatch(setNotificationFromStore()).then(() => {
         forEach((projectID) => {
-          if (getState().notifications[projectID] === undefined) {
+          if (getState().main.notifications[projectID] === undefined) {
             dispatch(setState(`notifications.${projectID}`, true))
           }
         })(mobileIDs)
 
         dispatch(checkPushPermissions()).then(()=> {
-          if (getState().pushEnabled){
+          if (getState().main.pushEnabled){
             dispatch(syncInterestSubscriptions())
           }
         })
@@ -265,9 +265,9 @@ export function updateSetting(key, value) {
 
 export function syncInterestSubscriptions() {
   return (dispatch, getState) => {
-    getState().projectList.reduce((promise, project) => {
+    getState().main.projectList.reduce((promise, project) => {
       return promise.then(() => {
-        var subscribed = getState().notifications[project.id]
+        var subscribed = getState().main.notifications[project.id]
         return dispatch(updateInterestSubscription(project.id, subscribed))
       })
     }, Promise.resolve())

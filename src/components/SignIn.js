@@ -22,8 +22,8 @@ import { Actions } from 'react-native-router-flux'
 const topPadding = (Platform.OS === 'ios') ? 72 : 60
 
 const mapStateToProps = (state) => ({
-  isFetching: state.isFetching,
-  errorMessage: state.errorMessage,
+  isFetching: state.main.isFetching,
+  errorMessage: state.main.errorMessage,
 })
 
 const mapDispatchToProps = (dispatch) => ({

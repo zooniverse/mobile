@@ -28,8 +28,8 @@ const topPadding = (Platform.OS === 'ios') ? 10 : 0
 const mapStateToProps = (state) => ({
   user: state.user,
   isGuestUser: state.user.isGuestUser,
-  isConnected: state.isConnected,
-  isFetching: state.isFetching,
+  isConnected: state.main.isConnected,
+  isFetching: state.main.isFetching,
   pushPrompted: state.user.pushPrompted
 })
 

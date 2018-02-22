@@ -20,9 +20,9 @@ GoogleAnalytics.trackEvent('view', 'Publication List')
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  disciplines: keys(state.publications),
-  publications: state.publications,
-  selectedDiscipline: state.selectedDiscipline,
+  disciplines: keys(state.main.publications),
+  publications: state.main.publications,
+  selectedDiscipline: state.main.selectedDiscipline,
 })
 
 const mapDispatchToProps = (dispatch) => ({

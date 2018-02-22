@@ -62,11 +62,11 @@ export function register() {
     dispatch(setIsFetching(true))
     dispatch(setState('errorMessage', ''))
     const values={
-      login: getState().registration.login,
-      password: getState().registration.password,
-      email: getState().registration.email,
-      credited_name: getState().registration.credited_name,
-      global_email_communication: getState().registration.global_email_communication,
+      login: getState().main.registration.login,
+      password: getState().main.registration.password,
+      email: getState().main.registration.email,
+      credited_name: getState().main.registration.credited_name,
+      global_email_communication: getState().main.registration.global_email_communication,
     }
     dispatch(checkIsConnected()).then(() => {
       auth.register(values).then((user) => {

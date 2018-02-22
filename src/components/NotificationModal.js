@@ -19,9 +19,9 @@ import GoogleAnalytics from 'react-native-google-analytics-bridge'
 let notificationTitle, notificationBody, projectID
 
 const mapStateToProps = (state) => ({
-  notificationProject: state.notificationProject,
-  notificationPayload: state.notificationPayload,
-  projectList: state.projectList || [],
+  notificationProject: state.main.notificationProject,
+  notificationPayload: state.main.notificationPayload,
+  projectList: state.main.projectList || [],
 })
 
 const mapDispatchToProps = (dispatch) => ({

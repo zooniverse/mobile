@@ -18,7 +18,7 @@ const WEBVIEW_REF = 'WEBVIEW_REF'
 const zooniverseURL = 'https://www.zooniverse.org/projects/'
 
 const mapStateToProps = (state) => ({
-  webViewNavCounter: state.webViewNavCounter || 0
+  webViewNavCounter: state.main.webViewNavCounter || 0
 })
 
 const mapDispatchToProps = (dispatch) => ({
