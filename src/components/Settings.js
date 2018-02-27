@@ -20,18 +20,18 @@ import {
   updateSetting,
   syncNotificationStore
 } from '../actions/index'
-import { addIndex, find, keys, map, flatten, propEq, without } from 'ramda'
+import { addIndex, find, keys, map, propEq, without } from 'ramda'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 
 GoogleAnalytics.trackEvent('view', 'Notification Settings')
 
 const mapStateToProps = (state) => ({
-  notifications: state.notifications,
-  settings: state.settings,
-  projectList: state.projectList || [],
-  isFetching: state.isFetching,
-  errorMessage: state.errorMessage,
-  pushEnabled: state.pushEnabled
+  notifications: state.main.notifications,
+  settings: state.main.settings,
+  projectList: state.main.projectList || [],
+  isFetching: state.main.isFetching,
+  errorMessage: state.main.errorMessage,
+  pushEnabled: state.main.pushEnabled
 })
 
 const mapDispatchToProps = (dispatch) => ({

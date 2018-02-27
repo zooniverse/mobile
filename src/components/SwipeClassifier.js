@@ -27,17 +27,17 @@ import {
 import { append, contains, isEmpty, reverse, uniq } from 'ramda'
 
 const mapStateToProps = (state, ownProps) => ({
-  isFetching: state.classifier.isFetching,
-  annotations: state.classifier.annotations[ownProps.workflowID] || {},
-  workflow: state.classifier.workflow[ownProps.workflowID] || {},
-  project: state.classifier.project[ownProps.workflowID] || {},
-  guide: state.classifier.guide[ownProps.workflowID] || {},
-  tutorial: state.classifier.tutorial[ownProps.workflowID] || {},
-  needsTutorial: state.classifier.needsTutorial[ownProps.workflowID] || false,
-  subject: state.classifier.subject[ownProps.workflowID] || {},
-  nextSubject: state.classifier.nextSubject[ownProps.workflowID] || {},
-  subjectSizes: state.classifier.subjectSizes[ownProps.workflowID] || {},
-  seenThisSession: state.classifier.seenThisSession[ownProps.workflowID] || [],
+  isFetching: state.main.classifier.isFetching,
+  annotations: state.main.classifier.annotations[ownProps.workflowID] || {},
+  workflow: state.main.classifier.workflow[ownProps.workflowID] || {},
+  project: state.main.classifier.project[ownProps.workflowID] || {},
+  guide: state.main.classifier.guide[ownProps.workflowID] || {},
+  tutorial: state.main.classifier.tutorial[ownProps.workflowID] || {},
+  needsTutorial: state.main.classifier.needsTutorial[ownProps.workflowID] || false,
+  subject: state.main.classifier.subject[ownProps.workflowID] || {},
+  nextSubject: state.main.classifier.nextSubject[ownProps.workflowID] || {},
+  subjectSizes: state.main.classifier.subjectSizes[ownProps.workflowID] || {},
+  seenThisSession: state.main.classifier.seenThisSession[ownProps.workflowID] || [],
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -10,26 +10,28 @@ import {
   loadSettings,
   setState } from '../actions/index'
 import { getAuthUser } from '../actions/auth'
+import * as ActionConstants from '../constants/actions'
 
 export function syncUserStore() {
-  return (dispatch, getState) => {
-    const user = getState().user
-    return store.save('@zooniverse:user', {
-      user
-    })
-  }
+  return {
+    type: ActionConstants.SYNC_USER_STORE
+  };
 }
 
 export function setUserFromStore() {
-  return dispatch => {
-    return new Promise ((resolve, reject) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
       store.get('@zooniverse:user').then(json => {
-        dispatch(setState('user', json.user))
-        return resolve()
-      }).catch(() => {
-        return reject()
-      })
-    })
+        if (json === null) {
+          return reject();
+        }
+        dispatch({
+          type: ActionConstants.SET_USER_FROM_STORE,
+          storeData: json.state
+        });
+        resolve()
+      });
+    });
   }
 }
 
@@ -42,7 +44,7 @@ export function loadUserData() {
           dispatch(loadSettings()),
         ])
       } else {
-        dispatch(getAuthUser()).then(() => {
+        getAuthUser().then(() => {
           return Promise.all([
             dispatch(loadUserAvatar()),
             dispatch(loadUserProjects()),
@@ -65,11 +67,17 @@ export function loadUserData() {
 export function loadUserAvatar() {
   return (dispatch) => {
     return new Promise ((resolve) => {
-      dispatch(getAuthUser()).then((userResource) => {
+      getAuthUser().then((userResource) => {
         userResource.get('avatar').then((avatar) => {
-          dispatch(setState('user.avatar', head(avatar)))
+          dispatch({
+            type: ActionConstants.SET_USER_AVATAR,
+            avatar: head(avatar)
+          });
         }).catch(() => {
-          dispatch(setState('user.avatar', {}))
+          dispatch({
+            type: ActionConstants.SET_USER_AVATAR,
+            avatar: {}
+          })
         }).then(() => {
           return resolve()
         })
@@ -82,7 +90,7 @@ export function loadUserProjects() {
   return (dispatch) => {
     dispatch(setState('loadingText', 'Loading Projects...'))
     return new Promise ((resolve, reject) => {
-      dispatch(getAuthUser()).then((userResourse) => {
+      getAuthUser().then((userResourse) => {
         userResourse.get('project_preferences').then((forCount) => {
           return forCount.length > 0 ? forCount[0].getMeta().count : 0
         }).then((preferenceCount) => {
@@ -98,14 +106,14 @@ export function loadUserProjects() {
             return null
           }).then((projects) => {
             map((project) => {
-              dispatch(setState(`user.projects.${project.id}`, {
-                  name: project.display_name,
-                  slug: project.slug,
-                  activity_count: classifications[project.id],
-                  sort_order: sortOrders[project.id],
-                  tutorials_completed_at: completedTutorials[project.id] || {}
-                }
-              ))
+              const projectData = {
+                name: project.display_name,
+                slug: project.slug,
+                activity_count: classifications[project.id],
+                sort_order: sortOrders[project.id],
+                tutorials_completed_at: completedTutorials[project.id] || {}
+              };
+              dispatch(setUserProjectData(project.id, projectData));
             }, projects)
           }).then(() => {
             dispatch(calculateTotalClassifications())
@@ -126,7 +134,48 @@ export function calculateTotalClassifications() {
   return (dispatch, getState) => {
     const getCounts = (key) => getState().user.projects[key]['activity_count']
     const totalClassifications = reduce(add, 0, map(getCounts, keys(getState().user.projects)))
-    dispatch(setState('user.totalClassifications', totalClassifications))
+    dispatch({
+      type: ActionConstants.SET_USER_TOTAL_CLASSIFICATIONS,
+      totalClassifications
+    });
+  }
+}
+
+export function setUserProjectData(projectId, projectData) {
+  return {
+    type: ActionConstants.SET_USER_PROJECT_DATA,
+    projectId: projectId,
+    projectData 
+  };
+}
+
+export function saveTutorialAsComplete(projectId, tutorialId, completionTime) {
+  return {
+    type: ActionConstants.SET_TUTORIAL_COMPLETE,
+    projectId,
+    tutorialId,
+    completionTime
+  }
+}
+
+export function setIsGuestUser(isGuestUser) {
+  return {
+    type: ActionConstants.SET_IS_GUEST_USER,
+    isGuestUser
+  }
+}
+
+export function setUser(user) {
+  return {
+    type: ActionConstants.SET_USER,
+    user
+  }
+}
+
+export function setPushPrompted(value) {
+  return {
+    type: ActionConstants.SET_PUSH_PROMPTED,
+    value
   }
 }
 

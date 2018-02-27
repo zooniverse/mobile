@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 
 
 const mapStateToProps = (state) => ({
-  isFetching: state.isFetching,
-  loadingText: state.loadingText || 'Loading...'
+  isFetching: state.main.isFetching,
+  loadingText: state.main.loadingText || 'Loading...'
 })
 
 export class OverlaySpinner extends Component {

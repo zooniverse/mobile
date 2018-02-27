@@ -15,7 +15,7 @@ import { setState } from '../actions/index'
 //This is to help calculate that height
 
 const mapStateToProps = (state, ownProps) => ({
-  questionContainerHeight: state.classifier.questionContainerHeight[ownProps.workflowID] || 0,
+  questionContainerHeight: state.main.classifier.questionContainerHeight[ownProps.workflowID] || 0,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

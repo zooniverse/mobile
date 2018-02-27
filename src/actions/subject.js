@@ -20,8 +20,8 @@ export function fetchUpcomingSubjects(workflowID) {
 export function loadSubjects() {
   return (dispatch, getState) => {
     return new Promise ((resolve, reject) => {
-      const workflowID = getState().classifier.currentWorkflowID
-      const upcomingSubjects = getState().classifier.upcomingSubjects[workflowID] || []
+      const workflowID = getState().main.classifier.currentWorkflowID
+      const upcomingSubjects = getState().main.classifier.upcomingSubjects[workflowID] || []
 
       if (length(upcomingSubjects) > 1) {
         return resolve()
@@ -43,12 +43,12 @@ export function loadSubjects() {
 export function setSubjectsToDisplay() {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
-      const workflowID = getState().classifier.currentWorkflowID
-      const upcomingSubjects = getState().classifier.upcomingSubjects[workflowID]
+      const workflowID = getState().main.classifier.currentWorkflowID
+      const upcomingSubjects = getState().main.classifier.upcomingSubjects[workflowID]
       let subject = upcomingSubjects[0]
       subject.display = getSubjectLocation(subject)
 
-      const isFirstSubject = isNil(getState().classifier.subjectSizes[workflowID])
+      const isFirstSubject = isNil(getState().main.classifier.subjectSizes[workflowID])
       function initFirstSubject(){
         return dispatch(setImageSizes(subject)).then(() => {
           return dispatch(setNextSubject())
@@ -70,8 +70,8 @@ export function setSubjectsToDisplay() {
 export function setNextSubject() {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
-      const workflowID = getState().classifier.currentWorkflowID
-      const upcomingSubjects = getState().classifier.upcomingSubjects[workflowID]
+      const workflowID = getState().main.classifier.currentWorkflowID
+      const upcomingSubjects = getState().main.classifier.upcomingSubjects[workflowID]
       let nextSubject = upcomingSubjects[1]
 
       nextSubject.display = getSubjectLocation(nextSubject)
@@ -84,11 +84,11 @@ export function setNextSubject() {
 export function setImageSizes(subject) {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
-      const workflowID = getState().classifier.currentWorkflowID
+      const workflowID = getState().main.classifier.currentWorkflowID
 
       Image.getSize(subject.display.src, (width, height) => {
-        const subjectDisplayWidth = getState().device.subjectDisplayWidth
-        const subjectDisplayHeight = getState().device.subjectDisplayHeight
+        const subjectDisplayWidth = getState().main.device.subjectDisplayWidth
+        const subjectDisplayHeight = getState().main.device.subjectDisplayHeight
         const aspectRatio = Math.min(subjectDisplayWidth / width, subjectDisplayHeight / height)
 
         const subjectSizes = {

@@ -18,10 +18,10 @@ import FCM, { FCMEvent } from 'react-native-fcm'
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  isFetching: state.isFetching,
-  isConnected: state.isConnected,
-  isModalVisible: state.isModalVisible || false,
-  notificationPayload: state.notificationPayload || {}
+  isFetching: state.main.isFetching,
+  isConnected: state.main.isConnected,
+  isModalVisible: state.main.isModalVisible || false,
+  notificationPayload: state.main.notificationPayload || {}
 })
 
 const mapDispatchToProps = (dispatch) => ({

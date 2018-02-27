@@ -1,5 +1,4 @@
 import auth from 'panoptes-client/lib/auth'
-import store from 'react-native-simple-store'
 import { Actions, ActionConst } from 'react-native-router-flux'
 import {
   checkIsConnected,
@@ -8,22 +7,14 @@ import {
   setState,
   setIsFetching
 } from '../actions/index'
-import { loadUserAvatar, loadUserProjects, syncUserStore } from '../actions/user'
+import { loadUserAvatar, loadUserProjects, syncUserStore, setIsGuestUser, setUser } from '../actions/user'
+import * as ActionConstants from '../constants/actions'
 
 export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
   /* eslint-disable no-console */
   console.reportErrorsAsExceptions = false
-
-  return () => {
-    return new Promise ((resolve, reject) => {
-      auth.checkCurrent().then ((user) => {
-        return resolve(user)
-      }).catch(() => {
-        return reject()
-      })
-    })
-  }
+  return auth.checkCurrent();
 }
 
 export function signIn(login, password) {
@@ -34,8 +25,7 @@ export function signIn(login, password) {
     dispatch(checkIsConnected()).then(() => {
       auth.signIn({login: login, password: password}).then((user) => {
         user.isGuestUser = false
-        dispatch(setState('user', user))
-
+        dispatch(setUser(user));
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),
@@ -62,17 +52,17 @@ export function register() {
     dispatch(setIsFetching(true))
     dispatch(setState('errorMessage', ''))
     const values={
-      login: getState().registration.login,
-      password: getState().registration.password,
-      email: getState().registration.email,
-      credited_name: getState().registration.credited_name,
-      global_email_communication: getState().registration.global_email_communication,
+      login: getState().main.registration.login,
+      password: getState().main.registration.password,
+      email: getState().main.registration.email,
+      credited_name: getState().main.registration.credited_name,
+      global_email_communication: getState().main.registration.global_email_communication,
     }
     dispatch(checkIsConnected()).then(() => {
       auth.register(values).then((user) => {
         user.avatar = {}
         user.isGuestUser = false
-        dispatch(setState('user', user))
+        dispatch(setUser(user))
         dispatch(syncUserStore())
         dispatch(setIsFetching(false))
         Actions.ZooniverseApp({type: ActionConst.RESET})
@@ -90,8 +80,7 @@ export function register() {
 
 export function signOut() {
   return dispatch => {
-    store.delete('@zooniverse:user')
-    dispatch(setState('user', {}))
+    dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
     Actions.SignIn()
   }
@@ -101,7 +90,7 @@ export function continueAsGuest() {
   return dispatch => {
     dispatch(loadNotificationSettings()).then(() => {
       dispatch(loadSettings()),
-      dispatch(setState('user.isGuestUser', true))
+      dispatch(setIsGuestUser(true))
       dispatch(syncUserStore())
     })
     Actions.ZooniverseApp({type: ActionConst.RESET})

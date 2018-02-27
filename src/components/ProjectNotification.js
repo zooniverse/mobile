@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import { setState, syncNotificationStore, updateInterestSubscription } from '../actions/index'
 
 const mapStateToProps = (state, ownProps) => ({
-  notification: state.notifications[ownProps.id]
+  notification: state.main.notifications[ownProps.id]
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

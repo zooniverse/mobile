@@ -15,10 +15,10 @@ import { contains, filter } from 'ramda'
 GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state) => ({
-  projectList: state.projectList || [],
-  recentsList: state.recentsList || [],
-  selectedProjectTag: state.selectedProjectTag || '',
-  promptForWorkflow: state.settings.promptForWorkflow || false,
+  projectList: state.main.projectList || [],
+  recentsList: state.main.recentsList || [],
+  selectedProjectTag: state.main.selectedProjectTag || '',
+  promptForWorkflow: state.main.settings.promptForWorkflow || false,
 })
 
 const dataSource = new ListView.DataSource({

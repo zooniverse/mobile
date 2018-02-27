@@ -24,10 +24,10 @@ import { isValidEmail } from '../utils/is-valid-email'
 import { isValidLogin } from '../utils/is-valid-login'
 
 const mapStateToProps = (state) => ({
-  isFetching: state.isFetching,
-  errorMessage: state.errorMessage,
-  isConnected: state.isConnected,
-  registration: state.registration
+  isFetching: state.main.isFetching,
+  errorMessage: state.main.errorMessage,
+  isConnected: state.main.isConnected,
+  registration: state.main.registration
 })
 
 const mapDispatchToProps = (dispatch) => ({

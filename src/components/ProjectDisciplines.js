@@ -18,7 +18,7 @@ import Discipline from './Discipline'
 import OverlaySpinner from './OverlaySpinner'
 import NavBar from '../components/NavBar'
 import { setState } from '../actions/index'
-import { syncUserStore } from '../actions/user'
+import { syncUserStore, setPushPrompted } from '../actions/user'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
@@ -28,8 +28,8 @@ const topPadding = (Platform.OS === 'ios') ? 10 : 0
 const mapStateToProps = (state) => ({
   user: state.user,
   isGuestUser: state.user.isGuestUser,
-  isConnected: state.isConnected,
-  isFetching: state.isFetching,
+  isConnected: state.main.isConnected,
+  isFetching: state.main.isFetching,
   pushPrompted: state.user.pushPrompted
 })
 
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setState('selectedProjectTag', tag))
   },
   setPushPrompted(value) {
-    dispatch(setState('user.pushPrompted', value))
+    dispatch(setPushPrompted(value))
     dispatch(syncUserStore())
   },
 })
