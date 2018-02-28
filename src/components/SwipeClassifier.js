@@ -36,7 +36,8 @@ const mapStateToProps = (state, ownProps) => ({
   needsTutorial: state.main.classifier.needsTutorial[ownProps.workflowID] || false,
   subject: state.main.classifier.subject[ownProps.workflowID] || {},
   nextSubject: state.main.classifier.nextSubject[ownProps.workflowID] || {},
-  subjectSizes: state.main.classifier.subjectSizes[ownProps.workflowID] || {},
+  subjectDisplayWidth: state.main.device.subjectDisplayWidth,
+  subjectDisplayHeight: state.main.device.subjectDisplayHeight,
   seenThisSession: state.main.classifier.seenThisSession[ownProps.workflowID] || [],
 })
 
@@ -117,12 +118,15 @@ export class SwipeClassifier extends React.Component {
             annotation={ this.props.annotations[task.unlinkedTask] }
             onAnswered={ this.onUnlinkedTaskAnswered }/>
         : null
-
+      const subjectSizes = {
+        resizedHeight: this.props.subjectDisplayHeight,
+        resizedWidth: this.props.subjectDisplayWidth
+      }
       const backSubject =
         <SwipeSubject
           inFront={false}
           subject={this.props.nextSubject}
-          subjectSizes={this.props.subjectSizes}
+          subjectSizes={subjectSizes}
           seenThisSession={this.props.seenThisSession}
           setImageSizes={() => {}}
         />
@@ -134,7 +138,7 @@ export class SwipeClassifier extends React.Component {
             workflowID={this.props.workflowID}
             taskHelp={task.help}
           />
-          <View style={[styles.subjectContainer, { width: this.props.subjectSizes.resizedWidth, height: this.props.subjectSizes.resizedHeight }]}>
+          <View style={[styles.subjectContainer, { width: this.props.subjectDisplayWidth, height: this.props.subjectDisplayHeight }]}>
             { isEmpty(this.props.nextSubject) ? null : backSubject }
           </View>
         </View>
@@ -222,7 +226,8 @@ SwipeClassifier.propTypes = {
   nextSubject: PropTypes.shape({
     id: PropTypes.string
   }),
-  subjectSizes: PropTypes.object,
+  subjectDisplayWidth: PropTypes.number,
+  subjectDisplayHeight: PropTypes.number,
   seenThisSession: PropTypes.array,
   startNewClassification: PropTypes.func,
   saveThenStartNewClassification: PropTypes.func,
