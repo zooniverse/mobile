@@ -14,14 +14,15 @@ exports[`renders correctly 1`] = `
     <ImageZoom
       cropHeight={1334}
       cropWidth={750}
-      imageHeight={0}
-      imageWidth={0}
+      imageHeight={667}
+      imageWidth={750}
       longPressTime={300}
       onLongPress={[Function]}
       panToMove={true}
       pinchToZoom={true}
     >
       <Image
+        resizeMethod="resize"
         source={
           Object {
             "uri": "https://placekitten.com/200/300",
@@ -29,8 +30,8 @@ exports[`renders correctly 1`] = `
         }
         style={
           Object {
-            "height": 0,
-            "width": 0,
+            "height": 667,
+            "width": 750,
           }
         }
       />
@@ -140,14 +141,15 @@ exports[`renders hidden correctly 1`] = `
     <ImageZoom
       cropHeight={1334}
       cropWidth={750}
-      imageHeight={0}
-      imageWidth={0}
+      imageHeight={667}
+      imageWidth={750}
       longPressTime={300}
       onLongPress={[Function]}
       panToMove={true}
       pinchToZoom={true}
     >
       <Image
+        resizeMethod="resize"
         source={
           Object {
             "uri": "https://placekitten.com/200/300",
@@ -155,8 +157,8 @@ exports[`renders hidden correctly 1`] = `
         }
         style={
           Object {
-            "height": 0,
-            "width": 0,
+            "height": 667,
+            "width": 750,
           }
         }
       />

@@ -29,12 +29,8 @@ Object {
     "notifications": Object {
       "general": true,
     },
-    "projectList": Array [],
-    "projectListHolding": Array [],
     "pushEnabled": false,
     "pushPrompted": false,
-    "recentsList": Array [],
-    "recentsListHolding": Array [],
     "registration": Object {
       "global_email_communication": true,
     },
@@ -44,6 +40,9 @@ Object {
       "promptForWorkflow": false,
     },
     "webViewNavCounter": 0,
+  },
+  "projects": Object {
+    "projectList": Array [],
   },
   "user": Object {},
 }
@@ -77,12 +76,8 @@ Object {
     "notifications": Object {
       "general": true,
     },
-    "projectList": Array [],
-    "projectListHolding": Array [],
     "pushEnabled": false,
     "pushPrompted": false,
-    "recentsList": Array [],
-    "recentsListHolding": Array [],
     "registration": Object {
       "global_email_communication": true,
     },
@@ -92,6 +87,9 @@ Object {
       "promptForWorkflow": false,
     },
     "webViewNavCounter": 0,
+  },
+  "projects": Object {
+    "projectList": Array [],
   },
   "user": Object {},
 }
@@ -125,12 +123,8 @@ Object {
     "notifications": Object {
       "general": true,
     },
-    "projectList": Array [],
-    "projectListHolding": Array [],
     "pushEnabled": false,
     "pushPrompted": false,
-    "recentsList": Array [],
-    "recentsListHolding": Array [],
     "registration": Object {
       "global_email_communication": true,
     },
@@ -144,6 +138,9 @@ Object {
       "display_name": "Me",
     },
     "webViewNavCounter": 0,
+  },
+  "projects": Object {
+    "projectList": Array [],
   },
   "user": Object {},
 }
@@ -177,12 +174,8 @@ Object {
     "notifications": Object {
       "general": true,
     },
-    "projectList": Array [],
-    "projectListHolding": Array [],
     "pushEnabled": false,
     "pushPrompted": false,
-    "recentsList": Array [],
-    "recentsListHolding": Array [],
     "registration": Object {
       "global_email_communication": true,
     },
@@ -193,6 +186,9 @@ Object {
     },
     "user": Object {},
     "webViewNavCounter": 0,
+  },
+  "projects": Object {
+    "projectList": Array [],
   },
   "user": Object {},
 }
