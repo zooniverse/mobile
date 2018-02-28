@@ -28,7 +28,7 @@ GoogleAnalytics.trackEvent('view', 'Notification Settings')
 const mapStateToProps = (state) => ({
   notifications: state.main.notifications,
   settings: state.main.settings,
-  projectList: state.main.projectList || [],
+  projectList: state.projects.projectList || [],
   isFetching: state.main.isFetching,
   errorMessage: state.main.errorMessage,
   pushEnabled: state.main.pushEnabled

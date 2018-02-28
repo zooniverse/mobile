@@ -1,6 +1,7 @@
 import { append, equals, lensPath, merge, reject, set, view } from 'ramda';
 import { combineReducers } from 'redux';
 import user from './userReducer';
+import projects from './projectsReducer';
 
 export const InitialState = {
   registration: { global_email_communication: true },
@@ -8,10 +9,6 @@ export const InitialState = {
   errorMessage: null,
   isConnected: null,
   selectedDiscipline: null,
-  projectList: [],
-  projectListHolding: [],
-  recentsList: [],
-  recentsListHolding: [],
   webViewNavCounter: 0,
   notificationProject: {},
   notificationPayload: {},
@@ -79,5 +76,6 @@ export const InitialState = {
 
 export default combineReducers({
   main,
-  user
+  user,
+  projects
 })

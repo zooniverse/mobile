@@ -21,7 +21,7 @@ let notificationTitle, notificationBody, projectID
 const mapStateToProps = (state) => ({
   notificationProject: state.main.notificationProject,
   notificationPayload: state.main.notificationPayload,
-  projectList: state.main.projectList || [],
+  projectList: state.projects.projectList || [],
 })
 
 const mapDispatchToProps = (dispatch) => ({

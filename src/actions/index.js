@@ -141,7 +141,7 @@ export function fetchNotificationProject(projectID) {
 export function loadNotificationSettings() {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      const mobileIDs = map((p) => p.id, getState().main.projectList)
+      const mobileIDs = map((p) => p.id, getState().projects.projectList)
       dispatch(setNotificationFromStore()).then(() => {
         forEach((projectID) => {
           if (getState().main.notifications[projectID] === undefined) {
@@ -195,7 +195,7 @@ export function updateSetting(key, value) {
 
 export function syncInterestSubscriptions() {
   return (dispatch, getState) => {
-    getState().main.projectList.reduce((promise, project) => {
+    getState().projects.projectList.reduce((promise, project) => {
       return promise.then(() => {
         var subscribed = getState().main.notifications[project.id]
         return dispatch(updateInterestSubscription(project.id, subscribed))
