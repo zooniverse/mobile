@@ -10,16 +10,24 @@ import NavBar from './NavBar'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
-import { contains, filter } from 'ramda'
+import { contains, filter, keys } from 'ramda'
 
 GoogleAnalytics.trackEvent('view', 'Project')
 
-const mapStateToProps = (state) => ({
-  projectList: state.main.projectList || [],
-  recentsList: state.main.recentsList || [],
-  selectedProjectTag: state.main.selectedProjectTag || '',
-  promptForWorkflow: state.main.settings.promptForWorkflow || false,
-})
+const mapStateToProps = (state) => {
+  let recentsList = []
+  if (!state.user.isGuestUser) {
+    const activeProjects = filter((project) => { return project.activity_count > 0 }, state.user.projects);
+    recentsList = state.projects.projectList.filter((project) => keys(activeProjects).includes(project.id));
+  }
+  
+  return {
+    projectList: state.projects.projectList || [],
+    recentsList,
+    selectedProjectTag: state.main.selectedProjectTag || '',
+    promptForWorkflow: state.main.settings.promptForWorkflow || false,
+  };
+}
 
 const dataSource = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
