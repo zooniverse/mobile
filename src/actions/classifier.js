@@ -7,7 +7,7 @@ import { getAuthUser } from '../actions/auth'
 import { loadSubjects, setSubjectsToDisplay } from '../actions/subject'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 
-export function startNewClassification(workflowID) {
+export function startNewClassification(workflowID, firstClassification=true) {
   return (dispatch, getState) => {
     dispatch(setState('loadingText', 'Loading Workflow...'))
     dispatch(setState('classifier.currentWorkflowID', workflowID))
@@ -34,7 +34,7 @@ export function startNewClassification(workflowID) {
       dispatch(setState('loadingText', 'Loading Subjects...'))
       return dispatch(loadSubjects())
     }).then(() => {
-      return dispatch(setSubjectsToDisplay())
+      return dispatch(setSubjectsToDisplay(firstClassification))
     }).then(() => {
       //now we can create the first classification!!
       const subject = getState().main.classifier.subject[workflowID]

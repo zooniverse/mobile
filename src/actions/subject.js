@@ -40,7 +40,7 @@ export function loadSubjects() {
   }
 }
 
-export function setSubjectsToDisplay() {
+export function setSubjectsToDisplay(isFirstSubject) {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
       const workflowID = getState().main.classifier.currentWorkflowID
@@ -48,15 +48,8 @@ export function setSubjectsToDisplay() {
       let subject = upcomingSubjects[0]
       subject.display = getSubjectLocation(subject)
 
-      const isFirstSubject = isNil(getState().main.classifier.subjectSizes[workflowID])
-      function initFirstSubject(){
-        return dispatch(setImageSizes(subject)).then(() => {
-          return dispatch(setNextSubject())
-        })
-      }
-
       function setupSubjects(){
-        return isFirstSubject ? initFirstSubject() : Promise.resolve()
+        return isFirstSubject ? dispatch(setNextSubject()) : Promise.resolve()
       }
 
       setupSubjects().then(() => {
