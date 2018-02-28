@@ -208,9 +208,11 @@ export function updateInterestSubscription(interest, subscribed) {
   var NotificationSettings = NativeModules.NotificationSettings
   return () => {
     return new Promise((resolve) => {
-      NotificationSettings.setInterestSubscription(interest, subscribed).then((message) => {
-        return resolve(message)
-      })
+      if (subscribed !== undefined) {
+        NotificationSettings.setInterestSubscription(interest, subscribed).then((message) => {
+          return resolve(message)
+        })
+      }
     })
   }
 }
