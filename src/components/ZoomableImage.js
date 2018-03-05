@@ -5,6 +5,11 @@ import {
 } from 'react-native'
 import ImageZoom from 'react-native-image-pan-zoom'
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state) => ({
+  subjectDisplayHeight: state.main.device.subjectDisplayHeight
+})
 
 const ZoomableImage = (props) => {
   return (
@@ -12,14 +17,14 @@ const ZoomableImage = (props) => {
       cropWidth={Dimensions.get('window').width}
       cropHeight={Dimensions.get('window').height}
       imageWidth={Dimensions.get('window').width}
-      imageHeight={Dimensions.get('window').height/2}
+      imageHeight={props.subjectDisplayHeight}
       panToMove={ props.allowPanAndZoom }
       pinchToZoom={ props.allowPanAndZoom }
       onLongPress={props.handlePress}
       longPressTime={ 300 }>
       <Image
         source={ props.source }
-        style={{width: Dimensions.get('window').width, height: Dimensions.get('window').height/2}} 
+        style={{width: Dimensions.get('window').width, height: props.subjectDisplayHeight}} 
         resizeMethod="resize"
       />
     </ImageZoom>
@@ -35,6 +40,7 @@ ZoomableImage.propTypes = {
   imageWidth: PropTypes.number,
   imageHeight: PropTypes.number,
   allowPanAndZoom: PropTypes.bool,
+  subjectDisplayHeight: PropTypes.number
 }
 
-export default ZoomableImage
+export default connect(mapStateToProps)(ZoomableImage);
