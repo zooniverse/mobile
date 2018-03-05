@@ -105,7 +105,19 @@ export function saveThenStartNewClassification() {
         'metadata.viewport': { width: getState().main.device.width, height: getState().main.device.height},
         'metadata.subject_dimensions.0': subjectDimensions
       }
-  
+
+      classification.update(updates)
+      classification.save()
+    }, () => {
+      // If get size fails, we should still make the classification, just leave the dimensions metadata
+      const updates = {
+        annotations: annotations,
+        completed: true,
+        'metadata.session': getState().main.session.id,
+        'metadata.finished_at': (new Date).toISOString(),
+        'metadata.viewport': { width: getState().main.device.width, height: getState().main.device.height }
+      }
+
       classification.update(updates)
       classification.save()
     });
