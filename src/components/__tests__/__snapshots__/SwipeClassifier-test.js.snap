@@ -170,31 +170,15 @@ exports[`renders correctly 1`] = `
     <View
       style={undefined}
     >
-      <ImageZoom
-        cropHeight={1334}
-        cropWidth={750}
-        imageHeight={667}
-        imageWidth={750}
-        longPressTime={300}
-        onLongPress={[Function]}
-        panToMove={true}
-        pinchToZoom={true}
-      >
-        <Image
-          resizeMethod="resize"
-          source={
-            Object {
-              "uri": "blah.jpg",
-            }
+      <ZoomableImage
+        allowPanAndZoom={true}
+        handlePress={[Function]}
+        source={
+          Object {
+            "uri": "blah.jpg",
           }
-          style={
-            Object {
-              "height": 667,
-              "width": 750,
-            }
-          }
-        />
-      </ImageZoom>
+        }
+      />
       <View
         style={undefined}
       >

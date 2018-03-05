@@ -7,6 +7,8 @@ const imageSource = {
   uri: 'https://placekitten.com/200/300'
 }
 
+jest.mock('../ZoomableImage', () => 'ZoomableImage')
+
 it('renders correctly', () => {
   const tree = renderer.create(
     <FullScreenImage

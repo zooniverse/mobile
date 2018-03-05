@@ -4,7 +4,7 @@ exports[`renders correctly 1`] = `
 <ImageZoom
   cropHeight={1334}
   cropWidth={750}
-  imageHeight={667}
+  imageHeight={undefined}
   imageWidth={750}
   longPressTime={300}
   onLongPress={[Function]}
@@ -20,7 +20,7 @@ exports[`renders correctly 1`] = `
     }
     style={
       Object {
-        "height": 667,
+        "height": undefined,
         "width": 750,
       }
     }

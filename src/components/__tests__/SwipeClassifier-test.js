@@ -9,6 +9,7 @@ jest.mock('../Tutorial', () => 'Tutorial')
 jest.mock('../Swipeable', () => 'Swipeable')
 jest.mock('../SwipeSubject', () => 'SwipeSubject')
 jest.mock('../SwipeTabs', () => 'SwipeTabs')
+jest.mock('../ZoomableImage', () => 'ZoomableImage')
 
 import { SwipeClassifier } from '../SwipeClassifier'
 

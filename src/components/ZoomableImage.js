@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
   subjectDisplayHeight: state.main.device.subjectDisplayHeight
 })
 
-const ZoomableImage = (props) => {
+export const ZoomableImage = (props) => {
   return (
     <ImageZoom
       cropWidth={Dimensions.get('window').width}
