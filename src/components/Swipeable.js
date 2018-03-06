@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 
 //needs to be absolutely positioned below the question, otherwise it covers up
 //everything above and prevents it from being touchable
-const toTop = (Platform.OS === 'ios') ? 135 : 125
+const toTop = (Platform.OS === 'ios') ? 65 : 55
 const SWIPE_THRESHOLD = 90
 const leftOverlayColor = theme.$swipeLeft
 const rightOverlayColor = theme.$swipeRight

@@ -152,7 +152,6 @@ class ZooWebView extends React.Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: (Platform.OS === 'ios') ? 70 : 58,
   },
 })
 

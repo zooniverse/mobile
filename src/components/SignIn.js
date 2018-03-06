@@ -19,8 +19,6 @@ import OverlaySpinner from './OverlaySpinner'
 import StyledText from './StyledText'
 import { Actions } from 'react-native-router-flux'
 
-const topPadding = (Platform.OS === 'ios') ? 72 : 60
-
 const mapStateToProps = (state) => ({
   isFetching: state.main.isFetching,
   errorMessage: state.main.errorMessage,
@@ -144,7 +142,6 @@ const styles = EStyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: topPadding,
   },
   signInContainer: {
     backgroundColor: 'transparent',

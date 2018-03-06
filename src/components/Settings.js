@@ -150,7 +150,6 @@ export class Settings extends React.Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
     paddingLeft: 10,
     paddingRight: 10
   },
@@ -170,7 +169,6 @@ const styles = EStyleSheet.create({
     marginRight: 10,
   },
   section: {
-    marginTop: 5,
     marginBottom: 5,
   }
 });

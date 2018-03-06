@@ -129,7 +129,6 @@ const styles = EStyleSheet.create({
   },
   firstTutorialContainer: {
     flex: 1,
-    marginTop: 60,
     paddingTop: topPadding,
     paddingBottom: 0,
   },
@@ -187,7 +186,7 @@ const styles = EStyleSheet.create({
   tutorialHeader: {
     fontSize: 20,
     marginHorizontal: 30,
-    marginTop: 80,
+    marginTop: 10,
     marginBottom: 0,
     paddingTop: topPadding,
     paddingBottom: 0,
