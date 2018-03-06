@@ -13,9 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
 import UserAvatar from './UserAvatar'
 import CircleRibbon from './CircleRibbon'
-
-const topPadding = (Platform.OS === 'ios') ? 22 : 10
-const height = 48 + topPadding
+import { $headerColor } from '../theme.js'
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -41,8 +39,6 @@ export class NavBar extends Component {
   }
 
   render() {
-    const containerHeight = (this.props.showAvatar ? height + 70 : height )
-    const logo = <Image source={require('../../images/logo.png')} style={styles.logo} />
     const userAvatar = ( this.props.user.avatar === undefined ? null : this.props.user.avatar.src )
 
     const avatar =
@@ -51,97 +47,124 @@ export class NavBar extends Component {
         <CircleRibbon />
       </View>
 
-    const title =
-      <Text style={styles.title}>
-        { this.props.title }
+    const CenterContainer = ({shouldShowTitle, shouldShowLogo}) => {
+      let centerElement = null;
+      if (shouldShowTitle){
+        centerElement = 
+          <Text style={styles.title} numberOfLines={1}>
+            { this.props.title }
       </Text>
+      } else if (shouldShowLogo) {
+        centerElement = <Image source={require('../../images/logo.png')} style={styles.logo} />
+      }
 
-    const back =
-      <TouchableOpacity
-        activeOpacity={0.5}
-        onPress={this.handleOnBack}
-        style={styles.leftIcon}>
-        <Icon name="angle-left" style={styles.icon} />
-      </TouchableOpacity>
+      return (
+        <View style={styles.centerContainer}>
+          {centerElement}
+        </View>
+      );
+    };
 
-    const drawer =
-      <TouchableOpacity
-        activeOpacity={0.5}
-        onPress={this.handleSideDrawer.bind(this)}
-        style={styles.rightIcon}>
-        <Icon name="bars" style={[styles.icon, styles.iconBar]} />
+    const LeftContainer = ({isActive}) => {
+      const colorStyle = isActive ? {} : styles.disabledIcon
+      return (
+        <View>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={this.handleOnBack}
+            disabled={!isActive}
+          >
+            <Icon name="angle-left" style={[styles.leftIcon, styles.icon, colorStyle]} />
+          </TouchableOpacity>
+        </View>
+      )
+    }
+
+    const RightContainer = ({isActive}) => {
+      const colorStyle = isActive ? {} : styles.disabledIcon
+      return (
+        <View>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={this.handleSideDrawer.bind(this)}
+            disabled={!isActive}
+          >
+          <Icon name="bars" style={[styles.icon, styles.rightIcon, colorStyle]} />
       </TouchableOpacity>
+        </View>
+      );
+    }
 
     return (
-      <View style={[styles.navBarContainer, {height: containerHeight}]}>
+      <View style={[styles.navBarContainer]}>
         <View style={styles.navBar}>
-          { this.props.showBack ? back : null }
-          { this.props.title ? title : null }
-          { this.props.showLogo ? logo : null }
-          { this.props.showDrawer ? drawer : null }
+          <LeftContainer isActive={this.props.showBack} />
+          <CenterContainer shouldShowTitle={this.props.title} shouldShowLogo={this.props.showLogo} />
+          <RightContainer isActive={this.props.showDrawer} />
         </View>
-        { this.props.showAvatar ? avatar : null }
+        <View>
+          { this.props.showAvatar ? avatar : null }
+        </View>
       </View>
     );
   }
 }
 
+const navBarHeight = (Platform.OS === 'ios') ? 74 : 62
+const navBarPadding = (Platform.OS === 'ios') ? 36 : 24
+
 const styles = EStyleSheet.create({
   navBarContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
+    flexDirection: 'column',
+    height: navBarHeight
   },
   navBar: {
     backgroundColor: '$headerColor',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: height,
-    paddingBottom: 10,
-    paddingTop: topPadding,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: navBarPadding,
+  },
+  centerContainer: {
+    flex: 1,
   },
   leftIcon: {
-    position: 'absolute',
-    left: 5,
-    top: topPadding - 2
+    paddingLeft: 25,
+    paddingRight: 15
   },
   rightIcon: {
-    position: 'absolute',
-    right: 10,
-    top: topPadding,
+    paddingLeft: 15,
+    paddingRight: 25,
+    paddingTop: 5,
+    alignContent: 'flex-end',
+    fontSize: 24
   },
   icon: {
     backgroundColor: '$transparent',
     color: '$textColor',
     fontSize: 30,
-    width: 40,
-    padding: 10
-  },
-  iconBar: {
-    fontSize: 24
   },
   title: {
     color: '$textColor',
     fontFamily: 'OpenSans-Semibold',
     fontSize: 20,
-    lineHeight: 30
+    lineHeight: 30,
+    textAlign: 'center',
   },
   logo: {
-    width: '40%',
-    height: 50,
+    flex: 1,
+    width: '70%',
     resizeMode: 'contain',
-    position: 'relative',
-    top: 5
+    alignSelf: 'center'
   },
   userAvatarContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    top: topPadding + 20,
-    left: 60,
-    right: 60,
+    marginTop: -25,
+    alignSelf: 'center',
+    alignItems: 'center'
+  },
+  disabledIcon: {
+    color: '$transparent'
   }
 })
 
