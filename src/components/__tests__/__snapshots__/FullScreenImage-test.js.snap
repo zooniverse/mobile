@@ -11,30 +11,15 @@ exports[`renders correctly 1`] = `
   <View
     style={undefined}
   >
-    <ImageZoom
-      cropHeight={1334}
-      cropWidth={750}
-      imageHeight={0}
-      imageWidth={0}
-      longPressTime={300}
-      onLongPress={[Function]}
-      panToMove={true}
-      pinchToZoom={true}
-    >
-      <Image
-        source={
-          Object {
-            "uri": "https://placekitten.com/200/300",
-          }
+    <ZoomableImage
+      allowPanAndZoom={true}
+      handlePress={[Function]}
+      source={
+        Object {
+          "uri": "https://placekitten.com/200/300",
         }
-        style={
-          Object {
-            "height": 0,
-            "width": 0,
-          }
-        }
-      />
-    </ImageZoom>
+      }
+    />
     <View
       style={undefined}
     >
@@ -137,30 +122,15 @@ exports[`renders hidden correctly 1`] = `
   <View
     style={undefined}
   >
-    <ImageZoom
-      cropHeight={1334}
-      cropWidth={750}
-      imageHeight={0}
-      imageWidth={0}
-      longPressTime={300}
-      onLongPress={[Function]}
-      panToMove={true}
-      pinchToZoom={true}
-    >
-      <Image
-        source={
-          Object {
-            "uri": "https://placekitten.com/200/300",
-          }
+    <ZoomableImage
+      allowPanAndZoom={true}
+      handlePress={[Function]}
+      source={
+        Object {
+          "uri": "https://placekitten.com/200/300",
         }
-        style={
-          Object {
-            "height": 0,
-            "width": 0,
-          }
-        }
-      />
-    </ImageZoom>
+      }
+    />
     <View
       style={undefined}
     >

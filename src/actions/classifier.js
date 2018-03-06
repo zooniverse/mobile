@@ -2,12 +2,12 @@ import apiClient from 'panoptes-client/lib/api-client'
 import { forEach, isEmpty, isNil, map, remove, toPairs } from 'ramda'
 import { addState, removeState, setState } from '../actions/index'
 import { Actions } from 'react-native-router-flux'
-import { Alert, Platform } from 'react-native'
+import { Alert, Platform, Image} from 'react-native'
 import { getAuthUser } from '../actions/auth'
 import { loadSubjects, setSubjectsToDisplay } from '../actions/subject'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 
-export function startNewClassification(workflowID) {
+export function startNewClassification(workflowID, firstClassification=true) {
   return (dispatch, getState) => {
     dispatch(setState('loadingText', 'Loading Workflow...'))
     dispatch(setState('classifier.currentWorkflowID', workflowID))
@@ -34,7 +34,7 @@ export function startNewClassification(workflowID) {
       dispatch(setState('loadingText', 'Loading Subjects...'))
       return dispatch(loadSubjects())
     }).then(() => {
-      return dispatch(setSubjectsToDisplay())
+      return dispatch(setSubjectsToDisplay(firstClassification))
     }).then(() => {
       //now we can create the first classification!!
       const subject = getState().main.classifier.subject[workflowID]
@@ -86,40 +86,51 @@ export function saveThenStartNewClassification() {
     const workflowID = classifier.currentWorkflowID
     const classification = classifier.classification[workflowID]
     const subject = classifier.subject[workflowID]
-    const subjectSizes = classifier.subjectSizes[workflowID]
-
     const structureAnnotation = (a) => { return { task: a[0], value: a[1] } }
     const annotations = map(structureAnnotation, toPairs(classifier.annotations[workflowID]))
 
-    const subjectDimensions = {
-      naturalWidth: subjectSizes.actualWidth,
-      naturalHeight: subjectSizes.actualHeight,
-      clientWidth: subjectSizes.resizedWidth,
-      clientHeight: subjectSizes.resizedHeight
-    }
-    const updates = {
-      annotations: annotations,
-      completed: true,
-      'metadata.session': getState().main.session.id,
-      'metadata.finished_at': (new Date).toISOString(),
-      'metadata.viewport': { width: getState().main.device.width, height: getState().main.device.height},
-      'metadata.subject_dimensions.0': subjectDimensions
-    }
+    Image.getSize(subject.display.src, (naturalWidth, naturalHeight) => {
+      const subjectDimensions = {
+        naturalWidth,
+        naturalHeight,
+        clientWidth: getState().main.device.subjectDisplayWidth,
+        clientHeight: getState().main.device.subjectDisplayHeight
+      }
 
-    classification.update(updates)
+      const updates = {
+        annotations: annotations,
+        completed: true,
+        'metadata.session': getState().main.session.id,
+        'metadata.finished_at': (new Date).toISOString(),
+        'metadata.viewport': { width: getState().main.device.width, height: getState().main.device.height},
+        'metadata.subject_dimensions.0': subjectDimensions
+      }
 
-    classification.save().then(() => {
-      //Remove this subject just saved from upcoming subjects
-      const workflowID = getState().main.classifier.currentWorkflowID
-      const oldSubjectList = getState().main.classifier.upcomingSubjects[workflowID]
-      const newSubjectList = remove(0, 1, oldSubjectList)
-      dispatch(setState(`classifier.upcomingSubjects.${workflowID}`, newSubjectList))
-      //Mark this subject as seen
-      dispatch(addState(`classifier.seenThisSession.${workflowID}`, subject.id))
-      dispatch(startNewClassification(workflowID))
+      classification.update(updates)
+      classification.save()
+    }, () => {
+      // If get size fails, we should still make the classification, just leave the dimensions metadata
+      const updates = {
+        annotations: annotations,
+        completed: true,
+        'metadata.session': getState().main.session.id,
+        'metadata.finished_at': (new Date).toISOString(),
+        'metadata.viewport': { width: getState().main.device.width, height: getState().main.device.height }
+      }
 
-      dispatch(setState(`classifier.annotations.${workflowID}`, {}))
-    })
+      classification.update(updates)
+      classification.save()
+    });
+
+    //Remove this subject just saved from upcoming subjects
+    const oldSubjectList = getState().main.classifier.upcomingSubjects[workflowID]
+    const newSubjectList = remove(0, 1, oldSubjectList)
+    dispatch(setState(`classifier.upcomingSubjects.${workflowID}`, newSubjectList))
+    //Mark this subject as seen
+    dispatch(addState(`classifier.seenThisSession.${workflowID}`, subject.id))
+    dispatch(startNewClassification(workflowID ,false))
+
+    dispatch(setState(`classifier.annotations.${workflowID}`, {}))
   }
 }
 

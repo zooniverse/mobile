@@ -27,7 +27,10 @@ const mapStateToProps = (state, ownProps) => ({
   subject: state.main.classifier.subject[ownProps.workflowID] || {},
   classification: state.main.classifier.classification[ownProps.workflowID] || {},
   annotations: state.main.classifier.annotations[ownProps.workflowID] || {},
-  subjectSizes: state.main.classifier.subjectSizes[ownProps.workflowID] || {},
+  subjectSizes: {
+    resizedHeight: state.main.device.subjectDisplayHeight,
+    resizedWidth: state.main.device.subjectDisplayWidth
+  },
   seenThisSession: state.main.classifier.seenThisSession[ownProps.workflowID] || [],
   questionContainerHeight: state.main.classifier.questionContainerHeight[ownProps.workflowID] || 0,
 })

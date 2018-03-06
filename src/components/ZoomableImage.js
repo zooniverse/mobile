@@ -1,49 +1,34 @@
 import React from 'react'
 import {
   Dimensions,
-  Image
+  Image,
 } from 'react-native'
 import ImageZoom from 'react-native-image-pan-zoom'
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 
-class ZoomableImage extends React.Component {
-  constructor(props) {
-    super(props)
-     this.state = {
-       height: 0,
-       width: 0
-     }
-  }
+const mapStateToProps = (state) => ({
+  subjectDisplayHeight: state.main.device.subjectDisplayHeight
+})
 
-  componentWillMount() {
-    const deviceWidth = Dimensions.get('window').width
-    const deviceHeight = Dimensions.get('window').height
-
-    Image.getSize(this.props.source.uri, (width, height) => {
-      const aspectRatio = Math.min(deviceWidth / width, deviceHeight / height)
-      const resizedHeight = height * aspectRatio
-      const resizedWidth = width * aspectRatio
-      this.setState({ height: resizedHeight, width: resizedWidth })
-    })
-  }
-
-  render() {
-    return (
-      <ImageZoom
-        cropWidth={Dimensions.get('window').width}
-        cropHeight={Dimensions.get('window').height}
-        imageWidth={this.state.width}
-        imageHeight={this.state.height}
-        panToMove={ this.props.allowPanAndZoom }
-        pinchToZoom={ this.props.allowPanAndZoom }
-        onLongPress={this.props.handlePress}
-        longPressTime={ 300 }>
-        <Image
-          source={ this.props.source }
-          style={{width: this.state.width, height: this.state.height}} />
-      </ImageZoom>
-    )
-  }
+export const ZoomableImage = (props) => {
+  return (
+    <ImageZoom
+      cropWidth={Dimensions.get('window').width}
+      cropHeight={Dimensions.get('window').height}
+      imageWidth={Dimensions.get('window').width}
+      imageHeight={props.subjectDisplayHeight}
+      panToMove={ props.allowPanAndZoom }
+      pinchToZoom={ props.allowPanAndZoom }
+      onLongPress={props.handlePress}
+      longPressTime={ 300 }>
+      <Image
+        source={ props.source }
+        style={{width: Dimensions.get('window').width, height: props.subjectDisplayHeight}} 
+        resizeMethod="resize"
+      />
+    </ImageZoom>
+  )
 }
 
 
@@ -55,6 +40,7 @@ ZoomableImage.propTypes = {
   imageWidth: PropTypes.number,
   imageHeight: PropTypes.number,
   allowPanAndZoom: PropTypes.bool,
+  subjectDisplayHeight: PropTypes.number
 }
 
-export default ZoomableImage
+export default connect(mapStateToProps)(ZoomableImage);

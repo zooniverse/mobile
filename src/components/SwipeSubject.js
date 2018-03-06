@@ -83,7 +83,8 @@ class SwipeSubject extends Component {
           <Image
             onLoadEnd={ ()=>{ this.imageLoadEnd() } }
             source={{uri: this.props.subject.display.src}}
-            style={[styles.image, imageSizeStyle]}
+            style={[styles.image]}
+            resizeMethod="resize" 
           />
         { alreadySeen ? alreadySeenBanner : null }
         </View>
@@ -114,6 +115,7 @@ const styles = EStyleSheet.create({
   },
   image: {
     borderRadius: 2,
+    flex: 1
   },
   alreadySeen: {
     elevation: 2,

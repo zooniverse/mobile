@@ -40,7 +40,7 @@ export function loadSubjects() {
   }
 }
 
-export function setSubjectsToDisplay() {
+export function setSubjectsToDisplay(isFirstSubject) {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
       const workflowID = getState().main.classifier.currentWorkflowID
@@ -48,15 +48,8 @@ export function setSubjectsToDisplay() {
       let subject = upcomingSubjects[0]
       subject.display = getSubjectLocation(subject)
 
-      const isFirstSubject = isNil(getState().main.classifier.subjectSizes[workflowID])
-      function initFirstSubject(){
-        return dispatch(setImageSizes(subject)).then(() => {
-          return dispatch(setNextSubject())
-        })
-      }
-
       function setupSubjects(){
-        return isFirstSubject ? initFirstSubject() : Promise.resolve()
+        return isFirstSubject ? dispatch(setNextSubject()) : Promise.resolve()
       }
 
       setupSubjects().then(() => {
@@ -77,34 +70,6 @@ export function setNextSubject() {
       nextSubject.display = getSubjectLocation(nextSubject)
       dispatch(setState(`classifier.nextSubject.${workflowID}`, nextSubject))
       return resolve()
-    })
-  }
-}
-
-export function setImageSizes(subject) {
-  return (dispatch, getState) => {
-    return new Promise ((resolve) => {
-      const workflowID = getState().main.classifier.currentWorkflowID
-
-      Image.getSize(subject.display.src, (width, height) => {
-        const subjectDisplayWidth = getState().main.device.subjectDisplayWidth
-        const subjectDisplayHeight = getState().main.device.subjectDisplayHeight
-        const aspectRatio = Math.min(subjectDisplayWidth / width, subjectDisplayHeight / height)
-
-        const subjectSizes = {
-          actualWidth: width,
-          actualHeight: height,
-          resizedWidth: width * aspectRatio,
-          resizedHeight: height * aspectRatio
-        }
-
-        dispatch(setState(`classifier.subjectSizes.${workflowID}`, subjectSizes))
-        return resolve()
-      }, (error) => {
-        dispatch(setState(`classifier.subjectSizes.${workflowID}`, {}))
-        dispatch(setState('error', error))
-        return resolve()
-      })
     })
   }
 }

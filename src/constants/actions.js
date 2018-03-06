@@ -1,3 +1,4 @@
+// User Actions Names 
 export const SYNC_USER_STORE = 'SYNC_USER_STORE';
 export const SET_USER_FROM_STORE = 'SET_USER_FROM_STORE';
 export const SET_TUTORIAL_COMPLETE = 'TUTORIAL_COMPLETE';
@@ -8,3 +9,8 @@ export const SET_IS_GUEST_USER = 'SET_IS_GUEST_USER';
 export const SET_USER = 'SET_USER_FROM_USER';
 export const SIGN_OUT = 'SIGN_OUT';
 export const SET_PUSH_PROMPTED = 'SET_PUSH_PROMPTED';
+
+// Project Action Names
+export const ADD_PROJECTS = 'ADD_PROJECTS';
+export const ADD_PROJECT_AVATAR = 'ADD_PROJECT_AVATAR';
+export const ADD_PROJECT_WORKFLOWS = 'ADD_PROJECT_WORKFLOWS';

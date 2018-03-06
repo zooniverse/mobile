@@ -5,7 +5,6 @@ import { Actions } from 'react-native-router-flux'
 import { add, addIndex, filter, fromPairs, head, isNil, keys, map, reduce } from 'ramda'
 
 import {
-  fetchRecentProjects,
   loadNotificationSettings,
   loadSettings,
   setState } from '../actions/index'
@@ -117,7 +116,6 @@ export function loadUserProjects() {
             }, projects)
           }).then(() => {
             dispatch(calculateTotalClassifications())
-            dispatch(fetchRecentProjects())
             dispatch(setState('loadingText', 'Loading...'))
             return resolve()
           })

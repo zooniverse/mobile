@@ -109,8 +109,8 @@ exports[`renders correctly 1`] = `
             Array [
               undefined,
               Object {
-                "height": 100,
-                "width": 100,
+                "height": undefined,
+                "width": undefined,
               },
             ]
           }
@@ -122,8 +122,8 @@ exports[`renders correctly 1`] = `
             subject={undefined}
             subjectSizes={
               Object {
-                "resizedHeight": 100,
-                "resizedWidth": 100,
+                "resizedHeight": undefined,
+                "resizedWidth": undefined,
               }
             }
           />
@@ -170,30 +170,15 @@ exports[`renders correctly 1`] = `
     <View
       style={undefined}
     >
-      <ImageZoom
-        cropHeight={1334}
-        cropWidth={750}
-        imageHeight={0}
-        imageWidth={0}
-        longPressTime={300}
-        onLongPress={[Function]}
-        panToMove={true}
-        pinchToZoom={true}
-      >
-        <Image
-          source={
-            Object {
-              "uri": "blah.jpg",
-            }
+      <ZoomableImage
+        allowPanAndZoom={true}
+        handlePress={[Function]}
+        source={
+          Object {
+            "uri": "blah.jpg",
           }
-          style={
-            Object {
-              "height": 0,
-              "width": 0,
-            }
-          }
-        />
-      </ImageZoom>
+        }
+      />
       <View
         style={undefined}
       >

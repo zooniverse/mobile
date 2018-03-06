@@ -34,6 +34,7 @@ exports[`renders already seen if already_seen is on subject 1`] = `
   >
     <Image
       onLoadEnd={[Function]}
+      resizeMethod="resize"
       source={
         Object {
           "uri": "blah.jpg",
@@ -42,10 +43,6 @@ exports[`renders already seen if already_seen is on subject 1`] = `
       style={
         Array [
           undefined,
-          Object {
-            "height": 100,
-            "width": 100,
-          },
         ]
       }
     />
@@ -106,6 +103,7 @@ exports[`renders already seen if it was seen this session 1`] = `
   >
     <Image
       onLoadEnd={[Function]}
+      resizeMethod="resize"
       source={
         Object {
           "uri": "blah.jpg",
@@ -114,10 +112,6 @@ exports[`renders already seen if it was seen this session 1`] = `
       style={
         Array [
           undefined,
-          Object {
-            "height": 100,
-            "width": 100,
-          },
         ]
       }
     />
@@ -178,6 +172,7 @@ exports[`renders back subject position correctly 1`] = `
   >
     <Image
       onLoadEnd={[Function]}
+      resizeMethod="resize"
       source={
         Object {
           "uri": "blah.jpg",
@@ -186,10 +181,6 @@ exports[`renders back subject position correctly 1`] = `
       style={
         Array [
           undefined,
-          Object {
-            "height": 100,
-            "width": 100,
-          },
         ]
       }
     />
@@ -228,6 +219,7 @@ exports[`renders front subject position correctly 1`] = `
   >
     <Image
       onLoadEnd={[Function]}
+      resizeMethod="resize"
       source={
         Object {
           "uri": "blah.jpg",
@@ -236,10 +228,6 @@ exports[`renders front subject position correctly 1`] = `
       style={
         Array [
           undefined,
-          Object {
-            "height": 100,
-            "width": 100,
-          },
         ]
       }
     />

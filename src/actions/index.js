@@ -103,76 +103,6 @@ export function checkIsConnected() {
   }
 }
 
-export function fetchAllProjects() {
-  return (dispatch, getState) => {
-    dispatch(setFromStore('projectList')).then(() => {
-
-      dispatch(setState('projectListHolding', []))
-      dispatch(loadRecents())
-      dispatch(fetchProjects({mobile_friendly: true, launch_approved: true}, 'projectListHolding')).then(() => {
-        dispatch(setState('projectList', sortBy(prop('display_name'), getState().main.projectListHolding)))
-        dispatch(syncStore('projectList'))
-      }).catch((error) => {
-        dispatch(displayError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
-      })
-    })
-  }
-}
-
-export function fetchRecentProjects() {
-  return (dispatch, getState) => {
-    //using holding so that the state doesn't disappear for the user during fetching
-    dispatch(setState('recentsListHolding', []))
-
-    const mobileIDs = map((p) => p.id, getState().main.projectList)
-    let activeProjects = filter((project) => { return project.activity_count > 0 }, getState().user.projects)
-    dispatch(fetchProjects({id: intersection(mobileIDs, keys(activeProjects) )}, 'recentsListHolding')).then(() => {
-      dispatch(setState('recentsList', sortBy(prop('display_name'), getState().main.recentsListHolding)))
-      dispatch(syncStore('recentsList'))
-    })
-  }
-}
-
-export function fetchProjects(parms, stateKey) {
-  return dispatch => {
-    return new Promise((resolve) => {
-      const allParms = merge(parms, {include: 'avatar', sort: 'display_name'})
-
-      apiClient.type('projects').get(allParms).then((projects) => {
-        return new Promise((resolve) => {
-          let promises = []
-          forEach((project) => {
-            const promise = apiClient.type('avatars').get(project.links.avatar.id).then((avatar) => {
-              project.avatar_src = avatar.src
-            }).then(() => {
-              return project.get('workflows', {mobile_friendly: true, active: true})
-            }).then((workflows) => {
-              project.workflows = tagSwipeFriendly(workflows)
-              return dispatch(addState(stateKey, project))
-            }).catch(() => {
-              return dispatch(addState(stateKey, project))
-            })
-            promises.push(promise)
-          }, projects)
-
-          Promise.all(promises).then(() => {
-            return resolve()
-          })
-        })
-      }).then(() => {
-        return resolve()
-      })
-    })
-  }
-}
-
-function tagSwipeFriendly(workflows) {
-  return map((workflow) => {
-    workflow.swipe_verified = workflow.mobile_friendly && isValidSwipeWorkflow(workflow)
-    return workflow
-  }, workflows)
-}
-
 export function fetchPublications() {
   return dispatch => {
     map((key) => {
@@ -211,7 +141,7 @@ export function fetchNotificationProject(projectID) {
 export function loadNotificationSettings() {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      const mobileIDs = map((p) => p.id, getState().main.projectList)
+      const mobileIDs = map((p) => p.id, getState().projects.projectList)
       dispatch(setNotificationFromStore()).then(() => {
         forEach((projectID) => {
           if (getState().main.notifications[projectID] === undefined) {
@@ -265,7 +195,7 @@ export function updateSetting(key, value) {
 
 export function syncInterestSubscriptions() {
   return (dispatch, getState) => {
-    getState().main.projectList.reduce((promise, project) => {
+    getState().projects.projectList.reduce((promise, project) => {
       return promise.then(() => {
         var subscribed = getState().main.notifications[project.id]
         return dispatch(updateInterestSubscription(project.id, subscribed))
@@ -278,9 +208,11 @@ export function updateInterestSubscription(interest, subscribed) {
   var NotificationSettings = NativeModules.NotificationSettings
   return () => {
     return new Promise((resolve) => {
-      NotificationSettings.setInterestSubscription(interest, subscribed).then((message) => {
-        return resolve(message)
-      })
+      if (subscribed !== undefined) {
+        NotificationSettings.setInterestSubscription(interest, subscribed).then((message) => {
+          return resolve(message)
+        })
+      }
     })
   }
 }
