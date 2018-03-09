@@ -13,7 +13,6 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
 import UserAvatar from './UserAvatar'
 import CircleRibbon from './CircleRibbon'
-import { $headerColor } from '../theme.js'
 
 const mapStateToProps = (state) => ({
   user: state.user,
