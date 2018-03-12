@@ -52,7 +52,7 @@ export class NavBar extends Component {
         centerElement = 
           <Text style={styles.title} numberOfLines={1}>
             { this.props.title }
-      </Text>
+        </Text>
       } else if (shouldShowLogo) {
         centerElement = <Image source={require('../../images/logo.png')} style={styles.logo} />
       }
@@ -73,7 +73,7 @@ export class NavBar extends Component {
             onPress={this.handleOnBack}
             disabled={!isActive}
           >
-            <Icon name="angle-left" style={[styles.leftIcon, styles.icon, colorStyle]} />
+            <Icon name="chevron-left" style={[styles.leftIcon, styles.icon, colorStyle]} />
           </TouchableOpacity>
         </View>
       )
@@ -129,19 +129,18 @@ const styles = EStyleSheet.create({
   },
   leftIcon: {
     paddingLeft: 25,
-    paddingRight: 15
+    paddingRight: 15,
+    fontSize: 26
   },
   rightIcon: {
     paddingLeft: 15,
     paddingRight: 25,
-    paddingTop: 5,
     alignContent: 'flex-end',
-    fontSize: 24
+    fontSize: 26
   },
   icon: {
     backgroundColor: '$transparent',
     color: '$textColor',
-    fontSize: 30,
   },
   title: {
     color: '$textColor',

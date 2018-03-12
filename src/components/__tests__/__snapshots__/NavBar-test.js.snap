@@ -60,7 +60,7 @@ exports[`renders correctly with defaults 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>
@@ -185,7 +185,7 @@ exports[`renders correctly with title 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>
