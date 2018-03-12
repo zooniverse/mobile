@@ -43,8 +43,6 @@ const styles = EStyleSheet.create({
   container: {
     backgroundColor: '$lightestGrey',
     flex: 1,
-    marginTop: 60,
-    paddingTop: topPadding,
     paddingBottom: 0,
   },
   panelContainer: {

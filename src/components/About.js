@@ -71,7 +71,6 @@ class About extends React.Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 70,
   },
   header: {
     marginBottom: 5,

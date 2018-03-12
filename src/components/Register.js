@@ -195,7 +195,6 @@ export class Register extends React.Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 70,
   },
   registerContainer: {
     flex: 1,

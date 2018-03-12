@@ -145,10 +145,10 @@ const styles = EStyleSheet.create({
   subNavContainer: {
     borderBottomColor: '$lightGrey',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingTop: 136 + topPadding,
+    paddingTop: 64 + topPadding,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    height: 184 + topPadding
+    height: 112 + topPadding
   },
   userName: {
     color: '$darkTextColor',

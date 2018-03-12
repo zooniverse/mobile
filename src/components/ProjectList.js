@@ -91,7 +91,6 @@ export class ProjectList extends React.Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
     backgroundColor: '$lightGreyBackground'
   },
   innerContainer: {

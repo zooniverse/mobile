@@ -125,10 +125,10 @@ export class PublicationList extends React.Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 110,
+    paddingTop: 40,
   },
   listStyle: {
-    paddingTop: 90
+    paddingTop: 20
   },
   messageContainer: {
     padding: 15,

@@ -94,7 +94,6 @@ class PublicationFilter extends React.Component {
 }
 
 //the following are required for absolutely positioned items on Android
-const topPadding = (Platform.OS === 'ios') ? 70 : 58
 const filterWidth = 150
 const itemHeight = 40
 const menuHeight = itemHeight * (length(keys(PUBLICATIONS)) + 1)
@@ -107,15 +106,10 @@ const styles = EStyleSheet.create({
   container: {
     position: 'absolute',
     flex: 1,
-    top: topPadding,
     right: 0,
     left: 0,
     width: '100%',
     height: itemHeight
-  },
-  fullHeightContainer: {
-    bottom: 0,
-    height: '100%'
   },
   dropdownViewContainer: {
     position: 'absolute',
