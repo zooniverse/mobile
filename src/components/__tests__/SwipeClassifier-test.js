@@ -44,6 +44,11 @@ const subjectSizes={resizedWidth: 100, resizedHeight: 100}
 
 const seenThisSession=[]
 
+// Stub out navBarActions
+const navBarActions = { 
+  setTitleForPage() {}
+}
+
 it('renders correctly', () => {
   const tree = renderer.create(
     <SwipeClassifier
@@ -57,7 +62,8 @@ it('renders correctly', () => {
       workflowID={'1'}
       subject={subject}
       subjectSizes={subjectSizes}
-      seenThisSession={seenThisSession} />
+      seenThisSession={seenThisSession}
+      navBarActions={navBarActions} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -73,7 +79,8 @@ it('renders spinner if fetching', () => {
       workflowID={'1'}
       subject={subject}
       subjectSizes={subjectSizes}
-      seenThisSession={seenThisSession} />
+      seenThisSession={seenThisSession}
+      navBarActions={navBarActions} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -90,7 +97,8 @@ it('renders tutorial if needed', () => {
       workflowID={'1'}
       subject={subject}
       subjectSizes={subjectSizes}
-      seenThisSession={seenThisSession} />
+      seenThisSession={seenThisSession}
+      navBarActions={navBarActions} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
