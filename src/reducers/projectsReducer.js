@@ -16,7 +16,7 @@ export default function projects(state=InitialProjectState, action) {
                 isLoading: true
             }
         }
-        case ActionConstants.ADD_PROJECT_SUCCESS: {
+        case ActionConstants.ADD_PROJECTS_SUCCESS: {
             return {
                 ...state,
                 isLoading: false,
@@ -25,7 +25,7 @@ export default function projects(state=InitialProjectState, action) {
                 projectList: action.projects
             };
         }
-        case ActionConstants.ADD_PROJECT_FAILURE: {
+        case ActionConstants.ADD_PROJECTS_FAILURE: {
             return {
                 ...state,
                 isLoading: false,

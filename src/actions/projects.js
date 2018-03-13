@@ -41,12 +41,12 @@ const addProjectsRequest = {
 }
 
 const addProjectsSuccess = (projects) => ({
-    type: ActionConstants.ADD_PROJECT_SUCCESS,
+    type: ActionConstants.ADD_PROJECTS_SUCCESS,
     projects
 });
 
 const addProjectsFailure = {
-    type: ActionConstants.ADD_PROJECT_FAILURE
+    type: ActionConstants.ADD_PROJECTS_FAILURE
 }
 
 function tagSwipeFriendly(workflows) {
