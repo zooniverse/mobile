@@ -66,7 +66,22 @@ exports[`renders correctly with defaults 1`] = `
     </View>
     <View
       style={undefined}
-    />
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
+      />
+    </View>
     <View>
       <View
         accessibilityComponentType={undefined}
@@ -197,7 +212,14 @@ exports[`renders correctly with title 1`] = `
         allowFontScaling={true}
         ellipsizeMode="tail"
         numberOfLines={1}
-        style={undefined}
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
       >
         OHai
       </Text>

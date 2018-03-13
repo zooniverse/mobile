@@ -41,7 +41,13 @@ Object {
     },
     "webViewNavCounter": 0,
   },
+  "navBar": Object {
+    "titles": Object {},
+  },
   "projects": Object {
+    "isFailure": false,
+    "isLoading": false,
+    "isSuccess": false,
     "projectList": Array [],
   },
   "user": Object {},
@@ -88,7 +94,13 @@ Object {
     },
     "webViewNavCounter": 0,
   },
+  "navBar": Object {
+    "titles": Object {},
+  },
   "projects": Object {
+    "isFailure": false,
+    "isLoading": false,
+    "isSuccess": false,
     "projectList": Array [],
   },
   "user": Object {},
@@ -139,7 +151,13 @@ Object {
     },
     "webViewNavCounter": 0,
   },
+  "navBar": Object {
+    "titles": Object {},
+  },
   "projects": Object {
+    "isFailure": false,
+    "isLoading": false,
+    "isSuccess": false,
     "projectList": Array [],
   },
   "user": Object {},
@@ -187,7 +205,13 @@ Object {
     "user": Object {},
     "webViewNavCounter": 0,
   },
+  "navBar": Object {
+    "titles": Object {},
+  },
   "projects": Object {
+    "isFailure": false,
+    "isLoading": false,
+    "isSuccess": false,
     "projectList": Array [],
   },
   "user": Object {},
