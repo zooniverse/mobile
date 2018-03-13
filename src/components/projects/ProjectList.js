@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import {
-  ListView,
   SectionList,
   View,
-  Text
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { bindActionCreators } from 'redux'

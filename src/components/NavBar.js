@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
