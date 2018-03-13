@@ -12,43 +12,42 @@ export function fetchProjects() {
             include: 'avatar',
             sort: 'display_name'
         }
-        apiClient.type('projects').get(allParams).then((projects) => {
-            dispatch(addProjectsAction(projects));
 
+        dispatch(addProjectsRequest)
+        apiClient.type('projects').get(allParams).then((projects) => {            
+            const promises = []
             projects.forEach((project) => {
-                // Store Project Avatars
-                apiClient.type('avatars').get(project.links.avatar.id).then((avatar) => {
-                    dispatch(addProjectAvatarAction(project.id, avatar.src))
-                });
+                promises.push(apiClient.type('avatars').get(project.links.avatar.id).then((avatar) => {
+                    project.avatar_src = avatar.src
+                })
+                // Stub out avatar rejection because it is optional for projects to have avatars
+                .catch(() => {}));
         
-                // Store Project Workflows
-                project.get('workflows', {mobile_friendly: true, active: true}).then((workflows) => {
-                    dispatch(addProjectWorkflows(project.id ,tagSwipeFriendly(workflows)));
-                });
+                promises.push(project.get('workflows', {mobile_friendly: true, active: true}).then((workflows) => {
+                    project.workflows = tagSwipeFriendly(workflows)
+                })
+                .catch(() => project.workflows = []));
             })
+            Promise.all(promises).then(() => dispatch(addProjectsSuccess(projects)))
         }).catch((error) => { 
+            dispatch(addProjectsFailure);
             Alert.alert( 'Error', 'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,);
         });
     }
 }
 
-const addProjectsAction = (projects) => ({
-    type: ActionConstants.ADD_PROJECTS,
+const addProjectsRequest = {
+    type: ActionConstants.ADD_PROJECTS_REQUEST
+}
+
+const addProjectsSuccess = (projects) => ({
+    type: ActionConstants.ADD_PROJECT_SUCCESS,
     projects
 });
 
-const addProjectAvatarAction = (projectId, avatarSrc) => ({
-    type: ActionConstants.ADD_PROJECT_AVATAR,
-    projectId,
-    avatarSrc
-})
-
-const addProjectWorkflows = (projectId, workflows) => ({
-    type: ActionConstants.ADD_PROJECT_WORKFLOWS,
-    projectId,
-    workflows
-})
-
+const addProjectsFailure = {
+    type: ActionConstants.ADD_PROJECT_FAILURE
+}
 
 function tagSwipeFriendly(workflows) {
     return workflows.map((workflow) => {
