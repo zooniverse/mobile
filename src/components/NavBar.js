@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   Image,
   Platform,
-  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -12,8 +11,10 @@ import { bindActionCreators } from 'redux'
 import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
+
 import UserAvatar from './UserAvatar'
 import CircleRibbon from './CircleRibbon'
+import FontedText from './common/FontedText'
 
 const mapStateToProps = (state, ownProps) => ({
   user: state.user,
@@ -32,7 +33,6 @@ export class NavBar extends Component {
     } else {
       Actions.pop()
     }
-
   }
 
   handleSideDrawer(){
@@ -146,10 +146,10 @@ const styles = EStyleSheet.create({
   },
   title: {
     color: '$textColor',
-    fontFamily: 'OpenSans-Semibold',
-    fontSize: 20,
-    lineHeight: 30,
+    fontSize: 24,
+    fontWeight: 'bold',
     textAlign: 'center',
+    lineHeight: 28
   },
   logo: {
     flex: 1,
