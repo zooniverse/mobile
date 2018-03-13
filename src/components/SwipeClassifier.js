@@ -6,6 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import ClassificationPanel from './ClassificationPanel'
 import Question from './Question'
 import Tutorial from './Tutorial'
@@ -25,6 +26,7 @@ import {
   removeAnnotationValue
 } from '../actions/classifier'
 import { append, contains, isEmpty, reverse, uniq } from 'ramda'
+import * as navBarActions from '../actions/navBar'
 
 const mapStateToProps = (state, ownProps) => ({
   isFetching: state.main.classifier.isFetching,
@@ -60,8 +62,10 @@ const mapDispatchToProps = (dispatch) => ({
   removeAnnotationValue(task, value) {
     dispatch(removeAnnotationValue(task, value))
   },
+  navBarActions: bindActionCreators(navBarActions, dispatch)
 })
 
+const PAGE_KEY = 'SwipeClassifier';
 export class SwipeClassifier extends React.Component {
   constructor(props) {
     super(props)
@@ -100,8 +104,12 @@ export class SwipeClassifier extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.navBarActions.setTitleForPage(this.props.display_name, PAGE_KEY)
+  }
+
   static renderNavigationBar() {
-    return <NavBar title={'Classify'} showBack={true} />;
+    return <NavBar pageKey={PAGE_KEY} showBack={true} />;
   }
 
   render() {
@@ -212,6 +220,7 @@ SwipeClassifier.propTypes = {
   isFetching: PropTypes.bool,
   annotations: PropTypes.object,
   workflowID: PropTypes.string,
+  display_name: PropTypes.string,
   workflow: PropTypes.shape({
     first_task: PropTypes.string,
     tasks: PropTypes.object,
@@ -241,6 +250,7 @@ SwipeClassifier.propTypes = {
   needsTutorial: PropTypes.bool,
   guide: PropTypes.object,
   setTutorialCompleted: PropTypes.func,
+  navBarActions: PropTypes.any
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SwipeClassifier)
