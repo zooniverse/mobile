@@ -110,6 +110,7 @@ const styles = EStyleSheet.create({
         fontSize: 26, 
         marginLeft: 25, 
         marginBottom: 20, 
+        fontWeight: 'bold',
         color: '$headerGrey'
     },
     emptyComponent: {
