@@ -43,7 +43,7 @@ export class SideDrawerContent extends Component {
 
   goHome(){
     this.close()
-    Actions.ZooniverseApp()
+    Actions.reset('ZooniverseApp')
   }
 
   signIn(){
