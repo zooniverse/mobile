@@ -173,7 +173,9 @@ ZooWebView.propTypes = {
   webViewNavCounter: PropTypes.number,
   updateNavCounter: PropTypes.func,
   setIsFetching: PropTypes.func,
-  navBarActions: PropTypes.any
+  navBarActions: PropTypes.shape({
+    setTitleForPage: PropTypes.func
+  })
 }
 
 
