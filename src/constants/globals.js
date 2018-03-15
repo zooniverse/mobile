@@ -27,6 +27,7 @@ export const GLOBALS = {
     {value: 'nature', label: 'Nature', color: '#46D178', display: true},
     {value: 'physics', label: 'Physics', color: '#F27441', display: false},
     {value: 'social science', label: 'Social Science', color: '#7EA8CE', display: false},
-    {value: 'astronomy', label: 'Space', color: '#512BAD', display: true}
+    {value: 'astronomy', label: 'Space', color: '#512BAD', display: true},
+    {value: 'recent', label: 'Recent', color: 'rgba(0, 151, 157, 1)', display: false }
   ]
 }
