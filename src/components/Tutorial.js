@@ -106,7 +106,7 @@ export class Tutorial extends Component {
     return (
       <View style={styles.container}>
         { this.props.isInitialTutorial ? tutorialHeader : null}
-        <ScrollView style={styles.content}>
+        <ScrollView style={styles.content} contentContainerStyle={styles.scrollViewContainerStyle}>
           { mediaImage }
           <StyledMarkdown
             width={ Dimensions.get('window').width - 80 }
@@ -135,8 +135,10 @@ const styles = EStyleSheet.create({
   content: {
     height: '100% - 300',
     marginHorizontal: 15,
-    padding: 15,
     backgroundColor: 'white'
+  },
+  scrollViewContainerStyle: {
+    padding: 15
   },
   footer: {
     height: 110,
