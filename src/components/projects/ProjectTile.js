@@ -18,6 +18,7 @@ import {Actions} from 'react-native-router-flux'
 import FontedText from '../common/FontedText'
 import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
+import theme from '../../theme'
 
 const mapStateToProps = (state, ownProps) => {
     const completeness = Number.parseFloat(ownProps.project.completeness)
@@ -77,7 +78,7 @@ class ProjectTile extends Component {
         const avatarSource = avatarUri !== undefined ? { uri: avatarUri } : require('../../../images/teal-wallpaper.png');
         const borderColorTransform = this.state.popupOpacity.interpolate({
             inputRange: [0, 1],
-            outputRange: ['#cbcccb', 'black']
+            outputRange: [theme.$borderGrey, 'black']
         });
         const popupStyle = {marginTop: -this.state.popupHeight, opacity: this.state.popupOpacity}
         return (
@@ -229,7 +230,7 @@ const styles = EStyleSheet.create({
     },
     chevronIcon: {
         fontSize: 15,
-        color: 'rgba(166,167,169,1)'
+        color: '$chevronGrey'
     },
     cellsContainer: {
         paddingHorizontal: 15

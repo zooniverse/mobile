@@ -13,7 +13,7 @@ const Separator = ({style}) => {
 
 const styles = EStyleSheet.create({
     defaultStyle: {
-        borderBottomColor: '#cbcccb',
+        borderBottomColor: '$borderGrey',
         borderBottomWidth: 1,
         flex: 1
     }
