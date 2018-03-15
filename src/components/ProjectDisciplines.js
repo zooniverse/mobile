@@ -23,8 +23,6 @@ import { syncUserStore, setPushPrompted } from '../actions/user'
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
 
-const topPadding = (Platform.OS === 'ios') ? 10 : 0
-
 const mapStateToProps = (state) => ({
   user: state.user,
   isGuestUser: state.user.isGuestUser,
@@ -145,10 +143,10 @@ const styles = EStyleSheet.create({
   subNavContainer: {
     borderBottomColor: '$lightGrey',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingTop: 64 + topPadding,
+    paddingTop: 74,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    height: 112 + topPadding
+    height: 122
   },
   userName: {
     color: '$darkTextColor',
