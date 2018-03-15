@@ -5,6 +5,7 @@ exports[`renders correctly 1`] = `
   style={undefined}
 >
   <RCTScrollView
+    contentContainerStyle={undefined}
     style={undefined}
   >
     <View>
@@ -403,6 +404,7 @@ exports[`renders header if initial tutorial 1`] = `
     Awesome project - Tutorial
   </Text>
   <RCTScrollView
+    contentContainerStyle={undefined}
     style={undefined}
   >
     <View>
@@ -786,6 +788,7 @@ exports[`renders with no media 1`] = `
   style={undefined}
 >
   <RCTScrollView
+    contentContainerStyle={undefined}
     style={undefined}
   >
     <View>
