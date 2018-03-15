@@ -2,45 +2,37 @@ import * as ActionConstants from '../constants/actions';
 import * as R from 'ramda';
 
 const InitialProjectState = {
+    isLoading: false,
+    isSuccess: false,
+    isFailure: false,
     projectList: []
 };
 
 export default function projects(state=InitialProjectState, action) {
     switch (action.type) {
-        case ActionConstants.ADD_PROJECTS: {
+        case ActionConstants.ADD_PROJECTS_REQUEST: {
             return {
                 ...state,
+                isLoading: true
+            }
+        }
+        case ActionConstants.ADD_PROJECTS_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                isSuccess: true,
+                isFailure: false,
                 projectList: action.projects
             };
         }
-        case ActionConstants.ADD_PROJECT_AVATAR: {
-            const updatedProjectList = updateProjectAttribute(state.projectList, action.projectId, 'avatar_src', action.avatarSrc);
+        case ActionConstants.ADD_PROJECTS_FAILURE: {
             return {
-                ...state, 
-                projectList: updatedProjectList
-            };
-        }
-        case ActionConstants.ADD_PROJECT_WORKFLOWS: {
-            const updatedProjectList = updateProjectAttribute(state.projectList, action.projectId, 'workflows', action.workflows);
-            return {
-                ...state, 
-                projectList: updatedProjectList
-            };
+                ...state,
+                isLoading: false,
+                isFailure: true
+            }
         }
         default:
             return state;
     }
-}
-
-function updateProjectAttribute(projectList, projectId, attribute, value) {
-    const newProjectList = projectList.slice(0);
-    const index = newProjectList.findIndex((project) => {
-        return project.id === projectId
-    });
-
-    if (index >= 0) {
-        newProjectList[index] = R.assoc(attribute, value, newProjectList[index]);
-    }
-
-    return newProjectList;
 }

@@ -1,100 +1,48 @@
 import * as ActionConstants from '../../constants/actions';
 import projects from '../projectsReducer';
 
-test('test Add projects', () => {
-    const initialProjectState = {
-        projectList: []
+const initialProjectState = {
+    isLoading: false,
+    isSuccess: false,
+    isFailure: false,
+    projectList: []
+};
+
+test('test Add projects request', () => {
+
+    const action = {
+        type: ActionConstants.ADD_PROJECTS_REQUEST,
     };
 
+    const modifiedState = projects(initialProjectState, action);
+    expect(modifiedState.projectList).toEqual([]);
+    expect(modifiedState.isLoading).toBeTruthy();
+})
+
+test('test Add projects success', () => {
     const projectList = [
         { id: '1'},
         { id: '2'}
     ];
     const action = {
-        type: ActionConstants.ADD_PROJECTS,
+        type: ActionConstants.ADD_PROJECTS_SUCCESS,
         projects: projectList
     };
 
     const modifiedState = projects(initialProjectState, action);
-    expect(modifiedState).toEqual({projectList });
+    expect(modifiedState.projectList).toEqual(projectList);
+    expect(modifiedState.isLoading).toBeFalsy();
+    expect(modifiedState.isSuccess).toBeTruthy();
 })
 
-test('test add project avatar', () => {
-    const initialProjectState = {
-        projectList: [
-            {
-                id: '1'
-            },
-            {
-                id: '2',
-                avatar_src: 'old_source'
-            }
-        ]
-    }
+test('test Add projects failure', () => {
 
-    const action1 = {
-        type: ActionConstants.ADD_PROJECT_AVATAR,
-        projectId: '1',
-        avatarSrc: 'id1_src'
-    };
-    expect(projects(initialProjectState, action1)).toEqual({
-        projectList: [
-            {
-                id: '1',
-                avatar_src: 'id1_src'
-            },
-            {
-                id: '2',
-                avatar_src: 'old_source'
-            }
-        ]
-    });
-
-    const action2 = {
-        type: ActionConstants.ADD_PROJECT_AVATAR,
-        projectId: '2',
-        avatarSrc: 'id2_src'
-    };
-    expect(projects(initialProjectState, action2)).toEqual({
-        projectList: [
-            {
-                id: '1',
-            },
-            {
-                id: '2',
-                avatar_src: 'id2_src'
-            }
-        ]
-    });
-})
-
-test('Add Project Workflows', () => {
-    const initialState = {
-        projectList: [
-            {
-                id: 'id',
-                workflows: {
-                    objects: 'eyo'
-                }
-            }
-        ]
-    };
     const action = {
-        type: ActionConstants.ADD_PROJECT_WORKFLOWS,
-        projectId: 'id',
-        workflows: {
-            test: 'test'
-        }
+        type: ActionConstants.ADD_PROJECTS_FAILURE,
     };
 
-    expect(projects(initialState, action)).toEqual({
-        projectList: [
-            {
-                id: 'id',
-                workflows: {
-                    test: 'test'
-                }
-            }
-        ]
-    })
+    const modifiedState = projects(initialProjectState, action);
+    expect(modifiedState.projectList).toEqual([]);
+    expect(modifiedState.isLoading).toBeFalsy();
+    expect(modifiedState.isFailure).toBeTruthy();
 })

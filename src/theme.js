@@ -28,4 +28,9 @@ export default {
   $swipeLeft: '#E45950',
   $swipeRight: '#00979D',
   $dragBarColor: '#B3B1B3',
+
+  // New Style Guide Colors
+  $headerGrey: 'rgba(92, 92, 92, 1)',
+  $borderGrey: 'rgba(203, 204, 203, 1)',
+  $chevronGrey: 'rgba(166,167,169,1)',
 }

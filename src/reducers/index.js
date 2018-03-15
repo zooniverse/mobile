@@ -2,6 +2,7 @@ import { append, equals, lensPath, merge, reject, set, view } from 'ramda';
 import { combineReducers } from 'redux';
 import user from './userReducer';
 import projects from './projectsReducer';
+import navBar from './navBarReducer';
 
 export const InitialState = {
   registration: { global_email_communication: true },
@@ -77,5 +78,6 @@ export const InitialState = {
 export default combineReducers({
   main,
   user,
-  projects
+  projects,
+  navBar
 })

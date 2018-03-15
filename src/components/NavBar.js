@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   Image,
   Platform,
-  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -11,11 +10,14 @@ import { connect } from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
+
 import UserAvatar from './UserAvatar'
 import CircleRibbon from './CircleRibbon'
+import FontedText from './common/FontedText'
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   user: state.user,
+  dynamicTitle: state.navBar.titles[ownProps.pageKey]
 })
 
 export class NavBar extends Component {
@@ -30,7 +32,6 @@ export class NavBar extends Component {
     } else {
       Actions.pop()
     }
-
   }
 
   handleSideDrawer(){
@@ -50,9 +51,9 @@ export class NavBar extends Component {
       let centerElement = null;
       if (shouldShowTitle){
         centerElement = 
-          <Text style={styles.title} numberOfLines={1}>
-            { this.props.title }
-        </Text>
+          <FontedText style={styles.title} numberOfLines={1}>
+            { this.props.title !== undefined ? this.props.title : this.props.dynamicTitle }
+        </FontedText>
       } else if (shouldShowLogo) {
         centerElement = <Image source={require('../../images/logo.png')} style={styles.logo} />
       }
@@ -98,7 +99,7 @@ export class NavBar extends Component {
       <View style={[styles.navBarContainer]}>
         <View style={styles.navBar}>
           <LeftContainer isActive={this.props.showBack} />
-          <CenterContainer shouldShowTitle={this.props.title} shouldShowLogo={this.props.showLogo} />
+          <CenterContainer shouldShowTitle={!this.props.showLogo && !this.props.showAvatar} shouldShowLogo={this.props.showLogo} />
           <RightContainer isActive={this.props.showDrawer} />
         </View>
         <View>
@@ -144,10 +145,10 @@ const styles = EStyleSheet.create({
   },
   title: {
     color: '$textColor',
-    fontFamily: 'OpenSans-Semibold',
-    fontSize: 20,
-    lineHeight: 30,
+    fontSize: 24,
+    fontWeight: 'bold',
     textAlign: 'center',
+    lineHeight: 28
   },
   logo: {
     flex: 1,
@@ -174,12 +175,15 @@ NavBar.propTypes = {
   onBack: PropTypes.func,
   user: PropTypes.object,
   title: PropTypes.string,
+  dynamicTitle: PropTypes.string,
+  pageKey: PropTypes.string
 }
 NavBar.defaultProps = {
   showLogo: false,
   showAvatar: false,
   showBack: false,
-  showDrawer: true
+  showDrawer: true,
+  title: undefined
 }
 
 export default connect(mapStateToProps)(NavBar)

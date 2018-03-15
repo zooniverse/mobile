@@ -9,10 +9,12 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import NavBar from './NavBar'
 import { setState, setIsFetching } from '../actions/index'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import OverlaySpinner from './OverlaySpinner'
 import PropTypes from 'prop-types';
+import * as navBarActions from '../actions/navBar'
 
 const WEBVIEW_REF = 'WEBVIEW_REF'
 const zooniverseURL = 'https://www.zooniverse.org/projects/'
@@ -28,7 +30,10 @@ const mapDispatchToProps = (dispatch) => ({
   setIsFetching(isFetching) {
     dispatch(setIsFetching(isFetching))
   },
+  navBarActions: bindActionCreators(navBarActions, dispatch)
 })
+
+const PAGE_NAME = 'ZooWebView';
 
 class ZooWebView extends React.Component {
   constructor(props) {
@@ -36,8 +41,16 @@ class ZooWebView extends React.Component {
     this.state = { canGoBack: false }
   }
 
+  static renderNavigationBar() {
+    return <NavBar pageKey={PAGE_NAME} showBack={true} />
+  }
+
   componentWillMount() {
     this.props.setIsFetching(true)
+  }
+
+  componentDidMount() {
+    this.props.navBarActions.setTitleForPage(this.props.project.display_name, PAGE_NAME)
   }
 
   render() {
@@ -66,7 +79,6 @@ class ZooWebView extends React.Component {
 
     return (
       <View style={styles.container}>
-        <NavBar title={this.props.project.display_name} showBack={true} onBack={()=> {this.onBack()}} />
         <WebView
           ref={WEBVIEW_REF}
           source={{uri: zurl}}
@@ -160,7 +172,10 @@ ZooWebView.propTypes = {
   project: PropTypes.object,
   webViewNavCounter: PropTypes.number,
   updateNavCounter: PropTypes.func,
-  setIsFetching: PropTypes.func
+  setIsFetching: PropTypes.func,
+  navBarActions: PropTypes.shape({
+    setTitleForPage: PropTypes.func
+  })
 }
 
 
