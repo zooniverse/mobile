@@ -4,7 +4,7 @@ exports[`renders correctly 1`] = `
 <ImageZoom
   cropHeight={1334}
   cropWidth={750}
-  imageHeight={undefined}
+  imageHeight={1334}
   imageWidth={750}
   longPressTime={300}
   onLongPress={[Function]}
@@ -13,6 +13,7 @@ exports[`renders correctly 1`] = `
 >
   <Image
     resizeMethod="resize"
+    resizeMode="contain"
     source={
       Object {
         "uri": "https://placekitten.com/200/300",
@@ -20,7 +21,7 @@ exports[`renders correctly 1`] = `
     }
     style={
       Object {
-        "height": undefined,
+        "height": 1334,
         "width": 750,
       }
     }

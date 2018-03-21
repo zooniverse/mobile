@@ -76,6 +76,14 @@ exports[`renders correctly 1`] = `
       >
         <SwipeSubject
           inFront={true}
+          leftAnswer="No"
+          pan={
+            Object {
+              "x": 0,
+              "y": 0,
+            }
+          }
+          rightAnswer="Yes"
           seenThisSession={undefined}
           setNextSubject={undefined}
           subject={
@@ -90,80 +98,6 @@ exports[`renders correctly 1`] = `
             }
           }
         />
-        <View
-          collapsable={undefined}
-          style={
-            Object {
-              "backgroundColor": "#E45950",
-              "height": 100,
-              "opacity": 0,
-              "width": 100,
-            }
-          }
-        />
-        <View
-          collapsable={undefined}
-          style={
-            Object {
-              "height": 100,
-              "opacity": 0,
-              "width": 100,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }
-          >
-            No
-          </Text>
-        </View>
-        <View
-          collapsable={undefined}
-          style={
-            Object {
-              "backgroundColor": "#00979D",
-              "height": 100,
-              "opacity": 0,
-              "width": 100,
-            }
-          }
-        />
-        <View
-          collapsable={undefined}
-          style={
-            Object {
-              "height": 100,
-              "opacity": 0,
-              "width": 100,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                undefined,
-                Array [
-                  undefined,
-                ],
-              ]
-            }
-          >
-            Yes
-          </Text>
-        </View>
       </View>
     </View>
   </View>

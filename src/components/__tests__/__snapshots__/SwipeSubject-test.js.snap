@@ -21,7 +21,6 @@ exports[`renders already seen if already_seen is on subject 1`] = `
   <View
     style={
       Array [
-        undefined,
         Object {
           "height": 100,
           "width": 100,
@@ -32,38 +31,110 @@ exports[`renders already seen if already_seen is on subject 1`] = `
       ]
     }
   >
-    <Image
-      onLoadEnd={[Function]}
-      resizeMethod="resize"
-      source={
-        Object {
-          "uri": "blah.jpg",
-        }
-      }
+    <View
       style={
         Array [
           undefined,
+          undefined,
         ]
       }
-    />
-    <View
-      style={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+      <Image
+        onLoadEnd={[Function]}
+        resizeMethod="resize"
+        resizeMode="contain"
+        source={
+          Object {
+            "uri": "blah.jpg",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "height": undefined,
+              "width": undefined,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
         style={
           Array [
             undefined,
-            Array [
-              undefined,
-            ],
           ]
         }
       >
-        ALREADY SEEN!
-      </Text>
+        <View
+          style={
+            Object {
+              "height": 100,
+              "width": 100,
+            }
+          }
+        >
+          <View
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "fontFamily": "Karla",
+                  },
+                  undefined,
+                ]
+              }
+            >
+              ALREADY SEEN!
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            undefined,
+            undefined,
+          ]
+        }
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "backgroundColor": "rgba(114, 120, 119, 1)",
+              "height": 100,
+              "opacity": 0,
+              "width": 100,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -90,7 +161,6 @@ exports[`renders already seen if it was seen this session 1`] = `
   <View
     style={
       Array [
-        undefined,
         Object {
           "height": 100,
           "width": 100,
@@ -101,38 +171,110 @@ exports[`renders already seen if it was seen this session 1`] = `
       ]
     }
   >
-    <Image
-      onLoadEnd={[Function]}
-      resizeMethod="resize"
-      source={
-        Object {
-          "uri": "blah.jpg",
-        }
-      }
+    <View
       style={
         Array [
           undefined,
+          undefined,
         ]
       }
-    />
-    <View
-      style={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+      <Image
+        onLoadEnd={[Function]}
+        resizeMethod="resize"
+        resizeMode="contain"
+        source={
+          Object {
+            "uri": "blah.jpg",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "height": undefined,
+              "width": undefined,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
         style={
           Array [
             undefined,
-            Array [
-              undefined,
-            ],
           ]
         }
       >
-        ALREADY SEEN!
-      </Text>
+        <View
+          style={
+            Object {
+              "height": 100,
+              "width": 100,
+            }
+          }
+        >
+          <View
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "fontFamily": "Karla",
+                  },
+                  undefined,
+                ]
+              }
+            >
+              ALREADY SEEN!
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            undefined,
+            undefined,
+          ]
+        }
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "backgroundColor": "rgba(114, 120, 119, 1)",
+              "height": 100,
+              "opacity": 0,
+              "width": 100,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -159,7 +301,6 @@ exports[`renders back subject position correctly 1`] = `
   <View
     style={
       Array [
-        undefined,
         Object {
           "height": 100,
           "width": 100,
@@ -170,20 +311,82 @@ exports[`renders back subject position correctly 1`] = `
       ]
     }
   >
-    <Image
-      onLoadEnd={[Function]}
-      resizeMethod="resize"
-      source={
-        Object {
-          "uri": "blah.jpg",
-        }
-      }
+    <View
       style={
         Array [
           undefined,
+          undefined,
         ]
       }
-    />
+    >
+      <Image
+        onLoadEnd={[Function]}
+        resizeMethod="resize"
+        resizeMode="contain"
+        source={
+          Object {
+            "uri": "blah.jpg",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "height": undefined,
+              "width": undefined,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            undefined,
+            undefined,
+          ]
+        }
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "backgroundColor": "rgba(114, 120, 119, 1)",
+              "height": 100,
+              "opacity": 0,
+              "width": 100,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
   </View>
 </View>
 `;
@@ -206,7 +409,6 @@ exports[`renders front subject position correctly 1`] = `
   <View
     style={
       Array [
-        undefined,
         Object {
           "height": 100,
           "width": 100,
@@ -217,20 +419,82 @@ exports[`renders front subject position correctly 1`] = `
       ]
     }
   >
-    <Image
-      onLoadEnd={[Function]}
-      resizeMethod="resize"
-      source={
-        Object {
-          "uri": "blah.jpg",
-        }
-      }
+    <View
       style={
         Array [
           undefined,
+          undefined,
         ]
       }
-    />
+    >
+      <Image
+        onLoadEnd={[Function]}
+        resizeMethod="resize"
+        resizeMode="contain"
+        source={
+          Object {
+            "uri": "blah.jpg",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "height": undefined,
+              "width": undefined,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            undefined,
+            undefined,
+          ]
+        }
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "backgroundColor": "rgba(114, 120, 119, 1)",
+              "height": 100,
+              "opacity": 0,
+              "width": 100,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
   </View>
 </View>
 `;
