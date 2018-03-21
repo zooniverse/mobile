@@ -7,7 +7,6 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import theme from '../theme'
 import { connect } from 'react-redux'
 import StyledText from './StyledText'
 import SwipeSubject from './SwipeSubject'
@@ -19,8 +18,6 @@ import PropTypes from 'prop-types';
 //everything above and prevents it from being touchable
 const toTop = (Platform.OS === 'ios') ? 65 : 55
 const SWIPE_THRESHOLD = 90
-const leftOverlayColor = theme.$swipeLeft
-const rightOverlayColor = theme.$swipeRight
 
 const mapStateToProps = (state, ownProps) => ({
   workflow: state.main.classifier.workflow[ownProps.workflowID] || {},
@@ -97,29 +94,21 @@ export class Swipeable extends Component {
   }
 
   render() {
-    const imageSizeStyle = { width: this.props.subjectSizes.resizedWidth, height: this.props.subjectSizes.resizedHeight }
     const swipeableSize = { width: this.props.subjectSizes.resizedWidth, height: this.props.subjectSizes.resizedHeight + 10 }
     let pan = this.state.pan
 
     let [translateX, translateY] = [pan.x, pan.y]
 
     let rotate = pan.x.interpolate({inputRange: [-200, 0, 200], outputRange: ['-30deg', '0deg', '30deg']})
-    let opacityRight = pan.x.interpolate({inputRange: [0, 100, 200], outputRange: [0, .6, .8]})
-    let opacityLeft = pan.x.interpolate({inputRange: [-200, -100, 0], outputRange: [.8, .6, 0]})
-    let opacityRightText = pan.x.interpolate({inputRange: [0, 30], outputRange: [0, 1]})
-    let opacityLeftText = pan.x.interpolate({inputRange: [-30, 0], outputRange: [1, 0]})
+    
 
     let animatedCardStyles = {transform: [{translateX}, {translateY}, {rotate}]}
-    let leftOverlayStyle = {backgroundColor: leftOverlayColor, opacity: opacityLeft}
-    let rightOverlayStyle = {backgroundColor: rightOverlayColor, opacity: opacityRight}
-    let leftOverlayTextStyle = {opacity: opacityLeftText}
-    let rightOverlayTextStyle = {opacity: opacityRightText}
 
     return (
       <View style={[styles.container, {top: toTop + this.props.questionContainerHeight, height: this.props.subjectSizes.resizedHeight + 40}]}>
         <View style={styles.subjectContainer}>
           <Animated.View
-            style={[styles.imageContainer, animatedCardStyles, swipeableSize]}
+            style={[animatedCardStyles, swipeableSize]}
             {...this._panResponder.panHandlers}>
 
             <TouchableOpacity
@@ -132,16 +121,10 @@ export class Swipeable extends Component {
                 subjectSizes={this.props.subjectSizes}
                 seenThisSession={this.props.seenThisSession}
                 setNextSubject={this.props.setNextSubject}
+                pan={pan}
+                leftAnswer={this.props.answers[0].label}
+                rightAnswer={this.props.answers[1].label}
               />
-              <Animated.View style={[styles.overlayContainer, leftOverlayStyle, imageSizeStyle]} />
-              <Animated.View style={[styles.overlayContainer, leftOverlayTextStyle, imageSizeStyle]}>
-                <StyledText additionalStyles={[styles.answerOverlayText]} text={ this.props.answers[0].label } />
-              </Animated.View>
-
-              <Animated.View style={[styles.overlayContainer, rightOverlayStyle, imageSizeStyle]} />
-              <Animated.View style={[styles.overlayContainer, rightOverlayTextStyle, imageSizeStyle]}>
-                <StyledText additionalStyles={[styles.answerOverlayText]} text={ this.props.answers[1].label } />
-              </Animated.View>
             </TouchableOpacity>
           </Animated.View>
         </View>
@@ -172,21 +155,6 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'flex-start',
-  },
-  overlayContainer: {
-    borderRadius: 2,
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    top: 20,
-    right: 0,
-    left: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  answerOverlayText: {
-    fontSize: 30,
-    color: 'white'
   },
 })
 
