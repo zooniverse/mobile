@@ -17,7 +17,8 @@ import FontedText from './common/FontedText'
 
 const mapStateToProps = (state, ownProps) => ({
   user: state.user,
-  dynamicTitle: state.navBar.titles[ownProps.pageKey]
+  dynamicTitle: state.navBar.titles[ownProps.pageKey],
+  dynamicColor: state.navBar.backgroundColors[ownProps.pageKey]
 })
 
 export class NavBar extends Component {
@@ -89,23 +90,24 @@ export class NavBar extends Component {
             onPress={this.handleSideDrawer.bind(this)}
             disabled={!isActive}
           >
-          <Icon name="bars" style={[styles.icon, styles.rightIcon, colorStyle]} />
-      </TouchableOpacity>
+            <Icon name="bars" style={[styles.icon, styles.rightIcon, colorStyle]} />
+          </TouchableOpacity>
         </View>
       );
     }
 
+    const dynamicColorStyle = this.props.dynamicColor !== undefined ? {backgroundColor: this.props.dynamicColor} : null
     return (
-      <View style={[styles.navBarContainer]}>
-        <View style={styles.navBar}>
-          <LeftContainer isActive={this.props.showBack} />
-          <CenterContainer shouldShowTitle={!this.props.showLogo && !this.props.showAvatar} shouldShowLogo={this.props.showLogo} />
-          <RightContainer isActive={this.props.showDrawer} />
+        <View style={[styles.navBarContainer]}>
+          <View style={[styles.navBar, dynamicColorStyle]}>
+            <LeftContainer isActive={this.props.showBack} />
+            <CenterContainer shouldShowTitle={!this.props.showLogo && !this.props.showAvatar} shouldShowLogo={this.props.showLogo} />
+            <RightContainer isActive={this.props.showDrawer} />
+          </View>
+          <View>
+            { this.props.showAvatar ? avatar : null }
+          </View>
         </View>
-        <View>
-          { this.props.showAvatar ? avatar : null }
-        </View>
-      </View>
     );
   }
 }
@@ -116,14 +118,13 @@ const navBarPadding = (Platform.OS === 'ios') ? 36 : 24
 const styles = EStyleSheet.create({
   navBarContainer: {
     flexDirection: 'column',
-    height: navBarHeight
   },
   navBar: {
     backgroundColor: '$headerColor',
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: navBarPadding,
+    height: navBarHeight
   },
   centerContainer: {
     flex: 1,
@@ -164,7 +165,14 @@ const styles = EStyleSheet.create({
   },
   disabledIcon: {
     color: '$transparent'
-  }
+  },
+  totalClassifications: {
+    color: '$darkTextColor',
+  },
+  userName: {
+    color: '$darkTextColor',
+    fontWeight: 'bold'
+  },
 })
 
 NavBar.propTypes = {
@@ -176,6 +184,7 @@ NavBar.propTypes = {
   user: PropTypes.object,
   title: PropTypes.string,
   dynamicTitle: PropTypes.string,
+  dynamicColor: PropTypes.string,
   pageKey: PropTypes.string
 }
 NavBar.defaultProps = {
