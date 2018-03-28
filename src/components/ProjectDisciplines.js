@@ -1,24 +1,24 @@
 import React from 'react'
 import {
+  ActivityIndicator,
   AlertIOS,
+  FlatList,
   Platform,
   PushNotificationIOS,
-  ScrollView,
-  StyleSheet,
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import StyledText from './StyledText'
-import { addIndex, filter, map, propEq } from 'ramda'
+import R from 'ramda'
 import { connect } from 'react-redux'
-import {GLOBALS} from '../constants/globals'
+import { bindActionCreators } from 'redux'
+import { GLOBALS, allProjectTags, loggedInDisciplineTags } from '../constants/globals'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
 import Discipline from './Discipline'
-import OverlaySpinner from './OverlaySpinner'
 import NavBar from '../components/NavBar'
-import { setState } from '../actions/index'
 import { syncUserStore, setPushPrompted } from '../actions/user'
+import FontedText from '../components/common/FontedText'
+import * as projectActions from '../actions/projects'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
@@ -28,13 +28,15 @@ const mapStateToProps = (state) => ({
   isGuestUser: state.user.isGuestUser,
   isConnected: state.main.isConnected,
   isFetching: state.main.isFetching,
-  pushPrompted: state.user.pushPrompted
+  pushPrompted: state.user.pushPrompted,
+  projectList: state.projects.projectList || [],
+  hasBetaProjects: !R.isEmpty(state.projects.betaProjectList),
+  hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
+  isLoading: state.projects.isLoading,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setSelectedProjectTag(tag) {
-    dispatch(setState('selectedProjectTag', tag))
-  },
+  projectActions: bindActionCreators(projectActions, dispatch),
   setPushPrompted(value) {
     dispatch(setPushPrompted(value))
     dispatch(syncUserStore())
@@ -51,6 +53,10 @@ export class ProjectDisciplines extends React.Component {
       setTimeout(()=> {
         this.promptRequestPermissions()
       }, 500)
+    }
+
+    if (R.isEmpty(this.props.projectList)) {
+      this.props.projectActions.fetchProjectsWithTags(allProjectTags)
     }
   }
 
@@ -84,53 +90,57 @@ export class ProjectDisciplines extends React.Component {
     return <NavBar showAvatar={true} />;
   }
 
+  _renderItem({item}) {
+    const { faIcon, value, label, color } = item
+    return (
+      <Discipline
+        faIcon={faIcon}
+        icon={value}
+        title={label}
+        tag={value}
+        color={color}
+      />
+    );
+  }
+
   render() {
     const totalClassifications = this.props.user.totalClassifications
-    const renderDiscipline = ({value, label, color}, idx) => {
-      return (
-        <Discipline
-          icon={value}
-          title={label}
-          tag={value}
-          key={idx}
-          color={color}
-          setSelectedProjectTag={() => {this.props.setSelectedProjectTag(value)}} /> )
-    }
-
-    const recent =
-      <Discipline
-        faIcon={'undo'}
-        title={'Recent'}
-        tag={'recent'}
-        color={'rgba(0, 151, 157, 1)'}
-        setSelectedProjectTag={() => {this.props.setSelectedProjectTag('recent')}} />
-
-    const DisciplineList =
-      <ScrollView>
-        { !this.props.isGuestUser ? recent : null }
-        {addIndex(map)(
-          (discipline, idx) => { return renderDiscipline(discipline, idx) },
-          filter(propEq('display', true), GLOBALS.DISCIPLINES)
-        )}
-      </ScrollView>
-
-    const pluralizeClassification = ( totalClassifications > 1 ? 's' : '' )
+    const pluralizeClassification = ( totalClassifications > 1 ? 'S' : '' )
     const totalClassificationsDisiplay =
-      <StyledText
-        additionalStyles={[styles.totalClassifications]}
-        text={`${totalClassifications} total classification${pluralizeClassification}`} />
+      <FontedText style={styles.totalClassifications}>
+        {`${totalClassifications} TOTAL CLASSIFICATION${pluralizeClassification}`}
+      </FontedText>
+
+    const disciplineInProjectList = (discipline) => {
+      const {user, hasBetaProjects, hasRecentProjects} = this.props
+      const isForLoggerInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasBetaProjects ).includes(discipline.value)
+      const isTagged = this.props.projectList.find((project) => project.tags.includes(discipline.value)) !== undefined
+      return isForLoggerInUser || isTagged
+    }
+    const disciplineList = R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES)
+    const listView = 
+      <FlatList
+        contentContainerStyle={styles.listContainer}
+        data={disciplineList}
+        renderItem={this._renderItem}
+        keyExtractor={(item, index) => index}
+        showsVerticalScrollIndicator={false}
+      />
+    const activityIndicator =
+      <View style={activityIndicator}>
+        <ActivityIndicator size="large" />
+      </View>
+  
 
     return (
       <View style={styles.container}>
         <View style={styles.subNavContainer}>
-            <StyledText additionalStyles={[styles.userName]}
-              text = { this.props.isGuestUser ? 'Guest User' : this.props.user.display_name } />
+            <FontedText style={styles.userName}>
+              { this.props.isGuestUser ? 'Guest User' : this.props.user.display_name }
+            </FontedText>
             { totalClassifications > 0 ? totalClassificationsDisiplay : null }
         </View>
-        <View style={styles.innerContainer}>
-          { DisciplineList }
-        </View>
-        { this.props.isFetching ? <OverlaySpinner /> : null }
+        { this.props.isLoading ? activityIndicator : listView }
       </View>
     );
   }
@@ -141,19 +151,21 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   subNavContainer: {
-    borderBottomColor: '$lightGrey',
-    borderBottomWidth: StyleSheet.hairlineWidth,
     paddingTop: 74,
+    paddingBottom: 25,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    height: 122
   },
   userName: {
-    color: '$darkTextColor',
-    fontWeight: 'bold'
+    color: '$headerGrey',
+    fontSize: 26,
+    lineHeight: 31,
   },
   totalClassifications: {
-    color: '$darkTextColor',
+    color: '$headerGrey',
+    fontSize: 14,
+    fontWeight: 'bold',
+    lineHeight: 17
   },
   signOut: {
     backgroundColor: '$transparent',
@@ -168,6 +180,14 @@ const styles = EStyleSheet.create({
   innerContainer: {
     flex: 1,
     marginTop: 10,
+  },
+  activityIndicator: {
+    flex: 1,
+    paddingBottom: 75,
+    justifyContent: 'center'
+  },
+  listContainer: {
+    paddingBottom: 25
   }
 });
 
@@ -176,8 +196,12 @@ ProjectDisciplines.propTypes = {
   isGuestUser: PropTypes.bool,
   isFetching: PropTypes.bool,
   pushPrompted: PropTypes.bool,
-  setSelectedProjectTag: PropTypes.func,
   setPushPrompted: PropTypes.func,
+  projectList: PropTypes.array,
+  isLoading: PropTypes.bool,
+  projectActions: PropTypes.any,
+  hasRecentProjects: PropTypes.bool,
+  hasBetaProjects: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)

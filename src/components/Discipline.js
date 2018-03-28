@@ -10,6 +10,7 @@ import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
 import ZooIcon from './ZooIcon'
+import FontedText from '../components/common/FontedText'
 
 class Discipline extends Component {
   constructor(props) {
@@ -19,22 +20,23 @@ class Discipline extends Component {
 
   handleClick() {
     GoogleAnalytics.trackEvent('view', this.props.tag)
-    this.props.setSelectedProjectTag()
-    Actions.ProjectList({tag: this.props.tag, color: this.props.color})
+    const navigationProps = {selectedProjectTag: this.props.tag, color: this.props.color}
+    Actions.ProjectList(navigationProps)
   }
 
   render() {
+    const customIconSize = this.props.tag === 'beta' ? { fontSize: 45 } : []
     return (
       <TouchableOpacity
         onPress={this.handleClick}>
         <View style={[styles.titleContainer, { backgroundColor: this.props.color }]}>
           <View style={styles.zooIconContainer}>
             { this.props.faIcon
-              ? <Icon name={this.props.faIcon} style={[styles.icon, styles.faIcon, styles.zooIconContainer]} />
+              ? <Icon name={this.props.faIcon} style={[styles.icon, styles.faIcon, styles.zooIconContainer, customIconSize]} />
               : <ZooIcon iconName={this.props.icon} /> }
           </View>
-          <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>{this.props.title}</Text>
-          <Icon name="angle-right" style={styles.icon} />
+          <FontedText style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>{this.props.title}</FontedText>
+          <Icon name="chevron-right" style={styles.chevronIcon} />
         </View>
       </TouchableOpacity>
     );
@@ -54,7 +56,6 @@ const titleSurroundWidth = widths.rightIconWidth + widths.zooIconContainerWidth 
 const styles = EStyleSheet.create({
   $titleSurroundWidth: titleSurroundWidth,
   titleContainer: {
-    borderRadius: 4,
     flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
@@ -66,17 +67,19 @@ const styles = EStyleSheet.create({
     marginBottom: 0
   },
   title: {
-    fontFamily: 'OpenSans-Semibold',
-    backgroundColor: '$transparent',
     color: '$textColor',
-    fontSize: 28,
-    lineHeight: 38,
+    fontSize: 26,
+    fontWeight: 'bold',
+    lineHeight: 31,
     width: '100% - $titleSurroundWidth'
   },
   icon: {
     fontSize: 30,
     color: '$textColor',
-    width: widths.rightIconWidth,
+  },
+  chevronIcon: {
+    fontSize: 26,
+    color: '$textColor',
   },
   faIcon: {
     paddingLeft: 10
@@ -92,7 +95,6 @@ Discipline.propTypes = {
   title: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  setSelectedProjectTag: PropTypes.func.isRequired
 }
 
 export default Discipline
