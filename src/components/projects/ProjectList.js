@@ -18,28 +18,34 @@ import { GLOBALS } from '../../constants/globals'
 
 GoogleAnalytics.trackEvent('view', 'Project')
 
-const mapStateToProps = (state) => {
-    const { selectedProjectTag } = state.main;
-    let projectList = []
+const mapStateToProps = (state, ownProps) => {
+    const { selectedProjectTag } = ownProps;
+    const inTestMode = selectedProjectTag === 'beta'
+    let projectList
     
     // Grab all of the projects from the selected Project Tag
     if (selectedProjectTag === 'recent') {
       const activeProjects = R.filter((project) => { return project.activity_count > 0 }, state.user.projects);
       projectList = state.projects.projectList.filter((project) => R.keys(activeProjects).includes(project.id));
-    } else {
+    } else if (inTestMode) {
+        projectList = state.projects.betaProjectList
+    }    
+    else {
         projectList = state.projects.projectList.filter((project) => R.contains(selectedProjectTag, project.tags))
     }
 
-    // Seperate out of the native workflows and non-native workflows    
+    // Seperate out the native workflows and non-native workflows    
     const swipeEnabledProjects = projectList.filter((project) => R.any((workflow) => workflow.swipe_verified)(project.workflows))
     const nonSwipeEnabledProjects = projectList.filter((project) => R.all((workflow) => !workflow.swipe_verified)(project.workflows))
 
     return {
-        selectedProjectTag,
         swipeEnabledProjects,
         nonSwipeEnabledProjects,
         promptForWorkflow: state.main.settings.promptForWorkflow || false,
         isLoading: state.projects.isLoading,
+        collaboratorIds: state.projects.collaboratorIds,
+        ownerIds: state.projects.ownerIds,
+        inTestMode
     };
 }
 
@@ -58,6 +64,12 @@ class ProjectList extends Component {
     componentDidMount() {
         const title = GLOBALS.DISCIPLINES.find((element) => element.value === this.props.selectedProjectTag).label
         this.props.navBarActions.setTitleForPage(title, PAGE_KEY);
+
+        if (this.props.inTestMode) {
+            this.props.navBarActions.setNavbarColorForPage('rgba(228,89,80,1)', PAGE_KEY)
+        } else {
+            this.props.navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
+        }
     }
 
     _emptyText() {
@@ -73,14 +85,28 @@ class ProjectList extends Component {
     }
 
     render() {
+        const {inTestMode, ownerIds, collaboratorIds, swipeEnabledProjects, nonSwipeEnabledProjects } = this.props
         let sections = []
-        if (this.props.swipeEnabledProjects.length > 0) {
-            sections.push({data: this.props.swipeEnabledProjects, title: 'Made For Mobile'});
-        }
+        if (inTestMode) {
+            if (!R.isEmpty(ownerIds)) {
+                const ownerProjects = swipeEnabledProjects.filter((project) => ownerIds.includes(project.id))
+                sections.push({data: ownerProjects, title: 'You Projects'})
+            }
 
-        if (this.props.nonSwipeEnabledProjects.length > 0) {
-            sections.push({data: this.props.nonSwipeEnabledProjects, title: 'In-Browser Experience'})
+            if (!R.isEmpty(collaboratorIds)) {
+                const collaboratorProjects = swipeEnabledProjects.filter((project) => collaboratorIds.includes(project.id))
+                sections.push({data: collaboratorProjects, title: 'Collaborations'})
+            }
+        } else {
+            if (!R.isEmpty(swipeEnabledProjects)) {
+                sections.push({data: swipeEnabledProjects, title: 'Made For Mobile'});
+            }
+    
+            if (!R.isEmpty(this.props.nonSwipeEnabledProjects)) {
+                sections.push({data: nonSwipeEnabledProjects, title: 'In-Browser Experience'})
+            }
         }
+        
 
         return (
             <SectionList
@@ -88,7 +114,7 @@ class ProjectList extends Component {
                 stickySectionHeadersEnabled={false}
                 ItemSeparatorComponent={() => <View style={styles.separatorView} />}
                 SectionSeparatorComponent={(data) => <View style={this._seperatorHeightStyle(data)} />}
-                renderItem={({item}) => <ProjectTile project={item} />}
+                renderItem={({item}) => <ProjectTile project={item} inTestMode={this.props.inTestMode}/>}
                 renderSectionHeader={({section}) => <FontedText style={styles.sectionHeader}> { section.title } </FontedText>}
                 sections={sections}
                 ListEmptyComponent={() => <FontedText style={styles.emptyComponent}> {this._emptyText()} </FontedText>}
@@ -129,7 +155,10 @@ ProjectList.propTypes = {
     isLoading: PropTypes.bool,
     isSuccess: PropTypes.bool,
     selectedProjectTag: PropTypes.string,
-    navBarActions: PropTypes.any
+    navBarActions: PropTypes.any,
+    inTestMode: PropTypes.bool,
+    collaboratorIds: PropTypes.array,
+    ownerIds: PropTypes.array
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectList)

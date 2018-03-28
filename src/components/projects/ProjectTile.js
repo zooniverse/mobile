@@ -40,6 +40,17 @@ class ProjectTile extends Component {
         this._onMainViewPress = this._onMainViewPress.bind(this)
     }
 
+    _overlayBanner() {
+        const bannerStyle = this.props.inTestMode ? [styles.bannerContainer, styles.testBannerStyle] : styles.bannerContainer
+        return (
+            <View style={bannerStyle}>
+                <FontedText style={styles.bannerText}>
+                    { this.props.inTestMode ? 'BETA' : 'OUT OF DATA' }
+                </FontedText>
+            </View>
+        )
+    }
+
     _onMainViewPress() {
         const { workflows, display_name, redirect } = this.props.project
         
@@ -52,7 +63,7 @@ class ProjectTile extends Component {
                 }, 1200);
             });
         } else if (workflows.length === 1) {
-            Actions.SwipeClassifier({ workflowID: R.head(workflows).id, display_name})
+            Actions.SwipeClassifier({ workflowID: R.head(workflows).id, display_name, inTestMode: this.props.inTestMode})
         } else if (redirect) {
             this._openURL(redirect)
         } else {
@@ -101,7 +112,7 @@ class ProjectTile extends Component {
                                 </FontedText>
                             </View>
                         </View>
-                        { this.props.outOfData ? <OutOfDataBanner /> : null }
+                        { this.props.outOfData || this.props.inTestMode ? this._overlayBanner() : null }
                     </View>
                     <Animated.View 
                         onLayout={(event) => this.setState({popupHeight: event.nativeEvent.layout.height})}
@@ -124,16 +135,6 @@ const PhoneIcon = () => {
         />
     );
 };
-
-const OutOfDataBanner = () => {
-    return (
-        <View style={styles.bannerContainer}>
-            <FontedText style={styles.bannerText}>
-                OUT OF DATA
-            </FontedText>
-        </View>
-    )
-}
 
 const WorkFlowList = ({workflows, project}) => {
     const workflowsView = R.addIndex(R.map)((workflow, index) => {
@@ -209,6 +210,9 @@ const styles = EStyleSheet.create({
         shadowOpacity: .5,
         shadowRadius: 4
     },
+    testBannerStyle: {
+        backgroundColor: '$testRed'
+    },
     bannerText: {
         paddingHorizontal: 15,
         paddingVertical: 4,
@@ -241,7 +245,8 @@ ProjectTile.propTypes = {
     project: PropTypes.object,
     containsNativeWorkflows: PropTypes.bool,
     tileWidth: PropTypes.number,
-    outOfData: PropTypes.bool
+    outOfData: PropTypes.bool,
+    inTestMode: PropTypes.bool
 }
 
 WorkFlowList.propTypes = {
