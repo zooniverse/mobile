@@ -69,7 +69,14 @@ exports[`renders with a title 1`] = `
       allowFontScaling={true}
       ellipsizeMode="tail"
       numberOfLines={1}
-      style={undefined}
+      style={
+        Array [
+          Object {
+            "fontFamily": "Karla",
+          },
+          undefined,
+        ]
+      }
     >
       O Hai!
     </Text>
@@ -92,7 +99,7 @@ exports[`renders with a title 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
