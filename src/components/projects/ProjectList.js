@@ -90,7 +90,7 @@ class ProjectList extends Component {
         if (inTestMode) {
             if (!R.isEmpty(ownerIds)) {
                 const ownerProjects = swipeEnabledProjects.filter((project) => ownerIds.includes(project.id))
-                sections.push({data: ownerProjects, title: 'You Projects'})
+                sections.push({data: ownerProjects, title: 'Your Projects'})
             }
 
             if (!R.isEmpty(collaboratorIds)) {

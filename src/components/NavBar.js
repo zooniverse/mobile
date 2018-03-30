@@ -166,13 +166,6 @@ const styles = EStyleSheet.create({
   disabledIcon: {
     color: '$transparent'
   },
-  totalClassifications: {
-    color: '$darkTextColor',
-  },
-  userName: {
-    color: '$darkTextColor',
-    fontWeight: 'bold'
-  },
 })
 
 NavBar.propTypes = {
