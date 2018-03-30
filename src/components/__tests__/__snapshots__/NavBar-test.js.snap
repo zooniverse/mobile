@@ -9,7 +9,12 @@ exports[`renders correctly with defaults 1`] = `
   }
 >
   <View
-    style={undefined}
+    style={
+      Array [
+        undefined,
+        null,
+      ]
+    }
   >
     <View>
       <View
@@ -149,7 +154,12 @@ exports[`renders correctly with title 1`] = `
   }
 >
   <View
-    style={undefined}
+    style={
+      Array [
+        undefined,
+        null,
+      ]
+    }
   >
     <View>
       <View

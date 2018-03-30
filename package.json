@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest --runInBand",
+    "test": "NODE_ENV=staging jest --runInBand",
     "test:watch": "npm test -- --watch"
   },
   "jest": {

@@ -4,7 +4,6 @@ export default {
   $registerButtonColor: 'rgba(12, 72, 129, 1)',
   $registerDisabledButtonColor: 'rgba(205,228,250, 1)',
   $disabledButtonColor: 'rgba(0, 151, 157, .35)',
-  $backgroundColor: 'white',
   $projectTitleColor: 'rgba(70, 209, 120, 1)',
   $textColor: 'white',
   $lightTransparent: 'rgba(0, 0, 0, .03)',
@@ -30,7 +29,9 @@ export default {
   $dragBarColor: '#B3B1B3',
 
   // New Style Guide Colors
+  $backgroundColor: 'rgba(239, 242, 245, 1)',
   $headerGrey: 'rgba(92, 92, 92, 1)',
   $borderGrey: 'rgba(203, 204, 203, 1)',
   $chevronGrey: 'rgba(166,167,169,1)',
+  $testRed: 'rgba(228,89,80,1)'
 }

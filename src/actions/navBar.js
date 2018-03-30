@@ -5,3 +5,14 @@ export const setTitleForPage = (title, pageKey) => ({
     title,
     pageKey
 });
+
+export const setNavbarColorForPage = (color, pageKey) => ({
+    type: ActionConstants.SET_NAVBAR_COLOR,
+    color,
+    pageKey
+})
+
+export const setNavbarColorForPageToDefault = (pageKey) => ({
+    type: ActionConstants.SET_NAVBAR_COLOR_TO_DEFAULT,
+    pageKey
+})

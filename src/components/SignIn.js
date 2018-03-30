@@ -147,8 +147,6 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent',
     margin: 30,
     marginTop: 20,
-    paddingLeft: 15,
-    paddingRight: 15,
   },
   lined: {
     flex: 1,

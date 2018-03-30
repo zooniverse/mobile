@@ -13,404 +13,43 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Array [
+          Object {
+            "fontFamily": "Karla",
+          },
           undefined,
-          Array [
-            undefined,
-          ],
         ]
       }
     >
       Fake User
     </Text>
   </View>
-  <View
-    style={undefined}
+  <RCTScrollView
+    contentContainerStyle={undefined}
+    data={Array []}
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    showsVerticalScrollIndicator={false}
+    stickyHeaderIndices={Array []}
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
   >
-    <RCTScrollView>
-      <View>
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "opacity": 1,
-            }
-          }
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <View
-            style={
-              Array [
-                undefined,
-                Object {
-                  "backgroundColor": "rgba(0, 151, 157, 1)",
-                },
-              ]
-            }
-          >
-            <View
-              style={undefined}
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": undefined,
-                      "fontSize": 12,
-                    },
-                    Array [
-                      undefined,
-                      undefined,
-                      undefined,
-                    ],
-                    Object {
-                      "fontFamily": "FontAwesome",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                  ]
-                }
-              >
-                
-              </Text>
-            </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={undefined}
-            >
-              Recent
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "FontAwesome",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "opacity": 1,
-            }
-          }
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <View
-            style={
-              Array [
-                undefined,
-                Object {
-                  "backgroundColor": "#18807F",
-                },
-              ]
-            }
-          >
-            <View
-              style={undefined}
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": undefined,
-                      "fontSize": 12,
-                    },
-                    Array [
-                      undefined,
-                      undefined,
-                    ],
-                    Object {
-                      "fontFamily": "zoo-font",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                  ]
-                }
-              >
-                
-              </Text>
-            </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={undefined}
-            >
-              Biology
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "FontAwesome",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "opacity": 1,
-            }
-          }
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <View
-            style={
-              Array [
-                undefined,
-                Object {
-                  "backgroundColor": "#46D178",
-                },
-              ]
-            }
-          >
-            <View
-              style={undefined}
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": undefined,
-                      "fontSize": 12,
-                    },
-                    Array [
-                      undefined,
-                      undefined,
-                    ],
-                    Object {
-                      "fontFamily": "zoo-font",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                  ]
-                }
-              >
-                
-              </Text>
-            </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={undefined}
-            >
-              Nature
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "FontAwesome",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "opacity": 1,
-            }
-          }
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <View
-            style={
-              Array [
-                undefined,
-                Object {
-                  "backgroundColor": "#512BAD",
-                },
-              ]
-            }
-          >
-            <View
-              style={undefined}
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": undefined,
-                      "fontSize": 12,
-                    },
-                    Array [
-                      undefined,
-                      undefined,
-                    ],
-                    Object {
-                      "fontFamily": "zoo-font",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                  ]
-                }
-              >
-                
-              </Text>
-            </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={undefined}
-            >
-              Space
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "FontAwesome",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-      </View>
-    </RCTScrollView>
-  </View>
+    <View />
+  </RCTScrollView>
 </View>
 `;
