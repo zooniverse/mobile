@@ -50,6 +50,9 @@ export default function projects(state=InitialProjectState, action) {
                 collaboratorIds: R.append(action.projectId, state.collaboratorIds)
             }
         }
+        case ActionConstants.SIGN_OUT: {
+            return InitialProjectState;
+        }
         default:
             return state;
     }
