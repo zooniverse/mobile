@@ -14,7 +14,9 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import * as R from 'ramda';
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import {Actions} from 'react-native-router-flux'
+import { bindActionCreators } from 'redux'
 
+import * as classifierActions from '../../actions/classifier'
 import FontedText from '../common/FontedText'
 import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
@@ -29,6 +31,10 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
+const mapDispatchToProps = (dispatch) => ({
+    classifierActions: bindActionCreators(classifierActions, dispatch)
+})
+
 class ProjectTile extends Component {
     constructor(props) {
         super(props)
@@ -38,6 +44,7 @@ class ProjectTile extends Component {
             popupHeight: 0
         }
         this._onMainViewPress = this._onMainViewPress.bind(this)
+        this._navigateToSwipeClassifier = this._navigateToSwipeClassifier.bind(this)
     }
 
     _overlayBanner() {
@@ -90,12 +97,22 @@ class ProjectTile extends Component {
                 }, 1200);
             });
         } else if (workflows.length === 1) {
-            Actions.SwipeClassifier({ workflowID: R.head(workflows).id, display_name, inTestMode: this.props.inTestMode})
+            this._navigateToSwipeClassifier(R.head(workflows))
         } else if (redirect) {
             this._openURL(redirect)
         } else {
             Actions.ZooWebView({project: this.props.project})
         }
+    }
+
+    _navigateToSwipeClassifier(workflow) {
+        this.props.classifierActions.clearClassifierData()
+        Actions.SwipeClassifier({ 
+            project: this.props.project,
+            workflow,
+            display_name: this.props.project.display_name,
+            inTestMode: this.props.inTestMode
+        })
     }
 
     _openURL(url){
@@ -247,4 +264,4 @@ ProjectTile.propTypes = {
     inTestMode: PropTypes.bool
 }
 
-export default connect(mapStateToProps)(ProjectTile);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectTile);

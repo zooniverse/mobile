@@ -1,7 +1,11 @@
 import apiClient from 'panoptes-client/lib/api-client'
-import { isNil, length, prepend } from 'ramda'
+import { length, prepend } from 'ramda'
 import { setState } from '../actions/index'
-import { Image } from 'react-native'
+import { 
+  setUpcomingSubjectsForWorkflow,
+  setSubjectForWorkflowId,
+  setNextSubjectForWorkflowId,
+} from './classifier'
 import getSubjectLocation from '../utils/get-subject-location'
 
 export function fetchUpcomingSubjects(workflowID) {
@@ -17,20 +21,19 @@ export function fetchUpcomingSubjects(workflowID) {
   }
 }
 
-export function loadSubjects() {
+export function loadSubjects(workflowId) {
   return (dispatch, getState) => {
     return new Promise ((resolve, reject) => {
-      const workflowID = getState().main.classifier.currentWorkflowID
-      const upcomingSubjects = getState().main.classifier.upcomingSubjects[workflowID] || []
+      const upcomingSubjects = getState().classifier.upcomingSubjects[workflowId] || []
 
       if (length(upcomingSubjects) > 1) {
         return resolve()
       }
 
-      dispatch(fetchUpcomingSubjects(workflowID)).then((subjects) => {
+      dispatch(fetchUpcomingSubjects(workflowId)).then((subjects) => {
         //if this is the last subject we need to keep it around
         const subjectList = (length(upcomingSubjects) === 1) ? prepend(upcomingSubjects[0], subjects) : subjects
-        dispatch(setState(`classifier.upcomingSubjects.${workflowID}`, subjectList))
+        dispatch(setUpcomingSubjectsForWorkflow(workflowId, subjectList))
         return resolve()
       }, (error) => {
         dispatch(setState('error', error))
@@ -40,35 +43,36 @@ export function loadSubjects() {
   }
 }
 
-export function setSubjectsToDisplay(isFirstSubject) {
+export function setSubjectsToDisplay(isFirstSubject, workflowId) {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
-      const workflowID = getState().main.classifier.currentWorkflowID
-      const upcomingSubjects = getState().main.classifier.upcomingSubjects[workflowID]
+      const upcomingSubjects = getState().classifier.upcomingSubjects[workflowId]
       let subject = upcomingSubjects[0]
       subject.display = getSubjectLocation(subject)
 
       function setupSubjects(){
-        return isFirstSubject ? dispatch(setNextSubject()) : Promise.resolve()
+        return isFirstSubject ? dispatch(setNextSubject(workflowId)) : Promise.resolve()
       }
 
       setupSubjects().then(() => {
-        dispatch(setState(`classifier.subject.${workflowID}`, subject))
+        dispatch(setSubjectForWorkflowId(workflowId, subject))
         return resolve()
       })
     })
   }
 }
 
-export function setNextSubject() {
+export function setNextSubject(workflowId) {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
-      const workflowID = getState().main.classifier.currentWorkflowID
-      const upcomingSubjects = getState().main.classifier.upcomingSubjects[workflowID]
+      const upcomingSubjects = getState().classifier.upcomingSubjects[workflowId]
+      console.log(`workflowID ${workflowId}`)
+      console.log(upcomingSubjects)
       let nextSubject = upcomingSubjects[1]
-
-      nextSubject.display = getSubjectLocation(nextSubject)
-      dispatch(setState(`classifier.nextSubject.${workflowID}`, nextSubject))
+      if (nextSubject) {
+        nextSubject.display = getSubjectLocation(nextSubject)
+      }
+      dispatch(setNextSubjectForWorkflowId(workflowId, nextSubject))
       return resolve()
     })
   }
