@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import user from './userReducer';
 import projects from './projectsReducer';
 import navBar from './navBarReducer';
+import classifier from './classifierReducer'
 
 export const InitialState = {
   registration: { global_email_communication: true },
@@ -18,23 +19,6 @@ export const InitialState = {
   settings: { promptForWorkflow: false },
   pushEnabled: false,
   pushPrompted: false,
-  classifier: { //key is workflow ID for each
-    isFetching: true,
-    currentWorkflowID: 0,
-    workflow: {},
-    project: {},
-    tutorial: {},
-    guide: {},
-    needsTutorial: {},
-    questionContainerHeight: {},
-    classification: {},
-    subject: {},
-    nextSubject: {},
-    subjectSizes: {},
-    annotations: [],
-    upcomingSubjects: {},
-    seenThisSession: {},
-  },
 }
 
  function main(state=InitialState, action) {
@@ -79,5 +63,6 @@ export default combineReducers({
   main,
   user,
   projects,
-  navBar
+  navBar,
+  classifier
 })
