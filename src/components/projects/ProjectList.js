@@ -15,6 +15,7 @@ import NavBar from '../NavBar'
 import FontedText from '../common/FontedText'
 import * as navBarActions from '../../actions/navBar'
 import { GLOBALS } from '../../constants/globals'
+import Theme from '../../theme'
 
 GoogleAnalytics.trackEvent('view', 'Project')
 
@@ -66,7 +67,7 @@ class ProjectList extends Component {
         this.props.navBarActions.setTitleForPage(title, PAGE_KEY);
 
         if (this.props.inTestMode) {
-            this.props.navBarActions.setNavbarColorForPage('rgba(228,89,80,1)', PAGE_KEY)
+            this.props.navBarActions.setNavbarColorForPage(Theme.$testRed, PAGE_KEY)
         } else {
             this.props.navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
         }
