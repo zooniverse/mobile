@@ -51,6 +51,33 @@ class ProjectTile extends Component {
         )
     }
 
+    _workFlowList = () => {
+        const workflowsView = R.addIndex(R.map)((workflow, index) => {
+            return (
+                <View key={index}>
+                    <Separator />
+                    <View>
+                        <TouchableOpacity onPress={() => this._navigateToSwipeClassifier(workflow) } >
+                            <View style={styles.cell}>
+                                <FontedText style={styles.cellTitle}>
+                                    {workflow.display_name}
+                                </FontedText>
+                                <View style={styles.chevronContainer}>
+                                    <Icon name="chevron-right" style={styles.chevronIcon}/>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            );
+        }, this.props.project.workflows);
+        return (
+            <View style={styles.cellsContainer}>
+                {workflowsView}
+            </View>
+        )
+    }
+
     _onMainViewPress() {
         const { workflows, display_name, redirect } = this.props.project
         
@@ -120,7 +147,7 @@ class ProjectTile extends Component {
                     > 
                         <PopupMessage />
                     </Animated.View>
-                    { this.props.project.workflows.length > 1 ? <WorkFlowList workflows={this.props.project.workflows} project={this.props.project}/> : null }
+                    { this.props.project.workflows.length > 1 ? this._workFlowList() : null }
                 </TouchableOpacity>
             </Animated.View>
         );
@@ -135,35 +162,6 @@ const PhoneIcon = () => {
         />
     );
 };
-
-const WorkFlowList = ({workflows, project}) => {
-    const workflowsView = R.addIndex(R.map)((workflow, index) => {
-        const { id } = workflow
-        const { display_name } = project
-        return (
-            <View key={index}>
-                <Separator />
-                <View>
-                    <TouchableOpacity onPress={() => Actions.SwipeClassifier({ workflowID: id, display_name })} >
-                        <View style={styles.cell}>
-                            <FontedText style={styles.cellTitle}>
-                                {workflow.display_name}
-                            </FontedText>
-                            <View style={styles.chevronContainer}>
-                                <Icon name="chevron-right" style={styles.chevronIcon}/>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        );
-    }, workflows);
-    return (
-        <View style={styles.cellsContainer}>
-            {workflowsView}
-        </View>
-    )
-}
 
 const styles = EStyleSheet.create({
     mainContainer: {
@@ -247,11 +245,6 @@ ProjectTile.propTypes = {
     tileWidth: PropTypes.number,
     outOfData: PropTypes.bool,
     inTestMode: PropTypes.bool
-}
-
-WorkFlowList.propTypes = {
-    workflows: PropTypes.array,
-    project: PropTypes.any
 }
 
 export default connect(mapStateToProps)(ProjectTile);
