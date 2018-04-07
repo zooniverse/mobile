@@ -85,7 +85,7 @@ exports[`renders correctly 1`] = `
           }
           rightAnswer="Yes"
           seenThisSession={undefined}
-          setNextSubject={undefined}
+          setNextSubject={[Function]}
           subject={
             Object {
               "id": "3424",
