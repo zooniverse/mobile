@@ -66,8 +66,6 @@ export function setNextSubject(workflowId) {
   return (dispatch, getState) => {
     return new Promise ((resolve) => {
       const upcomingSubjects = getState().classifier.upcomingSubjects[workflowId]
-      console.log(`workflowID ${workflowId}`)
-      console.log(upcomingSubjects)
       let nextSubject = upcomingSubjects[1]
       if (nextSubject) {
         nextSubject.display = getSubjectLocation(nextSubject)

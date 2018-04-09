@@ -204,6 +204,7 @@ const styles = EStyleSheet.create({
 SwipeClassifier.propTypes = {
   inTestMode: PropTypes.bool,
   isFetching: PropTypes.bool,
+  isSuccess: PropTypes.bool,
   annotations: PropTypes.object,
   workflowID: PropTypes.string,
   display_name: PropTypes.string,

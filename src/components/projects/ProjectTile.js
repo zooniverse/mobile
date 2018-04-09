@@ -261,7 +261,8 @@ ProjectTile.propTypes = {
     containsNativeWorkflows: PropTypes.bool,
     tileWidth: PropTypes.number,
     outOfData: PropTypes.bool,
-    inTestMode: PropTypes.bool
+    inTestMode: PropTypes.bool,
+    classifierActions: PropTypes.any
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectTile);
