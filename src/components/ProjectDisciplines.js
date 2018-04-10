@@ -23,16 +23,20 @@ import * as projectActions from '../actions/projects'
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-  isGuestUser: state.user.isGuestUser,
-  isConnected: state.main.isConnected,
-  isFetching: state.main.isFetching,
-  projectList: state.projects.projectList || [],
-  hasBetaProjects: !R.isEmpty(state.projects.betaProjectList),
-  hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
-  isLoading: state.projects.isLoading,
-})
+const mapStateToProps = (state) => {
+  const nativeBetaProjects = state.projects.betaProjectList.filter((project) => R.any((workflow) => workflow.swipe_verified)(project.workflows))
+  const hasBetaProjects = !R.isEmpty(nativeBetaProjects)
+  return {
+    user: state.user,
+    isGuestUser: state.user.isGuestUser,
+    isConnected: state.main.isConnected,
+    isFetching: state.main.isFetching,
+    projectList: state.projects.projectList || [],
+    hasBetaProjects,
+    hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
+    isLoading: state.projects.isLoading,
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   projectActions: bindActionCreators(projectActions, dispatch),
