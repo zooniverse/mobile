@@ -59,6 +59,7 @@ class ProjectTile extends Component {
     }
 
     _workFlowList = () => {
+        const swipeVerifiedWorkflows = this.props.project.workflows.filter( workflow => workflow.swipe_verified)
         const workflowsView = R.addIndex(R.map)((workflow, index) => {
             return (
                 <View key={index}>
@@ -77,7 +78,7 @@ class ProjectTile extends Component {
                     </View>
                 </View>
             );
-        }, this.props.project.workflows);
+        }, swipeVerifiedWorkflows);
         return (
             <View style={styles.cellsContainer}>
                 {workflowsView}
