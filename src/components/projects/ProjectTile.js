@@ -48,11 +48,11 @@ class ProjectTile extends Component {
     }
 
     _overlayBanner() {
-        const bannerStyle = this.props.inTestMode ? [styles.bannerContainer, styles.testBannerStyle] : styles.bannerContainer
+        const bannerStyle = this.props.inPreviewMode ? [styles.bannerContainer, styles.testBannerStyle] : styles.bannerContainer
         return (
             <View style={bannerStyle}>
                 <FontedText style={styles.bannerText}>
-                    { this.props.inTestMode ? 'BETA' : 'OUT OF DATA' }
+                    { this.props.inPreviewMode ? 'PREVIEW' : 'OUT OF DATA' }
                 </FontedText>
             </View>
         )
@@ -112,7 +112,7 @@ class ProjectTile extends Component {
             project: this.props.project,
             workflow,
             display_name: this.props.project.display_name,
-            inTestMode: this.props.inTestMode
+            inPreviewMode: this.props.inPreviewMode
         })
     }
 
@@ -157,7 +157,7 @@ class ProjectTile extends Component {
                                 </FontedText>
                             </View>
                         </View>
-                        { this.props.outOfData || this.props.inTestMode ? this._overlayBanner() : null }
+                        { this.props.outOfData || this.props.inPreviewMode ? this._overlayBanner() : null }
                     </View>
                     <Animated.View 
                         onLayout={(event) => this.setState({popupHeight: event.nativeEvent.layout.height})}
@@ -262,7 +262,7 @@ ProjectTile.propTypes = {
     containsNativeWorkflows: PropTypes.bool,
     tileWidth: PropTypes.number,
     outOfData: PropTypes.bool,
-    inTestMode: PropTypes.bool,
+    inPreviewMode: PropTypes.bool,
     classifierActions: PropTypes.any
 }
 

@@ -84,10 +84,10 @@ export class SwipeClassifier extends React.Component {
   }
 
   componentDidMount() {
-    const { display_name, inTestMode, navBarActions, classifierActions } = this.props
+    const { display_name, inPreviewMode, navBarActions, classifierActions } = this.props
     navBarActions.setTitleForPage(display_name, PAGE_KEY)
-    classifierActions.setClassifierTestMode(inTestMode)
-    if (inTestMode) {
+    classifierActions.setClassifierTestMode(inPreviewMode)
+    if (inPreviewMode) {
       navBarActions.setNavbarColorForPage(Theme.$testRed, PAGE_KEY)
     } else {
       navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
@@ -202,7 +202,7 @@ const styles = EStyleSheet.create({
 })
 
 SwipeClassifier.propTypes = {
-  inTestMode: PropTypes.bool,
+  inPreviewMode: PropTypes.bool,
   isFetching: PropTypes.bool,
   isSuccess: PropTypes.bool,
   annotations: PropTypes.object,

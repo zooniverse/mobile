@@ -19,7 +19,7 @@ const InitialClassifier = {
     subject: {},
     nextSubject: {},
     questionContainerHeight: {},
-    inTestMode: false
+    inPreviewMode: false
 };
 
 export default function classifier(state=InitialClassifier, action) {
@@ -94,7 +94,7 @@ export default function classifier(state=InitialClassifier, action) {
             return { ...state, isFetching: false, isSuccess: false, isFailure: false }
         }
         case ActionConstants.SET_CLASSIFIER_TEST_MODE: {
-            return { ...state, inTestMode: action.isTestMode}
+            return { ...state, inPreviewMode: action.isTestMode}
         }
         default:
             return state;

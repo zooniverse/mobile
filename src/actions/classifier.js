@@ -70,7 +70,7 @@ export function saveThenStartNewClassification(workflow) {
     }
     const annotations = R.map(structureAnnotation, R.toPairs(classifier.annotations[workflow.id]))
 
-    if (!classifier.inTestMode) {
+    if (!classifier.inPreviewMode) {
       Image.getSize(subject.display.src, (naturalWidth, naturalHeight) => {
         const subjectDimensions = {
           naturalWidth,

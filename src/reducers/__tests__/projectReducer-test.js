@@ -6,7 +6,7 @@ const initialProjectState = {
     isSuccess: false,
     isFailure: false,
     projectList: [],
-    betaProjectList: [],
+    previewProjectList: [],
     collaboratorIds: [],
     ownerIds: []
 };
@@ -48,25 +48,25 @@ test('test add projects', () => {
         { id: '1'},
         { id: '2'}
     ];
-    const nonBetaAction = {
+    const nonPreviewAction = {
         type: ActionConstants.ADD_PROJECTS,
         projects: projectList,
-        areBeta: false
+        arePreview: false
     }
 
-    const nonBetaModifiedState = projects(initialProjectState, nonBetaAction);
-    expect(nonBetaModifiedState.projectList).toEqual(projectList);
-    expect(nonBetaModifiedState.betaProjectList).toEqual([]);
+    const nonPreviewModifiedState = projects(initialProjectState, nonPreviewAction);
+    expect(nonPreviewModifiedState.projectList).toEqual(projectList);
+    expect(nonPreviewModifiedState.previewProjectList).toEqual([]);
 
-    const betaAction = {
+    const previewAction = {
         type: ActionConstants.ADD_PROJECTS,
         projects: projectList,
-        areBeta: true
+        arePreview: true
     }
     
-    const betaModifiedState = projects(initialProjectState, betaAction);
-    expect(betaModifiedState.betaProjectList).toEqual(projectList);
-    expect(betaModifiedState.projectList).toEqual([]);
+    const previewModifiedState = projects(initialProjectState, previewAction);
+    expect(previewModifiedState.previewProjectList).toEqual(projectList);
+    expect(previewModifiedState.projectList).toEqual([]);
 })
 
 test('test add owner project ids', () => {

@@ -17,7 +17,7 @@ export const GLOBALS = {
   },
   DISCIPLINES: [
     {value: 'recent', label: 'Recent', color: 'rgba(0, 151, 157, 1)', display: false, faIcon: 'clock-o'},
-    {value: 'beta', label: 'Beta', color: 'rgba(228,89,80,1)', display: false, faIcon: 'mobile'},
+    {value: 'preview', label: 'Preview', color: 'rgba(228,89,80,1)', display: false, faIcon: 'mobile'},
     {value: 'arts', label: 'Arts', color: '#AFA48C', display: false },
     {value: 'biology', label: 'Biology', color: '#9DDDF9', display: true },
     {value: 'climate', label: 'Climate', color: '#A1BFBE', display: false },
@@ -33,10 +33,10 @@ export const GLOBALS = {
   ]
 }
 
-export const loggedInDisciplineTags = (hasRecents, hasBetas) => {
+export const loggedInDisciplineTags = (hasRecents, hasPreviews) => {
   let disciplines = []
   if (hasRecents) disciplines.push('recent')
-  if (hasBetas) disciplines.push('beta')
+  if (hasPreviews) disciplines.push('preview')
   return disciplines
 }
 
