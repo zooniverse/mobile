@@ -15,20 +15,21 @@ import NavBar from '../NavBar'
 import FontedText from '../common/FontedText'
 import * as navBarActions from '../../actions/navBar'
 import { GLOBALS } from '../../constants/globals'
+import Theme from '../../theme'
 
 GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state, ownProps) => {
     const { selectedProjectTag } = ownProps;
-    const inTestMode = selectedProjectTag === 'beta'
+    const inPreviewMode = selectedProjectTag === 'preview'
     let projectList
     
     // Grab all of the projects from the selected Project Tag
     if (selectedProjectTag === 'recent') {
       const activeProjects = R.filter((project) => { return project.activity_count > 0 }, state.user.projects);
       projectList = state.projects.projectList.filter((project) => R.keys(activeProjects).includes(project.id));
-    } else if (inTestMode) {
-        projectList = state.projects.betaProjectList
+    } else if (inPreviewMode) {
+        projectList = state.projects.previewProjectList
     }    
     else {
         projectList = state.projects.projectList.filter((project) => R.contains(selectedProjectTag, project.tags))
@@ -45,7 +46,7 @@ const mapStateToProps = (state, ownProps) => {
         isLoading: state.projects.isLoading,
         collaboratorIds: state.projects.collaboratorIds,
         ownerIds: state.projects.ownerIds,
-        inTestMode
+        inPreviewMode
     };
 }
 
@@ -65,8 +66,8 @@ class ProjectList extends Component {
         const title = GLOBALS.DISCIPLINES.find((element) => element.value === this.props.selectedProjectTag).label
         this.props.navBarActions.setTitleForPage(title, PAGE_KEY);
 
-        if (this.props.inTestMode) {
-            this.props.navBarActions.setNavbarColorForPage('rgba(228,89,80,1)', PAGE_KEY)
+        if (this.props.inPreviewMode) {
+            this.props.navBarActions.setNavbarColorForPage(Theme.$testRed, PAGE_KEY)
         } else {
             this.props.navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
         }
@@ -85,9 +86,9 @@ class ProjectList extends Component {
     }
 
     render() {
-        const {inTestMode, ownerIds, collaboratorIds, swipeEnabledProjects, nonSwipeEnabledProjects } = this.props
+        const {inPreviewMode, ownerIds, collaboratorIds, swipeEnabledProjects, nonSwipeEnabledProjects } = this.props
         let sections = []
-        if (inTestMode) {
+        if (inPreviewMode) {
             if (!R.isEmpty(ownerIds)) {
                 const ownerProjects = swipeEnabledProjects.filter((project) => ownerIds.includes(project.id))
                 sections.push({data: ownerProjects, title: 'Your Projects'})
@@ -114,7 +115,7 @@ class ProjectList extends Component {
                 stickySectionHeadersEnabled={false}
                 ItemSeparatorComponent={() => <View style={styles.separatorView} />}
                 SectionSeparatorComponent={(data) => <View style={this._seperatorHeightStyle(data)} />}
-                renderItem={({item}) => <ProjectTile project={item} inTestMode={this.props.inTestMode}/>}
+                renderItem={({item}) => <ProjectTile project={item} inPreviewMode={this.props.inPreviewMode}/>}
                 renderSectionHeader={({section}) => <FontedText style={styles.sectionHeader}> { section.title } </FontedText>}
                 sections={sections}
                 ListEmptyComponent={() => <FontedText style={styles.emptyComponent}> {this._emptyText()} </FontedText>}
@@ -156,7 +157,7 @@ ProjectList.propTypes = {
     isSuccess: PropTypes.bool,
     selectedProjectTag: PropTypes.string,
     navBarActions: PropTypes.any,
-    inTestMode: PropTypes.bool,
+    inPreviewMode: PropTypes.bool,
     collaboratorIds: PropTypes.array,
     ownerIds: PropTypes.array
 }

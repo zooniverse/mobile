@@ -14,7 +14,9 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import * as R from 'ramda';
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import {Actions} from 'react-native-router-flux'
+import { bindActionCreators } from 'redux'
 
+import * as classifierActions from '../../actions/classifier'
 import FontedText from '../common/FontedText'
 import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
@@ -29,6 +31,10 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
+const mapDispatchToProps = (dispatch) => ({
+    classifierActions: bindActionCreators(classifierActions, dispatch)
+})
+
 class ProjectTile extends Component {
     constructor(props) {
         super(props)
@@ -38,15 +44,44 @@ class ProjectTile extends Component {
             popupHeight: 0
         }
         this._onMainViewPress = this._onMainViewPress.bind(this)
+        this._navigateToSwipeClassifier = this._navigateToSwipeClassifier.bind(this)
     }
 
     _overlayBanner() {
-        const bannerStyle = this.props.inTestMode ? [styles.bannerContainer, styles.testBannerStyle] : styles.bannerContainer
+        const bannerStyle = this.props.inPreviewMode ? [styles.bannerContainer, styles.testBannerStyle] : styles.bannerContainer
         return (
             <View style={bannerStyle}>
                 <FontedText style={styles.bannerText}>
-                    { this.props.inTestMode ? 'BETA' : 'OUT OF DATA' }
+                    { this.props.inPreviewMode ? 'PREVIEW' : 'OUT OF DATA' }
                 </FontedText>
+            </View>
+        )
+    }
+
+    _workFlowList = () => {
+        const swipeVerifiedWorkflows = this.props.project.workflows.filter( workflow => workflow.swipe_verified)
+        const workflowsView = R.addIndex(R.map)((workflow, index) => {
+            return (
+                <View key={index}>
+                    <Separator />
+                    <View>
+                        <TouchableOpacity onPress={() => this._navigateToSwipeClassifier(workflow) } >
+                            <View style={styles.cell}>
+                                <FontedText style={styles.cellTitle}>
+                                    {workflow.display_name}
+                                </FontedText>
+                                <View style={styles.chevronContainer}>
+                                    <Icon name="chevron-right" style={styles.chevronIcon}/>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            );
+        }, swipeVerifiedWorkflows);
+        return (
+            <View style={styles.cellsContainer}>
+                {workflowsView}
             </View>
         )
     }
@@ -63,12 +98,22 @@ class ProjectTile extends Component {
                 }, 1200);
             });
         } else if (workflows.length === 1) {
-            Actions.SwipeClassifier({ workflowID: R.head(workflows).id, display_name, inTestMode: this.props.inTestMode})
+            this._navigateToSwipeClassifier(R.head(workflows))
         } else if (redirect) {
             this._openURL(redirect)
         } else {
             Actions.ZooWebView({project: this.props.project})
         }
+    }
+
+    _navigateToSwipeClassifier(workflow) {
+        this.props.classifierActions.clearClassifierData()
+        Actions.SwipeClassifier({ 
+            project: this.props.project,
+            workflow,
+            display_name: this.props.project.display_name,
+            inPreviewMode: this.props.inPreviewMode
+        })
     }
 
     _openURL(url){
@@ -112,7 +157,7 @@ class ProjectTile extends Component {
                                 </FontedText>
                             </View>
                         </View>
-                        { this.props.outOfData || this.props.inTestMode ? this._overlayBanner() : null }
+                        { this.props.outOfData || this.props.inPreviewMode ? this._overlayBanner() : null }
                     </View>
                     <Animated.View 
                         onLayout={(event) => this.setState({popupHeight: event.nativeEvent.layout.height})}
@@ -120,7 +165,7 @@ class ProjectTile extends Component {
                     > 
                         <PopupMessage />
                     </Animated.View>
-                    { this.props.project.workflows.length > 1 ? <WorkFlowList workflows={this.props.project.workflows} project={this.props.project}/> : null }
+                    { this.props.project.workflows.length > 1 ? this._workFlowList() : null }
                 </TouchableOpacity>
             </Animated.View>
         );
@@ -135,35 +180,6 @@ const PhoneIcon = () => {
         />
     );
 };
-
-const WorkFlowList = ({workflows, project}) => {
-    const workflowsView = R.addIndex(R.map)((workflow, index) => {
-        const { id } = workflow
-        const { display_name } = project
-        return (
-            <View key={index}>
-                <Separator />
-                <View>
-                    <TouchableOpacity onPress={() => Actions.SwipeClassifier({ workflowID: id, display_name })} >
-                        <View style={styles.cell}>
-                            <FontedText style={styles.cellTitle}>
-                                {workflow.display_name}
-                            </FontedText>
-                            <View style={styles.chevronContainer}>
-                                <Icon name="chevron-right" style={styles.chevronIcon}/>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        );
-    }, workflows);
-    return (
-        <View style={styles.cellsContainer}>
-            {workflowsView}
-        </View>
-    )
-}
 
 const styles = EStyleSheet.create({
     mainContainer: {
@@ -246,12 +262,8 @@ ProjectTile.propTypes = {
     containsNativeWorkflows: PropTypes.bool,
     tileWidth: PropTypes.number,
     outOfData: PropTypes.bool,
-    inTestMode: PropTypes.bool
+    inPreviewMode: PropTypes.bool,
+    classifierActions: PropTypes.any
 }
 
-WorkFlowList.propTypes = {
-    workflows: PropTypes.array,
-    project: PropTypes.any
-}
-
-export default connect(mapStateToProps)(ProjectTile);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectTile);

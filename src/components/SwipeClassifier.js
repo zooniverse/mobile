@@ -17,51 +17,29 @@ import OverlaySpinner from './OverlaySpinner'
 import NavBar from './NavBar'
 import FullScreenImage from './FullScreenImage'
 import UnlinkedTask from './UnlinkedTask'
-import { setState } from '../actions/index'
-import {
-  startNewClassification,
-  setTutorialCompleted,
-  saveAnnotation,
-  saveThenStartNewClassification,
-  removeAnnotationValue
-} from '../actions/classifier'
 import { append, contains, isEmpty, reverse, uniq } from 'ramda'
+import * as classifierActions from '../actions/classifier'
 import * as navBarActions from '../actions/navBar'
+import Theme from '../theme'
+
 
 const mapStateToProps = (state, ownProps) => ({
-  isFetching: state.main.classifier.isFetching,
-  annotations: state.main.classifier.annotations[ownProps.workflowID] || {},
-  workflow: state.main.classifier.workflow[ownProps.workflowID] || {},
-  project: state.main.classifier.project[ownProps.workflowID] || {},
-  guide: state.main.classifier.guide[ownProps.workflowID] || {},
-  tutorial: state.main.classifier.tutorial[ownProps.workflowID] || {},
-  needsTutorial: state.main.classifier.needsTutorial[ownProps.workflowID] || false,
-  subject: state.main.classifier.subject[ownProps.workflowID] || {},
-  nextSubject: state.main.classifier.nextSubject[ownProps.workflowID] || {},
+  isSuccess: state.classifier.isSuccess,
+  isFailure: state.classifier.isFailure,
+  isFetching: state.classifier.isFetching,
+  annotations: state.classifier.annotations[ownProps.workflow.id] || {},
+  guide: state.classifier.guide[ownProps.workflow.id] || {},
+  tutorial: state.classifier.tutorial[ownProps.workflow.id] || {},
+  needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
+  subject: state.classifier.subject[ownProps.workflow.id] || {},
+  nextSubject: state.classifier.nextSubject[ownProps.workflow.id] || {},
   subjectDisplayWidth: state.main.device.subjectDisplayWidth,
   subjectDisplayHeight: state.main.device.subjectDisplayHeight,
-  seenThisSession: state.main.classifier.seenThisSession[ownProps.workflowID] || [],
+  seenThisSession: state.classifier.seenThisSession[ownProps.workflow.id] || [],
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  startNewClassification(workflowID) {
-    dispatch(startNewClassification(workflowID))
-  },
-  setTutorialCompleted() {
-    dispatch(setTutorialCompleted())
-  },
-  setIsFetching(isFetching) {
-    dispatch(setState('classifier.isFetching', isFetching))
-  },
-  saveAnnotation(task, value) {
-    dispatch(saveAnnotation(task, value))
-  },
-  saveThenStartNewClassification(answerIndex) {
-    dispatch(saveThenStartNewClassification(answerIndex))
-  },
-  removeAnnotationValue(task, value) {
-    dispatch(removeAnnotationValue(task, value))
-  },
+  classifierActions: bindActionCreators(classifierActions, dispatch),
   navBarActions: bindActionCreators(navBarActions, dispatch)
 })
 
@@ -74,8 +52,7 @@ export class SwipeClassifier extends React.Component {
       isQuestionVisible: true,
       showFullSize: false,
     }
-    this.props.setIsFetching(true)
-    this.props.startNewClassification(this.props.workflowID)
+    this.props.classifierActions.startNewClassification(this.props.workflow, this.props.project)
   }
 
   setQuestionVisibility(isVisible) {
@@ -84,28 +61,37 @@ export class SwipeClassifier extends React.Component {
 
   finishTutorial() {
     if (this.props.needsTutorial) {
-      this.props.setTutorialCompleted()
+      this.props.classifierActions.setTutorialCompleted(this.props.workflow.id, this.props.project.id)
     } else {
       this.setQuestionVisibility(true)
     }
   }
 
   onAnswered = (answer) => {
-    this.props.saveAnnotation(this.props.workflow.first_task, answer)
-    this.props.saveThenStartNewClassification()
+    const { id, first_task } = this.props.workflow
+    this.props.classifierActions.addAnnotationToTask(id, first_task, answer, false)
+    this.props.classifierActions.saveThenStartNewClassification(this.props.workflow)
   }
 
   onUnlinkedTaskAnswered = (task, value) => {
     const taskAnnotations = this.props.annotations[task] || []
+    const { id } = this.props.workflow
     if (contains(value, taskAnnotations)) {
-      this.props.removeAnnotationValue(task, value)
+      this.props.classifierActions.removeAnnotationFromTask(id, task, value)
     } else {
-      this.props.saveAnnotation(task, uniq(append(value, taskAnnotations)))
+      this.props.classifierActions.addAnnotationToTask(id, task, value, true)
     }
   }
 
   componentDidMount() {
-    this.props.navBarActions.setTitleForPage(this.props.display_name, PAGE_KEY)
+    const { display_name, inPreviewMode, navBarActions, classifierActions } = this.props
+    navBarActions.setTitleForPage(display_name, PAGE_KEY)
+    classifierActions.setClassifierTestMode(inPreviewMode)
+    if (inPreviewMode) {
+      navBarActions.setNavbarColorForPage(Theme.$testRed, PAGE_KEY)
+    } else {
+      navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
+    }
   }
 
   static renderNavigationBar() {
@@ -143,7 +129,7 @@ export class SwipeClassifier extends React.Component {
         <View>
           <Question
             question={task.question}
-            workflowID={this.props.workflowID}
+            workflowID={this.props.workflow.id}
             taskHelp={task.help}
           />
           <View style={[styles.subjectContainer, { width: this.props.subjectDisplayWidth, height: this.props.subjectDisplayHeight }]}>
@@ -154,7 +140,7 @@ export class SwipeClassifier extends React.Component {
       const swipeableSubject =
         <Swipeable
           key={this.props.subject.id}
-          workflowID={this.props.workflowID}
+          workflow={this.props.workflow}
           onAnswered={this.onAnswered}
           answers={answers}
           showFullSize={() => this.setState({showFullSize: true})}
@@ -200,9 +186,8 @@ export class SwipeClassifier extends React.Component {
         this.props.needsTutorial ? tutorial : classificationPanel
       )
     }
-
     return (
-      this.props.isFetching || isEmpty(this.props.workflow) ? <OverlaySpinner overrideVisibility={this.props.isFetching} /> : renderClassifierOrTutorial()
+      this.props.isFetching || !this.props.isSuccess ? <OverlaySpinner overrideVisibility={this.props.isFetching} /> : renderClassifierOrTutorial()
     )
   }
 }
@@ -217,7 +202,9 @@ const styles = EStyleSheet.create({
 })
 
 SwipeClassifier.propTypes = {
+  inPreviewMode: PropTypes.bool,
   isFetching: PropTypes.bool,
+  isSuccess: PropTypes.bool,
   annotations: PropTypes.object,
   workflowID: PropTypes.string,
   display_name: PropTypes.string,
@@ -225,6 +212,7 @@ SwipeClassifier.propTypes = {
     first_task: PropTypes.string,
     tasks: PropTypes.object,
     configuration: PropTypes.object,
+    id: PropTypes.string
   }),
   subject: PropTypes.shape({
     id: PropTypes.string,
@@ -238,18 +226,14 @@ SwipeClassifier.propTypes = {
   subjectDisplayWidth: PropTypes.number,
   subjectDisplayHeight: PropTypes.number,
   seenThisSession: PropTypes.array,
-  startNewClassification: PropTypes.func,
-  saveThenStartNewClassification: PropTypes.func,
-  saveAnnotation: PropTypes.func,
-  removeAnnotationValue:  PropTypes.func,
-  setIsFetching: PropTypes.func,
   project: PropTypes.shape({
     display_name: PropTypes.string,
+    id: PropTypes.string
   }),
   tutorial: PropTypes.object,
   needsTutorial: PropTypes.bool,
   guide: PropTypes.object,
-  setTutorialCompleted: PropTypes.func,
+  classifierActions: PropTypes.any,
   navBarActions: PropTypes.any
 }
 

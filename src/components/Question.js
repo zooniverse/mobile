@@ -8,19 +8,19 @@ import PropTypes from 'prop-types';
 import StyledMarkdown from './StyledMarkdown'
 import TaskHelp from './TaskHelp'
 import { connect } from 'react-redux'
-import { setState } from '../actions/index'
+import { setQuestionContainerHeight } from '../actions/classifier'
 
 //questionContainerHeight is stored in redux because the swipeable component needs
 //to be absolutely positioned outside of the ContainerPanel for Android
 //This is to help calculate that height
 
 const mapStateToProps = (state, ownProps) => ({
-  questionContainerHeight: state.main.classifier.questionContainerHeight[ownProps.workflowID] || 0,
+  questionContainerHeight: state.classifier.questionContainerHeight[ownProps.workflowID] || 0,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setQuestionContainerHeight(height) {
-    dispatch(setState(`classifier.questionContainerHeight.${ownProps.workflowID}`, height))
+    dispatch(setQuestionContainerHeight(ownProps.workflowID, height))
   },
 })
 

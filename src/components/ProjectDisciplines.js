@@ -23,16 +23,20 @@ import * as projectActions from '../actions/projects'
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-  isGuestUser: state.user.isGuestUser,
-  isConnected: state.main.isConnected,
-  isFetching: state.main.isFetching,
-  projectList: state.projects.projectList || [],
-  hasBetaProjects: !R.isEmpty(state.projects.betaProjectList),
-  hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
-  isLoading: state.projects.isLoading,
-})
+const mapStateToProps = (state) => {
+  const nativePreviewProjects = state.projects.previewProjectList.filter((project) => R.any((workflow) => workflow.swipe_verified)(project.workflows))
+  const hasPreviewProjects = !R.isEmpty(nativePreviewProjects)
+  return {
+    user: state.user,
+    isGuestUser: state.user.isGuestUser,
+    isConnected: state.main.isConnected,
+    isFetching: state.main.isFetching,
+    projectList: state.projects.projectList || [],
+    hasPreviewProjects,
+    hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
+    isLoading: state.projects.isLoading,
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   projectActions: bindActionCreators(projectActions, dispatch),
@@ -111,8 +115,8 @@ export class ProjectDisciplines extends React.Component {
       </FontedText>
 
     const disciplineInProjectList = (discipline) => {
-      const {user, hasBetaProjects, hasRecentProjects} = this.props
-      const isForLoggerInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasBetaProjects ).includes(discipline.value)
+      const {user, hasPreviewProjects, hasRecentProjects} = this.props
+      const isForLoggerInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects ).includes(discipline.value)
       const isTagged = this.props.projectList.find((project) => project.tags.includes(discipline.value)) !== undefined
       return isForLoggerInUser || isTagged
     }
@@ -199,7 +203,7 @@ ProjectDisciplines.propTypes = {
   isLoading: PropTypes.bool,
   projectActions: PropTypes.any,
   hasRecentProjects: PropTypes.bool,
-  hasBetaProjects: PropTypes.bool
+  hasPreviewProjects: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)

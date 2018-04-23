@@ -6,7 +6,7 @@ const InitialProjectState = {
     isSuccess: false,
     isFailure: false,
     projectList: [],
-    betaProjectList: [],
+    previewProjectList: [],
     collaboratorIds: [],
     ownerIds: []
 };
@@ -28,8 +28,8 @@ export default function projects(state=InitialProjectState, action) {
             };
         }
         case ActionConstants.ADD_PROJECTS: {
-            const { areBeta, projects } = action
-            return areBeta ? { ...state, betaProjectList: projects } : { ...state, projectList: projects}
+            const { arePreview, projects } = action
+            return arePreview ? { ...state, previewProjectList: projects } : { ...state, projectList: projects}
         }
         case ActionConstants.PROJECTS_FAILURE: {
             return {
@@ -49,6 +49,9 @@ export default function projects(state=InitialProjectState, action) {
                 ...state,
                 collaboratorIds: R.append(action.projectId, state.collaboratorIds)
             }
+        }
+        case ActionConstants.SIGN_OUT: {
+            return InitialProjectState;
         }
         default:
             return state;

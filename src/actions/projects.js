@@ -36,22 +36,22 @@ export function fetchProjectsWithTags(tags=[]) {
         dispatch(addProjectsRequest)
         getAuthUser().then( () => {
             let projectCalls = []
-            let betaProjects = []
+            let previewProjects = []
             // Fetch production Projects
             projectCalls.push(apiClient.type('projects').get(productionParams).then(loadWorkflows(dispatch, false)));
 
             // Fetch Test Projects
             projectCalls.push(apiClient.type('projects').get(ownerParams).then((projects) => {
                 projects.forEach((project) => dispatch(addOwnerProjectId(project)))
-                betaProjects = betaProjects.concat(projects);
+                previewProjects = previewProjects.concat(projects);
             }));
             projectCalls.push(apiClient.type('projects').get(collaboratorParams).then((projects) => {
                 projects.forEach((project) => dispatch(addCollaboratorProjectId(project)))
-                betaProjects = betaProjects.concat(projects);
+                previewProjects = previewProjects.concat(projects);
             }));
 
             Promise.all(projectCalls).then(() => {
-                loadWorkflows(dispatch, true, betaProjects).then(() => {
+                loadWorkflows(dispatch, true, previewProjects).then(() => {
                     dispatch(addProjectsSuccess);
                 })
                 
@@ -64,7 +64,7 @@ export function fetchProjectsWithTags(tags=[]) {
     }
 }
 
-const loadWorkflows = R.curry((dispatch, areBeta, projects) => {            
+const loadWorkflows = R.curry((dispatch, arePreview, projects) => {            
     const promises = []
     projects.forEach((project) => {
         promises.push(apiClient.type('avatars').get(project.links.avatar.id).then((avatar) => {
@@ -79,7 +79,7 @@ const loadWorkflows = R.curry((dispatch, areBeta, projects) => {
         .catch(() => project.workflows = []));
     })
     return Promise.all(promises).then(() => {
-        return dispatch(addProjects(projects, areBeta))
+        return dispatch(addProjects(projects, arePreview))
     })
 });
 
@@ -105,9 +105,9 @@ const addProjectsFailure = {
     type: ActionConstants.PROJECTS_FAILURE
 }
 
-const addProjects = (projects, areBeta) => ({
+const addProjects = (projects, arePreview) => ({
     type: ActionConstants.ADD_PROJECTS, 
-    areBeta,
+    arePreview,
     projects
 })
 

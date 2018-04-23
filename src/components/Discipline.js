@@ -25,7 +25,7 @@ class Discipline extends Component {
   }
 
   render() {
-    const customIconSize = this.props.tag === 'beta' ? { fontSize: 45 } : []
+    const customIconSize = this.props.tag === 'preview' ? { fontSize: 45 } : []
     return (
       <TouchableOpacity
         onPress={this.handleClick}>

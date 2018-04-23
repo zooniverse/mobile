@@ -20,21 +20,20 @@ const toTop = (Platform.OS === 'ios') ? 65 : 55
 const SWIPE_THRESHOLD = 90
 
 const mapStateToProps = (state, ownProps) => ({
-  workflow: state.main.classifier.workflow[ownProps.workflowID] || {},
-  subject: state.main.classifier.subject[ownProps.workflowID] || {},
-  classification: state.main.classifier.classification[ownProps.workflowID] || {},
-  annotations: state.main.classifier.annotations[ownProps.workflowID] || {},
+  subject: state.classifier.subject[ownProps.workflow.id] || {},
+  classification: state.classifier.classification[ownProps.workflow.id] || {},
+  annotations: state.classifier.annotations[ownProps.workflow.id] || {},
   subjectSizes: {
     resizedHeight: state.main.device.subjectDisplayHeight,
     resizedWidth: state.main.device.subjectDisplayWidth
   },
-  seenThisSession: state.main.classifier.seenThisSession[ownProps.workflowID] || [],
-  questionContainerHeight: state.main.classifier.questionContainerHeight[ownProps.workflowID] || 0,
+  seenThisSession: state.classifier.seenThisSession[ownProps.workflow.id] || [],
+  questionContainerHeight: state.classifier.questionContainerHeight[ownProps.workflow.id] || 0,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setNextSubject() {
-    dispatch(setNextSubject())
+  setNextSubject(workflowId) {
+    dispatch(setNextSubject(workflowId))
   },
 })
 
@@ -120,7 +119,7 @@ export class Swipeable extends Component {
                 subject={this.props.subject}
                 subjectSizes={this.props.subjectSizes}
                 seenThisSession={this.props.seenThisSession}
-                setNextSubject={this.props.setNextSubject}
+                setNextSubject={() => this.props.setNextSubject(this.props.workflow.id) }
                 pan={pan}
                 leftAnswer={this.props.answers[0].label}
                 rightAnswer={this.props.answers[1].label}
@@ -168,6 +167,7 @@ Swipeable.propTypes = {
   subjectSizes: PropTypes.object,
   seenThisSession: PropTypes.arrayOf(PropTypes.string),
   workflow: PropTypes.shape({
+    id: PropTypes.string,
     first_task: PropTypes.string,
     tasks: PropTypes.object,
   }),

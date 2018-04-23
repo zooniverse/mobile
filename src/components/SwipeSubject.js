@@ -121,7 +121,7 @@ class SwipeSubject extends Component {
             resizeMethod="resize" 
             resizeMode="contain"
           >
-            <View style={[styles.overlayContainer]}>
+            <View style={[styles.overlayContainer, styles.centeredElements]}>
               { alreadySeen ? alreadySeenBanner : null }
             </View>
             <View style={[styles.overlayContainer, styles.centeredElements]}>

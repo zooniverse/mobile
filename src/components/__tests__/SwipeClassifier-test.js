@@ -44,9 +44,15 @@ const subjectSizes={resizedWidth: 100, resizedHeight: 100}
 
 const seenThisSession=[]
 
-// Stub out navBarActions
+// Stub out actions
 const navBarActions = { 
-  setTitleForPage() {}
+  setTitleForPage() {},
+  setNavbarColorForPageToDefault() {}
+}
+
+const classifierActions = {
+  startNewClassification() {},
+  setClassifierTestMode() {}
 }
 
 it('renders correctly', () => {
@@ -63,7 +69,8 @@ it('renders correctly', () => {
       subject={subject}
       subjectSizes={subjectSizes}
       seenThisSession={seenThisSession}
-      navBarActions={navBarActions} />
+      navBarActions={navBarActions}
+      classifierActions={classifierActions} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -80,7 +87,8 @@ it('renders spinner if fetching', () => {
       subject={subject}
       subjectSizes={subjectSizes}
       seenThisSession={seenThisSession}
-      navBarActions={navBarActions} />
+      navBarActions={navBarActions}
+      classifierActions={classifierActions} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -98,7 +106,8 @@ it('renders tutorial if needed', () => {
       subject={subject}
       subjectSizes={subjectSizes}
       seenThisSession={seenThisSession}
-      navBarActions={navBarActions} />
+      navBarActions={navBarActions}
+      classifierActions={classifierActions} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

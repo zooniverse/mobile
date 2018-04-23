@@ -69,6 +69,7 @@ exports[`renders already seen if already_seen is on subject 1`] = `
         style={
           Array [
             undefined,
+            undefined,
           ]
         }
       >
@@ -208,6 +209,7 @@ exports[`renders already seen if it was seen this session 1`] = `
       <View
         style={
           Array [
+            undefined,
             undefined,
           ]
         }
@@ -349,6 +351,7 @@ exports[`renders back subject position correctly 1`] = `
         style={
           Array [
             undefined,
+            undefined,
           ]
         }
       />
@@ -456,6 +459,7 @@ exports[`renders front subject position correctly 1`] = `
       <View
         style={
           Array [
+            undefined,
             undefined,
           ]
         }
