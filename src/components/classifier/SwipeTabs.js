@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import {
-  Image,
   StyleSheet,
   TouchableOpacity,
   View
 } from 'react-native'
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
-import StyledText from './StyledText'
+import FontedText from '../common/FontedText'
 import FieldGuide from './FieldGuide'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { length } from 'ramda'
 
 export class SwipeTabs extends Component {
@@ -23,30 +21,33 @@ export class SwipeTabs extends Component {
   render() {
     const leftButton =
       <TouchableOpacity
-        onPress={this.props.onAnswered.bind(this, 1)}
+        onPress={this.props.onLeftButtonPressed}
         activeOpacity={0.5}
-        style={ [styles.button, styles.tealButton] }>
-        <Image source={require('../../images/swipe-left.png')} style={styles.swipeIcon} />
-        <StyledText additionalStyles={[styles.tealButtonText]} text={ this.props.answers[0].label } />
+        style={ [styles.button, styles.tealButton, styles.leftButtonPadding] }>
+        <FontedText style={[styles.buttonText, styles.tealButtonText]}>
+          { this.props.answers[0].label }
+        </FontedText>
       </TouchableOpacity>
 
 
     const rightButton =
       <TouchableOpacity
-        onPress={this.props.onAnswered.bind(this, 0)}
+        onPress={this.props.onRightButtonPressed}
         activeOpacity={0.5}
         style={ [styles.button, styles.tealButton] }>
-        <Image source={require('../../images/swipe-right.png')} style={styles.swipeIcon} />
-        <StyledText additionalStyles={[styles.tealButtonText]} text={ this.props.answers[1].label } />
+        <FontedText style={[styles.buttonText, styles.tealButtonText]}>
+          { this.props.answers[1].label }
+        </FontedText>
       </TouchableOpacity>
 
     const fieldGuideButton =
       <TouchableOpacity
         onPress={() => this.setState({isFieldGuideVisible: true})}
         activeOpacity={0.5}
-        style={ styles.button }>
-        <Icon name='map-o' style={styles.icon} />
-        <StyledText additionalStyles={[styles.buttonText]} text={ 'Field Guide' } />
+        style={ [styles.buttonShadow, styles.button, styles.leftButtonPadding] }>
+        <FontedText style={styles.buttonText}>
+           Field Guide
+        </FontedText>
       </TouchableOpacity>
 
     const fieldGuide =
@@ -70,55 +71,50 @@ export class SwipeTabs extends Component {
 }
 
 const styles = EStyleSheet.create({
-  $containerHeight: 60,
   container: {
+    marginHorizontal: 25,
+    marginVertical: 15,
     backgroundColor: '$lightestGrey',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: '$containerHeight',
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around'
+  },
+  leftButtonPadding: {
+    marginRight: 20
   },
   button: {
     backgroundColor: 'white',
     borderColor: '$disabledIconColor',
     borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 5,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 10,
+  },
+  buttonShadow: {
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    shadowOffset: {
+        height: 1,
+        width: 2,
+    },
   },
   buttonText: {
-    color: '$darkGrey',
+    marginVertical: 11,
+    marginHorizontal: 9
   },
   tealButton: {
+    flex: 1,
     backgroundColor: '$buttonColor'
   },
   tealButtonText: {
-    color: 'white'
-  },
-  icon: {
-    fontSize: 16,
-    color: '$darkGrey',
-    padding: 3,
-    marginRight: 5
-  },
-  swipeIcon: {
-    height: 27,
-    width: 20,
-    marginRight: 10,
+    color: 'white', 
   },
 })
 
 SwipeTabs.propTypes = {
   guide: PropTypes.object,
-  onAnswered: PropTypes.func,
+  onLeftButtonPressed: PropTypes.func,
+  onRightButtonPressed: PropTypes.func,
   answers: PropTypes.arrayOf(PropTypes.object)
 }
 

@@ -5,10 +5,10 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
-import StyledMarkdown from './StyledMarkdown'
-import StyledText from './StyledText'
-import SizedImage from './SizedImage'
-import Button from './Button'
+import StyledMarkdown from '../StyledMarkdown'
+import StyledText from '../StyledText'
+import SizedImage from '../SizedImage'
+import Button from '../Button'
 
 const ITEM_ICON_RADIUS = 50
 

@@ -5,10 +5,9 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
-import StyledMarkdown from './StyledMarkdown'
-import TaskHelp from './TaskHelp'
+import StyledMarkdown from '../StyledMarkdown'
 import { connect } from 'react-redux'
-import { setQuestionContainerHeight } from '../actions/classifier'
+import { setQuestionContainerHeight } from '../../actions/classifier'
 
 //questionContainerHeight is stored in redux because the swipeable component needs
 //to be absolutely positioned outside of the ContainerPanel for Android
@@ -36,7 +35,6 @@ export class Question extends Component {
             onReceivedHeight={ (newHeight) => this.props.setQuestionContainerHeight(newHeight) }
           />
         </View>
-        { this.props.taskHelp ? <TaskHelp text={this.props.taskHelp} /> : null }
       </View>
     )
   }

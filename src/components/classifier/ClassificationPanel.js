@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Platform,
   TouchableOpacity,
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
-import StyledText from './StyledText'
+import FontedText from '../common/FontedText'
 import PropTypes from 'prop-types';
-
-const topPadding = (Platform.OS === 'ios') ? 10 : 0
 
 class ClassificationPanel extends Component {
   render() {
@@ -17,12 +14,16 @@ class ClassificationPanel extends Component {
         <TouchableOpacity
           onPress={ () => { this.props.setQuestionVisibility(true) } }
           style={ this.props.isQuestionVisible ? [styles.tab] : [styles.tab, styles.deselectedTab] }>
-          <StyledText text={ 'QUESTION' } />
+          <FontedText style={styles.tabText}>
+            QUESTION
+          </FontedText>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={ () => { this.props.setQuestionVisibility(false) } }
           style={ this.props.isQuestionVisible ? [styles.tab, styles.deselectedTab] : [styles.tab] }>
-          <StyledText text={ 'TUTORIAL' } />
+          <FontedText style={styles.tabText}>
+            TUTORIAL
+          </FontedText>
         </TouchableOpacity>
       </View>
 
@@ -38,8 +39,7 @@ class ClassificationPanel extends Component {
 }
 
 const styles = EStyleSheet.create({
-  $tabHeight: 32,
-  $panelMargin: 13,
+  $panelHorizontalMargin: 25,
   container: {
     backgroundColor: '$lightestGrey',
     flex: 1,
@@ -48,11 +48,11 @@ const styles = EStyleSheet.create({
   panelContainer: {
     flex: 1,
     backgroundColor: 'white',
-    margin: '$panelMargin',
+    marginTop: 15,
+    marginHorizontal: '$panelHorizontalMargin',
     marginBottom: 0,
   },
   tabContainer: {
-    height: '$tabHeight',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
@@ -60,12 +60,14 @@ const styles = EStyleSheet.create({
   tab: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: '$tabHeight',
-    width: '50% - $panelMargin',
+    width: '50% - $panelHorizontalMargin',
     marginTop: 1,
   },
   deselectedTab: {
     backgroundColor: '$lightestGrey',
+  },
+  tabText: {
+    marginVertical: 15
   }
 })
 

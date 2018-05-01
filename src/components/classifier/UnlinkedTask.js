@@ -6,9 +6,9 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
-import StyledText from './StyledText'
+import FontedText from '../common/FontedText'
 import { addIndex, contains, map } from 'ramda'
-import theme from '../theme'
+import theme from '../../theme'
 
 const UnlinkedTask = (props) => {
   const annotationValues = props.annotation || []
@@ -27,7 +27,9 @@ const UnlinkedTask = (props) => {
           onPress={ ()=>props.onAnswered(props.unlinkedTaskKey, idx) }
           activeOpacity={0.5}
         >
-          <StyledText additionalStyles={[styles.answer]} text={ answer.label } />
+          <FontedText style={styles.answer}>
+            {answer.label }
+          </FontedText>
         </TouchableOpacity>
       </View>
     )
@@ -48,9 +50,8 @@ const UnlinkedTask = (props) => {
 const styles = EStyleSheet.create({
   container: {
     alignSelf: 'flex-start',
+    justifyContent: 'flex-end',
     margin: 15,
-    position: 'absolute',
-    bottom: 65
   },
   rowContainer: {
     flexDirection: 'row',
@@ -58,7 +59,9 @@ const styles = EStyleSheet.create({
     width: '85%',
   },
   switchComponent: {
-    margin: 3
+    marginLeft: 0,
+    marginVertical: 3,
+    marginRight: 3,
   },
   answer: {
     flexWrap: 'wrap',
