@@ -3,13 +3,11 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 
 jest.mock('WebView', () => 'WebView')
-jest.mock('../OverlaySpinner', () => 'OverlaySpinner')
+jest.mock('../../OverlaySpinner', () => 'OverlaySpinner')
 jest.mock('../Question', () => 'Question')
 jest.mock('../Tutorial', () => 'Tutorial')
-jest.mock('../Swipeable', () => 'Swipeable')
-jest.mock('../SwipeSubject', () => 'SwipeSubject')
 jest.mock('../SwipeTabs', () => 'SwipeTabs')
-jest.mock('../ZoomableImage', () => 'ZoomableImage')
+jest.mock('../../ZoomableImage', () => 'ZoomableImage')
 
 import { SwipeClassifier } from '../SwipeClassifier'
 
@@ -61,7 +59,7 @@ it('renders correctly', () => {
       isFetching={false}
       setIsFetching={jest.fn}
       startNewClassification={jest.fn}
-      saveThenStartNewClassification={jest.fn}
+      saveClassification={jest.fn}
       saveAnnotation={jest.fn}
       project={project}
       workflow={workflow}
