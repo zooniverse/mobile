@@ -11,7 +11,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import R from 'ramda'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { GLOBALS, allProjectTags, loggedInDisciplineTags } from '../constants/globals'
+import { GLOBALS, loggedInDisciplineTags } from '../constants/globals'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
 import Discipline from './Discipline'
@@ -59,7 +59,7 @@ export class ProjectDisciplines extends React.Component {
     }
 
     if (R.isEmpty(this.props.projectList)) {
-      this.props.projectActions.fetchProjectsWithTags(allProjectTags)
+      this.props.projectActions.fetchProjects()
     }
   }
 

@@ -39,11 +39,3 @@ export const loggedInDisciplineTags = (hasRecents, hasPreviews) => {
   if (hasPreviews) disciplines.push('preview')
   return disciplines
 }
-
-export const allProjectTags = GLOBALS.DISCIPLINES.reduce((tagList, discipline) => {
-  if (discipline.value !== 'recent') {
-    tagList.push(discipline.value)
-  }
-  
-  return tagList
-}, []);

@@ -6,7 +6,7 @@ import * as R from 'ramda'
 import * as ActionConstants from '../constants/actions'
 import { isValidSwipeWorkflow } from '../utils/is-valid-swipe-workflow'
 
-export function fetchProjectsWithTags(tags=[]) {
+export function fetchProjects() {
     return (dispatch) => {
         const productionParams = {
             mobile_friendly: true,
@@ -14,7 +14,6 @@ export function fetchProjectsWithTags(tags=[]) {
             live: true,
             include: 'avatar',
             sort: 'display_name',
-            tags
         }
 
         const ownerParams = {
