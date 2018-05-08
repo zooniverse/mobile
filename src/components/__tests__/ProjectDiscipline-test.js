@@ -6,7 +6,7 @@ import { ProjectDisciplines } from '../ProjectDisciplines'
 jest.useFakeTimers();
 
 const projectActions = {
-  fetchProjectsWithTags: () => {}
+  fetchProjects: () => {}
 }
 
 it('renders correctly', () => {

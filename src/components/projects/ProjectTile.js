@@ -22,14 +22,12 @@ import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
 import theme from '../../theme'
 
-const mapStateToProps = (state, ownProps) => {
-    const completeness = Number.parseFloat(ownProps.project.completeness)
-    return {
-        tileWidth: state.main.device.width - 52,
-        containsNativeWorkflows: ownProps.project.workflows.length > 0,
-        outOfData: !Number.isNaN(completeness) && completeness >= 1
-    }
-};
+const horizontalPadding = 25
+
+const mapStateToProps = (state, ownProps) => ({
+    tileWidth: state.main.device.width - 2*horizontalPadding,
+    containsNativeWorkflows: ownProps.project.workflows.length > 0,
+});
 
 const mapDispatchToProps = (dispatch) => ({
     classifierActions: bindActionCreators(classifierActions, dispatch)
@@ -60,16 +58,27 @@ class ProjectTile extends Component {
 
     _workFlowList = () => {
         const swipeVerifiedWorkflows = this.props.project.workflows.filter( workflow => workflow.swipe_verified)
+        const overlayBanner = 
+            <View style={styles.bannerView}>
+                {this._overlayBanner()}
+            </View>
         const workflowsView = R.addIndex(R.map)((workflow, index) => {
+            const shouldShowBanner = isComplete(workflow.completeness) && !this.props.inPreviewMode
             return (
                 <View key={index}>
                     <Separator />
                     <View>
-                        <TouchableOpacity onPress={() => this._navigateToSwipeClassifier(workflow) } >
+                        <TouchableOpacity 
+                            onPress={() => this._navigateToSwipeClassifier(workflow) }
+                            disabled={shouldShowBanner}
+                        >
                             <View style={styles.cell}>
-                                <FontedText style={styles.cellTitle}>
-                                    {workflow.display_name}
-                                </FontedText>
+                                <View style={ styles.descriptionContent }>
+                                    { shouldShowBanner ? overlayBanner : null }
+                                    <FontedText style={styles.cellTitle}>
+                                        {workflow.display_name}
+                                    </FontedText>
+                                </View>
                                 <View style={styles.chevronContainer}>
                                     <Icon name="chevron-right" style={styles.chevronIcon}/>
                                 </View>
@@ -130,6 +139,16 @@ class ProjectTile extends Component {
     }
 
     render() {
+        let shouldDisplayIsOutOfData = false
+        if (!this.props.containsNativeWorkflows) {
+            const projectIsComplete = isComplete(this.props.project.completeness)
+            shouldDisplayIsOutOfData = projectIsComplete
+        }
+        else if (!this.props.containsMultipleNativeWorkflows) {
+            const workflowIsComplete = isComplete(this.props.project.workflows[0].completeness)
+            shouldDisplayIsOutOfData = workflowIsComplete
+        }
+
         const avatarUri = R.prop('avatar_src', this.props.project);
         const avatarSource = avatarUri !== undefined ? { uri: avatarUri } : require('../../../images/teal-wallpaper.png');
         const borderColorTransform = this.state.popupOpacity.interpolate({
@@ -139,7 +158,10 @@ class ProjectTile extends Component {
         const popupStyle = {marginTop: -this.state.popupHeight, opacity: this.state.popupOpacity}
         return (
             <Animated.View style={[styles.mainContainer, {borderColor: borderColorTransform} ]}>
-                <TouchableOpacity onPress={this._onMainViewPress}>
+                <TouchableOpacity
+                    onPress={this._onMainViewPress}
+                    disabled={shouldDisplayIsOutOfData && !this.props.inPreviewMode}
+                >
                     <View>
                         <Image 
                             style={[styles.avatar, {width: this.props.tileWidth}]}
@@ -157,7 +179,9 @@ class ProjectTile extends Component {
                                 </FontedText>
                             </View>
                         </View>
-                        { this.props.outOfData || this.props.inPreviewMode ? this._overlayBanner() : null }
+                        <View style={styles.bannerOverlay}>
+                            { shouldDisplayIsOutOfData || this.props.inPreviewMode ? this._overlayBanner() : null }
+                        </View>
                     </View>
                     <Animated.View 
                         onLayout={(event) => this.setState({popupHeight: event.nativeEvent.layout.height})}
@@ -172,6 +196,12 @@ class ProjectTile extends Component {
     }
 }
 
+const isComplete = (completenessString) => {
+    const completenessFloat = Number.parseFloat(completenessString)
+    const isComplete = !Number.isNaN(completenessFloat) && completenessFloat >= 1
+    return isComplete
+}
+
 const PhoneIcon = () => {
     return (
         <Image 
@@ -184,7 +214,7 @@ const PhoneIcon = () => {
 const styles = EStyleSheet.create({
     mainContainer: {
         flexDirection: 'column', 
-        marginHorizontal: 25, 
+        marginHorizontal: horizontalPadding, 
         borderWidth: 1, 
         backgroundColor: 'white'
     },
@@ -216,10 +246,12 @@ const styles = EStyleSheet.create({
         width: 25,
         marginRight: 15
     },
-    bannerContainer: {
+    bannerOverlay: {
         position: 'absolute', 
         left: 0, 
         top: 15, 
+    },
+    bannerContainer: {
         backgroundColor: '$headerColor',
         shadowColor: 'black',
         shadowOffset: {width: 2, height: 2},
@@ -233,7 +265,11 @@ const styles = EStyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 4,
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: .22,
+        shadowRadius: 2,
     },
     cell: {
         flexDirection: 'row'
@@ -254,12 +290,18 @@ const styles = EStyleSheet.create({
     },
     cellsContainer: {
         paddingHorizontal: 15
+    },
+    bannerView: {
+        marginTop: -1,
+        marginLeft: -15,
+        width: 129
     }
 });
 
 ProjectTile.propTypes = {
     project: PropTypes.object,
     containsNativeWorkflows: PropTypes.bool,
+    containsMultipleNativeWorkflows: PropTypes.bool,
     tileWidth: PropTypes.number,
     outOfData: PropTypes.bool,
     inPreviewMode: PropTypes.bool,
