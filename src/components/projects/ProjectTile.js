@@ -22,8 +22,10 @@ import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
 import theme from '../../theme'
 
+const horizontalPadding = 25
+
 const mapStateToProps = (state, ownProps) => ({
-    tileWidth: state.main.device.width - 52,
+    tileWidth: state.main.device.width - 2*horizontalPadding,
     containsNativeWorkflows: ownProps.project.workflows.length > 0,
 });
 
@@ -212,7 +214,7 @@ const PhoneIcon = () => {
 const styles = EStyleSheet.create({
     mainContainer: {
         flexDirection: 'column', 
-        marginHorizontal: 25, 
+        marginHorizontal: horizontalPadding, 
         borderWidth: 1, 
         backgroundColor: 'white'
     },
