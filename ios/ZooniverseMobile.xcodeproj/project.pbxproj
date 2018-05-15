@@ -16,7 +16,11 @@
 		0143A58820B8AFBB00185AC0 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */; };
 		01471F5420C09330007A22F4 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01471F5320C09330007A22F4 /* ImageSizer.m */; };
 		0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0115251C2099005600C6C093 /* SimpleLineIcons.ttf */; };
+		01090E4220A9ED3800DBDD85 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01090E1920A9ED3800DBDD85 /* GoogleService-Info-prod.plist */; };
+		01090E4520A9EEE800DBDD85 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01090E4420A9EEE800DBDD85 /* FirebaseManager.swift */; };
+		01090E4A20AB38A300DBDD85 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01090E4920AB38A300DBDD85 /* NotificationSettings.m */; };
 		014AB847202374F80014915B /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051C91D7F618700052983 /* libRCTGoogleAnalyticsBridge.a */; };
+		0154415820A4C33800C8BA5A /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */; };
 		01DE9377205192F500E81CA7 /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9373205192F500E81CA7 /* Karla-Bold.ttf */; };
 		01DE9378205192F500E81CA7 /* Karla-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */; };
 		01DE9379205192F500E81CA7 /* Karla-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9375205192F500E81CA7 /* Karla-Italic.ttf */; };
@@ -34,7 +38,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		992180751D9B18E400F8BEDD /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 992180741D9B18E400F8BEDD /* FontAwesome.ttf */; };
 		992864FA1E08908900142B69 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992864F91E08908900142B69 /* WebKit.framework */; };
-		992C27581E5394C200C4C17B /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 992C27561E5394C200C4C17B /* NotificationSettings.m */; };
 		995543911DE362940016257B /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 995543901DE3624E0016257B /* libRNSVG.a */; };
 		999F9C831DB7B4FA002B6AF0 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C781DB7B4FA002B6AF0 /* OpenSans-Bold.ttf */; };
 		999F9C841DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 999F9C791DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf */; };
@@ -366,6 +369,11 @@
 		01471F5220C09330007A22F4 /* ImageSizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageSizer.h; path = ZooniverseMobile/ImageSizer.h; sourceTree = "<group>"; };
 		01471F5320C09330007A22F4 /* ImageSizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageSizer.m; path = ZooniverseMobile/ImageSizer.m; sourceTree = "<group>"; };
 		0115251C2099005600C6C093 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		01090E1920A9ED3800DBDD85 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
+		01090E4420A9EEE800DBDD85 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		01090E4820AB38A300DBDD85 /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationSettings.h; path = ZooniverseMobile/NotificationSettings.h; sourceTree = "<group>"; };
+		01090E4920AB38A300DBDD85 /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationSettings.m; path = ZooniverseMobile/NotificationSettings.m; sourceTree = "<group>"; };
+		0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dev.plist"; sourceTree = "<group>"; };
 		01DE9373205192F500E81CA7 /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Bold.ttf"; path = "../assets/fonts/Karla-Bold.ttf"; sourceTree = "<group>"; };
 		01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-BoldItalic.ttf"; path = "../assets/fonts/Karla-BoldItalic.ttf"; sourceTree = "<group>"; };
 		01DE9375205192F500E81CA7 /* Karla-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Italic.ttf"; path = "../assets/fonts/Karla-Italic.ttf"; sourceTree = "<group>"; };
@@ -387,8 +395,6 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		992180741D9B18E400F8BEDD /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		992864F91E08908900142B69 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		992C27561E5394C200C4C17B /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationSettings.m; path = ZooniverseMobile/NotificationSettings.m; sourceTree = "<group>"; };
-		992C27571E5394C200C4C17B /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationSettings.h; path = ZooniverseMobile/NotificationSettings.h; sourceTree = "<group>"; };
 		9955436A1DE3624E0016257B /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		999F9C781DB7B4FA002B6AF0 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		999F9C791DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -517,6 +523,14 @@
 				0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */,
 			);
 			name = Products;
+		019E41DD20AB61630086B2C1 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				01090E4820AB38A300DBDD85 /* NotificationSettings.h */,
+				01090E4920AB38A300DBDD85 /* NotificationSettings.m */,
+				01090E4420A9EEE800DBDD85 /* FirebaseManager.swift */,
+			);
+			name = Notifications;
 			sourceTree = "<group>";
 		};
 		01DE9372205192D800E81CA7 /* fonts */ = {
@@ -553,8 +567,9 @@
 		13B07FAE1A68108700A75B9A /* ZooniverseMobile */ = {
 			isa = PBXGroup;
 			children = (
-				992C27561E5394C200C4C17B /* NotificationSettings.m */,
-				992C27571E5394C200C4C17B /* NotificationSettings.h */,
+				019E41DD20AB61630086B2C1 /* Notifications */,
+				0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */,
+				01090E1920A9ED3800DBDD85 /* GoogleService-Info-prod.plist */,
 				99C686741D958DE000FF0CB2 /* ZooniverseMobile.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -793,6 +808,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 888MXXMABP;
+						LastSwiftMigration = 0930;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1195,10 +1211,12 @@
 				999F9C8C1DB7B4FA002B6AF0 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				992180751D9B18E400F8BEDD /* FontAwesome.ttf in Resources */,
 				999F9C8A1DB7B4FA002B6AF0 /* OpenSans-Regular.ttf in Resources */,
+				01090E4220A9ED3800DBDD85 /* GoogleService-Info-prod.plist in Resources */,
 				999F9C871DB7B4FA002B6AF0 /* OpenSans-Italic.ttf in Resources */,
 				999F9C861DB7B4FA002B6AF0 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */,
+				0154415820A4C33800C8BA5A /* GoogleService-Info-dev.plist in Resources */,
 				999F9C891DB7B4FA002B6AF0 /* OpenSans-LightItalic.ttf in Resources */,
 				999F9C8D1DB7B4FA002B6AF0 /* zoo-font.ttf in Resources */,
 				999F9C831DB7B4FA002B6AF0 /* OpenSans-Bold.ttf in Resources */,
@@ -1232,13 +1250,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZooniverseMobile-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		99CCFA761D81CCAC00DE62AA /* ShellScript */ = {
@@ -1260,9 +1281,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZooniverseMobile/Pods-ZooniverseMobile-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1299,6 +1323,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01090E4520A9EEE800DBDD85 /* FirebaseManager.swift in Sources */,
+				01090E4A20AB38A300DBDD85 /* NotificationSettings.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				992C27581E5394C200C4C17B /* NotificationSettings.m in Sources */,
@@ -1332,6 +1358,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1353,6 +1380,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ZooniverseMobileTests/Info.plist;
@@ -1373,6 +1401,7 @@
 			baseConfigurationReference = 2ABDCDF198F4CB5118B6B0C0 /* Pods-ZooniverseMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
@@ -1399,7 +1428,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
-				PUSHER_API_KEY = e32fd02482840a2e13ad;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1409,6 +1439,7 @@
 			baseConfigurationReference = 99B247C07D08CC4E84220651 /* Pods-ZooniverseMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1434,7 +1465,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
-				PUSHER_API_KEY = ed07dc711db7079f2401;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZooniverseMobile-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1487,6 +1519,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lc++";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1532,6 +1565,7 @@
 				INSTALL_OWNER = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-lc++";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
