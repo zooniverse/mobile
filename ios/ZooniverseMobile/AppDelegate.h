@@ -8,12 +8,12 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <Pusher/Pusher.h>
 #import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, PTPusherDelegate, UNUserNotificationCenterDelegate>
+@import Firebase;
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, strong) PTPusher *pusher;
 
 @end
