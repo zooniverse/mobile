@@ -1,6 +1,8 @@
 project './ZooniverseMobile.xcodeproj'
 
 target 'ZooniverseMobile' do
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
   pod 'SocketRocket'
   pod 'HockeySDK'
 end
