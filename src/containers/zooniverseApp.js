@@ -78,7 +78,7 @@ class ZooniverseApp extends Component {
   }
 
   onPushRegistration = () => {
-    this.props.syncInterestSubscriptions()
+    // this.props.syncInterestSubscriptions()
   }
 
   static renderNavigationBar() {

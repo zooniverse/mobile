@@ -16,9 +16,9 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   updateProjectNotification(checked) {
-    dispatch(setState(`notifications.${ownProps.id}`, checked))
-    dispatch(syncNotificationStore())
-    dispatch(updateInterestSubscription(ownProps.id, checked))
+    // dispatch(setState(`notifications.${ownProps.id}`, checked))
+    // dispatch(syncNotificationStore())
+    // dispatch(updateInterestSubscription(ownProps.id, checked))
   },
 })
 
