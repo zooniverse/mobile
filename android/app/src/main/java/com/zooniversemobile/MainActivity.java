@@ -15,9 +15,6 @@ import com.facebook.react.ReactActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.messaging.RemoteMessage;
-import com.pusher.android.PusherAndroid;
-import com.pusher.android.notifications.fcm.FCMPushNotificationReceivedListener;
-import com.pusher.android.notifications.tokens.PushNotificationRegistrationListener;
 import org.devio.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
@@ -44,47 +41,7 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SplashScreen.show(this);
-        if (playServicesAvailable()) {
-            PusherAndroid pusher = new PusherAndroid(BuildConfig.PUSHER_API_KEY);
-            PusherProperty.getInstance().nativePusher = pusher.nativePusher();
-
-            try {
-                PusherProperty.getInstance().nativePusher.registerFCM(this, new PushNotificationRegistrationListener() {
-                    @Override
-                    public void onSuccessfulRegistration() {
-                        PusherProperty.getInstance().nativePusher.subscribe("general");
-                    }
-
-                    @Override
-                    public void onFailedRegistration(int statusCode, String response) {
-                        System.out.println(
-                                "Registration failed with code " + statusCode +
-                                        " " + response
-                        );
-                    }
-                });
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            PusherProperty.getInstance().nativePusher.setFCMListener(new FCMPushNotificationReceivedListener() {
-                @Override
-                public void onMessageReceived(RemoteMessage remoteMessage) {
-                String projectID = String.valueOf(remoteMessage.getData().get("project_id"));
-                if (remoteMessage.getNotification() != null) {
-                    sendNotification(
-                            remoteMessage.getNotification().getTitle(),
-                            remoteMessage.getNotification().getBody(),
-                            projectID
-                    );
-                }
-                }
-            });
-
-        }
     }
-
 
     private boolean playServicesAvailable() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
