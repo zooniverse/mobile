@@ -4,6 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0">
 
+    <uses-permission android:name="android.permission.NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
@@ -37,6 +38,12 @@
         android:windowSoftInputMode="adjustResize"
         android:exported="true"
       />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
 
