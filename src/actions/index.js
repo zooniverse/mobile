@@ -16,7 +16,6 @@ import apiClient from 'panoptes-client/lib/api-client'
 import { PUBLICATIONS } from '../constants/publications'
 import { Alert, Platform, PushNotificationIOS, NativeModules } from 'react-native'
 import { addIndex, filter, forEach, head, intersection, keys, map, merge, prop, sortBy } from 'ramda'
-import { isValidSwipeWorkflow } from '../utils/is-valid-swipe-workflow'
 
 export function setState(stateKey, value) {
   return { type: SET_STATE, stateKey, value }

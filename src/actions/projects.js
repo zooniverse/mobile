@@ -4,7 +4,7 @@ import { getAuthUser } from './auth'
 import * as R from 'ramda'
 
 import * as ActionConstants from '../constants/actions'
-import { isValidSwipeWorkflow } from '../utils/is-valid-swipe-workflow'
+import { isValidSwipeWorkflow } from '../utils/workflow-utils'
 
 export function fetchProjects() {
     return (dispatch) => {

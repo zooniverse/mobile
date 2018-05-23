@@ -1,6 +1,20 @@
-import { filter, keys } from 'ramda'
+/**
+ * Helper utils for workflows
+ */
 
-export function isValidSwipeWorkflow(workflow) {
+import R from 'ramda'
+
+export const getTaskFromWorkflow = (workflow) => {
+    const key = workflow.first_task
+    return workflow.tasks[key]
+  }
+  
+export const getAnswersFromWorkflow = (workflow) => {
+    const task = getTaskFromWorkflow(workflow)
+    return task.answers
+}
+
+export const isValidSwipeWorkflow = (workflow) => {
   if (!workflow.first_task) {
     return false
   }
@@ -8,7 +22,7 @@ export function isValidSwipeWorkflow(workflow) {
   const hasTwoAnswers = firstTask.answers.length === 2
 
   const nonShortCut = (taskKey) => { return workflow.tasks[taskKey].type !== 'shortcut' }
-  const nonShortCutTasks = filter(nonShortCut, keys(workflow.tasks))
+  const nonShortCutTasks = R.filter(nonShortCut, R.keys(workflow.tasks))
 
   const hasSingleTask = nonShortCutTasks.length === 1
 
