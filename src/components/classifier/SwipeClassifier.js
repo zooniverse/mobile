@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Animated,
   Dimensions,
   TouchableOpacity,
   View
