@@ -8,16 +8,9 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import ZoomableImage from './ZoomableImage'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
-import StyledText from './StyledText'
 
 class FullScreenImage extends React.Component {
   render() {
-    const zoomMessage =
-      <View style={styles.rowContainer}>
-        <Icon name="info-circle" style={styles.infoIcon} />
-        <StyledText additionalStyles={[styles.message]} text='You can zoom into this image' />
-      </View>
-
     return (
       <Modal
         animationType={'fade'}
@@ -28,8 +21,7 @@ class FullScreenImage extends React.Component {
           <ZoomableImage
             source={this.props.source}
             handlePress={this.props.handlePress}
-            allowPanAndZoom={!!this.props.allowPanAndZoom} />
-          {this.props.allowPanAndZoom ? zoomMessage : null}
+          />
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={this.props.handlePress}
@@ -83,7 +75,6 @@ FullScreenImage.propTypes = {
   source: PropTypes.object,
   isVisible: PropTypes.bool,
   handlePress: PropTypes.func,
-  allowPanAndZoom: PropTypes.bool
 }
 
 export default FullScreenImage
