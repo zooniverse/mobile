@@ -26,8 +26,13 @@ import TaskHelpModal from './TaskHelpModal'
 import FontedText from '../common/FontedText'
 import { getTaskFromWorkflow, getAnswersFromWorkflow } from '../../utils/workflow-utils'
 
-export const subjectDisplayHeight = Dimensions.get('window').height - 380
-export const subjectDisplayWidth = Dimensions.get('window').width - 80
+const subjectClassifierPadding = {
+  height: 380,
+  width: 80
+}
+
+export const subjectDisplayHeight = Dimensions.get('window').height - subjectClassifierPadding.height
+export const subjectDisplayWidth = Dimensions.get('window').width - subjectClassifierPadding.width
 
 const mapStateToProps = (state, ownProps) => {
   return {

@@ -70,7 +70,6 @@ class ProjectTile extends Component {
                     <View>
                         <TouchableOpacity 
                             onPress={() => this._navigateToSwipeClassifier(workflow) }
-                            disabled={shouldShowBanner}
                         >
                             <View style={styles.cell}>
                                 <View style={ styles.descriptionContent }>
@@ -160,7 +159,6 @@ class ProjectTile extends Component {
             <Animated.View style={[styles.mainContainer, {borderColor: borderColorTransform} ]}>
                 <TouchableOpacity
                     onPress={this._onMainViewPress}
-                    disabled={shouldDisplayIsOutOfData && !this.props.inPreviewMode}
                 >
                     <View>
                         <Image 
