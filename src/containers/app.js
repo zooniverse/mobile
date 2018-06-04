@@ -22,7 +22,7 @@ import Settings from '../components/Settings'
 import SideDrawerContent from '../components/SideDrawerContent'
 import ZooWebView from '../components/ZooWebView'
 import Onboarding from '../components/Onboarding'
-import SwipeClassifier from '../components/SwipeClassifier'
+import SwipeClassifier from '../components/classifier/SwipeClassifier'
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
 

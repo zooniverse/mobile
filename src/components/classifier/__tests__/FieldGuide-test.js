@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
-jest.mock('../Button', () => 'Button')
+jest.mock('../../Button', () => 'Button')
 jest.useFakeTimers();
 
 import FieldGuide from '../FieldGuide'

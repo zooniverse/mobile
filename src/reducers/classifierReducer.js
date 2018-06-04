@@ -2,28 +2,36 @@ import * as ActionConstants from '../constants/actions';
 import R from 'ramda'
 
 const InitialClassifier = {
-    currentWorkflowId: 0,
     workflow: {},
     tasks: {},
     tutorial: {},
     project: {},
     needsTutorial: {},
-    classification: {},
     guide: {},
     isFetching: false,
     isSuccess: false,
     isFailure: false,
+    subjectStartTime: {},
     annotations: {},
-    upcomingSubjects: {},
     seenThisSession: {},
-    subject: {},
     nextSubject: {},
     questionContainerHeight: {},
-    inPreviewMode: false
+    inPreviewMode: false,
+    subjectLists: {},
 };
 
 export default function classifier(state=InitialClassifier, action) {
     switch (action.type) {
+        case ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW: {
+            const subjectList = state.subjectLists[action.workflowId] || []
+            const workflowIdLens = R.lensProp(action.workflowId)
+            const newSubjectList =  R.set(workflowIdLens, subjectList.concat(action.subjects), state.subjectLists)
+            return { ...state, subjectLists: newSubjectList}
+        }
+        case ActionConstants.CLEAR_SUBJECTS_FROM_WORKFLOW: {
+            const workflowIdLens = R.lensProp(action.workflowId)
+            return { ...state, subjectLists: R.set(workflowIdLens, [], state.subjectList) }
+        }
         case ActionConstants.ADD_CLASSIFIER_TUTORIAL: {
             const workflowIdLens = R.lensProp(action.workflowId)
             return { ...state, tutorial: R.set(workflowIdLens, action.tutorial, state.tutorial) }
@@ -35,10 +43,6 @@ export default function classifier(state=InitialClassifier, action) {
         case ActionConstants.SET_CLASSIFIER_GUIDE: {
             const workflowIdLens = R.lensProp(action.workflowId)
             return { ...state, guide: R.set(workflowIdLens, action.guide, state.guide) }
-        }
-        case ActionConstants.SET_CLASSIFICATION: {
-            const workflowIdLens = R.lensProp(action.workflowId)
-            return { ...state, classification: R.set(workflowIdLens, action.classification, state.classification) }
         }
         case ActionConstants.INITIALIZE_ANNOTATION: {
             const workflowIdLens = R.lensProp(action.workflowId)
@@ -59,27 +63,20 @@ export default function classifier(state=InitialClassifier, action) {
             const removedAnnotationList = R.reject(R.equals(action.annotation), annotationList)
             return { ...state, annotations: R.set(taskLens, removedAnnotationList, state.annotations) }
         }
-        case ActionConstants.SET_UPCOMING_SUBJECTS: {
-            const workflowIdLens = R.lensProp(action.workflowId)
-            return { ...state, upcomingSubjects: R.set(workflowIdLens, action.upcomingSubjects, state.upcomingSubjects)} 
-        }
         case ActionConstants.SET_SUBJECT_SEEN_THIS_SESSION: {
             const workflowIdLens = R.lensProp(action.workflowId)
             const subjectsSeenArray = state.seenThisSession[action.workflowId] || []
             subjectsSeenArray.push(action.subjectId)
             return { ...state, seenThisSession: R.set(workflowIdLens, subjectsSeenArray, state.seenThisSession)} 
         }
-        case ActionConstants.SET_SUBJECT: {
-            const workflowIdLens = R.lensProp(action.workflowId)
-            return { ...state, subject: R.set(workflowIdLens, action.subject, state.subject)}
-        }
-        case ActionConstants.SET_NEXT_SUBJECT: {
-            const workflowIdLens = R.lensProp(action.workflowId)
-            return { ...state, nextSubject: R.set(workflowIdLens, action.nextSubject, state.nextSubject)}
-        }
         case ActionConstants.SET_QUESTION_CONTAINER_HEIGHT: {
             const workflowIdLens = R.lensProp(action.workflowId)
             return { ...state, questionContainerHeight: R.set(workflowIdLens, action.questionContainerHeight, state.questionContainerHeight)}
+        }
+        case ActionConstants.SET_SUBJECT_START_TIME: {
+            const startTime = (new Date).toISOString()
+            const workflowIdLens = R.lensProp(action.workflowId)
+            return { ...state, subjectStartTime: R.set(workflowIdLens, startTime, state.subjectStartTime) }
         }
         case ActionConstants.REQUEST_CLASSIFIER_DATA: {
             return { ...state, isFetching: true }

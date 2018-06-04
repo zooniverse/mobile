@@ -1,26 +1,39 @@
 import apiClient from 'panoptes-client/lib/api-client'
 import R from 'ramda'
-import { addState, removeState, setState } from '../actions/index'
+import { setState } from '../actions/index'
 import { Actions } from 'react-native-router-flux'
 import { Alert, Platform, Image} from 'react-native'
 import { getAuthUser } from '../actions/auth'
-import { loadSubjects, setSubjectsToDisplay } from '../actions/subject'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 import * as ActionConstants from '../constants/actions'
+import getSubjectLocation from '../utils/get-subject-location'
+
+export function addSubjectsForWorklow(workflowId) {
+  return dispatch => {
+    return apiClient.type('subjects').get({workflow_id: workflowId, sort: 'queued'}).then((subjects) => {
+      subjects.forEach((subject) => subject.display = getSubjectLocation(subject))
+      dispatch({
+        type: ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW,
+        workflowId,
+        subjects
+      })
+    })
+  }
+}
 
 export function startNewClassification(workflow, project) {
-  return (dispatch, getState) => {
+  return dispatch => {
+    dispatch(clearSubjectsFromWorkflow(workflow.id))
     Promise.all([
       dispatch(requestClassifierData),
       dispatch(setState('loadingText', 'Loading Workflow...')),
+      dispatch(addSubjectsForWorklow(workflow.id)),
       dispatch(setupProjectPreferences(workflow.id, project)),
       dispatch(fetchFieldGuide(workflow.id, project.id)),
       dispatch(fetchTutorials(workflow.id)).then(() => dispatch(setNeedsTutorial(workflow.id, project.id))),
-      _setupClassification(dispatch, getState, workflow, true)
+      dispatch(setSubjectStartTimeForWorkflow(workflow.id))
     ])
-    .then(() => {
-      dispatch(classifierDataSuccess)
-    })
+    .then(() => dispatch(classifierDataSuccess))
     .catch(() => {
       dispatch(classifierDataFailure)
       Alert.alert('Error', 'Sorry, but there was an error loading this workflow.',
@@ -30,47 +43,24 @@ export function startNewClassification(workflow, project) {
   }
 }
 
-function _setupClassification(dispatch, getState, workflow, isFirstClassification) { 
-  dispatch(setState('loadingText', 'Loading Subjects...'))
-  return dispatch(loadSubjects(workflow.id))
-    .then(() =>  {
-      return dispatch(setSubjectsToDisplay(isFirstClassification, workflow.id))
-    })
-    .then(() => {
-      const subject = getState().classifier.subject[workflow.id]
-      return apiClient.type('classifications').create({
-        annotations: [],
-        metadata: {
-          workflow_version: workflow.version,
-          started_at: (new Date).toISOString(),
-          user_agent: `${Platform.OS} Mobile App`,
-          user_language: 'en',
-          utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
-          subject_dimensions: []
-        },
-        links: {
-          project: workflow.links.project,
-          workflow: workflow.id,
-          subjects: [subject.id]
-        }
-      })
-    })
-    .then((classification) => {
-      return dispatch(setClassificationForWorkflow(workflow.id, classification))
-    })
-}
-
-export function saveThenStartNewClassification(workflow) {
+export function saveClassification(workflow, subject) {
   return (dispatch, getState) => {
     const classifier = getState().classifier
-    const classification = classifier.classification[workflow.id]
-    const subject = classifier.subject[workflow.id]
-    const structureAnnotation = (a) => {
-      return {task: a[0], value: a[1] } 
-    }
-    const annotations = R.map(structureAnnotation, R.toPairs(classifier.annotations[workflow.id]))
+    const subjectStartTime = classifier.subjectStartTime[workflow.id]
+    const subjectCompletionTime = (new Date).toISOString()
+    const annotations = R.map(a => ({task: a[0], value: a[1]}), R.toPairs(classifier.annotations[workflow.id]))
 
-    if (!classifier.inPreviewMode) {
+    dispatch(setSubjectStartTimeForWorkflow(workflow.id))
+    dispatch(initializeAnnotation(workflow.id))
+
+    // If we are in preview mode, we skip reporting classifications
+    if (classifier.inPreviewMode) {
+      return
+    }
+    
+    // Report classification
+    let subjectDimensions = []
+    const imageSizePromise = new Promise((resolve, reject) => {
       Image.getSize(subject.display.src, (naturalWidth, naturalHeight) => {
         const subjectDimensions = {
           naturalWidth,
@@ -78,41 +68,34 @@ export function saveThenStartNewClassification(workflow) {
           clientWidth: getState().main.device.subjectDisplayWidth,
           clientHeight: getState().main.device.subjectDisplayHeight
         }
-
-        const updates = {
-          annotations: annotations,
-          completed: true,
-          'metadata.session': getState().main.session.id,
-          'metadata.finished_at': (new Date).toISOString(),
-          'metadata.viewport': { width: getState().main.device.width, height: getState().main.device.height},
-          'metadata.subject_dimensions.0': subjectDimensions
+        resolve(subjectDimensions)
+      }, reject)
+    })
+    imageSizePromise.then((imageDimensions) => {
+      subjectDimensions = imageDimensions
+    }).finally(() => {
+      apiClient.type('classifications').create({
+        completed: true,
+        annotations,
+        metadata: {
+          workflow_version: workflow.version,
+          started_at: subjectStartTime,
+          finished_at: subjectCompletionTime,
+          user_agent: `${Platform.OS} Mobile App`,
+          user_language: 'en',
+          utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
+          subject_dimensions: subjectDimensions,
+          viewport: { width: getState().main.device.width, height: getState().main.device.height },
+          session: getState().main.session.id
+        },
+        links: {
+          project: workflow.links.project,
+          workflow: workflow.id,
+          subjects: [subject.id]
         }
-
-        classification.update(updates)
-        classification.save()
-      }, () => {
-        // If get size fails, we should still make the classification, just leave the dimensions metadata
-        const updates = {
-          annotations: annotations,
-          completed: true,
-          'metadata.session': getState().main.session.id,
-          'metadata.finished_at': (new Date).toISOString(),
-          'metadata.viewport': { width: getState().main.device.width, height: getState().main.device.height }
-        }
-
-        classification.update(updates)
-        classification.save()
-      });
-    }
-
-    //Remove this subject just saved from upcoming subjects
-    const oldSubjectList = getState().classifier.upcomingSubjects[workflow.id]
-    const newSubjectList = R.remove(0, 1, oldSubjectList)
-    dispatch(setUpcomingSubjectsForWorkflow(workflow.id, newSubjectList))
-
-    dispatch(setSubjectSeenThisSession(workflow.id, subject.id))
-    _setupClassification(dispatch, getState, workflow, false)
-    dispatch(initializeAnnotation(workflow.id))
+      }).save()
+      dispatch(setSubjectSeenThisSession(workflow.id, subject.id))
+    })
   }
 }
 
@@ -256,28 +239,10 @@ export const removeAnnotationFromTask = (workflowId, task, annotation) => ({
   annotation,
 })
 
-export const setUpcomingSubjectsForWorkflow = (workflowId, upcomingSubjects) => ({
-  type: ActionConstants.SET_UPCOMING_SUBJECTS,
-  workflowId,
-  upcomingSubjects
-})
-
 const setSubjectSeenThisSession = (workflowId, subjectId) => ({
   type: ActionConstants.SET_SUBJECT_SEEN_THIS_SESSION,
   workflowId,
   subjectId
-})
-
-export const setSubjectForWorkflowId = (workflowId, subject) => ({
-  type: ActionConstants.SET_SUBJECT,
-  workflowId,
-  subject
-})
-
-export const setNextSubjectForWorkflowId = (workflowId, nextSubject) => ({
-  type: ActionConstants.SET_NEXT_SUBJECT,
-  workflowId,
-  nextSubject
 })
 
 export const setQuestionContainerHeight = (workflowId, questionContainerHeight) => ({
@@ -293,6 +258,16 @@ export const clearClassifierData = () => ({
 export const setClassifierTestMode = (isTestMode) => ({
   type: ActionConstants.SET_CLASSIFIER_TEST_MODE,
   isTestMode
+})
+
+const clearSubjectsFromWorkflow = (workflowId) => ({
+  type: ActionConstants.CLEAR_SUBJECTS_FROM_WORKFLOW,
+  workflowId,
+})
+
+const setSubjectStartTimeForWorkflow = (workflowId) => ({
+  type: ActionConstants.SET_SUBJECT_START_TIME,
+  workflowId
 })
 
 const addTutorial = (workflowId, tutorial) => ({
@@ -311,12 +286,6 @@ const setGuideForWorkflow = (workflowId, guide) => ({
   type: ActionConstants.SET_CLASSIFIER_GUIDE,
   workflowId,
   guide
-})
-
-const setClassificationForWorkflow = (workflowId, classification) => ({
-  type: ActionConstants.SET_CLASSIFICATION,
-  workflowId,
-  classification
 })
 
 const initializeAnnotation = (workflowId) => ({

@@ -14,9 +14,10 @@ export const ZoomableImage = (props) => {
       imageWidth={Dimensions.get('window').width}
       imageHeight={Dimensions.get('window').height}
       panToMove={ props.allowPanAndZoom }
-      pinchToZoom={ props.allowPanAndZoom }
       onLongPress={props.handlePress}
-      longPressTime={ 300 }>
+      longPressTime={ 300 }
+      pinchToZoom
+    >
       <Image
         source={ props.source }
         style={{width: Dimensions.get('window').width, height: Dimensions.get('window').height}} 
@@ -33,7 +34,6 @@ ZoomableImage.propTypes = {
     uri: PropTypes.string,
   }),
   handlePress: PropTypes.func,
-  allowPanAndZoom: PropTypes.bool,
 }
 
 export default ZoomableImage

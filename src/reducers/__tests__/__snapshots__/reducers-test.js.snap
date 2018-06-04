@@ -4,8 +4,6 @@ exports[`sets a new state 1`] = `
 Object {
   "classifier": Object {
     "annotations": Object {},
-    "classification": Object {},
-    "currentWorkflowId": 0,
     "guide": Object {},
     "inPreviewMode": false,
     "isFailure": false,
@@ -16,10 +14,10 @@ Object {
     "project": Object {},
     "questionContainerHeight": Object {},
     "seenThisSession": Object {},
-    "subject": Object {},
+    "subjectLists": Object {},
+    "subjectStartTime": Object {},
     "tasks": Object {},
     "tutorial": Object {},
-    "upcomingSubjects": Object {},
     "workflow": Object {},
   },
   "main": Object {
@@ -65,8 +63,6 @@ exports[`sets state from initial state 1`] = `
 Object {
   "classifier": Object {
     "annotations": Object {},
-    "classification": Object {},
-    "currentWorkflowId": 0,
     "guide": Object {},
     "inPreviewMode": false,
     "isFailure": false,
@@ -77,10 +73,10 @@ Object {
     "project": Object {},
     "questionContainerHeight": Object {},
     "seenThisSession": Object {},
-    "subject": Object {},
+    "subjectLists": Object {},
+    "subjectStartTime": Object {},
     "tasks": Object {},
     "tutorial": Object {},
-    "upcomingSubjects": Object {},
     "workflow": Object {},
   },
   "main": Object {
@@ -125,8 +121,6 @@ exports[`sets user 1`] = `
 Object {
   "classifier": Object {
     "annotations": Object {},
-    "classification": Object {},
-    "currentWorkflowId": 0,
     "guide": Object {},
     "inPreviewMode": false,
     "isFailure": false,
@@ -137,10 +131,10 @@ Object {
     "project": Object {},
     "questionContainerHeight": Object {},
     "seenThisSession": Object {},
-    "subject": Object {},
+    "subjectLists": Object {},
+    "subjectStartTime": Object {},
     "tasks": Object {},
     "tutorial": Object {},
-    "upcomingSubjects": Object {},
     "workflow": Object {},
   },
   "main": Object {
@@ -189,8 +183,6 @@ exports[`unsets user 1`] = `
 Object {
   "classifier": Object {
     "annotations": Object {},
-    "classification": Object {},
-    "currentWorkflowId": 0,
     "guide": Object {},
     "inPreviewMode": false,
     "isFailure": false,
@@ -201,10 +193,10 @@ Object {
     "project": Object {},
     "questionContainerHeight": Object {},
     "seenThisSession": Object {},
-    "subject": Object {},
+    "subjectLists": Object {},
+    "subjectStartTime": Object {},
     "tasks": Object {},
     "tutorial": Object {},
-    "upcomingSubjects": Object {},
     "workflow": Object {},
   },
   "main": Object {

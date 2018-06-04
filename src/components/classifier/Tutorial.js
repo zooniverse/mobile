@@ -9,10 +9,10 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
-import StyledMarkdown from './StyledMarkdown'
-import StyledText from './StyledText'
-import SizedImage from './SizedImage'
-import Button from './Button'
+import StyledMarkdown from '../StyledMarkdown'
+import StyledText from '../StyledText'
+import SizedImage from '../SizedImage'
+import Button from '../Button'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { addIndex, length, map } from 'ramda'
 
@@ -134,7 +134,7 @@ const styles = EStyleSheet.create({
   },
   content: {
     height: '100% - 300',
-    marginHorizontal: 15,
+    marginHorizontal: 25,
     backgroundColor: 'white'
   },
   scrollViewContainerStyle: {

@@ -12,7 +12,6 @@ exports[`renders correctly 1`] = `
     style={undefined}
   >
     <ZoomableImage
-      allowPanAndZoom={true}
       handlePress={[Function]}
       source={
         Object {
@@ -20,46 +19,6 @@ exports[`renders correctly 1`] = `
         }
       }
     />
-    <View
-      style={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 12,
-            },
-            undefined,
-            Object {
-              "fontFamily": "FontAwesome",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-          ]
-        }
-      >
-        
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            undefined,
-            Array [
-              undefined,
-            ],
-          ]
-        }
-      >
-        You can zoom into this image
-      </Text>
-    </View>
     <View
       accessibilityComponentType={undefined}
       accessibilityLabel={undefined}
@@ -123,7 +82,6 @@ exports[`renders hidden correctly 1`] = `
     style={undefined}
   >
     <ZoomableImage
-      allowPanAndZoom={true}
       handlePress={[Function]}
       source={
         Object {
@@ -131,46 +89,6 @@ exports[`renders hidden correctly 1`] = `
         }
       }
     />
-    <View
-      style={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 12,
-            },
-            undefined,
-            Object {
-              "fontFamily": "FontAwesome",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-          ]
-        }
-      >
-        
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            undefined,
-            Array [
-              undefined,
-            ],
-          ]
-        }
-      >
-        You can zoom into this image
-      </Text>
-    </View>
     <View
       accessibilityComponentType={undefined}
       accessibilityLabel={undefined}

@@ -30,18 +30,17 @@ exports[`renders a button if there is a field guide 1`] = `
       testID={undefined}
       tvParallaxProperties={undefined}
     >
-      <Image
-        source={1}
-        style={undefined}
-      />
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
         style={
           Array [
-            undefined,
+            Object {
+              "fontFamily": "Karla",
+            },
             Array [
+              undefined,
               undefined,
             ],
           ]
@@ -77,35 +76,14 @@ exports[`renders a button if there is a field guide 1`] = `
     >
       <Text
         accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 12,
-            },
-            undefined,
-            Object {
-              "fontFamily": "FontAwesome",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-          ]
-        }
-      >
-        
-      </Text>
-      <Text
-        accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
         style={
           Array [
+            Object {
+              "fontFamily": "Karla",
+            },
             undefined,
-            Array [
-              undefined,
-            ],
           ]
         }
       >
@@ -137,18 +115,17 @@ exports[`renders a button if there is a field guide 1`] = `
       testID={undefined}
       tvParallaxProperties={undefined}
     >
-      <Image
-        source={1}
-        style={undefined}
-      />
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
         style={
           Array [
-            undefined,
+            Object {
+              "fontFamily": "Karla",
+            },
             Array [
+              undefined,
               undefined,
             ],
           ]
@@ -191,18 +168,17 @@ exports[`renders correctly and with no button if no field guide 1`] = `
       testID={undefined}
       tvParallaxProperties={undefined}
     >
-      <Image
-        source={1}
-        style={undefined}
-      />
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
         style={
           Array [
-            undefined,
+            Object {
+              "fontFamily": "Karla",
+            },
             Array [
+              undefined,
               undefined,
             ],
           ]
@@ -236,18 +212,17 @@ exports[`renders correctly and with no button if no field guide 1`] = `
       testID={undefined}
       tvParallaxProperties={undefined}
     >
-      <Image
-        source={1}
-        style={undefined}
-      />
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
         style={
           Array [
-            undefined,
+            Object {
+              "fontFamily": "Karla",
+            },
             Array [
+              undefined,
               undefined,
             ],
           ]

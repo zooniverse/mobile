@@ -4,35 +4,29 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import StyledModal from './StyledModal'
-import StyledMarkdown from './StyledMarkdown'
-import Button from './Button'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import StyledModal from '../StyledModal'
+import StyledMarkdown from '../StyledMarkdown'
+import Button from '../Button'
 import PropTypes from 'prop-types';
 
 
-export class TaskHelp extends Component {
+export class TaskHelpModal extends Component {
   constructor(props) {
     super(props)
     this.setVisibility = this.setVisibility.bind(this)
-    this.state = {
-      isVisible: false
-    }
   }
 
   setVisibility(isVisible) {
-    this.setState({isVisible})
+    if (!isVisible) {
+        this.props.onCloseRequested()
+    }
   }
 
   render() {
     return (
       <View>
-        <Icon name='question-circle'
-          style={styles.helpIcon}
-          onPress={() => this.setVisibility(true)}
-          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}} />
         <StyledModal
-          isVisible={this.state.isVisible}
+          isVisible={this.props.isVisible}
           setVisibility={this.setVisibility}>
 
           <View style={styles.markdownContainer}>
@@ -44,7 +38,7 @@ export class TaskHelp extends Component {
           </View>
 
           <Button
-            handlePress={() => this.setVisibility(false)}
+            handlePress={this.props.onCloseRequested}
             buttonStyle={'navyButton'}
             text={'Close'} />
 
@@ -58,19 +52,13 @@ const styles = EStyleSheet.create({
   markdownContainer: {
     flex: 1,
     paddingVertical: 5,
-  },
-  helpIcon: {
-    fontSize: 20,
-    color: 'black',
-    paddingTop: 5
-  },
-  helpText: {
-    color: 'black'
   }
 })
 
-TaskHelp.propTypes = {
-  text: PropTypes.string,
+TaskHelpModal.propTypes = {
+    isVisible: PropTypes.bool,
+    text: PropTypes.string,
+    onCloseRequested: PropTypes.func
 }
 
-export default TaskHelp
+export default TaskHelpModal
