@@ -10,6 +10,7 @@ const imageSource = {
 it('renders correctly', () => {
   const tree = renderer.create(
     <ZoomableImage
+      images={{}}
       source={imageSource}
       handlePress={jest.fn}
       imageWidth={100}

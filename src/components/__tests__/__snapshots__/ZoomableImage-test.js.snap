@@ -16,7 +16,7 @@ exports[`renders correctly 1`] = `
     resizeMode="contain"
     source={
       Object {
-        "uri": "https://placekitten.com/200/300",
+        "uri": "",
       }
     }
     style={
