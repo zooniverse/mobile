@@ -14,6 +14,7 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* ZooniverseMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ZooniverseMobileTests.m */; };
 		0143A58820B8AFBB00185AC0 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */; };
+		01471F5420C09330007A22F4 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01471F5320C09330007A22F4 /* ImageSizer.m */; };
 		014AB847202374F80014915B /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051C91D7F618700052983 /* libRCTGoogleAnalyticsBridge.a */; };
 		01DE9377205192F500E81CA7 /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9373205192F500E81CA7 /* Karla-Bold.ttf */; };
 		01DE9378205192F500E81CA7 /* Karla-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */; };
@@ -361,6 +362,8 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ZooniverseMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZooniverseMobileTests.m; sourceTree = "<group>"; };
 		0143A55A20B8AF4500185AC0 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
+		01471F5220C09330007A22F4 /* ImageSizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageSizer.h; path = ZooniverseMobile/ImageSizer.h; sourceTree = "<group>"; };
+		01471F5320C09330007A22F4 /* ImageSizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageSizer.m; path = ZooniverseMobile/ImageSizer.m; sourceTree = "<group>"; };
 		01DE9373205192F500E81CA7 /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Bold.ttf"; path = "../assets/fonts/Karla-Bold.ttf"; sourceTree = "<group>"; };
 		01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-BoldItalic.ttf"; path = "../assets/fonts/Karla-BoldItalic.ttf"; sourceTree = "<group>"; };
 		01DE9375205192F500E81CA7 /* Karla-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Italic.ttf"; path = "../assets/fonts/Karla-Italic.ttf"; sourceTree = "<group>"; };
@@ -558,6 +561,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				01471F5320C09330007A22F4 /* ImageSizer.m */,
+				01471F5220C09330007A22F4 /* ImageSizer.h */,
 			);
 			name = ZooniverseMobile;
 			sourceTree = "<group>";
@@ -1293,6 +1298,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				992C27581E5394C200C4C17B /* NotificationSettings.m in Sources */,
+				01471F5420C09330007A22F4 /* ImageSizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
