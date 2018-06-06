@@ -23,8 +23,20 @@ import SideDrawerContent from '../components/SideDrawerContent'
 import ZooWebView from '../components/ZooWebView'
 import Onboarding from '../components/Onboarding'
 import SwipeClassifier from '../components/classifier/SwipeClassifier'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
+const persistConfig = {
+  key: 'root',
+  storage: storage,
+  whitelist: ['images'] // only images will be persisted
+};
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
+const persistor = persistStore(store)
+
 
 export default class App extends Component {
   componentDidMount() {
@@ -48,23 +60,25 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router sceneStyle={styles.sharedSceneStyles}>
-          <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
-            <Scene key="main" tabs={false}>
-              <Scene key="SignIn" component={SignIn} duration={0} type="reset" navBar={SignIn.renderNavigationBar} />
-              <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} initial />
-              <Scene key="ProjectDisciplines" component={ProjectDisciplines} navBar={ProjectDisciplines.renderNavigationBar} />
-              <Scene key="About" component={About} navBar={About.renderNavigationBar}/>
-              <Scene key="Publications" component={PublicationList} navBar={PublicationList.renderNavigationBar} />
-              <Scene key="ProjectList" component={ProjectList} navBar={ProjectList.renderNavigationBar} />
-              <Scene key="Register" component={Register} navBar={Register.renderNavigationBar} />
-              <Scene key="Settings" component={Settings} navBar={Settings.renderNavigationBar} />
-              <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
-              <Scene key="Onboarding" component={Onboarding} duration={0} hideNavBar={true} />
-              <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
-            </Scene>
-          </Drawer>
-        </Router>
+        <PersistGate loading={null} persistor={persistor}>
+          <Router sceneStyle={styles.sharedSceneStyles}>
+            <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
+              <Scene key="main" tabs={false}>
+                <Scene key="SignIn" component={SignIn} duration={0} type="reset" navBar={SignIn.renderNavigationBar} />
+                <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} initial />
+                <Scene key="ProjectDisciplines" component={ProjectDisciplines} navBar={ProjectDisciplines.renderNavigationBar} />
+                <Scene key="About" component={About} navBar={About.renderNavigationBar}/>
+                <Scene key="Publications" component={PublicationList} navBar={PublicationList.renderNavigationBar} />
+                <Scene key="ProjectList" component={ProjectList} navBar={ProjectList.renderNavigationBar} />
+                <Scene key="Register" component={Register} navBar={Register.renderNavigationBar} />
+                <Scene key="Settings" component={Settings} navBar={Settings.renderNavigationBar} />
+                <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
+                <Scene key="Onboarding" component={Onboarding} duration={0} hideNavBar={true} />
+                <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
+              </Scene>
+            </Drawer>
+          </Router>
+        </PersistGate>
       </Provider>
     );
   }
