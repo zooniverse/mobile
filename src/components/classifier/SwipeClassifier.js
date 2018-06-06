@@ -101,10 +101,10 @@ export class SwipeClassifier extends React.Component {
     }
   }
 
-  onTapCard = (cardIndex) => {
+  onTapCard = (subject) => {
     this.setState({
       showFullSize: true,
-      fullScreenImageSource: this.props.subjectLists[cardIndex].display.src
+      fullScreenImageSource: subject.display.src
     })
   }
 
@@ -119,6 +119,7 @@ export class SwipeClassifier extends React.Component {
             panX={this.state.panX}
             shouldAnimateOverlay={shouldAnimateOverlay}
             answers={this.props.answers}
+            onPress={this.onTapCard}
           />
       ) : <View />
   }
@@ -181,7 +182,6 @@ export class SwipeClassifier extends React.Component {
             onSwiped={this.onSwiped}
             onSwipedRight={(cardIndex) => this.onAnswered(0, this.props.subjectLists[cardIndex])}
             onSwipedLeft={(cardIndex) => this.onAnswered(1, this.props.subjectLists[cardIndex])}
-            onTapCard={this.onTapCard}
             cardIndex={this.state.swiperIndex}
             disableTopSwipe
             disableBottomSwipe
