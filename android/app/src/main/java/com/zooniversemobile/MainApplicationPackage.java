@@ -28,6 +28,7 @@ public class MainApplicationPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new NotificationSettings(reactContext));
+        modules.add(new ImageSizer(reactContext));
 
         return modules;
     }
