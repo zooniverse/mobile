@@ -22,7 +22,6 @@ import Register from '../components/Register'
 import Settings from '../components/Settings'
 import SideDrawerContent from '../components/SideDrawerContent'
 import ZooWebView from '../components/ZooWebView'
-import Onboarding from '../components/Onboarding'
 import SwipeClassifier from '../components/classifier/SwipeClassifier'
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
@@ -64,7 +63,6 @@ export default class App extends Component {
               <Scene key="Register" component={Register} navBar={Register.renderNavigationBar} />
               <Scene key="Settings" component={Settings} navBar={Settings.renderNavigationBar} />
               <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
-              <Scene key="Onboarding" component={Onboarding} duration={0} hideNavBar={true} />
               <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
             </Scene>
           </Drawer>
