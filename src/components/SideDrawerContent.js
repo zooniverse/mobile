@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   Alert,
+  Image,
   Linking,
   TouchableOpacity,
   View
@@ -8,7 +9,9 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import StyledText from './StyledText'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import FontedText from './common/FontedText'
+import Separator from './common/Separator'
 import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
@@ -71,89 +74,80 @@ export class SideDrawerContent extends Component {
     Actions.Settings()
   }
 
-  openSocialMediaLink(link) {
-    GoogleAnalytics.trackEvent('view', link)
-
-    Linking.canOpenURL(link).then(supported => {
-      if (supported) {
-        Linking.openURL(link);
-      } else {
-        Alert.alert(
-          'Error', 'Sorry, but it looks like you are unable to open the link ' + link + ' in your default browser.',
-        )
-      }
-    });
-  }
-
   render() {
-    const signIn =
-      <TouchableOpacity onPress={this.signIn} style={styles.linkContainer}>
-        <StyledText
-          textStyle={'largeLink'}
-          text={ 'Sign In / Register' } />
-      </TouchableOpacity>
-
-    const signOut =
-      <TouchableOpacity onPress={this.signOut} style={styles.linkContainer}>
-        <StyledText
-          textStyle={'largeLink'}
-          text={ 'Sign Out' } />
-      </TouchableOpacity>
-
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={this.close}
-          style={styles.closeIcon}>
-          <Icon name="times" style={styles.icon} />
-        </TouchableOpacity>
+        <View style={styles.logoContainer}>
+          <Image 
+            source={require('../../images/logo.png')}
+            style={styles.logoStyle} 
+          />
+          <TouchableOpacity onPress={this.close} >
+            <SimpleLineIcons name="close" style={styles.closeIcon} />
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity onPress={this.goHome} style={styles.linkContainer}>
-          <StyledText
-            textStyle={'largeLink'}
-            text={'Home'} />
-        </TouchableOpacity>
+        <Separator color="white" style={styles.separatorPadding} />
+        
+        <MenuButton 
+          onPress={this.goHome} 
+          text={'Home'} 
+        />
+        
+        { this.props.isGuestUser ? 
+          <MenuButton 
+            onPress={this.signIn} 
+            text={'Sign In / Register'} 
+          /> 
+          : null 
+        }
+        
+        <MenuButton 
+          onPress={this.goToAbout} 
+          text={'About'} 
+        />
 
-        { this.props.isGuestUser ? signIn : null }
+        <MenuButton 
+          onPress={this.goToPublications} 
+          text={'Publications'} 
+        />
 
-        <TouchableOpacity onPress={this.goToAbout} style={styles.linkContainer}>
-          <StyledText
-            textStyle={'largeLink'}
-            text={'About'} />
-        </TouchableOpacity>
+        <MenuButton 
+          onPress={this.settings} 
+          text={'Settings'} 
+        />
 
-        <TouchableOpacity onPress={this.goToPublications} style={styles.linkContainer}>
-          <StyledText
-            textStyle={'largeLink'}
-            text={'Publications'} />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.settings} style={styles.linkContainer}>
-          <StyledText
-            textStyle={'largeLink'}
-            text={'Settings'} />
-        </TouchableOpacity>
-
-        { this.props.isGuestUser ? null : signOut }
+        <FontedText style={styles.connextText}>
+          CONNECT
+        </FontedText>
 
 
         <View style={styles.socialMediaContainer}>
-          <TouchableOpacity onPress={() => this.openSocialMediaLink('https://twitter.com/the_zooniverse')}>
-            <Icon name="twitter" style={styles.socialMediaIcon} />
-          </TouchableOpacity>
+          <SocialMediaLink 
+            mediaLink="https://twitter.com/the_zooniverse"
+            iconName="twitter"
+          />
+          <SocialMediaLink 
+            mediaLink="http://www.facebook.com/therealzooniverse"
+            iconName="facebook-f"
+          />
+          <SocialMediaLink 
+            mediaLink="http://dailyzooniverse.tumblr.com/"
+            iconName="tumblr"
+          />
+          <SocialMediaLink 
+            mediaLink="https://plus.google.com/+ZooniverseOrgReal/"
+            iconName="google-plus"
+          />
+        </View>
 
-          <TouchableOpacity onPress={() => this.openSocialMediaLink('http://www.facebook.com/therealzooniverse')}>
-            <Icon name="facebook-official" style={styles.socialMediaIcon} />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => this.openSocialMediaLink('http://dailyzooniverse.tumblr.com/')}>
-            <Icon name="tumblr" style={styles.socialMediaIcon} />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => this.openSocialMediaLink('https://plus.google.com/+ZooniverseOrgReal/')}>
-            <Icon name="google-plus" style={styles.socialMediaIcon} />
-          </TouchableOpacity>
+        <View style={styles.signOutView}>
+          { this.props.isGuestUser ? null :
+            <MenuButton 
+              onPress={this.signOut}
+              text={'Sign Out'}
+            />
+          }
         </View>
 
       </View>
@@ -161,15 +155,41 @@ export class SideDrawerContent extends Component {
   }
 }
 
+const MenuButton = ({onPress, text}) => 
+  <View style={styles.linkContainer}>
+    <TouchableOpacity onPress={onPress}>
+      <FontedText style={styles.menuButtonText}>
+        {text}
+      </FontedText>
+    </TouchableOpacity>
+  </View>
+
+const SocialMediaLink = ({mediaLink, iconName}) => 
+  <TouchableOpacity onPress={() => openSocialMediaLink(mediaLink)}>
+    <Icon name={iconName} style={styles.socialMediaIcon} />
+  </TouchableOpacity>
+
+const openSocialMediaLink = (link) => {
+  GoogleAnalytics.trackEvent('view', link)
+
+  Linking.canOpenURL(link).then(supported => {
+    if (supported) {
+      Linking.openURL(link);
+    } else {
+      Alert.alert(
+        'Error', 'Sorry, but it looks like you are unable to open the link ' + link + ' in your default browser.',
+      )
+    }
+  });
+}
+
+
 const styles = EStyleSheet.create({
   container: {
+    backgroundColor: 'rgba(0,93,105,1)',
     flex: 1,
-    paddingTop: 80
-  },
-  closeIcon: {
-    position: 'absolute',
-    right: 5,
-    top: 24
+    paddingTop: 15,
+    paddingLeft: 25
   },
   icon: {
     color: '$headerColor',
@@ -177,22 +197,64 @@ const styles = EStyleSheet.create({
     padding: 10
   },
   linkContainer: {
-    paddingLeft: 25,
-    paddingTop: 8,
-    paddingBottom: 8
+    paddingTop: 17.5,
+    paddingBottom: 17.5
+  },
+  menuButtonText: {
+    fontSize: 22,
+    color: 'white'
   },
   socialMediaContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    paddingTop: 15,
-    paddingLeft: 15
+    marginLeft: -15
   },
   socialMediaIcon: {
-    color: '$darkTextColor',
+    color: 'white',
     fontSize: 18,
-    padding: 12,
+    marginHorizontal: 15,
+  },
+  signOutView: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 18.5
+  },
+  logoContainer: {
+    marginVertical: 25,
+    marginRight: 25,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  logoStyle: {
+    width: 125,
+    height: 15,
+    resizeMode: 'contain'
+  },
+  closeIcon: {
+    fontSize: 20,
+    color: 'white'
+  },
+  separatorPadding: {
+    marginBottom: 18
+  },
+  connextText: {
+    marginTop: 45,
+    marginBottom: 25,
+    color: 'white',
+    fontWeight: 'bold'
   }
 });
+
+MenuButton.propTypes = {
+  onPress: PropTypes.func,
+  text: PropTypes.string
+}
+
+SocialMediaLink.propTypes = {
+  mediaLink: PropTypes.string,
+  iconName: PropTypes.string
+}
 
 SideDrawerContent.propTypes = {
   user: PropTypes.object,
