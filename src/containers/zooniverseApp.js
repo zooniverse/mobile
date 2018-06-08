@@ -88,7 +88,7 @@ class ZooniverseApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        { isEmpty(this.props.user) ? <LaunchScreen /> : <ProjectDisciplines /> }
+        <ProjectDisciplines />
         <NotificationModal
           isVisible={this.props.isModalVisible}
           setVisibility={this.props.setModalVisibility}/>

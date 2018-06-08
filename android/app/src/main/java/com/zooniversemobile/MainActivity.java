@@ -18,6 +18,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.pusher.android.PusherAndroid;
 import com.pusher.android.notifications.fcm.FCMPushNotificationReceivedListener;
 import com.pusher.android.notifications.tokens.PushNotificationRegistrationListener;
+import org.devio.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -42,7 +43,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        SplashScreen.show(this);
         if (playServicesAvailable()) {
             PusherAndroid pusher = new PusherAndroid(BuildConfig.PUSHER_API_KEY);
             PusherProperty.getInstance().nativePusher = pusher.nativePusher();

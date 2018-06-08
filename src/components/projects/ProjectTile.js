@@ -66,7 +66,7 @@ class ProjectTile extends Component {
             const shouldShowBanner = isComplete(workflow.completeness) && !this.props.inPreviewMode
             return (
                 <View key={index}>
-                    <Separator />
+                    <Separator color={theme.$borderGrey}/>
                     <View>
                         <TouchableOpacity 
                             onPress={() => this._navigateToSwipeClassifier(workflow) }
@@ -171,7 +171,7 @@ class ProjectTile extends Component {
                                 <FontedText style={styles.title} numberOfLines={1}>
                                     {this.props.project.title}
                                 </FontedText> 
-                                <Separator style={styles.separator} />
+                                <Separator color={theme.$borderGrey} style={styles.separator} />
                                 <FontedText style={styles.description} numberOfLines={3}>
                                     {this.props.project.description}
                                 </FontedText>

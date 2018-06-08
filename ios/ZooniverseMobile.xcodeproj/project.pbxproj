@@ -15,6 +15,7 @@
 		00E356F31AD99517003FC87E /* ZooniverseMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ZooniverseMobileTests.m */; };
 		0143A58820B8AFBB00185AC0 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */; };
 		01471F5420C09330007A22F4 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01471F5320C09330007A22F4 /* ImageSizer.m */; };
+		0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0115251C2099005600C6C093 /* SimpleLineIcons.ttf */; };
 		014AB847202374F80014915B /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051C91D7F618700052983 /* libRCTGoogleAnalyticsBridge.a */; };
 		01DE9377205192F500E81CA7 /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9373205192F500E81CA7 /* Karla-Bold.ttf */; };
 		01DE9378205192F500E81CA7 /* Karla-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */; };
@@ -364,6 +365,7 @@
 		0143A55A20B8AF4500185AC0 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		01471F5220C09330007A22F4 /* ImageSizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageSizer.h; path = ZooniverseMobile/ImageSizer.h; sourceTree = "<group>"; };
 		01471F5320C09330007A22F4 /* ImageSizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageSizer.m; path = ZooniverseMobile/ImageSizer.m; sourceTree = "<group>"; };
+		0115251C2099005600C6C093 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		01DE9373205192F500E81CA7 /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Bold.ttf"; path = "../assets/fonts/Karla-Bold.ttf"; sourceTree = "<group>"; };
 		01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-BoldItalic.ttf"; path = "../assets/fonts/Karla-BoldItalic.ttf"; sourceTree = "<group>"; };
 		01DE9375205192F500E81CA7 /* Karla-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Italic.ttf"; path = "../assets/fonts/Karla-Italic.ttf"; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 		999F9C8E1DB7B57E002B6AF0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0115251C2099005600C6C093 /* SimpleLineIcons.ttf */,
 				999F9C781DB7B4FA002B6AF0 /* OpenSans-Bold.ttf */,
 				999F9C791DB7B4FA002B6AF0 /* OpenSans-BoldItalic.ttf */,
 				999F9C7A1DB7B4FA002B6AF0 /* OpenSans-ExtraBold.ttf */,
@@ -1195,6 +1198,7 @@
 				999F9C871DB7B4FA002B6AF0 /* OpenSans-Italic.ttf in Resources */,
 				999F9C861DB7B4FA002B6AF0 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */,
 				999F9C891DB7B4FA002B6AF0 /* OpenSans-LightItalic.ttf in Resources */,
 				999F9C8D1DB7B4FA002B6AF0 /* zoo-font.ttf in Resources */,
 				999F9C831DB7B4FA002B6AF0 /* OpenSans-Bold.ttf in Resources */,
