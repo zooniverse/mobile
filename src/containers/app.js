@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { AppState, NetInfo } from 'react-native'
+import { AppState, NetInfo, Platform } from 'react-native'
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'
@@ -10,6 +10,7 @@ import { setIsConnected, setState } from '../actions/index'
 import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import SplashScreen from 'react-native-splash-screen';
 
 import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/projects/ProjectList'
@@ -21,13 +22,15 @@ import Register from '../components/Register'
 import Settings from '../components/Settings'
 import SideDrawerContent from '../components/SideDrawerContent'
 import ZooWebView from '../components/ZooWebView'
-import Onboarding from '../components/Onboarding'
 import SwipeClassifier from '../components/classifier/SwipeClassifier'
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
 
 export default class App extends Component {
   componentDidMount() {
+    if (Platform.OS === 'android') {
+      SplashScreen.hide()
+    }
     store.dispatch(loadUserData())
     store.dispatch(setSession())
 
@@ -60,7 +63,6 @@ export default class App extends Component {
               <Scene key="Register" component={Register} navBar={Register.renderNavigationBar} />
               <Scene key="Settings" component={Settings} navBar={Settings.renderNavigationBar} />
               <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
-              <Scene key="Onboarding" component={Onboarding} duration={0} hideNavBar={true} />
               <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
             </Scene>
           </Drawer>
