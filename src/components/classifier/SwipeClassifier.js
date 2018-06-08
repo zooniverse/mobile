@@ -187,7 +187,7 @@ export class SwipeClassifier extends React.Component {
             disableBottomSwipe
             outputRotationRange={['-30deg', '0deg', '30deg']}
             nextCardYOffset={-15}
-            panXListener={(panX) => this.setState({ panX: panX}) }
+            panXListener={(panX) => this.setState({ panX }) }
             swipeAnimationDuration={500}
           />
         </View>

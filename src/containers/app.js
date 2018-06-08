@@ -29,7 +29,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 const persistConfig = {
   key: 'root',
-  storage: storage,
+  storage,
   whitelist: ['images'] // only images will be persisted
 };
 

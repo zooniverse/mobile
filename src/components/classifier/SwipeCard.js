@@ -55,7 +55,7 @@ class SwipeCard extends Component {
 
             this.props.imageActions.saveImageLocation(remoteUri, localUri)
             this.setState({
-                localUri: localUri
+                localUri
             })
         })
     }
