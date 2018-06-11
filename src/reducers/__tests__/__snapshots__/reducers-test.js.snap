@@ -20,6 +20,7 @@ Object {
     "tutorial": Object {},
     "workflow": Object {},
   },
+  "images": Object {},
   "main": Object {
     "bobLoblaw": "Has a law blog",
     "errorMessage": null,
@@ -79,6 +80,7 @@ Object {
     "tutorial": Object {},
     "workflow": Object {},
   },
+  "images": Object {},
   "main": Object {
     "errorMessage": null,
     "isConnected": true,
@@ -137,6 +139,7 @@ Object {
     "tutorial": Object {},
     "workflow": Object {},
   },
+  "images": Object {},
   "main": Object {
     "errorMessage": null,
     "isConnected": null,
@@ -199,6 +202,7 @@ Object {
     "tutorial": Object {},
     "workflow": Object {},
   },
+  "images": Object {},
   "main": Object {
     "errorMessage": null,
     "isConnected": null,

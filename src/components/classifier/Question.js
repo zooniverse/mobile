@@ -6,6 +6,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 import StyledMarkdown from '../StyledMarkdown'
+import Markdown from 'react-native-simple-markdown'
 import { connect } from 'react-redux'
 import { setQuestionContainerHeight } from '../../actions/classifier'
 
@@ -26,14 +27,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export class Question extends Component {
   render() {
     return (
-      <View style={[styles.questionContainer, { height: this.props.questionContainerHeight }]}>
+      <View style={[styles.questionContainer]}>
         <View style={styles.question}>
-          <StyledMarkdown
-            extraCSS={ 'p {font-size: 14px; font-weight: 500; margin: 5px 0 0;}' }
-            markdown={ this.props.question }
-            width={ Dimensions.get('window').width - 100 }
-            onReceivedHeight={ (newHeight) => this.props.setQuestionContainerHeight(newHeight) }
-          />
+          <Markdown>
+            {this.props.question}
+          </Markdown>
         </View>
       </View>
     )

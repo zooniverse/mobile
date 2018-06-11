@@ -2,14 +2,26 @@ import React, { Component } from 'react'
 import {
     Animated,
     Dimensions,
-    Image,
+    Platform,
+    TouchableOpacity,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import { subjectDisplayWidth, subjectDisplayHeight } from './SwipeClassifier'
+import RNFetchBlob from 'react-native-fetch-blob'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+import NativeImage from '../../nativeModules/NativeImage'
+import * as imageActions from '../../actions/images'
+import { loadRemoteImageToCache } from '../../utils/imageUtils'
+import { subjectDisplayWidth, subjectDisplayHeight } from './SwipeClassifier'
+import ProgressIndicatingImage from '../common/ProgressIndicatingImage'
 import FontedText from '../common/FontedText'
+
+const mapDispatchToProps = (dispatch) => ({
+  imageActions: bindActionCreators(imageActions, dispatch)
+})
 
 class SwipeCard extends Component {
     constructor(props) {
@@ -19,22 +31,55 @@ class SwipeCard extends Component {
             overlayViewHeight: subjectDisplayHeight,
             overlayAnswerIndex: 0,
             imageIsVisible: false,
+            localUri: ''
         }
+        this.unlinkImageOnLoad = false
+
+        this.updateOverlayImageForImageDimensions = this.updateOverlayImageForImageDimensions.bind(this)
     }
 
     componentDidMount() {
-        this.props.panX.addListener((value) => {
+        this.listenerId = this.props.panX.addListener((value) => {
+                this.setState({ overlayAnswerIndex: value.value < 0 ? 0 : 1})
+        })
+
+        const remoteUri = this.props.subject.display.src
+        loadRemoteImageToCache(remoteUri).then((localUri) => {
+            if (this.unlinkImageOnLoad) {
+                RNFetchBlob.fs.unlink(localUri)
+                return
+            }
+
+            const nativeImage = new NativeImage(localUri)
+            nativeImage.getImageSize().then(this.updateOverlayImageForImageDimensions)
+
+            this.props.imageActions.saveImageLocation(remoteUri, localUri)
             this.setState({
-                overlayAnswerIndex: value.value < 0 ? 0 : 1
+                localUri
             })
         })
-        Image.getSize(this.props.subject.display.src, (width, height) => {
-            const aspectRatio = Math.min(subjectDisplayWidth / width, subjectDisplayHeight / height)
-            this.setState({
-                overlayViewHeight: height * aspectRatio,
-                overlayViewWidth: width * aspectRatio
-            });
+    }
+
+    updateOverlayImageForImageDimensions({width, height}) {
+        const aspectRatio = Math.min(subjectDisplayWidth / width, subjectDisplayHeight / height)
+        this.setState({
+            overlayViewHeight: height * aspectRatio,
+            overlayViewWidth: width * aspectRatio
         });
+    }
+
+    componentWillUnmount() {
+        this.props.panX.removeListener(this.listenerId)
+
+        RNFetchBlob.fs.exists(this.state.localUri)
+        .then((fileExists) => {
+            if (fileExists) {
+                this.props.imageActions.deleteImageLocation(this.state.localUri)
+                RNFetchBlob.fs.unlink(this.state.localUri)
+            } else {
+                this.unlinkImageOnLoad = true
+            }
+        })        
     }
 
     render() {
@@ -66,14 +111,20 @@ class SwipeCard extends Component {
                 </Animated.View >
             </View>
 
+        const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         return (
-            <View style={{width: subjectDisplayWidth, height: subjectDisplayHeight}}>
-                <Image
+            <TouchableOpacity 
+                style={{width: subjectDisplayWidth, height: subjectDisplayHeight}} 
+                onPress={() => this.props.onPress(this.props.subject)}
+                activeOpacity={0.9}
+            >
+                <ProgressIndicatingImage
                     onLoadEnd={() => this.setState({imageIsVisible: true})}
-                    source={{uri: this.props.subject.display.src}}
+                    localUri={pathPrefix + this.state.localUri}
                     style={[styles.image, styles.imageShadow]}
                     resizeMethod="resize" 
                     resizeMode="contain"
+                    loadingText={'Loading Subject'}
                 />
                 <View style={styles.overlayContainer}>
                     <View style={imageDimensionStyle}>
@@ -81,12 +132,12 @@ class SwipeCard extends Component {
                         { alreadySeen ? alreadySeenBanner : null }
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
 
-export default SwipeCard
+export default connect(null, mapDispatchToProps)(SwipeCard)
 
 const styles = EStyleSheet.create({
     alreadySeen: {
@@ -143,5 +194,7 @@ SwipeCard.propTypes = {
     seenThisSession: PropTypes.bool,
     panX: PropTypes.object,
     shouldAnimateOverlay: PropTypes.bool,
-    answers: PropTypes.array
+    answers: PropTypes.array,
+    imageActions: PropTypes.any,
+    onPress: PropTypes.any
 }

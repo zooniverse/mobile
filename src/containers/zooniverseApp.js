@@ -15,13 +15,17 @@ import { setState, syncInterestSubscriptions } from '../actions/index'
 import { setDimensions } from '../actions/device'
 import { isEmpty, pathOr } from 'ramda'
 import FCM, { FCMEvent } from 'react-native-fcm'
+import { removeLeftOverImages } from '../utils/imageUtils'
+import * as imageActions from '../actions/images'
+import { bindActionCreators } from 'redux'
 
 const mapStateToProps = (state) => ({
   user: state.user,
   isFetching: state.main.isFetching,
   isConnected: state.main.isConnected,
   isModalVisible: state.main.isModalVisible || false,
-  notificationPayload: state.main.notificationPayload || {}
+  notificationPayload: state.main.notificationPayload || {},
+  images: state.images
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -37,6 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
   setDimensions() {
     dispatch(setDimensions())
   },
+  imageActions: bindActionCreators(imageActions, dispatch)
 })
 
 class ZooniverseApp extends Component {
@@ -46,7 +51,8 @@ class ZooniverseApp extends Component {
 
   componentDidMount() {
     this.props.setDimensions()
-
+    removeLeftOverImages(this.props.images)
+    this.props.imageActions.clearImageLocations()
     if (Platform.OS === 'ios') {
       PushNotificationIOS.addEventListener('notification', this.onRemoteNotification)
       PushNotificationIOS.addEventListener('register', this.onPushRegistration)
@@ -106,6 +112,8 @@ ZooniverseApp.propTypes = {
   setNotificationPayload: PropTypes.func,
   syncInterestSubscriptions: PropTypes.func,
   setDimensions: PropTypes.func,
+  images: PropTypes.object,
+  imageActions: PropTypes.any
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZooniverseApp)
