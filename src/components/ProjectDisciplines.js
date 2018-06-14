@@ -1,10 +1,12 @@
 import React from 'react'
 import {
   ActivityIndicator,
+  Alert,
   AlertIOS,
   FlatList,
   Platform,
   PushNotificationIOS,
+  RefreshControl,
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -19,6 +21,7 @@ import NavBar from '../components/NavBar'
 import { syncUserStore, setPushPrompted } from '../actions/user'
 import FontedText from '../components/common/FontedText'
 import * as projectActions from '../actions/projects'
+import { makeCancelable } from '../utils/promiseUtils'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
@@ -30,11 +33,11 @@ const mapStateToProps = (state) => {
     user: state.user,
     isGuestUser: state.user.isGuestUser,
     isConnected: state.main.isConnected,
-    isFetching: state.main.isFetching,
     projectList: state.projects.projectList || [],
     hasPreviewProjects,
     hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
-    isLoading: state.projects.isLoading,
+    isSuccess: state.projects.isSuccess,
+    isLoading: state.projects.isLoading
   }
 }
 
@@ -49,6 +52,12 @@ const mapDispatchToProps = (dispatch) => ({
 export class ProjectDisciplines extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      refreshing: true
+  }
+
+    this.refreshProjects = this.refreshProjects.bind(this)
   }
 
   componentDidMount() {
@@ -58,8 +67,12 @@ export class ProjectDisciplines extends React.Component {
       }, 500)
     }
 
-    if (R.isEmpty(this.props.projectList)) {
-      this.props.projectActions.fetchProjects()
+    this.refreshProjects()
+  }
+
+  componentWillUnmount() {
+    if (this.fetchProjectPromise) {
+      this.fetchProjectPromise.cancel()
     }
   }
 
@@ -106,6 +119,19 @@ export class ProjectDisciplines extends React.Component {
     );
   }
 
+  refreshProjects() {
+    this.setState({refreshing: true});
+    this.fetchProjectPromise = makeCancelable(this.props.projectActions.fetchProjects())
+    
+    this.fetchProjectPromise
+    .promise
+    .then(() => {
+      this.fetchProjectPromise = null
+      this.setState({refreshing: false});
+    })
+    .catch((error) => Alert.alert( 'Error', 'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error))
+  }
+
   render() {
     const totalClassifications = this.props.user.totalClassifications
     const pluralizeClassification = ( totalClassifications > 1 ? 'S' : '' )
@@ -120,7 +146,7 @@ export class ProjectDisciplines extends React.Component {
       const isTagged = this.props.projectList.find((project) => project.tags.includes(discipline.value)) !== undefined
       return isForLoggerInUser || isTagged
     }
-    const disciplineList = R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES)
+    const disciplineList = this.props.isSuccess ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES) : []
     const listView = 
       <FlatList
         contentContainerStyle={styles.listContainer}
@@ -128,6 +154,11 @@ export class ProjectDisciplines extends React.Component {
         renderItem={this._renderItem}
         keyExtractor={(item, index) => index}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.refreshProjects}
+          />}
       />
     const activityIndicator =
       <View style={activityIndicator}>
@@ -143,7 +174,7 @@ export class ProjectDisciplines extends React.Component {
             </FontedText>
             { totalClassifications > 0 ? totalClassificationsDisiplay : null }
         </View>
-        { this.props.isLoading ? activityIndicator : listView }
+        { this.props.isLoading && !this.props.isSuccess ? activityIndicator : listView }
       </View>
     );
   }
@@ -197,9 +228,9 @@ const styles = EStyleSheet.create({
 ProjectDisciplines.propTypes = {
   user: PropTypes.object,
   isGuestUser: PropTypes.bool,
-  isFetching: PropTypes.bool,
   setPushPrompted: PropTypes.func,
   projectList: PropTypes.array,
+  isSuccess: PropTypes.bool,
   isLoading: PropTypes.bool,
   projectActions: PropTypes.any,
   hasRecentProjects: PropTypes.bool,
