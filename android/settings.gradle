@@ -2,8 +2,7 @@ rootProject.name = 'ZooniverseMobile'
 include ':react-native-splash-screen'
 project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
 
-include ':react-native-google-analytics-bridge', ':react-native-fcm', ':react-native-svg', ':react-native-webview-bridge', ':app'
+include ':react-native-google-analytics-bridge', ':react-native-fcm', ':react-native-svg', ':app'
 project(':react-native-google-analytics-bridge').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-google-analytics-bridge/android')
 project(':react-native-fcm').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fcm/android')
 project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
-project(':react-native-webview-bridge').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview-bridge/android')
