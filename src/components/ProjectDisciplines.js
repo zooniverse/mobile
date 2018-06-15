@@ -129,7 +129,11 @@ export class ProjectDisciplines extends React.Component {
       this.fetchProjectPromise = null
       this.setState({refreshing: false});
     })
-    .catch((error) => Alert.alert( 'Error', 'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error))
+    .catch((error) => {
+      if (!error.isCanceled) {
+        Alert.alert( 'Error', 'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error)
+      }
+    })
   }
 
   render() {
