@@ -13,12 +13,12 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* ZooniverseMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ZooniverseMobileTests.m */; };
-		0143A58820B8AFBB00185AC0 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */; };
-		01471F5420C09330007A22F4 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01471F5320C09330007A22F4 /* ImageSizer.m */; };
-		0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0115251C2099005600C6C093 /* SimpleLineIcons.ttf */; };
 		01090E4220A9ED3800DBDD85 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01090E1920A9ED3800DBDD85 /* GoogleService-Info-prod.plist */; };
 		01090E4520A9EEE800DBDD85 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01090E4420A9EEE800DBDD85 /* FirebaseManager.swift */; };
 		01090E4A20AB38A300DBDD85 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01090E4920AB38A300DBDD85 /* NotificationSettings.m */; };
+		0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0115251C2099005600C6C093 /* SimpleLineIcons.ttf */; };
+		0143A58820B8AFBB00185AC0 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */; };
+		01471F5420C09330007A22F4 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01471F5320C09330007A22F4 /* ImageSizer.m */; };
 		014AB847202374F80014915B /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051C91D7F618700052983 /* libRCTGoogleAnalyticsBridge.a */; };
 		0154415820A4C33800C8BA5A /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */; };
 		01DE9377205192F500E81CA7 /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9373205192F500E81CA7 /* Karla-Bold.ttf */; };
@@ -365,14 +365,14 @@
 		00E356EE1AD99517003FC87E /* ZooniverseMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZooniverseMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ZooniverseMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZooniverseMobileTests.m; sourceTree = "<group>"; };
+		01090E1920A9ED3800DBDD85 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
+		01090E4420A9EEE800DBDD85 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseManager.swift; path = ZooniverseMobile/FirebaseManager.swift; sourceTree = "<group>"; };
+		01090E4820AB38A300DBDD85 /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationSettings.h; path = ZooniverseMobile/NotificationSettings.h; sourceTree = "<group>"; };
+		01090E4920AB38A300DBDD85 /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationSettings.m; path = ZooniverseMobile/NotificationSettings.m; sourceTree = "<group>"; };
+		0115251C2099005600C6C093 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		0143A55A20B8AF4500185AC0 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		01471F5220C09330007A22F4 /* ImageSizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageSizer.h; path = ZooniverseMobile/ImageSizer.h; sourceTree = "<group>"; };
 		01471F5320C09330007A22F4 /* ImageSizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageSizer.m; path = ZooniverseMobile/ImageSizer.m; sourceTree = "<group>"; };
-		0115251C2099005600C6C093 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
-		01090E1920A9ED3800DBDD85 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
-		01090E4420A9EEE800DBDD85 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		01090E4820AB38A300DBDD85 /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationSettings.h; path = ZooniverseMobile/NotificationSettings.h; sourceTree = "<group>"; };
-		01090E4920AB38A300DBDD85 /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationSettings.m; path = ZooniverseMobile/NotificationSettings.m; sourceTree = "<group>"; };
 		0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dev.plist"; sourceTree = "<group>"; };
 		01DE9373205192F500E81CA7 /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Bold.ttf"; path = "../assets/fonts/Karla-Bold.ttf"; sourceTree = "<group>"; };
 		01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-BoldItalic.ttf"; path = "../assets/fonts/Karla-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -523,6 +523,8 @@
 				0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */,
 			);
 			name = Products;
+			sourceTree = "<unknown>";
+		};
 		019E41DD20AB61630086B2C1 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -1327,7 +1329,6 @@
 				01090E4A20AB38A300DBDD85 /* NotificationSettings.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				992C27581E5394C200C4C17B /* NotificationSettings.m in Sources */,
 				01471F5420C09330007A22F4 /* ImageSizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

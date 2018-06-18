@@ -8,14 +8,14 @@
 
 import Firebase
 
-@objc class FirebaseManager: NSObject, MessagingDelegate {
+@objc public class FirebaseManager: NSObject, MessagingDelegate {
   
-  @objc static let shared = FirebaseManager()
+  @objc public static let shared = FirebaseManager()
   
   // Stub out initializer to enforce this class as a singleton
   private override init() {}
   
-  func configureFirebase() {
+  public func configureFirebase() {
     let plistNameValue = Bundle.main.object(forInfoDictionaryKey: "GOOGLE_SERVICE_PLIST")
     guard let plistName = plistNameValue as? String else {
       assertionFailure("Could not find google service plist");
@@ -32,7 +32,7 @@ import Firebase
     Messaging.messaging().delegate = self
   }
   
-  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+  public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
     print("Firebase registration token: \(fcmToken)")
   }
   
