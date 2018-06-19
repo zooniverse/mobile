@@ -7,13 +7,6 @@ const InitialUserState = {
 
 export default function user(state=InitialUserState, action) {
     switch (action.type) {
-        case ActionConstants.SET_USER_FROM_STORE: {
-            if ( action.storeData !== undefined ) {
-                return action.storeData;
-            } else {
-                return state;
-            }
-        }
         case ActionConstants.SET_USER_AVATAR: {
             return R.set(R.lensPath(['avatar']), action.avatar, state);
         }
