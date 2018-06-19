@@ -56,7 +56,9 @@ Object {
     "previewProjectList": Array [],
     "projectList": Array [],
   },
-  "user": Object {},
+  "user": Object {
+    "isGuestUser": true,
+  },
 }
 `;
 
@@ -115,7 +117,9 @@ Object {
     "previewProjectList": Array [],
     "projectList": Array [],
   },
-  "user": Object {},
+  "user": Object {
+    "isGuestUser": true,
+  },
 }
 `;
 
@@ -178,7 +182,9 @@ Object {
     "previewProjectList": Array [],
     "projectList": Array [],
   },
-  "user": Object {},
+  "user": Object {
+    "isGuestUser": true,
+  },
 }
 `;
 
@@ -238,6 +244,8 @@ Object {
     "previewProjectList": Array [],
     "projectList": Array [],
   },
-  "user": Object {},
+  "user": Object {
+    "isGuestUser": true,
+  },
 }
 `;
