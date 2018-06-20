@@ -87,7 +87,7 @@ export function loadUserAvatar() {
 
 export function loadUserProjects() {
   return (dispatch) => {
-    dispatch(setState('loadingText', 'Loading Projects...'))
+    dispatch(setState('loadingText', 'Loading User Data'))
     return new Promise ((resolve, reject) => {
       getAuthUser().then((userResourse) => {
         userResourse.get('project_preferences').then((forCount) => {

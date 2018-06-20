@@ -28,8 +28,9 @@ export default function projects(state=InitialProjectState, action) {
             };
         }
         case ActionConstants.ADD_PROJECTS: {
-            const { arePreview, projects } = action
-            return arePreview ? { ...state, previewProjectList: projects } : { ...state, projectList: projects}
+            const previewProjects = action.projects.filter( project => project.isPreview )
+            const productionProjects = action.projects.filter( project => !project.isPreview )
+            return { ...state, previewProjectList: previewProjects, projectList: productionProjects }
         }
         case ActionConstants.PROJECTS_FAILURE: {
             return {
@@ -39,15 +40,20 @@ export default function projects(state=InitialProjectState, action) {
             }
         }
         case ActionConstants.ADD_OWNER_PROJECT_ID: {
-            return {
+            const { ownerIds } = state
+            const containsIds = ownerIds.includes(action.projectId)
+            const newState = {
                 ...state,
-                ownerIds: R.append(action.projectId, state.ownerIds)
+                ownerIds: containsIds ? ownerIds : R.append(action.projectId, ownerIds)
             }
+            return newState
         }
         case ActionConstants.ADD_COLLABORATOR_PROJECT_ID: {
+            const { collaboratorIds } = state
+            const containsIds = collaboratorIds.includes(action.projectId)
             return {
                 ...state,
-                collaboratorIds: R.append(action.projectId, state.collaboratorIds)
+                collaboratorIds: containsIds ? collaboratorIds : R.append(action.projectId, collaboratorIds)
             }
         }
         case ActionConstants.SIGN_OUT: {

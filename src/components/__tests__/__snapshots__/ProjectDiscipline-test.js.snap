@@ -41,6 +41,12 @@ exports[`renders correctly 1`] = `
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={true}
+      />
+    }
     renderItem={[Function]}
     scrollEventThrottle={50}
     showsVerticalScrollIndicator={false}
@@ -49,6 +55,7 @@ exports[`renders correctly 1`] = `
     viewabilityConfigCallbackPairs={Array []}
     windowSize={21}
   >
+    <RCTRefreshControl />
     <View />
   </RCTScrollView>
 </View>

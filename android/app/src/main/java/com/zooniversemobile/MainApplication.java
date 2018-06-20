@@ -10,7 +10,6 @@ import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.horcrux.svg.SvgPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.facebook.soloader.SoLoader;
@@ -34,7 +33,6 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
             new SplashScreenReactPackage(),
           new MainApplicationPackage(),
           new GoogleAnalyticsBridgePackage(),
-          new WebViewBridgePackage(),
           new SvgPackage(),
           new FIRMessagingPackage()
       );
