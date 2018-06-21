@@ -193,27 +193,13 @@ export function updateSetting(key, value) {
 }
 
 export function syncInterestSubscriptions() {
-  return (dispatch, getState) => {
-    getState().projects.projectList.reduce((promise, project) => {
-      return promise.then(() => {
-        var subscribed = getState().main.notifications[project.id]
-        return dispatch(updateInterestSubscription(project.id, subscribed))
-      })
-    }, Promise.resolve())
+  return (dispatch) => {
+    // Implement Firebase Topic Sync
   }
 }
 
 export function updateInterestSubscription(interest, subscribed) {
-  var NotificationSettings = NativeModules.NotificationSettings
-  return () => {
-    return new Promise((resolve) => {
-      if (subscribed !== undefined) {
-        NotificationSettings.setInterestSubscription(interest, subscribed).then((message) => {
-          return resolve(message)
-        })
-      }
-    })
-  }
+  // Implement Firebase Topic Sub
 }
 
 export function checkPushPermissions() {

@@ -67,18 +67,11 @@ class ZooniverseApp extends Component {
   }
 
   onRemoteNotification = (notification) => {
-    //this is called on iOS < 10 when registered, so make sure it's a valid push notification
-    let isValidIOS = Platform.OS === 'ios' && !pathOr(false, ['_data', 'pusher_token_validation'], notification)
-    let isValidAndroid = Platform.OS === 'android' && notification.title
-
-    if (isValidIOS || isValidAndroid) {
-      this.props.setNotificationPayload(notification)
-      this.props.setModalVisibility(true)
-    }
+    // Implement Firebase notification receive
   }
 
   onPushRegistration = () => {
-    // this.props.syncInterestSubscriptions()
+    this.props.syncInterestSubscriptions()
   }
 
   static renderNavigationBar() {

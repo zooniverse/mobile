@@ -20,9 +20,7 @@ You'll need at least one emulator.  I've found the easiest way to add Virtual De
 
 Also you'll need a Gradle properties file outside the project for keeping secrets that aren't checked into source control.  This should be in ~/.gradle/gradle.properties and contain the following:
 `MYAPP_RELEASE_STORE_FILE=
-MYAPP_RELEASE_KEY_ALIAS=
-PUSHER_API_KEY=
-PUSHER_API_KEY_DEV=`
+MYAPP_RELEASE_KEY_ALIAS=`
 
 ## Run
 npm install
