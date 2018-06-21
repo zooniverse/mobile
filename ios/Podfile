@@ -1,7 +1,8 @@
 project './ZooniverseMobile.xcodeproj'
 
 target 'ZooniverseMobile' do
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
   pod 'SocketRocket'
-  pod 'libPusher', git: 'https://github.com/pusher/libPusher.git', branch: 'push-notifications'
   pod 'HockeySDK'
 end

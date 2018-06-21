@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Alert,
   Linking,
-  Platform,
   ScrollView,
   Text,
   TouchableOpacity,

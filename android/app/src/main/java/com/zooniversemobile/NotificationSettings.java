@@ -4,7 +4,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.pusher.android.notifications.PushNotificationRegistration;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 /**
  * Created by rschaaf on 11/4/16.
@@ -12,7 +12,6 @@ import com.pusher.android.notifications.PushNotificationRegistration;
 
 
 public class NotificationSettings extends ReactContextBaseJavaModule {
-    private PushNotificationRegistration nativePusher = null;
 
     public NotificationSettings(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -25,11 +24,12 @@ public class NotificationSettings extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setInterestSubscription(String interest, Boolean subscribed, Promise promise) {
-        nativePusher = PusherProperty.getInstance().nativePusher;
+        FirebaseMessaging messagingInstance = FirebaseMessaging.getInstance();
+
         if (subscribed) {
-            nativePusher.subscribe(interest);
+            messagingInstance.subscribeToTopic(interest);
         } else {
-            nativePusher.unsubscribe(interest);
+            messagingInstance.unsubscribeFromTopic(interest);
         }
 
         promise.resolve("Subscription update successful");

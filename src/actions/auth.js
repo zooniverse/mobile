@@ -7,7 +7,7 @@ import {
   setState,
   setIsFetching
 } from '../actions/index'
-import { loadUserAvatar, loadUserProjects, syncUserStore, setIsGuestUser, setUser } from '../actions/user'
+import { loadUserAvatar, loadUserProjects, setIsGuestUser, setUser } from '../actions/user'
 import * as ActionConstants from '../constants/actions'
 
 export function getAuthUser() {
@@ -33,7 +33,6 @@ export function signIn(login, password) {
           dispatch(loadSettings()),
         ])
       }).then(() => {
-        dispatch(syncUserStore())
         dispatch(setIsFetching(false))
         Actions.ZooniverseApp({type: ActionConst.RESET})  // Go to home screen
       }).catch((error) => {
@@ -63,7 +62,6 @@ export function register() {
         user.avatar = {}
         user.isGuestUser = false
         dispatch(setUser(user))
-        dispatch(syncUserStore())
         dispatch(setIsFetching(false))
         Actions.ZooniverseApp({type: ActionConst.RESET})
       }).catch((error) => {
@@ -91,7 +89,6 @@ export function continueAsGuest() {
     dispatch(loadNotificationSettings()).then(() => {
       dispatch(loadSettings()),
       dispatch(setIsGuestUser(true))
-      dispatch(syncUserStore())
     })
     Actions.ZooniverseApp({type: ActionConst.RESET})
   }

@@ -13,7 +13,7 @@
 #import <React/RCTRootView.h>
 
 #import "RCTPushNotificationManager.h"
-#import <Pusher/Pusher.h>
+#import "ZooniverseMobile-Swift.h"
 
 @import HockeySDK;
 
@@ -24,13 +24,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-  [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-
-  NSString *pusherKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"PUSHER_API_KEY"];
-  self.pusher = [PTPusher pusherWithKey:pusherKey delegate:self encrypted:YES];
-  
-
   [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"a64221f0d73b46829478d405c90e6638"];
   // Do some additional configuration if needed here
   [[BITHockeyManager sharedHockeyManager] startManager];
@@ -59,6 +52,8 @@
   rootView.loadingViewFadeDelay = 0.30;
   rootView.loadingViewFadeDuration = 0.30;
 
+  [FirebaseManager.shared configureFirebase];
+  [application registerForRemoteNotifications];
   return YES;
 }
 
@@ -68,8 +63,6 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-  [[[self pusher] nativePusher] registerWithDeviceToken:deviceToken];
-  [[[self pusher] nativePusher] subscribe:@"general"];
   [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 

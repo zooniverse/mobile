@@ -1,22 +1,12 @@
 import * as ActionConstants from '../constants/actions';
-import store from 'react-native-simple-store';
 import * as R from 'ramda';
 
-const InitialUserState = { };
+const InitialUserState = { 
+    isGuestUser: true
+};
 
 export default function user(state=InitialUserState, action) {
     switch (action.type) {
-        case ActionConstants.SYNC_USER_STORE: {
-            store.save('@zooniverse:user', { state })
-            return state;
-        }
-        case ActionConstants.SET_USER_FROM_STORE: {
-            if ( action.storeData !== undefined ) {
-                return action.storeData;
-            } else {
-                return state;
-            }
-        }
         case ActionConstants.SET_USER_AVATAR: {
             return R.set(R.lensPath(['avatar']), action.avatar, state);
         }
@@ -33,8 +23,7 @@ export default function user(state=InitialUserState, action) {
             return action.user;
         }
         case ActionConstants.SIGN_OUT: {
-            store.delete('@zooniverse:user');
-            return {};
+            return InitialUserState
         }
         case ActionConstants.SET_PUSH_PROMPTED: {
             return R.set(R.lensPath(['pushPrompted']), action.value, state);

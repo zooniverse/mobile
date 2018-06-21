@@ -18,7 +18,7 @@ import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
 import Discipline from './Discipline'
 import NavBar from '../components/NavBar'
-import { syncUserStore, setPushPrompted } from '../actions/user'
+import { setPushPrompted } from '../actions/user'
 import FontedText from '../components/common/FontedText'
 import * as projectActions from '../actions/projects'
 import { makeCancelable } from '../utils/promiseUtils'
@@ -45,7 +45,6 @@ const mapDispatchToProps = (dispatch) => ({
   projectActions: bindActionCreators(projectActions, dispatch),
   setPushPrompted(value) {
     dispatch(setPushPrompted(value))
-    dispatch(syncUserStore())
   },
 })
 

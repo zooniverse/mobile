@@ -129,14 +129,12 @@ android {
     buildTypes {
         debug {
             manifestPlaceholders = [shouldRemoveSystemAlertWindowPermission: "false"]
-            it.buildConfigField 'String', 'PUSHER_API_KEY', PUSHER_API_KEY_DEV
         }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
             manifestPlaceholders = [shouldRemoveSystemAlertWindowPermission: "true"]
-            it.buildConfigField 'String', 'PUSHER_API_KEY', PUSHER_API_KEY
         }
 
     }
@@ -169,7 +167,6 @@ dependencies {
 
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile 'com.google.firebase:firebase-core:10.0.1'
-    compile 'com.pusher:pusher-websocket-android:0.5.0'
 }
 
 subprojects {

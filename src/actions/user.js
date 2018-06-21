@@ -1,6 +1,5 @@
 //Use for user-specific data
 import apiClient from 'panoptes-client/lib/api-client'
-import store from 'react-native-simple-store'
 import { Actions } from 'react-native-router-flux'
 import { add, addIndex, filter, fromPairs, head, isNil, keys, map, reduce } from 'ramda'
 
@@ -11,55 +10,26 @@ import {
 import { getAuthUser } from '../actions/auth'
 import * as ActionConstants from '../constants/actions'
 
-export function syncUserStore() {
-  return {
-    type: ActionConstants.SYNC_USER_STORE
-  };
-}
-
-export function setUserFromStore() {
-  return (dispatch) => {
-    return new Promise((resolve, reject) => {
-      store.get('@zooniverse:user').then(json => {
-        if (json === null) {
-          return reject();
-        }
-        dispatch({
-          type: ActionConstants.SET_USER_FROM_STORE,
-          storeData: json.state
-        });
-        resolve()
-      });
-    });
-  }
-}
-
 export function loadUserData() {
   return (dispatch, getState) => {
-    dispatch(setUserFromStore()).then(() => {
-      if (getState().user.isGuestUser) {
+    if (getState().user.isGuestUser) {
+      return Promise.all([
+        dispatch(loadNotificationSettings()),
+        dispatch(loadSettings()),
+      ])
+    } else {
+      getAuthUser().then(() => {
         return Promise.all([
+          dispatch(loadUserAvatar()),
+          dispatch(loadUserProjects()),
           dispatch(loadNotificationSettings()),
           dispatch(loadSettings()),
         ])
-      } else {
-        getAuthUser().then(() => {
-          return Promise.all([
-            dispatch(loadUserAvatar()),
-            dispatch(loadUserProjects()),
-            dispatch(loadNotificationSettings()),
-            dispatch(loadSettings()),
-          ])
-        }).catch(() => {
-          dispatch(setState('errorMessage', ''))
-          Actions.SignIn()
-        })
-      }
-    }).then(() => {
-      dispatch(syncUserStore())
-    }).catch(() => {
-      Actions.SignIn()
-    })
+      }).catch(() => {
+        dispatch(setState('errorMessage', ''))
+        Actions.SignIn()
+      })
+    }
   }
 }
 
