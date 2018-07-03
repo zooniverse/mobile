@@ -66,7 +66,7 @@ export function fetchProjects() {
                     .then(() => {
                         dispatch(addProjects(allProjects))
                         dispatch(addProjectsSuccess);
-                        resolve()
+                        resolve(allProjects)
                     } )
                     .catch((error) => { 
                         dispatch(addProjectsFailure);
