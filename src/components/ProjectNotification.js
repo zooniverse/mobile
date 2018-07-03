@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import theme from '../theme'
 import StyledText from './StyledText'
 import { connect } from 'react-redux'
-import { setState, syncNotificationStore, updateInterestSubscription } from '../actions/index'
 
 const mapStateToProps = (state, ownProps) => ({
   notification: state.main.notifications[ownProps.id]

@@ -4,26 +4,20 @@ import { Actions } from 'react-native-router-flux'
 import { add, addIndex, filter, fromPairs, head, isNil, keys, map, reduce } from 'ramda'
 
 import {
-  loadNotificationSettings,
-  loadSettings,
-  setState } from '../actions/index'
+  setState 
+} from '../actions/index'
 import { getAuthUser } from '../actions/auth'
 import * as ActionConstants from '../constants/actions'
 
 export function loadUserData() {
   return (dispatch, getState) => {
     if (getState().user.isGuestUser) {
-      return Promise.all([
-        dispatch(loadNotificationSettings()),
-        dispatch(loadSettings()),
-      ])
+      return
     } else {
       getAuthUser().then(() => {
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),
-          dispatch(loadNotificationSettings()),
-          dispatch(loadSettings()),
         ])
       }).catch(() => {
         dispatch(setState('errorMessage', ''))

@@ -68,28 +68,6 @@ export function setFromStore(name) {
   }
 }
 
-export function syncNotificationStore() {
-  return (dispatch, getState) => {
-    const notifications = getState().main.notifications
-    return store.save('@zooniverse:notifications', {
-      notifications
-    })
-  }
-}
-
-export function setNotificationFromStore() {
-  return dispatch => {
-    return new Promise ((resolve) => {
-      store.get('@zooniverse:notifications').then(json => {
-        dispatch(setState('notifications', json.notifications))
-        return resolve()
-      }).catch(() => {
-        return resolve()
-      })
-    })
-  }
-}
-
 export function checkIsConnected() {
   return (dispatch, getState) => {
     return new Promise((resolve, reject) => {
@@ -137,39 +115,6 @@ export function fetchNotificationProject(projectID) {
   }
 }
 
-export function loadNotificationSettings() {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      const mobileIDs = map((p) => p.id, getState().projects.projectList)
-      dispatch(setNotificationFromStore()).then(() => {
-        forEach((projectID) => {
-          if (getState().main.notifications[projectID] === undefined) {
-            dispatch(setState(`notifications.${projectID}`, true))
-          }
-        })(mobileIDs)
-
-        dispatch(checkPushPermissions()).then(()=> {
-          if (getState().main.pushEnabled){
-            dispatch(syncInterestSubscriptions())
-          }
-        })
-        dispatch(syncNotificationStore())
-      })
-      return resolve()
-    })
-  }
-}
-
-export function loadSettings() {
-  return (dispatch) => {
-    return new Promise((resolve) => {
-      dispatch(setFromStore('settings')).then(() => {
-        return resolve()
-      })
-    })
-  }
-}
-
 
 export function loadRecents() {
   return (dispatch) => {
@@ -179,27 +124,6 @@ export function loadRecents() {
       })
     })
   }
-}
-
-export function updateSetting(key, value) {
-  return (dispatch) => {
-    return new Promise((resolve) => {
-      dispatch(setState(`settings.${key}`, value))
-      dispatch(syncStore('settings'))
-      return resolve()
-
-    })
-  }
-}
-
-export function syncInterestSubscriptions() {
-  return (dispatch) => {
-    // Implement Firebase Topic Sync
-  }
-}
-
-export function updateInterestSubscription(interest, subscribed) {
-  // Implement Firebase Topic Sub
 }
 
 export function checkPushPermissions() {
