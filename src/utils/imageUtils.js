@@ -1,4 +1,4 @@
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 import R from 'ramda'
 
 export const removeLeftOverImages = imageDictionary => {

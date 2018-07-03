@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 

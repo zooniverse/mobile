@@ -31,7 +31,6 @@
     "react-native-drawer": "^2.3.0",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-fcm": "11.3.1",
-    "react-native-fetch-blob": "github:joltup/react-native-fetch-blob",
     "react-native-google-analytics-bridge": "^5.0.0",
     "react-native-image-pan-zoom": "^2.0.16",
     "react-native-loading-spinner-overlay": "^0.5.2",
@@ -47,6 +46,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.1.0",
+    "rn-fetch-blob": "^0.10.10",
     "url": "^0.11.0"
   },
   "devDependencies": {
