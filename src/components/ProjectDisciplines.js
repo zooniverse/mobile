@@ -21,7 +21,9 @@ import NavBar from '../components/NavBar'
 import { setPushPrompted } from '../actions/user'
 import FontedText from '../components/common/FontedText'
 import * as projectActions from '../actions/projects'
+import * as settingsActions from '../actions/settings'
 import { makeCancelable } from '../utils/promiseUtils'
+import { extractSwipeEnabledProjects } from '../utils/projectUtils'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
@@ -43,6 +45,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   projectActions: bindActionCreators(projectActions, dispatch),
+  settingsActions: bindActionCreators(settingsActions, dispatch),
   setPushPrompted(value) {
     dispatch(setPushPrompted(value))
   },
@@ -51,7 +54,6 @@ const mapDispatchToProps = (dispatch) => ({
 export class ProjectDisciplines extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       refreshing: true
   }
@@ -124,9 +126,13 @@ export class ProjectDisciplines extends React.Component {
     
     this.fetchProjectPromise
     .promise
-    .then(() => {
+    .then((projectList) => {
       this.fetchProjectPromise = null
       this.setState({refreshing: false});
+
+      // Handle push subscriptions 
+      const notificationProjects = extractSwipeEnabledProjects(projectList.filter(project => !project.isPreview))
+      this.props.settingsActions.addUnusedProjectsToNotifications(notificationProjects)
     })
     .catch((error) => {
       if (!error.isCanceled) {
@@ -236,6 +242,7 @@ ProjectDisciplines.propTypes = {
   isSuccess: PropTypes.bool,
   isLoading: PropTypes.bool,
   projectActions: PropTypes.any,
+  settingsActions: PropTypes.any,
   hasRecentProjects: PropTypes.bool,
   hasPreviewProjects: PropTypes.bool
 }
