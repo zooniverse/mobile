@@ -8,12 +8,11 @@ import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
-import LaunchScreen from '../components/Launch'
 import NavBar from '../components/NavBar'
 import { connect } from 'react-redux'
-import { setState, syncInterestSubscriptions } from '../actions/index'
+import { setState } from '../actions/index'
 import { setDimensions } from '../actions/device'
-import { isEmpty, pathOr } from 'ramda'
+import * as settingsActions from '../actions/settings'
 import FCM, { FCMEvent } from 'react-native-fcm'
 import { removeLeftOverImages } from '../utils/imageUtils'
 import * as imageActions from '../actions/images'
@@ -35,13 +34,11 @@ const mapDispatchToProps = (dispatch) => ({
   setNotificationPayload(value) {
     dispatch(setState('notificationPayload', value))
   },
-  syncInterestSubscriptions() {
-    dispatch(syncInterestSubscriptions())
-  },
   setDimensions() {
     dispatch(setDimensions())
   },
-  imageActions: bindActionCreators(imageActions, dispatch)
+  imageActions: bindActionCreators(imageActions, dispatch),
+  settingsActions: bindActionCreators(settingsActions, dispatch)
 })
 
 class ZooniverseApp extends Component {
@@ -58,6 +55,7 @@ class ZooniverseApp extends Component {
       PushNotificationIOS.addEventListener('register', this.onPushRegistration)
     } else {
       FCM.on(FCMEvent.Notification, this.onRemoteNotification)
+      this.onPushRegistration()
     }
   }
 
@@ -71,7 +69,7 @@ class ZooniverseApp extends Component {
   }
 
   onPushRegistration = () => {
-    this.props.syncInterestSubscriptions()
+    this.props.settingsActions.initializeSubscriptionsWithFirebase()
   }
 
   static renderNavigationBar() {
@@ -103,10 +101,10 @@ ZooniverseApp.propTypes = {
   isModalVisible: PropTypes.bool,
   setModalVisibility: PropTypes.func,
   setNotificationPayload: PropTypes.func,
-  syncInterestSubscriptions: PropTypes.func,
   setDimensions: PropTypes.func,
   images: PropTypes.object,
-  imageActions: PropTypes.any
+  imageActions: PropTypes.any,
+  settingsActions: PropTypes.any
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZooniverseApp)
