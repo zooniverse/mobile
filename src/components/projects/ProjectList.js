@@ -15,6 +15,7 @@ import NavBar from '../NavBar'
 import FontedText from '../common/FontedText'
 import * as navBarActions from '../../actions/navBar'
 import { GLOBALS } from '../../constants/globals'
+import { extractNonSwipeEnabledProjects, extractSwipeEnabledProjects } from '../../utils/projectUtils'
 import Theme from '../../theme'
 
 GoogleAnalytics.trackEvent('view', 'Project')
@@ -36,8 +37,10 @@ const mapStateToProps = (state, ownProps) => {
     }
 
     // Seperate out the native workflows and non-native workflows    
-    const swipeEnabledProjects = projectList.filter((project) => R.any((workflow) => workflow.swipe_verified)(project.workflows))
-    const nonSwipeEnabledProjects = projectList.filter((project) => R.all((workflow) => !workflow.swipe_verified)(project.workflows))
+    const swipeEnabledProjects = extractSwipeEnabledProjects(projectList)
+    const nonSwipeEnabledProjects = state.settings.showAllWorkflows ?
+        extractNonSwipeEnabledProjects(projectList)
+        : []
 
     return {
         swipeEnabledProjects,
