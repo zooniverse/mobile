@@ -77,9 +77,9 @@ export class Settings extends React.Component {
     
 
     return (
-      <ScrollView contentContainerStyle={{padding: 25}}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <SettingHeader text="General Settings" />
-        <View style={{paddingTop: 20, paddingBottom: 35}}>
+        <View style={styles.workflowContainer}>
           <SettingsToggle
             title="Show all workflows"
             description="Includes non-native workflows"
@@ -87,7 +87,7 @@ export class Settings extends React.Component {
             value={this.props.showAllWorkflows}
           />
         </View>
-        <Separator style={{paddingBottom: 30}} color={'rgba(151, 151, 151, 1)'}/>
+        <Separator style={styles.titlePadding} color={'rgba(151, 151, 151, 1)'}/>
         <View>
           <SettingHeader text="Notification Settings" />
         </View>
@@ -128,7 +128,7 @@ export class Settings extends React.Component {
         <FlatList
           data={this.props.projectSpecificNotifications}
           renderItem={this.renderSettingsToggle}
-          ItemSeparatorComponent={() => <View style={{paddingTop: 10}}/>}
+          ItemSeparatorComponent={() => <View style={styles.separatorStyle}/>}
           keyExtractor={ item => item.id }
         />
       </ScrollView>
@@ -147,6 +147,19 @@ const styles = EStyleSheet.create({
     color: '$headerGrey',
     fontSize: 18,
     paddingBottom: 15
+  }, 
+  separatorStyle: {
+    paddingTop: 10
+  },
+  titlePadding: {
+    paddingBottom: 30
+  },
+  workflowContainer: {
+    paddingTop: 20,
+    paddingBottom: 35
+  },
+  scrollViewContainer: {
+    padding: 25
   }
 });
 
