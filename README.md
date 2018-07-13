@@ -52,3 +52,21 @@ Snapshots should be committed to the repo and any changes to snapshots should be
 If you want to setup redux debugging and monitoring, the app is equipped with [`remote-redux-devtools`](https://github.com/zalmoxisus/remote-redux-devtools). If you want to monitor redux through the app, check out their list of [monitoring options](https://github.com/zalmoxisus/remote-redux-devtools#monitoring). This is not required to run the app, it is just a development tool.
 
 This tool tends to be a little finicky. If you are having trouble setting it up, try restarting the simulator.
+
+### Push Notifications 
+
+Both the Android and iOS apps can receive push notifications. All of our push notification sending is handled through [Firebase](https://firebase.google.com/). If you want to send push notifications, it's fairly easy, just follow these instructions:
+	
+1. Log in to the [Firebase console](https://console.firebase.google.com) with the account `android@zooniverse.org` (password is in passbolt) 
+2. Select either the production (Zooniverse-production) or the development (zooniverse-mobile-dev) accounts
+3. Under the "Grow" menu on the left side, select "Cloud Messaging"
+4. Select the "New Message" button
+5. From here you can compose a message:
+	* The "Message Text" is the body of the notification
+	* If you want to give it a title or any custom data, check under the "Advanced Options" section
+6. When sending notifications, there are a few different "topics" you can send them to. These topics serve as subjects users can subscribe/unsubscribe to. The topics are as follows:
+	* `new_projects`- Notifications for when a new project is released
+	* `new_beta_projects`- Notifications for when a new beta project is released
+   * `urgent_notifications`- Notifications for when users help is needed urgently
+   * For project-specific notifications just use the project id
+7. Once everything is filled out, select "Send Message", the notification should be sent to both iOS and Android

@@ -154,7 +154,7 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-fetch-blob')
+    compile project(':rn-fetch-blob')
     compile project(':react-native-splash-screen')
     compile project(':react-native-fcm')
     compile 'com.android.support:support-v4:23.0.+'

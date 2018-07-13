@@ -56,6 +56,15 @@ Object {
     "previewProjectList": Array [],
     "projectList": Array [],
   },
+  "settings": Object {
+    "enableNotifications": true,
+    "newBetaNotifications": true,
+    "newProjectNotifications": true,
+    "notificationsInitialized": false,
+    "projectSpecificNotifications": Array [],
+    "showAllWorkflows": true,
+    "urgentHelpNotification": true,
+  },
   "user": Object {
     "isGuestUser": true,
   },
@@ -116,6 +125,15 @@ Object {
     "ownerIds": Array [],
     "previewProjectList": Array [],
     "projectList": Array [],
+  },
+  "settings": Object {
+    "enableNotifications": true,
+    "newBetaNotifications": true,
+    "newProjectNotifications": true,
+    "notificationsInitialized": false,
+    "projectSpecificNotifications": Array [],
+    "showAllWorkflows": true,
+    "urgentHelpNotification": true,
   },
   "user": Object {
     "isGuestUser": true,
@@ -182,6 +200,15 @@ Object {
     "previewProjectList": Array [],
     "projectList": Array [],
   },
+  "settings": Object {
+    "enableNotifications": true,
+    "newBetaNotifications": true,
+    "newProjectNotifications": true,
+    "notificationsInitialized": false,
+    "projectSpecificNotifications": Array [],
+    "showAllWorkflows": true,
+    "urgentHelpNotification": true,
+  },
   "user": Object {
     "isGuestUser": true,
   },
@@ -243,6 +270,15 @@ Object {
     "ownerIds": Array [],
     "previewProjectList": Array [],
     "projectList": Array [],
+  },
+  "settings": Object {
+    "enableNotifications": true,
+    "newBetaNotifications": true,
+    "newProjectNotifications": true,
+    "notificationsInitialized": false,
+    "projectSpecificNotifications": Array [],
+    "showAllWorkflows": true,
+    "urgentHelpNotification": true,
   },
   "user": Object {
     "isGuestUser": true,

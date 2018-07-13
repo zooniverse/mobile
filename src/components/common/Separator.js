@@ -10,7 +10,9 @@ const Separator = ({style, color}) => {
         borderBottomColor: color
     }
     return (
-        <View style={[styles.defaultStyle, style, propStyle]} />
+        <View style={style}>
+            <View style={[styles.defaultStyle, propStyle]} />
+        </View>
     );
 }
 

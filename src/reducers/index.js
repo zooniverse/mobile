@@ -5,6 +5,7 @@ import projects from './projectsReducer';
 import navBar from './navBarReducer';
 import classifier from './classifierReducer'
 import images from './imagesReducer'
+import settings from './settingsReducer'
 
 export const InitialState = {
   registration: { global_email_communication: true },
@@ -66,5 +67,6 @@ export default combineReducers({
   projects,
   navBar,
   classifier,
-  images
+  images,
+  settings
 })

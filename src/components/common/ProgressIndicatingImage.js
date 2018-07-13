@@ -6,7 +6,7 @@ import {
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'

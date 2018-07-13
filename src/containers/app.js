@@ -19,7 +19,7 @@ import About from '../components/About'
 import PublicationList from '../components/PublicationList'
 import SignIn from '../components/SignIn'
 import Register from '../components/Register'
-import Settings from '../components/Settings'
+import Settings from '../components/settings/Settings'
 import SideDrawerContent from '../components/SideDrawerContent'
 import ZooWebView from '../components/ZooWebView'
 import SwipeClassifier from '../components/classifier/SwipeClassifier'
@@ -30,7 +30,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['images', 'user'] // Images and User data will be persisted
+  whitelist: ['images', 'user', 'settings'] // All these stores will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer)
