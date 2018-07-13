@@ -17,6 +17,7 @@ import {
 } from '../../actions/index'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import * as settingsActions from '../../actions/settings'
+import theme from '../../theme'
 
 GoogleAnalytics.trackEvent('view', 'Notification Settings')
 
@@ -74,8 +75,6 @@ export class Settings extends React.Component {
   }
 
   render() {
-    
-
     return (
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <SettingHeader text="General Settings" />
@@ -87,7 +86,7 @@ export class Settings extends React.Component {
             value={this.props.showAllWorkflows}
           />
         </View>
-        <Separator style={styles.titlePadding} color={'rgba(151, 151, 151, 1)'}/>
+        <Separator style={styles.titlePadding} color={theme.$seperator}/>
         <View>
           <SettingHeader text="Notification Settings" />
         </View>

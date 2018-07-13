@@ -30,7 +30,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['images', 'user', 'settings'] // Images and User data will be persisted
+  whitelist: ['images', 'user', 'settings'] // All these stores will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer)

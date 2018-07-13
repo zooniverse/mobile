@@ -34,5 +34,6 @@ export default {
   $borderGrey: 'rgba(203, 204, 203, 1)',
   $chevronGrey: 'rgba(166,167,169,1)',
   $testRed: 'rgba(228,89,80,1)',
-  $zooniverseTeal: 'rgba(0, 151, 157, 1)'
+  $zooniverseTeal: 'rgba(0, 151, 157, 1)',
+  $seperator: 'rgba(151, 151, 151, 1)'
 }
