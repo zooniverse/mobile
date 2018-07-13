@@ -23,6 +23,7 @@ export function signIn(login, password) {
     dispatch(checkIsConnected()).then(() => {
       auth.signIn({login: login, password: password}).then((user) => {
         user.isGuestUser = false
+        user.projects = {}
         dispatch(setUser(user));
         return Promise.all([
           dispatch(loadUserAvatar()),
