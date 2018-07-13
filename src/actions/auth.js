@@ -75,6 +75,7 @@ export function register() {
 
 export function signOut() {
   return dispatch => {
+    auth.signOut()
     dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
     Actions.SignIn()
