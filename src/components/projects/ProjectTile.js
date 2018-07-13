@@ -270,7 +270,8 @@ const styles = EStyleSheet.create({
         shadowRadius: 2,
     },
     cell: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingHorizontal: 15
     },
     cellTitle: {
         fontWeight: 'bold', 
@@ -287,7 +288,7 @@ const styles = EStyleSheet.create({
         color: '$chevronGrey'
     },
     cellsContainer: {
-        paddingHorizontal: 15
+        paddingHorizontal: 0
     },
     bannerView: {
         marginTop: -1,
