@@ -2,7 +2,8 @@ import * as ActionConstants from '../constants/actions';
 import * as R from 'ramda';
 
 const InitialUserState = { 
-    isGuestUser: true
+    isGuestUser: true,
+    projects: {}
 };
 
 export default function user(state=InitialUserState, action) {
