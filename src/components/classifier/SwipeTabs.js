@@ -74,7 +74,7 @@ const styles = EStyleSheet.create({
   container: {
     marginHorizontal: 25,
     marginVertical: 15,
-    backgroundColor: '$lightestGrey',
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
