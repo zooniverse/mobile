@@ -67,6 +67,7 @@ Object {
   },
   "user": Object {
     "isGuestUser": true,
+    "projects": Object {},
   },
 }
 `;
@@ -137,6 +138,7 @@ Object {
   },
   "user": Object {
     "isGuestUser": true,
+    "projects": Object {},
   },
 }
 `;
@@ -211,6 +213,7 @@ Object {
   },
   "user": Object {
     "isGuestUser": true,
+    "projects": Object {},
   },
 }
 `;
@@ -282,6 +285,7 @@ Object {
   },
   "user": Object {
     "isGuestUser": true,
+    "projects": Object {},
   },
 }
 `;

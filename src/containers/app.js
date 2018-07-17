@@ -11,7 +11,6 @@ import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import SplashScreen from 'react-native-splash-screen';
-
 import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/projects/ProjectList'
 import ProjectDisciplines from '../components/ProjectDisciplines'
@@ -43,8 +42,6 @@ export default class App extends Component {
     if (Platform.OS === 'android') {
       SplashScreen.hide()
     }
-    store.dispatch(loadUserData())
-    store.dispatch(setSession())
 
     const handleAppStateChange = currentAppState => {
       if (currentAppState === 'active') {
@@ -60,10 +57,18 @@ export default class App extends Component {
     })
   }
 
+  /**
+   * This function is called after the persistent store has been loaded
+   */
+  onBeforeLift() {
+    store.dispatch(loadUserData())
+    store.dispatch(setSession())
+  }
+
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={null} persistor={persistor} onBeforeLift={this.onBeforeLift}>
           <Router sceneStyle={styles.sharedSceneStyles}>
             <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
               <Scene key="main" tabs={false}>

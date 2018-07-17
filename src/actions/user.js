@@ -1,5 +1,6 @@
 //Use for user-specific data
 import apiClient from 'panoptes-client/lib/api-client'
+import auth from './auth'
 import { Actions } from 'react-native-router-flux'
 import { add, addIndex, filter, fromPairs, head, isNil, keys, map, reduce } from 'ramda'
 
@@ -14,14 +15,17 @@ export function loadUserData() {
     if (getState().user.isGuestUser) {
       return
     } else {
-      getAuthUser().then(() => {
+      getAuthUser().then((userResource) => {
+        // We are no longer authenticated. Sign the user out
+        if (userResource === null) {
+          auth.signOut()
+          return
+        }
+        
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),
         ])
-      }).catch(() => {
-        dispatch(setState('errorMessage', ''))
-        Actions.SignIn()
       })
     }
   }
