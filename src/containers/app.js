@@ -11,8 +11,6 @@ import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import SplashScreen from 'react-native-splash-screen';
-import auth from 'panoptes-client'
-
 import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/projects/ProjectList'
 import ProjectDisciplines from '../components/ProjectDisciplines'
