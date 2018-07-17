@@ -11,8 +11,6 @@ import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import SplashScreen from 'react-native-splash-screen';
-import auth from 'panoptes-client'
-
 import ZooniverseApp from './zooniverseApp'
 import ProjectList from '../components/projects/ProjectList'
 import ProjectDisciplines from '../components/ProjectDisciplines'
@@ -24,6 +22,7 @@ import Settings from '../components/settings/Settings'
 import SideDrawerContent from '../components/SideDrawerContent'
 import ZooWebView from '../components/ZooWebView'
 import SwipeClassifier from '../components/classifier/SwipeClassifier'
+import WebViewScreen from '../components/WebViewScreen'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -73,18 +72,19 @@ export default class App extends Component {
         <PersistGate loading={null} persistor={persistor} onBeforeLift={this.onBeforeLift}>
           <Router sceneStyle={styles.sharedSceneStyles}>
             <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
-              <Scene key="main" tabs={false}>
-                <Scene key="SignIn" component={SignIn} duration={0} type="reset" navBar={SignIn.renderNavigationBar} />
-                <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} initial />
-                <Scene key="ProjectDisciplines" component={ProjectDisciplines} navBar={ProjectDisciplines.renderNavigationBar} />
-                <Scene key="About" component={About} navBar={About.renderNavigationBar}/>
-                <Scene key="Publications" component={PublicationList} navBar={PublicationList.renderNavigationBar} />
-                <Scene key="ProjectList" component={ProjectList} navBar={ProjectList.renderNavigationBar} />
-                <Scene key="Register" component={Register} navBar={Register.renderNavigationBar} />
-                <Scene key="Settings" component={Settings} navBar={Settings.renderNavigationBar} />
-                <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
-                <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
-              </Scene>
+                <Scene key="main" tabs={false}>
+                  <Scene key="SignIn" component={SignIn} duration={0} type="reset" navBar={SignIn.renderNavigationBar} />
+                  <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} initial />
+                  <Scene key="ProjectDisciplines" component={ProjectDisciplines} navBar={ProjectDisciplines.renderNavigationBar} />
+                  <Scene key="About" component={About} navBar={About.renderNavigationBar}/>
+                  <Scene key="Publications" component={PublicationList} navBar={PublicationList.renderNavigationBar} />
+                  <Scene key="ProjectList" component={ProjectList} navBar={ProjectList.renderNavigationBar} />
+                  <Scene key="Register" component={Register} navBar={Register.renderNavigationBar} />
+                  <Scene key="Settings" component={Settings} navBar={Settings.renderNavigationBar} />
+                  <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
+                  <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
+                  <Scene key="WebView" component={WebViewScreen} navBar={SwipeClassifier.renderNavigationBar}/>
+                </Scene>
             </Drawer>
           </Router>
         </PersistGate>
