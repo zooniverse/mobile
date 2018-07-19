@@ -33,7 +33,8 @@ export function fetchProjects() {
     return (dispatch) => { 
         return new Promise((resolve, reject) => {
             dispatch(addProjectsRequest)
-            getAuthUser().then( () => {
+            getAuthUser().then( (userProfile) => {
+                const userIsLoggedIn = userProfile !== null
                 let projectCalls = []
                 let allProjects = []
                 
@@ -44,23 +45,24 @@ export function fetchProjects() {
                 }))
 
                 // Fetch Test Projects
-                projectCalls.push(apiClient.type('projects').get(ownerParams).then( projects => {
-                    const taggedProjects = tagProjects(projects, true)
-                    allProjects = allProjects.concat(taggedProjects)
-                    taggedProjects.forEach((project) => dispatch(addOwnerProjectId(project)))
-                }));
-                projectCalls.push(apiClient.type('projects').get(collaboratorParams).then( projects => {
-                    const taggedProjects = tagProjects(projects, true)
-                    allProjects = allProjects.concat(taggedProjects)
-                    taggedProjects.forEach((project) => dispatch(addCollaboratorProjectId(project)))
-                }));
+                if (userIsLoggedIn) {
+                    projectCalls.push(apiClient.type('projects').get(ownerParams).then( projects => {
+                        const taggedProjects = tagProjects(projects, true)
+                        allProjects = allProjects.concat(taggedProjects)
+                        taggedProjects.forEach((project) => dispatch(addOwnerProjectId(project)))
+                    }));
+                    projectCalls.push(apiClient.type('projects').get(collaboratorParams).then( projects => {
+                        const taggedProjects = tagProjects(projects, true)
+                        allProjects = allProjects.concat(taggedProjects)
+                    }));
+                }
 
                 // First Load the projects
                 Promise.all(projectCalls).then(() => {
                     let projectDetailCalls = []
                     projectDetailCalls.push(getWorkflowsForProjects(allProjects))
-                    const a = getAvatarsForProjects(allProjects)
-                    projectDetailCalls = projectDetailCalls.concat(a)
+                    const avatarCall = getAvatarsForProjects(allProjects)
+                    projectDetailCalls = projectDetailCalls.concat(avatarCall)
                     // Then load the avatars and workflows
                     Promise.all(projectDetailCalls)
                     .then(() => {

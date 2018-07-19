@@ -58,6 +58,7 @@ export function register() {
       auth.register(values).then((user) => {
         user.avatar = {}
         user.isGuestUser = false
+        user.projects = {}
         dispatch(setUser(user))
         dispatch(setIsFetching(false))
         Actions.ZooniverseApp({type: ActionConst.RESET})
