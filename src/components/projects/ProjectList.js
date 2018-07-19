@@ -23,6 +23,7 @@ GoogleAnalytics.trackEvent('view', 'Project')
 const mapStateToProps = (state, ownProps) => {
     const { selectedProjectTag } = ownProps;
     const inPreviewMode = selectedProjectTag === 'preview'
+    const inBetaMode = selectedProjectTag === 'beta'
     let projectList
     
     // Grab all of the projects from the selected Project Tag
@@ -31,7 +32,9 @@ const mapStateToProps = (state, ownProps) => {
       projectList = state.projects.projectList.filter((project) => R.keys(activeProjects).includes(project.id));
     } else if (inPreviewMode) {
         projectList = state.projects.previewProjectList
-    }    
+    } else if (inBetaMode) {
+        projectList = state.projects.betaProjectList
+    }
     else {
         projectList = state.projects.projectList.filter((project) => R.contains(selectedProjectTag, project.tags))
     }
@@ -49,7 +52,8 @@ const mapStateToProps = (state, ownProps) => {
         isLoading: state.projects.isLoading,
         collaboratorIds: state.projects.collaboratorIds,
         ownerIds: state.projects.ownerIds,
-        inPreviewMode
+        inPreviewMode,
+        inBetaMode
     };
 }
 
@@ -118,7 +122,7 @@ class ProjectList extends Component {
                 stickySectionHeadersEnabled={false}
                 ItemSeparatorComponent={() => <View style={styles.separatorView} />}
                 SectionSeparatorComponent={(data) => <View style={this._seperatorHeightStyle(data)} />}
-                renderItem={({item}) => <ProjectTile project={item} inPreviewMode={this.props.inPreviewMode}/>}
+                renderItem={({item}) => <ProjectTile project={item} inPreviewMode={this.props.inPreviewMode} inBetaMode={this.props.inBetaMode}/>}
                 renderSectionHeader={({section}) => <FontedText style={styles.sectionHeader}> { section.title } </FontedText>}
                 sections={sections}
                 ListEmptyComponent={() => <FontedText style={styles.emptyComponent}> {this._emptyText()} </FontedText>}
@@ -161,6 +165,7 @@ ProjectList.propTypes = {
     selectedProjectTag: PropTypes.string,
     navBarActions: PropTypes.any,
     inPreviewMode: PropTypes.bool,
+    inBetaMode: PropTypes.bool,
     collaboratorIds: PropTypes.array,
     ownerIds: PropTypes.array
 }

@@ -120,7 +120,8 @@ class ProjectTile extends Component {
             project: this.props.project,
             workflow,
             display_name: this.props.project.display_name,
-            inPreviewMode: this.props.inPreviewMode
+            inPreviewMode: this.props.inPreviewMode,
+            inBetaMode: this.props.inBetaMode
         })
     }
 
@@ -304,6 +305,7 @@ ProjectTile.propTypes = {
     tileWidth: PropTypes.number,
     outOfData: PropTypes.bool,
     inPreviewMode: PropTypes.bool,
+    inBetaMode: PropTypes.bool,
     classifierActions: PropTypes.any
 }
 
