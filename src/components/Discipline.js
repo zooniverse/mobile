@@ -35,7 +35,24 @@ class Discipline extends Component {
               ? <Icon name={this.props.faIcon} style={[styles.icon, styles.faIcon, styles.zooIconContainer, customIconSize]} />
               : <ZooIcon iconName={this.props.icon} /> }
           </View>
-          <FontedText style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>{this.props.title}</FontedText>
+          <View style={{flexDirection: 'column', flex: 1}}>
+            <FontedText 
+              style={styles.title}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+            >{
+              this.props.title}
+            </FontedText>
+            { this.props.description ? 
+              <FontedText 
+                style={styles.description}
+                numberOfLines={1}
+                ellipsizeMode={'tail'}
+              > 
+                { this.props.description }
+              </FontedText> 
+              : null }
+          </View>
           <Icon name="chevron-right" style={styles.chevronIcon} />
         </View>
       </TouchableOpacity>
@@ -71,7 +88,10 @@ const styles = EStyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     lineHeight: 31,
-    width: '100% - $titleSurroundWidth'
+  },
+  description: {
+    color: '$textColor',
+    fontSize: 16
   },
   icon: {
     fontSize: 30,
@@ -95,6 +115,7 @@ Discipline.propTypes = {
   title: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  description: PropTypes.string
 }
 
 export default Discipline
