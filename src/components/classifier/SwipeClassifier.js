@@ -1,6 +1,8 @@
 import React from 'react'
 import {
+  Animated,
   Dimensions,
+  Platform,
   TouchableOpacity,
   View
 } from 'react-native'
@@ -20,11 +22,13 @@ import Swiper from 'react-native-deck-swiper'
 import R from 'ramda'
 import * as classifierActions from '../../actions/classifier'
 import * as navBarActions from '../../actions/navBar'
-import Theme from '../../theme'
 import SwipeCard from './SwipeCard'
 import TaskHelpModal from './TaskHelpModal'
 import FontedText from '../common/FontedText'
+import BetaFeedbackView from './BetaFeedbackView'
 import { getTaskFromWorkflow, getAnswersFromWorkflow } from '../../utils/workflow-utils'
+import { Actions } from 'react-native-router-flux';
+import { filledInFormUrl } from '../../utils/googleFormUtils'
 
 const subjectClassifierPadding = {
   height: 380,
@@ -68,12 +72,15 @@ export class SwipeClassifier extends React.Component {
       isModalVisible: false,
       swiperIndex: 0,
       fullScreenImageSource: '',
-      panX: null
+      panX: null,
+      feedbackViewHeight: new Animated.Value(0)
     }
     this.props.classifierActions.startNewClassification(this.props.workflow, this.props.project)
     this.onAnswered = this.onAnswered.bind(this)
     this.onSwiped = this.onSwiped.bind(this)
     this.onTapCard = this.onTapCard.bind(this)
+    this.onFeedbackViewLayout = this.onFeedbackViewLayout.bind(this)
+    this.navigateToFeedback = this.navigateToFeedback.bind(this)
   }
 
   setQuestionVisibility(isVisible) {
@@ -245,13 +252,46 @@ export class SwipeClassifier extends React.Component {
         />
       </View>
 
+    const feedbackView = 
+      <Animated.View style={{height: this.state.feedbackViewHeight}}>
+        <BetaFeedbackView
+          onLayout={this.onFeedbackViewLayout}
+          onPress={this.navigateToFeedback}
+        />
+      </Animated.View>
+
     return (
-      this.props.needsTutorial ? tutorial : classificationPanel
+      <View style={styles.container}>
+        { this.props.needsTutorial ? tutorial : classificationPanel }
+        { this.props.inBetaMode ? feedbackView : null }
+      </View>
     )
+  }
+
+  navigateToFeedback() {
+    const url = filledInFormUrl(
+      this.props.project.display_name,
+      this.props.project.id,
+      Platform.OS)
+    Actions.WebView({uri: url})
+  }
+
+  onFeedbackViewLayout({nativeEvent}) {
+    const { height } = nativeEvent.layout
+    if (height !== this.state.feedbackViewHeight) {
+      Animated.timing(this.state.feedbackViewHeight, {
+        duration: 300,
+        delay: 500,
+        toValue: height
+      }).start()
+    }
   }
 }
 
 const styles = EStyleSheet.create({
+  container: {
+    flex: 1
+  },
   classificationPanel: { 
     flex: 1,
     overflow: 'visible'
@@ -277,6 +317,7 @@ const styles = EStyleSheet.create({
 
 SwipeClassifier.propTypes = {
   inPreviewMode: PropTypes.bool,
+  inBetaMode: PropTypes.bool,
   isFetching: PropTypes.bool,
   isSuccess: PropTypes.bool,
   annotations: PropTypes.object,
