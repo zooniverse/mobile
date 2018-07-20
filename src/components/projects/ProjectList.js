@@ -107,7 +107,10 @@ class ProjectList extends Component {
             }
         } else {
             if (!R.isEmpty(swipeEnabledProjects)) {
-                sections.push({data: swipeEnabledProjects, title: 'Made For Mobile'});
+                const mobileSection = this.props.inBetaMode ? 
+                    {data: swipeEnabledProjects} :
+                    {data: swipeEnabledProjects, title: 'Made For Mobile'}
+                sections.push(mobileSection);
             }
     
             if (!R.isEmpty(this.props.nonSwipeEnabledProjects)) {
@@ -118,12 +121,13 @@ class ProjectList extends Component {
 
         return (
             <SectionList
+                ListHeaderComponent={this.props.inBetaMode && <ListHeaderComponent />}
                 contentContainerStyle={styles.contentContainer}
                 stickySectionHeadersEnabled={false}
                 ItemSeparatorComponent={() => <View style={styles.separatorView} />}
                 SectionSeparatorComponent={(data) => <View style={this._seperatorHeightStyle(data)} />}
                 renderItem={({item}) => <ProjectTile project={item} inPreviewMode={this.props.inPreviewMode} inBetaMode={this.props.inBetaMode}/>}
-                renderSectionHeader={({section}) => <FontedText style={styles.sectionHeader}> { section.title } </FontedText>}
+                renderSectionHeader={({section}) => section.title && <FontedText style={styles.sectionHeader}> { section.title } </FontedText>}
                 sections={sections}
                 ListEmptyComponent={() => <FontedText style={styles.emptyComponent}> {this._emptyText()} </FontedText>}
                 keyExtractor={(item, index) => index}
@@ -132,10 +136,30 @@ class ProjectList extends Component {
     }
 }
 
+const ListHeaderComponent = () => {
+    return  (
+        <FontedText style={styles.listHeader}>
+            {
+                'Thank you for volunteering to beta test projects in development.\n\n' +
+                'Your feedback here will help new projects join the Zooniverse.'
+            }
+        </FontedText>
+    )
+}
+
 const styles = EStyleSheet.create({
     contentContainer: {
         paddingBottom: 25,
         paddingTop: 35
+    },
+    listHeader: {
+        color: '$headerGrey',
+        fontWeight: 'bold',
+        fontSize: 16,
+        textAlign: 'justify',
+        marginHorizontal: 25,
+        marginBottom: 25
+        
     },
     separatorView: {
         height: 25
