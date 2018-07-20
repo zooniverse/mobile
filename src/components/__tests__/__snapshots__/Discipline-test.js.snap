@@ -64,22 +64,31 @@ exports[`renders with a title 1`] = `
         
       </Text>
     </View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      numberOfLines={1}
+    <View
       style={
-        Array [
-          Object {
-            "fontFamily": "Karla",
-          },
-          undefined,
-        ]
+        Object {
+          "flex": 1,
+          "flexDirection": "column",
+        }
       }
     >
-      O Hai!
-    </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
+      >
+        O Hai!
+      </Text>
+    </View>
     <Text
       accessible={true}
       allowFontScaling={false}
