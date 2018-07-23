@@ -1,7 +1,6 @@
 //Use for user-specific data
 import apiClient from 'panoptes-client/lib/api-client'
-import auth from './auth'
-import { Actions } from 'react-native-router-flux'
+import { signOut } from './auth'
 import { add, addIndex, filter, fromPairs, head, isNil, keys, map, reduce } from 'ramda'
 
 import {
@@ -18,8 +17,8 @@ export function loadUserData() {
       getAuthUser().then((userResource) => {
         // We are no longer authenticated. Sign the user out
         if (userResource === null) {
-          auth.signOut()
-          return
+          dispatch(signOut())
+          return Promise.resolve()
         }
         
         return Promise.all([

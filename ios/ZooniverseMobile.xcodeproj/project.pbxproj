@@ -17,7 +17,7 @@
 		01090E4520A9EEE800DBDD85 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01090E4420A9EEE800DBDD85 /* FirebaseManager.swift */; };
 		01090E4A20AB38A300DBDD85 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01090E4920AB38A300DBDD85 /* NotificationSettings.m */; };
 		0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0115251C2099005600C6C093 /* SimpleLineIcons.ttf */; };
-		0143A58820B8AFBB00185AC0 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */; };
+		0125C11920FE7CE2009DCD28 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125C11820FE7CAA009DCD28 /* libRNFetchBlob.a */; };
 		01471F5420C09330007A22F4 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01471F5320C09330007A22F4 /* ImageSizer.m */; };
 		014AB847202374F80014915B /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051C91D7F618700052983 /* libRCTGoogleAnalyticsBridge.a */; };
 		0154415820A4C33800C8BA5A /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */; };
@@ -101,9 +101,9 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = ZooniverseMobile;
 		};
-		0143A58420B8AF4500185AC0 /* PBXContainerItemProxy */ = {
+		0125C11720FE7CAA009DCD28 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0143A55A20B8AF4500185AC0 /* RNFetchBlob.xcodeproj */;
+			containerPortal = 0125C11320FE7CAA009DCD28 /* RNFetchBlob.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A15C300E1CD25C330074CB35;
 			remoteInfo = RNFetchBlob;
@@ -370,7 +370,7 @@
 		01090E4820AB38A300DBDD85 /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationSettings.h; path = ZooniverseMobile/NotificationSettings.h; sourceTree = "<group>"; };
 		01090E4920AB38A300DBDD85 /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationSettings.m; path = ZooniverseMobile/NotificationSettings.m; sourceTree = "<group>"; };
 		0115251C2099005600C6C093 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
-		0143A55A20B8AF4500185AC0 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
+		0125C11320FE7CAA009DCD28 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		01471F5220C09330007A22F4 /* ImageSizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageSizer.h; path = ZooniverseMobile/ImageSizer.h; sourceTree = "<group>"; };
 		01471F5320C09330007A22F4 /* ImageSizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageSizer.m; path = ZooniverseMobile/ImageSizer.m; sourceTree = "<group>"; };
 		0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dev.plist"; sourceTree = "<group>"; };
@@ -431,7 +431,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0143A58820B8AFBB00185AC0 /* libRNFetchBlob.a in Frameworks */,
+				0125C11920FE7CE2009DCD28 /* libRNFetchBlob.a in Frameworks */,
 				992864FA1E08908900142B69 /* WebKit.framework in Frameworks */,
 				99E051DA1D7F635700052983 /* libsqlite3.0.tbd in Frameworks */,
 				99E051D81D7F634900052983 /* libz.tbd in Frameworks */,
@@ -517,13 +517,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0143A55B20B8AF4500185AC0 /* Products */ = {
+		0125C11420FE7CAA009DCD28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */,
+				0125C11820FE7CAA009DCD28 /* libRNFetchBlob.a */,
 			);
 			name = Products;
-			sourceTree = "<unknown>";
+			sourceTree = "<group>";
 		};
 		019E41DD20AB61630086B2C1 /* Notifications */ = {
 			isa = PBXGroup;
@@ -621,7 +621,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				0143A55A20B8AF4500185AC0 /* RNFetchBlob.xcodeproj */,
+				0125C11320FE7CAA009DCD28 /* RNFetchBlob.xcodeproj */,
 				99D3E8081E9D3C8300F7863A /* RCTAnimation.xcodeproj */,
 				9955436A1DE3624E0016257B /* RNSVG.xcodeproj */,
 				99D806B91DF1D6D400106B56 /* RCTPushNotification.xcodeproj */,
@@ -887,8 +887,8 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = 0143A55B20B8AF4500185AC0 /* Products */;
-					ProjectRef = 0143A55A20B8AF4500185AC0 /* RNFetchBlob.xcodeproj */;
+					ProductGroup = 0125C11420FE7CAA009DCD28 /* Products */;
+					ProjectRef = 0125C11320FE7CAA009DCD28 /* RNFetchBlob.xcodeproj */;
 				},
 				{
 					ProductGroup = 9955436B1DE3624E0016257B /* Products */;
@@ -939,11 +939,11 @@
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		0143A58520B8AF4500185AC0 /* libRNFetchBlob.a */ = {
+		0125C11820FE7CAA009DCD28 /* libRNFetchBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFetchBlob.a;
-			remoteRef = 0143A58420B8AF4500185AC0 /* PBXContainerItemProxy */;
+			remoteRef = 0125C11720FE7CAA009DCD28 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		014AB96E202507200014915B /* libfishhook.a */ = {
@@ -1466,7 +1466,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
-				SWIFT_OBJC_BRIDGING_HEADER = "ZooniverseMobile-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
