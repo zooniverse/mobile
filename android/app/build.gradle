@@ -96,13 +96,13 @@ def enableProguardInReleaseBuilds = false
 def pass = getPassword("android@zooniverse.org","android_keystore")
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "com.zooniversemobile"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 27
         versionCode 17
         versionName "2.1.0"
         multiDexEnabled true
