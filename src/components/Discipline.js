@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -35,7 +34,7 @@ class Discipline extends Component {
               ? <Icon name={this.props.faIcon} style={[styles.icon, styles.faIcon, styles.zooIconContainer, customIconSize]} />
               : <ZooIcon iconName={this.props.icon} /> }
           </View>
-          <View style={{flexDirection: 'column', flex: 1}}>
+          <View style={styles.textContainer}>
             <FontedText 
               style={styles.title}
               numberOfLines={1}
@@ -107,6 +106,10 @@ const styles = EStyleSheet.create({
   zooIconContainer:{
     width: widths.zooIconContainerWidth
   },
+  textContainer: {
+    flexDirection: 'column',
+    flex: 1
+  }
 });
 
 Discipline.propTypes = {

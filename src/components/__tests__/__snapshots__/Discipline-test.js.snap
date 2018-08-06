@@ -65,12 +65,7 @@ exports[`renders with a title 1`] = `
       </Text>
     </View>
     <View
-      style={
-        Object {
-          "flex": 1,
-          "flexDirection": "column",
-        }
-      }
+      style={undefined}
     >
       <Text
         accessible={true}

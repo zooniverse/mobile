@@ -248,7 +248,8 @@ ProjectDisciplines.propTypes = {
   projectActions: PropTypes.any,
   settingsActions: PropTypes.any,
   hasRecentProjects: PropTypes.bool,
-  hasPreviewProjects: PropTypes.bool
+  hasPreviewProjects: PropTypes.bool,
+  hasBetaProjects: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)
