@@ -7,6 +7,7 @@ const InitialProjectState = {
     isFailure: false,
     projectList: [],
     previewProjectList: [],
+    betaProjectList: [],
     collaboratorIds: [],
     ownerIds: []
 };
@@ -28,9 +29,10 @@ export default function projects(state=InitialProjectState, action) {
             };
         }
         case ActionConstants.ADD_PROJECTS: {
-            const previewProjects = action.projects.filter( project => project.isPreview )
-            const productionProjects = action.projects.filter( project => !project.isPreview )
-            return { ...state, previewProjectList: previewProjects, projectList: productionProjects }
+            const previewProjectList = action.projects.filter( project => project.isPreview )
+            const projectList = action.projects.filter( project => !project.isPreview && !project.beta_approved )
+            const betaProjectList = action.projects.filter( project => project.beta_approved && !project.launch_approved )
+            return { ...state, previewProjectList, projectList, betaProjectList }
         }
         case ActionConstants.PROJECTS_FAILURE: {
             return {

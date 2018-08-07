@@ -15,6 +15,7 @@ export const GLOBALS = {
     'social-science': 61745,
     'zooniverse-logo': 61729
   },
+  //description: 'Help review projects to see if they are ready for launch',
   DISCIPLINES: [
     {value: 'recent', label: 'Recent', color: 'rgba(0, 151, 157, 1)', display: false, faIcon: 'clock-o'},
     {value: 'preview', label: 'Preview', color: 'rgba(228,89,80,1)', display: false, faIcon: 'mobile'},
@@ -30,6 +31,7 @@ export const GLOBALS = {
     {value: 'physics', label: 'Physics', color: '#F27441', display: false },
     {value: 'social science', label: 'Social Science', color: '#7EA8CE', display: false },
     {value: 'astronomy', label: 'Space', color: '#512BAD', display: true },
+    {value: 'beta', label: 'Beta Review', color: 'rgb(107, 107, 107)', display: false, faIcon: 'flask', description: 'Projects in Development'},
   ]
 }
 

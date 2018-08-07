@@ -13,6 +13,14 @@ const productionParams = {
     sort: 'display_name',
 }
 
+const betaParams = {
+    mobile_friendly: true,
+    beta_approved: true,
+    include: 'avatar',
+    sort: 'display_name',
+    live: true,
+}
+
 const ownerParams = {
     mobile_friendly: true,
     live: false,
@@ -40,6 +48,12 @@ export function fetchProjects() {
                 
                 // Fetch production Projects
                 projectCalls.push(apiClient.type('projects').get(productionParams).then( projects => {
+                    const taggedProjects = tagProjects(projects, false)
+                    allProjects = allProjects.concat(taggedProjects)
+                }))
+
+                // Fetch Beta Projects
+                projectCalls.push(apiClient.type('projects').get(betaParams).then( projects => {
                     const taggedProjects = tagProjects(projects, false)
                     allProjects = allProjects.concat(taggedProjects)
                 }))

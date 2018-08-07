@@ -273,7 +273,7 @@ export class SwipeClassifier extends React.Component {
       this.props.project.display_name,
       this.props.project.id,
       Platform.OS)
-    Actions.WebView({uri: url})
+    Actions.WebView({uri: url, loadingText: 'Loading Feedback Form'})
   }
 
   onFeedbackViewLayout({nativeEvent}) {

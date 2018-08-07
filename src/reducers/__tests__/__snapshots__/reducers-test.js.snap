@@ -48,6 +48,7 @@ Object {
     "titles": Object {},
   },
   "projects": Object {
+    "betaProjectList": Array [],
     "collaboratorIds": Array [],
     "isFailure": false,
     "isLoading": false,
@@ -119,6 +120,7 @@ Object {
     "titles": Object {},
   },
   "projects": Object {
+    "betaProjectList": Array [],
     "collaboratorIds": Array [],
     "isFailure": false,
     "isLoading": false,
@@ -194,6 +196,7 @@ Object {
     "titles": Object {},
   },
   "projects": Object {
+    "betaProjectList": Array [],
     "collaboratorIds": Array [],
     "isFailure": false,
     "isLoading": false,
@@ -266,6 +269,7 @@ Object {
     "titles": Object {},
   },
   "projects": Object {
+    "betaProjectList": Array [],
     "collaboratorIds": Array [],
     "isFailure": false,
     "isLoading": false,

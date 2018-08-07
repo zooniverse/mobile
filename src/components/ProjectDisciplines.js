@@ -31,12 +31,14 @@ GoogleAnalytics.trackEvent('view', 'Home')
 const mapStateToProps = (state) => {
   const nativePreviewProjects = state.projects.previewProjectList.filter((project) => R.any((workflow) => workflow.swipe_verified)(project.workflows))
   const hasPreviewProjects = !R.isEmpty(nativePreviewProjects)
+  const hasBetaProjects = !R.isEmpty(state.projects.betaProjectList.count)
   return {
     user: state.user,
     isGuestUser: state.user.isGuestUser,
     isConnected: state.main.isConnected,
     projectList: state.projects.projectList || [],
     hasPreviewProjects,
+    hasBetaProjects,
     hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
     isSuccess: state.projects.isSuccess,
     isLoading: state.projects.isLoading
@@ -108,7 +110,7 @@ export class ProjectDisciplines extends React.Component {
   }
 
   _renderItem({item}) {
-    const { faIcon, value, label, color } = item
+    const { faIcon, value, label, color, description } = item
     return (
       <Discipline
         faIcon={faIcon}
@@ -116,6 +118,7 @@ export class ProjectDisciplines extends React.Component {
         title={label}
         tag={value}
         color={color}
+        description={description}
       />
     );
   }
@@ -150,10 +153,11 @@ export class ProjectDisciplines extends React.Component {
       </FontedText>
 
     const disciplineInProjectList = (discipline) => {
-      const {user, hasPreviewProjects, hasRecentProjects} = this.props
+      const {user, hasPreviewProjects, hasRecentProjects, hasBetaProjects} = this.props
       const isForLoggerInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects ).includes(discipline.value)
       const isTagged = this.props.projectList.find((project) => project.tags.includes(discipline.value)) !== undefined
-      return isForLoggerInUser || isTagged
+      const isBeta = hasBetaProjects && discipline.value === 'beta'
+      return isForLoggerInUser || isTagged || isBeta
     }
     const disciplineList = this.props.isSuccess ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES) : []
     const listView = 
@@ -244,7 +248,8 @@ ProjectDisciplines.propTypes = {
   projectActions: PropTypes.any,
   settingsActions: PropTypes.any,
   hasRecentProjects: PropTypes.bool,
-  hasPreviewProjects: PropTypes.bool
+  hasPreviewProjects: PropTypes.bool,
+  hasBetaProjects: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)
