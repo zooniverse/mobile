@@ -69,7 +69,7 @@ public class MainActivity extends ReactActivity {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.mipmap.ic_notification)
                 .setContentTitle(messageTitle)
                 .setContentText(messageBody)
                 .setDefaults(Notification.DEFAULT_SOUND)

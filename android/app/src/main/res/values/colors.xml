@@ -2,4 +2,5 @@
 <resources>
     <color name="background_blue">#197CB2</color>
     <color name="primary_dark">#4F6D7A</color>
+    <color name="primary_teal">#00979D</color>
 </resources>
