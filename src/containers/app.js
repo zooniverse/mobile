@@ -26,6 +26,7 @@ import WebViewScreen from '../components/WebViewScreen'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
+import DrawingScreen from '../components/Markings/DrawingScreen'
 
 const persistConfig = {
   key: 'root',
@@ -74,7 +75,7 @@ export default class App extends Component {
             <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
                 <Scene key="main" tabs={false}>
                   <Scene key="SignIn" component={SignIn} duration={0} type="reset" navBar={SignIn.renderNavigationBar} />
-                  <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} initial />
+                  <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} />
                   <Scene key="ProjectDisciplines" component={ProjectDisciplines} navBar={ProjectDisciplines.renderNavigationBar} />
                   <Scene key="About" component={About} navBar={About.renderNavigationBar}/>
                   <Scene key="Publications" component={PublicationList} navBar={PublicationList.renderNavigationBar} />
@@ -84,6 +85,7 @@ export default class App extends Component {
                   <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
                   <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
                   <Scene key="WebView" component={WebViewScreen} navBar={SwipeClassifier.renderNavigationBar}/>
+                  <Scene key="Drawings" component={DrawingScreen} navBar={SwipeClassifier.renderNavigationBar} initial />
                 </Scene>
             </Drawer>
           </Router>
