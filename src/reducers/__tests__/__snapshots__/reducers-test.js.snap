@@ -20,6 +20,10 @@ Object {
     "tutorial": Object {},
     "workflow": Object {},
   },
+  "drawingScreen": Object {
+    "idCount": 0,
+    "shapes": Object {},
+  },
   "images": Object {},
   "main": Object {
     "bobLoblaw": "Has a law blog",
@@ -92,6 +96,10 @@ Object {
     "tutorial": Object {},
     "workflow": Object {},
   },
+  "drawingScreen": Object {
+    "idCount": 0,
+    "shapes": Object {},
+  },
   "images": Object {},
   "main": Object {
     "errorMessage": null,
@@ -162,6 +170,10 @@ Object {
     "tasks": Object {},
     "tutorial": Object {},
     "workflow": Object {},
+  },
+  "drawingScreen": Object {
+    "idCount": 0,
+    "shapes": Object {},
   },
   "images": Object {},
   "main": Object {
@@ -237,6 +249,10 @@ Object {
     "tasks": Object {},
     "tutorial": Object {},
     "workflow": Object {},
+  },
+  "drawingScreen": Object {
+    "idCount": 0,
+    "shapes": Object {},
   },
   "images": Object {},
   "main": Object {
