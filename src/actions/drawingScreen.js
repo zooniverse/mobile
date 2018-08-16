@@ -1,5 +1,4 @@
 import * as ActionConstants from '../constants/actions'
-import R from 'ramda'
 
 /**
  * Adds a shape to the drawing screen
