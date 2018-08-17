@@ -84,17 +84,22 @@ class SvgOverlay extends Component {
             onPanResponderRelease: (evt, gestureState) => {
                 const { previewSquareX, previewSquareY } = this.state
                 const { dx, dy } = gestureState
+                const shapeWidth = INITIAL_SQUARE_SIDE + dx
+                const shapeHeight = INITIAL_SQUARE_SIDE + dy
                 const shape = {
-                    type: 'square',
+                    type: 'rect',
                     color: this.props.color,
                     x: previewSquareX,
                     y: previewSquareY,
-                    width: INITIAL_SQUARE_SIDE + dx,
-                    height: INITIAL_SQUARE_SIDE + dy
+                    width: shapeWidth,
+                    height: shapeHeight
                 }
 
                 this.setState({ isDrawing: false })
-                this.props.drawingScreenActions.addShape(shape)
+                
+                if (shapeWidth > 20 || shapeHeight > 20) {
+                    this.props.drawingScreenActions.addShape(shape)
+                }
             },
             onPanResponderTerminate: () => {
                 this.setState({
@@ -114,7 +119,7 @@ class SvgOverlay extends Component {
         const convertObjectToComponent = (shape, index) => {
             const { type } = shape
             switch (type) {
-                case ('square'):
+                case ('rect'):
                     shapeArray.push(
                         <DragableSquare 
                             key={index} 
@@ -178,7 +183,7 @@ SvgOverlay.propTypes = {
     color: PropTypes.string,
     shape: PropTypes.oneOf(['rect']),
     mode: PropTypes.oneOf(['draw', 'edit', 'erase']),
-    shapes: PropTypes.object,
+    shapes: PropTypes.arrayOf(PropTypes.oneOf(['rect'])),
     drawingScreenActions: PropTypes.object
 }
 
