@@ -133,14 +133,10 @@ class SvgOverlay extends Component {
         return shapeArray
     }
 
-    render() {
-        return (
-            <Svg
-                { ...this.panResponder.panHandlers }
-                style={styles.svg}
-                preserveAspectRatio="xMidYMid meet"
-            >
-                { this.state.isDrawing ? 
+    renderPreviewShape() {
+        switch (this.props.shape) {
+            case 'rect':
+                return (
                     <Rect 
                         ref={ref => this.drawingRect = ref}
                         stroke="black"
@@ -149,6 +145,21 @@ class SvgOverlay extends Component {
                         x={this.state.previewSquareX} 
                         y={this.state.previewSquareY} 
                     />
+                )
+            default: 
+                return null
+        }
+    }
+
+    render() {
+        return (
+            <Svg
+                { ...this.panResponder.panHandlers }
+                style={styles.svg}
+                preserveAspectRatio="xMidYMid meet"
+            >
+                { this.state.isDrawing ? 
+                    this.renderPreviewShape()
                     : null
                 }
                 {this.renderShapes()}
@@ -165,6 +176,7 @@ const styles = {
 
 SvgOverlay.propTypes = {
     color: PropTypes.string,
+    shape: PropTypes.oneOf(['rect']),
     mode: PropTypes.oneOf(['draw', 'edit', 'erase']),
     shapes: PropTypes.object,
     drawingScreenActions: PropTypes.object

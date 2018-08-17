@@ -92,7 +92,7 @@ export default class DrawingScreen extends React.Component {
                 <Animated.View style={[imageSizeStyle, styles.svgContainer]}>
                     <Animated.View style={[imageSizeStyle, styles.svgOverlayContainer]}>
                         <SvgOverlay
-                            shapes={[]}
+                            shape="rect"
                             mode={this.state.mode}
                         />
                     </Animated.View>
