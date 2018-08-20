@@ -85,7 +85,7 @@ export default class App extends Component {
                   <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
                   <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
                   <Scene key="WebView" component={WebViewScreen} navBar={SwipeClassifier.renderNavigationBar}/>
-                  <Scene key="Drawings" component={DrawingScreen} navBar={SwipeClassifier.renderNavigationBar} initial />
+                  <Scene key="Drawings" drawerLockMode={'locked-closed'} panHandlers={null} component={DrawingScreen} navBar={SwipeClassifier.renderNavigationBar} initial />
                 </Scene>
             </Drawer>
           </Router>
