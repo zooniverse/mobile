@@ -97,7 +97,7 @@ class SvgOverlay extends Component {
 
                 this.setState({ isDrawing: false })
                 
-                if (shapeWidth > 20 || shapeHeight > 20) {
+                if (Math.abs(shapeWidth) > 20 || Math.abs(shapeHeight) > 20) {
                     this.props.drawingScreenActions.addShape(shape)
                 }
             },
