@@ -182,8 +182,8 @@ const styles = {
 SvgOverlay.propTypes = {
     color: PropTypes.string,
     shape: PropTypes.oneOf(['rect']),
+    shapes: PropTypes.object,
     mode: PropTypes.oneOf(['draw', 'edit', 'erase']),
-    shapes: PropTypes.arrayOf(PropTypes.oneOf(['rect'])),
     drawingScreenActions: PropTypes.object
 }
 
