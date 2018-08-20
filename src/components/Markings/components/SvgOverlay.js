@@ -13,6 +13,9 @@ import R from 'ramda'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as drawingScreenAction from '../../../actions/drawingScreen'
+import {
+    distanceFromRange
+} from '../drawingUtils'
 
 const INITIAL_SQUARE_SIDE = 2
 
@@ -45,6 +48,8 @@ class SvgOverlay extends Component {
             isDrawing: false,
             previewSquareX: 0,
             previewSquareY: 0,
+            overlayHeight: 0,
+            overlayWidth: 0
         }
 
         this.widthAnimated = new Animated.Value(INITIAL_SQUARE_SIDE)
@@ -76,16 +81,18 @@ class SvgOverlay extends Component {
                 })
             },
             onPanResponderMove: (evt, gestureState) => {
+                const { locationY } = evt.nativeEvent
                 const { dx, dy } = gestureState
                 this.widthAnimated.setValue(INITIAL_SQUARE_SIDE + dx)
-                this.heightAnimated.setValue(INITIAL_SQUARE_SIDE + dy)
+                this.heightAnimated.setValue(INITIAL_SQUARE_SIDE + dy - distanceFromRange(locationY, 0,this.state.overlayHeight))
             },
             onPanResponderTerminationRequest: () => true,
             onPanResponderRelease: (evt, gestureState) => {
                 const { previewSquareX, previewSquareY } = this.state
                 const { dx, dy } = gestureState
+                const { locationY } = evt.nativeEvent
                 const shapeWidth = INITIAL_SQUARE_SIDE + dx
-                const shapeHeight = INITIAL_SQUARE_SIDE + dy
+                const shapeHeight = INITIAL_SQUARE_SIDE + dy - distanceFromRange(locationY, 0,this.state.overlayHeight)
                 const shape = {
                     type: 'rect',
                     color: this.props.color,
@@ -126,6 +133,8 @@ class SvgOverlay extends Component {
                             index={index}
                             isEditable={this.props.mode === 'edit'}
                             isDeletable={this.props.mode === 'erase'}
+                            containerHeight={this.state.overlayHeight}
+                            containerWidth={this.state.overlayWidth}
                             onDelete={() => {
                                 this.props.drawingScreenActions.removeShapeAtIndex(index)
                             }}
@@ -160,6 +169,13 @@ class SvgOverlay extends Component {
         return (
             <Svg
                 { ...this.panResponder.panHandlers }
+                onLayout={({nativeEvent})=> {
+                    const { height, width } = nativeEvent.layout
+                    this.setState({
+                        overlayHeight: height,
+                        overlayWidth: width
+                    })
+                }}
                 style={styles.svg}
                 preserveAspectRatio="xMidYMid meet"
             >
