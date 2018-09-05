@@ -11,9 +11,13 @@ exports[`renders correctly (without task help) 1`] = `
   <View
     style={undefined}
   >
-    <Markdown>
-      Is this this?
-    </Markdown>
+    <View
+      style={undefined}
+    >
+      <Markdown>
+        Is this this?
+      </Markdown>
+    </View>
   </View>
 </View>
 `;
@@ -29,9 +33,13 @@ exports[`renders correctly with task help 1`] = `
   <View
     style={undefined}
   >
-    <Markdown>
-      Is this this?
-    </Markdown>
+    <View
+      style={undefined}
+    >
+      <Markdown>
+        Is this this?
+      </Markdown>
+    </View>
   </View>
 </View>
 `;

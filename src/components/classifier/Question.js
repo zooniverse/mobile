@@ -80,6 +80,7 @@ const styles = EStyleSheet.create({
   image: {
     flex: 1,
     paddingLeft: 15,
+    paddingBottom: 10,
     width: 100,
     height: 100
   },
