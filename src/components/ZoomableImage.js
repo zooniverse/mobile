@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
 
 export class ZoomableImage extends Component {
   render() {
-    let uri = ''
+    let uri = this.props.source.uri
     if (this.props.images[this.props.source.uri]) {
       const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
       uri = pathPrefix + this.props.images[this.props.source.uri]
