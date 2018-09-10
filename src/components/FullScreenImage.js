@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
+import FontedText from './common/FontedText'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ZoomableImage from './ZoomableImage'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -18,6 +19,14 @@ class FullScreenImage extends React.Component {
         onRequestClose={() => {}}
         visible={this.props.isVisible}>
         <View style={styles.container}>
+          {
+            this.props.question ? 
+              <FontedText style={styles.message}> 
+                {this.props.question} 
+              </FontedText>
+            :
+              null  
+          }
           <ZoomableImage
             source={this.props.source}
             handlePress={this.props.handlePress}
@@ -62,7 +71,9 @@ const styles = EStyleSheet.create({
     alignItems: 'center'
   },
   message: {
-    color: 'white',
+    fontSize: 20,
+    paddingTop: 50,
+    color: 'white'
   },
   infoIcon: {
     color: '$transluscentWhite',
@@ -75,6 +86,7 @@ FullScreenImage.propTypes = {
   source: PropTypes.object,
   isVisible: PropTypes.bool,
   handlePress: PropTypes.func,
+  question: PropTypes.string
 }
 
 export default FullScreenImage

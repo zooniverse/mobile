@@ -11,16 +11,18 @@ jest.mock('../../ZoomableImage', () => 'ZoomableImage')
 
 import { SwipeClassifier } from '../SwipeClassifier'
 
+const task = {
+  question: 'What was that?',
+  answers: [
+    { label: 'Yes' },
+    { label: 'No' },
+  ]
+}
+
 const workflow = {
   first_task: 'T0',
   tasks: {
-    T0: {
-      question: 'What was that?',
-      answers: [
-        { label: 'Yes' },
-        { label: 'No' },
-      ]
-    }
+    T0: task
   },
   configuration: {
     pan_and_zoom: true
@@ -56,6 +58,7 @@ const classifierActions = {
 it('renders correctly', () => {
   const tree = renderer.create(
     <SwipeClassifier
+      task={task}
       isFetching={false}
       setIsFetching={jest.fn}
       startNewClassification={jest.fn}
@@ -76,6 +79,7 @@ it('renders correctly', () => {
 it('renders spinner if fetching', () => {
   const tree = renderer.create(
     <SwipeClassifier
+      task={task}
       isFetching={true}
       setIsFetching={jest.fn}
       startNewClassification={jest.fn}
@@ -94,6 +98,7 @@ it('renders spinner if fetching', () => {
 it('renders tutorial if needed', () => {
   const tree = renderer.create(
     <SwipeClassifier
+      task={task} 
       isFetching={false}
       setIsFetching={jest.fn}
       startNewClassification={jest.fn}

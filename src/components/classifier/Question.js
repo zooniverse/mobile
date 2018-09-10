@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import {
   Dimensions,
+  Image,
+  TouchableOpacity,
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
-import StyledMarkdown from '../StyledMarkdown'
 import Markdown from 'react-native-simple-markdown'
 import { connect } from 'react-redux'
 import { setQuestionContainerHeight } from '../../actions/classifier'
+import {
+  extractFirstLinkedImageFrom,
+  removeImagesFrom
+} from '../../utils/markdownUtils'
 
 //questionContainerHeight is stored in redux because the swipeable component needs
 //to be absolutely positioned outside of the ContainerPanel for Android
@@ -25,13 +30,43 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 export class Question extends Component {
+
+  constructor(props) {
+    super(props)
+
+    const imageSource = extractFirstLinkedImageFrom(props.question)
+    const questionWithoutImages = removeImagesFrom(props.question)
+    this.state = {
+      imageSource,
+      question: questionWithoutImages
+    }
+  }
+
+
   render() {
     return (
       <View style={[styles.questionContainer]}>
         <View style={styles.question}>
-          <Markdown>
-            {this.props.question}
-          </Markdown>
+          <View style={styles.markdown}>
+            <Markdown>
+              {this.state.question}
+            </Markdown>
+          </View>
+          {
+            this.state.imageSource ? 
+              <TouchableOpacity 
+                onPress={() => {this.props.onPressImage(this.state.imageSource, this.state.question)}}
+                style={styles.image}
+              >
+                <Image 
+                  style={styles.markdown} 
+                  source={{ uri: this.state.imageSource }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            :
+              null
+          }
         </View>
       </View>
     )
@@ -39,6 +74,16 @@ export class Question extends Component {
 }
 
 const styles = EStyleSheet.create({
+  markdown: {
+    flex: 1
+  },
+  image: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingBottom: 10,
+    width: 100,
+    height: 100
+  },
   questionContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -47,6 +92,7 @@ const styles = EStyleSheet.create({
     marginHorizontal: 20,
   },
   question: {
+    flexDirection: 'row',
     backgroundColor: 'transparent',
     flex: 1,
     width: '100% - 80',
@@ -59,6 +105,7 @@ Question.propTypes = {
   taskHelp: PropTypes.string,
   setQuestionContainerHeight: PropTypes.func,
   questionContainerHeight: PropTypes.number,
+  onPressImage: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question)

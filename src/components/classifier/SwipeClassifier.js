@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import ClassificationPanel from './ClassificationPanel'
 import Question from './Question'
+import Separator from '../common/Separator'
 import Tutorial from './Tutorial'
 import SwipeTabs from './SwipeTabs'
 import OverlaySpinner from '../OverlaySpinner'
@@ -29,6 +30,8 @@ import BetaFeedbackView from './BetaFeedbackView'
 import { getTaskFromWorkflow, getAnswersFromWorkflow } from '../../utils/workflow-utils'
 import { Actions } from 'react-native-router-flux';
 import { filledInFormUrl } from '../../utils/googleFormUtils'
+import { markdownContainsImage } from '../../utils/markdownUtils'
+import Theme from '../../theme'
 
 const subjectClassifierPadding = {
   height: 380,
@@ -72,6 +75,8 @@ export class SwipeClassifier extends React.Component {
       isModalVisible: false,
       swiperIndex: 0,
       fullScreenImageSource: '',
+      fullScreenQuestion: '',
+      hasImageInQuestion: markdownContainsImage(this.props.task.question),
       panX: null,
       feedbackViewHeight: new Animated.Value(0)
     }
@@ -175,7 +180,21 @@ export class SwipeClassifier extends React.Component {
           question={this.props.task.question}
           workflowID={this.props.workflow.id}
           taskHelp={this.props.task.help}
+          onHeightCalculated={this.questionHeightReceived}
+          onPressImage={(src, question) => {
+            this.setState({ 
+              showFullSize: true,
+              fullScreenImageSource: src,
+              fullScreenQuestion: question
+            })}
+          }
         />
+        {
+          this.state.hasImageInQuestion ? 
+            <Separator style={styles.questionSeparator} />
+          :
+            null
+        }
         <View style={{ height: subjectDisplayHeight + 300, width: Dimensions.get('window').width}}>
           <Swiper
             ref={swiper => this.swiper = swiper}
@@ -243,7 +262,8 @@ export class SwipeClassifier extends React.Component {
         <FullScreenImage
           source={{uri: this.state.fullScreenImageSource}}
           isVisible={this.state.showFullSize}
-          handlePress={() => this.setState({ showFullSize: false })}
+          handlePress={() => this.setState({ fullScreenQuestion: '', showFullSize: false })}
+          question={this.state.fullScreenQuestion}
         />
         <TaskHelpModal
           text={this.props.task.help}
@@ -312,6 +332,10 @@ const styles = EStyleSheet.create({
     textAlign: 'center',
     marginTop: 15,
     color: 'rgba(0,93,105,1)'
+  },
+  separator: {
+    paddingTop: 10,
+    paddingHorizontal: 15
   }
 })
 

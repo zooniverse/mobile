@@ -68,6 +68,7 @@ export function fetchProjects() {
                     projectCalls.push(apiClient.type('projects').get(collaboratorParams).then( projects => {
                         const taggedProjects = tagProjects(projects, true)
                         allProjects = allProjects.concat(taggedProjects)
+                        taggedProjects.forEach((project) => dispatch(addCollaboratorProjectId(project)))
                     }));
                 }
 
