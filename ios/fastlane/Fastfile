@@ -1,0 +1,45 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+require_relative '../../fastlane/VersionUtils.rb' Fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    match(type: "appstore", git_url: "https://github.com/zooniverse/mobile-provisioning-profiles")
+    oldVersionString = get_info_plist_value(path: "./ZooniverseMobile/Info.plist", key: "CFBundleShortVersionString")
+    promptResponseIsValid = false
+    while (!promptResponseIsValid) do
+      newVersionString = prompt(text: "The current iOS version number is #{oldVersionString} what would you like the next version number to be?")
+      if !VersionUtils.versionStringIsValid(newVersionString) then
+        UI.error("Version string should only contain periods and numbers")
+      elsif !VersionUtils.versionStringIsCorrectLength(newVersionString) then
+        UI.error("Version string should have 3 numbers")
+      elsif !VersionUtils.isNewVersionBiggerThanOldVersion(newVersionString, oldVersionString) then
+        UI.error("New version string is not bigger than older version string")
+      else
+        promptResponseIsValid = true
+      end
+    end
+
+    UI.message("Building the iOS app with version number: #{newVersionString}")
+    set_info_plist_value(path: "./ZooniverseMobile/Info.plist", key: "CFBundleShortVersionString", value: newVersionString)
+    build_app(workspace: "ZooniverseMobile.xcworkspace", scheme: "ZooniverseMobile")
+    upload_to_testflight
+  end
+  
+end
