@@ -1,0 +1,45 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+require_relative '../../fastlane/VersionUtils.rb'
+default_platform(:android)
+
+platform :android do
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    android_set_version_code(gradle_file: "app/build.gradle")
+    oldVersionString = android_get_version_name(gradle_file: "app/build.gradle")
+    promptResponseIsValid = false
+    while (!promptResponseIsValid) do
+      newVersionString = prompt(text: "The current Android version number is #{oldVersionString} what would you like the next version number to be?")
+      if !VersionUtils.versionStringIsValid(newVersionString) then
+        UI.error("Version string should only contain periods and numbers")
+      elsif !VersionUtils.versionStringIsCorrectLength(newVersionString) then
+        UI.error("Version string should have 3 numbers")
+      elsif !VersionUtils.isNewVersionBiggerThanOldVersion(newVersionString, oldVersionString) then
+        UI.error("New version string is not bigger than older version string")
+      else
+        promptResponseIsValid = true
+      end
+    end
+
+    UI.message("Building the Android app with version number: #{newVersionString}")
+    android_set_version_name(version_name: newVersionString, gradle_file: "app/build.gradle")
+    
+    
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store(track: "beta")
+  end
+end
