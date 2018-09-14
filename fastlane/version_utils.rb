@@ -1,23 +1,25 @@
 module VersionUtils
 
-  def VersionUtils.versionStringIsValid(version_string)
+  def self.versionStringIsValid(version_string)
     version_string_array = version_string.split(".")
-    for number_string in version_string_array do
-      is_number = /\A\d+\z/ =~ number_string
-      unless is_number; false end
+    is_all_numbers = true
+    version_string_array.each do |number_string|
+      is_number = /\A\d+\z/.match(number_string) != nil
+      unless is_number then
+        is_all_numbers &= false
+      end
     end
-
-    true
+    is_all_numbers
   end
 
-  def VersionUtils.versionStringIsCorrectLength(version_string)
+  def self.versionStringIsCorrectLength(version_string)
     version_string.split(".").length == 3
   end
 
-  def VersionUtils.isNewVersionBiggerThanOldVersion(new_version_number_string, old_version_number_string)
+  def self.isNewVersionBiggerThanOldVersion(new_version_number_string, old_version_number_string)
     new_version_array = new_version_number_string.split(".").map(&:to_i)
     old_version_array = old_version_number_string.split(".").map(&:to_i)
-    for index in 0..2
+    old_version_array.each_index do |index|
       if new_version_array[index] > old_version_array[index]
         return true
       end
@@ -27,5 +29,4 @@ module VersionUtils
     end
     false
   end
-
 end

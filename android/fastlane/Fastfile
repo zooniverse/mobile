@@ -12,7 +12,7 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
-require_relative '../../fastlane/VersionUtils.rb'
+require_relative '../../fastlane/version_utils.rb'
 default_platform(:android)
 
 platform :android do
