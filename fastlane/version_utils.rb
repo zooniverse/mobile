@@ -1,13 +1,10 @@
 module VersionUtils
-
   def self.versionStringIsValid(version_string)
     version_string_array = version_string.split(".")
     is_all_numbers = true
     version_string_array.each do |number_string|
-      is_number = /\A\d+\z/.match(number_string) != nil
-      unless is_number then
-        is_all_numbers &= false
-      end
+      is_number = !/\A\d+\z/.match(number_string).nil?
+      unless is_number then is_all_numbers &= false end
     end
     is_all_numbers
   end
