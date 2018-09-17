@@ -20,7 +20,7 @@ platform :ios do
   
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    match(type: "appstore", git_url: "https://github.com/zooniverse/mobile-provisioning-profiles")
+    match(type: "appstore", git_url: "git@github.com:zooniverse/mobile-provisioning-profiles.git" )
     oldVersionString = get_info_plist_value(path: "./ZooniverseMobile/Info.plist", key: "CFBundleShortVersionString")
     promptResponseIsValid = false
     while (!promptResponseIsValid) do
@@ -39,7 +39,7 @@ platform :ios do
     UI.message("Building the iOS app with version number: #{newVersionString}")
     set_info_plist_value(path: "./ZooniverseMobile/Info.plist", key: "CFBundleShortVersionString", value: newVersionString)
     build_app(workspace: "ZooniverseMobile.xcworkspace", scheme: "ZooniverseMobile")
-    upload_to_testflight
+    # upload_to_testflight
   end
   
 end

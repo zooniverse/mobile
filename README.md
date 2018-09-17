@@ -61,9 +61,15 @@ That being said, there are few things you will need to do in order to get your d
 
 - Make sure Ruby is installed on your machine  
 - Install Fastlane using either  
-RubyGems: 
-	`sudo gem install fastlane -NV`  
-or Hombrew `brew cask install fastlane`
+RubyGems: `sudo gem install fastlane -NV`  
+Hombrew: `brew cask install fastlane`
+
+***Note:*** You will probably be asked to add `export PATH=“$HOME/.fastlane/bin:$PATH”` to your bash profile
+
+***Another Note:*** You may need to run the following line if you are having issues connecting to the private repo for `match`:  
+`ssh-add -K ~/.ssh/id_rsa`  
+This will add you github ssh private key to ssh-agent.
+
 
 
 #### iOS Preperations: 
