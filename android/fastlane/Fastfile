@@ -30,7 +30,7 @@ platform :android do
     android_set_version_name(version_name: new_version.to_s, gradle_file: "app/build.gradle")
 
     # Build and deploy
-    # gradle(task: "clean assembleRelease")
-    # upload_to_play_store(track: "beta")
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store(track: "beta")
   end
 end
