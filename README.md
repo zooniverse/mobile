@@ -79,8 +79,10 @@ This will add you github ssh private key to ssh-agent.
 - Make sure that you have access to the zooniverse Passbolt password manager 
 - Download the development and distribution certs from the [Apple Developer Portal](https://developer.apple.com/account/ios/certificate/?teamId=888MXXMABP) to your keychain.
 
-Now you should be able to run the build script in the main directory.  
-	`./buildiOS.sh`
+Now you should be able to run the build script in the main directory.   
+	`./buildiOS.sh patch`
+	
+One thing to note here is you can either put either 'major', 'minor' or 'patch' in as parameter depending on the type of version update you want to do.
 	
 If this is your first time building for iOS using fastlane you will be prompted for a password to decrypt the provisioning profiles stored in git. You can find the password in Passbolt under 'fastlane'.  
   
@@ -96,7 +98,9 @@ To start, you need to download a service account JSON. This gives your machine r
 - Update your `.bash_profile` to contain export `export SERVICE_ACCOUNT_JSON={LOCATION OF SERVICE JSON}`
 
 Now you should be able to run the build script from the main directory.  
-`./buildAndroid.sh`
+`./buildAndroid.sh patch`
+
+One thing to note here is you can must put either 'major', 'minor' or 'patch' in as parameter depending on the type of version update you want to do.
 
 If everything runs correctly, you will be prompted to enter in a new version number and then the script will build and push your build to PlayStore Beta, where you can eventually promote that build manually for release.
 
@@ -105,6 +109,8 @@ If everything runs correctly, you will be prompted to enter in a new version num
 Once both builds are building successfully, you should be able to run:
 
 `./buildAndroidAndIOS.sh`  
+
+One thing to note here is you can either put 'major', 'minor' or 'patch' in as parameter depending on the type of version update you want to do. The script will default to 'patch'
 
 This will basically do a clean build and open up the iOS and Android  fastlane scripts in two new windows. Don't forget to answer the prompts the on both of the scripts.
 
