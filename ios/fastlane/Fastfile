@@ -12,32 +12,25 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
-require_relative '../../fastlane/version_utils.rb'
+require 'semantic'
 
 default_platform(:ios)
 
 platform :ios do
   
   desc "Push a new beta build to TestFlight"
-  lane :beta do
+  lane :beta do |options|
+    # Download provisioning profiles
     match(type: "appstore", git_url: "git@github.com:zooniverse/mobile-provisioning-profiles.git" )
-    oldVersionString = get_info_plist_value(path: "./ZooniverseMobile/Info.plist", key: "CFBundleShortVersionString")
-    promptResponseIsValid = false
-    while (!promptResponseIsValid) do
-      newVersionString = prompt(text: "The current iOS version number is #{oldVersionString} what would you like the next version number to be?")
-      if !VersionUtils.versionStringIsValid(newVersionString) then
-        UI.error("Version string should only contain periods and numbers")
-      elsif !VersionUtils.versionStringIsCorrectLength(newVersionString) then
-        UI.error("Version string should have 3 numbers")
-      elsif !VersionUtils.isNewVersionBiggerThanOldVersion(newVersionString, oldVersionString) then
-        UI.error("New version string is not bigger than older version string")
-      else
-        promptResponseIsValid = true
-      end
-    end
 
-    UI.message("Building the iOS app with version number: #{newVersionString}")
-    set_info_plist_value(path: "./ZooniverseMobile/Info.plist", key: "CFBundleShortVersionString", value: newVersionString)
+    # Update Version 
+    old_version_string = get_info_plist_value(path: "./ZooniverseMobile/Info.plist", key: "CFBundleShortVersionString")
+    old_version = Semantic::Version.new(old_version_string)
+    new_version = old_version.increment!(options[:increment_type])
+    UI.message("Building the iOS app with version number: #{new_version}")
+    set_info_plist_value(path: "./ZooniverseMobile/Info.plist", key: "CFBundleShortVersionString", value: new_version.to_s)
+
+    # Build and deploy
     build_app(workspace: "ZooniverseMobile.xcworkspace", scheme: "ZooniverseMobile")
     upload_to_testflight
   end

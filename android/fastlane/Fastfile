@@ -12,34 +12,25 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
-require_relative '../../fastlane/version_utils.rb'
+require 'semantic'
 default_platform(:android)
 
 platform :android do
 
   desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
+  lane :beta do |options|
+    # Increment the version code
     android_set_version_code(gradle_file: "app/build.gradle")
-    oldVersionString = android_get_version_name(gradle_file: "app/build.gradle")
-    promptResponseIsValid = false
-    while (!promptResponseIsValid) do
-      newVersionString = prompt(text: "The current Android version number is #{oldVersionString} what would you like the next version number to be?")
-      if !VersionUtils.versionStringIsValid(newVersionString) then
-        UI.error("Version string should only contain periods and numbers")
-      elsif !VersionUtils.versionStringIsCorrectLength(newVersionString) then
-        UI.error("Version string should have 3 numbers")
-      elsif !VersionUtils.isNewVersionBiggerThanOldVersion(newVersionString, oldVersionString) then
-        UI.error("New version string is not bigger than older version string")
-      else
-        promptResponseIsValid = true
-      end
-    end
+    
+    # Increment the version name
+    old_version_string = android_get_version_name(gradle_file: "app/build.gradle")
+    old_version = Semantic::Version.new(old_version_string)
+    new_version = old_version.increment!(options[:increment_type])
+    UI.message("Building the Android app with version number: #{new_version}")
+    android_set_version_name(version_name: new_version.to_s, gradle_file: "app/build.gradle")
 
-    UI.message("Building the Android app with version number: #{newVersionString}")
-    android_set_version_name(version_name: newVersionString, gradle_file: "app/build.gradle")
-    
-    
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store(track: "beta")
+    # Build and deploy
+    # gradle(task: "clean assembleRelease")
+    # upload_to_play_store(track: "beta")
   end
 end
