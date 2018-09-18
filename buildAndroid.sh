@@ -1,3 +1,4 @@
 #!/bin/bash
 cd "android"
-fastlane beta
+bundle install
+bundle exec fastlane beta increment_type:$1
