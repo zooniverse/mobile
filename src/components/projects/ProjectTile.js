@@ -55,7 +55,7 @@ class ProjectTile extends Component {
     }
 
     _workFlowList = () => {
-        const swipeVerifiedWorkflows = this.props.project.workflows.filter( workflow => workflow.mobile_verified)
+        const mobileVerifiedWorkflows = this.props.project.workflows.filter( workflow => workflow.mobile_verified)
         const overlayBanner = 
             <View style={styles.bannerView}>
                 {this._overlayBanner()}
@@ -84,7 +84,7 @@ class ProjectTile extends Component {
                     </View>
                 </View>
             );
-        }, swipeVerifiedWorkflows);
+        }, mobileVerifiedWorkflows);
         return (
             <View style={styles.cellsContainer}>
                 {workflowsView}

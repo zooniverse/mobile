@@ -29,7 +29,7 @@ GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
 
 const mapStateToProps = (state) => {
-  const nativePreviewProjects = state.projects.previewProjectList.filter((project) => R.any((workflow) => workflow.swipe_verified)(project.workflows))
+  const nativePreviewProjects = state.projects.previewProjectList.filter((project) => R.any((workflow) => workflow.mobile_verified)(project.workflows))
   const hasPreviewProjects = !R.isEmpty(nativePreviewProjects)
   const hasBetaProjects = !R.isEmpty(state.projects.betaProjectList.count)
   return {
