@@ -14,9 +14,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import * as R from 'ramda';
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import {Actions} from 'react-native-router-flux'
-import { bindActionCreators } from 'redux'
 
-import * as classifierActions from '../../actions/classifier'
+import navigateToClassifier from '../../navigators/classifierNavigator'
 import FontedText from '../common/FontedText'
 import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
@@ -29,8 +28,8 @@ const mapStateToProps = (state, ownProps) => ({
     containsNativeWorkflows: ownProps.project.workflows.length > 0,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    classifierActions: bindActionCreators(classifierActions, dispatch)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    navigateToClassifier: navigateToClassifier(dispatch, ownProps.inPreviewMode, ownProps.inBetaMode, ownProps.project)
 })
 
 class ProjectTile extends Component {
@@ -42,7 +41,6 @@ class ProjectTile extends Component {
             popupHeight: 0
         }
         this._onMainViewPress = this._onMainViewPress.bind(this)
-        this._navigateToSwipeClassifier = this._navigateToSwipeClassifier.bind(this)
     }
 
     _overlayBanner() {
@@ -57,7 +55,7 @@ class ProjectTile extends Component {
     }
 
     _workFlowList = () => {
-        const swipeVerifiedWorkflows = this.props.project.workflows.filter( workflow => workflow.swipe_verified)
+        const swipeVerifiedWorkflows = this.props.project.workflows.filter( workflow => workflow.mobile_verified)
         const overlayBanner = 
             <View style={styles.bannerView}>
                 {this._overlayBanner()}
@@ -69,7 +67,7 @@ class ProjectTile extends Component {
                     <Separator color={theme.$borderGrey}/>
                     <View>
                         <TouchableOpacity 
-                            onPress={() => this._navigateToSwipeClassifier(workflow) }
+                            onPress={() => this.props.navigateToClassifier(workflow) }
                         >
                             <View style={styles.cell}>
                                 <View style={ styles.descriptionContent }>
@@ -106,23 +104,12 @@ class ProjectTile extends Component {
                 }, 1200);
             });
         } else if (workflows.length === 1) {
-            this._navigateToSwipeClassifier(R.head(workflows))
+            this.props.navigateToClassifier(R.head(workflows))
         } else if (redirect) {
             this._openURL(redirect)
         } else {
             Actions.ZooWebView({project: this.props.project})
         }
-    }
-
-    _navigateToSwipeClassifier(workflow) {
-        this.props.classifierActions.clearClassifierData()
-        Actions.SwipeClassifier({ 
-            project: this.props.project,
-            workflow,
-            display_name: this.props.project.display_name,
-            inPreviewMode: this.props.inPreviewMode,
-            inBetaMode: this.props.inBetaMode
-        })
     }
 
     _openURL(url){
@@ -306,7 +293,7 @@ ProjectTile.propTypes = {
     outOfData: PropTypes.bool,
     inPreviewMode: PropTypes.bool,
     inBetaMode: PropTypes.bool,
-    classifierActions: PropTypes.any
+    navigateToClassifier: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectTile);
