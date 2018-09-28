@@ -1,9 +1,6 @@
 import React from 'react'
 import {
-  Animated,
   Dimensions,
-  Platform,
-  TouchableOpacity,
   View
 } from 'react-native'
 import PropTypes from 'prop-types';
@@ -15,6 +12,7 @@ import Question from './Question'
 import Separator from '../common/Separator'
 import Tutorial from './Tutorial'
 import SwipeTabs from './SwipeTabs'
+import NeedHelpButton from './NeedHelpButton'
 import OverlaySpinner from '../OverlaySpinner'
 import NavBar from '../NavBar'
 import FullScreenImage from '../FullScreenImage'
@@ -24,14 +22,10 @@ import R from 'ramda'
 import * as classifierActions from '../../actions/classifier'
 import * as navBarActions from '../../actions/navBar'
 import SwipeCard from './SwipeCard'
-import TaskHelpModal from './TaskHelpModal'
-import FontedText from '../common/FontedText'
-import BetaFeedbackView from './BetaFeedbackView'
 import { getTaskFromWorkflow, getAnswersFromWorkflow } from '../../utils/workflow-utils'
-import { Actions } from 'react-native-router-flux';
-import { filledInFormUrl } from '../../utils/googleFormUtils'
 import { markdownContainsImage } from '../../utils/markdownUtils'
 import Theme from '../../theme'
+import ClassifierContainer from './ClassifierContainer'
 
 const subjectClassifierPadding = {
   height: 380,
@@ -78,14 +72,11 @@ export class SwipeClassifier extends React.Component {
       fullScreenQuestion: '',
       hasImageInQuestion: markdownContainsImage(this.props.task.question),
       panX: null,
-      feedbackViewHeight: new Animated.Value(0)
     }
-    this.props.classifierActions.startNewClassification(this.props.workflow, this.props.project)
+    
     this.onAnswered = this.onAnswered.bind(this)
     this.onSwiped = this.onSwiped.bind(this)
     this.onTapCard = this.onTapCard.bind(this)
-    this.onFeedbackViewLayout = this.onFeedbackViewLayout.bind(this)
-    this.navigateToFeedback = this.navigateToFeedback.bind(this)
   }
 
   setQuestionVisibility(isVisible) {
@@ -179,7 +170,6 @@ export class SwipeClassifier extends React.Component {
         <Question
           question={this.props.task.question}
           workflowID={this.props.workflow.id}
-          taskHelp={this.props.task.help}
           onHeightCalculated={this.questionHeightReceived}
           onPressImage={(src, question) => {
             this.setState({ 
@@ -230,19 +220,12 @@ export class SwipeClassifier extends React.Component {
       </View>
       : null
 
-    const needHelpText = this.props.task.help ?
-      <TouchableOpacity onPress={() => {this.setState({isModalVisible: true})}}>
-        <FontedText style={styles.needHelpText}> 
-          NEED SOME HELP WITH THIS TASK?
-        </FontedText>
-      </TouchableOpacity>
-      : null
-
     const swipeTabs =
       <SwipeTabs
         guide={this.props.guide}
         onLeftButtonPressed={ () => { this.swiper.swipeLeft() } }
         onRightButtonPressed={ () => { this.swiper.swipeRight() }}
+        onFieldGuidePressed={ () => this.classifierContainer.displayFieldGuide() }
         answers={this.props.answers}
       />
 
@@ -257,7 +240,7 @@ export class SwipeClassifier extends React.Component {
           { this.state.isQuestionVisible ? classification : tutorial }
           { this.state.isQuestionVisible ? unlinkedTask :null }
         </ClassificationPanel>
-        { this.state.isQuestionVisible ? needHelpText : null }
+        { this.state.isQuestionVisible && this.props.task.help ? <NeedHelpButton onPress={() => this.classifierContainer.displayHelpModal()} /> : null }
         { this.state.isQuestionVisible ? swipeTabs : null }
         <FullScreenImage
           source={{uri: this.state.fullScreenImageSource}}
@@ -265,46 +248,21 @@ export class SwipeClassifier extends React.Component {
           handlePress={() => this.setState({ fullScreenQuestion: '', showFullSize: false })}
           question={this.state.fullScreenQuestion}
         />
-        <TaskHelpModal
-          text={this.props.task.help}
-          isVisible={this.state.isModalVisible}
-          onCloseRequested={ () => this.setState({isModalVisible: false}) }
-        />
       </View>
-
-    const feedbackView = 
-      <Animated.View style={{height: this.state.feedbackViewHeight}}>
-        <BetaFeedbackView
-          onLayout={this.onFeedbackViewLayout}
-          onPress={this.navigateToFeedback}
-        />
-      </Animated.View>
 
     return (
       <View style={styles.container}>
-        { this.props.needsTutorial ? tutorial : classificationPanel }
-        { this.props.inBetaMode ? feedbackView : null }
+        <ClassifierContainer
+          inBetaMode={this.props.inBetaMode}
+          project={this.props.project}
+          help={this.props.task.help}
+          guide={this.props.guide}
+          ref={ref => this.classifierContainer = ref}
+        >
+          { this.props.needsTutorial ? tutorial : classificationPanel }
+        </ClassifierContainer>
       </View>
     )
-  }
-
-  navigateToFeedback() {
-    const url = filledInFormUrl(
-      this.props.project.display_name,
-      this.props.project.id,
-      Platform.OS)
-    Actions.WebView({uri: url, loadingText: 'Loading Feedback Form'})
-  }
-
-  onFeedbackViewLayout({nativeEvent}) {
-    const { height } = nativeEvent.layout
-    if (height !== this.state.feedbackViewHeight) {
-      Animated.timing(this.state.feedbackViewHeight, {
-        duration: 300,
-        delay: 500,
-        toValue: height
-      }).start()
-    }
   }
 }
 
