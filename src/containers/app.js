@@ -26,6 +26,7 @@ import WebViewScreen from '../components/WebViewScreen'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
+import DrawingClassifier from '../components/Markings/DrawingClassifier'
 
 const persistConfig = {
   key: 'root',
@@ -84,6 +85,7 @@ export default class App extends Component {
                   <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
                   <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
                   <Scene key="WebView" component={WebViewScreen} navBar={SwipeClassifier.renderNavigationBar}/>
+                  <Scene key="DrawingClassifier" drawerLockMode={'locked-closed'} panHandlers={null} component={DrawingClassifier} navBar={DrawingClassifier.renderNavigationBar}  />
                 </Scene>
             </Drawer>
           </Router>
