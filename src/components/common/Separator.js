@@ -6,12 +6,14 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 
 const Separator = ({style, color}) => {
-    const propStyle = {
-        borderBottomColor: color
+    let separatorStyle = [styles.defaultStyle]
+    if (color) {
+        separatorStyle.push({borderBottomColor: color})
     }
+
     return (
         <View style={style}>
-            <View style={[styles.defaultStyle, propStyle]} />
+            <View style={separatorStyle} />
         </View>
     );
 }
