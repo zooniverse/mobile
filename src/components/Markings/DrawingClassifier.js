@@ -158,7 +158,7 @@ class DrawingClassifier extends Component {
                 >
                     {isQuestionVisible ? classification : tutorial}
                 </ClassificationPanel>
-                {isQuestionVisible && this.props.help && <NeedHelpButton onPress={() => this.classificationContainer.displayHelpModal()} /> }
+                {isQuestionVisible && !R.isEmpty(this.props.help) && <NeedHelpButton onPress={() => this.classificationContainer.displayHelpModal()} /> }
                 {isQuestionVisible && this.props.guide && fieldGuideButton}
                 { isQuestionVisible && submitButton }
             </View>
