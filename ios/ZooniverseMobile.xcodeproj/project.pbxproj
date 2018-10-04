@@ -21,6 +21,7 @@
 		01471F5420C09330007A22F4 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01471F5320C09330007A22F4 /* ImageSizer.m */; };
 		014AB847202374F80014915B /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051C91D7F618700052983 /* libRCTGoogleAnalyticsBridge.a */; };
 		0154415820A4C33800C8BA5A /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */; };
+		015B202F215EBDDB00CC2A37 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 015B2029215EBDC200CC2A37 /* libRNBlur.a */; };
 		01DE9377205192F500E81CA7 /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9373205192F500E81CA7 /* Karla-Bold.ttf */; };
 		01DE9378205192F500E81CA7 /* Karla-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */; };
 		01DE9379205192F500E81CA7 /* Karla-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9375205192F500E81CA7 /* Karla-Italic.ttf */; };
@@ -227,6 +228,20 @@
 			remoteGlobalIDString = 014AB9562024FFCA0014915B;
 			remoteInfo = "RNSVG-tvOS";
 		};
+		015B2028215EBDC200CC2A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 015B1FFD215EBDC200CC2A37 /* RNBlur.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A68BD7BC1BC31318005F02DF;
+			remoteInfo = RNBlur;
+		};
+		015B202A215EBDC200CC2A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 015B1FFD215EBDC200CC2A37 /* RNBlur.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64D1BD361EEFE88700F3F219;
+			remoteInfo = "RNBlur-tvOS";
+		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
@@ -374,6 +389,7 @@
 		01471F5220C09330007A22F4 /* ImageSizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageSizer.h; path = ZooniverseMobile/ImageSizer.h; sourceTree = "<group>"; };
 		01471F5320C09330007A22F4 /* ImageSizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageSizer.m; path = ZooniverseMobile/ImageSizer.m; sourceTree = "<group>"; };
 		0154412F20A4C33800C8BA5A /* GoogleService-Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dev.plist"; sourceTree = "<group>"; };
+		015B1FFD215EBDC200CC2A37 /* RNBlur.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
 		01DE9373205192F500E81CA7 /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Bold.ttf"; path = "../assets/fonts/Karla-Bold.ttf"; sourceTree = "<group>"; };
 		01DE9374205192F500E81CA7 /* Karla-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-BoldItalic.ttf"; path = "../assets/fonts/Karla-BoldItalic.ttf"; sourceTree = "<group>"; };
 		01DE9375205192F500E81CA7 /* Karla-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Italic.ttf"; path = "../assets/fonts/Karla-Italic.ttf"; sourceTree = "<group>"; };
@@ -431,6 +447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015B202F215EBDDB00CC2A37 /* libRNBlur.a in Frameworks */,
 				0125C11920FE7CE2009DCD28 /* libRNFetchBlob.a in Frameworks */,
 				992864FA1E08908900142B69 /* WebKit.framework in Frameworks */,
 				99E051DA1D7F635700052983 /* libsqlite3.0.tbd in Frameworks */,
@@ -521,6 +538,15 @@
 			isa = PBXGroup;
 			children = (
 				0125C11820FE7CAA009DCD28 /* libRNFetchBlob.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		015B1FFE215EBDC200CC2A37 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				015B2029215EBDC200CC2A37 /* libRNBlur.a */,
+				015B202B215EBDC200CC2A37 /* libRNBlur.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -621,6 +647,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				015B1FFD215EBDC200CC2A37 /* RNBlur.xcodeproj */,
 				0125C11320FE7CAA009DCD28 /* RNFetchBlob.xcodeproj */,
 				99D3E8081E9D3C8300F7863A /* RCTAnimation.xcodeproj */,
 				9955436A1DE3624E0016257B /* RNSVG.xcodeproj */,
@@ -888,6 +915,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 015B1FFE215EBDC200CC2A37 /* Products */;
+					ProjectRef = 015B1FFD215EBDC200CC2A37 /* RNBlur.xcodeproj */;
+				},
+				{
 					ProductGroup = 0125C11420FE7CAA009DCD28 /* Products */;
 					ProjectRef = 0125C11320FE7CAA009DCD28 /* RNFetchBlob.xcodeproj */;
 				},
@@ -1064,6 +1095,20 @@
 			fileType = archive.ar;
 			path = "libRNSVG-tvOS.a";
 			remoteRef = 014AB99F202507200014915B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		015B2029215EBDC200CC2A37 /* libRNBlur.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBlur.a;
+			remoteRef = 015B2028215EBDC200CC2A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		015B202B215EBDC200CC2A37 /* libRNBlur.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBlur.a;
+			remoteRef = 015B202A215EBDC200CC2A37 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
