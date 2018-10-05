@@ -41,7 +41,9 @@ exports[`renders a button if there is a field guide 1`] = `
             },
             Array [
               undefined,
-              undefined,
+              Array [
+                undefined,
+              ],
             ],
           ]
         }
@@ -83,7 +85,10 @@ exports[`renders a button if there is a field guide 1`] = `
             Object {
               "fontFamily": "Karla",
             },
-            undefined,
+            Array [
+              undefined,
+              Array [],
+            ],
           ]
         }
       >
@@ -126,7 +131,9 @@ exports[`renders a button if there is a field guide 1`] = `
             },
             Array [
               undefined,
-              undefined,
+              Array [
+                undefined,
+              ],
             ],
           ]
         }
@@ -179,7 +186,9 @@ exports[`renders correctly and with no button if no field guide 1`] = `
             },
             Array [
               undefined,
-              undefined,
+              Array [
+                undefined,
+              ],
             ],
           ]
         }
@@ -223,7 +232,9 @@ exports[`renders correctly and with no button if no field guide 1`] = `
             },
             Array [
               undefined,
-              undefined,
+              Array [
+                undefined,
+              ],
             ],
           ]
         }

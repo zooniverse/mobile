@@ -14,7 +14,6 @@ import { bindActionCreators } from 'redux'
 
 import NativeImage from '../../nativeModules/NativeImage'
 import * as imageActions from '../../actions/images'
-import { loadRemoteImageToCache } from '../../utils/imageUtils'
 import { subjectDisplayWidth, subjectDisplayHeight } from './SwipeClassifier'
 import ProgressIndicatingImage from '../common/ProgressIndicatingImage'
 import FontedText from '../common/FontedText'
@@ -44,7 +43,7 @@ class SwipeCard extends Component {
         })
 
         const remoteUri = this.props.subject.display.src
-        loadRemoteImageToCache(remoteUri).then((localUri) => {
+        this.props.imageActions.loadImageToCache(remoteUri).then((localUri) => {
             if (this.unlinkImageOnLoad) {
                 RNFetchBlob.fs.unlink(localUri)
                 return
@@ -53,7 +52,6 @@ class SwipeCard extends Component {
             const nativeImage = new NativeImage(localUri)
             nativeImage.getImageSize().then(this.updateOverlayImageForImageDimensions)
 
-            this.props.imageActions.saveImageLocation(remoteUri, localUri)
             this.setState({
                 localUri
             })
@@ -124,7 +122,6 @@ class SwipeCard extends Component {
                     style={[styles.image, styles.imageShadow]}
                     resizeMethod="resize" 
                     resizeMode="contain"
-                    loadingText={'Loading Subject'}
                 />
                 <View style={styles.overlayContainer}>
                     <View style={imageDimensionStyle}>

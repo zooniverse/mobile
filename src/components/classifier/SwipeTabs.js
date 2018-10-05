@@ -9,6 +9,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import FontedText from '../common/FontedText'
 import FieldGuide from './FieldGuide'
 import { length } from 'ramda'
+import ClassifierButton from './ClassifierButton';
 
 export class SwipeTabs extends Component {
   constructor(props) {
@@ -20,41 +21,27 @@ export class SwipeTabs extends Component {
   }
   render() {
     const leftButton =
-      <TouchableOpacity
+      <ClassifierButton
         onPress={this.props.onLeftButtonPressed}
-        activeOpacity={0.5}
-        style={ [styles.button, styles.tealButton, styles.leftButtonPadding] }>
-        <FontedText style={[styles.buttonText, styles.tealButtonText]}>
-          { this.props.answers[0].label }
-        </FontedText>
-      </TouchableOpacity>
-
+        style={ [styles.growing, styles.leftButtonPadding] }
+        text={ this.props.answers[0].label }
+        type="answer"
+      />
 
     const rightButton =
-      <TouchableOpacity
+      <ClassifierButton
         onPress={this.props.onRightButtonPressed}
-        activeOpacity={0.5}
-        style={ [styles.button, styles.tealButton] }>
-        <FontedText style={[styles.buttonText, styles.tealButtonText]}>
-          { this.props.answers[1].label }
-        </FontedText>
-      </TouchableOpacity>
+        style={styles.growing}
+        text={ this.props.answers[1].label }
+        type="answer"
+      />
 
     const fieldGuideButton =
-      <TouchableOpacity
-        onPress={() => this.setState({isFieldGuideVisible: true})}
-        activeOpacity={0.5}
-        style={ [styles.buttonShadow, styles.button, styles.leftButtonPadding] }>
-        <FontedText style={styles.buttonText}>
-           Field Guide
-        </FontedText>
-      </TouchableOpacity>
-
-    const fieldGuide =
-      <FieldGuide
-        guide={this.props.guide}
-        isVisible={this.state.isFieldGuideVisible}
-        onClose={() => this.setState({isFieldGuideVisible: false})}
+      <ClassifierButton
+        onPress={this.props.onFieldGuidePressed}
+        style={ styles.leftButtonPadding }
+        text="Field Guide"
+        type="guide"
       />
 
     return (
@@ -64,7 +51,6 @@ export class SwipeTabs extends Component {
           { length(this.props.guide.items) > 0 ? fieldGuideButton : null }
           { rightButton }
         </View>
-        { this.state.isFieldGuideVisible ? fieldGuide : null }
       </View>
     )
   }
@@ -81,40 +67,16 @@ const styles = EStyleSheet.create({
   leftButtonPadding: {
     marginRight: 20
   },
-  button: {
-    backgroundColor: 'white',
-    borderColor: '$disabledIconColor',
-    borderWidth: StyleSheet.hairlineWidth,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonShadow: {
-    shadowColor: 'rgba(0, 0, 0, 0.5)',
-    shadowOpacity: 1,
-    shadowRadius: 2,
-    shadowOffset: {
-        height: 1,
-        width: 2,
-    },
-  },
-  buttonText: {
-    marginVertical: 11,
-    marginHorizontal: 9
-  },
-  tealButton: {
-    flex: 1,
-    backgroundColor: '$buttonColor'
-  },
-  tealButtonText: {
-    color: 'white', 
-  },
+  growing: {
+    flex: 1
+  }
 })
 
 SwipeTabs.propTypes = {
   guide: PropTypes.object,
   onLeftButtonPressed: PropTypes.func,
   onRightButtonPressed: PropTypes.func,
+  onFieldGuidePressed: PropTypes.func,
   answers: PropTypes.arrayOf(PropTypes.object)
 }
 

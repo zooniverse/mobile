@@ -12,8 +12,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as imageActions from '../../actions/images'
-import FontedText from '../common/FontedText'
-import Theme from '../../theme'
+import SubjectLoadingIndicator from './SubjectLoadingIndicator'
 
 const mapDispatchToProps = (dispatch) => ({
     imageActions: bindActionCreators(imageActions, dispatch)
@@ -55,10 +54,7 @@ class ProgressIndicatingImage extends Component {
 
     render() {
         if (!this.state.imageIsLoaded) {
-            return  <View style={styles.loadingContainer}>
-                        <ActivityIndicator size="large" color={ Theme.$zooniverseTeal } />
-                        <FontedText style={styles.loadingText}> {this.props.loadingText} </FontedText>
-                    </View>
+            return  <SubjectLoadingIndicator />
         }
 
         return  <Animated.View style={[styles.imageContainer, { opacity: this.state.imageOpacity}]}>
@@ -71,15 +67,6 @@ class ProgressIndicatingImage extends Component {
 }
 
 const styles = EStyleSheet.create({
-    loadingContainer: {
-        flex:1, 
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    loadingText: {
-        color: '$zooniverseTeal'
-    },
     imageContainer: {
         flex: 1
     }
@@ -93,7 +80,6 @@ ProgressIndicatingImage.propTypes = {
     ]),
     onLoadEnd: PropTypes.func,
     imageActions: PropTypes.any,
-    loadingText: PropTypes.string,
 }
 
 export default connect(null, mapDispatchToProps)(ProgressIndicatingImage)
