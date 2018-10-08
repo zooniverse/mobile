@@ -166,6 +166,8 @@ class SvgOverlay extends Component {
                         overlayWidth: width
                     })
                 }}
+                height={this.props.height}
+                width={this.props.width}
                 style={styles.svg}
                 preserveAspectRatio="xMidYMid meet"
             >

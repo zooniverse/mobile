@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import {
     ImageBackground,
+    Platform,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import SvgOverlay from './SvgOverlay'
 import { connect } from 'react-redux'
 // import { bindActionCreators } from 'redux'
 // import * as drawingScreenAction from '../../../actions/drawingScreen'
+import SvgOverlay from './SvgOverlay'
+import NativeImage from '../../../nativeModules/NativeImage'
 
 // const mapStateToProps = (state) => ({
     // shapes: state.drawingScreen.shapes
@@ -23,12 +25,15 @@ class MarkableImage extends Component {
         super(props)
 
         this.state = {
-            mode: 'edit'
+            mode: 'edit',
+            imageResizedHeight: 1,
+            imageResizedWidth: 1
         }
 
         // this.onShapeDeleted = this.onShapeDeleted.bind(this)
         // this.onShapeCreated = this.onShapeCreated.bind(this)
         // this.onShapeModified = this.onShapeModified.bind(this)
+        this.onImageLayout = this.onImageLayout.bind(this)
     }
 
     // onShapeDeleted(shapeIndex) {
@@ -43,15 +48,31 @@ class MarkableImage extends Component {
     //     this.props.drawingScreenActions.mutateShapeAtIndex(modifications, index)
     // }
 
+    onImageLayout({nativeEvent}) {
+        const { height: containerHeight, width: containerWidth } = nativeEvent.layout
+        new NativeImage(this.props.source).getImageSize().then(({width, height}) => {
+            const aspectRatio = Math.min(containerHeight/height, containerWidth/width)
+            this.setState({
+                imageResizedHeight: height * aspectRatio,
+                imageResizedWidth: width * aspectRatio
+            })
+            
+        })
+    }
+
     render() {
+        const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         return (
             <View style={styles.svgContainer}>
                 <ImageBackground 
+                    onLayout={this.onImageLayout}
                     style={styles.svgOverlayContainer}
-                    source={{uri: this.props.source}}
+                    source={{uri: pathPrefix + this.props.source}}
                     resizeMode="contain"
                 >
                     <SvgOverlay
+                        height={`${this.state.imageResizedHeight}`}
+                        width={`${this.state.imageResizedWidth}`}
                         shape="rect"
                         mode={this.state.mode}
                         onShapeCreated={this.onShapeCreated}

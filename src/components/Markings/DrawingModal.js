@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    Platform,
     Modal,
     View
 } from 'react-native'
@@ -34,35 +35,40 @@ class DrawingModal extends Component {
     render() {
         return (
             <Modal
+                onRequestClose={this.props.onClose}
                 presentationStyle="overFullScreen"
                 animationType="fade"
                 visible={this.props.visible}
                 transparent
             >
-                <BlurView style={styles.blurView} blurType="light">
-                    <View style={styles.modalContainer}>
-                        <MarkableImage
-                            source={this.props.imageSource}
-                        />
-                        <DrawingButtons
-                            onButtonSelected={this.handleDrawingButtonPress}
-                            highlightedButton={this.state.mode}
-                        />
-                        <InstructionView
-                            {... this.props.tool}
-                            numberDrawn={0}
-                            onCancel={this.props.onClose}
-                            onSave={this.props.onClose}
-                        />
-                    </View>
-                    <CloseButton
-                        onPress={this.props.onClose}
-                        style={styles.closeButton}
-                        color={Theme.$zooniverseTeal}
-                        backgroundColor="white"
-                        size={34}
+                { 
+                    Platform.OS === 'ios' ?
+                        <BlurView style={styles.blurView} blurType="light" />
+                    :
+                        <View style={ [styles.blurView, styles.androidBlurView] } />
+                }
+                <View style={styles.modalContainer}>
+                    <MarkableImage
+                        source={this.props.imageSource}
                     />
-                </BlurView>
+                    <DrawingButtons
+                        onButtonSelected={this.handleDrawingButtonPress}
+                        highlightedButton={this.state.mode}
+                    />
+                    <InstructionView
+                        {... this.props.tool}
+                        numberDrawn={0}
+                        onCancel={this.props.onClose}
+                        onSave={this.props.onClose}
+                    />
+                </View>
+                <CloseButton
+                    onPress={this.props.onClose}
+                    style={styles.closeButton}
+                    color={Theme.$zooniverseTeal}
+                    backgroundColor="white"
+                    size={34}
+                />
             </Modal>
         )
     }
@@ -70,7 +76,14 @@ class DrawingModal extends Component {
 
 const styles = EStyleSheet.create({
     blurView: {
-        flex: 1
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    },
+    androidBlurView: {
+        backgroundColor: 'rgba(255,255,255, 0.8)'
     },
     closeButton: {
         position: 'absolute',

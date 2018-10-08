@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
     Image,
+    Platform,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
@@ -37,6 +38,7 @@ export default class ImageWithSvgOverlay extends Component {
     }
 
     render() {
+        const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         return (
             <View style={styles.container}>
                 {this.props.imageIsLoaded ?
@@ -44,7 +46,7 @@ export default class ImageWithSvgOverlay extends Component {
                         <Image
                             onLayout={this.onImageLayout}
                             style={styles.backgroundImage}
-                            source={{uri: this.props.uri}}
+                            source={{uri: pathPrefix + this.props.uri}}
                             resizeMode="contain"
                         />
                         <View style={styles.svgContainer} >
