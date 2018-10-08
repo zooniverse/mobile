@@ -125,7 +125,7 @@ class DrawingClassifier extends Component {
                     workflowID={this.props.workflow.id}
                     taskHelp={this.props.help}
                 />
-                <TouchableOpacity style={{flex: 1}} onPress={() => this.setState({isModalVisible: true})}>
+                <TouchableOpacity style={styles.container} onPress={() => this.setState({isModalVisible: true})}>
                     <ImageWithSvgOverlay
                         imageIsLoaded={this.state.imageIsLoaded}
                         uri={this.state.localImagePath}

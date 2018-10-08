@@ -94,7 +94,7 @@ class SvgOverlay extends Component {
                 this.setState({ isDrawing: false })
                 
                 if (Math.abs(shapeWidth) > 20 || Math.abs(shapeHeight) > 20) {
-                    this.props
+                    this.props.onShapeCreated(shape)
                 }
             },
             onPanResponderTerminate: () => {
@@ -188,6 +188,8 @@ const styles = {
 }
 
 SvgOverlay.propTypes = {
+    height: PropTypes.number,
+    width: PropTypes.number,
     drawingColor: PropTypes.string,
     drawingShape: PropTypes.oneOf(['rect']),
     shapes: PropTypes.object,
