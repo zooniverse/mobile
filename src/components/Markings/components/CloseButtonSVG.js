@@ -38,8 +38,6 @@ class CloseButtonSVG extends Component {
 }
 
 CloseButtonSVG.propTypes = {
-    x: PropTypes.number,
-    y: PropTypes.number,
     onPress: PropTypes.func
 }
 

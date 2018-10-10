@@ -9,12 +9,12 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import Theme from '../../../theme'
 
-const radius = 15
+const RADIUS = 15
 export const DrawingButton = ({ style, enabled, type, onPress }) => {
     const circleStyle = {
-        width: radius * 2,
-        height: radius * 2,
-        borderRadius: radius,
+        width: RADIUS * 2,
+        height: RADIUS * 2,
+        borderRadius: RADIUS,
         backgroundColor: enabled ? Theme.$zooniverseTeal : 'transparent',
         borderWidth: 1,
         borderColor: Theme.$zooniverseTeal
@@ -27,7 +27,7 @@ export const DrawingButton = ({ style, enabled, type, onPress }) => {
             <View style={circleStyle}>
                 <TouchableOpacity style={styles.buttonStyle} onPress={onPress} >
                     <View style={[styles.iconContainer, iconStyleFromType(type)]}>
-                        <ButtonIcon type={type} size={radius} color={iconColor} />
+                        <ButtonIcon type={type} size={RADIUS} color={iconColor} />
                     </View>
                 </TouchableOpacity>
             </View>
