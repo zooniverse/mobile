@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {
+    TouchableOpacity,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
@@ -22,6 +23,7 @@ import ClassifierButton from '../classifier/ClassifierButton'
 import Separator from '../common/Separator'
 import NavBar from '../NavBar'
 import * as navBarActions from '../../actions/navBar'
+import DrawingModal from './DrawingModal'
 
 const mapStateToProps = (state, ownProps) => {
 
@@ -57,7 +59,8 @@ class DrawingClassifier extends Component {
         this.state = {
             imageIsLoaded: false,
             localImagePath: '',
-            isQuestionVisible: !props.needsTutorial
+            isQuestionVisible: !props.needsTutorial,
+            isModalVisible: false,
         }
 
         this.finishTutorial = this.finishTutorial.bind(this)
@@ -122,10 +125,12 @@ class DrawingClassifier extends Component {
                     workflowID={this.props.workflow.id}
                     taskHelp={this.props.help}
                 />
-                <ImageWithSvgOverlay
-                    imageIsLoaded={this.state.imageIsLoaded}
-                    uri={this.state.localImagePath}
-                />
+                <TouchableOpacity style={styles.container} onPress={() => this.setState({isModalVisible: true})}>
+                    <ImageWithSvgOverlay
+                        imageIsLoaded={this.state.imageIsLoaded}
+                        uri={this.state.localImagePath}
+                    />
+                </TouchableOpacity>
             </View>
 
         const fieldGuideButton = 
@@ -136,7 +141,7 @@ class DrawingClassifier extends Component {
                     text="Field Guide"
                     style={styles.fieldGuideButton}
                 />
-                <Separator color={'rgba(0,0,0,.2)'} style={styles.separator}/>
+                <Separator style={styles.separator}/>
             </View>
 
         const submitButton = 
@@ -175,6 +180,13 @@ class DrawingClassifier extends Component {
                 >
                     {this.props.needsTutorial ? tutorial : classificationView}
                 </ClassificationContainer>
+                <DrawingModal
+                    // We validate that tools has atleast one element earlier
+                    tool={this.props.tools[0]}
+                    visible={this.state.isModalVisible} 
+                    imageSource={this.state.localImagePath}
+                    onClose={() => this.setState({isModalVisible: false})}
+                />
             </View>
         )
     }
