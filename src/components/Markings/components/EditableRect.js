@@ -56,7 +56,6 @@ class EditableRect extends Component {
     render() {
         return (
             <G
-                style={{backgroundColor: 'black'}}
                 onLayout={this.props.onRectLayout}
             >
                 <Rect
