@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    Alert,
     Platform,
     Modal,
     View
@@ -7,6 +8,8 @@ import {
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { BlurView } from 'react-native-blur';
+import { bindActionCreators } from 'redux'
+import R from 'ramda'
 import Theme from '../../theme'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import CloseButton from '../common/CloseButton'
@@ -14,22 +17,65 @@ import MarkableImage from './components/MarkableImage'
 import DrawingButtons from './components/DrawingButtons'
 import InstructionView from './components/InstructionView'
 
+import * as drawingActions from '../../actions/drawing'
+
+const mapStateToProps = state => ({
+    canUndo: state.drawing.actions.length > 0,
+    shouldConfirmOnClose: !R.isEmpty(state.drawing.shapes) || !R.isEmpty(state.drawing.shapesInProgress)
+})
+
+const mapDispatchToProps = dispatch => ({
+     drawingActions: bindActionCreators(drawingActions, dispatch)
+})
+
 class DrawingModal extends Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
-            mode: 'unselected'
+            mode: 'draw'
         }
 
         this.handleDrawingButtonPress = this.handleDrawingButtonPress.bind(this)
+        this.onCancel = this.onCancel.bind(this)
+        this.onSave = this.onSave.bind(this)
     }
 
     handleDrawingButtonPress(drawingButton) {
-        this.setState({
-            mode: drawingButton
-        })
+        if (drawingButton === 'undo') {
+            this.props.drawingActions.undoMostRecentEdit()
+        } else {
+            this.setState({
+                mode: drawingButton
+            })
+        }
+    }
+
+    onCancel() {
+        const onConfirm = () => {
+            this.props.drawingActions.clearShapes()
+            this.props.onClose()
+        }
+
+        if (this.props.shouldConfirmOnClose) {
+            Alert.alert(
+                'Are you sure?',
+                'This will erase all of your annotations.',
+                [
+                    {text: 'Yes', onPress: onConfirm},
+                    {text: 'Cancel', style: 'cancel'},
+                ],
+                { cancelable: false }
+            )
+        } else {
+            onConfirm()
+        }
+    }
+
+    onSave() {
+        this.props.drawingActions.saveEdits()
+        this.props.onClose()
     }
 
     render() {
@@ -49,21 +95,24 @@ class DrawingModal extends Component {
                 }
                 <View style={styles.modalContainer}>
                     <MarkableImage
+                        drawingColor={this.props.tool.color}
                         source={this.props.imageSource}
+                        mode={this.state.mode}
                     />
                     <DrawingButtons
                         onButtonSelected={this.handleDrawingButtonPress}
                         highlightedButton={this.state.mode}
+                        canUndo={this.props.canUndo}
                     />
                     <InstructionView
                         {... this.props.tool}
                         numberDrawn={0}
-                        onCancel={this.props.onClose}
-                        onSave={this.props.onClose}
+                        onCancel={this.onCancel}
+                        onSave={this.onSave}
                     />
                 </View>
                 <CloseButton
-                    onPress={this.props.onClose}
+                    onPress={this.onCancel}
                     style={styles.closeButton}
                     color={Theme.$zooniverseTeal}
                     backgroundColor="white"
@@ -110,9 +159,12 @@ const styles = EStyleSheet.create({
 })
 
 DrawingModal.propTypes = {
+    canUndo: PropTypes.bool,
+    shouldConfirmOnClose: PropTypes.bool,
     visible: PropTypes.bool,
     imageSource: PropTypes.string,
     onClose: PropTypes.func,
+    onSave: PropTypes.func,
     tool: PropTypes.shape({
         max: PropTypes.string,
         min: PropTypes.string,
@@ -120,7 +172,12 @@ DrawingModal.propTypes = {
         color: PropTypes.string,
         label: PropTypes.string,
         details: PropTypes.array,
+    }),
+    drawingActions: PropTypes.shape({
+        saveEdits: PropTypes.func,
+        clearShapes: PropTypes.func,
+        undoMostRecentEdit: PropTypes.func
     })
 }
 
-export default connect(null, null)(DrawingModal)
+export default connect(mapStateToProps, mapDispatchToProps)(DrawingModal)
