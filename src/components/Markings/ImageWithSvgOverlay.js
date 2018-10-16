@@ -5,11 +5,13 @@ import {
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import NativeImage from '../../nativeModules/NativeImage'
-import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
 import {
     Svg,
- } from 'react-native-svg'
+    Rect
+} from 'react-native-svg'
+import R from 'ramda'
+import NativeImage from '../../nativeModules/NativeImage'
+import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
 
 export default class ImageWithSvgOverlay extends Component {
 
@@ -17,7 +19,9 @@ export default class ImageWithSvgOverlay extends Component {
         super(props)
         this.count = 0
         this.state = {
-            imageIsLoaded: false, 
+            imageIsLoaded: false,
+            imageNativeWidth: 1,
+            imageNativeHeight: 1,
             imageResizedWidth: 1,
             imageResizedHeight: 1,
         }
@@ -30,11 +34,36 @@ export default class ImageWithSvgOverlay extends Component {
         new NativeImage(this.props.uri).getImageSize().then(({width, height}) => {
             const aspectRatio = Math.min(containerHeight/height, containerWidth/width)
             this.setState({
+                imageIsLoaded: true,
                 imageResizedHeight: height * aspectRatio,
-                imageResizedWidth: width * aspectRatio
+                imageResizedWidth: width * aspectRatio,
+                imageNativeHeight: height,
+                imageNativeWidth: width
             })
             
         })
+    }
+
+    renderShapes() {
+        const shapeArray = []
+        const convertObjectToComponent = (shape, index) => {
+            const { type } = shape
+            switch (type) {
+                case ('rect'):
+                    shapeArray.push(
+                        <Rect 
+                            key={index}
+                            fill="transparent"
+                            stroke={shape.color}
+                            strokeWidth={3}
+                            { ... shape }
+                        />
+                    )
+            }
+        }
+        
+        R.mapObjIndexed(convertObjectToComponent, this.props.shapes)
+        return shapeArray
     }
 
     render() {
@@ -49,14 +78,20 @@ export default class ImageWithSvgOverlay extends Component {
                             source={{uri: pathPrefix + this.props.uri}}
                             resizeMode="contain"
                         />
-                        <View style={styles.svgContainer} >
-                            <Svg 
-                                height={this.state.imageResizedHeight}
-                                width={this.state.imageResizedWidth}
-                            >
-                                { /* TODO: Render the shapes that have been drawn here */ }
-                            </Svg>
-                        </View>
+                        {
+                            this.state.imageIsLoaded ? 
+                                <View style={styles.svgContainer} >
+                                    <Svg 
+                                        viewBox={`0 0 ${this.state.imageNativeWidth} ${this.state.imageNativeHeight}`}
+                                        height={this.state.imageResizedHeight}
+                                        width={this.state.imageResizedWidth}
+                                    >
+                                        { this.renderShapes() }
+                                    </Svg>
+                                </View>
+                            : 
+                                null
+                        }
                     </View>
                 :
                     <SubjectLoadingIndicator /> 
@@ -101,5 +136,6 @@ ImageWithSvgOverlay.propTypes = {
         y: PropTypes.number,
         width: PropTypes.number,
         height: PropTypes.number
-    }))
+    })),
+    shapes: PropTypes.object
 }
