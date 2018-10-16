@@ -6,18 +6,18 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
-// import * as drawingScreenAction from '../../../actions/drawingScreen'
+import { bindActionCreators } from 'redux'
+import * as drawingActions from '../../../actions/drawing'
 import SvgOverlay from './SvgOverlay'
 import NativeImage from '../../../nativeModules/NativeImage'
 
-// const mapStateToProps = (state) => ({
-    // shapes: state.drawingScreen.shapes
-// })
+const mapStateToProps = (state) => ({
+    shapes: state.drawing.shapesInProgress
+})
 
-// const mapDispatchToProps = (dispatch) => ({
-//      drawingScreenActions: bindActionCreators(drawingScreenAction, dispatch)
-// })
+const mapDispatchToProps = (dispatch) => ({
+     drawingActions: bindActionCreators(drawingActions, dispatch)
+})
 
 class MarkableImage extends Component {
 
@@ -25,38 +25,42 @@ class MarkableImage extends Component {
         super(props)
 
         this.state = {
-            mode: 'edit',
+            imageNativeWidth: 1,
+            imageNativeHeight: 1,
             imageResizedHeight: 1,
-            imageResizedWidth: 1
+            imageResizedWidth: 1,
+            isImageLoaded: false
         }
 
-        // this.onShapeDeleted = this.onShapeDeleted.bind(this)
-        // this.onShapeCreated = this.onShapeCreated.bind(this)
-        // this.onShapeModified = this.onShapeModified.bind(this)
+        this.onShapeDeleted = this.onShapeDeleted.bind(this)
+        this.onShapeCreated = this.onShapeCreated.bind(this)
+        this.onShapeModified = this.onShapeModified.bind(this)
         this.onImageLayout = this.onImageLayout.bind(this)
     }
 
-    // onShapeDeleted(shapeIndex) {
-    //     this.props.drawingScreenActions.removeShapeAtIndex(shapeIndex)
-    // }
+    onShapeDeleted(shapeIndex) {
+        this.props.drawingActions.removeShapeAtIndex(shapeIndex)
+    }
 
-    // onShapeCreated(newShape) {
-    //     this.props.drawingScreenActions.addShape(newShape)
-    // }
+    onShapeCreated(newShape) {
+        this.props.drawingActions.addShape(newShape)
+    }
 
-    // onShapeModified(modifications, index) {
-    //     this.props.drawingScreenActions.mutateShapeAtIndex(modifications, index)
-    // }
+    onShapeModified(modifications, index) {
+        this.props.drawingActions.mutateShapeAtIndex(modifications, index)
+    }
 
     onImageLayout({nativeEvent}) {
         const { height: containerHeight, width: containerWidth } = nativeEvent.layout
         new NativeImage(this.props.source).getImageSize().then(({width, height}) => {
             const aspectRatio = Math.min(containerHeight/height, containerWidth/width)
             this.setState({
+                isImageLoaded: true,
                 imageResizedHeight: height * aspectRatio,
-                imageResizedWidth: width * aspectRatio
+                imageResizedWidth: width * aspectRatio,
+                imageNativeHeight: height,
+                imageNativeWidth: width
             })
-            
         })
     }
 
@@ -70,15 +74,24 @@ class MarkableImage extends Component {
                     source={{uri: pathPrefix + this.props.source}}
                     resizeMode="contain"
                 >
-                    <SvgOverlay
-                        height={`${this.state.imageResizedHeight}`}
-                        width={`${this.state.imageResizedWidth}`}
-                        shape="rect"
-                        mode={this.state.mode}
-                        onShapeCreated={this.onShapeCreated}
-                        onShapeDeleted={this.onShapeDeleted}
-                        onShapeModified={this.onShapeModified}
-                    />
+                    {
+                        this.state.isImageLoaded ? 
+                            <SvgOverlay
+                                nativeWidth={this.state.imageNativeWidth}
+                                nativeHeight={this.state.imageNativeHeight}
+                                shapes={this.props.shapes}
+                                color={this.props.drawingColor}
+                                height={this.state.imageResizedHeight}
+                                width={this.state.imageResizedWidth}
+                                drawingShape="rect"
+                                mode={this.props.mode}
+                                onShapeCreated={this.onShapeCreated}
+                                onShapeDeleted={this.onShapeDeleted}
+                                onShapeModified={this.onShapeModified}
+                            />
+                        :
+                            null
+                    }
                 </ImageBackground>
             </View>
         )
@@ -92,12 +105,17 @@ const styles = {
         justifyContent: 'center',
     },
     svgOverlayContainer: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 }
 
 MarkableImage.propTypes = {
-    drawingScreenActions: PropTypes.shape({
+    drawingColor: PropTypes.string,
+    shapes: PropTypes.any,
+    mode: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
+    drawingActions: PropTypes.shape({
         removeShapeAtIndex: PropTypes.func,
         addShape: PropTypes.func,
         mutateShapeAtIndex: PropTypes.func
@@ -105,4 +123,4 @@ MarkableImage.propTypes = {
     source: PropTypes.string,
 }
 
-export default connect(null, null)(MarkableImage)
+export default connect(mapStateToProps, mapDispatchToProps)(MarkableImage)
