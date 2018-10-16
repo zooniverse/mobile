@@ -4,28 +4,28 @@ import {
     TouchableOpacity
 } from 'react-native'
 import PropTypes from 'prop-types'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import Theme from '../../../theme'
 
 const radius = 15
-export const DrawingButton = ({ style, enabled, type, onPress }) => {
+export const DrawingButton = ({ style, activated, type, onPress, disabled }) => {
     const circleStyle = {
         width: radius * 2,
         height: radius * 2,
         borderRadius: radius,
-        backgroundColor: enabled ? Theme.$zooniverseTeal : 'transparent',
+        backgroundColor: activated ? Theme.$zooniverseTeal : 'transparent',
         borderWidth: 1,
         borderColor: Theme.$zooniverseTeal
     }
 
-    const iconColor = enabled ? 'white' : 'black'
+    const iconColor = activated ? 'white' : 'rgba(92, 92, 92, 1)'
+    const opacity = {opacity: disabled ? 0.5 : 1}
 
     return (
         <View style={style}>
-            <View style={circleStyle}>
-                <TouchableOpacity style={styles.buttonStyle} onPress={onPress} >
+            <View style={[circleStyle, opacity]}>
+                <TouchableOpacity style={styles.buttonStyle} onPress={onPress} disabled={disabled}>
                     <View style={[styles.iconContainer, iconStyleFromType(type)]}>
                         <ButtonIcon type={type} size={radius} color={iconColor} />
                     </View>
@@ -38,16 +38,18 @@ export const DrawingButton = ({ style, enabled, type, onPress }) => {
 const ButtonIcon = ({type, ...props}) => {
     switch (type) {
         case 'edit':
-            return <SimpleLineIcons name={'note'} {...props} />
+            return <FontAwesome5 name={'edit'} {...props} solid/>
         case 'draw':
-            return <Icon name={'plus'} {...props} />
+            return <FontAwesome5 name={'plus'} {...props} />
         case 'erase':
-            return <SimpleLineIcons name={'trash'} {...props} />
+            return <FontAwesome5 name={'trash'} {...props} />
+        case 'undo':
+            return <FontAwesome5 name={'undo'} {...props} />
     }
 }
 
 ButtonIcon.propTypes = {
-    type: PropTypes.oneOf(['edit', 'draw', 'erase'])
+    type: PropTypes.oneOf(['edit', 'draw', 'erase', 'undo'])
 }
 
 const iconStyleFromType = (type) => {
@@ -60,7 +62,8 @@ const iconStyleFromType = (type) => {
 }
 
 DrawingButton.propTypes = {
-    enabled: PropTypes.bool,
+    activated: PropTypes.bool,
+    disabled: PropTypes.bool,
     onPress: PropTypes.func,
     type: PropTypes.string,
     style: PropTypes.object
