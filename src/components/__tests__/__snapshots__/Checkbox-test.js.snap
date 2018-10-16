@@ -25,6 +25,7 @@ exports[`renders 1`] = `
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
+        Object {},
       ]
     }
   >
@@ -58,6 +59,7 @@ exports[`renders background color when checked 1`] = `
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
+        Object {},
       ]
     }
   >

@@ -314,6 +314,7 @@ exports[`passes false to Modal when not visible 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
@@ -638,6 +639,7 @@ exports[`renders correctly when visible 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >

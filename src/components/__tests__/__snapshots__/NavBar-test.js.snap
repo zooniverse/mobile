@@ -62,6 +62,7 @@ exports[`renders correctly with defaults 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -133,6 +134,7 @@ exports[`renders correctly with defaults 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -207,6 +209,7 @@ exports[`renders correctly with title 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -280,6 +283,7 @@ exports[`renders correctly with title 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >

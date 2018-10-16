@@ -185,6 +185,7 @@ exports[`renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -232,6 +233,7 @@ exports[`renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -279,6 +281,7 @@ exports[`renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -326,6 +329,7 @@ exports[`renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -373,6 +377,7 @@ exports[`renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -584,6 +589,7 @@ exports[`renders header if initial tutorial 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -631,6 +637,7 @@ exports[`renders header if initial tutorial 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -678,6 +685,7 @@ exports[`renders header if initial tutorial 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -725,6 +733,7 @@ exports[`renders header if initial tutorial 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -772,6 +781,7 @@ exports[`renders header if initial tutorial 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -961,6 +971,7 @@ exports[`renders with no media 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -1008,6 +1019,7 @@ exports[`renders with no media 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -1055,6 +1067,7 @@ exports[`renders with no media 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -1102,6 +1115,7 @@ exports[`renders with no media 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -1149,6 +1163,7 @@ exports[`renders with no media 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >

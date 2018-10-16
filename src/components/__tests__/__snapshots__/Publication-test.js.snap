@@ -61,6 +61,7 @@ exports[`renders correctly 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >

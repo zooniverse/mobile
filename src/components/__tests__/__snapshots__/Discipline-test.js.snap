@@ -58,6 +58,7 @@ exports[`renders with a title 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
@@ -100,6 +101,7 @@ exports[`renders with a title 1`] = `
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >

@@ -68,6 +68,7 @@ exports[`does not render when not connected 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -147,6 +148,7 @@ exports[`renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -226,6 +228,7 @@ exports[`renders selected discipline 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
