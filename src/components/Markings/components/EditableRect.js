@@ -25,30 +25,35 @@ class EditableRect extends Component {
      * 
      * @param {An object that contains deltas to be applied to the shape} deltas
      */
-    update({dx, dy, dw, dh}) {
+    update({dx, dy, dw, dh}) {        
+        const newWidth = this.props.width + dw < 0.1 ? this.props.width + dw + 1 : this.props.width + dw
+        const newHeight = this.props.height + dh < 0.1 ? this.props.height + dh + 1: this.props.height + dh
+        const newX = this.props.x + dx < 0.1 ? this.props.x + dx + 1 : this.props.x + dx
+        const newY = this.props.y + dy < 0.1 ? this.props.y + dy + 1 : this.props.y + dy
+
         this.rect.setNativeProps({
-            x: `${this.props.x + dx}`,
-            y: `${this.props.y + dy}`,
-            width: `${this.props.width + dw}`,
-            height: `${this.props.height + dh}`
+            x: `${newX}`,
+            y: `${newY}`,
+            width: `${newWidth}`,
+            height: `${newHeight}`
         })
 
         if (this.props.showCorners) {
             this.upperLeftCircle.setNativeProps({
-                cx: `${this.props.x + dx}`,
-                cy: `${this.props.y + dy}`,
+                cx: `${newX}`,
+                cy: `${newY}`,
             })
             this.upperRightCircle.setNativeProps({
-                cx: `${this.props.x + dx + this.props.width + dw}`,
-                cy: `${this.props.y + dy}`
+                cx: `${newX + newWidth}`,
+                cy: `${newY}`
             })
             this.bottomRightCircle.setNativeProps({
-                cx: `${this.props.x + dx + this.props.width + dw}`,
-                cy: `${this.props.y + dy + this.props.height + dh}`
+                cx: `${newX + newWidth}`,
+                cy: `${newY + newHeight}`
             })
             this.bottomLeftCircle.setNativeProps({
-                cx: `${this.props.x + dx}`,
-                cy: `${this.props.y + dy + this.props.height + dh}`
+                cx: `${newX}`,
+                cy: `${newY + newHeight}`
             })
         }
     }
