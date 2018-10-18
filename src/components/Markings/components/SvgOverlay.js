@@ -46,10 +46,10 @@ class SvgOverlay extends Component {
 
         this.panResponder = PanResponder.create({
             // Ask to be the responder:
-            onStartShouldSetPanResponder: () => {this.props.mode === 'draw'},
-            onStartShouldSetPanResponderCapture: () => {return this.props.mode === 'draw'},
-            onMoveShouldSetPanResponder: () => { return this.props.mode === 'draw' },
-            onMoveShouldSetPanResponderCapture: () => { return this.props.mode === 'draw'},
+            onStartShouldSetPanResponder: () => this.props.mode === 'draw',
+            onStartShouldSetPanResponderCapture: () => this.props.mode === 'draw',
+            onMoveShouldSetPanResponder: () => this.props.mode === 'draw',
+            onMoveShouldSetPanResponderCapture: () => this.props.mode === 'draw',
             onPanResponderGrant: (evt) => {
                 const { locationX, locationY } = evt.nativeEvent
                 this.setState({
