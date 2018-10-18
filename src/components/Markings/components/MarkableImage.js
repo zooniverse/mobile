@@ -9,11 +9,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as drawingActions from '../../../actions/drawing'
 import SvgOverlay from './SvgOverlay'
-import NativeImage from '../../../nativeModules/NativeImage'
 
-const mapStateToProps = (state) => ({
-    shapes: state.drawing.shapesInProgress
-})
+const mapStateToProps = (state) => {
+    const { id } = state.classifier.subject
+    return {
+        shapes: state.drawing.shapesInProgress,
+        subjectDimensions: state.classifier.subjectDimensions[id]
+    }
+}
 
 const mapDispatchToProps = (dispatch) => ({
      drawingActions: bindActionCreators(drawingActions, dispatch)
@@ -27,8 +30,8 @@ class MarkableImage extends Component {
         this.state = {
             imageNativeWidth: 1,
             imageNativeHeight: 1,
-            imageResizedHeight: 1,
-            imageResizedWidth: 1,
+            clientHeight: 1,
+            clientWidth: 1,
             isImageLoaded: false
         }
 
@@ -52,19 +55,19 @@ class MarkableImage extends Component {
 
     onImageLayout({nativeEvent}) {
         const { height: containerHeight, width: containerWidth } = nativeEvent.layout
-        new NativeImage(this.props.source).getImageSize().then(({width, height}) => {
-            const aspectRatio = Math.min(containerHeight/height, containerWidth/width)
-            this.setState({
-                isImageLoaded: true,
-                imageResizedHeight: height * aspectRatio,
-                imageResizedWidth: width * aspectRatio,
-                imageNativeHeight: height,
-                imageNativeWidth: width
-            })
+        const { naturalHeight, naturalWidth } = this.props.subjectDimensions
+        const aspectRatio = Math.min(containerHeight/naturalHeight, containerWidth/naturalWidth)
+        const clientHeight = naturalHeight * aspectRatio
+        const clientWidth = naturalWidth * aspectRatio
+        this.setState({
+            isImageLoaded: true,
+            clientHeight,
+            clientWidth,
         })
     }
 
     render() {
+        const { naturalHeight, naturalWidth } = this.props.subjectDimensions
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         return (
             <View style={styles.svgContainer}>
@@ -77,12 +80,12 @@ class MarkableImage extends Component {
                     {
                         this.state.isImageLoaded ? 
                             <SvgOverlay
-                                nativeWidth={this.state.imageNativeWidth}
-                                nativeHeight={this.state.imageNativeHeight}
+                                nativeWidth={naturalWidth}
+                                nativeHeight={naturalHeight}
                                 shapes={this.props.shapes}
                                 color={this.props.drawingColor}
-                                height={this.state.imageResizedHeight}
-                                width={this.state.imageResizedWidth}
+                                height={this.state.clientHeight}
+                                width={this.state.clientWidth}
                                 drawingShape="rect"
                                 mode={this.props.mode}
                                 onShapeCreated={this.onShapeCreated}
@@ -112,6 +115,10 @@ const styles = {
 }
 
 MarkableImage.propTypes = {
+    subjectDimensions: PropTypes.shape({
+        naturalWidth: PropTypes.number,
+        naturalHeight: PropTypes.number
+    }),
     drawingColor: PropTypes.string,
     shapes: PropTypes.any,
     mode: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),

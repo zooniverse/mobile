@@ -10,10 +10,17 @@ import {
     Rect
 } from 'react-native-svg'
 import R from 'ramda'
-import NativeImage from '../../nativeModules/NativeImage'
+import { connect } from 'react-redux'
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
 
-export default class ImageWithSvgOverlay extends Component {
+const mapStateToProps = (state) => {
+    const subjectDimensions = state.classifier.subjectDimensions[state.classifier.subject.id]
+    return {
+        subjectDimensions: subjectDimensions ? subjectDimensions : {naturalHeight: 1, naturalWidth: 1}
+    }
+}
+
+class ImageWithSvgOverlay extends Component {
 
     constructor(props) {
         super(props)
@@ -22,8 +29,8 @@ export default class ImageWithSvgOverlay extends Component {
             imageIsLoaded: false,
             imageNativeWidth: 1,
             imageNativeHeight: 1,
-            imageResizedWidth: 1,
-            imageResizedHeight: 1,
+            clientWidth: 1,
+            clientHeight: 1,
         }
 
         this.onImageLayout = this.onImageLayout.bind(this)
@@ -31,16 +38,19 @@ export default class ImageWithSvgOverlay extends Component {
 
     onImageLayout({nativeEvent}) {
         const { height: containerHeight, width: containerWidth } = nativeEvent.layout
-        new NativeImage(this.props.uri).getImageSize().then(({width, height}) => {
-            const aspectRatio = Math.min(containerHeight/height, containerWidth/width)
-            this.setState({
-                imageIsLoaded: true,
-                imageResizedHeight: height * aspectRatio,
-                imageResizedWidth: width * aspectRatio,
-                imageNativeHeight: height,
-                imageNativeWidth: width
-            })
-            
+        const { naturalHeight, naturalWidth } = this.props.subjectDimensions
+        const aspectRatio = Math.min(containerHeight/naturalHeight, containerWidth/naturalWidth)
+        const clientHeight = naturalHeight * aspectRatio
+        const clientWidth = naturalWidth * aspectRatio
+        this.setState({
+            imageIsLoaded: true,
+            clientHeight,
+            clientWidth,
+        })
+        
+        this.props.onImageLayout({
+            clientHeight,
+            clientWidth,
         })
     }
 
@@ -68,6 +78,7 @@ export default class ImageWithSvgOverlay extends Component {
 
     render() {
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
+        const { naturalWidth, naturalHeight } = this.props.subjectDimensions
         return (
             <View style={styles.container}>
                 {this.props.imageIsLoaded ?
@@ -82,9 +93,9 @@ export default class ImageWithSvgOverlay extends Component {
                             this.state.imageIsLoaded ? 
                                 <View style={styles.svgContainer} >
                                     <Svg 
-                                        viewBox={`0 0 ${this.state.imageNativeWidth} ${this.state.imageNativeHeight}`}
-                                        height={this.state.imageResizedHeight}
-                                        width={this.state.imageResizedWidth}
+                                        viewBox={`0 0 ${naturalWidth} ${naturalHeight}`}
+                                        height={this.state.clientHeight}
+                                        width={this.state.clientWidth}
                                     >
                                         { this.renderShapes() }
                                     </Svg>
@@ -127,6 +138,10 @@ const styles = {
 }
 
 ImageWithSvgOverlay.propTypes = {
+    subjectDimensions: PropTypes.shape({
+        naturalWidth: PropTypes.number,
+        naturalHeight: PropTypes.number
+    }),
     imageIsLoaded: PropTypes.bool,
     uri: PropTypes.string,
     annotations: PropTypes.arrayOf(PropTypes.shape({
@@ -137,5 +152,8 @@ ImageWithSvgOverlay.propTypes = {
         width: PropTypes.number,
         height: PropTypes.number
     })),
+    onImageLayout: PropTypes.func,
     shapes: PropTypes.object
 }
+
+export default connect(mapStateToProps)(ImageWithSvgOverlay)
