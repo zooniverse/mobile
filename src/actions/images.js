@@ -2,15 +2,20 @@ import * as ActionConstants from '../constants/actions'
 import { loadRemoteImageToCache } from '../utils/imageUtils'
 
 export const loadImageToCache = (remoteSource) => {
-    return dispatch => {
+    return (dispatch, getState) => {
         return new Promise((resolve, reject) => {
-            loadRemoteImageToCache(remoteSource).then((localSource) => {
-                dispatch(saveImageLocation(remoteSource, localSource))
-                resolve(localSource)
-            })
-            .catch((error) => {
-                reject(error)
-            })
+            const cachedImagePath = getState().images[remoteSource]
+            if (cachedImagePath) {
+                resolve(cachedImagePath)
+            } else {
+                loadRemoteImageToCache(remoteSource).then((localSource) => {
+                    dispatch(saveImageLocation(remoteSource, localSource))
+                    resolve(localSource)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+            }
         })
     }
 }
