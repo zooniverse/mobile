@@ -60,6 +60,7 @@ exports[`renders correctly 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
@@ -130,6 +131,7 @@ exports[`renders hidden correctly 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >

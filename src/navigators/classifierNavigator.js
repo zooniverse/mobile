@@ -1,5 +1,6 @@
 import {Actions} from 'react-native-router-flux'
 import * as classifierActions from '../actions/classifier'
+import * as drawingActions from '../actions/drawing'
 import R from 'ramda'
 
 const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, workflow) => {
@@ -27,6 +28,7 @@ function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow,
 
 function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
     dispatch(classifierActions.startNewClassification(workflow, project))
+    dispatch(drawingActions.clearShapes())
     Actions.DrawingClassifier({
         ...parseDrawingTask(workflow),
         project,

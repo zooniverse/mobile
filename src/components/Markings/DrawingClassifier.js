@@ -39,7 +39,8 @@ const mapStateToProps = (state, ownProps) => {
         guide: state.classifier.guide[ownProps.workflow.id] || {},
         tutorial: state.classifier.tutorial[ownProps.workflow.id] || {},
         needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
-        usableSubjects
+        usableSubjects,
+        shapes: state.drawing.shapes
     }
 }
 
@@ -127,6 +128,7 @@ class DrawingClassifier extends Component {
                 />
                 <TouchableOpacity style={styles.container} onPress={() => this.setState({isModalVisible: true})}>
                     <ImageWithSvgOverlay
+                        shapes={this.props.shapes}
                         imageIsLoaded={this.state.imageIsLoaded}
                         uri={this.state.localImagePath}
                     />
@@ -186,6 +188,7 @@ class DrawingClassifier extends Component {
                     visible={this.state.isModalVisible} 
                     imageSource={this.state.localImagePath}
                     onClose={() => this.setState({isModalVisible: false})}
+                    
                 />
             </View>
         )
@@ -228,6 +231,7 @@ const styles = EStyleSheet.create({
 })
 
 DrawingClassifier.propTypes = {
+    shapes: PropTypes.object,
     isSuccess: PropTypes.bool,
     isFailure: PropTypes.bool,
     isFetching: PropTypes.bool,

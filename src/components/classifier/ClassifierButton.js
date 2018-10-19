@@ -66,7 +66,7 @@ const styles =EStyleSheet.create({
 ClassifierButton.propTypes = {
     style: PropTypes.any,
     onPress: PropTypes.func,
-    type: PropTypes.oneOf('answer', 'guide'),
+    type: PropTypes.oneOf(['answer', 'guide']),
     text: PropTypes.string.isRequired
 }
 

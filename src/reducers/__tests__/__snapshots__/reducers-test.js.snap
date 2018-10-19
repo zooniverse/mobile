@@ -20,6 +20,12 @@ Object {
     "tutorial": Object {},
     "workflow": Object {},
   },
+  "drawing": Object {
+    "actions": Array [],
+    "idCount": 0,
+    "shapes": Object {},
+    "shapesInProgress": Object {},
+  },
   "images": Object {},
   "main": Object {
     "bobLoblaw": "Has a law blog",
@@ -93,6 +99,12 @@ Object {
     "tutorial": Object {},
     "workflow": Object {},
   },
+  "drawing": Object {
+    "actions": Array [],
+    "idCount": 0,
+    "shapes": Object {},
+    "shapesInProgress": Object {},
+  },
   "images": Object {},
   "main": Object {
     "errorMessage": null,
@@ -164,6 +176,12 @@ Object {
     "tasks": Object {},
     "tutorial": Object {},
     "workflow": Object {},
+  },
+  "drawing": Object {
+    "actions": Array [],
+    "idCount": 0,
+    "shapes": Object {},
+    "shapesInProgress": Object {},
   },
   "images": Object {},
   "main": Object {
@@ -240,6 +258,12 @@ Object {
     "tasks": Object {},
     "tutorial": Object {},
     "workflow": Object {},
+  },
+  "drawing": Object {
+    "actions": Array [],
+    "idCount": 0,
+    "shapes": Object {},
+    "shapesInProgress": Object {},
   },
   "images": Object {},
   "main": Object {
