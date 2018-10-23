@@ -109,7 +109,7 @@ export default function classifier(state=InitialClassifier, action) {
             return { ...state, isFetching: false, isFailure: true }
         }
         case ActionConstants.CLEAR_CLASSIFIER_DATA: {
-            return { ...state, isFetching: false, isSuccess: false, isFailure: false }
+            return { ...state, subject: null, isFetching: false, isSuccess: false, isFailure: false }
         }
         case ActionConstants.SET_CLASSIFIER_TEST_MODE: {
             return { ...state, inPreviewMode: action.isTestMode}

@@ -27,8 +27,9 @@ function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow,
 }
 
 function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
-    dispatch(classifierActions.startNewClassification(workflow, project))
+    dispatch(classifierActions.clearClassifierData())
     dispatch(drawingActions.clearShapes())
+    dispatch(classifierActions.startNewClassification(workflow, project))
     Actions.DrawingClassifier({
         ...parseDrawingTask(workflow),
         project,
