@@ -88,6 +88,7 @@ class MarkableImage extends Component {
                                 width={this.state.clientWidth}
                                 drawingShape="rect"
                                 mode={this.props.mode}
+                                maxShapesDrawn={this.props.maxShapesDrawn}
                                 onShapeCreated={this.onShapeCreated}
                                 onShapeDeleted={this.onShapeDeleted}
                                 onShapeModified={this.onShapeModified}
@@ -121,6 +122,7 @@ MarkableImage.propTypes = {
     }),
     drawingColor: PropTypes.string,
     shapes: PropTypes.any,
+    maxShapesDrawn: PropTypes.bool,
     mode: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
     drawingActions: PropTypes.shape({
         removeShapeAtIndex: PropTypes.func,

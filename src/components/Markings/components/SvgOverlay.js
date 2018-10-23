@@ -8,7 +8,6 @@ import {
     Rect,
 } from 'react-native-svg'
 import PropTypes from 'prop-types'
-import R from 'ramda'
 import {
     distanceFromRange
 } from '../../../utils/drawingUtils'
@@ -46,10 +45,10 @@ class SvgOverlay extends Component {
 
         this.panResponder = PanResponder.create({
             // Ask to be the responder:
-            onStartShouldSetPanResponder: () => this.props.mode === 'draw',
-            onStartShouldSetPanResponderCapture: () => this.props.mode === 'draw',
-            onMoveShouldSetPanResponder: () => this.props.mode === 'draw',
-            onMoveShouldSetPanResponderCapture: () => this.props.mode === 'draw',
+            onStartShouldSetPanResponder: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onStartShouldSetPanResponderCapture: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onMoveShouldSetPanResponder: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onMoveShouldSetPanResponderCapture: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
             onPanResponderGrant: (evt) => {
                 const { locationX, locationY } = evt.nativeEvent
                 this.setState({
@@ -204,6 +203,7 @@ SvgOverlay.propTypes = {
     color: PropTypes.string,
     drawingShape: PropTypes.oneOf(['rect']),
     shapes: PropTypes.object,
+    maxShapesDrawn: PropTypes.bool,
     mode: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
     onShapeDeleted: PropTypes.func,
     onShapeCreated: PropTypes.func,
