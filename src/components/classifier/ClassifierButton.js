@@ -12,7 +12,7 @@ const ClassifierButton = (props) => {
     const textStyle = []
     switch (props.type) {
         case 'answer':
-            buttonStyle.push(styles.answerButton)
+            buttonStyle.push(props.disabled ? styles.answerButtonDisabled : styles.answerButton)
             textStyle.push(styles.answerButtonText)
             break
         case 'guide':
@@ -21,6 +21,7 @@ const ClassifierButton = (props) => {
     }
     return (
         <TouchableOpacity
+            disabled={props.disabled}
             onPress={props.onPress}
             activeOpacity={0.5}
             style={ buttonStyle }
@@ -58,12 +59,16 @@ const styles =EStyleSheet.create({
       answerButton: {
         backgroundColor: '$buttonColor'
       },
+      answerButtonDisabled: {
+          backgroundColor: '$disabledButtonColor'
+      },
       answerButtonText: {
         color: 'white', 
       },
 })
 
 ClassifierButton.propTypes = {
+    disabled: PropTypes.any,
     style: PropTypes.any,
     onPress: PropTypes.func,
     type: PropTypes.oneOf(['answer', 'guide']),
