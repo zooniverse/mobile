@@ -10,47 +10,51 @@ import {
     Rect
 } from 'react-native-svg'
 import R from 'ramda'
-import { connect } from 'react-redux'
+import { BlurView } from 'react-native-blur';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
-
-const mapStateToProps = (state) => {
-    const subjectDimensions = state.classifier.subjectDimensions[state.classifier.subject.id]
-    return {
-        subjectDimensions: subjectDimensions ? subjectDimensions : {naturalHeight: 1, naturalWidth: 1}
-    }
-}
 
 class ImageWithSvgOverlay extends Component {
 
     constructor(props) {
         super(props)
-        this.count = 0
+
         this.state = {
-            imageIsLoaded: false,
-            imageNativeWidth: 1,
-            imageNativeHeight: 1,
-            clientWidth: 1,
-            clientHeight: 1,
+            scale: new Animated.Value(1),
+            containerDimensions: {
+                width: 1,
+                height: 1
+            },
         }
 
         this.onImageLayout = this.onImageLayout.bind(this)
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.imageIsLoaded !== this.props.imageIsLoaded && !this.props.imageIsLoaded) {
+            this.setState({scale: new Animated.Value(0.8)})
+        }
+        if (!R.equals(prevProps.subjectDimensions, this.props.subjectDimensions) || !R.equals(prevState.containerDimensions, this.state.containerDimensions)) {
+            const { naturalHeight, naturalWidth } = this.props.subjectDimensions
+            const { height: containerHeight, width: containerWidth } = this.state.containerDimensions
+            const aspectRatio = Math.min(containerHeight/naturalHeight, containerWidth/naturalWidth)
+            const clientHeight = naturalHeight * aspectRatio
+            const clientWidth = naturalWidth * aspectRatio
+
+            this.props.onImageLayout({
+                clientHeight,
+                clientWidth,
+            })
+        }
+    }
     }
 
     onImageLayout({nativeEvent}) {
-        const { height: containerHeight, width: containerWidth } = nativeEvent.layout
-        const { naturalHeight, naturalWidth } = this.props.subjectDimensions
-        const aspectRatio = Math.min(containerHeight/naturalHeight, containerWidth/naturalWidth)
-        const clientHeight = naturalHeight * aspectRatio
-        const clientWidth = naturalWidth * aspectRatio
+        const { height, width } = nativeEvent.layout
         this.setState({
-            imageIsLoaded: true,
-            clientHeight,
-            clientWidth,
-        })
-        
-        this.props.onImageLayout({
-            clientHeight,
-            clientWidth,
+            containerDimensions: {
+                width,
+                height
+            }
         })
     }
 
@@ -89,20 +93,15 @@ class ImageWithSvgOverlay extends Component {
                             source={{uri: pathPrefix + this.props.uri}}
                             resizeMode="contain"
                         />
-                        {
-                            this.state.imageIsLoaded ? 
-                                <View style={styles.svgContainer} >
-                                    <Svg 
-                                        viewBox={`0 0 ${naturalWidth} ${naturalHeight}`}
-                                        height={this.state.clientHeight}
-                                        width={this.state.clientWidth}
-                                    >
-                                        { this.renderShapes() }
-                                    </Svg>
-                                </View>
-                            : 
-                                null
-                        }
+                        <View style={styles.svgContainer} >
+                            <Svg 
+                                viewBox={`0 0 ${naturalWidth} ${naturalHeight}`}
+                                height={this.state.containerDimensions.height}
+                                width={this.state.containerDimensions.width}
+                            >
+                                { this.renderShapes() }
+                            </Svg>
+                        </View>
                     </View>
                 :
                     <SubjectLoadingIndicator /> 

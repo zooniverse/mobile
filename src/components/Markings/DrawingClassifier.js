@@ -95,6 +95,7 @@ class DrawingClassifier extends Component {
         this.props.classifierActions.submitDrawingClassification(this.props.workflow, this.props.subject, this.state.subjectDimensions)
         this.setState({
             modalHasBeenClosedOnce: false,
+            imageIsLoaded: false
         })
     }
 
@@ -167,6 +168,7 @@ class DrawingClassifier extends Component {
                         imageIsLoaded={this.state.imageIsLoaded}
                         uri={this.state.localImagePath}
                         onImageLayout={this.onImageLayout}
+                        subjectDimensions={this.props.subjectDimensions}
                         displayToNativeRatio={this.props.subjectDimensions.naturalWidth/this.state.subjectDimensions.clientWidth}
                     />
                 </TouchableOpacity>
@@ -321,6 +323,10 @@ DrawingClassifier.propTypes = {
         setNavbarColorForPageToDefault: PropTypes.func
     }),
     numberOfShapesDrawn: PropTypes.number,
+    subjectDimensions: PropTypes.shape({
+        naturalHeight: PropTypes.number,
+        naturalWidth: PropTypes.number
+    })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawingClassifier)
