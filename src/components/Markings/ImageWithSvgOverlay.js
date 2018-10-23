@@ -91,6 +91,26 @@ class ImageWithSvgOverlay extends Component {
         return shapeArray
     }
 
+    renderBlurView() {
+        const expandIcon = <Icon name="arrows-alt" color="white" size={50} />
+
+        return (
+            <View style={styles.blurView}>
+                {
+                    Platform.OS === 'ios' ?
+                        <BlurView style={[styles.centeredContent, this.state.containerDimensions]} blurType="light" blurAmount={2}>
+                            { expandIcon }
+                        </BlurView>
+
+                    :
+                        <View style={ [styles.centeredContent, styles.androidBlurView, this.state.containerDimensions] }>
+                            { expandIcon }
+                        </View>
+                }
+            </View>
+        )
+    }
+
     render() {
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         const { naturalWidth, naturalHeight } = this.props.subjectDimensions
@@ -119,6 +139,7 @@ class ImageWithSvgOverlay extends Component {
                 :
                     <SubjectLoadingIndicator /> 
                 }
+                { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView()}
             </Animated.View>               
         )
     }
@@ -144,7 +165,24 @@ const styles = {
         left: 0,
         right: 0,
         bottom: 0
-    }
+    },
+    blurView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    },
+    centeredContent: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+    },
+    androidBlurView: {
+        backgroundColor: 'rgba(255, 255, 255, 0.4)'
+    },
 }
 
 ImageWithSvgOverlay.propTypes = {
@@ -152,6 +190,7 @@ ImageWithSvgOverlay.propTypes = {
         naturalWidth: PropTypes.number,
         naturalHeight: PropTypes.number
     }),
+    displayToNativeRatio: PropTypes.number,
     imageIsLoaded: PropTypes.bool,
     uri: PropTypes.string,
     annotations: PropTypes.arrayOf(PropTypes.shape({
@@ -163,7 +202,8 @@ ImageWithSvgOverlay.propTypes = {
         height: PropTypes.number
     })),
     onImageLayout: PropTypes.func,
-    shapes: PropTypes.object
+    shapes: PropTypes.object,
+    showBlurView: PropTypes.bool
 }
 
-export default connect(mapStateToProps)(ImageWithSvgOverlay)
+export default ImageWithSvgOverlay

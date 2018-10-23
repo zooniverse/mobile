@@ -68,6 +68,7 @@ class DrawingClassifier extends Component {
                 clientWidth: 1
             },
             modalHasBeenClosedOnce: false,
+            showBlurView: true
         }
 
         this.finishTutorial = this.finishTutorial.bind(this)
@@ -168,6 +169,7 @@ class DrawingClassifier extends Component {
                         imageIsLoaded={this.state.imageIsLoaded}
                         uri={this.state.localImagePath}
                         onImageLayout={this.onImageLayout}
+                        showBlurView={R.isEmpty(this.props.shapes)}
                         subjectDimensions={this.props.subjectDimensions}
                         displayToNativeRatio={this.props.subjectDimensions.naturalWidth/this.state.subjectDimensions.clientWidth}
                     />
