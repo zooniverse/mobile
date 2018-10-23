@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    Animated,
     Image,
     Platform,
     View
@@ -28,6 +29,8 @@ class ImageWithSvgOverlay extends Component {
         }
 
         this.onImageLayout = this.onImageLayout.bind(this)
+        this.animateScale = this.animateScale.bind(this)
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.imageIsLoaded !== this.props.imageIsLoaded && !this.props.imageIsLoaded) {
@@ -46,6 +49,14 @@ class ImageWithSvgOverlay extends Component {
             })
         }
     }
+
+    animateScale() {
+        Animated.spring(
+            this.state.scale,
+            {
+                toValue: 1
+            }
+        ).start()
     }
 
     onImageLayout({nativeEvent}) {
@@ -83,11 +94,13 @@ class ImageWithSvgOverlay extends Component {
     render() {
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         const { naturalWidth, naturalHeight } = this.props.subjectDimensions
+
         return (
-            <View style={styles.container}>
+            <Animated.View style={[styles.container, {transform: [{scale: this.state.scale}]}]}>
                 {this.props.imageIsLoaded ?
                     <View style={styles.container} >
                         <Image
+                            onLoad={() => this.animateScale()}
                             onLayout={this.onImageLayout}
                             style={styles.backgroundImage}
                             source={{uri: pathPrefix + this.props.uri}}
@@ -106,9 +119,7 @@ class ImageWithSvgOverlay extends Component {
                 :
                     <SubjectLoadingIndicator /> 
                 }
-            </View>
-            
-                
+            </Animated.View>               
         )
     }
 }
