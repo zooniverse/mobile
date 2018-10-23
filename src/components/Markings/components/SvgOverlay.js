@@ -131,7 +131,7 @@ class SvgOverlay extends Component {
                 return (
                     <Rect 
                         stroke="black"
-                        strokeWidth={3}
+                        strokeWidth={4 * this.state.displayToNativeRatioX}
                         fill="rgba(0, 0, 0, .5)"
                         x={this.state.previewSquareX} 
                         y={this.state.previewSquareY}

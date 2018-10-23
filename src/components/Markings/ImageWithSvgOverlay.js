@@ -65,7 +65,7 @@ class ImageWithSvgOverlay extends Component {
                             key={index}
                             fill="transparent"
                             stroke={shape.color}
-                            strokeWidth={3}
+                            strokeWidth={4 * this.props.displayToNativeRatio}
                             { ... shape }
                         />
                     )

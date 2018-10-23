@@ -28,6 +28,8 @@ import NativeImage from '../../nativeModules/NativeImage'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
 
 const mapStateToProps = (state, ownProps) => {
+    const subjectDimensions = state.classifier.subject ? state.classifier.subjectDimensions[state.classifier.subject.id] : null
+
     return {
         isSuccess: state.classifier.isSuccess,
         isFailure: state.classifier.isFailure,
@@ -37,7 +39,9 @@ const mapStateToProps = (state, ownProps) => {
         needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
         subject: state.classifier.subject,
         shapes: state.drawing.shapes,
-        workflowOutOfSubjects: state.classifier.workflowOutOfSubjects
+        workflowOutOfSubjects: state.classifier.workflowOutOfSubjects,
+        numberOfShapesDrawn: R.keys(state.drawing.shapesInProgress).length,
+        subjectDimensions: subjectDimensions ? subjectDimensions : {naturalHeight: 1, naturalWidth: 1},
     }
 }
 
@@ -163,6 +167,7 @@ class DrawingClassifier extends Component {
                         imageIsLoaded={this.state.imageIsLoaded}
                         uri={this.state.localImagePath}
                         onImageLayout={this.onImageLayout}
+                        displayToNativeRatio={this.props.subjectDimensions.naturalWidth/this.state.subjectDimensions.clientWidth}
                     />
                 </TouchableOpacity>
             </View>
