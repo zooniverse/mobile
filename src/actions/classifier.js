@@ -42,8 +42,7 @@ export function startNewClassification(workflow, project) {
       dispatch(classifierDataSuccess)
     })
     .catch((error) => {
-      console.log(error)
-      Alert.alert('Error', 'Sorry, but there was an error loading this workflow.',
+      Alert.alert('Error', `Sorry, the following error occured when loading this workflow. ${error}`,
         [{text: 'Go Back', onPress: () => { Actions.pop()}}]
       )
     })
