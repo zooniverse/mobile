@@ -25,6 +25,7 @@ import NavBar from '../NavBar'
 import * as navBarActions from '../../actions/navBar'
 import DrawingModal from './DrawingModal'
 import NativeImage from '../../nativeModules/NativeImage'
+import ShapeInstructionsView from './components/ShapeInstructionsView';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -61,7 +62,8 @@ class DrawingClassifier extends Component {
             subjectDimensions: {
                 clientHeight: 1,
                 clientWidth: 1
-            }
+            },
+            modalHasBeenClosedOnce: false,
         }
 
         this.finishTutorial = this.finishTutorial.bind(this)
@@ -87,6 +89,9 @@ class DrawingClassifier extends Component {
 
     submitClassification() {
         this.props.classifierActions.submitDrawingClassification(this.props.workflow, this.props.subject, this.state.subjectDimensions)
+        this.setState({
+            modalHasBeenClosedOnce: false,
+        })
     }
 
     componentDidUpdate(prevProps) {
@@ -130,6 +135,8 @@ class DrawingClassifier extends Component {
             return <OverlaySpinner overrideVisibility={this.props.isFetching} />
         }
 
+        const warnForRequirements = this.state.modalHasBeenClosedOnce && R.keys(this.props.shapes).length < this.props.tools[0].min
+
         const tutorial =
             <Tutorial
                 projectName={this.props.project.display_name}
@@ -144,6 +151,11 @@ class DrawingClassifier extends Component {
                     question={this.props.instructions}
                     workflowID={this.props.workflow.id}
                     taskHelp={this.props.help}
+                />
+                <ShapeInstructionsView
+                    { ...this.props.tools[0] }
+                    numberDrawn={this.props.numberOfShapesDrawn}
+                    warnForRequirements={warnForRequirements}
                 />
                 <TouchableOpacity style={styles.container} onPress={() => this.setState({isModalVisible: true})}>
                     <ImageWithSvgOverlay
@@ -208,8 +220,8 @@ class DrawingClassifier extends Component {
                     tool={this.props.tools[0]}
                     visible={this.state.isModalVisible} 
                     imageSource={this.state.localImagePath}
-                    onClose={() => this.setState({isModalVisible: false})}
-                    
+                    onClose={() => this.setState({isModalVisible: false, modalHasBeenClosedOnce: true})}
+                    warnForRequirements={this.state.modalHasBeenClosedOnce}
                 />
             </View>
         )
@@ -301,7 +313,8 @@ DrawingClassifier.propTypes = {
         setTitleForPage: PropTypes.func,
         setNavbarColorForPage: PropTypes.func,
         setNavbarColorForPageToDefault: PropTypes.func
-    })
+    }),
+    numberOfShapesDrawn: PropTypes.number,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawingClassifier)
