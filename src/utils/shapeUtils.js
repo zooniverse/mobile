@@ -73,24 +73,37 @@ export const analyzeCoordinateWithShape = (xCoord, yCoord, shape, corners) => {
  * @param {The ratio that the shape should scale in the x direction} scaleRatioX 
  * @param {The ratio that the shape should scale in the y direction} scaleRatioY 
  */
-export const calculateShapeChanges = (touchState, dx, dy, scaleRatioX, scaleRatioY) => {
+export const calculateShapeChanges = (touchState, touchDx, touchDy, scaleRatioX, scaleRatioY) => {
     const {upperLeft, bottomLeft, upperRight, bottomRight, onlySquare} = touchState
-    const scaledX = dx * scaleRatioX
-    const scaledY = dy * scaleRatioY
+    const scaledX = touchDx * scaleRatioX
+    const scaledY = touchDy * scaleRatioY
 
+    let dx = 0, dy = 0, dw = 0, dh = 0
     if (onlySquare) {
-        return {
-            dx: dx * scaleRatioX,
-            dy: dy * scaleRatioY,
-            dw: 0,
-            dh: 0
-        }
-    } else {
-        return {
-            dx: upperLeft || bottomLeft ? scaledX : 0,
-            dy: upperRight || upperLeft ? scaledY : 0,
-            dw: upperRight || bottomRight ? scaledX : -scaledX,
-            dh: bottomLeft || bottomRight ? scaledY : -scaledY
-        }
+        dx = scaledX
+        dy = scaledY
+    } else if (upperLeft) {
+        dx = scaledX
+        dy = scaledY
+        dw = -scaledX
+        dh = -scaledY
+    } else if (bottomLeft) {
+        dx = scaledX
+        dw = -scaledX
+        dh = scaledY
+    } else if (upperRight) {
+        dy = scaledY
+        dw = scaledX
+        dh = -scaledY
+    } else if (bottomRight) {
+        dw = scaledX
+        dh = scaledY
+    }
+
+    return {
+        dx,
+        dy,
+        dw,
+        dh
     }
 }

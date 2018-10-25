@@ -7,6 +7,10 @@ import { getAuthUser } from '../actions/auth'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 import * as ActionConstants from '../constants/actions'
 import getSubjectLocation from '../utils/get-subject-location'
+import { 
+  constructDrawingAnnotations
+} from '../utils/annotationUtils'
+import { clearShapes } from './drawing'
 
 export function addSubjectsForWorklow(workflowId) {
   return dispatch => {
@@ -33,9 +37,12 @@ export function startNewClassification(workflow, project) {
       dispatch(fetchTutorials(workflow.id)).then(() => dispatch(setNeedsTutorial(workflow.id, project.id))),
       dispatch(setSubjectStartTimeForWorkflow(workflow.id))
     ])
-    .then(() => dispatch(classifierDataSuccess))
-    .catch(() => {
-      Alert.alert('Error', 'Sorry, but there was an error loading this workflow.',
+    .then(() => {
+      dispatch(setSubjectForWorkflow(workflow.id))
+      dispatch(classifierDataSuccess)
+    })
+    .catch((error) => {
+      Alert.alert('Error', `Sorry, the following error occured when loading this workflow. ${error}`,
         [{text: 'Go Back', onPress: () => { Actions.pop()}}]
       )
     })
@@ -97,6 +104,55 @@ export function saveClassification(workflow, subject) {
     })
   }
 }
+
+export function submitDrawingClassification(workflow, subject, {clientHeight, clientWidth}) {
+  return (dispatch, getState) => {
+    const { classifier, drawing } = getState()
+    const subjectStartTime = classifier.subjectStartTime[workflow.id]
+    const subjectCompletionTime = (new Date).toISOString()
+    const firstTask = workflow.first_task
+    const tools = workflow.tasks[firstTask].tools
+    const annotations = constructDrawingAnnotations(drawing.shapes, tools, firstTask)
+    apiClient.type('classifications').create({
+      completed: true,
+      annotations,
+      metadata: {
+        workflow_version: workflow.version,
+        started_at: subjectStartTime,
+        finished_at: subjectCompletionTime,
+        user_agent: `${Platform.OS} Mobile App`,
+        user_language: 'en',
+        utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
+        subject_dimensions: { ...classifier.subjectDimensions[subject.id], clientHeight, clientWidth },
+        viewport: { width: getState().main.device.width, height: getState().main.device.height },
+        session: getState().main.session.id
+      },
+      links: {
+        project: workflow.links.project,
+        workflow: workflow.id,
+        subjects: [subject.id]
+      }
+    }).save()
+    
+    // Add more subjects if we are getting close to running out
+    const subjectList = classifier.subjectLists[workflow.id] || []
+    const subjectsSeenThisSession = classifier.seenThisSession[workflow.id] || []
+    const usableSubjects = subjectList.filter(subject => !subjectsSeenThisSession.includes(subject.id))
+    if (usableSubjects.length < 3) {
+      dispatch(addSubjectsForWorklow(workflow.id))
+    }
+    
+    // Mark the subject as completed and move on to the next
+    dispatch(setSubjectSeenThisSession(workflow.id, subject.id))
+    dispatch(setSubjectForWorkflow(workflow.id))
+    dispatch(clearShapes())
+  }
+}
+
+const setSubjectForWorkflow = (workflowId) => ({
+  type: ActionConstants.SET_SUBJECT_FOR_WORKFLOW,
+  workflowId
+})
 
 export function fetchFieldGuide(workflowId, projectId) {
   return (dispatch) => {
@@ -267,6 +323,12 @@ const clearSubjectsFromWorkflow = (workflowId) => ({
 const setSubjectStartTimeForWorkflow = (workflowId) => ({
   type: ActionConstants.SET_SUBJECT_START_TIME,
   workflowId
+})
+
+export const setSubjectSizeInWorkflow = (subjectId, {width, height}) => ({
+  type: ActionConstants.SET_SUBJECT_DIMENSIONS,
+  subjectId,
+  subjectDimensions: {naturalWidth: width, naturalHeight: height}
 })
 
 const addTutorial = (workflowId, tutorial) => ({

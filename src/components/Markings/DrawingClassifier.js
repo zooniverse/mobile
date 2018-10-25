@@ -24,14 +24,9 @@ import Separator from '../common/Separator'
 import NavBar from '../NavBar'
 import * as navBarActions from '../../actions/navBar'
 import DrawingModal from './DrawingModal'
+import NativeImage from '../../nativeModules/NativeImage'
 
 const mapStateToProps = (state, ownProps) => {
-
-    const subjectList = state.classifier.subjectLists[ownProps.workflow.id] || []
-    const subjectsSeenThisSession = state.classifier.seenThisSession[ownProps.workflow.id] || []
-
-    const seenSubjectIds = subjectsSeenThisSession.map(subject => subject.id)
-    const usableSubjects = subjectList.filter(subject => !seenSubjectIds.includes(subject.id))
     return {
         isSuccess: state.classifier.isSuccess,
         isFailure: state.classifier.isFailure,
@@ -39,8 +34,9 @@ const mapStateToProps = (state, ownProps) => {
         guide: state.classifier.guide[ownProps.workflow.id] || {},
         tutorial: state.classifier.tutorial[ownProps.workflow.id] || {},
         needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
-        usableSubjects,
-        shapes: state.drawing.shapes
+        subject: state.classifier.subject,
+        shapes: state.drawing.shapes,
+        workflowOutOfSubjects: state.classifier.workflowOutOfSubjects
     }
 }
 
@@ -62,10 +58,16 @@ class DrawingClassifier extends Component {
             localImagePath: '',
             isQuestionVisible: !props.needsTutorial,
             isModalVisible: false,
+            subjectDimensions: {
+                clientHeight: 1,
+                clientWidth: 1
+            }
         }
 
         this.finishTutorial = this.finishTutorial.bind(this)
         this.setQuestionVisibility = this.setQuestionVisibility.bind(this)
+        this.onImageLayout = this.onImageLayout.bind(this)
+        this.submitClassification = this.submitClassification.bind(this)
     }
 
     static renderNavigationBar() {
@@ -81,11 +83,19 @@ class DrawingClassifier extends Component {
         } else {
           navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
         }
-      }
+    }
+
+    submitClassification() {
+        this.props.classifierActions.submitDrawingClassification(this.props.workflow, this.props.subject, this.state.subjectDimensions)
+    }
 
     componentDidUpdate(prevProps) {
-        if (!R.equals(prevProps.usableSubjects, this.props.usableSubjects) && this.props.usableSubjects[0]) {
-            this.props.imageActions.loadImageToCache(this.props.usableSubjects[0].display.src).then(localImagePath => {
+        const { subject } = this.props
+        if (prevProps.subject !== subject && subject) {
+            this.props.imageActions.loadImageToCache(subject.display.src).then(localImagePath => {
+                new NativeImage(localImagePath).getImageSize().then(({width, height}) => {
+                    this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
+                })
                 this.setState({
                     imageIsLoaded: true,
                     localImagePath
@@ -104,6 +114,15 @@ class DrawingClassifier extends Component {
         } else {
             this.setQuestionVisibility(true)
         }
+    }
+
+    onImageLayout({clientHeight, clientWidth}) {
+        this.setState({
+            subjectDimensions: {
+                clientHeight,
+                clientWidth
+            }
+        })
     }
 
     render() {
@@ -131,6 +150,7 @@ class DrawingClassifier extends Component {
                         shapes={this.props.shapes}
                         imageIsLoaded={this.state.imageIsLoaded}
                         uri={this.state.localImagePath}
+                        onImageLayout={this.onImageLayout}
                     />
                 </TouchableOpacity>
             </View>
@@ -148,6 +168,7 @@ class DrawingClassifier extends Component {
 
         const submitButton = 
             <ClassifierButton
+                onPress={this.submitClassification}
                 style={styles.submitButton}
                 type="answer"
                 text="Submit"
@@ -183,7 +204,7 @@ class DrawingClassifier extends Component {
                     {this.props.needsTutorial ? tutorial : classificationView}
                 </ClassificationContainer>
                 <DrawingModal
-                    // We validate that tools has atleast one element earlier
+                    // We validate that tools has at least one element earlier
                     tool={this.props.tools[0]}
                     visible={this.state.isModalVisible} 
                     imageSource={this.state.localImagePath}
@@ -196,6 +217,11 @@ class DrawingClassifier extends Component {
 }
 
 const styles = EStyleSheet.create({
+    centeredContent: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     classificationBottomMargin: {
         marginBottom: 25
     },
@@ -231,6 +257,8 @@ const styles = EStyleSheet.create({
 })
 
 DrawingClassifier.propTypes = {
+    workflowOutOfSubjects: PropTypes.bool,
+    subject: PropTypes.object,
     shapes: PropTypes.object,
     isSuccess: PropTypes.bool,
     isFailure: PropTypes.bool,
@@ -240,7 +268,13 @@ DrawingClassifier.propTypes = {
     needsTutorial: PropTypes.bool,
     usableSubjects: PropTypes.array,
     imageActions: PropTypes.any,
-    classifierActions: PropTypes.any,
+    classifierActions: PropTypes.shape({
+        submitDrawingClassification: PropTypes.func,
+        setClassifierTestMode: PropTypes.func,
+        setTutorialCompleted: PropTypes.func,
+        setSubjectSizeInWorkflow: PropTypes.func,
+        addSubjectsForWorklow: PropTypes.func
+    }),
     help: PropTypes.string,
     tools: PropTypes.arrayOf(
         PropTypes.shape({

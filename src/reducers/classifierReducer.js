@@ -18,6 +18,8 @@ const InitialClassifier = {
     questionContainerHeight: {},
     inPreviewMode: false,
     subjectLists: {},
+    subjectDimensions: {},
+    subject: null,
 };
 
 export default function classifier(state=InitialClassifier, action) {
@@ -25,7 +27,10 @@ export default function classifier(state=InitialClassifier, action) {
         case ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW: {
             const subjectList = state.subjectLists[action.workflowId] || []
             const workflowIdLens = R.lensProp(action.workflowId)
-            const newSubjectList =  R.set(workflowIdLens, subjectList.concat(action.subjects), state.subjectLists)
+            const filteredNewSubjects = action.subjects.filter((newSubject) => {
+                return !R.any(subject => subject.id === newSubject.id, subjectList)
+            })
+            const newSubjectList =  R.set(workflowIdLens, subjectList.concat(filteredNewSubjects), state.subjectLists)
             return { ...state, subjectLists: newSubjectList}
         }
         case ActionConstants.CLEAR_SUBJECTS_FROM_WORKFLOW: {
@@ -77,6 +82,22 @@ export default function classifier(state=InitialClassifier, action) {
             const startTime = (new Date).toISOString()
             const workflowIdLens = R.lensProp(action.workflowId)
             return { ...state, subjectStartTime: R.set(workflowIdLens, startTime, state.subjectStartTime) }
+        }
+        case ActionConstants.SET_SUBJECT_DIMENSIONS: {
+            const subjectIdLens = R.lensProp(action.subjectId)
+            return { ...state, subjectDimensions: R.set(subjectIdLens, action.subjectDimensions, state.subjectDimensions)}
+        }
+        case ActionConstants.SET_SUBJECT_FOR_WORKFLOW: {
+            const subjectList = state.subjectLists[action.workflowId] || []
+            const subjectsSeenThisSession = state.seenThisSession[action.workflowId] || []
+            const usableSubjects = subjectList.filter(subject => !subjectsSeenThisSession.includes(subject.id))
+            const subject = usableSubjects[0]
+            if (subject) {
+                return { ...state, subject }
+            } else {
+                // If the user has seen every subject, display a random one they have seen
+                return { ...state, subject: subjectList[Math.floor(Math.random() * subjectList.length)] }
+            }
         }
         case ActionConstants.REQUEST_CLASSIFIER_DATA: {
             return { ...state, isFetching: true }
