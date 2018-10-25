@@ -161,7 +161,8 @@ class ShapeEditorSvg extends Component {
                             }}
                             key={index}
                             { ...shape }
-                            displayToNativeRatio={this.props.displayToNativeRatioX}
+                            displayToNativeRatioX={this.props.displayToNativeRatioX}
+                            displayToNativeRatioY={this.props.displayToNativeRatioY}
                             showCorners={this.props.mode === 'edit' && selectedShape}
                             isDeletable={this.props.mode === 'erase'}
                             ref={ref => this.setState({

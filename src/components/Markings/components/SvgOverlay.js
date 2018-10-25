@@ -89,7 +89,7 @@ class SvgOverlay extends Component {
                     previewSquareY: 0
                 })
                 
-                if (Math.abs(shapeWidth) > 20 || Math.abs(shapeHeight) > 20) {
+                if (Math.abs(shapeWidth) > (20 * this.state.displayToNativeRatioX) || Math.abs(shapeHeight) > (20 * this.state.displayToNativeRatioY)) {
                     this.props.onShapeCreated(shape)
                 }
             },
