@@ -21,7 +21,6 @@ Object {
     "tasks": Object {},
     "tutorial": Object {},
     "workflow": Object {},
-    "workflowOutOfSubjects": false,
   },
   "drawing": Object {
     "actions": Array [],
@@ -103,7 +102,6 @@ Object {
     "tasks": Object {},
     "tutorial": Object {},
     "workflow": Object {},
-    "workflowOutOfSubjects": false,
   },
   "drawing": Object {
     "actions": Array [],
@@ -184,7 +182,6 @@ Object {
     "tasks": Object {},
     "tutorial": Object {},
     "workflow": Object {},
-    "workflowOutOfSubjects": false,
   },
   "drawing": Object {
     "actions": Array [],
@@ -269,7 +266,6 @@ Object {
     "tasks": Object {},
     "tutorial": Object {},
     "workflow": Object {},
-    "workflowOutOfSubjects": false,
   },
   "drawing": Object {
     "actions": Array [],
