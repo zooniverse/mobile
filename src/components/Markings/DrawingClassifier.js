@@ -25,7 +25,6 @@ import NavBar from '../NavBar'
 import * as navBarActions from '../../actions/navBar'
 import DrawingModal from './DrawingModal'
 import NativeImage from '../../nativeModules/NativeImage'
-import FontedText from '../common/FontedText';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -156,11 +155,6 @@ class DrawingClassifier extends Component {
                 </TouchableOpacity>
             </View>
 
-        const outOfClassifications = 
-            <View style={styles.centeredContent}>
-                <FontedText> There are no more subjects to classify! </FontedText>
-            </View>
-
         const fieldGuideButton = 
             <View style={styles.fieldGuideContainer}>
                 <ClassifierButton
@@ -190,7 +184,7 @@ class DrawingClassifier extends Component {
                     isQuestionVisible={isQuestionVisible}
                     setQuestionVisibility={this.setQuestionVisibility}
                 >
-                    {isQuestionVisible ? (this.props.workflowOutOfSubjects ? outOfClassifications : classification) : tutorial}
+                    {isQuestionVisible ? classification : tutorial}
                 </ClassificationPanel>
                 {isQuestionVisible && !R.isEmpty(this.props.help) && <NeedHelpButton onPress={() => this.classificationContainer.displayHelpModal()} /> }
                 {isQuestionVisible && this.props.guide && fieldGuideButton}

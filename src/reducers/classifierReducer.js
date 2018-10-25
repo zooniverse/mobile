@@ -20,7 +20,6 @@ const InitialClassifier = {
     subjectLists: {},
     subjectDimensions: {},
     subject: null,
-    workflowOutOfSubjects: false
 };
 
 export default function classifier(state=InitialClassifier, action) {
@@ -96,7 +95,8 @@ export default function classifier(state=InitialClassifier, action) {
             if (subject) {
                 return { ...state, subject }
             } else {
-                return { ...state, workflowOutOfSubjects: true }
+                // If the user has seen every subject, display a random one they have seen
+                return { ...state, subject: subjectList[Math.floor(Math.random() * subjectList.length)] }
             }
         }
         case ActionConstants.REQUEST_CLASSIFIER_DATA: {
