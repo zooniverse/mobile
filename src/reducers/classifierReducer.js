@@ -72,7 +72,16 @@ export default function classifier(state=InitialClassifier, action) {
             const workflowIdLens = R.lensProp(action.workflowId)
             const subjectsSeenArray = state.seenThisSession[action.workflowId] || []
             subjectsSeenArray.push(action.subjectId)
-            return { ...state, seenThisSession: R.set(workflowIdLens, subjectsSeenArray, state.seenThisSession)} 
+            const updatedSubjects = state.subjectLists[action.workflowId].map(subject => {
+                if (subject.id === action.subjectId) {
+                    return R.set(R.lensProp('already_seen'), true, subject)
+                } else {
+                    return subject
+                }
+            })
+            const seenThisSession = R.set(workflowIdLens, subjectsSeenArray, state.seenThisSession)
+            const subjectLists = R.set(workflowIdLens, updatedSubjects, state.subjectLists)
+            return { ...state, seenThisSession, subjectLists} 
         }
         case ActionConstants.SET_QUESTION_CONTAINER_HEIGHT: {
             const workflowIdLens = R.lensProp(action.workflowId)
