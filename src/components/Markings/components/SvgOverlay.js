@@ -45,10 +45,10 @@ class SvgOverlay extends Component {
 
         this.panResponder = PanResponder.create({
             // Ask to be the responder:
-            onStartShouldSetPanResponder: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
-            onStartShouldSetPanResponderCapture: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
-            onMoveShouldSetPanResponder: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
-            onMoveShouldSetPanResponderCapture: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onStartShouldSetPanResponder: () => this.props.canDraw && this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onStartShouldSetPanResponderCapture: () => this.props.canDraw && this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onMoveShouldSetPanResponder: () => this.props.canDraw && this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onMoveShouldSetPanResponderCapture: () => this.props.canDraw && this.props.mode === 'draw' && !this.props.maxShapesDrawn,
             onPanResponderGrant: (evt) => {
                 const { locationX, locationY } = evt.nativeEvent
                 this.setState({
@@ -207,7 +207,8 @@ SvgOverlay.propTypes = {
     mode: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
     onShapeDeleted: PropTypes.func,
     onShapeCreated: PropTypes.func,
-    onShapeModified: PropTypes.func
+    onShapeModified: PropTypes.func,
+    canDraw: PropTypes.bool
 }
 
 SvgOverlay.defaultProps = {
