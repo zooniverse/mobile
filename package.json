@@ -29,6 +29,7 @@
     "react-native-browser-builtins": "^2.0.3",
     "react-native-checkbox-field": "^2.0.2",
     "react-native-deck-swiper": "github:zooniverse/react-native-deck-swiper",
+    "react-native-device-info": "^0.24.3",
     "react-native-drawer": "^2.3.0",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-fcm": "11.3.1",

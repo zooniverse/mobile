@@ -16,7 +16,6 @@
 		01090E4220A9ED3800DBDD85 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01090E1920A9ED3800DBDD85 /* GoogleService-Info-prod.plist */; };
 		01090E4520A9EEE800DBDD85 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01090E4420A9EEE800DBDD85 /* FirebaseManager.swift */; };
 		01090E4A20AB38A300DBDD85 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01090E4920AB38A300DBDD85 /* NotificationSettings.m */; };
-		0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0115251C2099005600C6C093 /* SimpleLineIcons.ttf */; };
 		0125C11920FE7CE2009DCD28 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125C11820FE7CAA009DCD28 /* libRNFetchBlob.a */; };
 		01471F5420C09330007A22F4 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01471F5320C09330007A22F4 /* ImageSizer.m */; };
 		014AB847202374F80014915B /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E051C91D7F618700052983 /* libRCTGoogleAnalyticsBridge.a */; };
@@ -28,6 +27,7 @@
 		01DE937A205192F500E81CA7 /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DE9376205192F500E81CA7 /* Karla-Regular.ttf */; };
 		01E9AF1B216D3F430089CAF1 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E9AF1A216D3F3D0089CAF1 /* libRNVectorIcons.a */; };
 		01E9AF80216E9F7D0089CAF1 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E9AF7C216E9F6E0089CAF1 /* libRNSVG.a */; };
+		01F6958E2187977E00DFB289 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F695872187976D00DFB289 /* libRNDeviceInfo.a */; };
 		03D7FD9E241A406B8C2BD7F7 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 880A346EBC57404CBBBAEE9C /* Ionicons.ttf */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
@@ -270,6 +270,20 @@
 			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
 			remoteInfo = "RNSVG-tvOS";
 		};
+		01F695862187976D00DFB289 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01F695592187976D00DFB289 /* RNDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
+			remoteInfo = RNDeviceInfo;
+		};
+		01F695882187976D00DFB289 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01F695592187976D00DFB289 /* RNDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E72EC1401F7ABB5A0001BC90;
+			remoteInfo = "RNDeviceInfo-tvOS";
+		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
@@ -417,6 +431,7 @@
 		01DE9376205192F500E81CA7 /* Karla-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Karla-Regular.ttf"; path = "../assets/fonts/Karla-Regular.ttf"; sourceTree = "<group>"; };
 		01E9AEEA216D3F3D0089CAF1 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		01E9AF4D216E9F6E0089CAF1 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
+		01F695592187976D00DFB289 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		051453304969ED18A9A5693A /* libPods-ZooniverseMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZooniverseMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -482,6 +497,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F6958E2187977E00DFB289 /* libRNDeviceInfo.a in Frameworks */,
 				01E9AF80216E9F7D0089CAF1 /* libRNSVG.a in Frameworks */,
 				01E9AF1B216D3F430089CAF1 /* libRNVectorIcons.a in Frameworks */,
 				015B202F215EBDDB00CC2A37 /* libRNBlur.a in Frameworks */,
@@ -625,6 +641,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		01F6955A2187976D00DFB289 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01F695872187976D00DFB289 /* libRNDeviceInfo.a */,
+				01F695892187976D00DFB289 /* libRNDeviceInfo-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -700,6 +725,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				01F695592187976D00DFB289 /* RNDeviceInfo.xcodeproj */,
 				01E9AF4D216E9F6E0089CAF1 /* RNSVG.xcodeproj */,
 				01E9AEEA216D3F3D0089CAF1 /* RNVectorIcons.xcodeproj */,
 				015B1FFD215EBDC200CC2A37 /* RNBlur.xcodeproj */,
@@ -977,6 +1003,10 @@
 					ProjectRef = 015B1FFD215EBDC200CC2A37 /* RNBlur.xcodeproj */;
 				},
 				{
+					ProductGroup = 01F6955A2187976D00DFB289 /* Products */;
+					ProjectRef = 01F695592187976D00DFB289 /* RNDeviceInfo.xcodeproj */;
+				},
+				{
 					ProductGroup = 0125C11420FE7CAA009DCD28 /* Products */;
 					ProjectRef = 0125C11320FE7CAA009DCD28 /* RNFetchBlob.xcodeproj */;
 				},
@@ -1187,6 +1217,20 @@
 			remoteRef = 01E9AF7D216E9F6E0089CAF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		01F695872187976D00DFB289 /* libRNDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNDeviceInfo.a;
+			remoteRef = 01F695862187976D00DFB289 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01F695892187976D00DFB289 /* libRNDeviceInfo-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNDeviceInfo-tvOS.a";
+			remoteRef = 01F695882187976D00DFB289 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1332,7 +1376,6 @@
 				999F9C871DB7B4FA002B6AF0 /* OpenSans-Italic.ttf in Resources */,
 				999F9C861DB7B4FA002B6AF0 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				0115251D2099027600C6C093 /* SimpleLineIcons.ttf in Resources */,
 				0154415820A4C33800C8BA5A /* GoogleService-Info-dev.plist in Resources */,
 				999F9C891DB7B4FA002B6AF0 /* OpenSans-LightItalic.ttf in Resources */,
 				999F9C8D1DB7B4FA002B6AF0 /* zoo-font.ttf in Resources */,
