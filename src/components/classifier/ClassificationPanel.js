@@ -29,7 +29,7 @@ class ClassificationPanel extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.panelContainer}>
+        <View style={[styles.panelContainer, this.props.isQuestionVisible ? styles.questionMargin : styles.tutorialMargin]}>
           { this.props.hasTutorial ? tabs : null }
           { this.props.children }
         </View>
@@ -49,8 +49,13 @@ const styles = EStyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     marginTop: 15,
-    marginHorizontal: '$panelHorizontalMargin',
     marginBottom: 0,
+  },
+  questionMargin: {
+    marginHorizontal: 25
+  },
+  tutorialMargin: {
+    marginHorizontal: 0
   },
   tabContainer: {
     flexDirection: 'row',

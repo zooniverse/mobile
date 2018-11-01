@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  Dimensions,
   Platform,
   ScrollView,
   StyleSheet,
@@ -8,13 +7,14 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import PropTypes from 'prop-types';
-import StyledMarkdown from '../StyledMarkdown'
-import StyledText from '../StyledText'
-import SizedImage from '../SizedImage'
-import Button from '../Button'
+import Markdown from 'react-native-simple-markdown'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { addIndex, length, map } from 'ramda'
+import PropTypes from 'prop-types';
+
+import StyledText from '../StyledText'
+import Button from '../Button'
+import FittedImage from '../common/FittedImage'
 
 const topPadding = (Platform.OS === 'ios') ? 10 : 0
 
@@ -26,6 +26,16 @@ export class Tutorial extends Component {
       sizedHeight: 0,
       sizedWidth: 0,
     }
+
+    this.onScrollViewLayout = this.onScrollViewLayout.bind(this)
+  }
+
+  onScrollViewLayout({ nativeEvent }) {
+    const { width } = nativeEvent.layout
+    this.setState({
+      sizedHeight: width,
+      sizedWidth: width
+    })
   }
 
   render() {
@@ -34,7 +44,7 @@ export class Tutorial extends Component {
     const totalSteps = length(steps)
 
     const mediaResource = (step.media ? this.props.tutorial.mediaResources[step.media] : null )
-    const mediaImage = (mediaResource !== null ? <SizedImage source={{ uri: mediaResource.src }} /> : null)
+    const mediaImage = (mediaResource !== null ? <FittedImage maxWidth={this.state.sizedWidth} maxHeight={this.state.sizedHeight} source={{ uri: mediaResource.src }} /> : null)
 
     const hasPreviousStep = this.state.step > 0
     const previousStep =
@@ -107,11 +117,14 @@ export class Tutorial extends Component {
       <View style={styles.container}>
         { this.props.isInitialTutorial ? tutorialHeader : null}
         <ScrollView style={styles.content} contentContainerStyle={styles.scrollViewContainerStyle}>
-          { mediaImage }
-          <StyledMarkdown
-            width={ Dimensions.get('window').width - 80 }
-            markdown={steps[this.state.step].content}
-          />
+          <View style={styles.container} onLayout={this.onScrollViewLayout}>
+            { mediaImage }
+            <View style={styles.markdown} >
+              <Markdown >
+                { steps[this.state.step].content }
+              </Markdown>
+            </View>
+          </View>
         </ScrollView>
         <View style={styles.footer}>
           <View style={styles.line} />
@@ -192,6 +205,10 @@ const styles = EStyleSheet.create({
     marginBottom: 0,
     paddingTop: topPadding,
     paddingBottom: 0,
+  },
+  markdown: {
+    flex: 1,
+    marginTop: 15
   }
 })
 
