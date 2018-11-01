@@ -8,27 +8,12 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types'
 import FontedText from '../../common/FontedText'
 import Separator from '../../common/Separator'
-
-const SUPPORTED_SHAPES = ['rectangle']
-
-const infoText = (min, max, numberDrawn) => {
-    return `${numberDrawn} of ${min} required, ${max} maximum`
-}
+import ShapeInstructionsView from './ShapeInstructionsView'
 
 const InstructionView = (props) => {
     return (
         <View style={styles.container}>
-            <View style={styles.instructionsContainer} >
-                <ShapePreview type={props.type} color={props.color} />
-                <View style={styles.textContainer} >
-                    <FontedText style={styles.label}>
-                        {props.label}
-                    </FontedText>
-                    <FontedText style={styles.infoText}> 
-                        {infoText(props.min, props.max, props.numberDrawn)}
-                    </FontedText>
-                </View>
-            </View>
+            <ShapeInstructionsView {...props} />
             <Separator style={styles.separator} />
             <View style={styles.instructionsContainer} >
                 <OptionButton type="cancel" onPress={props.onCancel} />
@@ -39,14 +24,15 @@ const InstructionView = (props) => {
 }
 
 InstructionView.propTypes = {
-    type: PropTypes.oneOf(SUPPORTED_SHAPES),
+    type: PropTypes.oneOf(['rectangle']),
     color: PropTypes.string,
     label: PropTypes.string,
     min: PropTypes.string,
     max: PropTypes.string,
     numberDrawn: PropTypes.number,
     onSave: PropTypes.func,
-    onCancel: PropTypes.func
+    onCancel: PropTypes.func,
+    warnForRequirements: PropTypes.bool
 }
 
 /**
@@ -62,7 +48,7 @@ const ShapePreview = ({type, color}) => {
     }
 }
 ShapePreview.propTypes = {
-    type: PropTypes.oneOf(SUPPORTED_SHAPES),
+    type: PropTypes.oneOf(['rectangle']),
     color: PropTypes.string
 }
 
@@ -106,19 +92,6 @@ const styles = EStyleSheet.create({
         flexDirection: 'row',
         padding: 20
     },
-    textContainer: {
-        flexDirection: 'column',
-        flex: 1,
-        paddingLeft: 15
-    },
-    label: {
-        fontWeight: 'bold',
-        fontSize: 14,
-    },
-    infoText: {
-        fontSize: 14,
-        color: '$headerGrey'
-    },
     separator: {
         marginHorizontal: 20
     },
@@ -142,11 +115,6 @@ const styles = EStyleSheet.create({
     saveButtonText: {
         color: 'white'
     },
-    rectangleShape: {
-        width: 30,
-        height: 30,
-        borderWidth: 2
-    }
 })
 
 export default InstructionView

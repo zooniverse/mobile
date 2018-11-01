@@ -8,7 +8,6 @@ import {
     Rect,
 } from 'react-native-svg'
 import PropTypes from 'prop-types'
-import R from 'ramda'
 import {
     distanceFromRange
 } from '../../../utils/drawingUtils'
@@ -46,10 +45,10 @@ class SvgOverlay extends Component {
 
         this.panResponder = PanResponder.create({
             // Ask to be the responder:
-            onStartShouldSetPanResponder: () => this.props.mode === 'draw',
-            onStartShouldSetPanResponderCapture: () => this.props.mode === 'draw',
-            onMoveShouldSetPanResponder: () => this.props.mode === 'draw',
-            onMoveShouldSetPanResponderCapture: () => this.props.mode === 'draw',
+            onStartShouldSetPanResponder: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onStartShouldSetPanResponderCapture: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onMoveShouldSetPanResponder: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
+            onMoveShouldSetPanResponderCapture: () => this.props.mode === 'draw' && !this.props.maxShapesDrawn,
             onPanResponderGrant: (evt) => {
                 const { locationX, locationY } = evt.nativeEvent
                 this.setState({
@@ -90,7 +89,7 @@ class SvgOverlay extends Component {
                     previewSquareY: 0
                 })
                 
-                if (Math.abs(shapeWidth) > 20 || Math.abs(shapeHeight) > 20) {
+                if (Math.abs(shapeWidth) > (20 * this.state.displayToNativeRatioX) || Math.abs(shapeHeight) > (20 * this.state.displayToNativeRatioY)) {
                     this.props.onShapeCreated(shape)
                 }
             },
@@ -131,7 +130,7 @@ class SvgOverlay extends Component {
                 return (
                     <Rect 
                         stroke="black"
-                        strokeWidth={3}
+                        strokeWidth={4 * this.state.displayToNativeRatioX}
                         fill="rgba(0, 0, 0, .5)"
                         x={this.state.previewSquareX} 
                         y={this.state.previewSquareY}
@@ -204,6 +203,7 @@ SvgOverlay.propTypes = {
     color: PropTypes.string,
     drawingShape: PropTypes.oneOf(['rect']),
     shapes: PropTypes.object,
+    maxShapesDrawn: PropTypes.bool,
     mode: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
     onShapeDeleted: PropTypes.func,
     onShapeCreated: PropTypes.func,

@@ -17,6 +17,7 @@ import PropTypes from 'prop-types'
 
 class CloseButtonSVG extends Component {
     render() {
+        const side = `${this.props.displayToNativeRatio * 30}`
         return (
             <G
             >
@@ -29,15 +30,16 @@ class CloseButtonSVG extends Component {
 
                 <Use
                     href="#symbol"
-                    width="20" height="20"
+                    width={side} height={side}
                 />
-                <Rect onLayout={this.props.onLayout} width="20" height="20" fill="transparent" />
+                <Rect onLayout={this.props.onLayout} width={side} height={side} fill="transparent" />
             </G>
         )
     }
 }
 
 CloseButtonSVG.propTypes = {
+    displayToNativeRatio: PropTypes.number,
     color: PropTypes.string,
     onLayout: PropTypes.func,
 }

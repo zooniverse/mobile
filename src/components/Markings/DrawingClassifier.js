@@ -25,8 +25,11 @@ import NavBar from '../NavBar'
 import * as navBarActions from '../../actions/navBar'
 import DrawingModal from './DrawingModal'
 import NativeImage from '../../nativeModules/NativeImage'
+import ShapeInstructionsView from './components/ShapeInstructionsView';
 
 const mapStateToProps = (state, ownProps) => {
+    const subjectDimensions = state.classifier.subject ? state.classifier.subjectDimensions[state.classifier.subject.id] : null
+
     return {
         isSuccess: state.classifier.isSuccess,
         isFailure: state.classifier.isFailure,
@@ -36,7 +39,9 @@ const mapStateToProps = (state, ownProps) => {
         needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
         subject: state.classifier.subject,
         shapes: state.drawing.shapes,
-        workflowOutOfSubjects: state.classifier.workflowOutOfSubjects
+        workflowOutOfSubjects: state.classifier.workflowOutOfSubjects,
+        numberOfShapesDrawn: R.keys(state.drawing.shapesInProgress).length,
+        subjectDimensions: subjectDimensions ? subjectDimensions : {naturalHeight: 1, naturalWidth: 1},
     }
 }
 
@@ -61,7 +66,9 @@ class DrawingClassifier extends Component {
             subjectDimensions: {
                 clientHeight: 1,
                 clientWidth: 1
-            }
+            },
+            modalHasBeenClosedOnce: false,
+            showBlurView: true
         }
 
         this.finishTutorial = this.finishTutorial.bind(this)
@@ -87,6 +94,10 @@ class DrawingClassifier extends Component {
 
     submitClassification() {
         this.props.classifierActions.submitDrawingClassification(this.props.workflow, this.props.subject, this.state.subjectDimensions)
+        this.setState({
+            modalHasBeenClosedOnce: false,
+            imageIsLoaded: false
+        })
     }
 
     componentDidUpdate(prevProps) {
@@ -130,6 +141,8 @@ class DrawingClassifier extends Component {
             return <OverlaySpinner overrideVisibility={this.props.isFetching} />
         }
 
+        const warnForRequirements = this.state.modalHasBeenClosedOnce && R.keys(this.props.shapes).length < this.props.tools[0].min
+
         const tutorial =
             <Tutorial
                 projectName={this.props.project.display_name}
@@ -145,12 +158,20 @@ class DrawingClassifier extends Component {
                     workflowID={this.props.workflow.id}
                     taskHelp={this.props.help}
                 />
+                <ShapeInstructionsView
+                    { ...this.props.tools[0] }
+                    numberDrawn={this.props.numberOfShapesDrawn}
+                    warnForRequirements={warnForRequirements}
+                />
                 <TouchableOpacity style={styles.container} onPress={() => this.setState({isModalVisible: true})}>
                     <ImageWithSvgOverlay
                         shapes={this.props.shapes}
                         imageIsLoaded={this.state.imageIsLoaded}
                         uri={this.state.localImagePath}
                         onImageLayout={this.onImageLayout}
+                        showBlurView={R.isEmpty(this.props.shapes)}
+                        subjectDimensions={this.props.subjectDimensions}
+                        displayToNativeRatio={this.props.subjectDimensions.naturalWidth/this.state.subjectDimensions.clientWidth}
                     />
                 </TouchableOpacity>
             </View>
@@ -168,6 +189,7 @@ class DrawingClassifier extends Component {
 
         const submitButton = 
             <ClassifierButton
+                disabled={R.keys(this.props.shapes).length < this.props.tools[0].min}
                 onPress={this.submitClassification}
                 style={styles.submitButton}
                 type="answer"
@@ -208,8 +230,8 @@ class DrawingClassifier extends Component {
                     tool={this.props.tools[0]}
                     visible={this.state.isModalVisible} 
                     imageSource={this.state.localImagePath}
-                    onClose={() => this.setState({isModalVisible: false})}
-                    
+                    onClose={() => this.setState({isModalVisible: false, modalHasBeenClosedOnce: true})}
+                    warnForRequirements={this.state.modalHasBeenClosedOnce}
                 />
             </View>
         )
@@ -301,6 +323,11 @@ DrawingClassifier.propTypes = {
         setTitleForPage: PropTypes.func,
         setNavbarColorForPage: PropTypes.func,
         setNavbarColorForPageToDefault: PropTypes.func
+    }),
+    numberOfShapesDrawn: PropTypes.number,
+    subjectDimensions: PropTypes.shape({
+        naturalHeight: PropTypes.number,
+        naturalWidth: PropTypes.number
     })
 }
 

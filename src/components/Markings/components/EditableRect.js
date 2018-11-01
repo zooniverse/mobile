@@ -70,7 +70,7 @@ class EditableRect extends Component {
                     width={this.props.width}
                     height={this.props.height}
                     stroke={this.props.color}
-                    strokeWidth="4"
+                    strokeWidth={4 * this.props.displayToNativeRatioX}
                     fill="transparent"
                 />
                 {
@@ -82,7 +82,7 @@ class EditableRect extends Component {
                                 cx={this.props.x}
                                 cy={this.props.y}
                                 fill={this.props.color}
-                                r="8"
+                                r={16 * this.props.displayToNativeRatioX}
                             />
                             <Circle
                                 ref={ref => this.upperRightCircle = ref}
@@ -90,7 +90,7 @@ class EditableRect extends Component {
                                 cx={this.props.x + this.props.width}
                                 cy={this.props.y}
                                 fill={this.props.color}
-                                r="8"
+                                r={16 * this.props.displayToNativeRatioX}
                             />
                             <Circle
                                 ref={ref => this.bottomLeftCircle = ref}
@@ -98,7 +98,7 @@ class EditableRect extends Component {
                                 cx={this.props.x}
                                 cy={this.props.height + this.props.y}
                                 fill={this.props.color}
-                                r="8"
+                                r={16 * this.props.displayToNativeRatioX}
                             />
                             <Circle
                                 ref={ref => this.bottomRightCircle = ref}
@@ -106,7 +106,7 @@ class EditableRect extends Component {
                                 cx={this.props.width + this.props.x}
                                 cy={this.props.height + this.props.y}
                                 fill={this.props.color}
-                                r="8"
+                                r={16 * this.props.displayToNativeRatioX}
                             />
                         </G> : null
                 }
@@ -115,9 +115,10 @@ class EditableRect extends Component {
                     this.props.isDeletable ?
                         <G
                             x={this.props.width > 0 ? this.props.width + this.props.x : this.props.x}
-                            y={(this.props.height > 0 ? this.props.y : this.props.y - Math.abs(this.props.height)) - 15}
+                            y={(this.props.height > 0 ? this.props.y : this.props.y - Math.abs(this.props.height)) - (15 * this.props.displayToNativeRatioY)}
                         >
                             <CloseButtonSVG
+                                displayToNativeRatio={this.props.displayToNativeRatioX}
                                 onLayout={this.props.onCloseLayout}
                                 color={this.props.color}
                                 onPress={this.props.onDelete}
@@ -132,6 +133,8 @@ class EditableRect extends Component {
 }
 
 EditableRect.propTypes = {
+    displayToNativeRatioX: PropTypes.number,
+    displayToNativeRatioY: PropTypes.number,
     x: PropTypes.number,
     y: PropTypes.number,
     width: PropTypes.number,

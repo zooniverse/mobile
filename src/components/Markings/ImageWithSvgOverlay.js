@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    Animated,
     Image,
     Platform,
     View
@@ -10,47 +11,61 @@ import {
     Rect
 } from 'react-native-svg'
 import R from 'ramda'
-import { connect } from 'react-redux'
+import { BlurView } from 'react-native-blur';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
-
-const mapStateToProps = (state) => {
-    const subjectDimensions = state.classifier.subjectDimensions[state.classifier.subject.id]
-    return {
-        subjectDimensions: subjectDimensions ? subjectDimensions : {naturalHeight: 1, naturalWidth: 1}
-    }
-}
 
 class ImageWithSvgOverlay extends Component {
 
     constructor(props) {
         super(props)
-        this.count = 0
+
         this.state = {
-            imageIsLoaded: false,
-            imageNativeWidth: 1,
-            imageNativeHeight: 1,
-            clientWidth: 1,
-            clientHeight: 1,
+            scale: new Animated.Value(1),
+            containerDimensions: {
+                width: 1,
+                height: 1
+            },
         }
 
         this.onImageLayout = this.onImageLayout.bind(this)
+        this.animateScale = this.animateScale.bind(this)
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.imageIsLoaded !== this.props.imageIsLoaded && !this.props.imageIsLoaded) {
+            this.setState({scale: new Animated.Value(0.8)})
+        }
+        if (!R.equals(prevProps.subjectDimensions, this.props.subjectDimensions) || !R.equals(prevState.containerDimensions, this.state.containerDimensions)) {
+            const { naturalHeight, naturalWidth } = this.props.subjectDimensions
+            const { height: containerHeight, width: containerWidth } = this.state.containerDimensions
+            const aspectRatio = Math.min(containerHeight/naturalHeight, containerWidth/naturalWidth)
+            const clientHeight = naturalHeight * aspectRatio
+            const clientWidth = naturalWidth * aspectRatio
+
+            this.props.onImageLayout({
+                clientHeight,
+                clientWidth,
+            })
+        }
+    }
+
+    animateScale() {
+        Animated.spring(
+            this.state.scale,
+            {
+                toValue: 1
+            }
+        ).start()
     }
 
     onImageLayout({nativeEvent}) {
-        const { height: containerHeight, width: containerWidth } = nativeEvent.layout
-        const { naturalHeight, naturalWidth } = this.props.subjectDimensions
-        const aspectRatio = Math.min(containerHeight/naturalHeight, containerWidth/naturalWidth)
-        const clientHeight = naturalHeight * aspectRatio
-        const clientWidth = naturalWidth * aspectRatio
+        const { height, width } = nativeEvent.layout
         this.setState({
-            imageIsLoaded: true,
-            clientHeight,
-            clientWidth,
-        })
-        
-        this.props.onImageLayout({
-            clientHeight,
-            clientWidth,
+            containerDimensions: {
+                width,
+                height
+            }
         })
     }
 
@@ -65,7 +80,7 @@ class ImageWithSvgOverlay extends Component {
                             key={index}
                             fill="transparent"
                             stroke={shape.color}
-                            strokeWidth={3}
+                            strokeWidth={4 * this.props.displayToNativeRatio}
                             { ... shape }
                         />
                     )
@@ -76,40 +91,56 @@ class ImageWithSvgOverlay extends Component {
         return shapeArray
     }
 
+    renderBlurView() {
+        const expandIcon = <Icon name="arrows-alt" color="white" size={50} />
+
+        return (
+            <View style={styles.blurView}>
+                {
+                    Platform.OS === 'ios' ?
+                        <BlurView style={[styles.centeredContent, this.state.containerDimensions]} blurType="light" blurAmount={2}>
+                            { expandIcon }
+                        </BlurView>
+
+                    :
+                        <View style={ [styles.centeredContent, styles.androidBlurView, this.state.containerDimensions] }>
+                            { expandIcon }
+                        </View>
+                }
+            </View>
+        )
+    }
+
     render() {
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         const { naturalWidth, naturalHeight } = this.props.subjectDimensions
+
         return (
-            <View style={styles.container}>
+            <Animated.View style={[styles.container, {transform: [{scale: this.state.scale}]}]}>
                 {this.props.imageIsLoaded ?
                     <View style={styles.container} >
                         <Image
+                            onLoad={() => this.animateScale()}
                             onLayout={this.onImageLayout}
                             style={styles.backgroundImage}
                             source={{uri: pathPrefix + this.props.uri}}
                             resizeMode="contain"
                         />
-                        {
-                            this.state.imageIsLoaded ? 
-                                <View style={styles.svgContainer} >
-                                    <Svg 
-                                        viewBox={`0 0 ${naturalWidth} ${naturalHeight}`}
-                                        height={this.state.clientHeight}
-                                        width={this.state.clientWidth}
-                                    >
-                                        { this.renderShapes() }
-                                    </Svg>
-                                </View>
-                            : 
-                                null
-                        }
+                        <View style={styles.svgContainer} >
+                            <Svg 
+                                viewBox={`0 0 ${naturalWidth} ${naturalHeight}`}
+                                height={this.state.containerDimensions.height}
+                                width={this.state.containerDimensions.width}
+                            >
+                                { this.renderShapes() }
+                            </Svg>
+                        </View>
                     </View>
                 :
                     <SubjectLoadingIndicator /> 
                 }
-            </View>
-            
-                
+                { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView()}
+            </Animated.View>               
         )
     }
 }
@@ -134,7 +165,24 @@ const styles = {
         left: 0,
         right: 0,
         bottom: 0
-    }
+    },
+    blurView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    },
+    centeredContent: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+    },
+    androidBlurView: {
+        backgroundColor: 'rgba(255, 255, 255, 0.4)'
+    },
 }
 
 ImageWithSvgOverlay.propTypes = {
@@ -142,6 +190,7 @@ ImageWithSvgOverlay.propTypes = {
         naturalWidth: PropTypes.number,
         naturalHeight: PropTypes.number
     }),
+    displayToNativeRatio: PropTypes.number,
     imageIsLoaded: PropTypes.bool,
     uri: PropTypes.string,
     annotations: PropTypes.arrayOf(PropTypes.shape({
@@ -153,7 +202,8 @@ ImageWithSvgOverlay.propTypes = {
         height: PropTypes.number
     })),
     onImageLayout: PropTypes.func,
-    shapes: PropTypes.object
+    shapes: PropTypes.object,
+    showBlurView: PropTypes.bool
 }
 
-export default connect(mapStateToProps)(ImageWithSvgOverlay)
+export default ImageWithSvgOverlay

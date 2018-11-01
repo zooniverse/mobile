@@ -20,6 +20,7 @@ import InstructionView from './components/InstructionView'
 import * as drawingActions from '../../actions/drawing'
 
 const mapStateToProps = state => ({
+    numberOfShapesDrawn: R.keys(state.drawing.shapesInProgress).length,
     canUndo: state.drawing.actions.length > 0,
     shouldConfirmOnClose: !R.isEmpty(state.drawing.shapes) || !R.isEmpty(state.drawing.shapesInProgress)
 })
@@ -98,6 +99,7 @@ class DrawingModal extends Component {
                         drawingColor={this.props.tool.color}
                         source={this.props.imageSource}
                         mode={this.state.mode}
+                        maxShapesDrawn={this.props.numberOfShapesDrawn >= this.props.tool.max}
                     />
                     <DrawingButtons
                         onButtonSelected={this.handleDrawingButtonPress}
@@ -106,9 +108,10 @@ class DrawingModal extends Component {
                     />
                     <InstructionView
                         {... this.props.tool}
-                        numberDrawn={0}
+                        numberDrawn={this.props.numberOfShapesDrawn}
                         onCancel={this.onCancel}
                         onSave={this.onSave}
+                        warnForRequirements={this.props.warnForRequirements && this.props.numberOfShapesDrawn < this.props.tool.min}
                     />
                 </View>
                 <CloseButton
@@ -177,7 +180,9 @@ DrawingModal.propTypes = {
         saveEdits: PropTypes.func,
         clearShapes: PropTypes.func,
         undoMostRecentEdit: PropTypes.func
-    })
+    }),
+    warnForRequirements: PropTypes.bool,
+    numberOfShapesDrawn: PropTypes.number
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawingModal)
