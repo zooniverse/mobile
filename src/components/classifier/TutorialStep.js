@@ -6,10 +6,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import Markdown from 'react-native-simple-markdown'
-<<<<<<< HEAD
-=======
 import DeviceInfo from 'react-native-device-info'
->>>>>>> Add dynamic sizing for tablet
 
 import FittedImage from '../common/FittedImage' 
 
@@ -65,7 +62,7 @@ const markdownStyles = {
     text: {
       fontSize: DeviceInfo.isTablet() ? 22 : 14
     }
-  }
+}
 
 const styles = {
     markdown: {

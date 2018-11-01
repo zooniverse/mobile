@@ -12,10 +12,6 @@ import Swiper from 'react-native-swiper';
 import { addIndex, length, map } from 'ramda'
 import PropTypes from 'prop-types';
 
-import StyledText from '../StyledText'
-import Button from '../Button'
-import TutorialStep from './TutorialStep'
-
 import Button from '../Button'
 import TutorialStep from './TutorialStep'
 import FontedText from '../common/FontedText';
@@ -33,7 +29,6 @@ export class Tutorial extends Component {
   render() {
     const steps = this.props.tutorial.steps
     const totalSteps = length(steps)
-    
     const tutorialSteps = steps.map((step, index) => {
       return (
         <TutorialStep
@@ -204,6 +199,10 @@ const styles = EStyleSheet.create({
     paddingTop: topPadding,
     paddingBottom: 0,
   },
+  markdown: {
+    flex: 1,
+    marginTop: 15
+  }
 })
 
 Tutorial.propTypes = {
