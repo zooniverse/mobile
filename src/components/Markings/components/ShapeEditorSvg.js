@@ -100,7 +100,6 @@ class ShapeEditorSvg extends Component {
                 const { shapeIndex, touchState, shapeRefs } = this.state
                 if (shapeIndex >= 0) {
                     const { dx, dy } = gestureState;
-
                     // Because Svgs don't have any way to animate, we have to update their props manually
                     const deltas = calculateShapeChanges(touchState, dx, dy, this.props.displayToNativeRatioX, this.props.displayToNativeRatioY)
                     shapeRefs[shapeIndex].update(deltas);
@@ -165,9 +164,14 @@ class ShapeEditorSvg extends Component {
                             displayToNativeRatioY={this.props.displayToNativeRatioY}
                             showCorners={this.props.mode === 'edit' && selectedShape}
                             isDeletable={this.props.mode === 'erase'}
-                            ref={ref => this.setState({
-                                shapeRefs: R.set(R.lensProp(index), ref ,this.state.shapeRefs)
-                            })}
+                            ref={ref => {
+                                if (ref) {
+                                    this.setState(currentState => {
+                                        currentState.shapeRefs = R.set(R.lensProp(index), ref, currentState.shapeRefs)
+                                        return currentState
+                                    })
+                                }
+                            }}
                         />
                     )
                 }
