@@ -33,6 +33,10 @@ export const clearShapes = () => ({
     type: ActionConstants.CLEAR_SHAPES
 })
 
+export const clearShapesInProgress = () => ({
+    type: ActionConstants.CLEAR_SHAPES_IN_PROGRESS
+})
+
 export const saveEdits = () => ({
     type: ActionConstants.SAVE_EDITS
 })

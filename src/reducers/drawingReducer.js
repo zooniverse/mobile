@@ -73,7 +73,6 @@ export default function drawing(state=InitialState, action) {
             return { ...state, shapesInProgress: {}, actions: [], shapes: {} }
         }
         case (ActionConstants.SAVE_EDITS): {
-
             return { ...state, shapes: state.shapesInProgress, actions: [] }
         }
         case (ActionConstants.MUTATE_SHAPE): {
@@ -87,6 +86,9 @@ export default function drawing(state=InitialState, action) {
             const actionsAfterUndo = R.dropLast(1, state.actions)
             const shapesInProgress = calculateChanges(state.shapes, actionsAfterUndo)
             return {...state, actions: actionsAfterUndo, shapesInProgress}
+        }
+        case (ActionConstants.CLEAR_SHAPES_IN_PROGRESS): {
+            return {...state, actions: [], shapesInProgress: state.shapes}
         }
         default:
             return state
