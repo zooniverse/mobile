@@ -60,6 +60,7 @@ const styles = EStyleSheet.create({
   container: {
     marginHorizontal: 25,
     marginTop: 15,
+    marginBottom: 5,
     backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'space-around'
