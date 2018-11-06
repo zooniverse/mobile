@@ -53,16 +53,20 @@ class DrawingModal extends Component {
         }
     }
 
-    onCancel() {
+    onCancel({justClearInProgress}) {
         const onConfirm = () => {
-            this.props.drawingActions.clearShapes()
+            if (justClearInProgress) {
+                this.props.drawingActions.clearShapesInProgress()
+            } else {
+                this.props.drawingActions.clearShapes()
+            }
             this.props.onClose()
         }
 
         if (this.props.shouldConfirmOnClose) {
             Alert.alert(
                 'Are you sure?',
-                'This will erase all of your annotations.',
+                `This will erase ${justClearInProgress ? 'your most recent edits' : 'all of your annotations.'}`,
                 [
                     {text: 'Yes', onPress: onConfirm},
                     {text: 'Cancel', style: 'cancel'},
@@ -109,13 +113,13 @@ class DrawingModal extends Component {
                     <InstructionView
                         {... this.props.tool}
                         numberDrawn={this.props.numberOfShapesDrawn}
-                        onCancel={this.onCancel}
+                        onCancel={() => this.onCancel({justClearInProgress: true})}
                         onSave={this.onSave}
                         warnForRequirements={this.props.warnForRequirements && this.props.numberOfShapesDrawn < this.props.tool.min}
                     />
                 </View>
                 <CloseButton
-                    onPress={this.onCancel}
+                    onPress={() => this.onCancel({justClearInProgress: false})}
                     style={styles.closeButton}
                     color={Theme.$zooniverseTeal}
                     backgroundColor="white"
@@ -179,7 +183,8 @@ DrawingModal.propTypes = {
     drawingActions: PropTypes.shape({
         saveEdits: PropTypes.func,
         clearShapes: PropTypes.func,
-        undoMostRecentEdit: PropTypes.func
+        undoMostRecentEdit: PropTypes.func,
+        clearShapesInProgress: PropTypes.func
     }),
     warnForRequirements: PropTypes.bool,
     numberOfShapesDrawn: PropTypes.number

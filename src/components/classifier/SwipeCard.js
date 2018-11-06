@@ -17,6 +17,7 @@ import * as imageActions from '../../actions/images'
 import { subjectDisplayWidth, subjectDisplayHeight } from './SwipeClassifier'
 import ProgressIndicatingImage from '../common/ProgressIndicatingImage'
 import FontedText from '../common/FontedText'
+import AlreadySeenBanner from './AlreadySeenBanner'
 
 const mapDispatchToProps = (dispatch) => ({
   imageActions: bindActionCreators(imageActions, dispatch)
@@ -93,13 +94,6 @@ class SwipeCard extends Component {
           }
         const alreadySeen = (this.props.subject.already_seen || this.props.seenThisSession) && this.state.imageIsVisible
     
-        const alreadySeenBanner =
-            <View style={styles.alreadySeen}>
-                <FontedText style={styles.alreadySeenText} >
-                    ALREADY SEEN!
-                </FontedText>
-            </View>
-
         const overlay =
             <View>
                 <Animated.View style={[imageDimensionStyle, styles.overlayContainer, styles.overlayBackground, { opacity }]}>
@@ -126,7 +120,7 @@ class SwipeCard extends Component {
                 <View style={styles.overlayContainer}>
                     <View style={imageDimensionStyle}>
                         { this.props.shouldAnimateOverlay ? overlay : null }
-                        { alreadySeen ? alreadySeenBanner : null }
+                        { alreadySeen ? <AlreadySeenBanner /> : null }
                     </View>
                 </View>
             </TouchableOpacity>
@@ -137,21 +131,6 @@ class SwipeCard extends Component {
 export default connect(null, mapDispatchToProps)(SwipeCard)
 
 const styles = EStyleSheet.create({
-    alreadySeen: {
-        elevation: 2,
-        position: 'absolute',
-        top: 16,
-        right: 0,
-        backgroundColor: '$darkOrange',
-        paddingVertical: 2,
-        paddingHorizontal: 5,
-        transform: [{ rotate: '20deg'}]
-    },
-    alreadySeenText: {
-        color: 'white',
-        fontSize: 12,
-        fontWeight: 'bold'
-    },
     imageShadow: {
         backgroundColor: 'transparent',
         shadowColor: 'rgba(0, 0, 0, 0.24)',

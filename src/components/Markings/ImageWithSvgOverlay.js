@@ -14,6 +14,7 @@ import R from 'ramda'
 import { BlurView } from 'react-native-blur';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
+import AlreadySeenBanner from '../classifier/AlreadySeenBanner'
 
 class ImageWithSvgOverlay extends Component {
 
@@ -139,7 +140,8 @@ class ImageWithSvgOverlay extends Component {
                 :
                     <SubjectLoadingIndicator /> 
                 }
-                { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView()}
+                { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView() }
+                { this.props.alreadySeen && this.props.imageIsLoaded && <AlreadySeenBanner /> }
             </Animated.View>               
         )
     }
@@ -203,7 +205,8 @@ ImageWithSvgOverlay.propTypes = {
     })),
     onImageLayout: PropTypes.func,
     shapes: PropTypes.object,
-    showBlurView: PropTypes.bool
+    showBlurView: PropTypes.bool,
+    alreadySeen: PropTypes.bool
 }
 
 export default ImageWithSvgOverlay

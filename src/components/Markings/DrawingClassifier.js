@@ -170,6 +170,7 @@ class DrawingClassifier extends Component {
                         uri={this.state.localImagePath}
                         onImageLayout={this.onImageLayout}
                         showBlurView={R.isEmpty(this.props.shapes)}
+                        alreadySeen={this.props.subject.already_seen}
                         subjectDimensions={this.props.subjectDimensions}
                         displayToNativeRatio={this.props.subjectDimensions.naturalWidth/this.state.subjectDimensions.clientWidth}
                     />
