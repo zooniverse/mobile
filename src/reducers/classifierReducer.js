@@ -27,10 +27,7 @@ export default function classifier(state=InitialClassifier, action) {
         case ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW: {
             const subjectList = state.subjectLists[action.workflowId] || []
             const workflowIdLens = R.lensProp(action.workflowId)
-            const filteredNewSubjects = action.subjects.filter((newSubject) => {
-                return !R.any(subject => subject.id === newSubject.id, subjectList)
-            })
-            const newSubjectList =  R.set(workflowIdLens, subjectList.concat(filteredNewSubjects), state.subjectLists)
+            const newSubjectList =  R.set(workflowIdLens, [...subjectList, ...action.subjects], state.subjectLists)
             return { ...state, subjectLists: newSubjectList}
         }
         case ActionConstants.CLEAR_SUBJECTS_FROM_WORKFLOW: {
