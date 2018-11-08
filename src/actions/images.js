@@ -1,13 +1,11 @@
+import RNFetchBlob from 'rn-fetch-blob'
 import * as ActionConstants from '../constants/actions'
 import { loadRemoteImageToCache } from '../utils/imageUtils'
 
 export const loadImageToCache = (remoteSource) => {
     return (dispatch, getState) => {
         return new Promise((resolve, reject) => {
-            const cachedImagePath = getState().images[remoteSource]
-            if (cachedImagePath) {
-                resolve(cachedImagePath)
-            } else {
+            const loadImage = () => {
                 loadRemoteImageToCache(remoteSource).then((localSource) => {
                     dispatch(saveImageLocation(remoteSource, localSource))
                     resolve(localSource)
@@ -15,6 +13,20 @@ export const loadImageToCache = (remoteSource) => {
                 .catch((error) => {
                     reject(error)
                 })
+            }
+
+            const cachedImagePath = getState().images[remoteSource]
+            if (cachedImagePath) {
+                RNFetchBlob.fs.exists(cachedImagePath)
+                .then((fileExists) => {
+                    if (fileExists) {
+                        resolve(cachedImagePath)
+                    } else {
+                        loadImage()
+                    }
+                })                
+            } else {
+                loadImage()
             }
         })
     }
