@@ -268,7 +268,8 @@ export class SwipeClassifier extends React.Component {
 
 const styles = EStyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    marginBottom: 15
   },
   classificationPanel: { 
     flex: 1,
