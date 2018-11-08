@@ -6,16 +6,18 @@ import {
 import PropTypes from 'prop-types'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import DeviceInfo from 'react-native-device-info';
+
 import Theme from '../../../theme'
 
-const RADIUS = 15
+const RADIUS = DeviceInfo.isTablet() ? 20 : 15
 export const DrawingButton = ({ style, activated, type, onPress, disabled }) => {
     const circleStyle = {
         width: RADIUS * 2,
         height: RADIUS * 2,
         borderRadius: RADIUS,
         backgroundColor: activated ? Theme.$zooniverseTeal : 'transparent',
-        borderWidth: 1,
+        borderWidth: DeviceInfo.isTablet() ? 2 : 1,
         borderColor: Theme.$zooniverseTeal
     }
 

@@ -3,9 +3,11 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native'
-import FontedText from '../common/FontedText'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import DeviceInfo from 'react-native-device-info'
+
+import FontedText from '../common/FontedText'
 
 const ClassifierButton = (props) => {
     const buttonStyle = [props.style, styles.button]
@@ -41,6 +43,7 @@ const styles =EStyleSheet.create({
         justifyContent: 'center',
       },
       buttonText: {
+        fontSize: DeviceInfo.isTablet ? 22 : 14,
         marginVertical: 11,
         marginHorizontal: 9
       },

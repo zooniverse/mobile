@@ -9,6 +9,8 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 import Markdown from 'react-native-simple-markdown'
 import { connect } from 'react-redux'
+import DeviceInfo from 'react-native-device-info'
+
 import { setQuestionContainerHeight } from '../../actions/classifier'
 import {
   extractFirstLinkedImageFrom,
@@ -48,7 +50,7 @@ export class Question extends Component {
       <View style={[styles.questionContainer]}>
         <View style={styles.question}>
           <View style={styles.markdown}>
-            <Markdown>
+            <Markdown styles={markdownStyles}>
               {this.state.question}
             </Markdown>
           </View>
@@ -70,6 +72,12 @@ export class Question extends Component {
         </View>
       </View>
     )
+  }
+}
+
+const markdownStyles = {
+  text: {
+    fontSize: DeviceInfo.isTablet() ? 22 : 14
   }
 }
 

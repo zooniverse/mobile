@@ -2,6 +2,7 @@ import React from 'react'
 import {
     TouchableOpacity
 } from 'react-native'
+import DeviceInfo from 'react-native-device-info'
 import FontedText from '../common/FontedText'
 import PropTypes from 'prop-types'
 
@@ -21,6 +22,7 @@ NeedHelpButton.propTypes = {
 
 const styles = {
     needHelpText: {
+        fontSize: DeviceInfo.isTablet() ? 22 : 14,
         textAlign: 'center',
         marginTop: 15,
         color: 'rgba(0,93,105,1)'
