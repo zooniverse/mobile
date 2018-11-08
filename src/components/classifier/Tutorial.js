@@ -35,7 +35,7 @@ export class Tutorial extends Component {
         <TutorialStep
           key={`${index}`}
           markdownContent={step.content}
-          mediaUri={this.props.tutorial.mediaResources[step.media] ? this.props.tutorial.mediaResources[step.media].src : null}
+          mediaUri={this.props.tutorial.mediaResources && this.props.tutorial.mediaResources[step.media] ? this.props.tutorial.mediaResources[step.media].src : null}
         />
       )
     })
