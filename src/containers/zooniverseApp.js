@@ -36,11 +36,9 @@ const mapDispatchToProps = (dispatch) => ({
   setNotificationPayload(value) {
     dispatch(setState('notificationPayload', value))
   },
-  setDimensions() {
-    dispatch(setDimensions())
-  },
   imageActions: bindActionCreators(imageActions, dispatch),
-  settingsActions: bindActionCreators(settingsActions, dispatch)
+  settingsActions: bindActionCreators(settingsActions, dispatch),
+  appActions: bindActionCreators(appActions, dispatch)
 })
 
 class ZooniverseApp extends Component {
@@ -48,8 +46,20 @@ class ZooniverseApp extends Component {
     super(props);
   }
 
+  handleDimensionsChange(dimensions) {
+    this.props.appActions.updateScreenDimensions({
+      width: dimensions.window.width,
+      height: dimensions.window.height
+    })
+  }
+
   componentDidMount() {
-    this.props.setDimensions()
+    // Initially set screen dimensions
+    this.handleDimensionsChange({window: Dimensions.get('window')})
+
+    // Subscribe to screen change events
+    Dimensions.addEventListener('change', this.handleDimensionsChange.bind(this))
+
     removeLeftOverImages(this.props.images)
     this.props.imageActions.clearImageLocations()
     if (Platform.OS === 'ios') {
@@ -106,7 +116,10 @@ ZooniverseApp.propTypes = {
   setDimensions: PropTypes.func,
   images: PropTypes.object,
   imageActions: PropTypes.any,
-  settingsActions: PropTypes.any
+  settingsActions: PropTypes.any,
+  appActions: PropTypes.shape({
+    updateScreenDimensions: PropTypes.func
+  })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZooniverseApp)
