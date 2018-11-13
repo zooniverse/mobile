@@ -40,7 +40,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
             new GoogleAnalyticsBridgePackage(),
             new SvgPackage(),
             new FIRMessagingPackage(),
-            new RNDeviceInfo(),
+            new RNDeviceInfo()
       );
     }
 
