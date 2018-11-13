@@ -1,22 +1,24 @@
 import React, {Component} from 'react'
 import {
+  Dimensions,
   Platform,
   PushNotificationIOS,
   View
 } from 'react-native'
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
 import NavBar from '../components/NavBar'
-import { connect } from 'react-redux'
 import { setState } from '../actions/index'
-import { setDimensions } from '../actions/device'
-import * as settingsActions from '../actions/settings'
 import FCM, { FCMEvent } from 'react-native-fcm'
 import { removeLeftOverImages } from '../utils/imageUtils'
+import * as settingsActions from '../actions/settings'
 import * as imageActions from '../actions/images'
-import { bindActionCreators } from 'redux'
+import * as appActions from '../actions/app'
 
 const mapStateToProps = (state) => ({
   user: state.user,
