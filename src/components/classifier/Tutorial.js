@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  Dimensions,
   Platform,
   ScrollView,
   StyleSheet,
@@ -8,13 +7,14 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import PropTypes from 'prop-types';
-import StyledMarkdown from '../StyledMarkdown'
-import StyledText from '../StyledText'
-import SizedImage from '../SizedImage'
-import Button from '../Button'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Swiper from 'react-native-swiper';
 import { addIndex, length, map } from 'ramda'
+import PropTypes from 'prop-types';
+
+import StyledText from '../StyledText'
+import Button from '../Button'
+import TutorialStep from './TutorialStep'
 
 const topPadding = (Platform.OS === 'ios') ? 10 : 0
 
@@ -23,23 +23,27 @@ export class Tutorial extends Component {
     super(props)
     this.state = {
       step: 0,
-      sizedHeight: 0,
-      sizedWidth: 0,
     }
   }
 
   render() {
     const steps = this.props.tutorial.steps
-    const step = steps[this.state.step]
     const totalSteps = length(steps)
-
-    const mediaResource = (step.media ? this.props.tutorial.mediaResources[step.media] : null )
-    const mediaImage = (mediaResource !== null ? <SizedImage source={{ uri: mediaResource.src }} /> : null)
+    
+    const tutorialSteps = steps.map((step, index) => {
+      return (
+        <TutorialStep
+          key={`TUTORIAL_STEP_${index}`}
+          markdownContent={step.content}
+          mediaUri={this.props.tutorial.mediaResources && this.props.tutorial.mediaResources[step.media] ? this.props.tutorial.mediaResources[step.media].src : null}
+        />
+      )
+    })
 
     const hasPreviousStep = this.state.step > 0
     const previousStep =
       <TouchableOpacity
-        onPress={() => this.setState({step: this.state.step - 1})}
+        onPress={() => this.swiper.scrollBy(-1, false)}
         style={styles.navIconContainer}>
         <Icon name='chevron-left' style={styles.navIcon} />
       </TouchableOpacity>
@@ -52,7 +56,7 @@ export class Tutorial extends Component {
     const hasNextStep = (this.state.step + 1) < totalSteps
     const nextStep =
       <TouchableOpacity
-        onPress={() => this.setState({step: this.state.step + 1})}
+        onPress={() => this.swiper.scrollBy(1, false)}
         style={styles.navIconContainer}>
         <Icon name='chevron-right' style={styles.navIcon} />
       </TouchableOpacity>
@@ -62,13 +66,13 @@ export class Tutorial extends Component {
         <Icon name='chevron-right' style={[styles.navIcon, styles.disabledIcon]} />
       </View>
 
-    const renderCircle = (currentStep, idx) => {
+    const renderCircle = (currentStep, index) => {
       return (
         <TouchableOpacity
-          key={ idx }
-          onPress={() => this.setState({step: idx})}>
+          key={ `PAGINATION_DOT_${index}` }
+          onPress={() => this.swiper.scrollBy(index - this.state.step, false)}>
           <Icon
-            name={ currentStep === idx ? 'circle' : 'circle-thin'}
+            name={ currentStep === index ? 'circle' : 'circle-thin'}
             style={styles.circleIcon} />
         </TouchableOpacity>
       )
@@ -88,7 +92,7 @@ export class Tutorial extends Component {
 
     const continueButton =
       <Button
-        handlePress={() => this.setState({step: this.state.step + 1})}
+        handlePress={() => this.swiper.scrollBy(1, false)}
         additionalStyles={[styles.orangeButton]}
         text={'Continue'} />
 
@@ -106,13 +110,16 @@ export class Tutorial extends Component {
     return (
       <View style={styles.container}>
         { this.props.isInitialTutorial ? tutorialHeader : null}
-        <ScrollView style={styles.content} contentContainerStyle={styles.scrollViewContainerStyle}>
-          { mediaImage }
-          <StyledMarkdown
-            width={ Dimensions.get('window').width - 80 }
-            markdown={steps[this.state.step].content}
-          />
-        </ScrollView>
+        <View style={styles.container}>
+          <Swiper
+            ref={ref => this.swiper = ref}
+            showsPagination={false}
+            loop={false}
+            onIndexChanged={(index) => this.setState({step: index})}
+          >
+            {tutorialSteps}
+          </Swiper>
+        </View>
         <View style={styles.footer}>
           <View style={styles.line} />
           { hasNextStep ? continueButton : finishedButton }
@@ -192,7 +199,7 @@ const styles = EStyleSheet.create({
     marginBottom: 0,
     paddingTop: topPadding,
     paddingBottom: 0,
-  }
+  },
 })
 
 Tutorial.propTypes = {

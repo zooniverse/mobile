@@ -49,8 +49,8 @@ const styles = EStyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     marginTop: 15,
-    marginHorizontal: '$panelHorizontalMargin',
     marginBottom: 0,
+    marginHorizontal: 25
   },
   tabContainer: {
     flexDirection: 'row',

@@ -59,7 +59,7 @@ export class SwipeTabs extends Component {
 const styles = EStyleSheet.create({
   container: {
     marginHorizontal: 25,
-    marginVertical: 15,
+    marginTop: 15,
     backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'space-around'
