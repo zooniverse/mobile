@@ -30,7 +30,7 @@ export class Tutorial extends Component {
     const steps = this.props.tutorial.steps
     const totalSteps = length(steps)
     
-    const tutorialStep = steps.map((step, index) => {
+    const tutorialSteps = steps.map((step, index) => {
       return (
         <TutorialStep
           key={`${index}`}
@@ -117,7 +117,7 @@ export class Tutorial extends Component {
             loop={false}
             onIndexChanged={(index) => this.setState({step: index})}
           >
-            {tutorialStep}
+            {tutorialSteps}
           </Swiper>
         </View>
         <View style={styles.footer}>
