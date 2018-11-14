@@ -5,7 +5,12 @@ exports[`renders correctly 1`] = `
   style={undefined}
 >
   <View
-    style={undefined}
+    style={
+      Array [
+        undefined,
+        undefined,
+      ]
+    }
   />
 </View>
 `;
