@@ -33,7 +33,7 @@ export class Tutorial extends Component {
     const tutorialSteps = steps.map((step, index) => {
       return (
         <TutorialStep
-          key={`${index}`}
+          key={`TUTORIAL_STEP_${index}`}
           markdownContent={step.content}
           mediaUri={this.props.tutorial.mediaResources && this.props.tutorial.mediaResources[step.media] ? this.props.tutorial.mediaResources[step.media].src : null}
         />
@@ -69,7 +69,7 @@ export class Tutorial extends Component {
     const renderCircle = (currentStep, index) => {
       return (
         <TouchableOpacity
-          key={ index }
+          key={ `PAGINATION_DOT_${index}` }
           onPress={() => this.swiper.scrollBy(index - this.state.step, false)}>
           <Icon
             name={ currentStep === index ? 'circle' : 'circle-thin'}
