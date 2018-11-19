@@ -43,7 +43,7 @@ const styles =EStyleSheet.create({
         justifyContent: 'center',
       },
       buttonText: {
-        fontSize: DeviceInfo.isTablet ? 22 : 14,
+        fontSize: DeviceInfo.isTablet() ? 22 : 14,
         marginVertical: 11,
         marginHorizontal: 9
       },
