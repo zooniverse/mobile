@@ -147,7 +147,7 @@ class DrawingClassifier extends Component {
 
         // We validate that tools has at least one element earlier
         const tool = this.props.tools[0]
-        const warnForRequirements = this.state.modalHasBeenClosedOnce && R.keys(this.props.shapes).length < this.props.tools[0].min
+        const warnForRequirements = this.state.modalHasBeenClosedOnce && R.keys(this.props.shapes).length < tool.min
 
         const tutorial =
             <Tutorial
@@ -165,7 +165,7 @@ class DrawingClassifier extends Component {
                     taskHelp={this.props.help}
                 />
                 <ShapeInstructionsView
-                    { ...this.props.tools[0] }
+                    { ...tool }
                     numberDrawn={this.props.numberOfShapesDrawn}
                     warnForRequirements={warnForRequirements}
                 />
@@ -200,7 +200,7 @@ class DrawingClassifier extends Component {
 
         const submitButton = 
             <ClassifierButton
-                disabled={R.keys(this.props.shapes).length < this.props.tools[0].min}
+                disabled={R.keys(this.props.shapes).length < tool.min}
                 onPress={this.submitClassification}
                 style={styles.submitButton}
                 type="answer"
