@@ -4,8 +4,8 @@ import {
     View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-
 import PropTypes from 'prop-types'
+
 import FontedText from '../../common/FontedText'
 import Separator from '../../common/Separator'
 import ShapeInstructionsView from './ShapeInstructionsView'

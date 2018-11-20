@@ -13,8 +13,7 @@ import R from 'ramda'
 import Theme from '../../theme'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import CloseButton from '../common/CloseButton'
-import MarkableImage from './components/MarkableImage'
-import DrawingButtons from './components/DrawingButtons'
+import DrawingToolView from './components/DrawingToolView'
 import InstructionView from './components/InstructionView'
 
 import * as drawingActions from '../../actions/drawing'
@@ -34,11 +33,6 @@ class DrawingModal extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            mode: 'draw'
-        }
-
-        this.handleDrawingButtonPress = this.handleDrawingButtonPress.bind(this)
         this.onCancel = this.onCancel.bind(this)
         this.onSave = this.onSave.bind(this)
     }
@@ -99,15 +93,11 @@ class DrawingModal extends Component {
                         <View style={ [styles.blurView, styles.androidBlurView] } />
                 }
                 <View style={styles.modalContainer}>
-                    <MarkableImage
-                        drawingColor={this.props.tool.color}
-                        source={this.props.imageSource}
-                        mode={this.state.mode}
+                    <DrawingToolView
+                        onUndoButtonSelected={this.props.drawingActions.undoMostRecentEdit}
                         maxShapesDrawn={this.props.numberOfShapesDrawn >= this.props.tool.max}
-                    />
-                    <DrawingButtons
-                        onButtonSelected={this.handleDrawingButtonPress}
-                        highlightedButton={this.state.mode}
+                        drawingColor={this.props.tool.color}
+                        imageSource={this.props.imageSource}
                         canUndo={this.props.canUndo}
                     />
                     <InstructionView

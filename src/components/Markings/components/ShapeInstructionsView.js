@@ -2,9 +2,11 @@ import React from 'react'
 import {
     View
 } from 'react-native'
-import FontedText from '../../common/FontedText'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import DeviceInfo from 'react-native-device-info'
+
+import FontedText from '../../common/FontedText'
 
 const ShapeInstructionsView = (props) => {
     const warningStyle = props.warnForRequirements ? styles.warningText : {}
@@ -68,10 +70,10 @@ const styles = EStyleSheet.create({
     },
     label: {
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: DeviceInfo.isTablet() ? 22 : 14,
     },
     infoText: {
-        fontSize: 14,
+        fontSize: DeviceInfo.isTablet() ? 22 : 14,
         color: '$headerGrey'
     },
     warningText: {

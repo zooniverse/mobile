@@ -8,21 +8,23 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import R from 'ramda'
+import DeviceInfo from 'react-native-device-info';
 
 import Theme from '../../theme'
 import ClassificationPanel from '../classifier/ClassificationPanel'
-import ImageWithSvgOverlay from './ImageWithSvgOverlay'
+import DrawingClassifierSubject from './DrawingClassifierSubject'
 import Question from '../classifier/Question'
 import Tutorial from '../classifier/Tutorial'
 import * as imageActions from '../../actions/images'
 import * as classifierActions from '../../actions/classifier'
+import * as navBarActions from '../../actions/navBar'
+import * as drawingActions from '../../actions/drawing'
 import ClassificationContainer from '../classifier/ClassifierContainer'
 import NeedHelpButton from '../classifier/NeedHelpButton'
 import OverlaySpinner from '../OverlaySpinner'
 import ClassifierButton from '../classifier/ClassifierButton'
 import Separator from '../common/Separator'
 import NavBar from '../NavBar'
-import * as navBarActions from '../../actions/navBar'
 import DrawingModal from './DrawingModal'
 import NativeImage from '../../nativeModules/NativeImage'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
@@ -38,17 +40,19 @@ const mapStateToProps = (state, ownProps) => {
         tutorial: state.classifier.tutorial[ownProps.workflow.id] || {},
         needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
         subject: state.classifier.subject,
-        shapes: state.drawing.shapes,
+        shapes: DeviceInfo.isTablet() ? state.drawing.shapesInProgress : state.drawing.shapes,
         workflowOutOfSubjects: state.classifier.workflowOutOfSubjects,
         numberOfShapesDrawn: R.keys(state.drawing.shapesInProgress).length,
         subjectDimensions: subjectDimensions ? subjectDimensions : {naturalHeight: 1, naturalWidth: 1},
+        canUndo: state.drawing.actions.length > 0,
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     imageActions: bindActionCreators(imageActions, dispatch),
     classifierActions: bindActionCreators(classifierActions, dispatch),
-    navBarActions: bindActionCreators(navBarActions, dispatch)
+    navBarActions: bindActionCreators(navBarActions, dispatch),
+    drawingActions: bindActionCreators(drawingActions, dispatch)
 })
 
 const PAGE_KEY = 'DrawingScreen'
@@ -93,7 +97,7 @@ class DrawingClassifier extends Component {
     }
 
     submitClassification() {
-        this.props.classifierActions.submitDrawingClassification(this.props.workflow, this.props.subject, this.state.subjectDimensions)
+        this.props.classifierActions.submitDrawingClassification(this.props.shapes, this.props.workflow, this.props.subject, this.state.subjectDimensions)
         this.setState({
             modalHasBeenClosedOnce: false,
             imageIsLoaded: false
@@ -106,10 +110,10 @@ class DrawingClassifier extends Component {
             this.props.imageActions.loadImageToCache(subject.display.src).then(localImagePath => {
                 new NativeImage(localImagePath).getImageSize().then(({width, height}) => {
                     this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
-                })
-                this.setState({
-                    imageIsLoaded: true,
-                    localImagePath
+                    this.setState({
+                        imageIsLoaded: true,
+                        localImagePath
+                    })
                 })
             })
         }
@@ -141,7 +145,9 @@ class DrawingClassifier extends Component {
             return <OverlaySpinner overrideVisibility={this.props.isFetching} />
         }
 
-        const warnForRequirements = this.state.modalHasBeenClosedOnce && R.keys(this.props.shapes).length < this.props.tools[0].min
+        // We validate that tools has at least one element earlier
+        const tool = this.props.tools[0]
+        const warnForRequirements = this.state.modalHasBeenClosedOnce && R.keys(this.props.shapes).length < tool.min
 
         const tutorial =
             <Tutorial
@@ -159,17 +165,21 @@ class DrawingClassifier extends Component {
                     taskHelp={this.props.help}
                 />
                 <ShapeInstructionsView
-                    { ...this.props.tools[0] }
+                    { ...tool }
                     numberDrawn={this.props.numberOfShapesDrawn}
                     warnForRequirements={warnForRequirements}
                 />
-                <TouchableOpacity style={styles.container} onPress={() => this.setState({isModalVisible: true})}>
-                    <ImageWithSvgOverlay
-                        shapes={this.props.shapes}
+                <TouchableOpacity disabled={DeviceInfo.isTablet()} onPress={() => this.setState({isModalVisible: true})} style={styles.container} >
+                    <DrawingClassifierSubject
+                        showDrawingButtons={DeviceInfo.isTablet()}
+                        onUndoButtonSelected={this.props.drawingActions.undoMostRecentEdit}
+                        maxShapesDrawn={this.props.numberOfShapesDrawn >= tool.max}
+                        drawingColor={tool.color}
                         imageIsLoaded={this.state.imageIsLoaded}
-                        uri={this.state.localImagePath}
+                        imageSource={this.state.localImagePath}
+                        canUndo={this.props.canUndo}
                         onImageLayout={this.onImageLayout}
-                        showBlurView={R.isEmpty(this.props.shapes)}
+                        showBlurView={!DeviceInfo.isTablet() && R.isEmpty(this.props.shapes)}
                         alreadySeen={this.props.subject.already_seen}
                         subjectDimensions={this.props.subjectDimensions}
                         displayToNativeRatio={this.props.subjectDimensions.naturalWidth/this.state.subjectDimensions.clientWidth}
@@ -190,7 +200,7 @@ class DrawingClassifier extends Component {
 
         const submitButton = 
             <ClassifierButton
-                disabled={R.keys(this.props.shapes).length < this.props.tools[0].min}
+                disabled={R.keys(this.props.shapes).length < tool.min}
                 onPress={this.submitClassification}
                 style={styles.submitButton}
                 type="answer"
@@ -210,7 +220,7 @@ class DrawingClassifier extends Component {
                     {isQuestionVisible ? classification : tutorial}
                 </ClassificationPanel>
                 {isQuestionVisible && !R.isEmpty(this.props.help) && <NeedHelpButton onPress={() => this.classificationContainer.displayHelpModal()} /> }
-                {isQuestionVisible && this.props.guide && fieldGuideButton}
+                {isQuestionVisible && !R.empty(this.props.guide) && fieldGuideButton}
                 { isQuestionVisible && submitButton }
             </View>
 
@@ -227,8 +237,7 @@ class DrawingClassifier extends Component {
                     {this.props.needsTutorial ? tutorial : classificationView}
                 </ClassificationContainer>
                 <DrawingModal
-                    // We validate that tools has at least one element earlier
-                    tool={this.props.tools[0]}
+                    tool={tool}
                     visible={this.state.isModalVisible} 
                     imageSource={this.state.localImagePath}
                     onClose={() => this.setState({isModalVisible: false, modalHasBeenClosedOnce: true})}
@@ -329,6 +338,10 @@ DrawingClassifier.propTypes = {
     subjectDimensions: PropTypes.shape({
         naturalHeight: PropTypes.number,
         naturalWidth: PropTypes.number
+    }),
+    canUndo: PropTypes.bool,
+    drawingActions: PropTypes.shape({
+        undoMostRecentEdit: PropTypes.func
     })
 }
 

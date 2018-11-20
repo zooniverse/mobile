@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import DeviceInfo from 'react-native-device-info'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import FontedText from '../common/FontedText'
 import PropTypes from 'prop-types';
@@ -67,6 +68,7 @@ const styles = EStyleSheet.create({
     backgroundColor: '$lightestGrey',
   },
   tabText: {
+    fontSize: DeviceInfo.isTablet() ? 22 : 14,
     marginVertical: 15
   }
 })

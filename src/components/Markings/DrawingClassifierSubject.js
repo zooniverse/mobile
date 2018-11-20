@@ -1,42 +1,34 @@
 import React, { Component } from 'react'
 import {
-    Animated,
-    Image,
     Platform,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
 import {
-    Svg,
     Rect
 } from 'react-native-svg'
 import R from 'ramda'
 import { BlurView } from 'react-native-blur';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
 import AlreadySeenBanner from '../classifier/AlreadySeenBanner'
+import DrawingToolView from './components/DrawingToolView';
 
-class ImageWithSvgOverlay extends Component {
+class DrawingClassifierSubject extends Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
-            scale: new Animated.Value(1),
             containerDimensions: {
                 width: 1,
                 height: 1
             },
         }
 
-        this.onImageLayout = this.onImageLayout.bind(this)
-        this.animateScale = this.animateScale.bind(this)
+        this.onContainerLayout = this.onContainerLayout.bind(this)
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.imageIsLoaded !== this.props.imageIsLoaded && !this.props.imageIsLoaded) {
-            this.setState({scale: new Animated.Value(0.8)})
-        }
         if (!R.equals(prevProps.subjectDimensions, this.props.subjectDimensions) || !R.equals(prevState.containerDimensions, this.state.containerDimensions)) {
             const { naturalHeight, naturalWidth } = this.props.subjectDimensions
             const { height: containerHeight, width: containerWidth } = this.state.containerDimensions
@@ -51,23 +43,8 @@ class ImageWithSvgOverlay extends Component {
         }
     }
 
-    animateScale() {
-        Animated.spring(
-            this.state.scale,
-            {
-                toValue: 1
-            }
-        ).start()
-    }
-
-    onImageLayout({nativeEvent}) {
-        const { height, width } = nativeEvent.layout
-        this.setState({
-            containerDimensions: {
-                width,
-                height
-            }
-        })
+    onContainerLayout(containerDimensions) {
+        this.setState({ containerDimensions })
     }
 
     renderShapes() {
@@ -113,36 +90,24 @@ class ImageWithSvgOverlay extends Component {
     }
 
     render() {
-        const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
-        const { naturalWidth, naturalHeight } = this.props.subjectDimensions
-
         return (
-            <Animated.View style={[styles.container, {transform: [{scale: this.state.scale}]}]}>
-                {this.props.imageIsLoaded ?
-                    <View style={styles.container} >
-                        <Image
-                            onLoad={() => this.animateScale()}
-                            onLayout={this.onImageLayout}
-                            style={styles.backgroundImage}
-                            source={{uri: pathPrefix + this.props.uri}}
-                            resizeMode="contain"
-                        />
-                        <View style={styles.svgContainer} >
-                            <Svg 
-                                viewBox={`0 0 ${naturalWidth} ${naturalHeight}`}
-                                height={this.state.containerDimensions.height}
-                                width={this.state.containerDimensions.width}
-                            >
-                                { this.renderShapes() }
-                            </Svg>
-                        </View>
-                    </View>
-                :
-                    <SubjectLoadingIndicator /> 
-                }
+            <View style={styles.container}>
+                <View style={styles.container}>
+                    <DrawingToolView
+                        imageIsLoaded={this.props.imageIsLoaded}
+                        onContainerLayout={this.onContainerLayout}
+                        onUndoButtonSelected={this.props.onUndoButtonSelected}
+                        maxShapesDrawn={this.props.maxShapesDrawn}
+                        drawingColor={this.props.drawingColor}
+                        imageSource={this.props.imageSource}
+                        canUndo={this.props.canUndo}
+                        showDrawingButtons={this.props.showDrawingButtons}
+                        canDraw={this.props.showDrawingButtons}
+                    />
+                </View> 
                 { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView() }
                 { this.props.alreadySeen && this.props.imageIsLoaded && <AlreadySeenBanner /> }
-            </Animated.View>               
+            </View>               
         )
     }
 }
@@ -187,7 +152,7 @@ const styles = {
     },
 }
 
-ImageWithSvgOverlay.propTypes = {
+DrawingClassifierSubject.propTypes = {
     subjectDimensions: PropTypes.shape({
         naturalWidth: PropTypes.number,
         naturalHeight: PropTypes.number
@@ -206,7 +171,13 @@ ImageWithSvgOverlay.propTypes = {
     onImageLayout: PropTypes.func,
     shapes: PropTypes.object,
     showBlurView: PropTypes.bool,
-    alreadySeen: PropTypes.bool
+    alreadySeen: PropTypes.bool,
+    showDrawingButtons: PropTypes.bool,
+    onUndoButtonSelected: PropTypes.func,
+    maxShapesDrawn: PropTypes.bool,
+    drawingColor: PropTypes.string,
+    imageSource: PropTypes.string,
+    canUndo: PropTypes.bool
 }
 
-export default ImageWithSvgOverlay
+export default DrawingClassifierSubject

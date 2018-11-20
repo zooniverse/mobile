@@ -59,6 +59,14 @@ class MarkableImage extends Component {
         const aspectRatio = Math.min(containerHeight/naturalHeight, containerWidth/naturalWidth)
         const clientHeight = naturalHeight * aspectRatio
         const clientWidth = naturalWidth * aspectRatio
+        
+        if (this.props.onContainerLayout) {
+            this.props.onContainerLayout({
+                height: clientHeight,
+                width: clientWidth,
+            })
+        }
+
         this.setState({
             isImageLoaded: true,
             clientHeight,
@@ -80,6 +88,7 @@ class MarkableImage extends Component {
                     {
                         this.state.isImageLoaded ? 
                             <SvgOverlay
+                                canDraw={this.props.canDraw}
                                 nativeWidth={naturalWidth}
                                 nativeHeight={naturalHeight}
                                 shapes={this.props.shapes}
@@ -130,6 +139,8 @@ MarkableImage.propTypes = {
         mutateShapeAtIndex: PropTypes.func
     }),
     source: PropTypes.string,
+    onContainerLayout: PropTypes.func,
+    canDraw: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarkableImage)

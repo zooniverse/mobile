@@ -105,14 +105,14 @@ export function saveClassification(workflow, subject) {
   }
 }
 
-export function submitDrawingClassification(workflow, subject, {clientHeight, clientWidth}) {
+export function submitDrawingClassification(shapes, workflow, subject, {clientHeight, clientWidth}) {
   return (dispatch, getState) => {
-    const { classifier, drawing } = getState()
+    const { classifier } = getState()
     const subjectStartTime = classifier.subjectStartTime[workflow.id]
     const subjectCompletionTime = (new Date).toISOString()
     const firstTask = workflow.first_task
     const tools = workflow.tasks[firstTask].tools
-    const annotations = constructDrawingAnnotations(drawing.shapes, tools, firstTask)
+    const annotations = constructDrawingAnnotations(shapes, tools, firstTask)
     apiClient.type('classifications').create({
       completed: true,
       annotations,

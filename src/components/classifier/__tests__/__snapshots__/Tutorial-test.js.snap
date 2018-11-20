@@ -73,7 +73,15 @@ exports[`renders correctly 1`] = `
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   ### Welcome to Planet Four: Ridges
 ----------
 This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
@@ -145,7 +153,15 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
 
 
@@ -217,7 +233,15 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
                 </Markdown>
               </View>
@@ -506,10 +530,10 @@ exports[`renders header if initial tutorial 1`] = `
     ellipsizeMode="tail"
     style={
       Array [
+        Object {
+          "fontFamily": "Karla",
+        },
         undefined,
-        Array [
-          undefined,
-        ],
       ]
     }
   >
@@ -584,7 +608,15 @@ exports[`renders header if initial tutorial 1`] = `
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   ### Welcome to Planet Four: Ridges
 ----------
 This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
@@ -656,7 +688,15 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
 
 
@@ -728,7 +768,15 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
                 </Markdown>
               </View>
@@ -1051,7 +1099,15 @@ exports[`renders with no media 1`] = `
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   ### Welcome to Planet Four: Ridges
 ----------
 This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
@@ -1094,7 +1150,15 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
 
 
@@ -1137,7 +1201,15 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown>
+                <Markdown
+                  styles={
+                    Object {
+                      "text": Object {
+                        "fontSize": 14,
+                      },
+                    }
+                  }
+                >
                   Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
                 </Markdown>
               </View>
