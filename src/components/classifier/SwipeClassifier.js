@@ -240,8 +240,8 @@ export class SwipeClassifier extends React.Component {
           { this.state.isQuestionVisible ? classification : tutorial }
           { this.state.isQuestionVisible ? unlinkedTask :null }
         </ClassificationPanel>
-        { this.state.isQuestionVisible && this.props.task.help ? <NeedHelpButton onPress={() => this.classifierContainer.displayHelpModal()} /> : null }
         { this.state.isQuestionVisible ? swipeTabs : null }
+        { this.state.isQuestionVisible && this.props.task.help ? <NeedHelpButton onPress={() => this.classifierContainer.displayHelpModal()} /> : null }
         <FullScreenImage
           source={{uri: this.state.fullScreenImageSource}}
           isVisible={this.state.showFullSize}

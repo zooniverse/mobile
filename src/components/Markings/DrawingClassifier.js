@@ -281,7 +281,6 @@ const styles = EStyleSheet.create({
     },
     fieldGuideContainer: {
         marginHorizontal: 25,
-        marginTop: 15
     },
     fieldGuideButton: {
         height: 40
