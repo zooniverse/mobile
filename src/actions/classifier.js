@@ -68,11 +68,12 @@ export function saveClassification(workflow, subject, displayDimensions) {
     let subjectDimensions = []
     const imageSizePromise = new Promise((resolve, reject) => {
       Image.getSize(subject.display.src, (naturalWidth, naturalHeight) => {
+        const aspectRatio = Math.min(displayDimensions.height/naturalHeight, displayDimensions.width/naturalWidth)
         const subjectDimensions = {
           naturalWidth,
           naturalHeight,
-          clientWidth: displayDimensions.width,
-          clientHeight: displayDimensions.height
+          clientWidth: displayDimensions.width * aspectRatio,
+          clientHeight: displayDimensions.height * aspectRatio
         }
         resolve(subjectDimensions)
       }, reject)
