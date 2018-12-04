@@ -26,6 +26,7 @@ class TutorialStep extends Component {
     }
 
     onLayout({nativeEvent}) {
+        this._scrollView.flashScrollIndicators()
         this.setState({
             width: nativeEvent.layout.width
         })
@@ -33,7 +34,7 @@ class TutorialStep extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.container}>
+            <ScrollView ref={ref => this._scrollView = ref} style={styles.container}>
                 <View style={styles.container}>
                     <View style={styles.contentContainer} onLayout={this.onLayout}>
                         {
