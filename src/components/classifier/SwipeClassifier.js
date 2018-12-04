@@ -27,14 +27,6 @@ import { markdownContainsImage } from '../../utils/markdownUtils'
 import Theme from '../../theme'
 import ClassifierContainer from './ClassifierContainer'
 
-const subjectClassifierPadding = {
-  height: 380,
-  width: 80
-}
-
-export const subjectDisplayHeight = Dimensions.get('window').height - subjectClassifierPadding.height
-export const subjectDisplayWidth = Dimensions.get('window').width - subjectClassifierPadding.width
-
 const mapStateToProps = (state, ownProps) => {
   return {
     task: getTaskFromWorkflow(ownProps.workflow),
@@ -46,8 +38,6 @@ const mapStateToProps = (state, ownProps) => {
     guide: state.classifier.guide[ownProps.workflow.id] || {},
     tutorial: state.classifier.tutorial[ownProps.workflow.id] || {},
     needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
-    subjectDisplayWidth: state.main.device.subjectDisplayWidth,
-    subjectDisplayHeight: state.main.device.subjectDisplayHeight,
     subjectLists: state.classifier.subjectLists[ownProps.workflow.id] || [],
     subjectsSeenThisSession: state.classifier.seenThisSession[ownProps.workflow.id] || []
  }
@@ -72,11 +62,22 @@ export class SwipeClassifier extends React.Component {
       fullScreenQuestion: '',
       hasImageInQuestion: markdownContainsImage(this.props.task.question),
       panX: null,
+      swiperDimensions: {
+        width: 1,
+        height: 1
+      }
     }
     
     this.onAnswered = this.onAnswered.bind(this)
     this.onSwiped = this.onSwiped.bind(this)
     this.onTapCard = this.onTapCard.bind(this)
+  }
+
+  onClassifierLayout({nativeEvent}) {
+    const { width, height } = nativeEvent.layout
+    this.setState({
+      swiperDimensions: { width, height}
+    })
   }
 
   setQuestionVisibility(isVisible) {
@@ -94,7 +95,7 @@ export class SwipeClassifier extends React.Component {
   onAnswered = (answer, subject) => {
     const { id, first_task } = this.props.workflow
     this.props.classifierActions.addAnnotationToTask(id, first_task, answer, false)
-    this.props.classifierActions.saveClassification(this.props.workflow, subject)
+    this.props.classifierActions.saveClassification(this.props.workflow, subject, this.state.swiperDimensions)
   }
 
   onSwiped = (subjectIndex) => {
@@ -123,6 +124,8 @@ export class SwipeClassifier extends React.Component {
             shouldAnimateOverlay={shouldAnimateOverlay}
             answers={this.props.answers}
             onPress={this.onTapCard}
+            subjectDisplayWidth={this.state.swiperDimensions.width}
+            subjectDisplayHeight={this.state.swiperDimensions.height}
           />
       ) : <View />
   }
@@ -165,7 +168,7 @@ export class SwipeClassifier extends React.Component {
         finishTutorial={() => this.finishTutorial()}
       />
 
-    const classification =
+    const question =
       <View>
         <Question
           question={this.props.task.question}
@@ -185,15 +188,18 @@ export class SwipeClassifier extends React.Component {
           :
             null
         }
-        <View style={{ height: subjectDisplayHeight + 300, width: Dimensions.get('window').width}}>
+      </View>
+
+    const classifier = 
+      <View style={styles.classifier} onLayout={this.onClassifierLayout.bind(this)}>
           <Swiper
             ref={swiper => this.swiper = swiper}
-            cardHorizontalMargin={15}
+            cardHorizontalMargin={0}
             keyExtractor={cardData => cardData.id}
             cards={this.props.subjectLists}
             renderCard={this.renderCard}
-            cardVerticalMargin={15}
-            marginTop={15}
+            cardVerticalMargin={0}
+            marginTop={0}
             backgroundColor="transparent"
             onSwiped={this.onSwiped}
             onSwipedRight={(cardIndex) => this.onAnswered(0, this.props.subjectLists[cardIndex])}
@@ -206,11 +212,10 @@ export class SwipeClassifier extends React.Component {
             panXListener={(panX) => this.setState({ panX }) }
             swipeAnimationDuration={500}
           />
-        </View>
       </View>
 
     const unlinkedTask = this.props.task.unlinkedTask ?
-      <View style={styles.unlinkedTaskContainer}>
+      <View>
         <UnlinkedTask
           unlinkedTaskKey={ this.props.task.unlinkedTask }
           unlinkedTask={ this.props.workflow.tasks[this.props.task.unlinkedTask] }
@@ -237,8 +242,16 @@ export class SwipeClassifier extends React.Component {
           isQuestionVisible = {this.state.isQuestionVisible }
           setQuestionVisibility = { this.setQuestionVisibility }
         >
-          { this.state.isQuestionVisible ? classification : tutorial }
-          { this.state.isQuestionVisible ? unlinkedTask :null }
+            {
+              this.state.isQuestionVisible ? 
+                <View style={{flex: 1}}>
+                  { question }
+                  { classifier }
+                  { unlinkedTask }
+                </View>
+              :
+                tutorial
+            }
         </ClassificationPanel>
         { this.state.isQuestionVisible ? swipeTabs : null }
         { this.state.isQuestionVisible && this.props.task.help ? <NeedHelpButton onPress={() => this.classifierContainer.displayHelpModal()} /> : null }
@@ -269,11 +282,11 @@ export class SwipeClassifier extends React.Component {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 15
   },
   classificationPanel: { 
     flex: 1,
-    overflow: 'visible'
+    overflow: 'visible',
+    marginBottom: 15
   },
   subjectContainer: {
     alignSelf: 'center',
@@ -295,6 +308,10 @@ const styles = EStyleSheet.create({
   separator: {
     paddingTop: 10,
     paddingHorizontal: 15
+  },
+  classifier: {
+    flex: 1,
+    margin: 15
   }
 })
 
@@ -321,8 +338,6 @@ SwipeClassifier.propTypes = {
   nextSubject: PropTypes.shape({
     id: PropTypes.string
   }),
-  subjectDisplayWidth: PropTypes.number,
-  subjectDisplayHeight: PropTypes.number,
   seenThisSession: PropTypes.array,
   project: PropTypes.shape({
     display_name: PropTypes.string,
