@@ -74,6 +74,13 @@ exports[`renders correctly 1`] = `
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
@@ -154,6 +161,13 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
@@ -234,6 +248,13 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
@@ -609,6 +630,13 @@ exports[`renders header if initial tutorial 1`] = `
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
@@ -689,6 +717,13 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
@@ -769,6 +804,13 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
@@ -1100,6 +1142,13 @@ exports[`renders with no media 1`] = `
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
@@ -1151,6 +1200,13 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
@@ -1202,6 +1258,13 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                 }
               >
                 <Markdown
+                  rules={
+                    Object {
+                      "image": Object {
+                        "match": [Function],
+                      },
+                    }
+                  }
                   styles={
                     Object {
                       "text": Object {
