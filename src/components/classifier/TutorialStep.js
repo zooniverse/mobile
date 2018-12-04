@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import Markdown from 'react-native-simple-markdown'
 import DeviceInfo from 'react-native-device-info'
 
+import { markdownImageRule } from '../../utils/markdownUtils'
 import FittedImage from '../common/FittedImage' 
 
 const ImageWidth = Dimensions.get('window').width - 100
@@ -47,7 +48,7 @@ class TutorialStep extends Component {
                         }
 
                         <View style={styles.markdown} >
-                            <Markdown styles={markdownStyles}>
+                            <Markdown rules={markdownImageRule} styles={markdownStyles}>
                                 { this.props.markdownContent }
                             </Markdown>
                         </View>
