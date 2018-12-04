@@ -244,7 +244,7 @@ export class SwipeClassifier extends React.Component {
         >
             {
               this.state.isQuestionVisible ? 
-                <View style={{flex: 1}}>
+                <View style={styles.container}>
                   { question }
                   { classifier }
                   { unlinkedTask }

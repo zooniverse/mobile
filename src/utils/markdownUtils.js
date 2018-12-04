@@ -34,7 +34,7 @@ export const markdownContainsImage = (markdownString) => {
  * teaches it to recognize those images 
  */
 const LINK_INSIDE = '(?:\\[[^\\]]*\\]|[^\\]]|\\](?=[^\\[]*\\]))*';
-const LINK_HREF_AND_TITLE = '\\s*<?([^\\s]*?)>?(?:\\s+["\"]([\\s\\S]*?)["\"])?\\s*';
+const LINK_HREF_AND_TITLE = '\\s*<?([^\\s]*?)>?(?:\\s+[""]([\\s\\S]*?)[""])?\\s*';
 const IMAGE_SIZE = '( =[0-9]*[xX]([0-9]*)?)?';
 const inlineRegex = (regex) => {
     const match = (source, state) => {
