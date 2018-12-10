@@ -113,7 +113,6 @@ ZooniverseApp.propTypes = {
   isModalVisible: PropTypes.bool,
   setModalVisibility: PropTypes.func,
   setNotificationPayload: PropTypes.func,
-  setDimensions: PropTypes.func,
   images: PropTypes.object,
   imageActions: PropTypes.any,
   settingsActions: PropTypes.any,
