@@ -42,71 +42,10 @@ class SvgOverlay extends Component {
             displayToNativeRatioX: props.nativeWidth/props.width,
             displayToNativeRatioY: props.nativeHeight/props.height
         }
-
-        this.panResponder = PanResponder.create({
-            // Ask to be the responder:
-            onStartShouldSetPanResponder: () => this.props.canDraw && this.props.mode === 'draw' && !this.props.maxShapesDrawn,
-            onStartShouldSetPanResponderCapture: () => this.props.canDraw && this.props.mode === 'draw' && !this.props.maxShapesDrawn,
-            onMoveShouldSetPanResponder: () => this.props.canDraw && this.props.mode === 'draw' && !this.props.maxShapesDrawn,
-            onMoveShouldSetPanResponderCapture: () => this.props.canDraw && this.props.mode === 'draw' && !this.props.maxShapesDrawn,
-            onPanResponderGrant: (evt) => {
-                const { locationX, locationY } = evt.nativeEvent
-                this.setState({
-                    isDrawing: true,
-                    previewSquareX: (locationX - INITIAL_SQUARE_SIDE) * this.state.displayToNativeRatioX,
-                    previewSquareY: (locationY - INITIAL_SQUARE_SIDE) * this.state.displayToNativeRatioY
-                })
-            },
-            onPanResponderMove: (evt, gestureState) => {
-                const { locationY } = evt.nativeEvent
-                const { dx, dy } = gestureState
-                this.setState({
-                    previewSquareWidth: (INITIAL_SQUARE_SIDE + dx) * this.state.displayToNativeRatioX,
-                    previewSquareHeight: (INITIAL_SQUARE_SIDE + dy - distanceFromRange(locationY, 0, this.props.height)) * this.state.displayToNativeRatioY
-                })
-            },
-            onPanResponderTerminationRequest: () => true,
-            onPanResponderRelease: (evt, gestureState) => {
-                const { displayToNativeRatioX, displayToNativeRatioY, previewSquareX, previewSquareY } = this.state
-                const { dx, dy } = gestureState
-                const { locationY } = evt.nativeEvent
-                const shapeWidth = (INITIAL_SQUARE_SIDE + dx) * displayToNativeRatioX
-                const shapeHeight = (INITIAL_SQUARE_SIDE + dy - distanceFromRange(locationY, 0, this.props.height)) * displayToNativeRatioY
-                const shape = {
-                    type: 'rect',
-                    color: this.props.color,
-                    x: previewSquareX,
-                    y: previewSquareY,
-                    width: shapeWidth,
-                    height: shapeHeight
-                }
-
-                this.setState({ 
-                    isDrawing: false,
-                    previewSquareWidth: INITIAL_SQUARE_SIDE,
-                    previewSquareHeight: INITIAL_SQUARE_SIDE,
-                    previewSquareX: 0,
-                    previewSquareY: 0
-                })
-                
-                if (Math.abs(shapeWidth) > (20 * this.state.displayToNativeRatioX) || Math.abs(shapeHeight) > (20 * this.state.displayToNativeRatioY)) {
-                    this.props.onShapeCreated(shape)
-                }
-            },
-            onPanResponderTerminate: () => {
-                this.setState({
-                    squareWidth: INITIAL_SQUARE_SIDE,
-                    squareHeight: INITIAL_SQUARE_SIDE,
-                    isDrawing: false,
-                })
-
-
-            },
-            onShouldBlockNativeResponder: () => false
-          });
           
           this.onShapeEdited = this.onShapeEdited.bind(this)
           this.onShapeDeleted = this.onShapeDeleted.bind(this)
+          this.onShapeCreated = this.onShapeCreated.bind(this)
     }
 
     componentDidUpdate(prevProps) {
@@ -124,40 +63,22 @@ class SvgOverlay extends Component {
         }
     }
 
-    renderPreviewShape() {
-        switch (this.props.drawingShape) {
-            case 'rect':
-                return (
-                    <Rect 
-                        stroke="black"
-                        strokeWidth={4 * this.state.displayToNativeRatioX}
-                        fill="rgba(0, 0, 0, .5)"
-                        x={this.state.previewSquareX} 
-                        y={this.state.previewSquareY}
-                        width={this.state.previewSquareWidth}
-                        height={this.state.previewSquareHeight}
-                    />
-                )
-            default: 
-                return null
+    onShapeCreated(shapeDimensions) {
+        const shape = {
+            type: 'rect',
+            color: this.props.color,
+            ...shapeDimensions
+        }
+
+        if (Math.abs(shapeDimensions.width) > (20 * this.state.displayToNativeRatioX) || Math.abs(shapeDimensions.height) > (20 * this.state.displayToNativeRatioY)) {
+            this.props.onShapeCreated(shape)
         }
     }
 
     render() {
         const sizeStyle = {height: this.props.height, width: this.props.width}
         return (
-            <View {...this.panResponder.panHandlers} style={sizeStyle} >
-                {
-                    this.props.mode === 'draw' ? 
-                        <Svg
-                            viewBox={`0 0 ${this.props.nativeWidth} ${this.props.nativeHeight}`}
-                            height={this.props.height}
-                            width={this.props.width}
-                        >
-                            {this.state.isDrawing ? this.renderPreviewShape(): null }
-                        </Svg>
-                    : null
-                }
+            <View style={sizeStyle} >
                 <View style={[styles.absolute, sizeStyle]}>
                     <ShapeEditorSvg 
                         viewBox={`0 0 ${this.props.nativeWidth} ${this.props.nativeHeight}`}
@@ -167,8 +88,11 @@ class SvgOverlay extends Component {
                         mode={this.props.mode}
                         onShapeEdited={this.onShapeEdited}
                         onShapeDeleted={this.onShapeDeleted}
+                        onShapeCreated={this.onShapeCreated}
                         displayToNativeRatioX={this.state.displayToNativeRatioX}
                         displayToNativeRatioY={this.state.displayToNativeRatioY}
+                        drawingShape={this.props.drawingShape}
+                        onShapeIsOutOfBoundsUpdates={this.props.onShapeIsOutOfBoundsUpdates}
                     />
                 </View>
             </View>
@@ -204,10 +128,11 @@ SvgOverlay.propTypes = {
     drawingShape: PropTypes.oneOf(['rect']),
     shapes: PropTypes.object,
     maxShapesDrawn: PropTypes.bool,
-    mode: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
+    mode: PropTypes.oneOf(['draw', 'erase', 'unselected']),
     onShapeDeleted: PropTypes.func,
     onShapeCreated: PropTypes.func,
     onShapeModified: PropTypes.func,
+    onShapeIsOutOfBoundsUpdates: PropTypes.func,
     canDraw: PropTypes.bool
 }
 
