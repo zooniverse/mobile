@@ -15,6 +15,22 @@ export const isCoordinateWithinSquare = (xCoord, yCoord, {x, y, width, height}) 
 }
 
 /**
+ * This function determines if any part of the shape passed in is out of bounds
+ * 
+ * @param {{x, y, width, height} dimensions of the shape} shape 
+ * @param {{width, height} dimensions of the bounds} bounds 
+ */
+export const isShapeOutOfBounds = (shape, bounds, bufferConstant=0) => {
+    const {x, y, width, height} = shape
+    const isPastLeftBound = (width > 0 ? x : parseFloat(x) + parseFloat(width)) < 0 - bufferConstant
+    const isPastUpperBound = (height > 0 ? y : parseFloat(y) + parseFloat(height)) < 0 - bufferConstant
+    const isPastRightBound = (width > 0 ? parseFloat(x) + parseFloat(width) : x) > bounds.width + bufferConstant
+    const isPastBottomBound = ( height > 0 ? parseFloat(y) + parseFloat(height) : y) > bounds.height + bufferConstant
+
+    return isPastLeftBound || isPastUpperBound || isPastRightBound || isPastBottomBound
+}
+
+/**
  * This function determines whether a touch coordinate is touching the permeter of an object
  * 
  * @param {x coordinate of touch} xCoord 
