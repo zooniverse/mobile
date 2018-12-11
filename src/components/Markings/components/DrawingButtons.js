@@ -29,7 +29,7 @@ const DrawingButtons = (props) => {
                 />
                 <DrawingButton
                     type="erase"
-                    activated={props.highlightedButton === 'erase'}
+                    activated={props.highlightedButton === 'erase' || props.aShapeIsOutOfBounds}
                     onPress={() => props.onModeButtonSelected('erase')}
                 />
             </View>
@@ -58,6 +58,8 @@ DrawingButtons.propTypes = {
     onUndoButtonSelected: PropTypes.func,
     highlightedButton: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
     canUndo: PropTypes.bool
+    canUndo: PropTypes.bool,
+    aShapeIsOutOfBounds: PropTypes.bool
 }
 
 export default DrawingButtons

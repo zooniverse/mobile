@@ -101,6 +101,7 @@ class MarkableImage extends Component {
                                 onShapeCreated={this.onShapeCreated}
                                 onShapeDeleted={this.onShapeDeleted}
                                 onShapeModified={this.onShapeModified}
+                                onShapeIsOutOfBoundsUpdates={this.props.onShapeIsOutOfBoundsUpdates}
                             />
                         :
                             null
@@ -132,7 +133,7 @@ MarkableImage.propTypes = {
     drawingColor: PropTypes.string,
     shapes: PropTypes.any,
     maxShapesDrawn: PropTypes.bool,
-    mode: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
+    mode: PropTypes.oneOf(['draw', 'erase', 'unselected']),
     drawingActions: PropTypes.shape({
         removeShapeAtIndex: PropTypes.func,
         addShape: PropTypes.func,
@@ -140,7 +141,8 @@ MarkableImage.propTypes = {
     }),
     source: PropTypes.string,
     onContainerLayout: PropTypes.func,
-    canDraw: PropTypes.bool
+    canDraw: PropTypes.bool,
+    onShapeIsOutOfBoundsUpdates: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarkableImage)
