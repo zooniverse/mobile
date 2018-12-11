@@ -15,6 +15,31 @@ export const isCoordinateWithinSquare = (xCoord, yCoord, {x, y, width, height}) 
 }
 
 /**
+ * This function determines whether a touch coordinate is touching the permeter of an object
+ * 
+ * @param {x coordinate of touch} xCoord 
+ * @param {y coordinate of touch} yCoord 
+ * @param {dimensions of perimeter} shapePerimeter 
+ */
+const isCoordinateTouchingPerimeter = (xCoord, yCoord, {x, y ,width, height}) => {
+    const touchRange = 10
+    const isCoordinateTouching = (touchCoordinate, targeCoordinate) => {
+        return touchCoordinate > (targeCoordinate - touchRange) && touchCoordinate < (targeCoordinate + touchRange)
+    }
+
+    const isCoordinateWithinRange = (touchCoordinate, rangeOrigin, rangeLength) => {
+        return touchCoordinate > rangeOrigin && touchCoordinate < rangeOrigin + rangeLength
+    }
+
+    const isTouchingLeftSide = isCoordinateTouching(xCoord, x) && isCoordinateWithinRange(yCoord, y, height)
+    const isTouchingRightSide = isCoordinateTouching(xCoord, x + width) && isCoordinateWithinRange(yCoord, y, height)
+    const isTouchingTopSide = isCoordinateTouching(yCoord, y) && isCoordinateWithinRange(xCoord, x, width)
+    const isTouchingBottomSide = isCoordinateTouching(yCoord, y + height) && isCoordinateWithinRange(xCoord, x, width)
+
+    return isTouchingLeftSide || isTouchingRightSide || isTouchingTopSide || isTouchingBottomSide
+}
+
+/**
  * This function receives an x,y coordinate and determines if the touch is touching
  * any of the corners passed into the object
  * 
@@ -54,12 +79,13 @@ const analyzeCorners = (xCoord, yCoord, corners) => {
  */
 export const analyzeCoordinateWithShape = (xCoord, yCoord, shape, corners) => {
     const analyzedCorners = analyzeCorners(xCoord, yCoord, corners)
-    const notTouchingCorners = !analyzedCorners.upperLeft && !analyzedCorners.upperRight && !analyzedCorners.bottomLeft && !analyzedCorners.bottomRight
-    const withinSquare = isCoordinateWithinSquare(xCoord, yCoord, shape)
+    const touchingCorners = analyzedCorners.upperLeft || analyzedCorners.upperRight || analyzedCorners.bottomLeft || analyzedCorners.bottomRight
+    const touchingPerimeter = isCoordinateTouchingPerimeter(xCoord, yCoord, shape)
+    const withinSquare = touchingCorners || touchingPerimeter
     return {
         ... analyzedCorners,
         withinSquare,
-        onlySquare: notTouchingCorners && withinSquare
+        onlySquare: !touchingCorners && touchingPerimeter
     }
 }
 
