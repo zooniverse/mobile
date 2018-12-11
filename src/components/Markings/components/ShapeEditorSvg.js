@@ -4,6 +4,7 @@ import {
     View
 } from 'react-native'
 import { 
+    Rect,
     Svg,
 } from 'react-native-svg'
 import R from 'ramda'
@@ -12,11 +13,15 @@ import EditableRect from './EditableRect'
 import {
     analyzeCoordinateWithShape,
     calculateShapeChanges,
-    isCoordinateWithinSquare
+    isCoordinateWithinSquare,
+    isShapeOutOfBounds,
 } from '../../../utils/shapeUtils'
+import {
+    distanceFromRange
+} from '../../../utils/drawingUtils'
 
 /**
- * This class handles all user interactions with shapes that are already drawn.
+ * This class handles all user interactions with shapes.
  * 
  * Because of some oddities with Pan Responders and Svgs in modals, 
  * we need to tackle this problem in a somewhat round-about way.
@@ -28,7 +33,18 @@ import {
  * location data if/which shape the user is touching. 
  */
 
+const INITIAL_PREVIEW_SHAPE_SIDE = 2
+
 class ShapeEditorSvg extends Component {
+
+    previewShapeInitialDimensions() {
+        return {
+            x: 0,
+            y: 0,
+            width: INITIAL_PREVIEW_SHAPE_SIDE * this.props.displayToNativeRatioX,
+            height: INITIAL_PREVIEW_SHAPE_SIDE * this.props.displayToNativeRatioY
+        }
+    }
 
     constructor(props) {
         super(props)
@@ -38,6 +54,7 @@ class ShapeEditorSvg extends Component {
             cornerLocations: {},
             closeLocations: {},
             shapeIndex: -1,
+            shapeToRemoveIndex: -1,
             touchState: {
                 bottomLeft: false,
                 bottomRight: false,
@@ -45,7 +62,9 @@ class ShapeEditorSvg extends Component {
                 upperRight: false,
                 onlySquare: false
             },
-            shapeRefs: {}
+            shapeRefs: {},
+            isDrawing: false,
+            previewShapeDimensions: this.previewShapeInitialDimensions()
         }
 
         this.erasePanResponder = PanResponder.create({
@@ -55,28 +74,21 @@ class ShapeEditorSvg extends Component {
             onMoveShouldSetPanResponderCapture: () => this.props.mode === 'erase',
             onPanResponderGrant: (evt) => {
                 const { locationX, locationY } = evt.nativeEvent
-                let keyToDelete = undefined
+                let keyToDelete = null
                 R.forEachObjIndexed((closeShape, key) => {
                     if (isCoordinateWithinSquare(locationX, locationY, closeShape)) {
                         keyToDelete = key
                     }
                 }, this.state.closeLocations)
-                if (keyToDelete) {
-                    this.setState({
-                        closeLocations: R.dissoc(keyToDelete, this.state.closeLocations),
-                        cornerLocations: R.dissoc(keyToDelete, this.state.cornerLocations),
-                        shapeLocations: R.dissoc(keyToDelete, this.state.shapeLocations)
-                    })
-                    this.props.onShapeDeleted(keyToDelete)
-                }
+                this.deleteShapeWithKey(keyToDelete)
             }
         })
 
         this.editPanResponder = PanResponder.create({
-            onStartShouldSetPanResponder: () => this.props.mode === 'edit',
-            onStartShouldSetPanResponderCapture: () => this.props.mode === 'edit',
-            onMoveShouldSetPanResponder: () => this.props.mode === 'edit',
-            onMoveShouldSetPanResponderCapture: () => this.props.mode === 'edit',
+            onStartShouldSetPanResponder: () => this.props.mode === 'draw',
+            onStartShouldSetPanResponderCapture: () => this.props.mode === 'draw',
+            onMoveShouldSetPanResponder: () => this.props.mode === 'draw',
+            onMoveShouldSetPanResponderCapture: () => this.props.mode === 'draw',
             onPanResponderGrant: (evt) => {
                 const { locationX, locationY } = evt.nativeEvent
 
@@ -94,36 +106,91 @@ class ShapeEditorSvg extends Component {
                         shapeIndex: touchedShapeIndex,
                         touchState: touchedSquare
                     })
-                }             
+                } 
+                // If a shape isn't being touched, then we should begin drawing a new shape 
+                else {
+                    const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, {
+                        x: (locationX - INITIAL_PREVIEW_SHAPE_SIDE) * this.props.displayToNativeRatioX,
+                        y: (locationY - INITIAL_PREVIEW_SHAPE_SIDE) * this.props.displayToNativeRatioY,
+                    })
+                    this.setState({
+                        isDrawing: true,
+                        previewShapeDimensions
+                    })
+                }
             },
             onPanResponderMove: (evt, gestureState) => {
-                const { shapeIndex, touchState, shapeRefs } = this.state
+                const { shapeIndex, touchState, shapeRefs, isDrawing } = this.state
+                const { locationX, locationY } = evt.nativeEvent
+                const { dx, dy } = gestureState
                 if (shapeIndex >= 0) {
-                    const { dx, dy } = gestureState;
                     // Because Svgs don't have any way to animate, we have to update their props manually
                     const deltas = calculateShapeChanges(touchState, dx, dy, this.props.displayToNativeRatioX, this.props.displayToNativeRatioY)
-                    shapeRefs[shapeIndex].update(deltas);
+                    const newDimensions = shapeRefs[shapeIndex].update(deltas);
+                    const shapeIsOutOfBounds = isShapeOutOfBounds(newDimensions, {width: this.props.width *this.props.displayToNativeRatioX, height: this.props.height * this.props.displayToNativeRatioY}) && touchState.onlySquare
+                    this.props.onShapeIsOutOfBoundsUpdates(shapeIsOutOfBounds)
+                    this.setState({
+                        shapeToRemoveIndex: shapeIsOutOfBounds ? shapeIndex : -1
+                    })
+                } 
+                
+                if (isDrawing) {
+                    const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, {
+                        width: (INITIAL_PREVIEW_SHAPE_SIDE + dx- distanceFromRange(locationX, 0, this.props.width)) * this.props.displayToNativeRatioX,
+                        height: (INITIAL_PREVIEW_SHAPE_SIDE + dy - distanceFromRange(locationY, 0, this.props.height)) * this.props.displayToNativeRatioY 
+                        // distanceFromRange(locationY, 0, this.props.height)) * this.state.displayToNativeRatioY
+
+                    })
+                    this.setState({
+                        previewShapeDimensions
+                    })
                 }
             },
             onPanResponderTerminationRequest: () => true,
             onPanResponderRelease: (evt, gestureState) => {
-                const { shapeIndex, touchState } = this.state
-                if (shapeIndex >= 0) {
+                const { shapeIndex, touchState, isDrawing, shapeToRemoveIndex } = this.state
+
+                // Remove a shape if the user has dragged it off screen
+                if (shapeToRemoveIndex >= 0 && touchState.onlySquare) { 
+                    this.deleteShapeWithKey(shapeToRemoveIndex)
+                }
+                // If the user is editing a shape, update the shape changes 
+                else if (shapeIndex >= 0) {
                     const { dx, dy } = gestureState;
                     const deltas = calculateShapeChanges(touchState, dx, dy, this.props.displayToNativeRatioX, this.props.displayToNativeRatioY)
 
                     // Once the animation is complete, we report the final edit on the shape
                     this.props.onShapeEdited(shapeIndex, touchState, deltas)
-                    this.resetTouchState()
                 }
+                // If the user isn't editing a shape, save the new drawnShape
+                else if (isDrawing) {
+                    this.props.onShapeCreated(this.state.previewShapeDimensions)
+                }
+
+                this.resetTouchState()
             },
             onShouldBlockNativeResponder: () => false
         });
     }
 
+    deleteShapeWithKey(key) {
+        if (key) {
+            this.setState({
+                closeLocations: R.dissoc(key, this.state.closeLocations),
+                cornerLocations: R.dissoc(key, this.state.cornerLocations),
+                shapeLocations: R.dissoc(key, this.state.shapeLocations)
+            })
+            this.props.onShapeDeleted(key)
+        }
+    }
+
     resetTouchState() {
+        this.props.onShapeIsOutOfBoundsUpdates(false)
         this.setState({
+            isDrawing: false,
+            previewShapeDimensions: this.previewShapeInitialDimensions(),
             shapeIndex: -1,
+            shapeToRemoveIndex: -1,
             touchState: {
                 bottomLeft: false,
                 bottomRight: false,
@@ -132,6 +199,22 @@ class ShapeEditorSvg extends Component {
                 onlySquare: false
             }
         })
+    }
+
+    renderPreviewShape() {
+        switch (this.props.drawingShape) {
+            case 'rect':
+                return (
+                    <Rect 
+                        stroke="black"
+                        strokeWidth={4 * this.props.displayToNativeRatioX}
+                        fill="rgba(0, 0, 0, .5)"
+                        {... this.state.previewShapeDimensions}
+                    />
+                )
+            default: 
+                return null
+        }
     }
 
     renderShapes() {
@@ -160,9 +243,10 @@ class ShapeEditorSvg extends Component {
                             }}
                             key={index}
                             { ...shape }
+                            blurred={this.state.shapeToRemoveIndex === index}
                             displayToNativeRatioX={this.props.displayToNativeRatioX}
                             displayToNativeRatioY={this.props.displayToNativeRatioY}
-                            showCorners={this.props.mode === 'edit' && selectedShape}
+                            showCorners={this.props.mode === 'draw' && selectedShape}
                             isDeletable={this.props.mode === 'erase'}
                             ref={ref => {
                                 if (ref) {
@@ -195,7 +279,7 @@ class ShapeEditorSvg extends Component {
     }
 
     render() {
-        const panHandlers = this.props.mode === 'edit' ? this.editPanResponder.panHandlers : this.erasePanResponder.panHandlers
+        const panHandlers = this.props.mode === 'draw' ? this.editPanResponder.panHandlers : this.erasePanResponder.panHandlers
         return (
             <View { ...panHandlers } style={{height: this.props.height, width: this.props.width}}>
                 <Svg
@@ -204,6 +288,7 @@ class ShapeEditorSvg extends Component {
                     width={this.props.width}
                 >
                     { this.renderShapes() }
+                    { this.state.isDrawing && this.renderPreviewShape() }
                 </Svg>
             </View>
         )
@@ -218,8 +303,11 @@ ShapeEditorSvg.propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
     mode: PropTypes.string,
+    onShapeCreated: PropTypes.func,
     onShapeEdited: PropTypes.func,
     onShapeDeleted: PropTypes.func,
+    drawingShape: PropTypes.string,
+    onShapeIsOutOfBoundsUpdates: PropTypes.func
 }
 
 export default ShapeEditorSvg
