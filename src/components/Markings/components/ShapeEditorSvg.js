@@ -138,7 +138,6 @@ class ShapeEditorSvg extends Component {
                     const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, {
                         width: (INITIAL_PREVIEW_SHAPE_SIDE + dx- distanceFromRange(locationX, 0, this.props.width)) * this.props.displayToNativeRatioX,
                         height: (INITIAL_PREVIEW_SHAPE_SIDE + dy - distanceFromRange(locationY, 0, this.props.height)) * this.props.displayToNativeRatioY 
-                        // distanceFromRange(locationY, 0, this.props.height)) * this.state.displayToNativeRatioY
 
                     })
                     this.setState({
