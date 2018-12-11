@@ -33,12 +33,14 @@ class EditableRect extends Component {
         const newX = this.props.x + dx < 0.1 ? this.props.x + dx + 1 : this.props.x + dx
         const newY = this.props.y + dy < 0.1 ? this.props.y + dy + 1 : this.props.y + dy
 
-        this.rect.setNativeProps({
+        const newDimensions = {
             x: `${newX}`,
             y: `${newY}`,
             width: `${newWidth}`,
             height: `${newHeight}`
-        })
+        }
+
+        this.rect.setNativeProps(newDimensions)
 
         if (this.props.showCorners) {
             this.upperLeftCircle.setNativeProps({
@@ -58,14 +60,15 @@ class EditableRect extends Component {
                 cy: `${newY + newHeight}`
             })
         }
+
+        return newDimensions
     }
 
     render() {
         return (
-            <G
-                onLayout={this.props.onRectLayout}
-            >
+            <G>
                 <Rect
+                    onLayout={this.props.onRectLayout}
                     ref={ref => this.rect = ref}
                     x={this.props.x}
                     y={this.props.y}
