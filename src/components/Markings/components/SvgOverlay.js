@@ -128,12 +128,11 @@ SvgOverlay.propTypes = {
     drawingShape: PropTypes.oneOf(['rect']),
     shapes: PropTypes.object,
     maxShapesDrawn: PropTypes.bool,
-    mode: PropTypes.oneOf(['draw', 'erase', 'unselected']),
+    mode: PropTypes.oneOf(['draw', 'erase', 'view']),
     onShapeDeleted: PropTypes.func,
     onShapeCreated: PropTypes.func,
     onShapeModified: PropTypes.func,
     onShapeIsOutOfBoundsUpdates: PropTypes.func,
-    canDraw: PropTypes.bool
 }
 
 SvgOverlay.defaultProps = {

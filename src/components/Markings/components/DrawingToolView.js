@@ -50,9 +50,8 @@ class DrawingToolView extends Component {
                                 onContainerLayout={this.props.onContainerLayout}
                                 drawingColor={this.props.drawingColor}
                                 source={this.props.imageSource}
-                                mode={this.state.mode}
+                                mode={this.props.canDraw ? this.state.mode : 'view'}
                                 maxShapesDrawn={this.props.maxShapesDrawn}
-                                canDraw={this.props.canDraw}
                                 onShapeIsOutOfBoundsUpdates={(aShapeIsOutOfBounds) => this.setState({aShapeIsOutOfBounds})}
                             />
                         </Animated.View>
