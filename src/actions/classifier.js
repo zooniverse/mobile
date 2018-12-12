@@ -49,7 +49,7 @@ export function startNewClassification(workflow, project) {
   }
 }
 
-export function saveClassification(workflow, subject) {
+export function saveClassification(workflow, subject, displayDimensions) {
   return (dispatch, getState) => {
     const classifier = getState().classifier
     const subjectStartTime = classifier.subjectStartTime[workflow.id]
@@ -68,11 +68,12 @@ export function saveClassification(workflow, subject) {
     let subjectDimensions = []
     const imageSizePromise = new Promise((resolve, reject) => {
       Image.getSize(subject.display.src, (naturalWidth, naturalHeight) => {
+        const aspectRatio = Math.min(displayDimensions.height/naturalHeight, displayDimensions.width/naturalWidth)
         const subjectDimensions = {
           naturalWidth,
           naturalHeight,
-          clientWidth: getState().main.device.subjectDisplayWidth,
-          clientHeight: getState().main.device.subjectDisplayHeight
+          clientWidth: displayDimensions.width * aspectRatio,
+          clientHeight: displayDimensions.height * aspectRatio
         }
         resolve(subjectDimensions)
       }, reject)
@@ -91,7 +92,7 @@ export function saveClassification(workflow, subject) {
           user_language: 'en',
           utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
           subject_dimensions: subjectDimensions,
-          viewport: { width: getState().main.device.width, height: getState().main.device.height },
+          viewport: { width: getState().app.device.width, height: getState().app.device.height },
           session: getState().main.session.id
         },
         links: {
@@ -124,7 +125,7 @@ export function submitDrawingClassification(shapes, workflow, subject, {clientHe
         user_language: 'en',
         utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
         subject_dimensions: { ...classifier.subjectDimensions[subject.id], clientHeight, clientWidth },
-        viewport: { width: getState().main.device.width, height: getState().main.device.height },
+        viewport: { width: getState().app.device.width, height: getState().app.device.height },
         session: getState().main.session.id
       },
       links: {

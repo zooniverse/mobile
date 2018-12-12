@@ -21,10 +21,9 @@ import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
 import theme from '../../theme'
 
-const horizontalPadding = 25
+const horizontalPadding = 15
 
 const mapStateToProps = (state, ownProps) => ({
-    tileWidth: state.main.device.width - 2*horizontalPadding,
     containsNativeWorkflows: ownProps.project.workflows.length > 0,
 });
 
@@ -148,9 +147,10 @@ class ProjectTile extends Component {
                 <TouchableOpacity
                     onPress={this._onMainViewPress}
                 >
-                    <View>
-                        <Image 
-                            style={[styles.avatar, {width: this.props.tileWidth}]}
+                    <View style={styles.contentContainer}>
+                        <Image
+                            resizeMode="cover"
+                            style={[styles.avatar]}
                             source= {avatarSource}
                         />
                         <View style={styles.descriptionContainer}>
@@ -199,6 +199,7 @@ const PhoneIcon = () => {
 
 const styles = EStyleSheet.create({
     mainContainer: {
+        flex: 1,
         flexDirection: 'column', 
         marginHorizontal: horizontalPadding, 
         borderWidth: 1, 
@@ -282,6 +283,9 @@ const styles = EStyleSheet.create({
         marginTop: -1,
         marginLeft: -15,
         width: 129
+    },
+    contentContainer: {
+        overflow: 'hidden'
     }
 });
 
@@ -289,7 +293,6 @@ ProjectTile.propTypes = {
     project: PropTypes.object,
     containsNativeWorkflows: PropTypes.bool,
     containsMultipleNativeWorkflows: PropTypes.bool,
-    tileWidth: PropTypes.number,
     outOfData: PropTypes.bool,
     inPreviewMode: PropTypes.bool,
     inBetaMode: PropTypes.bool,

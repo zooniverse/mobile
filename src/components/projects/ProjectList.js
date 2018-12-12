@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
-  SectionList,
-  View,
+    FlatList,
+    View,
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { bindActionCreators } from 'redux'
@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
 import R from 'ramda'
+import DeviceInfo from 'react-native-device-info'
 
 import ProjectTile from './ProjectTile';
 import NavBar from '../NavBar'
@@ -61,9 +62,17 @@ const mapDispatchToProps = (dispatch) => ({
     navBarActions: bindActionCreators(navBarActions, dispatch)
 })
 
+const ColumnNumbers = DeviceInfo.isTablet() ? 2 : 1
+
 const PAGE_KEY = 'ProjectList';
 
 class ProjectList extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.renderItem = this.renderItem.bind(this)
+    }
     
     static renderNavigationBar() {
         return <NavBar pageKey={PAGE_KEY} showBack={true} />;
@@ -80,56 +89,120 @@ class ProjectList extends Component {
         }
     }
 
-    _emptyText() {
+    emptyText() {
         if (!this.props.isLoading) {
             return 'Sorry, but you have no mobile friendly projects to display'
         } else {
             return 'Loading Projects...'
         }
     }
-    
-    _seperatorHeightStyle(data) {
-        return {height: !!data.leadingItem && !!data.trailingSection ? 50 : 0}
+
+    renderItem({item}) {
+        switch (item.displayType) {
+            case 'project': 
+                return <ProjectTile project={item} inPreviewMode={this.props.inPreviewMode} inBetaMode={this.props.inBetaMode}/>
+            case 'spacer':
+                return <View style={styles.spacer} />
+            case 'header':
+                return <FontedText style={styles.sectionHeader}> { item.text } </FontedText>
+        }
     }
 
+    /**
+     * A note on how we are rendering the list view here:
+     * 
+     * On handset we render the list view with 1 column and on tablet
+     * we render it with 2 columns. In addition, the list view requires 
+     * two section headers: 
+     *      In Preview: 1) Your Projects. 2) Collaborations
+     *      In Normal mode: 1) Made for mobile. 2) In Browser experience.
+     * 
+     * Normally to create a list with section headers, you would use a SectionList,
+     * but they don't ship with any column number integrations.
+     * 
+     * In order to get around this, we use a Flatlist (which does have column number integrations)
+     * and push cells that appear to be section headers. We achieve the correct spacing by
+     * adding spacer components that will fill in cells for the rest of the line.
+     * 
+     * For example:
+     * 
+     * If the first section of the list has 3 projects, our list of items to display would be:
+     * [Header, spacer, project, project, project, spacer]
+     * 
+     * With two columns it will display as:
+     * 
+     *  Header, Spacer
+     *  Project, Project
+     *  Project, Spacer
+     * 
+     * This way when our next section starts, the header will be at the beginning of a line   
+     */
     render() {
+        const fillLineWithSpacers = (projects) => {
+            while (projects.length % ColumnNumbers !== 0) {
+                projects.push({displayType: 'spacer'})
+            }
+        }
+
+        const tagAsProject = (project) => R.set(R.lensProp('displayType'), 'project', project)
         const {inPreviewMode, ownerIds, collaboratorIds, swipeEnabledProjects, nonSwipeEnabledProjects } = this.props
-        let sections = []
+        let projects = []
         if (inPreviewMode) {
             if (!R.isEmpty(ownerIds)) {
-                const ownerProjects = swipeEnabledProjects.filter((project) => ownerIds.includes(project.id))
-                sections.push({data: ownerProjects, title: 'Your Projects'})
+                // Add Header
+                projects.push({ displayType: 'header', text: 'Your Projects'})
+                fillLineWithSpacers(projects)
+
+                // Add Projects
+                const ownerProjects = swipeEnabledProjects.filter((project) => ownerIds.includes(project.id)).map(tagAsProject)
+                projects = [...projects, ...ownerProjects]
+                fillLineWithSpacers(projects)
             }
 
             if (!R.isEmpty(collaboratorIds)) {
-                const collaboratorProjects = swipeEnabledProjects.filter((project) => collaboratorIds.includes(project.id))
-                sections.push({data: collaboratorProjects, title: 'Collaborations'})
+                // Add Header
+                projects.push({displayType: 'header', text: 'Collaborations'})
+                fillLineWithSpacers(projects)
+
+                // Add Projects
+                const collaboratorProjects = swipeEnabledProjects.filter((project) => collaboratorIds.includes(project.id)).map(tagAsProject)
+                projects = [...projects, ...collaboratorProjects]
+                fillLineWithSpacers(projects)
             }
         } else {
             if (!R.isEmpty(swipeEnabledProjects)) {
-                const mobileSection = this.props.inBetaMode ? 
-                    {data: swipeEnabledProjects} :
-                    {data: swipeEnabledProjects, title: 'Made For Mobile'}
-                sections.push(mobileSection);
+                // Add Header
+                if (!this.props.inBetaMode) {
+                    projects.push({displayType: 'header', text: 'Made For Mobile'})
+                    fillLineWithSpacers(projects)
+                }
+
+                // Add Projects
+                projects = [...projects, ...swipeEnabledProjects.map(tagAsProject)]
+                fillLineWithSpacers(projects)
             }
     
-            if (!R.isEmpty(this.props.nonSwipeEnabledProjects)) {
-                sections.push({data: nonSwipeEnabledProjects, title: 'In-Browser Experience'})
+            if (!R.isEmpty(nonSwipeEnabledProjects)) {
+                // Add Header
+                projects.push({displayType: 'header', text: 'In-Browser Experience'})
+                fillLineWithSpacers(projects)
+
+                // Add Projects
+                projects = [...projects, ...nonSwipeEnabledProjects.map(tagAsProject)]
+                fillLineWithSpacers(projects)
             }
-        }
-        
+        }      
 
         return (
-            <SectionList
+            <FlatList
+                numColumns={ColumnNumbers}
+                data={projects}
+                columnWrapperStyle={DeviceInfo.isTablet() ? styles.columnWrapper : null}
                 ListHeaderComponent={this.props.inBetaMode && <ListHeaderComponent />}
                 contentContainerStyle={styles.contentContainer}
-                stickySectionHeadersEnabled={false}
                 ItemSeparatorComponent={() => <View style={styles.separatorView} />}
-                SectionSeparatorComponent={(data) => <View style={this._seperatorHeightStyle(data)} />}
-                renderItem={({item}) => <ProjectTile project={item} inPreviewMode={this.props.inPreviewMode} inBetaMode={this.props.inBetaMode}/>}
-                renderSectionHeader={({section}) => section.title && <FontedText style={styles.sectionHeader}> { section.title } </FontedText>}
-                sections={sections}
-                ListEmptyComponent={() => <FontedText style={styles.emptyComponent}> {this._emptyText()} </FontedText>}
+                renderItem={this.renderItem}
+                ListEmptyComponent={() => <FontedText style={styles.emptyComponent}> {this.emptyText()} </FontedText>}
                 keyExtractor={(item, index) => index}
             />
         );
@@ -175,8 +248,14 @@ const styles = EStyleSheet.create({
         fontStyle: 'italic', 
         marginHorizontal: 20, 
         color: '$headerGrey'
+    },
+    spacer: {
+        flex: 1,
+        marginHorizontal: 15
+    },
+    columnWrapper: { 
+        marginHorizontal: 25
     }
-
 });
 
 ProjectList.propTypes = {

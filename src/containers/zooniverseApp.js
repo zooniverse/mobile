@@ -1,22 +1,24 @@
 import React, {Component} from 'react'
 import {
+  Dimensions,
   Platform,
   PushNotificationIOS,
   View
 } from 'react-native'
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
 import NavBar from '../components/NavBar'
-import { connect } from 'react-redux'
 import { setState } from '../actions/index'
-import { setDimensions } from '../actions/device'
-import * as settingsActions from '../actions/settings'
 import FCM, { FCMEvent } from 'react-native-fcm'
 import { removeLeftOverImages } from '../utils/imageUtils'
+import * as settingsActions from '../actions/settings'
 import * as imageActions from '../actions/images'
-import { bindActionCreators } from 'redux'
+import * as appActions from '../actions/app'
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -34,11 +36,9 @@ const mapDispatchToProps = (dispatch) => ({
   setNotificationPayload(value) {
     dispatch(setState('notificationPayload', value))
   },
-  setDimensions() {
-    dispatch(setDimensions())
-  },
   imageActions: bindActionCreators(imageActions, dispatch),
-  settingsActions: bindActionCreators(settingsActions, dispatch)
+  settingsActions: bindActionCreators(settingsActions, dispatch),
+  appActions: bindActionCreators(appActions, dispatch)
 })
 
 class ZooniverseApp extends Component {
@@ -46,8 +46,20 @@ class ZooniverseApp extends Component {
     super(props);
   }
 
+  handleDimensionsChange(dimensions) {
+    this.props.appActions.updateScreenDimensions({
+      width: dimensions.window.width,
+      height: dimensions.window.height
+    })
+  }
+
   componentDidMount() {
-    this.props.setDimensions()
+    // Initially set screen dimensions
+    this.handleDimensionsChange({window: Dimensions.get('window')})
+
+    // Subscribe to screen change events
+    Dimensions.addEventListener('change', this.handleDimensionsChange.bind(this))
+
     removeLeftOverImages(this.props.images)
     this.props.imageActions.clearImageLocations()
     if (Platform.OS === 'ios') {
@@ -101,10 +113,12 @@ ZooniverseApp.propTypes = {
   isModalVisible: PropTypes.bool,
   setModalVisibility: PropTypes.func,
   setNotificationPayload: PropTypes.func,
-  setDimensions: PropTypes.func,
   images: PropTypes.object,
   imageActions: PropTypes.any,
-  settingsActions: PropTypes.any
+  settingsActions: PropTypes.any,
+  appActions: PropTypes.shape({
+    updateScreenDimensions: PropTypes.func
+  })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZooniverseApp)

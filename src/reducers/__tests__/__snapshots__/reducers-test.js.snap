@@ -2,6 +2,12 @@
 
 exports[`sets a new state 1`] = `
 Object {
+  "app": Object {
+    "device": Object {
+      "height": 0,
+      "width": 0,
+    },
+  },
   "classifier": Object {
     "annotations": Object {},
     "guide": Object {},
@@ -83,6 +89,12 @@ Object {
 
 exports[`sets state from initial state 1`] = `
 Object {
+  "app": Object {
+    "device": Object {
+      "height": 0,
+      "width": 0,
+    },
+  },
   "classifier": Object {
     "annotations": Object {},
     "guide": Object {},
@@ -163,6 +175,12 @@ Object {
 
 exports[`sets user 1`] = `
 Object {
+  "app": Object {
+    "device": Object {
+      "height": 0,
+      "width": 0,
+    },
+  },
   "classifier": Object {
     "annotations": Object {},
     "guide": Object {},
@@ -247,6 +265,12 @@ Object {
 
 exports[`unsets user 1`] = `
 Object {
+  "app": Object {
+    "device": Object {
+      "height": 0,
+      "width": 0,
+    },
+  },
   "classifier": Object {
     "annotations": Object {},
     "guide": Object {},

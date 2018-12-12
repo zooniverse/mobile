@@ -1,5 +1,6 @@
 import { append, equals, lensPath, merge, reject, set, view } from 'ramda';
 import { combineReducers } from 'redux';
+import app from './appReducer'
 import user from './userReducer';
 import projects from './projectsReducer';
 import navBar from './navBarReducer';
@@ -64,6 +65,7 @@ export const InitialState = {
 
 export default combineReducers({
   main,
+  app,
   user,
   projects,
   navBar,

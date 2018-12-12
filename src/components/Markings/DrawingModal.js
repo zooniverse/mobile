@@ -37,16 +37,6 @@ class DrawingModal extends Component {
         this.onSave = this.onSave.bind(this)
     }
 
-    handleDrawingButtonPress(drawingButton) {
-        if (drawingButton === 'undo') {
-            this.props.drawingActions.undoMostRecentEdit()
-        } else {
-            this.setState({
-                mode: drawingButton
-            })
-        }
-    }
-
     onCancel({justClearInProgress}) {
         const onConfirm = () => {
             if (justClearInProgress) {
