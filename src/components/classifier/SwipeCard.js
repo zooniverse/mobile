@@ -14,7 +14,6 @@ import { bindActionCreators } from 'redux'
 
 import NativeImage from '../../nativeModules/NativeImage'
 import * as imageActions from '../../actions/images'
-import { subjectDisplayWidth, subjectDisplayHeight } from './SwipeClassifier'
 import ProgressIndicatingImage from '../common/ProgressIndicatingImage'
 import FontedText from '../common/FontedText'
 import AlreadySeenBanner from './AlreadySeenBanner'
@@ -27,8 +26,12 @@ class SwipeCard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            overlayViewWidth: subjectDisplayWidth,
-            overlayViewHeight: subjectDisplayHeight,
+            nativeImageDimensions: {
+                width: 1,
+                height: 1,
+            },
+            overlayViewWidth: props.subjectDisplayWidth,
+            overlayViewHeight: props.subjectDisplayHeight,
             overlayAnswerIndex: 0,
             imageIsVisible: false,
             localUri: ''
@@ -59,11 +62,20 @@ class SwipeCard extends Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        const widthChanged = prevProps.subjectDisplayWidth !== this.props.subjectDisplayWidth
+        const heightChanged = prevProps.subjectDisplayHeight !== this.props.subjectDisplayHeight
+        if (widthChanged || heightChanged) {
+            this.updateOverlayImageForImageDimensions(this.state.nativeImageDimensions)
+        }
+    }
+
     updateOverlayImageForImageDimensions({width, height}) {
-        const aspectRatio = Math.min(subjectDisplayWidth / width, subjectDisplayHeight / height)
+        const aspectRatio = Math.min(this.props.subjectDisplayWidth / width, this.props.subjectDisplayHeight / height)
         this.setState({
             overlayViewHeight: height * aspectRatio,
-            overlayViewWidth: width * aspectRatio
+            overlayViewWidth: width * aspectRatio,
+            nativeImageDimensions: {width, height}
         });
     }
 
@@ -106,7 +118,7 @@ class SwipeCard extends Component {
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         return (
             <TouchableOpacity 
-                style={{width: subjectDisplayWidth, height: subjectDisplayHeight}} 
+                style={{width: this.props.subjectDisplayWidth, height: this.props.subjectDisplayHeight}} 
                 onPress={() => this.props.onPress(this.props.subject)}
                 activeOpacity={0.9}
             >
@@ -172,5 +184,7 @@ SwipeCard.propTypes = {
     shouldAnimateOverlay: PropTypes.bool,
     answers: PropTypes.array,
     imageActions: PropTypes.any,
-    onPress: PropTypes.any
+    onPress: PropTypes.any,
+    subjectDisplayWidth: PropTypes.number,
+    subjectDisplayHeight: PropTypes.number
 }

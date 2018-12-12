@@ -8,9 +8,10 @@ import PropTypes from 'prop-types'
 import Markdown from 'react-native-simple-markdown'
 import DeviceInfo from 'react-native-device-info'
 
+import { markdownImageRule } from '../../utils/markdownUtils'
 import FittedImage from '../common/FittedImage' 
 
-const ImageWidth = Dimensions.get('window').width - 100
+const ImageWidth = Math.min(Dimensions.get('window').width - 100, 400)
 class TutorialStep extends Component {
 
     constructor(props) {
@@ -25,6 +26,7 @@ class TutorialStep extends Component {
     }
 
     onLayout({nativeEvent}) {
+        this._scrollView.flashScrollIndicators()
         this.setState({
             width: nativeEvent.layout.width
         })
@@ -32,7 +34,7 @@ class TutorialStep extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.container}>
+            <ScrollView ref={ref => this._scrollView = ref} style={styles.container}>
                 <View style={styles.container}>
                     <View style={styles.contentContainer} onLayout={this.onLayout}>
                         {
@@ -47,7 +49,7 @@ class TutorialStep extends Component {
                         }
 
                         <View style={styles.markdown} >
-                            <Markdown styles={markdownStyles}>
+                            <Markdown rules={markdownImageRule} styles={markdownStyles}>
                                 { this.props.markdownContent }
                             </Markdown>
                         </View>

@@ -61,7 +61,7 @@ const styles = EStyleSheet.create({
   tab: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '50% - $panelHorizontalMargin',
+    flex: 1,
     marginTop: 1,
   },
   deselectedTab: {
