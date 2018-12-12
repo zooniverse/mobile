@@ -40,9 +40,16 @@ class EditableRect extends Component {
             height: `${newHeight}`
         }
 
-        this.rect.setNativeProps(newDimensions)
+        if (this.rect) {
+            this.rect.setNativeProps(newDimensions)
+        }
 
-        if (this.props.showCorners) {
+        if (this.props.showCorners
+            && this.upperLeftCircle
+            && this.upperRightCircle
+            && this.bottomRightCircle
+            && this.bottomLeftCircle
+            ) {
             this.upperLeftCircle.setNativeProps({
                 cx: `${newX}`,
                 cy: `${newY}`,
