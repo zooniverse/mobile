@@ -11,7 +11,7 @@ import DeviceInfo from 'react-native-device-info'
 import { markdownImageRule } from '../../utils/markdownUtils'
 import FittedImage from '../common/FittedImage' 
 
-const ImageWidth = Dimensions.get('window').width - 100
+const ImageWidth = Math.min(Dimensions.get('window').width - 100, 400)
 class TutorialStep extends Component {
 
     constructor(props) {
