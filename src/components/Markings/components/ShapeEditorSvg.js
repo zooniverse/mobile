@@ -60,7 +60,7 @@ class ShapeEditorSvg extends Component {
                 bottomRight: false,
                 upperLeft: false,
                 upperRight: false,
-                onlySquare: false
+                permiterOnly: false
             },
             shapeRefs: {},
             isDrawing: false,
@@ -127,10 +127,11 @@ class ShapeEditorSvg extends Component {
                     // Because Svgs don't have any way to animate, we have to update their props manually
                     const deltas = calculateShapeChanges(touchState, dx, dy, this.props.displayToNativeRatioX, this.props.displayToNativeRatioY)
                     const newDimensions = shapeRefs[shapeIndex].update(deltas);
-                    const shapeIsOutOfBounds = isShapeOutOfBounds(newDimensions, {width: this.props.width *this.props.displayToNativeRatioX, height: this.props.height * this.props.displayToNativeRatioY}) && touchState.onlySquare
-                    this.props.onShapeIsOutOfBoundsUpdates(shapeIsOutOfBounds)
+                    const shapeIsOutOfBounds = isShapeOutOfBounds(newDimensions, {width: this.props.width *this.props.displayToNativeRatioX, height: this.props.height * this.props.displayToNativeRatioY})
+                    const shapeIsOutOfBoundsAndBeingDragged = shapeIsOutOfBounds && touchState.permiterOnly
+                    this.props.onShapeIsOutOfBoundsUpdates(shapeIsOutOfBoundsAndBeingDragged)
                     this.setState({
-                        shapeToRemoveIndex: shapeIsOutOfBounds ? shapeIndex : -1
+                        shapeToRemoveIndex: shapeIsOutOfBoundsAndBeingDragged ? shapeIndex : -1
                     })
                 } 
                 
@@ -150,7 +151,7 @@ class ShapeEditorSvg extends Component {
                 const { shapeIndex, touchState, isDrawing, shapeToRemoveIndex } = this.state
 
                 // Remove a shape if the user has dragged it off screen
-                if (shapeToRemoveIndex >= 0 && touchState.onlySquare) { 
+                if (shapeToRemoveIndex >= 0 && touchState.permiterOnly) { 
                     this.deleteShapeWithKey(shapeToRemoveIndex)
                 }
                 // If the user is editing a shape, update the shape changes 
@@ -195,7 +196,7 @@ class ShapeEditorSvg extends Component {
                 bottomRight: false,
                 upperLeft: false,
                 upperRight: false,
-                onlySquare: false
+                permiterOnly: false
             }
         })
     }
