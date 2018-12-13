@@ -121,7 +121,7 @@ class ShapeEditorSvg extends Component {
             },
             onPanResponderMove: (evt, gestureState) => {
                 const { shapeIndex, touchState, shapeRefs, isDrawing } = this.state
-                const { locationX, locationY } = evt.nativeEvent
+                const { locationX, locationY, pageX, pageY } = evt.nativeEvent
                 const { dx, dy } = gestureState
                 if (shapeIndex >= 0) {
                     // Because Svgs don't have any way to animate, we have to update their props manually
@@ -136,11 +136,15 @@ class ShapeEditorSvg extends Component {
                 } 
                 
                 if (isDrawing) {
-                    const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, {
-                        width: (INITIAL_PREVIEW_SHAPE_SIDE + dx- distanceFromRange(locationX, 0, this.props.width)) * this.props.displayToNativeRatioX,
-                        height: (INITIAL_PREVIEW_SHAPE_SIDE + dy - distanceFromRange(locationY, 0, this.props.height)) * this.props.displayToNativeRatioY 
+                    const shapeDimensionUpdates = {}
+                    if (locationX !== pageX && distanceFromRange(locationX, 0, this.props.width) === 0) {
+                        shapeDimensionUpdates.width = (INITIAL_PREVIEW_SHAPE_SIDE + dx) * this.props.displayToNativeRatioX
+                    }
 
-                    })
+                    if (locationY !== pageY && distanceFromRange(locationY, 0, this.props.height) === 0) {
+                        shapeDimensionUpdates.height = (INITIAL_PREVIEW_SHAPE_SIDE + dy) * this.props.displayToNativeRatioY
+                    }
+                    const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, shapeDimensionUpdates)
                     this.setState({
                         previewShapeDimensions
                     })
