@@ -21,15 +21,9 @@ const DrawingButtons = (props) => {
                     activated={props.highlightedButton === 'draw'}
                     onPress={() => props.onModeButtonSelected('draw')}
                 />
-                <DrawingButton 
-                    style={styles.buttonPadding}
-                    type="edit"
-                    activated={props.highlightedButton === 'edit'}
-                    onPress={() => props.onModeButtonSelected('edit')}
-                />
                 <DrawingButton
                     type="erase"
-                    activated={props.highlightedButton === 'erase'}
+                    activated={props.highlightedButton === 'erase' || props.aShapeIsOutOfBounds}
                     onPress={() => props.onModeButtonSelected('erase')}
                 />
             </View>
@@ -56,8 +50,9 @@ const styles = {
 DrawingButtons.propTypes = {
     onModeButtonSelected: PropTypes.func,
     onUndoButtonSelected: PropTypes.func,
-    highlightedButton: PropTypes.oneOf(['draw', 'edit', 'erase', 'unselected']),
-    canUndo: PropTypes.bool
+    highlightedButton: PropTypes.oneOf(['draw', 'erase', 'unselected']),
+    canUndo: PropTypes.bool,
+    aShapeIsOutOfBounds: PropTypes.bool
 }
 
 export default DrawingButtons

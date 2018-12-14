@@ -5,6 +5,8 @@ import {
     Circle,
 } from 'react-native-svg'
 import PropTypes from 'prop-types'
+import Color from 'color';
+
 import CloseButtonSVG from './CloseButtonSVG'
 
 export const RectCorners = {
@@ -31,14 +33,23 @@ class EditableRect extends Component {
         const newX = this.props.x + dx < 0.1 ? this.props.x + dx + 1 : this.props.x + dx
         const newY = this.props.y + dy < 0.1 ? this.props.y + dy + 1 : this.props.y + dy
 
-        this.rect.setNativeProps({
+        const newDimensions = {
             x: `${newX}`,
             y: `${newY}`,
             width: `${newWidth}`,
             height: `${newHeight}`
-        })
+        }
 
-        if (this.props.showCorners) {
+        if (this.rect) {
+            this.rect.setNativeProps(newDimensions)
+        }
+
+        if (this.props.showCorners
+            && this.upperLeftCircle
+            && this.upperRightCircle
+            && this.bottomRightCircle
+            && this.bottomLeftCircle
+            ) {
             this.upperLeftCircle.setNativeProps({
                 cx: `${newX}`,
                 cy: `${newY}`,
@@ -56,14 +67,15 @@ class EditableRect extends Component {
                 cy: `${newY + newHeight}`
             })
         }
+
+        return newDimensions
     }
 
     render() {
         return (
-            <G
-                onLayout={this.props.onRectLayout}
-            >
+            <G>
                 <Rect
+                    onLayout={this.props.onRectLayout}
                     ref={ref => this.rect = ref}
                     x={this.props.x}
                     y={this.props.y}
@@ -71,7 +83,7 @@ class EditableRect extends Component {
                     height={this.props.height}
                     stroke={this.props.color}
                     strokeWidth={4 * this.props.displayToNativeRatioX}
-                    fill="transparent"
+                    fill={this.props.blurred ? Color(this.props.color).alpha(0.3).toString() : 'transparent'}
                 />
                 {
                     this.props.showCorners ? 
@@ -133,6 +145,7 @@ class EditableRect extends Component {
 }
 
 EditableRect.propTypes = {
+    blurred: PropTypes.bool,
     displayToNativeRatioX: PropTypes.number,
     displayToNativeRatioY: PropTypes.number,
     x: PropTypes.number,
