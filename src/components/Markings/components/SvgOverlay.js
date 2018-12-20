@@ -93,6 +93,7 @@ class SvgOverlay extends Component {
                         displayToNativeRatioY={this.state.displayToNativeRatioY}
                         drawingShape={this.props.drawingShape}
                         onShapeIsOutOfBoundsUpdates={this.props.onShapeIsOutOfBoundsUpdates}
+                        maxShapesDrawn={this.props.maxShapesDrawn}
                     />
                 </View>
             </View>
