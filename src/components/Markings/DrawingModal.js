@@ -68,8 +68,6 @@ class DrawingModal extends Component {
     }
 
     render() {
-        console.log(this.props.numberOfShapesDrawn)
-        console.log(this.props.tool.max)
         return (
             <Modal
                 onRequestClose={this.props.onClose}
