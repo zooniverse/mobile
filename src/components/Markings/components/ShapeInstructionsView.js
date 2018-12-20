@@ -19,13 +19,25 @@ const ShapeInstructionsView = (props) => {
                 </FontedText>
                 <FontedText style={styles.infoText}> 
                     <FontedText style={warningStyle}>
-                        {`${props.numberDrawn} of ${props.min} required`}
+                        { warningText(parseInt(props.numberDrawn), parseInt(props.min), parseInt(props.max)) }
                     </FontedText>
-                    { props.max ? `, ${props.max} maximum` : '' }
+                    { maxText(parseInt(props.min), parseInt(props.max)) }
                 </FontedText>
             </View>
         </View>
     )
+}
+
+const warningText = (numberDrawn, min, max) => {
+    const exists = (val) => !(val === null || isNaN(val))
+    const ofText = (exists(min) || exists(max)) ? ' of' : ''
+    return `${numberDrawn}` + ofText + (exists(min) ? ` ${min} required` : '')
+}
+
+const maxText = (min, max) => {
+    const comma = (min !== null && !isNaN(min) && max) ? ', ' : ' '
+    const maxText = max ? `${max} maximum ` : ''
+    return comma + maxText + 'drawn'
 }
 
 ShapeInstructionsView.propTypes = {

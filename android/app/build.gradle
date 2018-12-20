@@ -103,8 +103,8 @@ android {
         applicationId "com.zooniversemobile"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 23
-        versionName "2.2.7"
+        versionCode 25
+        versionName "2.2.9"
         multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -168,7 +168,7 @@ dependencies {
     compile "com.facebook.react:react-native:+" // From node_modules
     compile project(':react-native-device-info')
 
-    compile 'com.google.firebase:firebase-messaging:10.0.1'
+    compile 'com.google.firebase:firebase-messaging:10.2.1'
     compile 'com.google.firebase:firebase-core:10.0.1'
 }
 

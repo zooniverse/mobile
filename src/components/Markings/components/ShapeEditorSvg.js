@@ -108,7 +108,7 @@ class ShapeEditorSvg extends Component {
                     })
                 } 
                 // If a shape isn't being touched, then we should begin drawing a new shape 
-                else {
+                else if (!this.props.maxShapesDrawn) {
                     const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, {
                         x: (locationX - INITIAL_PREVIEW_SHAPE_SIDE) * this.props.displayToNativeRatioX,
                         y: (locationY - INITIAL_PREVIEW_SHAPE_SIDE) * this.props.displayToNativeRatioY,
@@ -311,7 +311,8 @@ ShapeEditorSvg.propTypes = {
     onShapeEdited: PropTypes.func,
     onShapeDeleted: PropTypes.func,
     drawingShape: PropTypes.string,
-    onShapeIsOutOfBoundsUpdates: PropTypes.func
+    onShapeIsOutOfBoundsUpdates: PropTypes.func,
+    maxShapesDrawn: PropTypes.bool
 }
 
 export default ShapeEditorSvg
