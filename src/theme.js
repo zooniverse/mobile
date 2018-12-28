@@ -35,5 +35,7 @@ export default {
   $chevronGrey: 'rgba(166,167,169,1)',
   $testRed: 'rgba(228,89,80,1)',
   $zooniverseTeal: 'rgba(0, 151, 157, 1)',
-  $seperator: 'rgba(151, 151, 151, 1)'
+  $seperator: 'rgba(151, 151, 151, 1)',
+  $classifierGrey: '#E2E5E9'
+
 }
