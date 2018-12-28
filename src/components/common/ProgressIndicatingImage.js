@@ -73,7 +73,7 @@ class ProgressIndicatingImage extends Component {
             height: imageDimensions.height * aspectRatio
         }
         return (
-            <View style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={styles.overlay}>
                 <View style={[styles.borderView, borderDimensions]} />
             </View>
         )
@@ -103,6 +103,15 @@ class ProgressIndicatingImage extends Component {
 }
 
 const styles = EStyleSheet.create({
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     imageContainer: {
         flex: 1
     },

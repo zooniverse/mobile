@@ -126,17 +126,16 @@ class SwipeCard extends Component {
             <Animated.View style={[styles.overlayContainer, styles.overlayBackground, { opacity }]}>
                 <FontedText style={styles.overlayText}>
                     { this.props.answers[this.state.overlayAnswerIndex].label }
-                </FontedText>
+                </FontedText>lop
             </Animated.View >
 
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
         const dimensionsStyle = {width: this.props.subjectDisplayWidth, height: (this.props.subjectDisplayHeight - 50)}
         const opacityStyle = { opacity: this.props.dimensionsLoaded ? 1 : 0 }
         const { imageIndex, localUris, pagerDimensions} = this.state
-        console.log(dimensionsStyle)
         return (
             <View style={[styles.cardBackground, dimensionsStyle, opacityStyle]}>
-                    <View style={{flex: 1, flexDirection: 'row'}}>
+                    <View style={styles.cardContainer}>
                         {
                             this.props.subject.displays.length > 1 && 
                                 <VerticalPaginationBar
@@ -146,7 +145,7 @@ class SwipeCard extends Component {
                                     pageIndex={imageIndex}
                                 />
                         }
-                        <View style={{flex: 1}} onLayout={event => this.setState({
+                        <View style={styles.container} onLayout={event => this.setState({
                                 pagerDimensions: {
                                     width: event.nativeEvent.layout.width,
                                     height: event.nativeEvent.layout.height
@@ -167,7 +166,7 @@ class SwipeCard extends Component {
                                 {
                                     pagerDimensions.height > 1 && (R.isEmpty(localUris) ? this.props.subject.displays : localUris).map( (uri, index) => {
                                         return (
-                                            <View style={{flex: 1, ...pagerDimensions}} key={`SWIPER_IMAGE_${index}`}>
+                                            <View style={[styles.container, ...pagerDimensions]} key={`SWIPER_IMAGE_${index}`}>
                                                 <ProgressIndicatingImage
                                                     withBorder
                                                     localUri={pathPrefix + uri}
@@ -183,7 +182,7 @@ class SwipeCard extends Component {
                         </View>
                     </View>
                     
-                    <View style={{width: '100%'}}>
+                    <View style={styles.optionsBarContainer}>
                         <SubjectOptionsBar
                             numberOfSelections={this.props.subject.displays.length}
                             selectionIndex={imageIndex}
@@ -202,6 +201,9 @@ class SwipeCard extends Component {
 export default connect(null, mapDispatchToProps)(SwipeCard)
 
 const styles = EStyleSheet.create({
+    container: {
+        flex: 1
+    },
     cardBackground: {
         borderWidth: 1,
         borderColor: '#E2E5E9',
@@ -217,9 +219,16 @@ const styles = EStyleSheet.create({
             width: 0,
         },
     },
+    optionsBarContainer: {
+        width: '100%'
+    },
     image: {
         borderRadius: 2,
         flex: 1
+    },
+    cardContainer: {
+        flex: 1,
+        flexDirection: 'row'
     },
     overlayContainer: {
         position: 'absolute',
