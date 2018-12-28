@@ -169,6 +169,7 @@ class SwipeCard extends Component {
                                         return (
                                             <View style={{flex: 1, ...pagerDimensions}} key={`SWIPER_IMAGE_${index}`}>
                                                 <ProgressIndicatingImage
+                                                    withBorder
                                                     localUri={pathPrefix + uri}
                                                     style={[styles.image, styles.imageShadow]}
                                                     resizeMethod="resize" 
