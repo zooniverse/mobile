@@ -27,13 +27,6 @@ const DrawingButtons = (props) => {
                     onPress={() => props.onModeButtonSelected('draw')}
                     radius={circleRadius}
                 />
-                <CircleIconButton 
-                    style={styles.buttonPadding}
-                    type="edit"
-                    activated={props.highlightedButton === 'edit'}
-                    onPress={() => props.onModeButtonSelected('edit')}
-                    radius={circleRadius}
-                />
                 <CircleIconButton
                     type="erase"
                     activated={props.highlightedButton === 'erase' || props.aShapeIsOutOfBounds}
