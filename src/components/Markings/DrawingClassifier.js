@@ -107,7 +107,7 @@ class DrawingClassifier extends Component {
     componentDidUpdate(prevProps) {
         const { subject } = this.props
         if (prevProps.subject !== subject && subject) {
-            this.props.imageActions.loadImageToCache(subject.display.src).then(localImagePath => {
+            this.props.imageActions.loadImageToCache(subject.displays[0].src).then(localImagePath => {
                 new NativeImage(localImagePath).getImageSize().then(({width, height}) => {
                     this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
                     this.setState({

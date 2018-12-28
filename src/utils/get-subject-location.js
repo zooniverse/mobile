@@ -1,14 +1,13 @@
 import { indexOf } from 'ramda'
 
-export default function getSubjectLocation(subject, frame = 0) {
+function getSubjectLocation(locationRef) {
   const READABLE_FORMATS = {
     image: ['jpeg', 'png', 'gif']
   }
 
-  var format, mimeType, ref, ref1, src, type
-  ref = subject.locations[frame]
-  for (mimeType in ref) {
-    src = ref[mimeType];
+  var format, mimeType, ref1, src, type
+  for (mimeType in locationRef) {
+    src = locationRef[mimeType];
     ref1 = mimeType.split('/'), type = ref1[0], format = ref1[1]
 
     if (type in READABLE_FORMATS && indexOf.call(format, READABLE_FORMATS[type]) >= 0) {
@@ -21,4 +20,9 @@ export default function getSubjectLocation(subject, frame = 0) {
     format: format,
     src: src
   }
+}
+
+export default function getSubjectLocations(subject) {
+  const displays = subject.locations.map(getSubjectLocation)
+  return displays
 }
