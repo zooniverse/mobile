@@ -5,17 +5,17 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info';
 
-import Theme from '../../../theme'
+import Theme from '../../theme'
 
-const RADIUS = DeviceInfo.isTablet() ? 20 : 15
-export const DrawingButton = ({ style, activated, type, onPress, disabled }) => {
+const CircleIconButton = ({ style, activated, type, onPress, disabled, radius }) => {
     const circleStyle = {
-        width: RADIUS * 2,
-        height: RADIUS * 2,
-        borderRadius: RADIUS,
+        width: radius * 2,
+        height: radius * 2,
+        borderRadius: radius,
         backgroundColor: activated ? Theme.$zooniverseTeal : 'transparent',
         borderWidth: DeviceInfo.isTablet() ? 2 : 1,
         borderColor: Theme.$zooniverseTeal
@@ -29,7 +29,7 @@ export const DrawingButton = ({ style, activated, type, onPress, disabled }) => 
             <View style={[circleStyle, opacity]}>
                 <TouchableOpacity style={styles.buttonStyle} onPress={onPress} disabled={disabled}>
                     <View style={[styles.iconContainer, iconStyleFromType(type)]}>
-                        <ButtonIcon type={type} size={RADIUS} color={iconColor} />
+                        <ButtonIcon type={type} size={radius} color={iconColor} />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -39,8 +39,12 @@ export const DrawingButton = ({ style, activated, type, onPress, disabled }) => 
 
 const ButtonIcon = ({type, ...props}) => {
     switch (type) {
+        case 'share': 
+            return <SimpleLineIcons name={'share-alt'} {...props} />
+        case 'expand':
+            return <SimpleLineIcons name={'size-fullscreen'} {...props} />
         case 'edit':
-            return <FontAwesome5 name={'edit'} {...props} solid/>
+            return <FontAwesome5 name={'edit'} {...props} solid />
         case 'draw':
             return <FontAwesome5 name={'plus'} {...props} />
         case 'erase':
@@ -51,7 +55,7 @@ const ButtonIcon = ({type, ...props}) => {
 }
 
 ButtonIcon.propTypes = {
-    type: PropTypes.oneOf(['edit', 'draw', 'erase', 'undo'])
+    type: PropTypes.oneOf(['edit', 'draw', 'erase', 'undo', 'expand', 'share'])
 }
 
 const iconStyleFromType = (type) => {
@@ -63,7 +67,8 @@ const iconStyleFromType = (type) => {
     }
 }
 
-DrawingButton.propTypes = {
+CircleIconButton.propTypes = {
+    radius: PropTypes.number,
     activated: PropTypes.bool,
     disabled: PropTypes.bool,
     onPress: PropTypes.func,
@@ -84,3 +89,5 @@ const styles = EStyleSheet.create({
         alignItems: 'center'
     }
 })
+
+export default CircleIconButton

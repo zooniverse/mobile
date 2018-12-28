@@ -3,28 +3,42 @@ import {
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import {DrawingButton} from './DrawingButton'
+import DeviceInfo from 'react-native-device-info';
+
+import CircleIconButton from '../../common/CircleIconButton'
+
+const circleRadius = DeviceInfo.isTablet() ? 20 : 15
 
 const DrawingButtons = (props) => {
     return (
         <View style={styles.container} >
-            <DrawingButton
+            <CircleIconButton
                 disabled={!props.canUndo}
                 type="undo"
                 activated={false}
                 onPress={() => props.onUndoButtonSelected()}
+                radius={circleRadius}
             />
             <View style={styles.drawingButtonsContainer}>
-                <DrawingButton 
+                <CircleIconButton 
                     style={styles.buttonPadding}
                     type="draw"
                     activated={props.highlightedButton === 'draw'}
                     onPress={() => props.onModeButtonSelected('draw')}
+                    radius={circleRadius}
                 />
-                <DrawingButton
+                <CircleIconButton 
+                    style={styles.buttonPadding}
+                    type="edit"
+                    activated={props.highlightedButton === 'edit'}
+                    onPress={() => props.onModeButtonSelected('edit')}
+                    radius={circleRadius}
+                />
+                <CircleIconButton
                     type="erase"
                     activated={props.highlightedButton === 'erase' || props.aShapeIsOutOfBounds}
                     onPress={() => props.onModeButtonSelected('erase')}
+                    radius={circleRadius}
                 />
             </View>
         </View>
