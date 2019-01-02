@@ -60,7 +60,7 @@ class ShapeEditorSvg extends Component {
                 bottomRight: false,
                 upperLeft: false,
                 upperRight: false,
-                permiterOnly: false
+                perimeterOnly: false
             },
             shapeRefs: {},
             isDrawing: false,
@@ -128,7 +128,7 @@ class ShapeEditorSvg extends Component {
                     const deltas = calculateShapeChanges(touchState, dx, dy, this.props.displayToNativeRatioX, this.props.displayToNativeRatioY)
                     const newDimensions = shapeRefs[shapeIndex].update(deltas);
                     const shapeIsOutOfBounds = isShapeOutOfBounds(newDimensions, {width: this.props.width *this.props.displayToNativeRatioX, height: this.props.height * this.props.displayToNativeRatioY})
-                    const shapeIsOutOfBoundsAndBeingDragged = shapeIsOutOfBounds && touchState.permiterOnly
+                    const shapeIsOutOfBoundsAndBeingDragged = shapeIsOutOfBounds && touchState.perimeterOnly
                     this.props.onShapeIsOutOfBoundsUpdates(shapeIsOutOfBoundsAndBeingDragged)
                     this.setState({
                         shapeToRemoveIndex: shapeIsOutOfBoundsAndBeingDragged ? shapeIndex : -1
@@ -155,7 +155,7 @@ class ShapeEditorSvg extends Component {
                 const { shapeIndex, touchState, isDrawing, shapeToRemoveIndex } = this.state
 
                 // Remove a shape if the user has dragged it off screen
-                if (shapeToRemoveIndex >= 0 && touchState.permiterOnly) { 
+                if (shapeToRemoveIndex >= 0 && touchState.perimeterOnly) { 
                     this.deleteShapeWithKey(shapeToRemoveIndex)
                 }
                 // If the user is editing a shape, update the shape changes 
@@ -200,7 +200,7 @@ class ShapeEditorSvg extends Component {
                 bottomRight: false,
                 upperLeft: false,
                 upperRight: false,
-                permiterOnly: false
+                perimeterOnly: false
             }
         })
     }

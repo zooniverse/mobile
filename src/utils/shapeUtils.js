@@ -83,7 +83,7 @@ const analyzeCorners = (xCoord, yCoord, corners) => {
  *  bottomLeft: true,
  *  bottomRight: false,
  *  withinSquare: true,
- *  permiterOnly: false
+ *  perimeterOnly: false
  * }
  * 
  * This object essentially explains which part of the shape the user is touching
@@ -101,7 +101,7 @@ export const analyzeCoordinateWithShape = (xCoord, yCoord, shape, corners) => {
     return {
         ... analyzedCorners,
         withinSquare,
-        permiterOnly: !touchingCorners && touchingPerimeter
+        perimeterOnly: !touchingCorners && touchingPerimeter
     }
 }
 
@@ -116,12 +116,12 @@ export const analyzeCoordinateWithShape = (xCoord, yCoord, shape, corners) => {
  * @param {The ratio that the shape should scale in the y direction} scaleRatioY 
  */
 export const calculateShapeChanges = (touchState, touchDx, touchDy, scaleRatioX, scaleRatioY) => {
-    const {upperLeft, bottomLeft, upperRight, bottomRight, permiterOnly} = touchState
+    const {upperLeft, bottomLeft, upperRight, bottomRight, perimeterOnly} = touchState
     const scaledX = touchDx * scaleRatioX
     const scaledY = touchDy * scaleRatioY
 
     let dx = 0, dy = 0, dw = 0, dh = 0
-    if (permiterOnly) {
+    if (perimeterOnly) {
         dx = scaledX
         dy = scaledY
     } else if (upperLeft) {
