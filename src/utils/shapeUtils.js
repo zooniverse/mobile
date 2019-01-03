@@ -1,4 +1,11 @@
 import R from 'ramda'
+export const drawingTouchState = {
+    perimeterOnly: false,
+    upperLeft: false,
+    bottomLeft: false,
+    upperRight: false,
+    bottomRight: true
+}
 
 /**
  * This function receives and x,y coordinate and determines if
