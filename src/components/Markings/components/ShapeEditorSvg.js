@@ -15,10 +15,8 @@ import {
     calculateShapeChanges,
     isCoordinateWithinSquare,
     isShapeOutOfBounds,
+    drawingTouchState
 } from '../../../utils/shapeUtils'
-import {
-    distanceFromRange
-} from '../../../utils/drawingUtils'
 
 /**
  * This class handles all user interactions with shapes.
@@ -64,6 +62,7 @@ class ShapeEditorSvg extends Component {
             },
             shapeRefs: {},
             isDrawing: false,
+            dragOrigin: { x: 0, y: 0},
             previewShapeDimensions: this.previewShapeInitialDimensions()
         }
 
@@ -90,7 +89,11 @@ class ShapeEditorSvg extends Component {
             onMoveShouldSetPanResponder: () => this.props.mode === 'draw',
             onMoveShouldSetPanResponderCapture: () => this.props.mode === 'draw',
             onPanResponderGrant: (evt) => {
+                // We save The drag origin to later calculate if our drag goes out of bounds
                 const { locationX, locationY } = evt.nativeEvent
+                this.setState({
+                    dragOrigin: { x: locationX, y: locationY },
+                })
 
                 // Determine if the user is touching a shape and where in the shape they are touching
                 const analyzedLocations = R.mapObjIndexed((shape, key) => {
@@ -106,7 +109,8 @@ class ShapeEditorSvg extends Component {
                         shapeIndex: touchedShapeIndex,
                         touchState: touchedSquare
                     })
-                } 
+                }
+
                 // If a shape isn't being touched, then we should begin drawing a new shape 
                 else if (!this.props.maxShapesDrawn) {
                     const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, {
@@ -121,11 +125,19 @@ class ShapeEditorSvg extends Component {
             },
             onPanResponderMove: (evt, gestureState) => {
                 const { shapeIndex, touchState, shapeRefs, isDrawing } = this.state
-                const { locationX, locationY, pageX, pageY } = evt.nativeEvent
                 const { dx, dy } = gestureState
+                const dragLocation = {
+                    x: this.state.dragOrigin.x + dx,
+                    y: this.state.dragOrigin.y + dy
+                }
+
                 if (shapeIndex >= 0) {
+                    const shape = this.props.shapes[shapeIndex]
+                    const deltas = calculateShapeChanges(touchState, dx, dy, 
+                                                         this.props.displayToNativeRatioX, this.props.displayToNativeRatioY,
+                                                         shape, this.props.width, this.props.height, dragLocation)
+
                     // Because Svgs don't have any way to animate, we have to update their props manually
-                    const deltas = calculateShapeChanges(touchState, dx, dy, this.props.displayToNativeRatioX, this.props.displayToNativeRatioY)
                     const newDimensions = shapeRefs[shapeIndex].update(deltas);
                     const shapeIsOutOfBounds = isShapeOutOfBounds(newDimensions, {width: this.props.width *this.props.displayToNativeRatioX, height: this.props.height * this.props.displayToNativeRatioY})
                     const shapeIsOutOfBoundsAndBeingDragged = shapeIsOutOfBounds && touchState.perimeterOnly
@@ -136,17 +148,19 @@ class ShapeEditorSvg extends Component {
                 } 
                 
                 if (isDrawing) {
-                    const shapeDimensionUpdates = {}
-                    if (locationX !== pageX && distanceFromRange(locationX, 0, this.props.width) === 0) {
-                        shapeDimensionUpdates.width = (INITIAL_PREVIEW_SHAPE_SIDE + dx) * this.props.displayToNativeRatioX
+                    const previewShapeStartDimensions = R.merge(this.state.previewShapeDimensions, {width: 0, height: 0})
+
+                    const deltas = calculateShapeChanges(drawingTouchState, dx + INITIAL_PREVIEW_SHAPE_SIDE, dy + INITIAL_PREVIEW_SHAPE_SIDE, 
+                        this.props.displayToNativeRatioX, this.props.displayToNativeRatioY,
+                        previewShapeStartDimensions, this.props.width, this.props.height, dragLocation)
+
+                    const previewShapesUpdates = {
+                        width: deltas.dw,
+                        height: deltas.dh
                     }
 
-                    if (locationY !== pageY && distanceFromRange(locationY, 0, this.props.height) === 0) {
-                        shapeDimensionUpdates.height = (INITIAL_PREVIEW_SHAPE_SIDE + dy) * this.props.displayToNativeRatioY
-                    }
-                    const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, shapeDimensionUpdates)
                     this.setState({
-                        previewShapeDimensions
+                        previewShapeDimensions: R.merge(this.state.previewShapeDimensions, previewShapesUpdates)
                     })
                 }
             },
@@ -161,7 +175,15 @@ class ShapeEditorSvg extends Component {
                 // If the user is editing a shape, update the shape changes 
                 else if (shapeIndex >= 0) {
                     const { dx, dy } = gestureState;
-                    const deltas = calculateShapeChanges(touchState, dx, dy, this.props.displayToNativeRatioX, this.props.displayToNativeRatioY)
+                    const dragLocation = {
+                        x: this.state.dragOrigin.x + dx,
+                        y: this.state.dragOrigin.y + dy
+                    }
+
+                    const shape = this.props.shapes[shapeIndex]
+                    const deltas = calculateShapeChanges(touchState, dx, dy, 
+                        this.props.displayToNativeRatioX, this.props.displayToNativeRatioY,
+                        shape, this.props.width, this.props.height, dragLocation)
 
                     // Once the animation is complete, we report the final edit on the shape
                     this.props.onShapeEdited(shapeIndex, touchState, deltas)
@@ -192,6 +214,7 @@ class ShapeEditorSvg extends Component {
         this.props.onShapeIsOutOfBoundsUpdates(false)
         this.setState({
             isDrawing: false,
+            dragOrigin: { x: 0, y: 0},
             previewShapeDimensions: this.previewShapeInitialDimensions(),
             shapeIndex: -1,
             shapeToRemoveIndex: -1,
