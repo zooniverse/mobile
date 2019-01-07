@@ -51,7 +51,6 @@ const VerticalPaginationBar = (props) => {
         </View>
     )
 }
-//textLayer.textColor = UIColor.black
 
 const styles = EStyleSheets.create({
     container: {
