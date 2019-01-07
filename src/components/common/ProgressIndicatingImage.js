@@ -35,7 +35,9 @@ class ProgressIndicatingImage extends Component {
         }
         this.animateImageIfLoaded = this.animateImageIfLoaded.bind(this)
         this.unlinkImageOnLoad = false
+    }
 
+    componentDidMount() {
         this.animateImageIfLoaded()
     }
 

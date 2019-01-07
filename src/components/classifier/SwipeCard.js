@@ -60,7 +60,7 @@ class SwipeCard extends Component {
                 this.setState({ overlayAnswerIndex: value.value < 0 ? 0 : 1})
         })
 
-        Dimensions.addEventListener('change', this.handleDimensionsChange.bind(this))
+        Dimensions.addEventListener('change', this.handleDimensionsChange)
 
         // Load all images to cache
         const loadImagePromises = this.props.subject.displays.map( ({src}) => {
@@ -99,7 +99,7 @@ class SwipeCard extends Component {
 
     componentWillUnmount() {
         this.props.panX.removeListener(this.listenerId)
-        Dimensions.removeEventListener('change', this.handleDimensionsChange.bind(this))
+        Dimensions.removeEventListener('change', this.handleDimensionsChange)
 
         this.state.localUris.forEach((uri) => {
             RNFetchBlob.fs.exists(uri)
@@ -126,11 +126,11 @@ class SwipeCard extends Component {
             <Animated.View style={[styles.overlayContainer, styles.overlayBackground, { opacity }]}>
                 <FontedText style={styles.overlayText}>
                     { this.props.answers[this.state.overlayAnswerIndex].label }
-                </FontedText>lop
+                </FontedText>
             </Animated.View >
 
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
-        const dimensionsStyle = {width: this.props.subjectDisplayWidth, height: (this.props.subjectDisplayHeight - 50)}
+        const dimensionsStyle = {width: this.props.subjectDisplayWidth, height: this.props.subjectDisplayHeight}
         const opacityStyle = { opacity: this.props.dimensionsLoaded ? 1 : 0 }
         const { imageIndex, localUris, pagerDimensions} = this.state
         return (
@@ -166,7 +166,7 @@ class SwipeCard extends Component {
                                 {
                                     pagerDimensions.height > 1 && (R.isEmpty(localUris) ? this.props.subject.displays : localUris).map( (uri, index) => {
                                         return (
-                                            <View style={[styles.container, ...pagerDimensions]} key={`SWIPER_IMAGE_${index}`}>
+                                            <View style={[styles.container, pagerDimensions]} key={`SWIPER_IMAGE_${index}`}>
                                                 <ProgressIndicatingImage
                                                     withBorder
                                                     localUri={pathPrefix + uri}
