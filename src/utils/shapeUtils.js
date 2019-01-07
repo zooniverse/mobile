@@ -1,4 +1,15 @@
 import R from 'ramda'
+import {
+    distanceFromRange
+} from './drawingUtils'
+
+export const drawingTouchState = {
+    perimeterOnly: false,
+    upperLeft: false,
+    bottomLeft: false,
+    upperRight: false,
+    bottomRight: true
+}
 
 /**
  * This function receives and x,y coordinate and determines if
@@ -83,7 +94,7 @@ const analyzeCorners = (xCoord, yCoord, corners) => {
  *  bottomLeft: true,
  *  bottomRight: false,
  *  withinSquare: true,
- *  permiterOnly: false
+ *  perimeterOnly: false
  * }
  * 
  * This object essentially explains which part of the shape the user is touching
@@ -101,7 +112,7 @@ export const analyzeCoordinateWithShape = (xCoord, yCoord, shape, corners) => {
     return {
         ... analyzedCorners,
         withinSquare,
-        permiterOnly: !touchingCorners && touchingPerimeter
+        perimeterOnly: !touchingCorners && touchingPerimeter
     }
 }
 
@@ -115,37 +126,81 @@ export const analyzeCoordinateWithShape = (xCoord, yCoord, shape, corners) => {
  * @param {The ratio that the shape should scale in the x direction} scaleRatioX 
  * @param {The ratio that the shape should scale in the y direction} scaleRatioY 
  */
-export const calculateShapeChanges = (touchState, touchDx, touchDy, scaleRatioX, scaleRatioY) => {
-    const {upperLeft, bottomLeft, upperRight, bottomRight, permiterOnly} = touchState
+export const calculateShapeChanges = (  touchState, touchDx, touchDy, scaleRatioX, 
+                                        scaleRatioY, shapeCoordinates, svgWidth, svgHeight,
+                                        dragOrigin ) => {
+    const {upperLeft, bottomLeft, upperRight, bottomRight, perimeterOnly} = touchState
     const scaledX = touchDx * scaleRatioX
     const scaledY = touchDy * scaleRatioY
 
-    let dx = 0, dy = 0, dw = 0, dh = 0
-    if (permiterOnly) {
-        dx = scaledX
-        dy = scaledY
-    } else if (upperLeft) {
-        dx = scaledX
-        dy = scaledY
-        dw = -scaledX
-        dh = -scaledY
-    } else if (bottomLeft) {
-        dx = scaledX
-        dw = -scaledX
-        dh = scaledY
-    } else if (upperRight) {
-        dy = scaledY
-        dw = scaledX
-        dh = -scaledY
-    } else if (bottomRight) {
-        dw = scaledX
-        dh = scaledY
+    const deltas = {
+        dx: 0,
+        dy: 0,
+        dw: 0,
+        dh: 0
     }
 
-    return {
-        dx,
-        dy,
-        dw,
-        dh
+    if (perimeterOnly) {
+        deltas.dx = scaledX
+        deltas.dy = scaledY
+    } else if (upperLeft) {
+        deltas.dx = scaledX
+        deltas.dy = scaledY
+        deltas.dw = -scaledX
+        deltas.dh = -scaledY
+    } else if (bottomLeft) {
+        deltas.dx = scaledX
+        deltas.dw = -scaledX
+        deltas.dh = scaledY
+    } else if (upperRight) {
+        deltas.dy = scaledY
+        deltas.dw = scaledX
+        deltas.dh = -scaledY
+    } else if (bottomRight) {
+        deltas.dw = scaledX
+        deltas.dh = scaledY
     }
+
+    return constrainDeltasToRange(  touchState, deltas, shapeCoordinates,
+                                    svgWidth * scaleRatioX, svgHeight * scaleRatioY,
+                                    { x: dragOrigin.x * scaleRatioX, y: dragOrigin.y * scaleRatioY } )
+}
+
+/**
+ * This function constrains a change in a shape to 2d bounds
+ * @param {Where the user is touching} touchState 
+ * @param {Proposed Deltas to a shape} deltas 
+ * @param {Shape coordinates} shapeCoordinates 
+ * @param {X bound} maxX 
+ * @param {Y bound} maxY 
+ * @param {Where the drag event originated} dragOrigin
+ */
+const constrainDeltasToRange = (touchState, deltas, shapeCoordinates, maxX, maxY, dragOrigin) => {
+    const { upperLeft, bottomLeft, upperRight, bottomRight } = touchState
+    const { dx, dy, dw, dh } = deltas 
+    const { x, y, height, width } = shapeCoordinates
+
+    const xIsOutOfRange = distanceFromRange(dragOrigin.x, 0, maxX) !== 0
+    const yIsOutOfRange = distanceFromRange(dragOrigin.y, 0, maxY) !== 0
+
+    const constrainedDeltas = { dx, dy, dw, dh }
+    if (xIsOutOfRange) {
+        const isXInverted = width + dw < 0 
+        if (upperLeft || bottomLeft) {
+            constrainedDeltas.dx = (isXInverted ? maxX : 0) - x
+            constrainedDeltas.dw = -constrainedDeltas.dx
+        }
+        if (upperRight || bottomRight) constrainedDeltas.dw = (isXInverted ? 0 : maxX) - (x + width)
+    }
+
+    if (yIsOutOfRange) {
+        const isYInverted = height + dh < 0
+        if (upperLeft || upperRight) {
+            constrainedDeltas.dy = (isYInverted ? maxY : 0) - y
+            constrainedDeltas.dh = -constrainedDeltas.dy
+        }
+        if (bottomLeft || bottomRight) constrainedDeltas.dh = (isYInverted ? 0 : maxY) - (y + height)
+    }
+
+    return constrainedDeltas
 }
