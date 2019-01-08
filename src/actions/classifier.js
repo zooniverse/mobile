@@ -6,7 +6,7 @@ import { Alert, Platform, Image} from 'react-native'
 import { getAuthUser } from '../actions/auth'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 import * as ActionConstants from '../constants/actions'
-import getSubjectLocation from '../utils/get-subject-location'
+import getSubjectLocations from '../utils/get-subject-location'
 import { 
   constructDrawingAnnotations
 } from '../utils/annotationUtils'
@@ -15,7 +15,7 @@ import { clearShapes } from './drawing'
 export function addSubjectsForWorklow(workflowId) {
   return dispatch => {
     return apiClient.type('subjects').get({workflow_id: workflowId, sort: 'queued'}).then((subjects) => {
-      subjects.forEach((subject) => subject.display = getSubjectLocation(subject))
+      subjects.forEach((subject) => subject.displays = getSubjectLocations(subject))
       dispatch({
         type: ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW,
         workflowId,
@@ -66,19 +66,22 @@ export function saveClassification(workflow, subject, displayDimensions) {
     
     // Report classification
     let subjectDimensions = []
-    const imageSizePromise = new Promise((resolve, reject) => {
-      Image.getSize(subject.display.src, (naturalWidth, naturalHeight) => {
-        const aspectRatio = Math.min(displayDimensions.height/naturalHeight, displayDimensions.width/naturalWidth)
-        const subjectDimensions = {
-          naturalWidth,
-          naturalHeight,
-          clientWidth: displayDimensions.width * aspectRatio,
-          clientHeight: displayDimensions.height * aspectRatio
-        }
-        resolve(subjectDimensions)
-      }, reject)
+    const sizePromises = subject.displays.map(({src}) => {
+      return new Promise((resolve, reject) => {
+        Image.getSize(src, (naturalWidth, naturalHeight) => {
+          const aspectRatio = Math.min(displayDimensions.height/naturalHeight, displayDimensions.width/naturalWidth)
+          const subjectDimensions = {
+            naturalWidth,
+            naturalHeight,
+            clientWidth: displayDimensions.width * aspectRatio,
+            clientHeight: displayDimensions.height * aspectRatio
+          }
+          resolve(subjectDimensions)
+        }, reject)
+      })
     })
-    imageSizePromise.then((imageDimensions) => {
+
+    Promise.all(sizePromises).then((imageDimensions) => {
       subjectDimensions = imageDimensions
     }).finally(() => {
       apiClient.type('classifications').create({

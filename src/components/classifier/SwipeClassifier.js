@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Dimensions,
   View
 } from 'react-native'
 import PropTypes from 'prop-types';
@@ -70,13 +69,14 @@ export class SwipeClassifier extends React.Component {
     
     this.onAnswered = this.onAnswered.bind(this)
     this.onSwiped = this.onSwiped.bind(this)
-    this.onTapCard = this.onTapCard.bind(this)
+    this.expandImage = this.expandImage.bind(this)
   }
 
   onClassifierLayout({nativeEvent}) {
     const { width, height } = nativeEvent.layout
     this.setState({
-      swiperDimensions: { width, height}
+      swiperDimensions: { width, height},
+      swiperDimensionsLoaded: true
     })
   }
 
@@ -105,10 +105,10 @@ export class SwipeClassifier extends React.Component {
     }
   }
 
-  onTapCard = (subject) => {
+  expandImage = (imageSource) => {
     this.setState({
       showFullSize: true,
-      fullScreenImageSource: subject.display.src
+      fullScreenImageSource: imageSource
     })
   }
 
@@ -123,9 +123,10 @@ export class SwipeClassifier extends React.Component {
             panX={this.state.panX}
             shouldAnimateOverlay={shouldAnimateOverlay}
             answers={this.props.answers}
-            onPress={this.onTapCard}
+            onExpandButtonPressed={this.expandImage}
             subjectDisplayWidth={this.state.swiperDimensions.width}
             subjectDisplayHeight={this.state.swiperDimensions.height}
+            dimensionsLoaded={this.state.swiperDimensionsLoaded}
           />
       ) : <View />
   }
@@ -193,6 +194,7 @@ export class SwipeClassifier extends React.Component {
     const classifier = 
       <View style={styles.classifier} onLayout={this.onClassifierLayout.bind(this)}>
           <Swiper
+            verticalInitiation={false}
             ref={swiper => this.swiper = swiper}
             cardHorizontalMargin={0}
             keyExtractor={cardData => cardData.id}

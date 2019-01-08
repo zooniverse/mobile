@@ -88,6 +88,7 @@ class MarkableImage extends Component {
                     {
                         this.state.isImageLoaded ? 
                             <SvgOverlay
+                                canDraw={this.props.canDraw}
                                 nativeWidth={naturalWidth}
                                 nativeHeight={naturalHeight}
                                 shapes={this.props.shapes}
@@ -140,7 +141,8 @@ MarkableImage.propTypes = {
     }),
     source: PropTypes.string,
     onContainerLayout: PropTypes.func,
-    onShapeIsOutOfBoundsUpdates: PropTypes.func
+    onShapeIsOutOfBoundsUpdates: PropTypes.func,
+    canDraw: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarkableImage)

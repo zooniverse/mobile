@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-    ActivityIndicator,
     Animated,
     Image,
     View
@@ -11,6 +10,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import NativeImage from '../../nativeModules/NativeImage'
 import * as imageActions from '../../actions/images'
 import SubjectLoadingIndicator from './SubjectLoadingIndicator'
 
@@ -23,10 +23,22 @@ class ProgressIndicatingImage extends Component {
         super(props)
         this.state = {
             imageIsLoaded: false,
-            imageOpacity: new Animated.Value(0)
+            imageOpacity: new Animated.Value(0),
+            viewDimensions: {
+                width: 0,
+                height: 0
+            },
+            imageDimensions: {
+                width: 0,
+                height: 0
+            }
         }
         this.animateImageIfLoaded = this.animateImageIfLoaded.bind(this)
         this.unlinkImageOnLoad = false
+    }
+
+    componentDidMount() {
+        this.animateImageIfLoaded()
     }
 
     componentDidUpdate(prevProps) {
@@ -38,41 +50,82 @@ class ProgressIndicatingImage extends Component {
     animateImageIfLoaded() {
         RNFetchBlob.fs.exists(this.props.localUri).then((fileExists) => {
             if (fileExists) {
-                this.setState({
-                    imageIsLoaded: true,
-                }, () => {
-                    Animated.timing( this.state.imageOpacity,
-                        {
-                            toValue: 1,
-                            duration: 300
-                        }
-                    ).start()
+                new NativeImage(this.props.localUri).getImageSize().then((dimensions) => {
+                    this.setState({
+                        imageDimensions: dimensions,
+                        imageIsLoaded: true,
+                    }, () => {
+                        Animated.timing( this.state.imageOpacity,
+                            {
+                                toValue: 1,
+                                duration: 300
+                            }
+                        ).start()
+                    })
                 })
             }
         })
     }
 
-    render() {
-        if (!this.state.imageIsLoaded) {
-            return  <SubjectLoadingIndicator />
+    renderBorderOverlay() {
+        const { viewDimensions, imageDimensions } = this.state
+        const aspectRatio = Math.min(viewDimensions.height/imageDimensions.height, viewDimensions.width/imageDimensions.width)
+        const borderDimensions = {
+            width: imageDimensions.width * aspectRatio,
+            height: imageDimensions.height * aspectRatio
         }
+        return (
+            <View style={styles.overlay}>
+                <View style={[styles.borderView, borderDimensions]} />
+            </View>
+        )
+    }
 
-        return  <Animated.View style={[styles.imageContainer, { opacity: this.state.imageOpacity}]}>
-                    <Image 
-                        {...this.props}
-                        source={{uri:this.props.localUri}}
-                    />
-                </Animated.View>
+    render() {
+        return  (
+            <Animated.View  
+                onLayout={event => this.setState({viewDimensions: event.nativeEvent.layout})}
+                style={[styles.imageContainer, { opacity: this.state.imageOpacity}]}
+            >
+                {
+                    this.state.imageIsLoaded ? 
+                        <Image 
+                            {...this.props}
+                            source={{uri:this.props.localUri}}
+                        />
+                    :
+                        <SubjectLoadingIndicator />
+                }
+                {
+                    this.state.imageIsLoaded && this.renderBorderOverlay()
+                }
+            </Animated.View>
+        )
     }
 }
 
 const styles = EStyleSheet.create({
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     imageContainer: {
         flex: 1
+    },
+    borderView: {
+        borderWidth: 1,
+        borderLeftWidth: 0,
+        borderColor: '#E2E5E9'
     }
 })
 
 ProgressIndicatingImage.propTypes = {
+    withBorder: PropTypes.bool,
     localUri: PropTypes.string,
     style: PropTypes.oneOfType([
         PropTypes.object,

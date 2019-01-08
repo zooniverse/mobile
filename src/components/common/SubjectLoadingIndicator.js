@@ -20,7 +20,7 @@ const SubjectLoadingIndicator = () => {
 const styles = EStyleSheet.create({
     loadingContainer: {
         flex:1, 
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'center'
     },

@@ -52,10 +52,10 @@ it('gets a subject location ', () => {
   let subject = {
     locations: [ { 'image/jpeg': 'https://kitty.org/cat.jpg' }]
   }
-  let returnSubject = {
+  let returnSubject = [{
     type: 'image',
     format: 'jpeg',
     src: 'https://kitty.org/cat.jpg'
-  }
+  }]
   expect(getSubjectLocation(subject)).toEqual(returnSubject)
 })
