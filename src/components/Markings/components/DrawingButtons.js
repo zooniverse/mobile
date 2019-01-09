@@ -34,18 +34,28 @@ const DrawingButtons = (props) => {
                     radius={circleRadius}
                 />
             </View>
+            {
+                props.showHelpButton &&
+                <View pointerEvents="box-none" style={{top: 5, bottom: 0, left: 0, right: 0, position: 'absolute', alignItems: 'center', justifyContent: 'center'}}>
+                    <View>
+                        <NeedHelpButton onPress={props.onHelpButtonPressed}/>
+                    </View>
+                </View>
+            }
         </View>
     )
 }
 
 const styles = {
+    undoButtonContainer: {
+        flex: 1
+    },
     container: {
         paddingVertical: 12,
         paddingHorizontal: 20,
         flexDirection: 'row',
     },
     drawingButtonsContainer: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
     },
@@ -59,7 +69,13 @@ DrawingButtons.propTypes = {
     onUndoButtonSelected: PropTypes.func,
     highlightedButton: PropTypes.oneOf(['draw', 'erase', 'unselected']),
     canUndo: PropTypes.bool,
-    aShapeIsOutOfBounds: PropTypes.bool
+    aShapeIsOutOfBounds: PropTypes.bool,
+    showHelpButton: PropTypes.bool,
+    onHelpButtonPressed: PropTypes.func
+}
+
+DrawingButtons.defaultProps = {
+    showHelpButton: false
 }
 
 export default DrawingButtons

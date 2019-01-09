@@ -28,6 +28,7 @@ import NavBar from '../NavBar'
 import DrawingModal from './DrawingModal'
 import NativeImage from '../../nativeModules/NativeImage'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
+import DrawingHeader from './components/DrawingHeader'
 
 const mapStateToProps = (state, ownProps) => {
     const subjectDimensions = state.classifier.subject ? state.classifier.subjectDimensions[state.classifier.subject.id] : null
@@ -159,18 +160,26 @@ class DrawingClassifier extends Component {
 
         const classification =
             <View style={styles.classificationContainer}>
-                <Question
-                    question={this.props.instructions}
-                    workflowID={this.props.workflow.id}
-                    taskHelp={this.props.help}
+                <DrawingHeader
+                    horizontal={DeviceInfo.isTablet()}
+                    renderQuestion={() => 
+                        <Question
+                            question={this.props.instructions}
+                            workflowID={this.props.workflow.id}
+                            taskHelp={this.props.help}
+                        />}
+                    renderInstructions={() => 
+                        <ShapeInstructionsView
+                            { ...tool }
+                            numberDrawn={this.props.numberOfShapesDrawn}
+                            warnForRequirements={warnForRequirements}
+                        />
+                    }
                 />
-                <ShapeInstructionsView
-                    { ...tool }
-                    numberDrawn={this.props.numberOfShapesDrawn}
-                    warnForRequirements={warnForRequirements}
-                />
-                <TouchableOpacity disabled={DeviceInfo.isTablet()} onPress={() => this.setState({isModalVisible: true})} style={styles.container} >
+                <TouchableOpacity disabled={DeviceInfo.isTablet()} onPress={() => this.setState({isModalVisible: true})} style={[styles.container, {margin: 10}]} >
                     <DrawingClassifierSubject
+                        showHelpButton={DeviceInfo.isTablet() && !R.isEmpty(this.props.help) }
+                        onHelpButtonPressed={() => this.classificationContainer.displayHelpModal()}
                         showDrawingButtons={DeviceInfo.isTablet()}
                         onUndoButtonSelected={this.props.drawingActions.undoMostRecentEdit}
                         maxShapesDrawn={this.props.numberOfShapesDrawn >= tool.max}
@@ -219,7 +228,7 @@ class DrawingClassifier extends Component {
                 >
                     {isQuestionVisible ? classification : tutorial}
                 </ClassificationPanel>
-                {isQuestionVisible && !R.isEmpty(this.props.help) && <NeedHelpButton onPress={() => this.classificationContainer.displayHelpModal()} /> }
+                {isQuestionVisible && !R.isEmpty(this.props.help) && !DeviceInfo.isTablet() && <NeedHelpButton onPress={() => this.classificationContainer.displayHelpModal()} /> }
                 {isQuestionVisible && !R.empty(this.props.guide) && fieldGuideButton}
                 { isQuestionVisible && submitButton }
             </View>

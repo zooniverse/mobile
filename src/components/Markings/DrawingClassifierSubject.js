@@ -94,6 +94,8 @@ class DrawingClassifierSubject extends Component {
             <View style={styles.container}>
                 <View style={styles.container}>
                     <DrawingToolView
+                        showHelpButton={this.props.showHelpButton}
+                        onHelpButtonPressed={this.props.onHelpButtonPressed}
                         imageIsLoaded={this.props.imageIsLoaded}
                         onContainerLayout={this.onContainerLayout}
                         onUndoButtonSelected={this.props.onUndoButtonSelected}
@@ -177,7 +179,9 @@ DrawingClassifierSubject.propTypes = {
     maxShapesDrawn: PropTypes.bool,
     drawingColor: PropTypes.string,
     imageSource: PropTypes.string,
-    canUndo: PropTypes.bool
+    canUndo: PropTypes.bool,
+    showHelpButton: PropTypes.bool,
+    onHelpButtonPressed: PropTypes.func
 }
 
 export default DrawingClassifierSubject
