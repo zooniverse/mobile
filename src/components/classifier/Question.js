@@ -98,11 +98,11 @@ const styles = EStyleSheet.create({
     alignItems: 'stretch',
     marginTop: 10,
     marginHorizontal: 20,
+    flex: 1
   },
   question: {
     flexDirection: 'row',
     backgroundColor: 'transparent',
-    flex: 1,
     width: '100% - 80',
   },
 })
