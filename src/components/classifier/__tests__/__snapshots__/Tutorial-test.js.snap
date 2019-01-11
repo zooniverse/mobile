@@ -73,27 +73,36 @@ exports[`renders correctly 1`] = `
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  ### Welcome to Planet Four: Ridges
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    ### Welcome to Planet Four: Ridges
 ----------
 This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
 
-                </Markdown>
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -160,27 +169,36 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
 
 
 ###### Image(c) : NASA/JPL/University of Arizona
-                </Markdown>
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -247,24 +265,33 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
-                </Markdown>
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -307,7 +334,14 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
-        style={undefined}
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
       >
         Continue
       </Text>
@@ -629,27 +663,36 @@ exports[`renders header if initial tutorial 1`] = `
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  ### Welcome to Planet Four: Ridges
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    ### Welcome to Planet Four: Ridges
 ----------
 This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
 
-                </Markdown>
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -716,27 +759,36 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
 
 
 ###### Image(c) : NASA/JPL/University of Arizona
-                </Markdown>
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -803,24 +855,33 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
-                </Markdown>
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -863,7 +924,14 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
-        style={undefined}
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
       >
         Continue
       </Text>
@@ -1141,27 +1209,36 @@ exports[`renders with no media 1`] = `
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  ### Welcome to Planet Four: Ridges
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    ### Welcome to Planet Four: Ridges
 ----------
 This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
 
-                </Markdown>
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -1199,27 +1276,36 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
 
 
 ###### Image(c) : NASA/JPL/University of Arizona
-                </Markdown>
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -1257,24 +1343,33 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                   }
                 }
               >
-                <Markdown
-                  rules={
-                    Object {
-                      "image": Object {
-                        "match": [Function],
-                      },
-                    }
-                  }
-                  styles={
-                    Object {
-                      "text": Object {
-                        "fontSize": 14,
-                      },
-                    }
-                  }
+                <View
+                  onLayout={[Function]}
                 >
-                  Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
-                </Markdown>
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                        },
+                      }
+                    }
+                  >
+                    Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
+                  </Markdown>
+                </View>
               </View>
             </View>
           </View>
@@ -1317,7 +1412,14 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
-        style={undefined}
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
       >
         Continue
       </Text>

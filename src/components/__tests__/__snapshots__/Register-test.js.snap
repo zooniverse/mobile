@@ -384,7 +384,14 @@ exports[`renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
           >
             Register
           </Text>
@@ -848,7 +855,14 @@ exports[`renders errors 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
           >
             Register
           </Text>

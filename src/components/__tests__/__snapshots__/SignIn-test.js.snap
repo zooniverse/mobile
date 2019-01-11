@@ -162,7 +162,14 @@ exports[`renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
           >
             Sign In
           </Text>
@@ -214,7 +221,14 @@ exports[`renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
           >
             Continue without signing in
           </Text>
@@ -248,7 +262,14 @@ exports[`renders correctly 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
           >
             Register for account
           </Text>
@@ -434,7 +455,14 @@ exports[`renders error message 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
           >
             Sign In
           </Text>
@@ -486,7 +514,14 @@ exports[`renders error message 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
           >
             Continue without signing in
           </Text>
@@ -520,7 +555,14 @@ exports[`renders error message 1`] = `
             accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
-            style={undefined}
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
           >
             Register for account
           </Text>

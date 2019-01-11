@@ -30,7 +30,14 @@ exports[`renders TouchableOpacity disabled when passed in 1`] = `
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
-    style={undefined}
+    style={
+      Array [
+        Object {
+          "fontFamily": "Karla",
+        },
+        undefined,
+      ]
+    }
   />
 </View>
 `;
@@ -65,7 +72,14 @@ exports[`renders button text correctly 1`] = `
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
-    style={undefined}
+    style={
+      Array [
+        Object {
+          "fontFamily": "Karla",
+        },
+        undefined,
+      ]
+    }
   >
     O Hai!
   </Text>
@@ -102,7 +116,14 @@ exports[`renders styles as array when special style is passed in 1`] = `
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
-    style={undefined}
+    style={
+      Array [
+        Object {
+          "fontFamily": "Karla",
+        },
+        undefined,
+      ]
+    }
   />
 </View>
 `;
