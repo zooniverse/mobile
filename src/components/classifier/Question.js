@@ -11,6 +11,7 @@ import Markdown from 'react-native-simple-markdown'
 import { connect } from 'react-redux'
 import DeviceInfo from 'react-native-device-info'
 
+import SizedMarkdown from '../common/SizedMarkdown'
 import { setQuestionContainerHeight } from '../../actions/classifier'
 import {
   extractFirstLinkedImageFrom,
@@ -47,12 +48,12 @@ export class Question extends Component {
 
   render() {
     return (
-      <View style={[styles.questionContainer]}>
+      <View style={styles.questionContainer}>
         <View style={styles.question}>
           <View style={styles.markdown}>
-            <Markdown styles={markdownStyles}>
+            <SizedMarkdown>
               {this.state.question}
-            </Markdown>
+            </SizedMarkdown>
           </View>
           {
             this.state.imageSource ? 
@@ -75,12 +76,6 @@ export class Question extends Component {
   }
 }
 
-const markdownStyles = {
-  text: {
-    fontSize: DeviceInfo.isTablet() ? 22 : 14
-  }
-}
-
 const styles = EStyleSheet.create({
   markdown: {
     flex: 1
@@ -98,7 +93,7 @@ const styles = EStyleSheet.create({
     alignItems: 'stretch',
     marginTop: 10,
     marginHorizontal: 20,
-    flex: 1
+
   },
   question: {
     flexDirection: 'row',
