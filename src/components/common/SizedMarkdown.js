@@ -25,7 +25,6 @@ class SizedMarkdown extends Component {
         super(props)
 
         this.state = {
-            viewLayedOut: false,
             viewDimensions: {
                 width: 0,
                 height: 0
@@ -46,7 +45,7 @@ class SizedMarkdown extends Component {
     }
 
     render() {
-        const { viewDimensions, viewLayedOut } = this.state
+        const { viewDimensions } = this.state
         const customStyles = {
             ...markdownStyles,
             image: {

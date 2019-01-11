@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info';
 
 import CircleIconButton from '../../common/CircleIconButton'
+import NeedHelpButton from '../../classifier/NeedHelpButton'
 
 const circleRadius = DeviceInfo.isTablet() ? 20 : 15
 
@@ -36,7 +37,7 @@ const DrawingButtons = (props) => {
             </View>
             {
                 props.showHelpButton &&
-                <View pointerEvents="box-none" style={{top: 5, bottom: 0, left: 0, right: 0, position: 'absolute', alignItems: 'center', justifyContent: 'center'}}>
+                <View pointerEvents="box-none" style={styles.needHelpContainer}>
                     <View>
                         <NeedHelpButton onPress={props.onHelpButtonPressed}/>
                     </View>
@@ -56,11 +57,21 @@ const styles = {
         flexDirection: 'row',
     },
     drawingButtonsContainer: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
     },
     buttonPadding: {
         paddingRight: 15
+    },
+    needHelpContainer: {
+        top: 5,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 }
 

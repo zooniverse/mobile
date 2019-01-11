@@ -2,10 +2,6 @@ import 'react-native'
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow';
 import WorkflowPrompt from '../WorkflowPrompt'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-
-const store = createStore(() => {}, ['test'])
 
 const mobileWorkflows=[
   {id: 1, display_name: 'Mobile 1'},

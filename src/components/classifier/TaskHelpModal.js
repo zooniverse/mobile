@@ -40,7 +40,7 @@ export class TaskHelpModal extends Component {
           <Button
             handlePress={this.props.onCloseRequested}
             buttonStyle={'tealButton'}
-            additionalTextStyles={{textAlign: 'center'}}
+            additionalTextStyles={styles.buttonStyle}
             text={'Close'} 
           />
         </StyledModal>
@@ -53,6 +53,9 @@ const styles = EStyleSheet.create({
   markdownContainer: {
     flex: 1,
     paddingVertical: 5,
+  },
+  buttonStyle: {
+    textAlign: 'center'
   }
 })
 

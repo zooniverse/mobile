@@ -176,7 +176,7 @@ class DrawingClassifier extends Component {
                         />
                     }
                 />
-                <TouchableOpacity disabled={DeviceInfo.isTablet()} onPress={() => this.setState({isModalVisible: true})} style={[styles.container, {margin: 10}]} >
+                <TouchableOpacity disabled={DeviceInfo.isTablet()} onPress={() => this.setState({isModalVisible: true})} style={styles.subjectDisplayContainer} >
                     <DrawingClassifierSubject
                         showHelpButton={DeviceInfo.isTablet() && !R.isEmpty(this.props.help) }
                         onHelpButtonPressed={() => this.classificationContainer.displayHelpModal()}
@@ -293,6 +293,10 @@ const styles = EStyleSheet.create({
     },
     fieldGuideButton: {
         height: 40
+    },
+    subjectDisplayContainer: {
+        flex: 1,
+        margin: 10
     }
 })
 
