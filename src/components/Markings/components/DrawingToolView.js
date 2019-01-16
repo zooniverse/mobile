@@ -62,6 +62,8 @@ class DrawingToolView extends Component {
                 {
                     this.props.showDrawingButtons && 
                         <DrawingButtons
+                            showHelpButton={this.props.showHelpButton}
+                            onHelpButtonPressed={this.props.onHelpButtonPressed}
                             onUndoButtonSelected={this.props.onUndoButtonSelected}
                             onModeButtonSelected={buttonType => this.setState({mode: buttonType})}
                             highlightedButton={this.state.mode}
@@ -88,7 +90,9 @@ DrawingToolView.propTypes = {
     showDrawingButtons: PropTypes.bool,
     imageIsLoaded: PropTypes.bool,
     animateImage: PropTypes.func,
-    canDraw: PropTypes.bool
+    canDraw: PropTypes.bool,
+    onHelpButtonPressed: PropTypes.func,
+    showHelpButton: PropTypes.bool
 }
 
 DrawingToolView.defaultProps = {

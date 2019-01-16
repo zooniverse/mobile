@@ -189,7 +189,7 @@ export class SwipeClassifier extends React.Component {
           :
             null
         }
-      </View>
+      </View>      
 
     const classifier = 
       <View style={styles.classifier} onLayout={this.onClassifierLayout.bind(this)}>

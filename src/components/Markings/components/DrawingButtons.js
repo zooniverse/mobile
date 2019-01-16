@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info';
 
 import CircleIconButton from '../../common/CircleIconButton'
+import NeedHelpButton from '../../classifier/NeedHelpButton'
 
 const circleRadius = DeviceInfo.isTablet() ? 20 : 15
 
@@ -34,11 +35,22 @@ const DrawingButtons = (props) => {
                     radius={circleRadius}
                 />
             </View>
+            {
+                props.showHelpButton &&
+                <View pointerEvents="box-none" style={styles.needHelpContainer}>
+                    <View>
+                        <NeedHelpButton onPress={props.onHelpButtonPressed}/>
+                    </View>
+                </View>
+            }
         </View>
     )
 }
 
 const styles = {
+    undoButtonContainer: {
+        flex: 1
+    },
     container: {
         paddingVertical: 12,
         paddingHorizontal: 20,
@@ -51,6 +63,15 @@ const styles = {
     },
     buttonPadding: {
         paddingRight: 15
+    },
+    needHelpContainer: {
+        top: 5,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 }
 
@@ -59,7 +80,13 @@ DrawingButtons.propTypes = {
     onUndoButtonSelected: PropTypes.func,
     highlightedButton: PropTypes.oneOf(['draw', 'erase', 'unselected']),
     canUndo: PropTypes.bool,
-    aShapeIsOutOfBounds: PropTypes.bool
+    aShapeIsOutOfBounds: PropTypes.bool,
+    showHelpButton: PropTypes.bool,
+    onHelpButtonPressed: PropTypes.func
+}
+
+DrawingButtons.defaultProps = {
+    showHelpButton: false
 }
 
 export default DrawingButtons

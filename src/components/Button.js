@@ -1,11 +1,12 @@
 import React from 'react'
 import {
-  Text,
   TouchableOpacity
 } from 'react-native'
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { append } from 'ramda'
+
+import FontedText from './common/FontedText'
 
 const Button = (props) => {
   let buttonStyle = ( props.buttonStyle ? [styles.button, styles[props.buttonStyle]] : styles.button )
@@ -19,9 +20,9 @@ const Button = (props) => {
       onPress={props.handlePress}
       disabled={props.disabled}
       activeOpacity={0.5}>
-      <Text style={textStyle}>
+      <FontedText style={textStyle}>
         {props.text}
-      </Text>
+      </FontedText>
     </TouchableOpacity>
   )
 }
@@ -55,6 +56,9 @@ const styles = EStyleSheet.create({
   navyButton: {
     backgroundColor: '$navy',
   },
+  tealButton: {
+    backgroundColor: '$zooniverseTeal'
+  }
 });
 
 Button.propTypes = {
@@ -62,7 +66,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   buttonStyle: PropTypes.string,
   additionalStyles: PropTypes.array,
-  additionalTextStyles: PropTypes.array,
+  additionalTextStyles: PropTypes.any,
   text: PropTypes.string
 }
 Button.defaultProps = { disabled: false }

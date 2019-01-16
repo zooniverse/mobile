@@ -1,6 +1,6 @@
 import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import ShallowRenderer from 'react-test-renderer/shallow';
 import WorkflowPrompt from '../WorkflowPrompt'
 
 const mobileWorkflows=[
@@ -13,22 +13,23 @@ const nonMobileWorkflows=[
   {id: 2, display_name: 'Non 2'}
 ]
 
+const renderer = new ShallowRenderer();
 it('renders correctly when visible', () => {
-  const tree = renderer.create(
-    <WorkflowPrompt
-      mobileWorkflows={mobileWorkflows}
-      nonMobileWorkflows={nonMobileWorkflows}
-      isVisible={true}
-      openMobileProject={jest.fn}
-      openExternalProject={jest.fn}
-      hideWorkflowPrompt={jest.fn}
-    />
-  ).toJSON()
+  const tree = renderer.render(
+      <WorkflowPrompt
+        mobileWorkflows={mobileWorkflows}
+        nonMobileWorkflows={nonMobileWorkflows}
+        isVisible={true}
+        openMobileProject={jest.fn}
+        openExternalProject={jest.fn}
+        hideWorkflowPrompt={jest.fn}
+      />
+  )
   expect(tree).toMatchSnapshot()
 })
 
 it('passes false to Modal when not visible', () => {
-  const tree = renderer.create(
+  const tree = renderer.render(
     <WorkflowPrompt
       mobileWorkflows={mobileWorkflows}
       nonMobileWorkflows={nonMobileWorkflows}
@@ -37,6 +38,6 @@ it('passes false to Modal when not visible', () => {
       openExternalProject={jest.fn}
       hideWorkflowPrompt={jest.fn}
     />
-  ).toJSON()
+  )
   expect(tree).toMatchSnapshot()
 })

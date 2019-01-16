@@ -5,11 +5,9 @@ import {
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import Markdown from 'react-native-simple-markdown'
-import DeviceInfo from 'react-native-device-info'
 
-import { markdownImageRule } from '../../utils/markdownUtils'
 import FittedImage from '../common/FittedImage' 
+import SizedMarkdown from '../common/SizedMarkdown'
 
 const ImageWidth = Math.min(Dimensions.get('window').width - 100, 400)
 class TutorialStep extends Component {
@@ -49,20 +47,14 @@ class TutorialStep extends Component {
                         }
 
                         <View style={styles.markdown} >
-                            <Markdown rules={markdownImageRule} styles={markdownStyles}>
+                            <SizedMarkdown>
                                 { this.props.markdownContent }
-                            </Markdown>
+                            </SizedMarkdown>
                         </View>
                     </View>
                 </View>
             </ScrollView>
         )
-    }
-}
-
-const markdownStyles = {
-    text: {
-      fontSize: DeviceInfo.isTablet() ? 22 : 14
     }
 }
 

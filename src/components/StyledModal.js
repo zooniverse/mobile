@@ -1,37 +1,64 @@
 import React, { Component } from 'react'
 import {
   Modal,
-  Platform,
-  ScrollView,
   TouchableOpacity,
   View
 } from 'react-native'
+import { connect } from 'react-redux'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import PropTypes from 'prop-types';
+import DeviceInfo from 'react-native-device-info'
 
-const top = (Platform.OS === 'ios') ? 10 : 0
+import FontedText from './common/FontedText';
+
+const mapStateToProps = (state) => ({
+  device: state.app.device
+})
+
+const isTablet = DeviceInfo.isTablet()
 
 class StyledModal extends Component {
+
   render() {
+    const widthModifier = isTablet ? .7 : .90
+    const modalDimensions = {
+      height: this.props.device.height * .85,
+      width: Math.min(this.props.device.height, this.props.device.width) * widthModifier
+    }
+
     return (
       <View>
         <Modal
           animationType={'fade'}
           transparent={true}
           onRequestClose={() => {}}
-          visible={this.props.isVisible}>
+          visible={this.props.isVisible}
+        >
           <View style={styles.container}>
-            <ScrollView style={styles.outerContainer} contentContainerStyle={styles.innerContainer}>
-              { this.props.children }
-            </ScrollView>
+            <View style={modalDimensions}>
+              <View style={styles.header}>
+                <View style={styles.headerContent}>
+                  <FontedText style={styles.headerText}>
+                    { this.props.title }
+                  </FontedText>
+                  <TouchableOpacity style={styles.closeButton}
+                      activeOpacity={0.5}
+                      onPress={() => this.props.setVisibility(false)}
+                    >
+                    <FontAwesome5Icon 
+                      name="times-circle"
+                      style={styles.closeIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
+                
+              </View>
+              <View style={styles.contentContainer}>
+                { this.props.children }
+              </View>
+            </View>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => this.props.setVisibility(false)}
-            style={styles.closeIcon}>
-            <Icon name="times" style={styles.icon} />
-          </TouchableOpacity>
         </Modal>
 
       </View>
@@ -43,37 +70,53 @@ const styles = EStyleSheet.create({
   container: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     flex: 1,
-    justifyContent: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 20,
   },
-  outerContainer: {
-    top: 20 + top,
-    marginBottom: 30,
+  header: {
+    backgroundColor: '$zooniverseTeal'
   },
-  innerContainer: {
-    alignItems: 'flex-start',
-    backgroundColor: 'white',
-    borderRadius: 4,
-    padding: 24,
+  headerContent: {
+    flexDirection: 'row',
+    marginHorizontal: isTablet ? 25 : 10,
+    marginVertical: 7,
   },
-  icon: {
-    backgroundColor: 'transparent',
+  headerText: {
+    flex: 1,
+    fontSize: isTablet ? 22 : 14,
     color: 'white',
-    fontSize: 24,
-    padding: 15,
+    shadowColor: 'rgba(0, 0, 0, 0.22)',
+    shadowOffset: {
+      height: 2,
+      width: 0,
+    },
+    shadowRadius: 2
+  },
+  contentContainer: {
+    flex: 1,
+    padding: isTablet ? 30 : 20,
+    backgroundColor: 'white'
+  },
+  closeButton: {
+    alignItems: 'flex-end'
   },
   closeIcon: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    top: top,
-    right: 13
+    fontSize: isTablet ? 25 : 15,
+    color: 'white',
+    opacity: 0.9
   }
 })
 
 StyledModal.propTypes = {
   children: PropTypes.array,
   isVisible: PropTypes.bool,
-  setVisibility: PropTypes.func
+  setVisibility: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  device: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number
+  })
 }
 
-export default StyledModal
+export default connect(mapStateToProps)(StyledModal)
