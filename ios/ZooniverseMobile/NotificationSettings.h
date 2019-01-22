@@ -6,7 +6,7 @@
 //  Copyright © 2016 Zooniverse. All rights reserved.
 //
 
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 #import "AppDelegate.h"
 
 @interface NotificationSettings : NSObject <RCTBridgeModule>

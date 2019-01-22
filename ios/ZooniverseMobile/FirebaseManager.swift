@@ -15,7 +15,7 @@ import Firebase
   // Stub out initializer to enforce this class as a singleton
   private override init() {}
   
-  public func configureFirebase() {
+  @objc public func configureFirebase() {
     let plistNameValue = Bundle.main.object(forInfoDictionaryKey: "GOOGLE_SERVICE_PLIST")
     guard let plistName = plistNameValue as? String else {
       assertionFailure("Could not find google service plist");
@@ -32,7 +32,7 @@ import Firebase
     Messaging.messaging().delegate = self
   }
   
-  public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+  @objc public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
     print("Firebase registration token: \(fcmToken)")
   }
   

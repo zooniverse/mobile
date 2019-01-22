@@ -6,7 +6,7 @@
 //  Copyright © 2018 Zooniverse. All rights reserved.
 //
 
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 
 @interface ImageSizer : NSObject <RCTBridgeModule>
 
