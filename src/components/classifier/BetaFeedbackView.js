@@ -24,7 +24,8 @@ const BetaFeedbackView = (props) => {
 const styles = EStyleSheet.create({
     touchableContainer: {
         backgroundColor: '$zooniverseTeal',
-        paddingVertical: 10,
+        height: 36.5,
+        alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row'
     },
@@ -34,7 +35,6 @@ const styles = EStyleSheet.create({
         fontWeight: 'bold'
     },
     icon: {
-        alignSelf: 'center',
         color: 'white'
     }
 })

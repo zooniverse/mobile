@@ -165,7 +165,7 @@ export class ProjectDisciplines extends React.Component {
         contentContainerStyle={styles.listContainer}
         data={disciplineList}
         renderItem={this._renderItem}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => `${index}`}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
