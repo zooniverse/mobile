@@ -9,10 +9,6 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
 
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="22" />
-
     <application
       android:name=".MainApplication"
       android:largeHeap="true"
