@@ -281,7 +281,16 @@ exports[`renders correctly 1`] = `
             }
           }
         >
-          <Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
             Register
           </Text>
         </View>
@@ -620,7 +629,16 @@ exports[`renders errors 1`] = `
             }
           }
         >
-          <Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
             Register
           </Text>
         </View>

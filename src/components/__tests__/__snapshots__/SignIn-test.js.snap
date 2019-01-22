@@ -106,7 +106,16 @@ exports[`renders correctly 1`] = `
             }
           }
         >
-          <Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
             Sign In
           </Text>
         </View>
@@ -132,7 +141,16 @@ exports[`renders correctly 1`] = `
             }
           }
         >
-          <Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
             Continue without signing in
           </Text>
         </View>
@@ -151,7 +169,16 @@ exports[`renders correctly 1`] = `
             }
           }
         >
-          <Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
             Register for account
           </Text>
         </View>
@@ -277,7 +304,16 @@ exports[`renders error message 1`] = `
             }
           }
         >
-          <Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
             Sign In
           </Text>
         </View>
@@ -303,7 +339,16 @@ exports[`renders error message 1`] = `
             }
           }
         >
-          <Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
             Continue without signing in
           </Text>
         </View>
@@ -322,7 +367,16 @@ exports[`renders error message 1`] = `
             }
           }
         >
-          <Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
             Register for account
           </Text>
         </View>

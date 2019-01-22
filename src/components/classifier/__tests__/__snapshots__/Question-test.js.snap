@@ -1,52 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly (without task help) 1`] = `
-<View
-  style={
-    Array [
-      undefined,
-    ]
-  }
->
+<View>
   <View>
     <View>
-      <Markdown
-        styles={
-          Object {
-            "text": Object {
-              "fontSize": 14,
-            },
-          }
-        }
+      <View
+        onLayout={[Function]}
       >
-        Is this this?
-      </Markdown>
+        <Markdown
+          rules={
+            Object {
+              "image": Object {
+                "match": [Function],
+              },
+            }
+          }
+          styles={
+            Object {
+              "image": Object {
+                "height": 0,
+                "width": 0,
+              },
+              "text": Object {
+                "fontFamily": "Karla",
+                "fontSize": 14,
+              },
+            }
+          }
+        >
+          Is this this?
+        </Markdown>
+      </View>
     </View>
   </View>
 </View>
 `;
 
 exports[`renders correctly with task help 1`] = `
-<View
-  style={
-    Array [
-      undefined,
-    ]
-  }
->
+<View>
   <View>
     <View>
-      <Markdown
-        styles={
-          Object {
-            "text": Object {
-              "fontSize": 14,
-            },
-          }
-        }
+      <View
+        onLayout={[Function]}
       >
-        Is this this?
-      </Markdown>
+        <Markdown
+          rules={
+            Object {
+              "image": Object {
+                "match": [Function],
+              },
+            }
+          }
+          styles={
+            Object {
+              "image": Object {
+                "height": 0,
+                "width": 0,
+              },
+              "text": Object {
+                "fontFamily": "Karla",
+                "fontSize": 14,
+              },
+            }
+          }
+        >
+          Is this this?
+        </Markdown>
+      </View>
     </View>
   </View>
 </View>

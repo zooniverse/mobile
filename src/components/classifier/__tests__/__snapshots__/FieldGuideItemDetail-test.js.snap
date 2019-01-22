@@ -166,7 +166,16 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      <Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
+      >
         &lt; Back
       </Text>
     </View>

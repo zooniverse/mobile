@@ -93,8 +93,8 @@ class NotificationModal extends Component {
     return (
       <StyledModal
         isVisible={this.props.isVisible}
-        setVisibility={this.props.setVisibility}>
-
+        setVisibility={this.props.setVisibility}
+        title="Notification">
         <StyledText
           textStyle='largeBold'
           text={notificationTitle} />

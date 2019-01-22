@@ -24,7 +24,7 @@ const styles = {
     needHelpText: {
         fontSize: DeviceInfo.isTablet() ? 22 : 14,
         textAlign: 'center',
-        marginVertical: 15,
+        marginTop: 15,
         color: 'rgba(0,93,105,1)'
     }
 }
