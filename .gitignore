@@ -21,9 +21,6 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-main.jsbundle.meta
-main.jsbundle
-HockeySDK-iOS/
 
 # Android/IntelliJ
 #
@@ -31,25 +28,17 @@ build/
 .idea
 .gradle
 local.properties
-zooniverse-key.keystore
-gradle.properties
 *.iml
 
 # node.js
 #
 node_modules/
 npm-debug.log
+yarn-error.log
 
 # BUCK
 buck-out/
 \.buckd/
-
-android/app/libs
-android/keystores/debug.keystore
-
-# VSCODE
-.vscode
-
 *.keystore
 
 # fastlane
@@ -62,3 +51,6 @@ android/keystores/debug.keystore
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+
+# Bundle artifact
+*.jsbundle
