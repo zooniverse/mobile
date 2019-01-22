@@ -2,17 +2,11 @@
 
 exports[`renders 1`] = `
 <CheckboxField
-  checkboxStyle={undefined}
-  containerStyle={undefined}
   defaultColor="white"
-  onSelect={undefined}
-  selected={undefined}
   selectedColor="#1995ea"
 >
   <Text
-    accessible={true}
     allowFontScaling={false}
-    ellipsizeMode="tail"
     style={
       Array [
         Object {
@@ -36,17 +30,12 @@ exports[`renders 1`] = `
 
 exports[`renders background color when checked 1`] = `
 <CheckboxField
-  checkboxStyle={undefined}
-  containerStyle={undefined}
   defaultColor="white"
-  onSelect={undefined}
   selected={true}
   selectedColor="#1995ea"
 >
   <Text
-    accessible={true}
     allowFontScaling={false}
-    ellipsizeMode="tail"
     style={
       Array [
         Object {

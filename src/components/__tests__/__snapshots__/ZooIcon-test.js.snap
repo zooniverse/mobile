@@ -2,9 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <Text
-  accessible={true}
   allowFontScaling={false}
-  ellipsizeMode="tail"
   style={
     Array [
       Object {

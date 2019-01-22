@@ -1,24 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  style={undefined}
->
+<View>
   <RCTScrollView>
     <View>
-      <View
-        style={undefined}
-      >
-        <View
-          style={undefined}
-        >
-          <View
-            style={undefined}
-          >
+      <View>
+        <View>
+          <View>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -28,9 +17,7 @@ exports[`renders correctly 1`] = `
               User Name
             </Text>
           </View>
-          <View
-            style={undefined}
-          >
+          <View>
             <TextInput
               allowFontScaling={true}
               autoCapitalize="none"
@@ -39,21 +26,13 @@ exports[`renders correctly 1`] = `
               onChangeText={[Function]}
               returnKeyType="done"
               secureTextEntry={false}
-              style={undefined}
               underlineColorAndroid="white"
             />
           </View>
         </View>
-        <View
-          style={undefined}
-        >
-          <View
-            style={undefined}
-          >
+        <View>
+          <View>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -63,9 +42,7 @@ exports[`renders correctly 1`] = `
               Email address
             </Text>
           </View>
-          <View
-            style={undefined}
-          >
+          <View>
             <TextInput
               allowFontScaling={true}
               autoCapitalize="none"
@@ -74,24 +51,14 @@ exports[`renders correctly 1`] = `
               onChangeText={[Function]}
               returnKeyType="done"
               secureTextEntry={false}
-              style={undefined}
               underlineColorAndroid="white"
             />
           </View>
         </View>
-        <View
-          style={undefined}
-        >
-          <View
-            style={undefined}
-          >
-            <View
-              style={undefined}
-            >
+        <View>
+          <View>
+            <View>
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -101,9 +68,6 @@ exports[`renders correctly 1`] = `
                 Password
               </Text>
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -130,7 +94,6 @@ exports[`renders correctly 1`] = `
                 onChangeText={[Function]}
                 returnKeyType="done"
                 secureTextEntry={false}
-                style={undefined}
                 underlineColorAndroid="white"
               />
             </View>
@@ -144,17 +107,13 @@ exports[`renders correctly 1`] = `
             }
           >
             <CheckboxField
-              checkboxStyle={undefined}
-              containerStyle={undefined}
               defaultColor="white"
               onSelect={[Function]}
               selected={true}
               selectedColor="#1995ea"
             >
               <Text
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -175,16 +134,8 @@ exports[`renders correctly 1`] = `
               </Text>
             </CheckboxField>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -196,13 +147,8 @@ exports[`renders correctly 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -215,16 +161,9 @@ exports[`renders correctly 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={undefined}
-        >
-          <View
-            style={undefined}
-          >
+        <View>
+          <View>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -234,9 +173,6 @@ exports[`renders correctly 1`] = `
               Real name
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -247,9 +183,7 @@ exports[`renders correctly 1`] = `
                 Optional
             </Text>
           </View>
-          <View
-            style={undefined}
-          >
+          <View>
             <TextInput
               allowFontScaling={true}
               autoCapitalize="none"
@@ -258,14 +192,10 @@ exports[`renders correctly 1`] = `
               onChangeText={[Function]}
               returnKeyType="done"
               secureTextEntry={false}
-              style={undefined}
               underlineColorAndroid="white"
             />
           </View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -276,11 +206,8 @@ exports[`renders correctly 1`] = `
             We'll use this to give you credit in scientific papers, etc.
           </Text>
         </View>
-        <View
-          style={undefined}
-        >
+        <View>
           <CheckboxField
-            checkboxStyle={undefined}
             containerStyle={
               Array [
                 undefined,
@@ -289,13 +216,10 @@ exports[`renders correctly 1`] = `
             }
             defaultColor="white"
             onSelect={[Function]}
-            selected={undefined}
             selectedColor="#1995ea"
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
-              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
@@ -316,16 +240,8 @@ exports[`renders correctly 1`] = `
             </Text>
           </CheckboxField>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -337,13 +253,8 @@ exports[`renders correctly 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -356,16 +267,8 @@ exports[`renders correctly 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -377,25 +280,13 @@ exports[`renders correctly 1`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={undefined}
-          >
+          <Text>
             Register
           </Text>
         </View>
-        <View
-          style={undefined}
-        >
+        <View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -406,16 +297,8 @@ exports[`renders correctly 1`] = `
             By signing up, I agree to Zooniverse's 
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -427,13 +310,8 @@ exports[`renders correctly 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -452,24 +330,13 @@ exports[`renders correctly 1`] = `
 `;
 
 exports[`renders errors 1`] = `
-<View
-  style={undefined}
->
+<View>
   <RCTScrollView>
     <View>
-      <View
-        style={undefined}
-      >
-        <View
-          style={undefined}
-        >
-          <View
-            style={undefined}
-          >
+      <View>
+        <View>
+          <View>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -479,9 +346,7 @@ exports[`renders errors 1`] = `
               User Name
             </Text>
           </View>
-          <View
-            style={undefined}
-          >
+          <View>
             <TextInput
               allowFontScaling={true}
               autoCapitalize="none"
@@ -490,21 +355,13 @@ exports[`renders errors 1`] = `
               onChangeText={[Function]}
               returnKeyType="done"
               secureTextEntry={false}
-              style={undefined}
               underlineColorAndroid="white"
             />
           </View>
         </View>
-        <View
-          style={undefined}
-        >
-          <View
-            style={undefined}
-          >
+        <View>
+          <View>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -514,9 +371,7 @@ exports[`renders errors 1`] = `
               Email address
             </Text>
           </View>
-          <View
-            style={undefined}
-          >
+          <View>
             <TextInput
               allowFontScaling={true}
               autoCapitalize="none"
@@ -525,24 +380,14 @@ exports[`renders errors 1`] = `
               onChangeText={[Function]}
               returnKeyType="done"
               secureTextEntry={false}
-              style={undefined}
               underlineColorAndroid="white"
             />
           </View>
         </View>
-        <View
-          style={undefined}
-        >
-          <View
-            style={undefined}
-          >
-            <View
-              style={undefined}
-            >
+        <View>
+          <View>
+            <View>
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -552,9 +397,6 @@ exports[`renders errors 1`] = `
                 Password
               </Text>
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -581,7 +423,6 @@ exports[`renders errors 1`] = `
                 onChangeText={[Function]}
                 returnKeyType="done"
                 secureTextEntry={false}
-                style={undefined}
                 underlineColorAndroid="white"
               />
             </View>
@@ -595,17 +436,13 @@ exports[`renders errors 1`] = `
             }
           >
             <CheckboxField
-              checkboxStyle={undefined}
-              containerStyle={undefined}
               defaultColor="white"
               onSelect={[Function]}
               selected={true}
               selectedColor="#1995ea"
             >
               <Text
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -626,16 +463,8 @@ exports[`renders errors 1`] = `
               </Text>
             </CheckboxField>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -647,13 +476,8 @@ exports[`renders errors 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -666,16 +490,9 @@ exports[`renders errors 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={undefined}
-        >
-          <View
-            style={undefined}
-          >
+        <View>
+          <View>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -685,9 +502,6 @@ exports[`renders errors 1`] = `
               Real name
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -698,9 +512,7 @@ exports[`renders errors 1`] = `
                 Optional
             </Text>
           </View>
-          <View
-            style={undefined}
-          >
+          <View>
             <TextInput
               allowFontScaling={true}
               autoCapitalize="none"
@@ -709,14 +521,10 @@ exports[`renders errors 1`] = `
               onChangeText={[Function]}
               returnKeyType="done"
               secureTextEntry={false}
-              style={undefined}
               underlineColorAndroid="white"
             />
           </View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -727,11 +535,8 @@ exports[`renders errors 1`] = `
             We'll use this to give you credit in scientific papers, etc.
           </Text>
         </View>
-        <View
-          style={undefined}
-        >
+        <View>
           <CheckboxField
-            checkboxStyle={undefined}
             containerStyle={
               Array [
                 undefined,
@@ -740,13 +545,10 @@ exports[`renders errors 1`] = `
             }
             defaultColor="white"
             onSelect={[Function]}
-            selected={undefined}
             selectedColor="#1995ea"
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
-              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
@@ -767,16 +569,8 @@ exports[`renders errors 1`] = `
             </Text>
           </CheckboxField>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -788,13 +582,8 @@ exports[`renders errors 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,
@@ -807,9 +596,6 @@ exports[`renders errors 1`] = `
           </View>
         </View>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Array [
               undefined,
@@ -820,16 +606,8 @@ exports[`renders errors 1`] = `
           Wrong!
         </Text>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -841,25 +619,13 @@ exports[`renders errors 1`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={undefined}
-          >
+          <Text>
             Register
           </Text>
         </View>
-        <View
-          style={undefined}
-        >
+        <View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -870,16 +636,8 @@ exports[`renders errors 1`] = `
             By signing up, I agree to Zooniverse's 
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -891,13 +649,8 @@ exports[`renders errors 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   undefined,

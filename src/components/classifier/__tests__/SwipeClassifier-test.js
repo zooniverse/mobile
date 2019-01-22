@@ -1,13 +1,9 @@
-import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import ShallowRenderer from 'react-test-renderer/shallow';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
-jest.mock('WebView', () => 'WebView')
-jest.mock('../../OverlaySpinner', () => 'OverlaySpinner')
-jest.mock('../Question', () => 'Question')
-jest.mock('../Tutorial', () => 'Tutorial')
-jest.mock('../SwipeTabs', () => 'SwipeTabs')
-jest.mock('../../ZoomableImage', () => 'ZoomableImage')
+const store = createStore(() => {}, ['test'])
 
 import { SwipeClassifier } from '../SwipeClassifier'
 
@@ -55,9 +51,12 @@ const classifierActions = {
   setClassifierTestMode() {}
 }
 
+const renderer = new ShallowRenderer();
+
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <SwipeClassifier
+  const tree = renderer.render(
+    <Provider store={store}>
+      <SwipeClassifier
       task={task}
       isFetching={false}
       setIsFetching={jest.fn}
@@ -72,45 +71,51 @@ it('renders correctly', () => {
       seenThisSession={seenThisSession}
       navBarActions={navBarActions}
       classifierActions={classifierActions} />
-  ).toJSON()
+    </Provider>
+  )
   expect(tree).toMatchSnapshot()
 })
 
 it('renders spinner if fetching', () => {
-  const tree = renderer.create(
-    <SwipeClassifier
-      task={task}
-      isFetching={true}
-      setIsFetching={jest.fn}
-      startNewClassification={jest.fn}
-      project={project}
-      workflow={workflow}
-      workflowID={'1'}
-      subject={subject}
-      subjectSizes={subjectSizes}
-      seenThisSession={seenThisSession}
-      navBarActions={navBarActions}
-      classifierActions={classifierActions} />
-  ).toJSON()
+  const tree = renderer.render(
+    <Provider store={store}>
+      <SwipeClassifier
+        task={task}
+        isFetching={true}
+        setIsFetching={jest.fn}
+        startNewClassification={jest.fn}
+        project={project}
+        workflow={workflow}
+        workflowID={'1'}
+        subject={subject}
+        subjectSizes={subjectSizes}
+        seenThisSession={seenThisSession}
+        navBarActions={navBarActions}
+        classifierActions={classifierActions} />
+    </Provider>
+    
+  )
   expect(tree).toMatchSnapshot()
 })
 
 it('renders tutorial if needed', () => {
-  const tree = renderer.create(
-    <SwipeClassifier
-      task={task} 
-      isFetching={false}
-      setIsFetching={jest.fn}
-      startNewClassification={jest.fn}
-      needsTutorial={true}
-      project={project}
-      workflow={workflow}
-      workflowID={'1'}
-      subject={subject}
-      subjectSizes={subjectSizes}
-      seenThisSession={seenThisSession}
-      navBarActions={navBarActions}
-      classifierActions={classifierActions} />
-  ).toJSON()
+  const tree = renderer.render(
+    <Provider store={store}>
+      <SwipeClassifier
+        task={task} 
+        isFetching={false}
+        setIsFetching={jest.fn}
+        startNewClassification={jest.fn}
+        needsTutorial={true}
+        project={project}
+        workflow={workflow}
+        workflowID={'1'}
+        subject={subject}
+        subjectSizes={subjectSizes}
+        seenThisSession={seenThisSession}
+        navBarActions={navBarActions}
+        classifierActions={classifierActions} />
+    </Provider>
+  )
   expect(tree).toMatchSnapshot()
 })

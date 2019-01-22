@@ -1,14 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  style={undefined}
->
+<View>
   <RCTScrollView>
     <View>
-      <View
-        style={undefined}
-      >
+      <View>
         <View />
       </View>
     </View>
@@ -21,20 +17,10 @@ exports[`renders correctly 1`] = `
       ]
     }
   >
-    <View
-      style={undefined}
-    >
+    <View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -46,16 +32,9 @@ exports[`renders correctly 1`] = `
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
-        <View
-          style={undefined}
-        >
+        <View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -65,9 +44,7 @@ exports[`renders correctly 1`] = `
             Choose Category
           </Text>
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {

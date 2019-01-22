@@ -8,12 +8,8 @@ exports[`renders correctly (without task help) 1`] = `
     ]
   }
 >
-  <View
-    style={undefined}
-  >
-    <View
-      style={undefined}
-    >
+  <View>
+    <View>
       <Markdown
         styles={
           Object {
@@ -38,12 +34,8 @@ exports[`renders correctly with task help 1`] = `
     ]
   }
 >
-  <View
-    style={undefined}
-  >
-    <View
-      style={undefined}
-    >
+  <View>
+    <View>
       <Markdown
         styles={
           Object {

@@ -9,18 +9,10 @@ exports[`passes false to Modal when not visible 1`] = `
     transparent={true}
     visible={false}
   >
-    <View
-      style={undefined}
-    >
-      <RCTScrollView
-        contentContainerStyle={undefined}
-        style={undefined}
-      >
+    <View>
+      <RCTScrollView>
         <View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -33,9 +25,6 @@ exports[`passes false to Modal when not visible 1`] = `
             Please Choose Workflow
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -48,20 +37,10 @@ exports[`passes false to Modal when not visible 1`] = `
           >
             FOR MOBILE
           </Text>
-          <View
-            style={undefined}
-          >
+          <View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -73,13 +52,8 @@ exports[`passes false to Modal when not visible 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -93,16 +67,8 @@ exports[`passes false to Modal when not visible 1`] = `
               </Text>
             </View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -114,13 +80,8 @@ exports[`passes false to Modal when not visible 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -135,9 +96,6 @@ exports[`passes false to Modal when not visible 1`] = `
             </View>
           </View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -150,20 +108,10 @@ exports[`passes false to Modal when not visible 1`] = `
           >
             OTHER WORKFLOWS
           </Text>
-          <View
-            style={undefined}
-          >
+          <View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -175,13 +123,8 @@ exports[`passes false to Modal when not visible 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -195,16 +138,8 @@ exports[`passes false to Modal when not visible 1`] = `
               </Text>
             </View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -216,13 +151,8 @@ exports[`passes false to Modal when not visible 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -237,16 +167,8 @@ exports[`passes false to Modal when not visible 1`] = `
             </View>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -258,15 +180,8 @@ exports[`passes false to Modal when not visible 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={undefined}
-            >
+            <Text>
               Cancel
             </Text>
           </View>
@@ -274,16 +189,8 @@ exports[`passes false to Modal when not visible 1`] = `
       </RCTScrollView>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -295,13 +202,9 @@ exports[`passes false to Modal when not visible 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -334,18 +237,10 @@ exports[`renders correctly when visible 1`] = `
     transparent={true}
     visible={true}
   >
-    <View
-      style={undefined}
-    >
-      <RCTScrollView
-        contentContainerStyle={undefined}
-        style={undefined}
-      >
+    <View>
+      <RCTScrollView>
         <View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -358,9 +253,6 @@ exports[`renders correctly when visible 1`] = `
             Please Choose Workflow
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -373,20 +265,10 @@ exports[`renders correctly when visible 1`] = `
           >
             FOR MOBILE
           </Text>
-          <View
-            style={undefined}
-          >
+          <View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -398,13 +280,8 @@ exports[`renders correctly when visible 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -418,16 +295,8 @@ exports[`renders correctly when visible 1`] = `
               </Text>
             </View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -439,13 +308,8 @@ exports[`renders correctly when visible 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -460,9 +324,6 @@ exports[`renders correctly when visible 1`] = `
             </View>
           </View>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 undefined,
@@ -475,20 +336,10 @@ exports[`renders correctly when visible 1`] = `
           >
             OTHER WORKFLOWS
           </Text>
-          <View
-            style={undefined}
-          >
+          <View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -500,13 +351,8 @@ exports[`renders correctly when visible 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -520,16 +366,8 @@ exports[`renders correctly when visible 1`] = `
               </Text>
             </View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -541,13 +379,8 @@ exports[`renders correctly when visible 1`] = `
                   "opacity": 1,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     undefined,
@@ -562,16 +395,8 @@ exports[`renders correctly when visible 1`] = `
             </View>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -583,15 +408,8 @@ exports[`renders correctly when visible 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={undefined}
-            >
+            <Text>
               Cancel
             </Text>
           </View>
@@ -599,16 +417,8 @@ exports[`renders correctly when visible 1`] = `
       </RCTScrollView>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -620,13 +430,9 @@ exports[`renders correctly when visible 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {

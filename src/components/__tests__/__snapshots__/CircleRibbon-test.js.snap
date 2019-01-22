@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly with 1 classification 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Svg
     height={120}
     width={120}
@@ -22,9 +20,7 @@ exports[`renders correctly with 1 classification 1`] = `
 `;
 
 exports[`renders correctly with 1 project 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Svg
     height={120}
     width={120}
@@ -43,9 +39,7 @@ exports[`renders correctly with 1 project 1`] = `
 `;
 
 exports[`renders correctly with a majority project 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Svg
     height={120}
     width={120}
@@ -82,9 +76,7 @@ exports[`renders correctly with a majority project 1`] = `
 `;
 
 exports[`renders correctly with no projects 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Svg
     height={120}
     width={120}
@@ -93,9 +85,7 @@ exports[`renders correctly with no projects 1`] = `
 `;
 
 exports[`renders correctly with projects 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Svg
     height={120}
     width={120}

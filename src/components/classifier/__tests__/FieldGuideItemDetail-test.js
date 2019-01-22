@@ -3,8 +3,25 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import FieldGuideItemDetail from '../FieldGuideItemDetail'
 
-jest.mock('../../SizedImage', () => 'SizedImage');
-jest.mock('WebView', () => 'WebView');
+// Stub out animated functions
+jest.mock('Animated', () => {                                                                                                                                                                         
+  const ActualAnimated = require.requireActual('Animated');                                                                                                                                           
+  return {                                                                                                                                                                                            
+    ...ActualAnimated,                                                                                                                                                                                
+    timing: () => {                                                                                                                                                                      
+      return {                                                                                                                                                                                        
+        start: () => {
+        },                                                                                                                                                  
+      };                                                                                                                                                                                              
+    },                                                                                                                                                                                                
+  };                                                                                                                                                                                                  
+});
+jest.mock('Easing', () => {
+  return {
+    linear: 'linear',
+    bezier: () => 'bezier'
+  }
+})
 
 const item = {
   title: 'fake_avatar',
