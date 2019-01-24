@@ -291,6 +291,7 @@ class ShapeEditorSvg extends Component {
                     viewBox={this.props.viewBox}
                     height={this.props.height}
                     width={this.props.width}
+                    key={`${Object.keys(this.props.shapes).length}${this.props.mode}`}
                 >
                     { this.renderShapes() }
                     { this.state.isDrawing && this.renderPreviewShape() }
