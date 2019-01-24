@@ -1,4 +1,6 @@
 rootProject.name = 'ZooniverseMobile'
+include ':react-native-FCM'
+project(':react-native-FCM').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-FCM/android')
 
 include ':app'
 include ':react-native-svg'
