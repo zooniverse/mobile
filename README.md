@@ -52,7 +52,7 @@ Snapshots should be committed to the repo and any changes to snapshots should be
 
 ## Building For Release
 
-### Automated 
+### Automated
 Our build scripts are powered by [Fastlane](https://fastlane.tools/). 99% of the time you should use the automated scripts to build and push the Android and iOS apps to Google Beta and Testflight because they will automatically clean the projects and node modules and handle incrementing the build numbers.
 
 That being said, there are few things you will need to do in order to get your dev environment ready to use the build scripts.
@@ -72,26 +72,26 @@ This will add you github ssh private key to ssh-agent.
 
 
 
-#### iOS Preperations: 
-   Before getting everything setup it is probably worth spending some time understanding how [Fastlane match](https://codesigning.guide/) works. 
+#### iOS Preperations:
+   Before getting everything setup it is probably worth spending some time understanding how [Fastlane match](https://codesigning.guide/) works.
 
 - Make sure that you have access to the [private repo](https://github.com/zooniverse/mobile-provisioning-profiles) that houses our provisioning profiles.
-- Make sure that you have access to the zooniverse Passbolt password manager 
+- Make sure that you have access to the zooniverse Passbolt password manager
 - Download the development and distribution certs from the [Apple Developer Portal](https://developer.apple.com/account/ios/certificate/?teamId=888MXXMABP) to your keychain.
 
 Now you should be able to run the build script in the main directory.   
 	`./buildiOS.sh patch`
-	
+
 One thing to note here is you can either put either 'major', 'minor' or 'patch' in as parameter depending on the type of version update you want to do.
-	
+
 If this is your first time building for iOS using fastlane you will be prompted for a password to decrypt the provisioning profiles stored in git. You can find the password in Passbolt under 'fastlane'.  
-  
+
   If everything runs correctly, you will be prompted to enter in a new version number and then the script will build and push your build to Testflight, where you can eventually promote that build manually for release.
-  
+
 #### Android Preperations:
-	
+
 To start, you need to download a service account JSON. This gives your machine rights to upload Android builds to the Google Play console.
-  
+
 - Navigate [Service accounts](https://console.developers.google.com/iam-admin/serviceaccounts/project?project=643622617518) under the google developer portal. Make sure you are logged in android@zooniverse.org.
 - From the list of Service accounts select the actions menu for the account named 'fastlane' from there select 'Create Key' and download it as a JSON
 - Save the json key anywhere on your machine (make sure it is not saved to version control)
@@ -117,19 +117,19 @@ This will basically do a clean build and open up the iOS and Android  fastlane s
 
 ### Manual
 
-Manual instructions for [Android](https://docs.google.com/document/d/14yNuwpYofV2m5hYle3zg19fJKUk3ymYU2RkkN75DlF8/) and [iOS](https://docs.google.com/document/d/1kMbryj3tvJhnXkdIgHcnmOJQqwh_VMLspuCFYJfn_0s/edit) can be found in our google drive. 
+Manual instructions for [Android](https://docs.google.com/document/d/14yNuwpYofV2m5hYle3zg19fJKUk3ymYU2RkkN75DlF8/) and [iOS](https://docs.google.com/document/d/1kMbryj3tvJhnXkdIgHcnmOJQqwh_VMLspuCFYJfn_0s/edit) can be found in our google drive.
 
-## Debugging 
+## Debugging
 If you want to setup redux debugging and monitoring, the app is equipped with [`remote-redux-devtools`](https://github.com/zalmoxisus/remote-redux-devtools). If you want to monitor redux through the app, check out their list of [monitoring options](https://github.com/zalmoxisus/remote-redux-devtools#monitoring). This is not required to run the app, it is just a development tool.
 
 This tool tends to be a little finicky. If you are having trouble setting it up, try restarting the simulator.
 
 
-## Push Notifications 
+## Push Notifications
 
 Both the Android and iOS apps can receive push notifications. All of our push notification sending is handled through [Firebase](https://firebase.google.com/). If you want to send push notifications, it's fairly easy, just follow these instructions:
-	
-1. Log in to the [Firebase console](https://console.firebase.google.com) with the account `android@zooniverse.org` (password is in passbolt) 
+
+1. Log in to the [Firebase console](https://console.firebase.google.com) with the account `android@zooniverse.org` (password is in passbolt)
 2. Select either the production (Zooniverse-production) or the development (zooniverse-mobile-dev) accounts
 3. Under the "Grow" menu on the left side, select "Cloud Messaging"
 4. Select the "New Message" button
@@ -142,3 +142,5 @@ Both the Android and iOS apps can receive push notifications. All of our push no
    * `urgent_notifications`- Notifications for when users help is needed urgently
    * For project-specific notifications just use the project id
 7. Once everything is filled out, select "Send Message", the notification should be sent to both iOS and Android
+
+[![pullreminders](https://pullreminders.com/badge.svg)](https://pullreminders.com?ref=badge)
