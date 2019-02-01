@@ -22,9 +22,7 @@ exports[`passes false to Modal when not visible 1`] = `
     text="FOR MOBILE"
     textStyle="headerText"
   />
-  <View
-    style={undefined}
-  >
+  <View>
     <Button
       additionalStyles={
         Array [
@@ -65,9 +63,7 @@ exports[`passes false to Modal when not visible 1`] = `
     text="OTHER WORKFLOWS"
     textStyle="headerText"
   />
-  <View
-    style={undefined}
-  >
+  <View>
     <Button
       additionalStyles={
         Array [
@@ -135,9 +131,7 @@ exports[`renders correctly when visible 1`] = `
     text="FOR MOBILE"
     textStyle="headerText"
   />
-  <View
-    style={undefined}
-  >
+  <View>
     <Button
       additionalStyles={
         Array [
@@ -178,9 +172,7 @@ exports[`renders correctly when visible 1`] = `
     text="OTHER WORKFLOWS"
     textStyle="headerText"
   />
-  <View
-    style={undefined}
-  >
+  <View>
     <Button
       additionalStyles={
         Array [

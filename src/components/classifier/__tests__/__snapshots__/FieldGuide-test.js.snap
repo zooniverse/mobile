@@ -1,11 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  style={undefined}
->
+<View>
   <View
-    collapsable={undefined}
     style={
       Object {
         "height": 0,
@@ -18,16 +15,8 @@ exports[`renders correctly 1`] = `
           onLayout={[Function]}
         >
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -39,8 +28,6 @@ exports[`renders correctly 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Image
               source={
@@ -48,11 +35,8 @@ exports[`renders correctly 1`] = `
                   "uri": "fake_icon.jpg",
                 }
               }
-              style={undefined}
             />
             <Text
-              accessible={true}
-              allowFontScaling={true}
               ellipsizeMode="tail"
               numberOfLines={1}
               style={
@@ -68,16 +52,8 @@ exports[`renders correctly 1`] = `
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -89,8 +65,6 @@ exports[`renders correctly 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Image
               source={
@@ -98,11 +72,8 @@ exports[`renders correctly 1`] = `
                   "uri": "fake_icon.jpg",
                 }
               }
-              style={undefined}
             />
             <Text
-              accessible={true}
-              allowFontScaling={true}
               ellipsizeMode="tail"
               numberOfLines={1}
               style={
@@ -121,7 +92,6 @@ exports[`renders correctly 1`] = `
       </View>
     </RCTScrollView>
     <View
-      collapsable={undefined}
       style={
         Object {
           "paddingBottom": 0,
@@ -129,16 +99,8 @@ exports[`renders correctly 1`] = `
       }
     >
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -150,13 +112,9 @@ exports[`renders correctly 1`] = `
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -179,7 +137,6 @@ exports[`renders correctly 1`] = `
     </View>
   </View>
   <View
-    collapsable={undefined}
     hitSlop={
       Object {
         "bottom": 10,
@@ -206,21 +163,11 @@ exports[`renders correctly 1`] = `
       }
     }
   >
-    <View
-      style={undefined}
-    />
-    <View
-      style={undefined}
-    >
-      <View
-        style={undefined}
-      >
-        <View
-          style={undefined}
-        />
-        <View
-          style={undefined}
-        />
+    <View />
+    <View>
+      <View>
+        <View />
+        <View />
       </View>
     </View>
   </View>

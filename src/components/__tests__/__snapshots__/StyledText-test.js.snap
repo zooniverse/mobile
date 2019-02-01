@@ -2,9 +2,6 @@
 
 exports[`renders styles as array when style passed in 1`] = `
 <Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
   style={
     Array [
       undefined,
@@ -18,9 +15,6 @@ exports[`renders styles as array when style passed in 1`] = `
 
 exports[`renders text correctly 1`] = `
 <Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
   style={
     Array [
       undefined,

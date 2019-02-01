@@ -203,7 +203,7 @@ class ProjectList extends Component {
                 ItemSeparatorComponent={() => <View style={styles.separatorView} />}
                 renderItem={this.renderItem}
                 ListEmptyComponent={() => <FontedText style={styles.emptyComponent}> {this.emptyText()} </FontedText>}
-                keyExtractor={(item, index) => index}
+                keyExtractor={(item, index) => `${index}`}
             />
         );
     }

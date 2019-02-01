@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders for isFetching 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Modal
     animationType="none"
     hardwareAccelerated={false}
@@ -74,9 +72,6 @@ exports[`renders for isFetching 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -98,8 +93,4 @@ exports[`renders for isFetching 1`] = `
 </View>
 `;
 
-exports[`renders nothing for isFetching false 1`] = `
-<View
-  style={undefined}
-/>
-`;
+exports[`renders nothing for isFetching false 1`] = `<View />`;

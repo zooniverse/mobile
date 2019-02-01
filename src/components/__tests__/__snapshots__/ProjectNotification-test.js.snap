@@ -1,19 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders checked 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Switch
     onTintColor="rgba(0, 151, 157, 1)"
     onValueChange={[Function]}
-    style={undefined}
     value={true}
   />
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Array [
         undefined,
@@ -26,19 +20,13 @@ exports[`renders checked 1`] = `
 `;
 
 exports[`renders not checked 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Switch
     onTintColor="rgba(0, 151, 157, 1)"
     onValueChange={[Function]}
-    style={undefined}
     value={false}
   />
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Array [
         undefined,

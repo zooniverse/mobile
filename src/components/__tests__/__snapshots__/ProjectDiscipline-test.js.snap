@@ -1,16 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  style={undefined}
->
-  <View
-    style={undefined}
-  >
+<View>
+  <View>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -24,7 +17,6 @@ exports[`renders correctly 1`] = `
     </Text>
   </View>
   <RCTScrollView
-    contentContainerStyle={undefined}
     data={Array []}
     disableVirtualization={false}
     getItem={[Function]}

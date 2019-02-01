@@ -1,6 +1,6 @@
 import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import ShallowRenderer from 'react-test-renderer/shallow';
 import FullScreenImage from '../FullScreenImage'
 
 const imageSource = {
@@ -9,26 +9,28 @@ const imageSource = {
 
 jest.mock('../ZoomableImage', () => 'ZoomableImage')
 
+const renderer = new ShallowRenderer();
+
 it('renders correctly', () => {
-  const tree = renderer.create(
+  const tree = renderer.render(
     <FullScreenImage
       source={imageSource}
       handlePress={jest.fn}
       isVisible={true}
       allowPanAndZoom={true}
     />
-  ).toJSON()
+  )
   expect(tree).toMatchSnapshot()
 })
 
 it('renders hidden correctly', () => {
-  const tree = renderer.create(
+  const tree = renderer.render(
     <FullScreenImage
       source={imageSource}
       handlePress={jest.fn}
       isVisible={false}
       allowPanAndZoom={true}
     />
-  ).toJSON()
+  )
   expect(tree).toMatchSnapshot()
 })

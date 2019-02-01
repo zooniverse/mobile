@@ -7,7 +7,7 @@
 //
 
 #import "ImageSizer.h"
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @implementation ImageSizer
 

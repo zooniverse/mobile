@@ -8,6 +8,5 @@ exports[`renders correctly 1`] = `
       "uri": "avatar",
     }
   }
-  style={undefined}
 />
 `;

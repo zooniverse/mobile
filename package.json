@@ -9,6 +9,9 @@
   },
   "jest": {
     "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    },
     "transformIgnorePatterns": [
       "node_modules/(?!(react-native-extended-stylesheet|react-native|react-navigation|react-native-vector-icons|react-native-loading-spinner-overlay)/)"
     ],
@@ -20,12 +23,15 @@
     "babel-preset-react-native-stage-0": "^1.0.1",
     "color": "^3.1.0",
     "crypto-js": "^3.1.9-1",
+    "envinfo": "^6.0.1",
+    "json5": "^2.1.0",
     "markdown-it": "^8.3.1",
+    "metro": "^0.51.1",
     "panoptes-client": "^2.9.1",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",
-    "react": "^16.2.0",
-    "react-native": "^0.52.2",
+    "react": "16.6.0-alpha.8af6728",
+    "react-native": "0.57.8",
     "react-native-blur": "^3.2.2",
     "react-native-browser-builtins": "^2.0.3",
     "react-native-checkbox-field": "^2.0.2",
@@ -42,9 +48,9 @@
     "react-native-simple-markdown": "^1.1.0",
     "react-native-simple-store": "^1.1.0",
     "react-native-splash-screen": "^3.0.6",
-    "react-native-svg": "^6.1.3",
+    "react-native-svg": "8.0.0",
     "react-native-swiper": "^1.5.13",
-    "react-native-vector-icons": "^5.0.0",
+    "react-native-vector-icons": "6.1.0",
     "react-native-vertical-view-pager": "github:gy-chen/react_native_vertical_view_pager",
     "react-native-webview-bridge": "^0.33.0",
     "react-redux": "^4.4.5",
@@ -66,8 +72,8 @@
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-react-native": "^2.0.0",
     "eslint-plugin-standard": "^2.0.0",
-    "jest": "22.1.4",
-    "jest-cli": "^22.1.4",
-    "react-test-renderer": "16.2.0"
+    "jest": "23.6.0",
+    "jest-cli": "23.6.0",
+    "react-test-renderer": "16.7.0"
   }
 }

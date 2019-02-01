@@ -1,12 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  style={undefined}
->
-  <View
-    style={undefined}
-  >
+<View>
+  <View>
     <Swiper
       loop={false}
       onIndexChanged={[Function]}
@@ -299,23 +295,11 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </RCTScrollView>
     </Swiper>
   </View>
-  <View
-    style={undefined}
-  >
+  <View>
+    <View />
     <View
-      style={undefined}
-    />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -327,13 +311,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -346,16 +325,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         Continue
       </Text>
     </View>
-    <View
-      style={undefined}
-    >
-      <View
-        style={undefined}
-      >
+    <View>
+      <View>
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -379,16 +352,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -400,13 +365,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -427,16 +388,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -448,13 +401,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -475,16 +424,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -496,13 +437,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -523,16 +460,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -544,13 +473,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -576,13 +501,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
 `;
 
 exports[`renders header if initial tutorial 1`] = `
-<View
-  style={undefined}
->
+<View>
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Array [
         Object {
@@ -594,9 +514,7 @@ exports[`renders header if initial tutorial 1`] = `
   >
     Awesome project - Tutorial
   </Text>
-  <View
-    style={undefined}
-  >
+  <View>
     <Swiper
       loop={false}
       onIndexChanged={[Function]}
@@ -889,23 +807,11 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </RCTScrollView>
     </Swiper>
   </View>
-  <View
-    style={undefined}
-  >
+  <View>
+    <View />
     <View
-      style={undefined}
-    />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -917,13 +823,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -936,16 +837,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         Continue
       </Text>
     </View>
-    <View
-      style={undefined}
-    >
-      <View
-        style={undefined}
-      >
+    <View>
+      <View>
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -969,16 +864,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -990,13 +877,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -1017,16 +900,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1038,13 +913,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -1065,16 +936,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1086,13 +949,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -1113,16 +972,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1134,13 +985,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -1166,12 +1013,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
 `;
 
 exports[`renders with no media 1`] = `
-<View
-  style={undefined}
->
-  <View
-    style={undefined}
-  >
+<View>
+  <View>
     <Swiper
       loop={false}
       onIndexChanged={[Function]}
@@ -1377,23 +1220,11 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </RCTScrollView>
     </Swiper>
   </View>
-  <View
-    style={undefined}
-  >
+  <View>
+    <View />
     <View
-      style={undefined}
-    />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -1405,13 +1236,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -1424,16 +1250,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         Continue
       </Text>
     </View>
-    <View
-      style={undefined}
-    >
-      <View
-        style={undefined}
-      >
+    <View>
+      <View>
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -1457,16 +1277,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1478,13 +1290,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -1505,16 +1313,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1526,13 +1326,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -1553,16 +1349,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1574,13 +1362,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -1601,16 +1385,8 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1622,13 +1398,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             "opacity": 1,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {

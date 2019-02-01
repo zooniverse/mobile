@@ -1,17 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<Modal
+<Component
   animationType="fade"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
   transparent={true}
   visible={true}
 >
-  <View
-    style={undefined}
-  >
-    <ZoomableImage
+  <View>
+    <Connect(ZoomableImage)
       handlePress={[Function]}
       source={
         Object {
@@ -19,70 +17,30 @@ exports[`renders correctly 1`] = `
         }
       }
     />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
     >
-      <Text
-        accessible={true}
+      <Icon
         allowFontScaling={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 12,
-            },
-            undefined,
-            Object {
-              "fontFamily": "FontAwesome",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
-          ]
-        }
-      >
-        
-      </Text>
-    </View>
+        name="times"
+        size={12}
+      />
+    </TouchableOpacity>
   </View>
-</Modal>
+</Component>
 `;
 
 exports[`renders hidden correctly 1`] = `
-<Modal
+<Component
   animationType="fade"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
   transparent={true}
   visible={false}
 >
-  <View
-    style={undefined}
-  >
-    <ZoomableImage
+  <View>
+    <Connect(ZoomableImage)
       handlePress={[Function]}
       source={
         Object {
@@ -90,54 +48,16 @@ exports[`renders hidden correctly 1`] = `
         }
       }
     />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
     >
-      <Text
-        accessible={true}
+      <Icon
         allowFontScaling={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 12,
-            },
-            undefined,
-            Object {
-              "fontFamily": "FontAwesome",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
-          ]
-        }
-      >
-        
-      </Text>
-    </View>
+        name="times"
+        size={12}
+      />
+    </TouchableOpacity>
   </View>
-</Modal>
+</Component>
 `;

@@ -9,6 +9,8 @@ const projectActions = {
   fetchProjects: () => {}
 }
 
+jest.mock('Alert', () => 'Alert')
+
 it('renders correctly', () => {
   const user ={ display_name: 'Fake User' }
   const tree = renderer.create(

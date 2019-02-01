@@ -100,7 +100,7 @@ class SvgOverlay extends Component {
         )
     }
 
-    onShapeEdited(shapeIndex, touchState, {dx, dy, dw, dh}) {
+    onShapeEdited(shapeIndex, {dx, dy, dw, dh}) {
         this.props.onShapeModified({
             dx, 
             dy, 

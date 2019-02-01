@@ -47,10 +47,12 @@ class ShapeEditorSvg extends Component {
     constructor(props) {
         super(props)
 
+        this.shapeLocations = {}
+        this.cornerLocations = {}
+        this.closeLocations = {}
+        this.shapeRefs = {}
+
         this.state = {
-            shapeLocations: {},
-            cornerLocations: {},
-            closeLocations: {},
             shapeIndex: -1,
             shapeToRemoveIndex: -1,
             touchState: {
@@ -60,7 +62,6 @@ class ShapeEditorSvg extends Component {
                 upperRight: false,
                 perimeterOnly: false
             },
-            shapeRefs: {},
             isDrawing: false,
             dragOrigin: { x: 0, y: 0},
             previewShapeDimensions: this.previewShapeInitialDimensions()
@@ -78,8 +79,8 @@ class ShapeEditorSvg extends Component {
                     if (isCoordinateWithinSquare(locationX, locationY, closeShape)) {
                         keyToDelete = key
                     }
-                }, this.state.closeLocations)
-                this.deleteShapeWithKey(keyToDelete)
+                }, this.closeLocations)
+                this.props.onShapeDeleted(keyToDelete)
             }
         })
 
@@ -97,8 +98,8 @@ class ShapeEditorSvg extends Component {
 
                 // Determine if the user is touching a shape and where in the shape they are touching
                 const analyzedLocations = R.mapObjIndexed((shape, key) => {
-                    return analyzeCoordinateWithShape(locationX, locationY, shape, this.state.cornerLocations[key])
-                }, this.state.shapeLocations)
+                    return analyzeCoordinateWithShape(locationX, locationY, shape, this.cornerLocations[key])
+                }, this.shapeLocations)
                 const allShapesTouched = R.pickBy((analysis) => analysis.withinSquare, analyzedLocations)
                 
                 // If a shape is being touched, update state with where it's being touched
@@ -124,7 +125,7 @@ class ShapeEditorSvg extends Component {
                 }
             },
             onPanResponderMove: (evt, gestureState) => {
-                const { shapeIndex, touchState, shapeRefs, isDrawing } = this.state
+                const { shapeIndex, touchState, isDrawing } = this.state
                 const { dx, dy } = gestureState
                 const dragLocation = {
                     x: this.state.dragOrigin.x + dx,
@@ -138,7 +139,7 @@ class ShapeEditorSvg extends Component {
                                                          shape, this.props.width, this.props.height, dragLocation)
 
                     // Because Svgs don't have any way to animate, we have to update their props manually
-                    const newDimensions = shapeRefs[shapeIndex].update(deltas);
+                    const newDimensions = this.shapeRefs[shapeIndex].update(deltas);
                     const shapeIsOutOfBounds = isShapeOutOfBounds(newDimensions, {width: this.props.width *this.props.displayToNativeRatioX, height: this.props.height * this.props.displayToNativeRatioY})
                     const shapeIsOutOfBoundsAndBeingDragged = shapeIsOutOfBounds && touchState.perimeterOnly
                     this.props.onShapeIsOutOfBoundsUpdates(shapeIsOutOfBoundsAndBeingDragged)
@@ -170,7 +171,7 @@ class ShapeEditorSvg extends Component {
 
                 // Remove a shape if the user has dragged it off screen
                 if (shapeToRemoveIndex >= 0 && touchState.perimeterOnly) { 
-                    this.deleteShapeWithKey(shapeToRemoveIndex)
+                    this.props.onShapeDeleted(shapeToRemoveIndex)
                 }
                 // If the user is editing a shape, update the shape changes 
                 else if (shapeIndex >= 0) {
@@ -186,7 +187,7 @@ class ShapeEditorSvg extends Component {
                         shape, this.props.width, this.props.height, dragLocation)
 
                     // Once the animation is complete, we report the final edit on the shape
-                    this.props.onShapeEdited(shapeIndex, touchState, deltas)
+                    this.props.onShapeEdited(shapeIndex, deltas)
                 }
                 // If the user isn't editing a shape, save the new drawnShape
                 else if (isDrawing) {
@@ -199,14 +200,14 @@ class ShapeEditorSvg extends Component {
         });
     }
 
-    deleteShapeWithKey(key) {
-        if (key) {
-            this.setState({
-                closeLocations: R.dissoc(key, this.state.closeLocations),
-                cornerLocations: R.dissoc(key, this.state.cornerLocations),
-                shapeLocations: R.dissoc(key, this.state.shapeLocations)
-            })
-            this.props.onShapeDeleted(key)
+    componentDidUpdate(prevProps) {
+        const previousShapeKeys = R.keys(prevProps.shapes)
+        const currentShapeKeys = R.keys(this.props.shapes)
+        if (previousShapeKeys.length > currentShapeKeys.length) {
+            const filterDroppedKeys = (val, key) => currentShapeKeys.includes(key)
+            this.closeLocations = R.pickBy(filterDroppedKeys, this.closeLocations)
+            this.cornerLocations = R.pickBy(filterDroppedKeys, this.cornerLocations)
+            this.shapeLocations = R.pickBy(filterDroppedKeys, this.shapeLocations)
         }
     }
 
@@ -244,7 +245,7 @@ class ShapeEditorSvg extends Component {
         }
     }
 
-    renderShapes() {
+    renderShapes() {        
         const shapeArray = []
         const convertObjectToComponent = (shape, index) => {
             const { type } = shape
@@ -254,19 +255,13 @@ class ShapeEditorSvg extends Component {
                     shapeArray.push(
                         <EditableRect
                             onRectLayout={(event) => {
-                                this.setState({
-                                    shapeLocations: R.set(R.lensProp(index), event.nativeEvent.layout, this.state.shapeLocations)
-                                })
+                                this.shapeLocations = R.set(R.lensProp(index), event.nativeEvent.layout, this.shapeLocations)
                             }}
                             onCornerLayout={(event, corner) => {
-                                this.setState({
-                                    cornerLocations: R.set(R.lensPath([index, corner]), event.nativeEvent.layout, this.state.cornerLocations)
-                                })
+                                this.cornerLocations = R.set(R.lensPath([index, corner]), event.nativeEvent.layout, this.cornerLocations)
                             }}
                             onCloseLayout={(event) => {
-                                this.setState({
-                                    closeLocations: R.set(R.lensProp(index), event.nativeEvent.layout, this.state.closeLocations)
-                                })
+                                this.closeLocations = R.set(R.lensProp(index), event.nativeEvent.layout, this.closeLocations)
                             }}
                             key={index}
                             { ...shape }
@@ -277,10 +272,7 @@ class ShapeEditorSvg extends Component {
                             isDeletable={this.props.mode === 'erase'}
                             ref={ref => {
                                 if (ref) {
-                                    this.setState(currentState => {
-                                        currentState.shapeRefs = R.set(R.lensProp(index), ref, currentState.shapeRefs)
-                                        return currentState
-                                    })
+                                        this.shapeRefs = R.set(R.lensProp(index), ref, this.shapeRefs)
                                 }
                             }}
                         />
@@ -293,18 +285,6 @@ class ShapeEditorSvg extends Component {
         return shapeArray
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        const updateChanges = (val, key) => key !== 'cornerLocations' && key !== 'shapeLocations'
-        const filteredNextState = R.pickBy(updateChanges, nextState)
-        const filteredState = R.pickBy(updateChanges, this.state)
-
-        if (R.equals(filteredNextState, filteredState) && R.equals(nextProps, this.props)) {
-            return false
-        }
-
-        return true
-    }
-
     render() {
         const panHandlers = this.props.mode === 'draw' ? this.editPanResponder.panHandlers : this.erasePanResponder.panHandlers
         return (
@@ -313,6 +293,7 @@ class ShapeEditorSvg extends Component {
                     viewBox={this.props.viewBox}
                     height={this.props.height}
                     width={this.props.width}
+                    key={`${Object.keys(this.props.shapes).length}${this.props.mode}`}
                 >
                     { this.renderShapes() }
                     { this.state.isDrawing && this.renderPreviewShape() }

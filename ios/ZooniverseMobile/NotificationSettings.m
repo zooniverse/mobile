@@ -7,7 +7,7 @@
 //
 
 #import "NotificationSettings.h"
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @implementation NotificationSettings
 

@@ -1,14 +1,6 @@
 import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
-
-jest.mock('../SideDrawerContent', () => 'SideDrawerContent')
-
-jest.mock('react-native-router-flux', () => ({
-  Actions: 'Field',
-  DefaultRenderer: 'DefaultRenderer',
-}))
-
+import ShallowRenderer from 'react-test-renderer/shallow';
 import SideDrawer from '../SideDrawer'
 
 it('renders correctly', () => {
@@ -17,8 +9,10 @@ it('renders correctly', () => {
     open: true
   }
 
-  const tree = renderer.create(
+  const renderer = new ShallowRenderer();
+
+  const tree = renderer.render(
     <SideDrawer navigationState={navigationState} onNavigate={jest.fn}/>
-  ).toJSON()
+  )
   expect(tree).toMatchSnapshot()
 })

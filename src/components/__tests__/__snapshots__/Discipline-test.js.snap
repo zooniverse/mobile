@@ -2,16 +2,8 @@
 
 exports[`renders with a title 1`] = `
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
   accessible={true}
-  collapsable={undefined}
-  hasTVPreferredFocus={undefined}
-  hitSlop={undefined}
   isTVSelectable={true}
-  nativeID={undefined}
-  onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -23,8 +15,6 @@ exports[`renders with a title 1`] = `
       "opacity": 1,
     }
   }
-  testID={undefined}
-  tvParallaxProperties={undefined}
 >
   <View
     style={
@@ -36,13 +26,9 @@ exports[`renders with a title 1`] = `
       ]
     }
   >
-    <View
-      style={undefined}
-    >
+    <View>
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -65,12 +51,8 @@ exports[`renders with a title 1`] = `
         
       </Text>
     </View>
-    <View
-      style={undefined}
-    >
+    <View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
         ellipsizeMode="tail"
         numberOfLines={1}
         style={
@@ -86,9 +68,7 @@ exports[`renders with a title 1`] = `
       </Text>
     </View>
     <Text
-      accessible={true}
       allowFontScaling={false}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {

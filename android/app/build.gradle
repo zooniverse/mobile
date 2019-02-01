@@ -73,7 +73,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+        entryFile: "index.js"
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -93,16 +93,16 @@ def enableSeparateBuildPerCPUArchitecture = false
  * Run Proguard to shrink the Java bytecode in release builds.
  */
 def enableProguardInReleaseBuilds = false
-def pass = getPassword("android@zooniverse.org","android_keystore")
+def pass = getPassword("android@zooniverse.org", "android_keystore")
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.zooniversemobile"
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 25
         versionName "2.2.9"
         multiDexEnabled true
@@ -136,14 +136,13 @@ android {
             signingConfig signingConfigs.release
             manifestPlaceholders = [shouldRemoveSystemAlertWindowPermission: "true"]
         }
-
     }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
@@ -154,45 +153,28 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-FCM')
     compile project(':react-native-vector-icons')
     compile project(':react-native-blur')
     compile project(':rn-fetch-blob')
     compile project(':react-native-splash-screen')
-    compile project(':react-native-fcm')
-    compile 'com.android.support:support-v4:23.0.+'
-    compile 'com.android.support:multidex:1.0.0'
+    implementation 'com.android.support:multidex:1.0.0'
     compile project(':react-native-svg')
     compile project(':react-native-google-analytics-bridge')
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+" // From node_modules
     compile project(':react-native-device-info')
-
-    compile 'com.google.firebase:firebase-messaging:10.2.1'
-    compile 'com.google.firebase:firebase-core:10.0.1'
-}
-
-subprojects {
-    if(name.equals('react-native-google-analytics-bridge')) {
-        project.ext.'googlePlayServicesVersion' = '12.0.1'
-    }
-
-    if (project.name.contains('react-native-vector-icons')) {
-        buildscript {
-            repositories {
-                jcenter()
-                maven { url "https://dl.bintray.com/android/android-tools/"  }
-            }
-        }
-    }
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
 }
 
 // Run this once to be able to run the application with BUCK
 // puts all compile dependencies into folder libs for BUCK to use
 task copyDownloadableDepsToLibs(type: Copy) {
-  from configurations.compile
-  into 'libs'
+    from configurations.compile
+    into 'libs'
 }
 
-apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
