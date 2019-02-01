@@ -80,7 +80,7 @@ class ShapeEditorSvg extends Component {
                         keyToDelete = key
                     }
                 }, this.closeLocations)
-                this.deleteShapeWithKey(keyToDelete)
+                this.props.onShapeDeleted(keyToDelete)
             }
         })
 
@@ -171,7 +171,7 @@ class ShapeEditorSvg extends Component {
 
                 // Remove a shape if the user has dragged it off screen
                 if (shapeToRemoveIndex >= 0 && touchState.perimeterOnly) { 
-                    this.deleteShapeWithKey(shapeToRemoveIndex)
+                    this.props.onShapeDeleted(shapeToRemoveIndex)
                 }
                 // If the user is editing a shape, update the shape changes 
                 else if (shapeIndex >= 0) {
@@ -200,12 +200,14 @@ class ShapeEditorSvg extends Component {
         });
     }
 
-    deleteShapeWithKey(key) {
-        if (key) {
-            this.closeLocations = R.dissoc(key, this.closeLocations),
-            this.cornerLocations = R.dissoc(key, this.cornerLocations),
-            this.shapeLocations = R.dissoc(key, this.shapeLocations)
-            this.props.onShapeDeleted(key)
+    componentDidUpdate(prevProps) {
+        const previousShapeKeys = R.keys(prevProps.shapes)
+        const currentShapeKeys = R.keys(this.props.shapes)
+        if (previousShapeKeys.length > currentShapeKeys.length) {
+            const filterDroppedKeys = (val, key) => currentShapeKeys.includes(key)
+            this.closeLocations = R.pickBy(filterDroppedKeys, this.closeLocations)
+            this.cornerLocations = R.pickBy(filterDroppedKeys, this.cornerLocations)
+            this.shapeLocations = R.pickBy(filterDroppedKeys, this.shapeLocations)
         }
     }
 
