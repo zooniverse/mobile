@@ -55,8 +55,16 @@ class SwipeCardSubjectsView extends Component {
                 {
                     imagesAreLoaded && hasMultipleSubjects && 
                         <VerticalPaginationBar
-                            onScrollDownPressed={() => this.pager.scrollTo({y: (imageIndex + 1) * pagerDimensions.height})}
-                            onScrollUpPressed={() => this.pager.scrollTo({y: (imageIndex - 1) * pagerDimensions.height})}
+                            onScrollDownPressed={() => {
+                                if (imageIndex + 1 < imageUris.length) {
+                                    this.pager.scrollTo({y: (imageIndex + 1) * pagerDimensions.height})
+                                }
+                            }}
+                            onScrollUpPressed={() => {
+                                if (imageIndex - 1 >= 0) {
+                                    this.pager.scrollTo({y: (imageIndex - 1) * pagerDimensions.height})
+                                }
+                            }}
                             totalPages={imageUris.length} 
                             pageIndex={imageIndex}
                         />
