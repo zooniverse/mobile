@@ -3,6 +3,7 @@ import {
     Animated,
     Dimensions,
     Platform,
+    ScrollView,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
@@ -10,16 +11,13 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import RNFetchBlob from 'rn-fetch-blob'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import R from 'ramda'
-import VerticalViewPager from 'react-native-vertical-view-pager';
 
 
 import * as imageActions from '../../actions/images'
-import ProgressIndicatingImage from '../common/ProgressIndicatingImage'
 import FontedText from '../common/FontedText'
 import AlreadySeenBanner from './AlreadySeenBanner'
 import SubjectOptionsBar from './SubjectOptionsBar'
-import VerticalPaginationBar from './VerticalPaginationBar'
+import SwipeCardSubjectsView from './SwipeCardSubjectsView';
 
 const mapDispatchToProps = (dispatch) => ({
   imageActions: bindActionCreators(imageActions, dispatch)
@@ -33,34 +31,21 @@ class SwipeCard extends Component {
                 width: 1,
                 height: 1,
             },
-            pagerDimensions: {
-                width: 1,
-                height: 1
-            },
             overlayViewWidth: props.subjectDisplayWidth,
             overlayViewHeight: props.subjectDisplayHeight,
             overlayAnswerIndex: 0,
             localUris: [],
-            imageIndex: 0
+            displayImageUri: '',
         }
         this.unlinkImageOnLoad = false
 
         this.updateOverlayImageForImageDimensions = this.updateOverlayImageForImageDimensions.bind(this)
-        this.handleDimensionsChange = this.handleDimensionsChange.bind(this)
-    }
-
-    handleDimensionsChange() {
-        if (this.pager) {
-            setTimeout(() => this.pager.scrollTo({y: 0}), 300)
-        }
     }
 
     componentDidMount() {
         this.listenerId = this.props.panX.addListener((value) => {
-                this.setState({ overlayAnswerIndex: value.value < 0 ? 0 : 1})
+            this.setState({ overlayAnswerIndex: value.value < 0 ? 0 : 1})
         })
-
-        Dimensions.addEventListener('change', this.handleDimensionsChange)
 
         // Load all images to cache
         const loadImagePromises = this.props.subject.displays.map( ({src}) => {
@@ -74,7 +59,7 @@ class SwipeCard extends Component {
             })
 
             this.setState({
-                localUris
+                localUris,
             })
         })
     }
@@ -93,7 +78,6 @@ class SwipeCard extends Component {
             overlayViewHeight: height * aspectRatio,
             overlayViewWidth: width * aspectRatio,
             nativeImageDimensions: {width, height},
-            dimensionPropsReceived: true
         });
     }
 
@@ -115,84 +99,56 @@ class SwipeCard extends Component {
     }
 
     render() {
+        const { 
+            localUris,
+            overlayAnswerIndex,
+            displayImageUri
+        } = this.state;
+
+        const { 
+            panX,
+            subject,
+            seenThisSession,
+            answers,
+            subjectDisplayWidth,
+            subjectDisplayHeight,
+            dimensionsLoaded,
+            onExpandButtonPressed
+        } = this.props;
+
         const windowWidth = Dimensions.get('window').width
-        const opacity = this.props.panX.interpolate({
+        const opacity = panX.interpolate({
             inputRange: [-windowWidth/4, 0, windowWidth/4],
             outputRange: [1, 0, 1]
           })
-        const alreadySeen = (this.props.subject.already_seen || this.props.seenThisSession)
+        const alreadySeen = (subject.already_seen || seenThisSession)
     
         const overlay =
             <Animated.View style={[styles.overlayContainer, styles.overlayBackground, { opacity }]}>
                 <FontedText style={styles.overlayText}>
-                    { this.props.answers[this.state.overlayAnswerIndex].label }
+                    { answers[overlayAnswerIndex].label }
                 </FontedText>
             </Animated.View >
 
-        const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
-        const dimensionsStyle = {width: this.props.subjectDisplayWidth, height: this.props.subjectDisplayHeight}
-        const opacityStyle = { opacity: this.props.dimensionsLoaded ? 1 : 0 }
-        const { imageIndex, localUris, pagerDimensions} = this.state
+        const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}
+        const opacityStyle = { opacity: dimensionsLoaded ? 1 : 0 }
         return (
             <View style={[styles.cardBackground, dimensionsStyle, opacityStyle]}>
-                    <View style={styles.cardContainer}>
-                        {
-                            this.props.subject.displays.length > 1 && 
-                                <VerticalPaginationBar
-                                    onScrollDownPressed={() => this.pager.scrollTo({y: (imageIndex + 1) * pagerDimensions.height})}
-                                    onScrollUpPressed={() => this.pager.scrollTo({y: (imageIndex - 1) * pagerDimensions.height})}
-                                    totalPages={this.props.subject.displays.length} 
-                                    pageIndex={imageIndex}
-                                />
-                        }
-                        <View style={styles.container} onLayout={event => this.setState({
-                                pagerDimensions: {
-                                    width: event.nativeEvent.layout.width,
-                                    height: event.nativeEvent.layout.height
-                                }
-                            })}>
-                            <VerticalViewPager
-                                bounces={false}
-                                showsVerticalScrollIndicator={false}
-                                ref={ref => this.pager = ref}
-                                key={localUris.length}
-                                // Make this happen while scrolling
-                                onScroll={({nativeEvent}) => {
-                                    this.setState({
-                                        imageIndex: Math.round(nativeEvent.contentOffset.y/pagerDimensions.height)
-                                    })
-                                }}
-                            >
-                                {
-                                    pagerDimensions.height > 1 && (R.isEmpty(localUris) ? this.props.subject.displays : localUris).map( (uri, index) => {
-                                        return (
-                                            <View style={[styles.container, pagerDimensions]} key={`SWIPER_IMAGE_${index}`}>
-                                                <ProgressIndicatingImage
-                                                    withBorder
-                                                    localUri={pathPrefix + uri}
-                                                    style={[styles.image, styles.imageShadow]}
-                                                    resizeMethod="resize" 
-                                                    resizeMode="contain"
-                                                />
-                                            </View>
-                                        )
-                                    })
-                                }
-                            </VerticalViewPager>
-                        </View>
-                    </View>
-                    
-                    <View style={styles.optionsBarContainer}>
-                        <SubjectOptionsBar
-                            numberOfSelections={this.props.subject.displays.length}
-                            selectionIndex={imageIndex}
-                            onExpandButtonPressed={() => this.props.onExpandButtonPressed(this.props.subject.displays[imageIndex].src)}
-                        />
-                    </View>
-                    <View style={styles.overlayContainer} pointerEvents="none">
-                        { this.props.shouldAnimateOverlay ? overlay : null }
-                        { alreadySeen ? <AlreadySeenBanner /> : null }
-                    </View>
+                <SwipeCardSubjectsView
+                    imageUris={localUris.map((uri) => `file://${uri}`)}
+                    hasMultipleSubjects={subject.displays.length > 1}
+                    onDisplayImageChange={(uri) => this.setState({ displayImageUri: uri })}
+                />
+                <View style={styles.optionsBarContainer}>
+                    <SubjectOptionsBar
+                        numberOfSelections={subject.displays.length}
+                        onExpandButtonPressed={() => onExpandButtonPressed(displayImageUri)}
+                    />
+                </View>
+                <View style={styles.overlayContainer} pointerEvents="none">
+                    { this.props.shouldAnimateOverlay ? overlay : null }
+                    { alreadySeen ? <AlreadySeenBanner /> : null }
+                </View>
             </View>
         )
     }
