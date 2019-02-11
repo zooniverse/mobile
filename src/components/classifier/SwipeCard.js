@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import {
     Animated,
     Dimensions,
-    Platform,
-    ScrollView,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
