@@ -51,7 +51,6 @@
     "react-native-svg": "8.0.0",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "6.1.0",
-    "react-native-vertical-view-pager": "github:gy-chen/react_native_vertical_view_pager",
     "react-native-webview-bridge": "^0.33.0",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",

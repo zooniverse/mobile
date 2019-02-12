@@ -4,17 +4,22 @@ import {
     View, 
     ActivityIndicator
 } from 'react-native'
+import PropTypes from 'prop-types'
+
 import FontedText from './FontedText'
 import Theme from '../../theme'
 
-const SubjectLoadingIndicator = () => {
-    
+const SubjectLoadingIndicator = (props) => {
     return (
         <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={ Theme.$zooniverseTeal } />
-            <FontedText style={styles.loadingText}> Loading Subject </FontedText>
+            <FontedText style={styles.loadingText}> {`Loading Subject${props.multipleSubjects ? 's' : ''}`} </FontedText>
         </View>
     )
+}
+
+SubjectLoadingIndicator.propTypes = {
+    multipleSubjects: PropTypes.bool
 }
 
 const styles = EStyleSheet.create({
