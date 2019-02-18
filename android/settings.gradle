@@ -1,8 +1,7 @@
 rootProject.name = 'ZooniverseMobile'
-include ':react-native-FCM'
-project(':react-native-FCM').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-FCM/android')
+include ':react-native-firebase'
+project(':react-native-firebase').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-firebase/android')
 
-include ':app'
 include ':react-native-svg'
 project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
 include ':react-native-vector-icons'
@@ -16,7 +15,6 @@ project(':react-native-splash-screen').projectDir = new File(rootProject.project
 include ':react-native-device-info'
 project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
 
-include ':react-native-google-analytics-bridge', ':react-native-fcm', ':react-native-svg', ':app'
+include ':react-native-google-analytics-bridge', ':react-native-svg', ':app'
 project(':react-native-google-analytics-bridge').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-google-analytics-bridge/android')
-project(':react-native-fcm').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fcm/android')
 project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
