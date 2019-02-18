@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:93215313385:android:fb87f7b9896c4f38",
+        "mobilesdk_app_id": "1:93215313385:android:4c3f86b290a01b5e",
         "android_client_info": {
-          "package_name": "com.zooniversemobile"
+          "package_name": "com.zooniversemobile.debug"
         }
       },
       "oauth_client": [
