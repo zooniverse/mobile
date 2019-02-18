@@ -3,8 +3,8 @@
 exports[`renders checked 1`] = `
 <View>
   <Switch
-    onTintColor="rgba(0, 151, 157, 1)"
     onValueChange={[Function]}
+    trackColor="rgba(0, 151, 157, 1)"
     value={true}
   />
   <Text
@@ -22,8 +22,8 @@ exports[`renders checked 1`] = `
 exports[`renders not checked 1`] = `
 <View>
   <Switch
-    onTintColor="rgba(0, 151, 157, 1)"
     onValueChange={[Function]}
+    trackColor="rgba(0, 151, 157, 1)"
     value={false}
   />
   <Text

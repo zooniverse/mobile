@@ -73,9 +73,9 @@ Object {
   },
   "settings": Object {
     "enableNotifications": true,
+    "fcmToken": "",
     "newBetaNotifications": true,
     "newProjectNotifications": true,
-    "notificationsInitialized": false,
     "projectSpecificNotifications": Array [],
     "showAllWorkflows": true,
     "urgentHelpNotification": true,
@@ -159,9 +159,9 @@ Object {
   },
   "settings": Object {
     "enableNotifications": true,
+    "fcmToken": "",
     "newBetaNotifications": true,
     "newProjectNotifications": true,
-    "notificationsInitialized": false,
     "projectSpecificNotifications": Array [],
     "showAllWorkflows": true,
     "urgentHelpNotification": true,
@@ -249,9 +249,9 @@ Object {
   },
   "settings": Object {
     "enableNotifications": true,
+    "fcmToken": "",
     "newBetaNotifications": true,
     "newProjectNotifications": true,
-    "notificationsInitialized": false,
     "projectSpecificNotifications": Array [],
     "showAllWorkflows": true,
     "urgentHelpNotification": true,
@@ -336,9 +336,9 @@ Object {
   },
   "settings": Object {
     "enableNotifications": true,
+    "fcmToken": "",
     "newBetaNotifications": true,
     "newProjectNotifications": true,
-    "notificationsInitialized": false,
     "projectSpecificNotifications": Array [],
     "showAllWorkflows": true,
     "urgentHelpNotification": true,
