@@ -2,7 +2,7 @@ project './ZooniverseMobile.xcodeproj'
 
 target 'ZooniverseMobile' do
   pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
   pod 'SocketRocket'
+  pod 'Firebase/Messaging', '~> 5.15.0'
 
 end
