@@ -1,20 +1,18 @@
 import React, {Component} from 'react'
 import {
   Dimensions,
-  Platform,
-  PushNotificationIOS,
   View
 } from 'react-native'
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import firebase from 'react-native-firebase';
 
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
 import NavBar from '../components/NavBar'
 import { setState } from '../actions/index'
-import FCM, { FCMEvent } from 'react-native-fcm'
 import { removeLeftOverImages } from '../utils/imageUtils'
 import * as settingsActions from '../actions/settings'
 import * as imageActions from '../actions/images'
@@ -44,6 +42,8 @@ const mapDispatchToProps = (dispatch) => ({
 class ZooniverseApp extends Component {
   constructor(props) {
     super(props);
+
+    this.onFCMTokenReceived = this.onFCMTokenReceived.bind(this);
   }
 
   handleDimensionsChange(dimensions) {
@@ -52,6 +52,10 @@ class ZooniverseApp extends Component {
       height: dimensions.window.height
     })
   }
+
+  onFCMTokenReceived(token) {
+    this.props.settingsActions.initializeSubscriptionsWithFirebase(token)
+  } 
 
   componentDidMount() {
     // Initially set screen dimensions
@@ -62,26 +66,13 @@ class ZooniverseApp extends Component {
 
     removeLeftOverImages(this.props.images)
     this.props.imageActions.clearImageLocations()
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.addEventListener('notification', this.onRemoteNotification)
-      PushNotificationIOS.addEventListener('register', this.onPushRegistration)
-    } else {
-      FCM.on(FCMEvent.Notification, this.onRemoteNotification)
-      this.onPushRegistration()
-    }
+
+    firebase.messaging().getToken().then(this.onFCMTokenReceived);
+    this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(this.onFCMTokenReceived);
   }
 
   componentWillUnmount() {
-    PushNotificationIOS.removeEventListener('notification', this.onRemoteNotification);
-    PushNotificationIOS.removeEventListener('register', this.onPushRegistration)
-  }
-
-  onRemoteNotification = (notification) => {
-    // Implement Firebase notification receive
-  }
-
-  onPushRegistration = () => {
-    this.props.settingsActions.initializeSubscriptionsWithFirebase()
+    this.onTokenRefreshListener()
   }
 
   static renderNavigationBar() {
