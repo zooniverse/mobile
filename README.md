@@ -29,7 +29,9 @@ npm install
 
 ### iOS
 To run in the simulator from the command line:
-react-native run-ios
+
+
+`react-native run-ios` or `npm run ios`
 
 Using Xcode:
 Open iOS/ZooniverseMobile.xcworkspace in Xcode and press the run button (or `⌘-R`).
@@ -37,10 +39,16 @@ Open iOS/ZooniverseMobile.xcworkspace in Xcode and press the run button (or `⌘
 http://stackoverflow.com/questions/38710654/rctwebsocket-ignoring-return-value-of-function-declared-with-warn-unused-resul
 
 ### Android
-To run in the emulator from the command line (you'll need device connected or emulator already running)
-react-native run-android
-*Note* You need to have either a device emulator open already or a physical device plugged into your computer - otherwise you'll need to run through Android Studio
-*Note* If Android studio prompts you to update Gradle Files, you should do it
+To run in the emulator from the command line (you'll need device connected or emulator already running):
+
+`npm run android`
+
+
+*Notes*
+
+- You need to have either a device emulator open already or a physical device plugged into your computer otherwise you'll need to run through Android Studio
+- If Android studio prompts you to update Gradle files, you should do it.
+- The command `react-native run-android` will install the build, but fail in launching the app due to a bug with the `react-native` script with having a seperate `applicationId` for development builds
 
 ## Testing
 Unit tests utilize Jests' Snapshots, located in src/****/__tests__ directories.  Mocks are located under root /__mocks__ directory.
