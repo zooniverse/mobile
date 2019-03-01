@@ -13,12 +13,13 @@ import { register } from '../actions/auth'
 import { connect } from 'react-redux'
 import Button from './Button'
 import Input from './Input'
-import NavBar from './NavBar'
 import OverlaySpinner from './OverlaySpinner'
 import StyledText from './StyledText'
 import Checkbox from './Checkbox'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { any, isEmpty, converge, isNil, or } from 'ramda'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
 
 import { isValidEmail } from '../utils/is-valid-email'
 import { isValidLogin } from '../utils/is-valid-login'
@@ -39,7 +40,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setError(errorMessage) {
     dispatch(setState('errorMessage', errorMessage))
-  }
+  },
+  setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.Register))
 })
 
 export class Register extends React.Component {
@@ -92,9 +94,13 @@ export class Register extends React.Component {
     })
   }
 
-
-  static renderNavigationBar() {
-    return <NavBar showDrawer={false} showBack={true} title={'Register'} />;
+  componentDidMount() {
+    this.props.setNavbarSettingsForPage({
+      showHamburgerMenu: false,
+      showBack: true,
+      title: 'Register',
+      centerType: 'title'
+    })
   }
 
   render() {
@@ -223,7 +229,8 @@ Register.propTypes = {
   setField: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
-  registration: PropTypes.object
+  registration: PropTypes.object,
+  setNavbarSettingsForPage: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

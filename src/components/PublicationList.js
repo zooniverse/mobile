@@ -15,6 +15,8 @@ import { fetchPublications, setState } from '../actions/index'
 import { connect } from 'react-redux'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { addIndex, defaultTo, keys, map } from 'ramda'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys';
 
 GoogleAnalytics.trackEvent('view', 'Publication List')
 
@@ -31,7 +33,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setSelectedDiscipline(selected) {
     dispatch(setState('selectedDiscipline', selected))
-  }
+  },
+  setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.Publications))
+
 })
 
 export class PublicationList extends React.Component {
@@ -43,8 +47,12 @@ export class PublicationList extends React.Component {
     this.props.fetchPublications()
   }
 
-  static renderNavigationBar() {
-    return <NavBar title={'Publications'} showBack={true} />;
+  componentDidMount() {
+    this.props.setNavbarSettingsForPage({
+      title: 'Publications',
+      showBack: true,
+      centerType: 'title'
+    })
   }
 
   render() {
@@ -157,7 +165,8 @@ PublicationList.propTypes = {
   selectedDiscipline: PropTypes.string,
   publications: PropTypes.object,
   fetchPublications: PropTypes.func,
-  setSelectedDiscipline: PropTypes.func
+  setSelectedDiscipline: PropTypes.func,
+  setNavbarSettingsForPage: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicationList)

@@ -4,16 +4,25 @@ import {
   Text,
   View
 } from 'react-native'
+import { connect } from 'react-redux'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import StyledText from './StyledText'
-import NavBar from './NavBar'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
+import PropTypes from 'prop-types'
+
+import StyledText from './StyledText'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
 
 GoogleAnalytics.trackEvent('view', 'About page')
 
 class About extends React.Component {
-  static renderNavigationBar() {
-    return <NavBar title={'About'} showBack={true} />;
+
+  componentDidMount() {
+    this.props.setNavbarSettingsForPage({
+      title: 'About',
+      showBack: true,
+      centerType: 'title'
+    })
   }
 
   render() {
@@ -87,4 +96,12 @@ const styles = EStyleSheet.create({
   }
 })
 
-export default About
+About.propTypes = {
+  setNavbarSettingsForPage: PropTypes.func,
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.About))
+});
+
+export default connect(null, mapDispatchToProps)(About);

@@ -4,9 +4,13 @@ import {
     View,
     WebView
 } from 'react-native'
-import FontedText from './common/FontedText'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import { connect } from 'react-redux'
+
+import FontedText from './common/FontedText'
+import PageKeys from '../constants/PageKeys'
+import { setNavbarSettings } from '../actions/navBar'
 
 class WebViewScreen extends Component {
 
@@ -14,6 +18,14 @@ class WebViewScreen extends Component {
         super(props)
 
         this.renderLoadingScreen = this.renderLoadingScreen.bind(this)
+    }
+
+    componentDidMount() {
+        this.props.setNavbarSettings({
+            title: '',
+            showBack: true,
+            centerType: 'title'
+        })
     }
 
     renderLoadingScreen() {
@@ -64,7 +76,12 @@ const styles = EStyleSheet.create({
 
 WebViewScreen.propTypes = {
     uri: PropTypes.string.isRequired,
-    loadingText: PropTypes.string
+    loadingText: PropTypes.string,
+    setNavbarSettings: PropTypes.function,
 }
 
-export default WebViewScreen
+const mapDispatchToProps = (dispatch) => ({
+    setNavbarSettings: (settings) => dispatch(setNavbarSettings(settings, PageKeys.WebView))
+})
+
+export default connect(null, mapDispatchToProps)(WebViewScreen)

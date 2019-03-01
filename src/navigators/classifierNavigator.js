@@ -1,9 +1,19 @@
 import {Actions} from 'react-native-router-flux'
-import * as classifierActions from '../actions/classifier'
-import * as drawingActions from '../actions/drawing'
 import R from 'ramda'
 
+import * as classifierActions from '../actions/classifier'
+import * as drawingActions from '../actions/drawing'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
+
 const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, workflow) => {
+    dispatch(setNavbarSettingsForPage({
+        title: project.display_name,
+        isPreview: inPreviewMode,
+        showBack: true,
+        centerType: 'title'
+    }, getPageKeyForWorkflowType(workflow.type)))
+
     switch (workflow.type) {
         case 'drawing':
             navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
@@ -13,6 +23,15 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
             break;
     }
 })
+
+function getPageKeyForWorkflowType(workflowType) {
+    switch (workflowType) {
+        case 'drawing':
+            return PageKeys.DrawingClassifier;
+        case 'question':
+            return PageKeys.SwipeClassifier;
+    }
+}
 
 function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
     dispatch(classifierActions.clearClassifierData())
