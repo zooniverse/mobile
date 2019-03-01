@@ -1,11 +1,15 @@
 import React, {Component} from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { AppState, NetInfo, Platform } from 'react-native'
+import {
+  AppState,
+  NetInfo,
+  Platform,
+} from 'react-native'
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'
-import {Scene, Router, Drawer} from 'react-native-router-flux'
+import {Scene, Router, Drawer, Actions} from 'react-native-router-flux'
 import { setIsConnected, setState } from '../actions/index'
 import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
@@ -27,6 +31,10 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
 import DrawingClassifier from '../components/Markings/DrawingClassifier'
+import SafeAreaContainer from './SafeAreaContainer'
+import { setPageShowing } from '../actions/navBar'
+import NavBar from '../components/NavBar';
+import PageKeys from '../constants/PageKeys'
 
 const persistConfig = {
   key: 'root',
@@ -65,30 +73,37 @@ export default class App extends Component {
   onBeforeLift() {
     store.dispatch(loadUserData())
     store.dispatch(setSession())
+    store.dispatch(setPageShowing(PageKeys.ZooniverseApp))
+  }
+
+  onSceneChange() {
+    store.dispatch(setPageShowing(Actions.currentScene))
   }
 
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor} onBeforeLift={this.onBeforeLift}>
-          <Router sceneStyle={styles.sharedSceneStyles}>
-            <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
-                <Scene key="main" tabs={false}>
-                  <Scene key="SignIn" component={SignIn} duration={0} type="reset" navBar={SignIn.renderNavigationBar} />
-                  <Scene key="ZooniverseApp" component={ZooniverseApp} navBar={ZooniverseApp.renderNavigationBar} initial />
-                  <Scene key="ProjectDisciplines" component={ProjectDisciplines} navBar={ProjectDisciplines.renderNavigationBar} />
-                  <Scene key="About" component={About} navBar={About.renderNavigationBar}/>
-                  <Scene key="Publications" component={PublicationList} navBar={PublicationList.renderNavigationBar} />
-                  <Scene key="ProjectList" component={ProjectList} navBar={ProjectList.renderNavigationBar} />
-                  <Scene key="Register" component={Register} navBar={Register.renderNavigationBar} />
-                  <Scene key="Settings" component={Settings} navBar={Settings.renderNavigationBar} />
-                  <Scene key="ZooWebView" component={ZooWebView} duration={0} navBar={ZooWebView.renderNavigationBar} />
-                  <Scene key="SwipeClassifier" component={SwipeClassifier} panHandlers={null} navBar={SwipeClassifier.renderNavigationBar}/>
-                  <Scene key="WebView" component={WebViewScreen} navBar={SwipeClassifier.renderNavigationBar}/>
-                  <Scene key="DrawingClassifier" drawerLockMode={'locked-closed'} panHandlers={null} component={DrawingClassifier} navBar={DrawingClassifier.renderNavigationBar}  />
-                </Scene>
-            </Drawer>
-          </Router>
+          <SafeAreaContainer>
+            <Router sceneStyle={styles.sharedSceneStyles} navBar={() => <NavBar />} onStateChange={this.onSceneChange}>
+              <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
+                  <Scene key="main" tabs={false}>
+                    <Scene key={PageKeys.SignIn} component={SignIn} duration={0} type="reset"  />
+                    <Scene key={PageKeys.ZooniverseApp} component={ZooniverseApp}  initial />
+                    <Scene key={PageKeys.ProjectDisciplines} component={ProjectDisciplines}  />
+                    <Scene key={PageKeys.About} component={About} />
+                    <Scene key={PageKeys.Publications} component={PublicationList}  />
+                    <Scene key={PageKeys.ProjectList} component={ProjectList}  />
+                    <Scene key={PageKeys.Register} component={Register} />
+                    <Scene key={PageKeys.Settings} component={Settings}  />
+                    <Scene key={PageKeys.ZooWebView} component={ZooWebView} duration={0}  />
+                    <Scene key={PageKeys.SwipeClassifier} component={SwipeClassifier} panHandlers={null} />
+                    <Scene key={PageKeys.WebView} component={WebViewScreen} />
+                    <Scene key={PageKeys.DrawingClassifier} drawerLockMode={'locked-closed'} panHandlers={null} component={DrawingClassifier}   />
+                  </Scene>
+              </Drawer>
+            </Router>
+          </SafeAreaContainer>
         </PersistGate>
       </Provider>
     );
