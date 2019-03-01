@@ -43,7 +43,7 @@ const seenThisSession=[]
 // Stub out actions
 const navBarActions = { 
   setTitleForPage() {},
-  setNavbarColorForPageToDefault() {}
+  setColorForPageToDefault() {}
 }
 
 const classifierActions = {
