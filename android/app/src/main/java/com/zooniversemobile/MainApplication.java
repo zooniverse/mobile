@@ -3,8 +3,9 @@ package com.zooniversemobile;
 import android.support.multidex.MultiDexApplication;
 import android.app.Application;
 
-import com.evollu.react.fcm.FIRMessagingPackage;
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import com.horcrux.svg.SvgPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.cmcewen.blurview.BlurViewPackage;
@@ -32,6 +33,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
+            new RNFirebaseMessagingPackage(),
             new VectorIconsPackage(),
             new BlurViewPackage(),
             new RNFetchBlobPackage(),
@@ -39,7 +42,6 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
             new MainApplicationPackage(),
             new GoogleAnalyticsBridgePackage(),
             new SvgPackage(),
-            new FIRMessagingPackage(),
             new RNDeviceInfo()
       );
     }

@@ -1,66 +1,99 @@
 PODS:
-  - Firebase/Core (4.9.0):
-    - FirebaseAnalytics (= 4.0.9)
-    - FirebaseCore (= 4.0.15)
-  - Firebase/Messaging (4.9.0):
-    - Firebase/Core
-    - FirebaseMessaging (= 2.1.0)
-  - FirebaseAnalytics (4.0.9):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+  - Firebase/Core (5.15.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.4.0)
+  - Firebase/CoreOnly (5.15.0):
+    - FirebaseCore (= 5.1.10)
+  - Firebase/Messaging (5.15.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.2.2)
+  - FirebaseAnalytics (5.4.0):
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.3)
+    - GoogleAppMeasurement (= 5.4.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.15):
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseInstanceID (2.0.9):
-    - FirebaseCore (~> 4.0)
-  - FirebaseMessaging (2.1.0):
-    - FirebaseAnalytics (~> 4.0)
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/Logger (~> 2.1)
+  - FirebaseAnalyticsInterop (1.1.0)
+  - FirebaseCore (5.1.10):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseInstanceID (3.3.0):
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.3)
+    - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseMessaging (3.2.2):
+    - FirebaseAnalyticsInterop (~> 1.1)
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.0)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/Reachability (~> 5.2)
     - Protobuf (~> 3.1)
-  - GoogleToolboxForMac/Defines (2.1.3)
-  - GoogleToolboxForMac/Logger (2.1.3):
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
-  - Protobuf (3.5.0)
+  - GoogleAppMeasurement (5.4.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (5.3.7):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.3.7)
+  - GoogleUtilities/Logger (5.3.7):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.3.7):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.3.7):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.3.7)"
+  - GoogleUtilities/Reachability (5.3.7):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.3.7):
+    - GoogleUtilities/Logger
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - Protobuf (3.6.1)
   - SocketRocket (0.5.1)
 
 DEPENDENCIES:
   - Firebase/Core
-  - Firebase/Messaging
+  - Firebase/Messaging (~> 5.15.0)
   - SocketRocket
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseInstanceID
     - FirebaseMessaging
-    - GoogleToolboxForMac
+    - GoogleAppMeasurement
+    - GoogleUtilities
     - nanopb
     - Protobuf
     - SocketRocket
 
 SPEC CHECKSUMS:
-  Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
-  FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
-  FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
-  FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
-  FirebaseMessaging: 2bafab2d0f3ab3dfd753101c2c32995c2051b5da
-  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
+  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
+  FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
+  FirebaseAnalyticsInterop: e5f21be9af6548372e2f0815834ff909bff395a2
+  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
+  FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  FirebaseMessaging: b412996f6a09337d232bb3a6676ce4d1f353d024
+  GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
+  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: 80427eaa5cdc293d156ca2ad16fd48eba2144523
+PODFILE CHECKSUM: bce48e8dd4643c5362ffff878cbe5fb316489ea7
 
 COCOAPODS: 1.5.3

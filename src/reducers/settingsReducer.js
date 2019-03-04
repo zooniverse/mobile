@@ -2,7 +2,7 @@ import * as ActionConstants from '../constants/actions'
 import R from 'ramda'
 
 const InitialState = {
-    notificationsInitialized: false,
+    fcmToken: '',
     showAllWorkflows: true,
     enableNotifications: true,
     newProjectNotifications: true,
@@ -50,7 +50,7 @@ export default function settings(state=InitialState, action) {
         case ActionConstants.UPDATE_URGENT_HELP_NOTIFICATIONS:
             return { ...state, urgentHelpNotification: action.enabled}
         case ActionConstants.NOTIFICATIONS_INITIALIZED: 
-            return { ...state, notificationsInitialized: true}
+            return { ...state, fcmToken: action.token}
         default:
             return state
     }

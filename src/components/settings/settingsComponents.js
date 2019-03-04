@@ -22,7 +22,7 @@ export const SettingsToggle = ({onToggle, title, description, value, disabled, s
             <View style={styles.settingsToggleContainer}>
                 <Switch
                     disabled={disabled}
-                    onTintColor={theme.$zooniverseTeal}
+                    trackColor={theme.$zooniverseTeal}
                     onValueChange={onToggle}
                     value={value}
                 />

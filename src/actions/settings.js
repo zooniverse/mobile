@@ -1,7 +1,5 @@
 import * as ActionConstants from '../constants/actions'
-import { 
-    updateSubscriptionOfTopic
-} from '../nativeModules/NotificationSettings'
+import firebase from 'react-native-firebase';
 
 /**
  * These are the topic names we subscribe to Firebase with
@@ -15,6 +13,14 @@ const TopicNames = {
     newBetaProjects: 'new_beta_projects',
     urgentNotifications: 'urgent_notifications'
 }
+
+const updateSubscriptionOfTopic = (subscribe, topicName) => {
+    if (subscribe) {
+        firebase.messaging().subscribeToTopic(topicName);
+    } else {
+        firebase.messaging().unsubscribeFromTopic(topicName);
+    }
+} 
 
 export const addUnusedProjectsToNotifications = (projects) => {
     return (dispatch, getState) => {
@@ -37,35 +43,32 @@ export const addUnusedProjectsToNotifications = (projects) => {
 }
 
 const addProjectToSubscriptions = project => {
-    return dispatch => {
-        updateSubscriptionOfTopic(true, project.id).then(() => {
-            dispatch({
-                type: ActionConstants.ADD_PROJECT_SUBSCRIPTION,
-                project
-            })
+    return dispatch => {     
+        updateSubscriptionOfTopic(true, project.id)
+        dispatch({
+            type: ActionConstants.ADD_PROJECT_SUBSCRIPTION,
+            project
         })
     }
 }
 
 const removeProjectFromSubscriptions = project => {
     return dispatch => {
-        updateSubscriptionOfTopic(false, project.id).then(() => {
-            dispatch({
-                type: ActionConstants.REMOVE_PROJECT_SUBSCRIPTION,
-                project
-            })
+        updateSubscriptionOfTopic(false, project.id)
+        dispatch({
+            type: ActionConstants.REMOVE_PROJECT_SUBSCRIPTION,
+            project
         })
     }
 }
 
 export const updateProjectSubsciption = (projectId, subscribed) => {
     return dispatch => {
-        updateSubscriptionOfTopic(subscribed, projectId).then(() => {
-            dispatch({
-                type: ActionConstants.UPDATE_SUBSCRIPTION_TO_PROJECT,
-                subscribe: subscribed,
-                projectId
-            })
+        updateSubscriptionOfTopic(subscribed, projectId)
+        dispatch({
+            type: ActionConstants.UPDATE_SUBSCRIPTION_TO_PROJECT,
+            subscribe: subscribed,
+            projectId
         })
     }
 }
@@ -100,46 +103,55 @@ export const updateEnableNotifications = (enabled) => {
 
 export const updateNewProjectNotifications = (enabled) => {
     return dispatch => {
-        updateSubscriptionOfTopic(enabled, TopicNames.newProjects).then(() => {
-            dispatch({
-                type: ActionConstants.UPDATE_NEW_PROJECT_NOTIICATIONS,
-                enabled
-            })
+        updateSubscriptionOfTopic(enabled, TopicNames.newProjects)
+        dispatch({
+            type: ActionConstants.UPDATE_NEW_PROJECT_NOTIICATIONS,
+            enabled
         })
     }
 }
 
 export const updateBetaNotifications = (enabled) => {
     return dispatch => {
-        updateSubscriptionOfTopic(enabled, TopicNames.newBetaProjects).then(() => {
-            dispatch({
-                type: ActionConstants.UPDATE_BETA_NOTIFICATIONS,
-                enabled
-            })
+        updateSubscriptionOfTopic(enabled, TopicNames.newBetaProjects)
+        dispatch({
+            type: ActionConstants.UPDATE_BETA_NOTIFICATIONS,
+            enabled
         })
     }
 }
 
 export const updateUrgentHelpNotifications = (enabled) => {
     return dispatch => {
-        updateSubscriptionOfTopic(enabled, TopicNames.urgentNotifications).then(() => {
-            dispatch({
-                type: ActionConstants.UPDATE_URGENT_HELP_NOTIFICATIONS,
-                enabled
-            })
+        updateSubscriptionOfTopic(enabled, TopicNames.urgentNotifications)
+        dispatch({
+            type: ActionConstants.UPDATE_URGENT_HELP_NOTIFICATIONS,
+            enabled
         })
     }
 }
 
-export const initializeSubscriptionsWithFirebase = () => {
+export const initializeSubscriptionsWithFirebase = (token) => {
     return (dispatch, getState) => {
-        if (!getState().settings.notificationsInitialized) {
-            updateSubscriptionOfTopic(true, TopicNames.newProjects)
-            updateSubscriptionOfTopic(true, TopicNames.newBetaProjects)
-            updateSubscriptionOfTopic(true, TopicNames.urgentNotifications)
-            
+        const {
+            fcmToken,
+            newProjectNotifications,
+            newBetaNotifications,
+            urgentHelpNotification,
+            projectSpecificNotifications
+        } = getState().settings;
+
+        if (fcmToken !== token) {
+            updateSubscriptionOfTopic(newProjectNotifications, TopicNames.newProjects)
+            updateSubscriptionOfTopic(newBetaNotifications, TopicNames.newBetaProjects)
+            updateSubscriptionOfTopic(urgentHelpNotification, TopicNames.urgentNotifications)
+            projectSpecificNotifications.forEach(project => {
+                updateSubscriptionOfTopic(project.subscribed, project.id)
+            })
+
             dispatch({
-                type: ActionConstants.NOTIFICATIONS_INITIALIZED
+                type: ActionConstants.NOTIFICATIONS_INITIALIZED,
+                token
             })
         }
     }
