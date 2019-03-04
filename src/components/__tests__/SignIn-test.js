@@ -5,14 +5,14 @@ import { SignIn } from '../SignIn'
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <SignIn isConnected={true} />
+    <SignIn isConnected={true} setNavbarSettingsForPage={()=>{}}/>
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
 
 it('renders error message', () => {
   const tree = renderer.create(
-    <SignIn isConnected={true} errorMessage={'does not compute'} />
+    <SignIn isConnected={true} errorMessage={'does not compute'} setNavbarSettingsForPage={()=>{}}/>
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

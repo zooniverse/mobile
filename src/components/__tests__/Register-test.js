@@ -10,7 +10,9 @@ it('renders correctly', () => {
       register={() => {}}
       setField={() => {}}
       setError={() => {}}
-      registration={{}} />
+      registration={{}} 
+      setNavbarSettingsForPage={()=>{}}
+      />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -23,7 +25,9 @@ it('renders errors', () => {
       setField={() => {}}
       setError={() => {}}
       registration={{}}
-      errorMessage={'Wrong!'} />
+      errorMessage={'Wrong!'} 
+      setNavbarSettingsForPage={()=>{}}
+      />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

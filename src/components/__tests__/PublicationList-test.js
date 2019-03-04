@@ -18,6 +18,7 @@ it('renders correctly', () => {
       selectedDiscipline={'science'}
       publications={publications}
       fetchPublications={jest.fn}
+      setNavbarSettingsForPage={()=>{}}
     />
   ).toJSON()
   expect(tree).toMatchSnapshot()

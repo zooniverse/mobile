@@ -6,14 +6,6 @@ const InitialNavBarState = {
     pageSettings: {}
 };
 
-const defaultNavBarSettings = {
-    title: '',
-    showBack: false,
-    hambugerMenuShowing: true,
-    centerType: 'logo',
-    isPreview: false
-}
-
 describe('Nav Bar Reducer', () => {
     test('test set page showings', () => {
         const action = {

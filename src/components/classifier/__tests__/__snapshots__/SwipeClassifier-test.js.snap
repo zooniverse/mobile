@@ -11,7 +11,7 @@ exports[`renders correctly 1`] = `
   isFetching={false}
   navBarActions={
     Object {
-      "setNavbarColorForPageToDefault": [Function],
+      "setColorForPageToDefault": [Function],
       "setTitleForPage": [Function],
     }
   }
@@ -88,7 +88,7 @@ exports[`renders spinner if fetching 1`] = `
   isFetching={true}
   navBarActions={
     Object {
-      "setNavbarColorForPageToDefault": [Function],
+      "setColorForPageToDefault": [Function],
       "setTitleForPage": [Function],
     }
   }
@@ -163,7 +163,7 @@ exports[`renders tutorial if needed 1`] = `
   isFetching={false}
   navBarActions={
     Object {
-      "setNavbarColorForPageToDefault": [Function],
+      "setColorForPageToDefault": [Function],
       "setTitleForPage": [Function],
     }
   }
