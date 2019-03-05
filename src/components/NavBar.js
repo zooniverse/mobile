@@ -118,8 +118,8 @@ export class NavBar extends Component {
   }
 }
 
-const navBarHeight = (Platform.OS === 'ios') ? 74 : 62
-const navBarPadding = (Platform.OS === 'ios') ? 36 : 24
+const navBarHeight = 62
+const navBarPadding = 24
 
 const selectBackgroundStyle = (isPreview) => {
   return isPreview ? styles.previewBackgroundColor : styles.defaultBackgroundColor
