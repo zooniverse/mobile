@@ -12,7 +12,7 @@ exports[`renders correctly with defaults 1`] = `
     style={
       Array [
         undefined,
-        null,
+        undefined,
       ]
     }
   >
@@ -58,19 +58,7 @@ exports[`renders correctly with defaults 1`] = `
         </Text>
       </View>
     </View>
-    <View>
-      <Text
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "fontFamily": "Karla",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    <View />
     <View>
       <View
         accessible={true}
@@ -98,7 +86,7 @@ exports[`renders correctly with defaults 1`] = `
               Array [
                 undefined,
                 undefined,
-                Object {},
+                undefined,
               ],
               Object {
                 "fontFamily": "FontAwesome",
@@ -130,7 +118,7 @@ exports[`renders correctly with title 1`] = `
     style={
       Array [
         undefined,
-        null,
+        undefined,
       ]
     }
   >
@@ -176,21 +164,7 @@ exports[`renders correctly with title 1`] = `
         </Text>
       </View>
     </View>
-    <View>
-      <Text
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "fontFamily": "Karla",
-            },
-            undefined,
-          ]
-        }
-      >
-        OHai
-      </Text>
-    </View>
+    <View />
     <View>
       <View
         accessible={true}
@@ -218,7 +192,7 @@ exports[`renders correctly with title 1`] = `
               Array [
                 undefined,
                 undefined,
-                Object {},
+                undefined,
               ],
               Object {
                 "fontFamily": "FontAwesome",

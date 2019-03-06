@@ -10,21 +10,18 @@ import { bindActionCreators } from 'redux'
 import R from 'ramda'
 import DeviceInfo from 'react-native-device-info';
 
-import Theme from '../../theme'
 import ClassificationPanel from '../classifier/ClassificationPanel'
 import DrawingClassifierSubject from './DrawingClassifierSubject'
 import Question from '../classifier/Question'
 import Tutorial from '../classifier/Tutorial'
 import * as imageActions from '../../actions/images'
 import * as classifierActions from '../../actions/classifier'
-import * as navBarActions from '../../actions/navBar'
 import * as drawingActions from '../../actions/drawing'
 import ClassificationContainer from '../classifier/ClassifierContainer'
 import NeedHelpButton from '../classifier/NeedHelpButton'
 import OverlaySpinner from '../OverlaySpinner'
 import ClassifierButton from '../classifier/ClassifierButton'
 import Separator from '../common/Separator'
-import NavBar from '../NavBar'
 import DrawingModal from './DrawingModal'
 import NativeImage from '../../nativeModules/NativeImage'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
@@ -52,11 +49,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
     imageActions: bindActionCreators(imageActions, dispatch),
     classifierActions: bindActionCreators(classifierActions, dispatch),
-    navBarActions: bindActionCreators(navBarActions, dispatch),
     drawingActions: bindActionCreators(drawingActions, dispatch)
 })
-
-const PAGE_KEY = 'DrawingScreen'
 
 class DrawingClassifier extends Component {
 
@@ -82,19 +76,9 @@ class DrawingClassifier extends Component {
         this.submitClassification = this.submitClassification.bind(this)
     }
 
-    static renderNavigationBar() {
-        return <NavBar pageKey={PAGE_KEY} showBack={true} />;
-    }
-
     componentDidMount() {
-        const { display_name, inPreviewMode, navBarActions, classifierActions } = this.props
-        navBarActions.setTitleForPage(display_name, PAGE_KEY)
+        const { inPreviewMode, classifierActions } = this.props
         classifierActions.setClassifierTestMode(inPreviewMode)
-        if (inPreviewMode) {
-          navBarActions.setNavbarColorForPage(Theme.$testRed, PAGE_KEY)
-        } else {
-          navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
-        }
     }
 
     submitClassification() {
@@ -341,11 +325,6 @@ DrawingClassifier.propTypes = {
     }),
     inBetaMode: PropTypes.bool,
     inPreviewMode: PropTypes.bool,
-    navBarActions: PropTypes.shape({
-        setTitleForPage: PropTypes.func,
-        setNavbarColorForPage: PropTypes.func,
-        setNavbarColorForPageToDefault: PropTypes.func
-    }),
     numberOfShapesDrawn: PropTypes.number,
     subjectDimensions: PropTypes.shape({
         naturalHeight: PropTypes.number,

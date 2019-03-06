@@ -18,6 +18,8 @@ import {
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import * as settingsActions from '../../actions/settings'
 import theme from '../../theme'
+import { setNavbarSettingsForPage } from '../../actions/navBar'
+import PageKeys from '../../constants/PageKeys'
 
 GoogleAnalytics.trackEvent('view', 'Notification Settings')
 
@@ -50,16 +52,18 @@ const mapDispatchToProps = (dispatch) => ({
   checkPushPermissions(){
     dispatch(checkPushPermissions())
   },
-  settingsActions: bindActionCreators(settingsActions, dispatch)
+  settingsActions: bindActionCreators(settingsActions, dispatch),
+  setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.Settings))
 })
 
 export class Settings extends React.Component {
   componentDidMount() {
     this.props.checkPushPermissions()
-  }
-
-  static renderNavigationBar() {
-    return <NavBar title={'Settings'} showBack={true} />;
+    this.props.setNavbarSettingsForPage({
+      title: 'Settings',
+      showBack: true,
+      centerType: 'title'
+    })
   }
 
   renderSettingsToggle = ({item}) => {
@@ -181,7 +185,8 @@ Settings.propTypes = {
   newBetaNotifications: PropTypes.bool,
   urgentHelpNotification: PropTypes.bool,
   projectSpecificNotifications: PropTypes.array,
-  settingsActions: PropTypes.any
+  settingsActions: PropTypes.any,
+  setNavbarSettingsForPage: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)

@@ -13,10 +13,11 @@ import { signIn, continueAsGuest } from '../actions/auth'
 import { connect } from 'react-redux';
 import Button from './Button'
 import Input from './Input'
-import NavBar from './NavBar'
 import OverlaySpinner from './OverlaySpinner'
 import StyledText from './StyledText'
 import { Actions } from 'react-native-router-flux'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
 
 const mapStateToProps = (state) => ({
   isFetching: state.main.isFetching,
@@ -30,6 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
   continueAsGuest() {
     dispatch(continueAsGuest())
   },
+  setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.SignIn))
 })
 
 export class SignIn extends React.Component {
@@ -71,8 +73,11 @@ export class SignIn extends React.Component {
     this.props.continueAsGuest()
   }
 
-  static renderNavigationBar() {
-    return <NavBar showLogo={true} showDrawer={false} />;
+  componentDidMount() {
+    this.props.setNavbarSettingsForPage({
+      centerType: 'logo',
+      showHamburgerMenu: false,
+    })
   }
 
   render() {
@@ -176,6 +181,7 @@ SignIn.propTypes = {
   isFetching: PropTypes.bool,
   signIn: PropTypes.func,
   continueAsGuest: PropTypes.func,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  setNavbarSettingsForPage: PropTypes.func
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

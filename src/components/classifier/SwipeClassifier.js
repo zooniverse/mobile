@@ -13,17 +13,14 @@ import Tutorial from './Tutorial'
 import SwipeTabs from './SwipeTabs'
 import NeedHelpButton from './NeedHelpButton'
 import OverlaySpinner from '../OverlaySpinner'
-import NavBar from '../NavBar'
 import FullScreenImage from '../FullScreenImage'
 import UnlinkedTask from './UnlinkedTask'
 import Swiper from 'react-native-deck-swiper'
 import R from 'ramda'
 import * as classifierActions from '../../actions/classifier'
-import * as navBarActions from '../../actions/navBar'
 import SwipeCard from './SwipeCard'
 import { getTaskFromWorkflow, getAnswersFromWorkflow } from '../../utils/workflow-utils'
 import { markdownContainsImage } from '../../utils/markdownUtils'
-import Theme from '../../theme'
 import ClassifierContainer from './ClassifierContainer'
 
 const mapStateToProps = (state, ownProps) => {
@@ -44,10 +41,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   classifierActions: bindActionCreators(classifierActions, dispatch),
-  navBarActions: bindActionCreators(navBarActions, dispatch)
 })
 
-const PAGE_KEY = 'SwipeClassifier';
 export class SwipeClassifier extends React.Component {
   constructor(props) {
     super(props)
@@ -142,18 +137,9 @@ export class SwipeClassifier extends React.Component {
   }
 
   componentDidMount() {
-    const { display_name, inPreviewMode, navBarActions, classifierActions } = this.props
-    navBarActions.setTitleForPage(display_name, PAGE_KEY)
+    const { inPreviewMode, classifierActions } = this.props
     classifierActions.setClassifierTestMode(inPreviewMode)
-    if (inPreviewMode) {
-      navBarActions.setNavbarColorForPage(Theme.$testRed, PAGE_KEY)
-    } else {
-      navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
-    }
-  }
 
-  static renderNavigationBar() {
-    return <NavBar pageKey={PAGE_KEY} showBack={true} />;
   }
 
   render() {
@@ -349,7 +335,6 @@ SwipeClassifier.propTypes = {
   needsTutorial: PropTypes.bool,
   guide: PropTypes.object,
   classifierActions: PropTypes.any,
-  navBarActions: PropTypes.any,
   subjectLists: PropTypes.array,
   subjectsSeenThisSession: PropTypes.array,
   answers: PropTypes.array,

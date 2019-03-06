@@ -17,13 +17,14 @@ import { GLOBALS, loggedInDisciplineTags } from '../constants/globals'
 import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
 import Discipline from './Discipline'
-import NavBar from '../components/NavBar'
 import { setPushPrompted } from '../actions/user'
 import FontedText from '../components/common/FontedText'
 import * as projectActions from '../actions/projects'
 import * as settingsActions from '../actions/settings'
 import { makeCancelable } from '../utils/promiseUtils'
 import { extractSwipeEnabledProjects } from '../utils/projectUtils'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
 
 GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
@@ -46,6 +47,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  setNavbarSettingsForPage: (settings, page) => dispatch(setNavbarSettingsForPage(settings, page)),
   projectActions: bindActionCreators(projectActions, dispatch),
   settingsActions: bindActionCreators(settingsActions, dispatch),
   setPushPrompted(value) {
@@ -64,6 +66,9 @@ export class ProjectDisciplines extends React.Component {
   }
 
   componentDidMount() {
+    this.props.setNavbarSettingsForPage({
+      centerType: 'avatar' 
+    }, PageKeys.ProjectDisciplines)
     if (this.shouldPromptForPermissions()) {
       setTimeout(()=> {
         this.promptRequestPermissions()
@@ -103,10 +108,6 @@ export class ProjectDisciplines extends React.Component {
       PushNotificationIOS.requestPermissions()
     }
     this.props.setPushPrompted(true)
-  }
-
-  static renderNavigationBar() {
-    return <NavBar showAvatar={true} />;
   }
 
   _renderItem({item}) {
@@ -198,7 +199,7 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   subNavContainer: {
-    paddingTop: 74,
+    paddingTop: Platform.OS === 'ios' ? 25 : 74,
     paddingBottom: 25,
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -249,7 +250,8 @@ ProjectDisciplines.propTypes = {
   settingsActions: PropTypes.any,
   hasRecentProjects: PropTypes.bool,
   hasPreviewProjects: PropTypes.bool,
-  hasBetaProjects: PropTypes.bool
+  hasBetaProjects: PropTypes.bool,
+  setNavbarSettingsForPage: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)

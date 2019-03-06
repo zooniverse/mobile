@@ -58,8 +58,8 @@ Object {
     "webViewNavCounter": 0,
   },
   "navBar": Object {
-    "backgroundColors": Object {},
-    "titles": Object {},
+    "pageSettings": Object {},
+    "pageShowing": "",
   },
   "projects": Object {
     "betaProjectList": Array [],
@@ -144,8 +144,8 @@ Object {
     "webViewNavCounter": 0,
   },
   "navBar": Object {
-    "backgroundColors": Object {},
-    "titles": Object {},
+    "pageSettings": Object {},
+    "pageShowing": "",
   },
   "projects": Object {
     "betaProjectList": Array [],
@@ -234,8 +234,8 @@ Object {
     "webViewNavCounter": 0,
   },
   "navBar": Object {
-    "backgroundColors": Object {},
-    "titles": Object {},
+    "pageSettings": Object {},
+    "pageShowing": "",
   },
   "projects": Object {
     "betaProjectList": Array [],
@@ -321,8 +321,8 @@ Object {
     "webViewNavCounter": 0,
   },
   "navBar": Object {
-    "backgroundColors": Object {},
-    "titles": Object {},
+    "pageSettings": Object {},
+    "pageShowing": "",
   },
   "projects": Object {
     "betaProjectList": Array [],

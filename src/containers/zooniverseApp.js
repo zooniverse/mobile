@@ -11,12 +11,13 @@ import firebase from 'react-native-firebase';
 
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
-import NavBar from '../components/NavBar'
 import { setState } from '../actions/index'
 import { removeLeftOverImages } from '../utils/imageUtils'
 import * as settingsActions from '../actions/settings'
 import * as imageActions from '../actions/images'
 import * as appActions from '../actions/app'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -36,7 +37,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   imageActions: bindActionCreators(imageActions, dispatch),
   settingsActions: bindActionCreators(settingsActions, dispatch),
-  appActions: bindActionCreators(appActions, dispatch)
+  appActions: bindActionCreators(appActions, dispatch),
+  setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.ZooniverseApp))
 })
 
 class ZooniverseApp extends Component {
@@ -58,6 +60,10 @@ class ZooniverseApp extends Component {
   } 
 
   componentDidMount() {
+    this.props.setNavbarSettingsForPage({
+      centerType: 'avatar'
+    })
+    
     // Initially set screen dimensions
     this.handleDimensionsChange({window: Dimensions.get('window')})
 
@@ -73,10 +79,6 @@ class ZooniverseApp extends Component {
 
   componentWillUnmount() {
     this.onTokenRefreshListener()
-  }
-
-  static renderNavigationBar() {
-    return <NavBar showAvatar={true} />;
   }
 
   render() {
@@ -109,7 +111,8 @@ ZooniverseApp.propTypes = {
   settingsActions: PropTypes.any,
   appActions: PropTypes.shape({
     updateScreenDimensions: PropTypes.func
-  })
+  }),
+  setNavbarSettingsForPage: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZooniverseApp)

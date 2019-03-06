@@ -12,12 +12,11 @@ import R from 'ramda'
 import DeviceInfo from 'react-native-device-info'
 
 import ProjectTile from './ProjectTile';
-import NavBar from '../NavBar'
 import FontedText from '../common/FontedText'
 import * as navBarActions from '../../actions/navBar'
 import { GLOBALS } from '../../constants/globals'
 import { extractNonSwipeEnabledProjects, extractSwipeEnabledProjects } from '../../utils/projectUtils'
-import Theme from '../../theme'
+import PageKeys from '../../constants/PageKeys'
 
 GoogleAnalytics.trackEvent('view', 'Project')
 
@@ -64,8 +63,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const ColumnNumbers = DeviceInfo.isTablet() ? 2 : 1
 
-const PAGE_KEY = 'ProjectList';
-
 class ProjectList extends Component {
 
     constructor(props) {
@@ -73,20 +70,16 @@ class ProjectList extends Component {
 
         this.renderItem = this.renderItem.bind(this)
     }
-    
-    static renderNavigationBar() {
-        return <NavBar pageKey={PAGE_KEY} showBack={true} />;
-    }
 
     componentDidMount() {
-        const title = GLOBALS.DISCIPLINES.find((element) => element.value === this.props.selectedProjectTag).label
-        this.props.navBarActions.setTitleForPage(title, PAGE_KEY);
-
-        if (this.props.inPreviewMode) {
-            this.props.navBarActions.setNavbarColorForPage(Theme.$testRed, PAGE_KEY)
-        } else {
-            this.props.navBarActions.setNavbarColorForPageToDefault(PAGE_KEY)
-        }
+        const { selectedProjectTag, navBarActions, inPreviewMode } = this.props;
+        const title = GLOBALS.DISCIPLINES.find((element) => element.value === selectedProjectTag).label
+        navBarActions.setNavbarSettingsForPage({
+            title,
+            showBack: true,
+            isPreview: inPreviewMode,
+            centerType: 'title',
+        }, PageKeys.ProjectList)
     }
 
     emptyText() {

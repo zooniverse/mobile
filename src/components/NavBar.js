@@ -15,11 +15,18 @@ import UserAvatar from './UserAvatar'
 import CircleRibbon from './CircleRibbon'
 import FontedText from './common/FontedText'
 
-const mapStateToProps = (state, ownProps) => ({
-  user: state.user,
-  dynamicTitle: state.navBar.titles[ownProps.pageKey],
-  dynamicColor: state.navBar.backgroundColors[ownProps.pageKey]
-})
+const mapStateToProps = (state) => {
+  const { pageShowing, pageSettings } = state.navBar
+  const navbarSettings = pageSettings[pageShowing]
+  return {
+    user: state.user,
+    title: navbarSettings ? navbarSettings.title : '',
+    showBack: navbarSettings ? navbarSettings.showBack : false,
+    hambugerMenuShowing: navbarSettings ? navbarSettings.hambugerMenuShowing : false,
+    isPreview: navbarSettings ? navbarSettings.isPreview : false,
+    centerType: navbarSettings ? navbarSettings.centerType : 'title'
+  }
+}
 
 export class NavBar extends Component {
   constructor(props) {
@@ -48,14 +55,14 @@ export class NavBar extends Component {
         <CircleRibbon />
       </View>
 
-    const CenterContainer = ({shouldShowTitle, shouldShowLogo}) => {
+    const CenterContainer = () => {
       let centerElement = null;
-      if (shouldShowTitle){
+      if ('title' === this.props.centerType){
         centerElement = 
           <FontedText style={styles.title} numberOfLines={1}>
-            { this.props.title !== undefined ? this.props.title : this.props.dynamicTitle }
-        </FontedText>
-      } else if (shouldShowLogo) {
+            { this.props.title }
+          </FontedText>
+      } else if ('logo' === this.props.centerType) {
         centerElement = <Image source={require('../../images/logo.png')} style={styles.logo} />
       }
 
@@ -96,31 +103,39 @@ export class NavBar extends Component {
       );
     }
 
-    const dynamicColorStyle = this.props.dynamicColor !== undefined ? {backgroundColor: this.props.dynamicColor} : null
     return (
         <View style={[styles.navBarContainer]}>
-          <View style={[styles.navBar, dynamicColorStyle]}>
+          <View style={[styles.navBar, selectBackgroundStyle(this.props.isPreview)]}>
             <LeftContainer isActive={this.props.showBack} />
-            <CenterContainer shouldShowTitle={!this.props.showLogo && !this.props.showAvatar} shouldShowLogo={this.props.showLogo} />
-            <RightContainer isActive={this.props.showDrawer} />
+            <CenterContainer />
+            <RightContainer isActive={this.props.hambugerMenuShowing} />
           </View>
           <View>
-            { this.props.showAvatar ? avatar : null }
+            { this.props.centerType === 'avatar' ? avatar : null }
           </View>
         </View>
     );
   }
 }
 
-const navBarHeight = (Platform.OS === 'ios') ? 74 : 62
-const navBarPadding = (Platform.OS === 'ios') ? 36 : 24
+const navBarHeight = 62
+const navBarPadding = 24
+
+const selectBackgroundStyle = (isPreview) => {
+  return isPreview ? styles.previewBackgroundColor : styles.defaultBackgroundColor
+}
 
 const styles = EStyleSheet.create({
+  defaultBackgroundColor: {
+    backgroundColor: '$headerColor',
+  },
+  previewBackgroundColor: {
+    backgroundColor: '$testRed'
+  },
   navBarContainer: {
     flexDirection: 'column',
   },
   navBar: {
-    backgroundColor: '$headerColor',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: navBarPadding,
@@ -161,7 +176,8 @@ const styles = EStyleSheet.create({
     flex: 1,
     marginTop: -25,
     alignSelf: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 86
   },
   disabledIcon: {
     color: '$transparent'
@@ -172,19 +188,17 @@ NavBar.propTypes = {
   showLogo: PropTypes.bool,
   showAvatar: PropTypes.bool,
   showBack: PropTypes.bool,
-  showDrawer: PropTypes.bool,
+  hambugerMenuShowing: PropTypes.bool,
   onBack: PropTypes.func,
   user: PropTypes.object,
   title: PropTypes.string,
-  dynamicTitle: PropTypes.string,
-  dynamicColor: PropTypes.string,
-  pageKey: PropTypes.string
+  isPreview: PropTypes.bool,
+  centerType: PropTypes.oneOf(['title', 'logo', 'avatar'])
+
 }
 NavBar.defaultProps = {
   showLogo: false,
   showAvatar: false,
-  showBack: false,
-  showDrawer: true,
   title: undefined
 }
 

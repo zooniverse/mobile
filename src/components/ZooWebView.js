@@ -15,6 +15,7 @@ import {Actions} from 'react-native-router-flux'
 import OverlaySpinner from './OverlaySpinner'
 import PropTypes from 'prop-types';
 import * as navBarActions from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
 
 const WEBVIEW_REF = 'WEBVIEW_REF'
 const zooniverseURL = 'https://www.zooniverse.org/projects/'
@@ -33,16 +34,10 @@ const mapDispatchToProps = (dispatch) => ({
   navBarActions: bindActionCreators(navBarActions, dispatch)
 })
 
-const PAGE_NAME = 'ZooWebView';
-
 class ZooWebView extends React.Component {
   constructor(props) {
     super(props)
     this.state = { canGoBack: false }
-  }
-
-  static renderNavigationBar() {
-    return <NavBar pageKey={PAGE_NAME} showBack={true} />
   }
 
   componentWillMount() {
@@ -50,7 +45,11 @@ class ZooWebView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navBarActions.setTitleForPage(this.props.project.display_name, PAGE_NAME)
+    this.props.navBarActions.setNavbarSettingsForPage({
+      title: this.props.project.display_name,
+      showBack: true,
+      centerType: 'title'
+    }, PageKeys.ZooWebView)
   }
 
   render() {
@@ -174,7 +173,7 @@ ZooWebView.propTypes = {
   updateNavCounter: PropTypes.func,
   setIsFetching: PropTypes.func,
   navBarActions: PropTypes.shape({
-    setTitleForPage: PropTypes.func
+    setNavbarSettingsForPage: PropTypes.func
   })
 }
 

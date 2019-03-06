@@ -14,7 +14,7 @@ jest.mock('Alert', () => 'Alert')
 it('renders correctly', () => {
   const user ={ display_name: 'Fake User' }
   const tree = renderer.create(
-    <ProjectDisciplines user={user} projectList={[]} projectActions={projectActions} />
+    <ProjectDisciplines user={user} projectList={[]} projectActions={projectActions} setNavbarSettingsForPage={()=>{}}/>
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

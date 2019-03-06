@@ -76,35 +76,37 @@ class DrawingModal extends Component {
                 visible={this.props.visible}
                 transparent
             >
-                { 
-                    Platform.OS === 'ios' ?
-                        <BlurView style={styles.blurView} blurType="light" />
-                    :
-                        <View style={ [styles.blurView, styles.androidBlurView] } />
-                }
-                <View style={styles.modalContainer}>
-                    <DrawingToolView
-                        onUndoButtonSelected={this.props.drawingActions.undoMostRecentEdit}
-                        maxShapesDrawn={this.props.numberOfShapesDrawn >= this.props.tool.max}
-                        drawingColor={this.props.tool.color}
-                        imageSource={this.props.imageSource}
-                        canUndo={this.props.canUndo}
-                    />
-                    <InstructionView
-                        {... this.props.tool}
-                        numberDrawn={this.props.numberOfShapesDrawn}
-                        onCancel={() => this.onCancel({justClearInProgress: true})}
-                        onSave={this.onSave}
-                        warnForRequirements={this.props.warnForRequirements && this.props.numberOfShapesDrawn < this.props.tool.min}
+                <View style={styles.modal}>
+                    { 
+                        Platform.OS === 'ios' ?
+                            <BlurView style={styles.blurView} blurType="light" />
+                        :
+                            <View style={ [styles.blurView, styles.androidBlurView] } />
+                    }
+                    <View style={styles.modalContainer}>
+                        <DrawingToolView
+                            onUndoButtonSelected={this.props.drawingActions.undoMostRecentEdit}
+                            maxShapesDrawn={this.props.numberOfShapesDrawn >= this.props.tool.max}
+                            drawingColor={this.props.tool.color}
+                            imageSource={this.props.imageSource}
+                            canUndo={this.props.canUndo}
+                        />
+                        <InstructionView
+                            {... this.props.tool}
+                            numberDrawn={this.props.numberOfShapesDrawn}
+                            onCancel={() => this.onCancel({justClearInProgress: true})}
+                            onSave={this.onSave}
+                            warnForRequirements={this.props.warnForRequirements && this.props.numberOfShapesDrawn < this.props.tool.min}
+                        />
+                    </View>
+                    <CloseButton
+                        onPress={() => this.onCancel({justClearInProgress: false})}
+                        style={styles.closeButton}
+                        color={Theme.$zooniverseTeal}
+                        backgroundColor="white"
+                        size={34}
                     />
                 </View>
-                <CloseButton
-                    onPress={() => this.onCancel({justClearInProgress: false})}
-                    style={styles.closeButton}
-                    color={Theme.$zooniverseTeal}
-                    backgroundColor="white"
-                    size={34}
-                />
             </Modal>
         )
     }
@@ -141,6 +143,10 @@ const styles = EStyleSheet.create({
         marginHorizontal: 25,
         marginBottom: 25,
         marginTop: 40
+    },
+    modal: {
+        flex: 1,
+        marginTop: Platform.OS === 'ios' ? 50 : 0
     }
 
 })
