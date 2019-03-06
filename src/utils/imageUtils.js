@@ -9,10 +9,10 @@ export const removeLeftOverImages = imageDictionary => {
 
 export const loadRemoteImageToCache = (remoteUri) => {
     return new Promise((resolve, reject) => {
-        const fileExtension = remoteUri.split('.').pop();
+        const appendExt = remoteUri.split('.').pop().split('?')[0];
         const task = RNFetchBlob.config({
                         fileCache: true,
-                        appendExt: fileExtension
+                        appendExt
                     })
                     .fetch('GET', remoteUri)
 
