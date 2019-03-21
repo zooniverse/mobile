@@ -10,7 +10,7 @@ import R from 'ramda';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator'
-import VerticalPaginationBar from './VerticalPaginationBar'
+import PaginationBar from './PaginationBar'
 
 class SwipeCardSubjectsView extends Component {
     constructor(props) {
@@ -54,19 +54,21 @@ class SwipeCardSubjectsView extends Component {
             <View style={styles.cardContainer}>
                 {
                     imagesAreLoaded && hasMultipleSubjects && 
-                        <VerticalPaginationBar
-                            onScrollDownPressed={() => {
+                        <PaginationBar
+                            onPageForwardPressed={() => {
                                 if (imageIndex + 1 < imageUris.length) {
                                     this.pager.scrollTo({y: (imageIndex + 1) * pagerDimensions.height})
                                 }
                             }}
-                            onScrollUpPressed={() => {
+                            onPageBackwardPressed={() => {
                                 if (imageIndex - 1 >= 0) {
                                     this.pager.scrollTo({y: (imageIndex - 1) * pagerDimensions.height})
                                 }
                             }}
                             totalPages={imageUris.length} 
                             pageIndex={imageIndex}
+                            vertical
+                            showArrows
                         />
                 }
                 <View style={styles.container} onLayout={event => this.setState({
