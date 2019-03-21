@@ -24,8 +24,8 @@ export class ZoomableImage extends Component {
       <ImageZoom
         cropWidth={Dimensions.get('window').width}
         cropHeight={Dimensions.get('window').height}
-        imageWidth={Dimensions.get('window').width}
-        imageHeight={Dimensions.get('window').height}
+        imageWidth={Dimensions.get('window').width - 75}
+        imageHeight={Dimensions.get('window').height - 75}
         onLongPress={this.props.handlePress}
         longPressTime={ 300 }
         pinchToZoom
@@ -33,7 +33,7 @@ export class ZoomableImage extends Component {
       >
         <Image
           source={ {uri} }
-          style={{width: Dimensions.get('window').width, height: Dimensions.get('window').height}} 
+          style={{width: Dimensions.get('window').width - 75, height: Dimensions.get('window').height - 75}} 
           resizeMethod="resize"
           resizeMode="contain"
         />
