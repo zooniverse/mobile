@@ -5,6 +5,7 @@ import {
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
+import EStyleSheet from 'react-native-extended-stylesheet'
 
 import LoadableImage from '../common/LoadableImage'
 import AlreadySeenBanner from './AlreadySeenBanner'
@@ -71,7 +72,7 @@ class TapableSubject extends Component {
                             snapToInterval={width - 40}
                             horizontal
                             style={{height, width}}
-                            contentContainerStyle={{flexGrow: 1}}
+                            contentContainerStyle={styles.scrollViewContainer}
                             scrollEventThrottle={1}
                             showsHorizontalScrollIndicator={false}
                             onScroll={Animated.event(
@@ -118,7 +119,7 @@ class TapableSubject extends Component {
                                             >
                                                 <LoadableImage
                                                     source={{uri: display.src}}
-                                                    style={{height, width: width - 60, backgroundColor: 'transparent'}}
+                                                    style={[{height, width: width - 60}, styles.imageBackground]}
                                                 />
                                             </TouchableOpacity> 
                                         </Animated.View>
@@ -128,7 +129,7 @@ class TapableSubject extends Component {
                             { alreadySeen && <AlreadySeenBanner /> }
                         </Animated.ScrollView>
                     :
-                        <TouchableOpacity style={{flex: 1}} onPress={() => onPress(subject.displays[0].src)}>
+                        <TouchableOpacity style={styles.imageContainer} onPress={() => onPress(subject.displays[0].src)}>
                             <LoadableImage
                                 source={{uri: subject.displays[0].src}}
                                 style={{height, width}}
@@ -137,7 +138,7 @@ class TapableSubject extends Component {
                 }
                 {
                     subject.displays.length > 1 &&
-                        <View style={{marginTop: 10}}>
+                        <View style={styles.paginationContainer}>
                             <PaginationBar
                                 totalPages={subject.displays.length}
                                 pageIndex={this.state.imageIndex}
@@ -148,6 +149,21 @@ class TapableSubject extends Component {
         );
     }
 }
+
+const styles = EStyleSheet.create({
+    scrollViewContainer: {
+        flexGrow: 1
+    },
+    imageBackground: {
+        backgroundColor: 'transparent'
+    },
+    imageContainer: {
+        flex: 1
+    },
+    paginationContainer: {
+        marginTop: 10
+    }
+})
 
 TapableSubject.propTypes = {
     height: PropTypes.number,
