@@ -4,8 +4,8 @@ exports[`renders correctly 1`] = `
 <ImageZoom
   cropHeight={1334}
   cropWidth={750}
-  imageHeight={1334}
-  imageWidth={750}
+  imageHeight={1259}
+  imageWidth={675}
   longPressTime={300}
   onLongPress={[Function]}
   panToMove={true}
@@ -21,8 +21,8 @@ exports[`renders correctly 1`] = `
     }
     style={
       Object {
-        "height": 1334,
-        "width": 750,
+        "height": 1259,
+        "width": 675,
       }
     }
   />
