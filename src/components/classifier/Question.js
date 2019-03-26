@@ -49,7 +49,6 @@ export class Question extends Component {
   render() {
     return (
       <View style={styles.questionContainer}>
-        <View style={styles.question}>
           <View style={styles.markdown}>
             <SizedMarkdown>
               {this.state.question}
@@ -70,7 +69,6 @@ export class Question extends Component {
             :
               null
           }
-        </View>
       </View>
     )
   }
