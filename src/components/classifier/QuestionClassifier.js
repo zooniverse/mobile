@@ -70,11 +70,14 @@ class QuestionClassifier extends Component {
           subject
         } = this.props
         const { id, first_task } = workflow
-        const { answerSelected } = this.state
+        const { 
+          answerSelected,
+          imageDimensions
+        } = this.state
 
         this.scrollView.scrollTo({x: 0, y: 0})
         classifierActions.addAnnotationToTask(id, first_task, answerSelected, false)
-        classifierActions.saveClassification(workflow, subject, this.state.imageDimensions)
+        classifierActions.saveClassification(workflow, subject, imageDimensions)
 
         this.setState({
           answerSelected: -1
@@ -99,7 +102,12 @@ class QuestionClassifier extends Component {
       } = this.props
 
       const {
-        answerSelected
+        answerSelected,
+        imageDimensions,
+        isQuestionVisible,
+        fullScreenImageSource,
+        fullScreenQuestion,
+        showFullSize
       } = this.state
 
       if (isFetching || !isSuccess) {
@@ -142,18 +150,18 @@ class QuestionClassifier extends Component {
           <View style={styles.classificationPanel}>
             <ClassificationPanel
               hasTutorial = { !R.isEmpty(tutorial) }
-              isQuestionVisible = {this.state.isQuestionVisible }
+              isQuestionVisible = {isQuestionVisible }
               setQuestionVisibility = { this.setQuestionVisibility() }
             >
               {
-                this.state.isQuestionVisible &&
+                isQuestionVisible &&
                   <View>
                     { question }
                   </View>
               }
             </ClassificationPanel>
             {
-              this.state.isQuestionVisible ?
+              isQuestionVisible ?
                 <ScrollView 
                   style={styles.scrollView}
                   ref={ref => this.scrollView = ref}
@@ -163,7 +171,7 @@ class QuestionClassifier extends Component {
                     <View onLayout={({nativeEvent}) => this.setState({imageDimensions: {width: nativeEvent.layout.width, height: nativeEvent.layout.height}})}>
                       <TapableSubject
                         height={300}
-                        width={this.state.imageDimensions.width}
+                        width={imageDimensions.width}
                         subject={subject}
                         alreadySeen={seenThisSession}
                         onPress={(imageSource) => this.setState({
@@ -175,8 +183,8 @@ class QuestionClassifier extends Component {
                       answers.map((answer, index) =>
                         <View key={index} style={styles.buttonContainer}>
                           <ClassifierButton
-                            selected={index === this.state.answerSelected}
-                            blurred={this.state.answerSelected !== -1 && index !== this.state.answerSelected}
+                            selected={index === answerSelected}
+                            blurred={answerSelected !== -1 && index !== answerSelected}
                             type="answer"
                             text={answer.label}
                             onPress={this.onOptionSelected(index)}
@@ -217,10 +225,10 @@ class QuestionClassifier extends Component {
                 renderTutorial()
             }
             <FullScreenImage
-              source={this.state.fullScreenImageSource}
-              isVisible={this.state.showFullSize}
+              source={fullScreenImageSource}
+              isVisible={showFullSize}
               handlePress={() => this.setState({ fullScreenQuestion: '', showFullSize: false })}
-              question={this.state.fullScreenQuestion}
+              question={fullScreenQuestion}
             />
           </View>
 
