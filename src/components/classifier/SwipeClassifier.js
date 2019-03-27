@@ -70,7 +70,6 @@ export class SwipeClassifier extends React.Component {
     const { width, height } = nativeEvent.layout
     this.setState({
       swiperDimensions: { width, height},
-      swiperDimensionsLoaded: true
     })
   }
 
@@ -120,7 +119,6 @@ export class SwipeClassifier extends React.Component {
             onExpandButtonPressed={this.expandImage}
             subjectDisplayWidth={this.state.swiperDimensions.width}
             subjectDisplayHeight={this.state.swiperDimensions.height}
-            dimensionsLoaded={true}
           />
       ) : <View />
   }
