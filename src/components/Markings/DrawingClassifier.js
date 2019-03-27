@@ -205,6 +205,7 @@ class DrawingClassifier extends Component {
         const classificationView =
             <View style={[styles.container, classificationBottomPadding]}>
                 <ClassificationPanel
+                    containerStyle={styles.container}
                     isFetching={this.props.isFetching}
                     hasTutorial={!R.isEmpty(this.props.tutorial)}
                     isQuestionVisible={isQuestionVisible}
