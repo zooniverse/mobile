@@ -3,34 +3,32 @@
 exports[`renders correctly (without task help) 1`] = `
 <View>
   <View>
-    <View>
-      <View
-        onLayout={[Function]}
+    <View
+      onLayout={[Function]}
+    >
+      <Markdown
+        rules={
+          Object {
+            "image": Object {
+              "match": [Function],
+            },
+          }
+        }
+        styles={
+          Object {
+            "image": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "text": Object {
+              "fontFamily": "Karla",
+              "fontSize": 14,
+            },
+          }
+        }
       >
-        <Markdown
-          rules={
-            Object {
-              "image": Object {
-                "match": [Function],
-              },
-            }
-          }
-          styles={
-            Object {
-              "image": Object {
-                "height": 0,
-                "width": 0,
-              },
-              "text": Object {
-                "fontFamily": "Karla",
-                "fontSize": 14,
-              },
-            }
-          }
-        >
-          Is this this?
-        </Markdown>
-      </View>
+        Is this this?
+      </Markdown>
     </View>
   </View>
 </View>
@@ -39,34 +37,32 @@ exports[`renders correctly (without task help) 1`] = `
 exports[`renders correctly with task help 1`] = `
 <View>
   <View>
-    <View>
-      <View
-        onLayout={[Function]}
+    <View
+      onLayout={[Function]}
+    >
+      <Markdown
+        rules={
+          Object {
+            "image": Object {
+              "match": [Function],
+            },
+          }
+        }
+        styles={
+          Object {
+            "image": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "text": Object {
+              "fontFamily": "Karla",
+              "fontSize": 14,
+            },
+          }
+        }
       >
-        <Markdown
-          rules={
-            Object {
-              "image": Object {
-                "match": [Function],
-              },
-            }
-          }
-          styles={
-            Object {
-              "image": Object {
-                "height": 0,
-                "width": 0,
-              },
-              "text": Object {
-                "fontFamily": "Karla",
-                "fontSize": 14,
-              },
-            }
-          }
-        >
-          Is this this?
-        </Markdown>
-      </View>
+        Is this this?
+      </Markdown>
     </View>
   </View>
 </View>
