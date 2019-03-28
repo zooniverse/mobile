@@ -8,18 +8,18 @@ const DrawingHeader = (props) => {
     return props.horizontal ? 
         <View style={styles.horizontalContainer}>
             <View style={styles.horizontalQuestionContainer}>
-                {props.renderQuestion()}
+                {props.question}
             </View>
             <View style={styles.horizontalInstructionContainer}>
-                {props.renderInstructions()}
+                {props.instructions}
             </View>
         </View>
     :
         <View>
             <View style={styles.verticalQuestionContainer}>
-                {props.renderQuestion()}
+                {props.question}
             </View>
-            {props.renderInstructions()}
+            {props.instructions}
         </View>
 }
 
@@ -28,10 +28,11 @@ const styles = {
         flexDirection: 'row'
     },
     horizontalQuestionContainer: {
-        flex: 5
+        maginRight: 15,
+        flex: 2
     },
     horizontalInstructionContainer: {
-        flex: 4
+        flex: 1
     },
     verticalQuestionContainer: {
         marginBottom: 10
@@ -40,8 +41,8 @@ const styles = {
 
 DrawingHeader.propTypes = {
     horizontal: PropTypes.bool,
-    renderQuestion: PropTypes.func.isRequired,
-    renderInstructions: PropTypes.func.isRequired
+    question: PropTypes.object.isRequired,
+    instructions: PropTypes.object.isRequired
 }
 
 DrawingHeader.defaultProps = {

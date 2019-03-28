@@ -146,13 +146,10 @@ class DrawingClassifier extends Component {
             <View style={styles.classificationContainer}>
                 <DrawingHeader
                     horizontal={DeviceInfo.isTablet()}
-                    renderQuestion={() => 
-                        <Question
-                            question={this.props.instructions}
-                            workflowID={this.props.workflow.id}
-                            taskHelp={this.props.help}
-                        />}
-                    renderInstructions={() => 
+                    question={
+                        <Question question={this.props.instructions}/>
+                    }
+                    instructions={
                         <ShapeInstructionsView
                             { ...tool }
                             numberDrawn={this.props.numberOfShapesDrawn}
