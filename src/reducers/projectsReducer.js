@@ -30,7 +30,7 @@ export default function projects(state=InitialProjectState, action) {
         }
         case ActionConstants.ADD_PROJECTS: {
             const previewProjectList = action.projects.filter( project => project.isPreview )
-            const projectList = action.projects.filter( project => !project.isPreview && !project.beta_approved )
+            const projectList = action.projects.filter( project => !project.isPreview && project.launch_approved )
             const betaProjectList = action.projects.filter( project => project.beta_approved && !project.launch_approved )
             return { ...state, previewProjectList, projectList, betaProjectList }
         }
