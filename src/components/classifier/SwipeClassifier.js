@@ -50,7 +50,6 @@ export class SwipeClassifier extends React.Component {
     this.state = {
       isQuestionVisible: true,
       showFullSize: false,
-      isModalVisible: false,
       swiperIndex: 0,
       fullScreenImageSource: '',
       fullScreenQuestion: '',
@@ -71,7 +70,6 @@ export class SwipeClassifier extends React.Component {
     const { width, height } = nativeEvent.layout
     this.setState({
       swiperDimensions: { width, height},
-      swiperDimensionsLoaded: true
     })
   }
 
@@ -121,7 +119,6 @@ export class SwipeClassifier extends React.Component {
             onExpandButtonPressed={this.expandImage}
             subjectDisplayWidth={this.state.swiperDimensions.width}
             subjectDisplayHeight={this.state.swiperDimensions.height}
-            dimensionsLoaded={this.state.swiperDimensionsLoaded}
           />
       ) : <View />
   }
@@ -160,7 +157,6 @@ export class SwipeClassifier extends React.Component {
         <Question
           question={this.props.task.question}
           workflowID={this.props.workflow.id}
-          onHeightCalculated={this.questionHeightReceived}
           onPressImage={(src, question) => {
             this.setState({ 
               showFullSize: true,
@@ -225,6 +221,7 @@ export class SwipeClassifier extends React.Component {
     const classificationPanel =
       <View style={styles.classificationPanel}>
         <ClassificationPanel
+          containerStyle={styles.container}
           isFetching={ this.props.isFetching }
           hasTutorial = { !R.isEmpty(this.props.tutorial) }
           isQuestionVisible = {this.state.isQuestionVisible }

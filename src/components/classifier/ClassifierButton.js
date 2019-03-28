@@ -14,8 +14,14 @@ const ClassifierButton = (props) => {
     const textStyle = []
     switch (props.type) {
         case 'answer':
-            buttonStyle.push(props.disabled ? styles.answerButtonDisabled : styles.answerButton)
             textStyle.push(styles.answerButtonText)
+            buttonStyle.push(props.disabled ? styles.answerButtonDisabled : styles.answerButton)
+            if (props.selected) {
+                buttonStyle.push(styles.selectedAnswerButton)
+            }
+            if (props.blurred) {
+                buttonStyle.push(styles.answerButtonDisabled)
+            }
             break
         case 'guide':
             buttonStyle.push(styles.guideButton)
@@ -31,7 +37,7 @@ const ClassifierButton = (props) => {
             <FontedText style={[styles.buttonText, textStyle]}>
                 { props.text }
             </FontedText>
-      </TouchableOpacity>
+        </TouchableOpacity>
     )
 }
 
@@ -62,6 +68,9 @@ const styles =EStyleSheet.create({
       answerButton: {
         backgroundColor: '$buttonColor'
       },
+      selectedAnswerButton: {
+        backgroundColor: '$selectedButton'
+      },
       answerButtonDisabled: {
           backgroundColor: '$disabledButtonColor'
       },
@@ -71,6 +80,8 @@ const styles =EStyleSheet.create({
 })
 
 ClassifierButton.propTypes = {
+    selected: PropTypes.bool,
+    blurred: PropTypes.bool,
     disabled: PropTypes.any,
     style: PropTypes.any,
     onPress: PropTypes.func,

@@ -29,25 +29,16 @@ class ClassificationPanel extends Component {
       </View>
 
     return (
-      <View style={styles.container}>
-        <View style={styles.panelContainer}>
+        <View style={[styles.panelContainer, this.props.containerStyle]}>
           { this.props.hasTutorial ? tabs : null }
           { this.props.children }
         </View>
-      </View>
     )
   }
 }
 
 const styles = EStyleSheet.create({
-  $panelHorizontalMargin: 25,
-  container: {
-    backgroundColor: '$lightestGrey',
-    flex: 1,
-    paddingBottom: 0,
-  },
   panelContainer: {
-    flex: 1,
     backgroundColor: 'white',
     marginTop: 15,
     marginBottom: 0,
@@ -74,6 +65,7 @@ const styles = EStyleSheet.create({
 })
 
 ClassificationPanel.propTypes = {
+  containerStyle: PropTypes.any,
   isFetching: PropTypes.bool,
   hasTutorial: PropTypes.bool,
   children: PropTypes.node,

@@ -55,9 +55,11 @@ export function saveClassification(workflow, subject, displayDimensions) {
     const subjectStartTime = classifier.subjectStartTime[workflow.id]
     const subjectCompletionTime = (new Date).toISOString()
     const annotations = R.map(a => ({task: a[0], value: a[1]}), R.toPairs(classifier.annotations[workflow.id]))
-
+    dispatch(setSubjectSeenThisSession(workflow.id, subject.id))
+    
     dispatch(setSubjectStartTimeForWorkflow(workflow.id))
     dispatch(initializeAnnotation(workflow.id))
+    dispatch(setSubjectForWorkflow(workflow.id))
 
     // If we are in preview mode, we skip reporting classifications
     if (classifier.inPreviewMode) {
@@ -104,7 +106,13 @@ export function saveClassification(workflow, subject, displayDimensions) {
           subjects: [subject.id]
         }
       }).save()
-      dispatch(setSubjectSeenThisSession(workflow.id, subject.id))
+      // Add more subjects if we are getting close to running out
+      const subjectList = classifier.subjectLists[workflow.id] || []
+      const subjectsSeenThisSession = classifier.seenThisSession[workflow.id] || []
+      const usableSubjects = subjectList.filter(subject => !subjectsSeenThisSession.includes(subject.id))
+      if (usableSubjects.length < 5) {
+        dispatch(addSubjectsForWorklow(workflow.id))
+      }
     })
   }
 }

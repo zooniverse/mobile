@@ -21,10 +21,10 @@ const workflowHasSingleTask = (workflow) => {
 }
 
 export const isValidMobileWorkflow = workflow => {
-  return isValidDrawingWorkflow(workflow) || isValidSwipeWorkflow(workflow)
+  return isValidDrawingWorkflow(workflow) || isValidQuestionWorkflow(workflow)
 }
 
-const isValidSwipeWorkflow = (workflow) => {
+const isValidQuestionWorkflow = (workflow) => {
   if (!workflow.first_task) {
     return false
   }
@@ -41,8 +41,8 @@ const isValidSwipeWorkflow = (workflow) => {
   const isNotFlipbook = config ? config.multi_image_mode !== 'flipbook' : true
   const doesNotUseFeedback = firstTask.feedback ? !firstTask.feedback.enabled : true;
 
-  if (hasTwoAnswers && hasSingleTask && questionNotTooLong && notTooManyShortcuts && isNotFlipbook && doesNotUseFeedback) {
-    workflow.type = 'question'
+  if (hasSingleTask && questionNotTooLong && notTooManyShortcuts && isNotFlipbook && doesNotUseFeedback) {
+    workflow.type = hasTwoAnswers ? 'swipe' : 'question'
     return true
   }
 

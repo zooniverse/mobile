@@ -110,7 +110,6 @@ class SwipeCard extends Component {
             answers,
             subjectDisplayWidth,
             subjectDisplayHeight,
-            dimensionsLoaded,
             onExpandButtonPressed
         } = this.props;
 
@@ -129,9 +128,8 @@ class SwipeCard extends Component {
             </Animated.View >
 
         const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}
-        const opacityStyle = { opacity: dimensionsLoaded ? 1 : 0 }
         return (
-            <View style={[styles.cardBackground, dimensionsStyle, opacityStyle]}>
+            <View style={[styles.cardBackground, dimensionsStyle]}>
                 <SwipeCardSubjectsView
                     imageUris={localUris.map((uri) => `file://${uri}`)}
                     hasMultipleSubjects={subject.displays.length > 1}
@@ -214,5 +212,4 @@ SwipeCard.propTypes = {
     onExpandButtonPressed: PropTypes.any,
     subjectDisplayWidth: PropTypes.number,
     subjectDisplayHeight: PropTypes.number,
-    dimensionsLoaded: PropTypes.bool
 }

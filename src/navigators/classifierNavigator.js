@@ -19,6 +19,9 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
             navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
             break;
         case 'question':
+            navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
+            break;
+        case 'swipe':
             navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
             break;
     }
@@ -29,6 +32,8 @@ function getPageKeyForWorkflowType(workflowType) {
         case 'drawing':
             return PageKeys.DrawingClassifier;
         case 'question':
+            return PageKeys.QuestionClassifier;
+        case 'swipe': 
             return PageKeys.SwipeClassifier;
     }
 }
@@ -36,13 +41,25 @@ function getPageKeyForWorkflowType(workflowType) {
 function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
-        Actions.SwipeClassifier({ 
-            project,
-            workflow,
-            display_name: project.display_name,
-            inPreviewMode,
-            inBetaMode
-        })
+    Actions.SwipeClassifier({ 
+        project,
+        workflow,
+        display_name: project.display_name,
+        inPreviewMode,
+        inBetaMode
+    })
+}
+
+function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+    dispatch(classifierActions.clearClassifierData())
+    dispatch(classifierActions.startNewClassification(workflow, project))
+    Actions.QuestionClassifier({ 
+        project,
+        workflow,
+        display_name: project.display_name,
+        inPreviewMode,
+        inBetaMode
+    })
 }
 
 function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
