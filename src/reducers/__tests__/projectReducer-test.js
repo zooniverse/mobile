@@ -45,8 +45,8 @@ test('test projects failure', () => {
 
 test('test add projects', () => {
     const nonPreviewProjectList = [
-        { id: '1', isPreview: false},
-        { id: '2', isPreview: false}
+        { id: '1', isPreview: false, launch_approved: true},
+        { id: '2', isPreview: false, launch_approved: true}
     ];
     const nonPreviewAction = {
         type: ActionConstants.ADD_PROJECTS,
