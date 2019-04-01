@@ -37,6 +37,11 @@ export default {
   $zooniverseTeal: 'rgba(0, 151, 157, 1)',
   $seperator: 'rgba(151, 151, 151, 1)',
   $classifierGrey: '#E2E5E9',
-  $selectedButton: 'rgba(0, 52, 59, 1)'
+  $selectedButton: 'rgba(0, 52, 59, 1)',
+
+  // Museum Mode colors
+  $museum_lightBackground: 'rgba(51,51,51,1)',
+  $museum_darkBackground: 'rgba(45,45,45,1)',
+  $museum_teal: 'rgba(173,221,224,1)'
 
 }
