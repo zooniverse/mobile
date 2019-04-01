@@ -86,9 +86,9 @@ export default class App extends Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor} onBeforeLift={this.onBeforeLift}>
           <SafeAreaContainer>
-            <Router sceneStyle={styles.sharedSceneStyles} navBar={() => <NavBar />} onStateChange={this.onSceneChange}>
+            <Router sceneStyle={styles.sharedSceneStyles} navBar={() => <NavBar />} onStateChange={this.onSceneChange} >
               <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
-                  <Scene key="main" tabs={false}>
+                  <Scene key="main" tabs={false} drawerLockMode={'locked-closed'}>
                     <Scene key={PageKeys.SignIn} component={SignIn} duration={0} type="reset"  />
                     <Scene key={PageKeys.ZooniverseApp} component={ZooniverseApp}  initial />
                     <Scene key={PageKeys.ProjectDisciplines} component={ProjectDisciplines}  />
@@ -100,7 +100,6 @@ export default class App extends Component {
                     <Scene key={PageKeys.ZooWebView} component={ZooWebView} duration={0}  />
                     <Scene key={PageKeys.SwipeClassifier} component={SwipeClassifier} panHandlers={null} />
                     <Scene key={PageKeys.WebView} component={WebViewScreen} />
-                    <Scene key={PageKeys.DrawingClassifier} drawerLockMode={'locked-closed'} panHandlers={null} component={DrawingClassifier} />
                     <Scene key={PageKeys.QuestionClassifier} component={QuestionClassifier} />
                   </Scene>
               </Drawer>
