@@ -10,7 +10,8 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
     dispatch(setNavbarSettingsForPage({
         title: project.display_name,
         isPreview: inPreviewMode,
-        showBack: true,
+        showBack: workflow.type !== 'drawing',
+        hambugerMenuShowing: workflow.type !== 'drawing',
         centerType: 'title'
     }, getPageKeyForWorkflowType(workflow.type)))
 
