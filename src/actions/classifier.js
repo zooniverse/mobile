@@ -177,9 +177,9 @@ export function fetchFieldGuide(workflowId, projectId) {
           guide.get('attached_images').then((images) => {
             R.forEach((image) => icons[image.id] = image, images)
             guide.icons = icons
-            return resolve()
           }).finally(() => {
             dispatch(setGuideForWorkflow(workflowId, guide))
+            return resolve()
           })
         }
       }).catch(() => {
