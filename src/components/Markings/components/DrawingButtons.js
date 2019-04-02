@@ -16,7 +16,7 @@ const DrawingButtons = (props) => {
             <CircleIconButton
                 disabled={!props.canUndo}
                 type="undo"
-                activated={false}
+                activated={props.canUndo}
                 onPress={() => props.onUndoButtonSelected()}
                 radius={circleRadius}
             />

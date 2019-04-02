@@ -38,8 +38,15 @@ class ClassificationPanel extends Component {
 }
 
 const styles = EStyleSheet.create({
+  $panelHorizontalMargin: 25,
+  container: {
+    backgroundColor: '$museum_darkBackground',
+    flex: 1,
+    paddingBottom: 0,
+  },
   panelContainer: {
-    backgroundColor: 'white',
+    flex: 1,
+    backgroundColor: '$museum_lightBackground',
     marginTop: 15,
     marginBottom: 0,
     marginHorizontal: 25
@@ -56,11 +63,12 @@ const styles = EStyleSheet.create({
     marginTop: 1,
   },
   deselectedTab: {
-    backgroundColor: '$lightestGrey',
+    backgroundColor: '$museum_darkBackground',
   },
   tabText: {
     fontSize: DeviceInfo.isTablet() ? 22 : 14,
-    marginVertical: 15
+    marginVertical: 15,
+    color: 'white'
   }
 })
 

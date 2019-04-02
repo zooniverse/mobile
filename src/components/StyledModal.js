@@ -96,7 +96,7 @@ const styles = EStyleSheet.create({
   contentContainer: {
     flex: 1,
     padding: isTablet ? 30 : 20,
-    backgroundColor: 'white'
+    backgroundColor: '$museum_lightBackground'
   },
   closeButton: {
     alignItems: 'flex-end'

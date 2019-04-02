@@ -172,12 +172,12 @@ const styles = EStyleSheet.create({
   },
   navIcon: {
     fontSize: 16,
-    color: '$darkGrey',
+    color: '$disabledIconColor',
     padding: 10,
     backgroundColor: 'transparent',
   },
   disabledIcon: {
-    color: '$disabledIconColor',
+    color: '$darkGrey',
   },
   emptyNav: {
     height: 36,

@@ -51,6 +51,7 @@ export class TaskHelpModal extends Component {
 
 const styles = EStyleSheet.create({
   markdownContainer: {
+    backgroundColor: '$museum_lightBackground',
     flex: 1,
     paddingVertical: 5,
   },

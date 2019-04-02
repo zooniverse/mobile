@@ -67,7 +67,8 @@ const isTablet = DeviceInfo.isTablet()
 const markdownStyles = {
     text: {
         fontFamily: 'Karla',
-        fontSize: isTablet ? 22 : 14
+        fontSize: isTablet ? 22 : 14,
+        color: 'white'
     }
 }
 

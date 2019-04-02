@@ -66,7 +66,7 @@ const styles =EStyleSheet.create({
         },
       },
       answerButton: {
-        backgroundColor: '$buttonColor'
+        backgroundColor: '$orange'
       },
       selectedAnswerButton: {
         backgroundColor: '$selectedButton'
@@ -75,7 +75,7 @@ const styles =EStyleSheet.create({
           backgroundColor: '$disabledButtonColor'
       },
       answerButtonText: {
-        color: 'white', 
+        color: 'black', 
       },
 })
 

@@ -83,10 +83,11 @@ const styles = EStyleSheet.create({
     label: {
         fontWeight: 'bold',
         fontSize: DeviceInfo.isTablet() ? 22 : 14,
+        color: '$chevronGrey'
     },
     infoText: {
         fontSize: DeviceInfo.isTablet() ? 22 : 14,
-        color: '$headerGrey'
+        color: 'white'
     },
     warningText: {
         fontWeight: 'bold',
