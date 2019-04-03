@@ -77,7 +77,7 @@ const styles = EStyleSheet.create({
 WebViewScreen.propTypes = {
     uri: PropTypes.string.isRequired,
     loadingText: PropTypes.string,
-    setNavbarSettings: PropTypes.function,
+    setNavbarSettings: PropTypes.func,
 }
 
 const mapDispatchToProps = (dispatch) => ({
