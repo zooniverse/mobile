@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 
 import FontedText from './common/FontedText'
 import PageKeys from '../constants/PageKeys'
-import { setNavbarSettings } from '../actions/navBar'
+import { setNavbarSettingsForPage } from '../actions/navBar'
 
 class WebViewScreen extends Component {
 
@@ -77,11 +77,11 @@ const styles = EStyleSheet.create({
 WebViewScreen.propTypes = {
     uri: PropTypes.string.isRequired,
     loadingText: PropTypes.string,
-    setNavbarSettings: PropTypes.function,
+    setNavbarSettings: PropTypes.func,
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setNavbarSettings: (settings) => dispatch(setNavbarSettings(settings, PageKeys.WebView))
+    setNavbarSettings: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.WebView))
 })
 
 export default connect(null, mapDispatchToProps)(WebViewScreen)
