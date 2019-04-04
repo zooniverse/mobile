@@ -87,6 +87,7 @@ exports[`renders correctly 1`] = `
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
@@ -183,6 +184,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
@@ -279,6 +281,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
@@ -599,6 +602,7 @@ exports[`renders header if initial tutorial 1`] = `
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
@@ -695,6 +699,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
@@ -791,6 +796,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
@@ -1070,6 +1076,7 @@ exports[`renders with no media 1`] = `
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
@@ -1137,6 +1144,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
@@ -1204,6 +1212,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "white",
                           "fontFamily": "Karla",
                           "fontSize": 14,
                         },
