@@ -101,6 +101,7 @@ export default class App extends Component {
                     <Scene key={PageKeys.SwipeClassifier} component={SwipeClassifier} panHandlers={null} />
                     <Scene key={PageKeys.WebView} component={WebViewScreen} />
                     <Scene key={PageKeys.QuestionClassifier} component={QuestionClassifier} />
+                    <Scene key={PageKeys.DrawingClassifier} component={DrawingClassifier} />
                   </Scene>
               </Drawer>
             </Router>
