@@ -103,8 +103,8 @@ android {
         applicationId "com.zooniversemobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 26
-        versionName "2.3.0"
+        versionCode 27
+        versionName "2.4.0"
         multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
