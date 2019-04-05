@@ -1827,7 +1827,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.adler.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
-				PROVISIONING_PROFILE_SPECIFIER = "Adler Zooniverse";
+				PROVISIONING_PROFILE_SPECIFIER = "Adler Zooniverse Adhoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
