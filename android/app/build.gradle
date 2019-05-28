@@ -155,13 +155,13 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-svg')
     implementation project(path: ':react-native-firebase', configuration: 'default')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-blur')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-splash-screen')
     implementation 'com.android.support:multidex:1.0.0'
-    implementation project(':react-native-svg')
     implementation project(':react-native-google-analytics-bridge')
     implementation project(':react-native-device-info')
     implementation fileTree(dir: "libs", include: ["*.jar"])
