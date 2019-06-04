@@ -4,7 +4,7 @@ module.exports = {
   getBlacklistRE () {
     return blacklist([
         /react-native\/local-cli\/core\/__fixtures__.*/,
-        /node_modules\/react-native-deck-swiper\/react-native\/.*/
+        /node_modules\/react-native-deck-swiper\/node_modules\/react-native/
     ])
   },
 }
