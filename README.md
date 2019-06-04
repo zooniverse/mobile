@@ -24,7 +24,7 @@ Setting up to work on a react-native app is a little tricky, and setting up to w
  - XCode 10.1 or 10.2
  - An iPhone X Simulator, which you can run from XCode.
 #### Steps:
-1. Open XCode, and in XCode open `mobile/ios/ZooniverseMobile.xcworkspace`. We now need to manually link up the `react-native-svg` dependency. Follow [these instructions](http://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking) to manually link `RNSVG.xcodeproj`, found at `mobile/node_modules/react-native-svg/ios/RNSVG.xcodeproj`. For our app, you _do_ need to do step 3 in that tutorial, adding `$(SRCROOT)/../node_modules/react-native-svg/ios` to our Header Search Paths for both debug and release at Build Settings > Header Search Paths.
+1. Open XCode, and in XCode open `mobile/ios/ZooniverseMobile.xcworkspace`. We now need to manually link up the `react-native-svg` dependency. Follow [these instructions](http://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking) to manually link `RNSVG.xcodeproj`, found at `mobile/node_modules/react-native-svg/ios/RNSVG.xcodeproj`. For our app, you _do_ need to do step 3 in that tutorial, adding `$(SRCROOT)/../node_modules/react-native-svg/ios/RNSVG` to our Header Search Paths for both debug and release at Build Settings > Header Search Paths.
 1. Switch the project to the XCode Legacy Build System as described [here](https://github.com/facebook/react-native/issues/19573) under the section named **"Opting out of the new Xcode build system."**
 1. Build and run the project from XCode on an iPhone X simulator. Shortly, your simulator should boot with the Zooniverse app on it.
 
