@@ -18,8 +18,11 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
         case 'drawing':
             navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
             break;
-        case 'question':
+        case 'single':
             navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
+            break;
+        case 'multiple':
+            navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
             break;
         case 'swipe':
             navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
@@ -31,10 +34,12 @@ function getPageKeyForWorkflowType(workflowType) {
     switch (workflowType) {
         case 'drawing':
             return PageKeys.DrawingClassifier;
-        case 'question':
+        case 'single':
             return PageKeys.QuestionClassifier;
         case 'swipe': 
             return PageKeys.SwipeClassifier;
+        case 'multiple':
+            return PageKeys.MultiAnswerClassifier;
     }
 }
 
@@ -54,6 +59,18 @@ function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workfl
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
     Actions.QuestionClassifier({ 
+        project,
+        workflow,
+        display_name: project.display_name,
+        inPreviewMode,
+        inBetaMode
+    })
+}
+
+function navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+    dispatch(classifierActions.clearClassifierData())
+    dispatch(classifierActions.startNewClassification(workflow, project))
+    Actions.MultiAnswerClassifier({
         project,
         workflow,
         display_name: project.display_name,

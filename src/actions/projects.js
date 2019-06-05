@@ -6,7 +6,7 @@ import * as ActionConstants from '../constants/actions'
 import { isValidMobileWorkflow } from '../utils/workflow-utils'
 
 const productionParams = {
-    mobile_friendly: true,
+    // mobile_friendly: true,
     launch_approved: true,
     live: true,
     include: 'avatar',
@@ -14,7 +14,7 @@ const productionParams = {
 }
 
 const betaParams = {
-    mobile_friendly: true,
+    // mobile_friendly: true,
     beta_approved: true,
     include: 'avatar',
     sort: 'display_name',
@@ -22,7 +22,7 @@ const betaParams = {
 }
 
 const ownerParams = {
-    mobile_friendly: true,
+    // mobile_friendly: true,
     live: false,
     include: 'avatar',
     sort: 'display_name',
@@ -30,7 +30,7 @@ const ownerParams = {
 }
 
 const collaboratorParams = {
-    mobile_friendly: true,
+    // mobile_friendly: true,
     live: false,
     include: 'avatar',
     sort: 'display_name',
@@ -112,10 +112,13 @@ const getAvatarsForProjects = projects => {
 
 const getWorkflowsForProjects = projects => {            
     const projectIds = projects.map((project) => project.id)
-    return apiClient.type('workflows').get({mobile_friendly: true, active: true, project_id: projectIds})
+
+    // TODO: change the literal list in the next line to projectIds
+    return apiClient.type('workflows').get({active: true, project_id: [1878,1877,302,514,523]})
     .then(workflows => {
         workflows.forEach( workflow => {
-            workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
+            // TODO: change below to workflow.mobile_friendly && isValidMobileWorkflow(workflow) upon panoptes change
+            workflow.mobile_verified = isValidMobileWorkflow(workflow)
             const project = projects.find( project => project.id === workflow.links.project )
             if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
                 project.workflows = R.append(workflow, project.workflows)

@@ -32,6 +32,7 @@ import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
 import DrawingClassifier from '../components/Markings/DrawingClassifier'
 import QuestionClassifier from '../components/classifier/QuestionClassifier'
+import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier'
 import SafeAreaContainer from './SafeAreaContainer'
 import { setPageShowing } from '../actions/navBar'
 import NavBar from '../components/NavBar';
@@ -102,6 +103,7 @@ export default class App extends Component {
                     <Scene key={PageKeys.WebView} component={WebViewScreen} />
                     <Scene key={PageKeys.DrawingClassifier} drawerLockMode={'locked-closed'} panHandlers={null} component={DrawingClassifier} />
                     <Scene key={PageKeys.QuestionClassifier} component={QuestionClassifier} />
+                    <Scene key={PageKeys.MultiAnswerClassifier} component={MultiAnswerClassifier} />
                   </Scene>
               </Drawer>
             </Router>

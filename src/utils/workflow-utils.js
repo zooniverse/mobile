@@ -29,7 +29,6 @@ const isValidQuestionWorkflow = (workflow) => {
     return false
   }
   const firstTask = workflow.tasks[workflow.first_task]
-  const hasTwoAnswers = firstTask.answers.length === 2
 
   const hasSingleTask = workflowHasSingleTask(workflow)
 
@@ -42,7 +41,7 @@ const isValidQuestionWorkflow = (workflow) => {
   const doesNotUseFeedback = firstTask.feedback ? !firstTask.feedback.enabled : true;
 
   if (hasSingleTask && questionNotTooLong && notTooManyShortcuts && isNotFlipbook && doesNotUseFeedback) {
-    workflow.type = hasTwoAnswers ? 'swipe' : 'question'
+    workflow.type = firstTask.type
     return true
   }
 
