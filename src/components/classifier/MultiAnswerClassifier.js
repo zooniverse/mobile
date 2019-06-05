@@ -34,7 +34,7 @@ class MultiAnswerClassifier extends Component {
             fullScreenImageSource: { uri: '' },
             fullScreenQuestion: '',
             imageDimensions: { width: 0, height: 0 },
-            answerSelected: -1
+            answersSelected: []
         }
     }
 
@@ -43,7 +43,7 @@ class MultiAnswerClassifier extends Component {
             this.setState({isQuestionVisible: isVisible})
         }
     }
-    
+
     finishTutorial() {
       if (this.props.needsTutorial) {
         this.props.classifierActions.setTutorialCompleted(this.props.workflow.id, this.props.project.id)
@@ -52,10 +52,11 @@ class MultiAnswerClassifier extends Component {
       }
     }
 
-    onOptionSelected(index) {
+    onOptionSelected(answersSelected, index) {
       return () => {
+        var addedAnswer = answersSelected.concat(index)
         this.setState({
-          answerSelected: index
+            answersSelected: addedAnswer
         })
 
         setTimeout(() => this.scrollView.scrollToEnd(), 300)
@@ -70,17 +71,17 @@ class MultiAnswerClassifier extends Component {
           subject
         } = this.props
         const { id, first_task } = workflow
-        const { 
-          answerSelected,
+        const {
+          answersSelected,
           imageDimensions
         } = this.state
 
         this.scrollView.scrollTo({x: 0, y: 0})
-        classifierActions.addAnnotationToTask(id, first_task, answerSelected, false)
+        classifierActions.addAnnotationToTask(id, first_task, answersSelected, false)
         classifierActions.saveClassification(workflow, subject, imageDimensions)
 
         this.setState({
-          answerSelected: -1
+          answersSelected: []
         })
       }
     }
@@ -102,7 +103,7 @@ class MultiAnswerClassifier extends Component {
       } = this.props
 
       const {
-        answerSelected,
+        answersSelected,
         imageDimensions,
         isQuestionVisible,
         fullScreenImageSource,
@@ -130,7 +131,7 @@ class MultiAnswerClassifier extends Component {
               question={task.question}
               workflowID={workflow.id}
               onPressImage={(src, question) => {
-                this.setState({ 
+                this.setState({
                   showFullSize: true,
                   fullScreenImageSource: ({uri: src}),
                   fullScreenQuestion: question
@@ -138,12 +139,12 @@ class MultiAnswerClassifier extends Component {
               }
             />
             {
-              markdownContainsImage(task.question) ? 
+              markdownContainsImage(task.question) ?
                 <Separator style={styles.questionSeparator} />
               :
                 null
             }
-          </View>   
+          </View>
 
       const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
       const classificationPanel =
@@ -162,7 +163,7 @@ class MultiAnswerClassifier extends Component {
             </ClassificationPanel>
             {
               isQuestionVisible ?
-                <ScrollView 
+                <ScrollView
                   style={styles.scrollView}
                   ref={ref => this.scrollView = ref}
                 >
@@ -183,11 +184,11 @@ class MultiAnswerClassifier extends Component {
                       answers.map((answer, index) =>
                         <View key={index} style={styles.buttonContainer}>
                           <ClassifierButton
-                            selected={index === answerSelected}
-                            blurred={answerSelected !== -1 && index !== answerSelected}
+                            selected={answersSelected.includes(index)}
+                            blurred={!answersSelected.includes(index)}
                             type="answer"
                             text={answer.label}
-                            onPress={this.onOptionSelected(index)}
+                            onPress={this.onOptionSelected(answersSelected, index)}
                           />
                         </View>
                       )
@@ -195,19 +196,19 @@ class MultiAnswerClassifier extends Component {
                   </View>
                   <View style={styles.buttonContainer}>
                     <ClassifierButton
-                      disabled={answerSelected === -1}
+                      disabled={answersSelected === []}
                       type="answer"
                       text="Submit"
                       onPress={this.submitClassification()}
                     />
                   </View>
                   {
-                    (task.help || R.length(guide.items) > 0) && 
+                    (task.help || R.length(guide.items) > 0) &&
                       <Separator style={styles.separator}/>
                   }
-                  { 
-                    task.help && 
-                      <NeedHelpButton 
+                  {
+                    task.help &&
+                      <NeedHelpButton
                         onPress={() => this.classifierContainer.displayHelpModal()}
                       />
                   }
@@ -323,7 +324,7 @@ const mapStateToProps = (state, ownProps) => {
       subjectsSeenThisSession: state.classifier.seenThisSession[ownProps.workflow.id] || []
    }
   }
-  
+
   const mapDispatchToProps = (dispatch) => ({
     classifierActions: bindActionCreators(classifierActions, dispatch),
   })
