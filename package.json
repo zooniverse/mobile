@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android --appIdSuffix 'debug'",
     "ios": "react-native run-ios",
@@ -17,6 +18,9 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(react-native-extended-stylesheet|react-native|react-navigation|react-native-vector-icons|react-native-loading-spinner-overlay)/)"
     ],
+    "modulePathIgnorePatterns": [
+      "node_modules/react-native-deck-swiper/node_modules/react-native"
+    ],
     "moduleNameMapper": {
       "^[./a-zA-Z0-9$_-]+.png$": "RelativeImageStub"
     }
@@ -30,6 +34,7 @@
     "markdown-it": "^8.3.1",
     "metro": "^0.51.1",
     "panoptes-client": "~2.12.0",
+    "patch-package": "^6.1.2",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",
     "react": "16.8.3",

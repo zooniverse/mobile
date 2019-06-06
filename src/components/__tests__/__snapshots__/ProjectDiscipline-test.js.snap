@@ -39,6 +39,7 @@ exports[`renders correctly 1`] = `
         refreshing={true}
       />
     }
+    removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
     showsVerticalScrollIndicator={false}
