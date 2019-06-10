@@ -26,7 +26,7 @@ Setting up to work on a react-native app is a little tricky, and setting up to w
 #### Steps:
 1. Open XCode, and in XCode open `mobile/ios/ZooniverseMobile.xcworkspace`. We now need to manually link up the `react-native-svg` dependency. Follow [these instructions](http://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking) to manually link `RNSVG.xcodeproj`, found at `mobile/node_modules/react-native-svg/ios/RNSVG.xcodeproj`. For our app, you _do_ need to do step 3 in that tutorial, adding `$(SRCROOT)/../node_modules/react-native-svg/ios/RNSVG` to our Header Search Paths for both debug and release at Build Settings > Header Search Paths.
 1. Switch the project to the XCode Legacy Build System as described [here](https://github.com/facebook/react-native/issues/19573) under the section named **"Opting out of the new Xcode build system."**
-1. Build and run the project from XCode on an iPhone X simulator. Shortly, your simulator should boot with the Zooniverse app on it.
+1. Build and run the project from XCode on an iPhone X simulator, or run `react-native run-ios`. Shortly, your simulator should boot with the Zooniverse app on it.
 
 **Note**:  There is a bug in Xcode 8 with react-native's RCTWebSocket.  If you receive an error, follow the instructions here:
 http://stackoverflow.com/questions/38710654/rctwebsocket-ignoring-return-value-of-function-declared-with-warn-unused-resul
