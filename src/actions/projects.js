@@ -113,12 +113,10 @@ const getAvatarsForProjects = projects => {
 const getWorkflowsForProjects = projects => {            
     const projectIds = projects.map((project) => project.id)
 
-    // TODO: change the literal list in the next line to projectIds
-    return apiClient.type('workflows').get({active: true, project_id: [1878,1877,302,514,523]})
+    return apiClient.type('workflows').get({active: true, project_id: projectIds})
     .then(workflows => {
         workflows.forEach( workflow => {
-            // TODO: change below to workflow.mobile_friendly && isValidMobileWorkflow(workflow) upon panoptes change
-            workflow.mobile_verified = isValidMobileWorkflow(workflow)
+            workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
             const project = projects.find( project => project.id === workflow.links.project )
             if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
                 project.workflows = R.append(workflow, project.workflows)
