@@ -6,7 +6,7 @@ import * as ActionConstants from '../constants/actions'
 import { isValidMobileWorkflow } from '../utils/workflow-utils'
 
 const productionParams = {
-    // mobile_friendly: true,
+    mobile_friendly: true,
     launch_approved: true,
     live: true,
     include: 'avatar',
@@ -14,7 +14,7 @@ const productionParams = {
 }
 
 const betaParams = {
-    // mobile_friendly: true,
+    mobile_friendly: true,
     beta_approved: true,
     include: 'avatar',
     sort: 'display_name',
@@ -22,7 +22,7 @@ const betaParams = {
 }
 
 const ownerParams = {
-    // mobile_friendly: true,
+    mobile_friendly: true,
     live: false,
     include: 'avatar',
     sort: 'display_name',
@@ -30,7 +30,7 @@ const ownerParams = {
 }
 
 const collaboratorParams = {
-    // mobile_friendly: true,
+    mobile_friendly: true,
     live: false,
     include: 'avatar',
     sort: 'display_name',

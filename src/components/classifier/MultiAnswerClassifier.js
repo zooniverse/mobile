@@ -54,12 +54,18 @@ class MultiAnswerClassifier extends Component {
 
     onOptionSelected(answersSelected, index) {
       return () => {
-        var addedAnswer = answersSelected.concat(index)
-        this.setState({
-            answersSelected: addedAnswer
-        })
+          var updatedSelection = []
+          if (answersSelected.includes(index)) {
+              updatedSelection = answersSelected.filter(function(element) { return element !== index })
+          } else {
+              updatedSelection = answersSelected.concat(index)
+          }
 
-        setTimeout(() => this.scrollView.scrollToEnd(), 300)
+          this.setState({
+              answersSelected: updatedSelection
+          })
+
+          setTimeout(() => this.scrollView.scrollToEnd(), 300)
       }
     }
 
