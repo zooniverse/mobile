@@ -113,7 +113,7 @@ const getAvatarsForProjects = projects => {
 const getWorkflowsForProjects = projects => {            
     const projectIds = projects.map((project) => project.id)
 
-    return apiClient.type('workflows').get({active: true, project_id: projectIds})
+    return apiClient.type('workflows').get({mobile_friendly: true, active: true, project_id: projectIds})
     .then(workflows => {
         workflows.forEach( workflow => {
             workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
