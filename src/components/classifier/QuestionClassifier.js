@@ -206,7 +206,7 @@ class QuestionClassifier extends Component {
                       <Separator style={styles.separator}/>
                   }
                   { 
-                    task.help && 
+                        task.help !== null &&
                       <NeedHelpButton 
                         onPress={() => this.classifierContainer.displayHelpModal()}
                       />
