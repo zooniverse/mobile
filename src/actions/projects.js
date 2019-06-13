@@ -6,6 +6,7 @@ import * as ActionConstants from '../constants/actions'
 import { isValidMobileWorkflow } from '../utils/workflow-utils'
 
 const productionParams = {
+    page_size: 50,
     mobile_friendly: true,
     launch_approved: true,
     live: true,
