@@ -6,7 +6,6 @@ import * as ActionConstants from '../constants/actions'
 import { isValidMobileWorkflow } from '../utils/workflow-utils'
 
 const productionParams = {
-    page_size: 50,
     mobile_friendly: true,
     launch_approved: true,
     live: true,
@@ -46,9 +45,15 @@ export function fetchProjects() {
                 const userIsLoggedIn = userProfile !== null
                 let projectCalls = []
                 let allProjects = []
+
                 
                 // Fetch production Projects
                 projectCalls.push(apiClient.type('projects').get(productionParams).then( projects => {
+                    const taggedProjects = tagProjects(projects, false)
+                    allProjects = allProjects.concat(taggedProjects)
+                }))
+
+                projectCalls.push(apiClient.type('projects').get({...productionParams, ...{page: 2}}).then( projects => {
                     const taggedProjects = tagProjects(projects, false)
                     allProjects = allProjects.concat(taggedProjects)
                 }))
