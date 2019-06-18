@@ -1,9 +1,9 @@
 import apiClient from 'panoptes-client/lib/api-client'
-import { getAuthUser } from './auth'
+import {getAuthUser} from './auth'
 import * as R from 'ramda'
 
 import * as ActionConstants from '../constants/actions'
-import { isValidMobileWorkflow } from '../utils/workflow-utils'
+import {isValidMobileWorkflow} from '../utils/workflow-utils'
 
 const productionParams = {
     mobile_friendly: true,
@@ -38,40 +38,43 @@ const collaboratorParams = {
 }
 
 export function fetchProjects() {
-    return (dispatch) => { 
+    return (dispatch) => {
         return new Promise((resolve, reject) => {
             dispatch(addProjectsRequest)
-            getAuthUser().then( (userProfile) => {
+            getAuthUser().then((userProfile) => {
                 const userIsLoggedIn = userProfile !== null
                 let projectCalls = []
                 let allProjects = []
 
-                
-                // Fetch production Projects
-                projectCalls.push(apiClient.type('projects').get(productionParams).then( projects => {
-                    const taggedProjects = tagProjects(projects, false)
-                    allProjects = allProjects.concat(taggedProjects)
-                }))
+                let fetchPaginatedProjects = (params, _page = 1) => {
+                    return apiClient.type('projects')
+                        .get({...params, ...{page: _page}})
+                        .then((projects) => {
+                            const taggedProjects = tagProjects(projects, false)
+                            allProjects = allProjects.concat(taggedProjects)
 
-                projectCalls.push(apiClient.type('projects').get({...productionParams, ...{page: 2}}).then( projects => {
-                    const taggedProjects = tagProjects(projects, false)
-                    allProjects = allProjects.concat(taggedProjects)
-                }))
+                            if (taggedProjects.length === 20) {
+                                var currentPage = _page + 1
+                                return fetchPaginatedProjects(params, currentPage)
+                            }
+                        })
+                }
+
+                projectCalls.push(fetchPaginatedProjects(productionParams));
 
                 // Fetch Beta Projects
-                projectCalls.push(apiClient.type('projects').get(betaParams).then( projects => {
+                projectCalls.push(apiClient.type('projects').get(betaParams).then(projects => {
                     const taggedProjects = tagProjects(projects, false)
                     allProjects = allProjects.concat(taggedProjects)
                 }))
-
                 // Fetch Test Projects
                 if (userIsLoggedIn) {
-                    projectCalls.push(apiClient.type('projects').get(ownerParams).then( projects => {
+                    projectCalls.push(apiClient.type('projects').get(ownerParams).then(projects => {
                         const taggedProjects = tagProjects(projects, true)
                         allProjects = allProjects.concat(taggedProjects)
                         taggedProjects.forEach((project) => dispatch(addOwnerProjectId(project)))
                     }));
-                    projectCalls.push(apiClient.type('projects').get(collaboratorParams).then( projects => {
+                    projectCalls.push(apiClient.type('projects').get(collaboratorParams).then(projects => {
                         const taggedProjects = tagProjects(projects, true)
                         allProjects = allProjects.concat(taggedProjects)
                         taggedProjects.forEach((project) => dispatch(addCollaboratorProjectId(project)))
@@ -86,48 +89,49 @@ export function fetchProjects() {
                     projectDetailCalls = projectDetailCalls.concat(avatarCall)
                     // Then load the avatars and workflows
                     Promise.all(projectDetailCalls)
-                    .then(() => {
-                        dispatch(addProjects(allProjects))
-                        dispatch(addProjectsSuccess);
-                        resolve(allProjects)
-                    } )
-                    .catch((error) => { 
+                        .then(() => {
+                            dispatch(addProjects(allProjects))
+                            dispatch(addProjectsSuccess);
+                            resolve(allProjects)
+                        })
+                        .catch((error) => {
+                            dispatch(addProjectsFailure);
+                            reject(error)
+                        })
+                })
+                    .catch((error) => {
                         dispatch(addProjectsFailure);
                         reject(error)
                     })
-                })
-                .catch((error) => { 
-                    dispatch(addProjectsFailure);
-                    reject(error)
-                })
             })
         })
     }
 }
 
 const getAvatarsForProjects = projects => {
-    return projects.map( project => {
+    return projects.map(project => {
         return apiClient.type('avatars').get(project.links.avatar.id)
-        .then((avatar) => {
-            project.avatar_src = avatar.src
-        })
-        // Stub out avatar rejection because it is optional for projects to have avatars
-        .catch(() => {});
+            .then((avatar) => {
+                project.avatar_src = avatar.src
+            })
+            // Stub out avatar rejection because it is optional for projects to have avatars
+            .catch(() => {
+            });
     })
 }
 
-const getWorkflowsForProjects = projects => {            
+const getWorkflowsForProjects = projects => {
     const projectIds = projects.map((project) => project.id)
     return apiClient.type('workflows').get({mobile_friendly: true, active: true, project_id: projectIds})
-    .then(workflows => {
-        workflows.forEach( workflow => {
-            workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
-            const project = projects.find( project => project.id === workflow.links.project )
-            if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
-                project.workflows = R.append(workflow, project.workflows)
-            }
+        .then(workflows => {
+            workflows.forEach(workflow => {
+                workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
+                const project = projects.find(project => project.id === workflow.links.project)
+                if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
+                    project.workflows = R.append(workflow, project.workflows)
+                }
+            })
         })
-    })
 };
 
 const addOwnerProjectId = (project) => ({
@@ -153,12 +157,12 @@ const addProjectsFailure = {
 }
 
 const addProjects = projects => ({
-    type: ActionConstants.ADD_PROJECTS, 
+    type: ActionConstants.ADD_PROJECTS,
     projects
 })
 
 const tagProjects = (projects, arePreview) => {
-    const taggedProjects = projects.map( project => {
+    const taggedProjects = projects.map(project => {
         project.isPreview = arePreview
         if (!project.workflows) project.workflows = []
         return project
