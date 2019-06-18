@@ -29,7 +29,6 @@ const isValidQuestionWorkflow = (workflow) => {
     return false
   }
   const firstTask = workflow.tasks[workflow.first_task]
-  const hasTwoAnswers = firstTask.answers.length === 2
 
   const hasSingleTask = workflowHasSingleTask(workflow)
 
@@ -42,7 +41,14 @@ const isValidQuestionWorkflow = (workflow) => {
   const doesNotUseFeedback = firstTask.feedback ? !firstTask.feedback.enabled : true;
 
   if (hasSingleTask && questionNotTooLong && notTooManyShortcuts && isNotFlipbook && doesNotUseFeedback) {
-    workflow.type = hasTwoAnswers ? 'swipe' : 'question'
+    workflow.type = firstTask.type
+
+    const hasTwoAnswers = firstTask.answers.length === 2
+    if (hasTwoAnswers && workflow.type === 'single') {
+        // This is a special, mobile-only flow where users swipe left and right for questions where they choose on of two answers
+        workflow.type = 'swipe'
+    }
+
     return true
   }
 

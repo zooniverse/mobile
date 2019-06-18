@@ -23,7 +23,7 @@ import ClassifierButton from './ClassifierButton'
 import FullScreenImage from '../FullScreenImage'
 import TapableSubject from './TapableSubject';
 
-class QuestionClassifier extends Component {
+class MultiAnswerClassifier extends Component {
 
     constructor(props) {
         super(props)
@@ -34,7 +34,7 @@ class QuestionClassifier extends Component {
             fullScreenImageSource: { uri: '' },
             fullScreenQuestion: '',
             imageDimensions: { width: 0, height: 0 },
-            answerSelected: -1
+            answersSelected: []
         }
     }
 
@@ -43,7 +43,7 @@ class QuestionClassifier extends Component {
             this.setState({isQuestionVisible: isVisible})
         }
     }
-    
+
     finishTutorial() {
       if (this.props.needsTutorial) {
         this.props.classifierActions.setTutorialCompleted(this.props.workflow.id, this.props.project.id)
@@ -52,13 +52,20 @@ class QuestionClassifier extends Component {
       }
     }
 
-    onOptionSelected(index) {
+    onOptionSelected(answersSelected, index) {
       return () => {
-        this.setState({
-          answerSelected: index
-        })
+          var updatedSelection = []
+          if (answersSelected.includes(index)) {
+              updatedSelection = answersSelected.filter(function(element) { return element !== index })
+          } else {
+              updatedSelection = answersSelected.concat(index)
+          }
 
-        setTimeout(() => this.scrollView.scrollToEnd(), 300)
+          this.setState({
+              answersSelected: updatedSelection
+          })
+
+          setTimeout(() => this.scrollView.scrollToEnd(), 300)
       }
     }
 
@@ -70,17 +77,17 @@ class QuestionClassifier extends Component {
           subject
         } = this.props
         const { id, first_task } = workflow
-        const { 
-          answerSelected,
+        const {
+          answersSelected,
           imageDimensions
         } = this.state
 
         this.scrollView.scrollTo({x: 0, y: 0})
-        classifierActions.addAnnotationToTask(id, first_task, answerSelected, false)
+        classifierActions.addAnnotationToTask(id, first_task, answersSelected, false)
         classifierActions.saveClassification(workflow, subject, imageDimensions)
 
         this.setState({
-          answerSelected: -1
+          answersSelected: []
         })
       }
     }
@@ -102,7 +109,7 @@ class QuestionClassifier extends Component {
       } = this.props
 
       const {
-        answerSelected,
+        answersSelected,
         imageDimensions,
         isQuestionVisible,
         fullScreenImageSource,
@@ -130,7 +137,7 @@ class QuestionClassifier extends Component {
               question={task.question}
               workflowID={workflow.id}
               onPressImage={(src, question) => {
-                this.setState({ 
+                this.setState({
                   showFullSize: true,
                   fullScreenImageSource: ({uri: src}),
                   fullScreenQuestion: question
@@ -138,12 +145,12 @@ class QuestionClassifier extends Component {
               }
             />
             {
-              markdownContainsImage(task.question) ? 
+              markdownContainsImage(task.question) ?
                 <Separator style={styles.questionSeparator} />
               :
                 null
             }
-          </View>   
+          </View>
 
       const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
       const classificationPanel =
@@ -162,7 +169,7 @@ class QuestionClassifier extends Component {
             </ClassificationPanel>
             {
               isQuestionVisible ?
-                <ScrollView 
+                <ScrollView
                   style={styles.scrollView}
                   ref={ref => this.scrollView = ref}
                 >
@@ -183,11 +190,11 @@ class QuestionClassifier extends Component {
                       answers.map((answer, index) =>
                         <View key={index} style={styles.buttonContainer}>
                           <ClassifierButton
-                            selected={index === answerSelected}
-                            blurred={answerSelected !== -1 && index !== answerSelected}
+                            selected={answersSelected.includes(index)}
+                            blurred={!answersSelected.includes(index)}
                             type="answer"
                             text={answer.label}
-                            onPress={this.onOptionSelected(index)}
+                            onPress={this.onOptionSelected(answersSelected, index)}
                           />
                         </View>
                       )
@@ -195,19 +202,19 @@ class QuestionClassifier extends Component {
                   </View>
                   <View style={styles.buttonContainer}>
                     <ClassifierButton
-                      disabled={answerSelected === -1}
+                      disabled={answersSelected === []}
                       type="answer"
                       text="Submit"
                       onPress={this.submitClassification()}
                     />
                   </View>
                   {
-                    (task.help || R.length(guide.items) > 0) && 
+                    (task.help || R.length(guide.items) > 0) &&
                       <Separator style={styles.separator}/>
                   }
-                  { 
-                        task.help !== null &&
-                      <NeedHelpButton 
+                  {
+                    task.help !== null &&
+                      <NeedHelpButton
                         onPress={() => this.classifierContainer.displayHelpModal()}
                       />
                   }
@@ -248,7 +255,7 @@ class QuestionClassifier extends Component {
     }
 }
 
-QuestionClassifier.propTypes = {
+MultiAnswerClassifier.propTypes = {
     project: PropTypes.object,
     workflow: PropTypes.object,
     display_name: PropTypes.string,
@@ -323,9 +330,9 @@ const mapStateToProps = (state, ownProps) => {
       subjectsSeenThisSession: state.classifier.seenThisSession[ownProps.workflow.id] || []
    }
   }
-  
+
   const mapDispatchToProps = (dispatch) => ({
     classifierActions: bindActionCreators(classifierActions, dispatch),
   })
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionClassifier);
+export default connect(mapStateToProps, mapDispatchToProps)(MultiAnswerClassifier);

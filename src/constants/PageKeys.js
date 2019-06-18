@@ -10,6 +10,7 @@ const PageKeys = {
     ZooWebView: 'ZooWebView',
     SwipeClassifier: 'SwipeClassifier',
     QuestionClassifier: 'QuestionClassifier',
+    MultiAnswerClassifier: 'MultiAnswerClassifier',
     WebView: 'WebView',
     DrawingClassifier: 'DrawingClassifier'
 }
