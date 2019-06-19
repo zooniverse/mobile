@@ -61,12 +61,8 @@ export function fetchProjects() {
                 }
 
                 projectCalls.push(fetchPaginatedProjects(productionParams));
+                projectCalls.push(fetchPaginatedProjects(betaParams));
 
-                // Fetch Beta Projects
-                projectCalls.push(apiClient.type('projects').get(betaParams).then(projects => {
-                    const taggedProjects = tagProjects(projects, false)
-                    allProjects = allProjects.concat(taggedProjects)
-                }))
                 // Fetch Test Projects
                 if (userIsLoggedIn) {
                     projectCalls.push(apiClient.type('projects').get(ownerParams).then(projects => {
