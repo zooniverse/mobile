@@ -2,7 +2,6 @@ import React from 'react'
 import {
   ActivityIndicator,
   Alert,
-  AlertIOS,
   FlatList,
   Platform,
   PushNotificationIOS,
@@ -91,7 +90,7 @@ export class ProjectDisciplines extends React.Component {
   promptRequestPermissions = () => {
     PushNotificationIOS.checkPermissions((permissions) => {
       if (permissions.alert === 0){
-        AlertIOS.alert(
+        Alert.alert(
           'Allow Notifications?',
           'Zooniverse would like to occasionally send you info about new projects or projects needing help.',
           [
