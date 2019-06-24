@@ -14,9 +14,6 @@ Setting up to work on a react-native app is a little tricky, and setting up to w
 1. Follow the instructions for Android and iOS setup in [this guide](https://facebook.github.io/react-native/docs/getting-started.html).
 1. Clone down this repo and navigate to its directory (called `mobile`).
 1. Run `npm install` (later, if you need to reinstall dependencies for some reason, you can run `rm -rf node_modules/ && npm install`)
-1. Open the `mobile` directory in your IDE of choice. navigate to `node_modules/react-native-deck-swiper/node_modules` and delete the `react-native` directory you find in there.
-    - When we run the app, the presence of this version of react-native in addition to the dependency for the app itself creates a conflict. You'll know that this is what you're running into if you get an error about @hasteImpl returning two modules of the same name.
-    - This happens because zooniverse has its own fork of the `react-native-deck-swiper` module. Although we have removed `react-native` from the `package.json`, something else in it must be requiring this dependency. It's on the list of issues to address, to have our dependency fork not ship with this copy of `react-native`.
 1. Run `npm start`.
 
 ### Setting up to run on iOS
