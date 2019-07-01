@@ -10,4 +10,6 @@ target 'ZooniverseMobile' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 end

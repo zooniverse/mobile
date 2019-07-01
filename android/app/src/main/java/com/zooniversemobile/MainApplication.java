@@ -4,10 +4,10 @@ import android.support.multidex.MultiDexApplication;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -33,10 +33,10 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
             new SvgPackage(),
             new RNFirebasePackage(),
             new RNFirebaseMessagingPackage(),
-            new VectorIconsPackage(),
             new BlurViewPackage(),
             new RNFetchBlobPackage(),
             new SplashScreenReactPackage(),
