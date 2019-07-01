@@ -52,7 +52,6 @@ export function fetchProjects() {
                         .then((projects) => {
                             const taggedProjects = tagProjects(projects, false)
                             allProjects = allProjects.concat(taggedProjects)
-
                             if (taggedProjects.length === 20) {
                                 var currentPage = _page + 1
                                 return fetchPaginatedProjects(params, currentPage)
@@ -119,16 +118,27 @@ const getAvatarsForProjects = projects => {
 const getWorkflowsForProjects = projects => {
     const projectIds = projects.map((project) => project.id)
 
-    return apiClient.type('workflows').get({mobile_friendly: true, active: true, project_id: projectIds})
-        .then(workflows => {
-            workflows.forEach(workflow => {
-                workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
-                const project = projects.find(project => project.id === workflow.links.project)
-                if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
-                    project.workflows = R.append(workflow, project.workflows)
+    let fetchPaginatedWorkflows = (params, _page = 1) => {
+        return apiClient.type('workflows')
+            .get({...params, ...{page: _page}})
+            .then((workflows) => {
+                workflows.forEach(workflow => {
+                    workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
+
+                    const project = projects.find(project => project.id === workflow.links.project)
+                    if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
+                        project.workflows = R.append(workflow, project.workflows)
+                    }
+                })
+
+                if (workflows.length === 20) {
+                    var currentPage = _page + 1
+                    return fetchPaginatedWorkflows(params, currentPage)
                 }
             })
-        })
+    }
+
+    fetchPaginatedWorkflows({mobile_friendly: true, active: true, project_id: projectIds})
 };
 
 const addOwnerProjectId = (project) => ({
