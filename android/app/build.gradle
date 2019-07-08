@@ -107,8 +107,8 @@ android {
         applicationId "com.zooniversemobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 27
-        versionName "2.4.0"
+        versionCode 41
+        versionName "2.6.1"
         multiDexEnabled true
     }
     signingConfigs {
@@ -155,9 +155,9 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-vector-icons')
     implementation project(':react-native-svg')
     implementation project(path: ':react-native-firebase', configuration: 'default')
-    implementation project(':react-native-vector-icons')
     implementation project(':react-native-blur')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-splash-screen')
