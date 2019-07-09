@@ -16,6 +16,7 @@ const productionParams = {
 const betaParams = {
     mobile_friendly: true,
     beta_approved: true,
+    launch_approved: false,
     include: 'avatar',
     sort: 'display_name',
     live: true,
