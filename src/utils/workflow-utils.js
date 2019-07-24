@@ -33,7 +33,6 @@ const isValidQuestionWorkflow = (workflow) => {
   const hasSingleTask = workflowHasSingleTask(workflow)
 
   const shortcut = workflow.tasks[firstTask.unlinkedTask]
-  const config = workflow.configuration
 
   const questionNotTooLong = firstTask.question.length < 200
   const notTooManyShortcuts = shortcut ? shortcut.answers.length <= 2 : true
