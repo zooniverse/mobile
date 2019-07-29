@@ -8,7 +8,7 @@ export const getTaskFromWorkflow = (workflow) => {
     const key = workflow.first_task
     return workflow.tasks[key]
   }
-  
+
 export const getAnswersFromWorkflow = (workflow) => {
     const task = getTaskFromWorkflow(workflow)
     return task.answers
@@ -33,14 +33,12 @@ const isValidQuestionWorkflow = (workflow) => {
   const hasSingleTask = workflowHasSingleTask(workflow)
 
   const shortcut = workflow.tasks[firstTask.unlinkedTask]
-  const config = workflow.configuration
 
   const questionNotTooLong = firstTask.question.length < 200
   const notTooManyShortcuts = shortcut ? shortcut.answers.length <= 2 : true
-  const isNotFlipbook = config ? config.multi_image_mode !== 'flipbook' : true
   const doesNotUseFeedback = firstTask.feedback ? !firstTask.feedback.enabled : true;
 
-  if (hasSingleTask && questionNotTooLong && notTooManyShortcuts && isNotFlipbook && doesNotUseFeedback) {
+  if (hasSingleTask && questionNotTooLong && notTooManyShortcuts && doesNotUseFeedback) {
     workflow.type = firstTask.type
 
     const hasTwoAnswers = firstTask.answers.length === 2
@@ -62,9 +60,9 @@ const isValidDrawingWorkflow = (workflow) => {
 
   const firstTask = workflow.tasks[workflow.first_task]
   if (firstTask === undefined) {
-    return false 
+    return false
   }
-  
+
   if (firstTask.type !== 'drawing') {
     return false
   }
