@@ -5,8 +5,10 @@ import {
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import FontedText from '../common/FontedText'
 import PropTypes from 'prop-types';
+
+import FontedText from '../common/FontedText'
+import * as colorModes from '../../actions/colorModes'
 
 class ClassificationPanel extends Component {
   render() {
@@ -29,7 +31,7 @@ class ClassificationPanel extends Component {
       </View>
 
     return (
-        <View style={[styles.panelContainer, this.props.containerStyle]}>
+        <View style={[styles.panelContainer, this.props.containerStyle, colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]}>
           { this.props.hasTutorial ? tabs : null }
           { this.props.children }
         </View>
@@ -39,7 +41,6 @@ class ClassificationPanel extends Component {
 
 const styles = EStyleSheet.create({
   panelContainer: {
-    backgroundColor: 'white',
     marginTop: 15,
     marginBottom: 0,
     marginHorizontal: 25
@@ -71,5 +72,6 @@ ClassificationPanel.propTypes = {
   children: PropTypes.node,
   isQuestionVisible: PropTypes.bool,
   setQuestionVisibility: PropTypes.func,
+  inMuseumMode: PropTypes.bool,
 }
 export default ClassificationPanel

@@ -75,7 +75,7 @@ function navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, wor
         workflow,
         display_name: project.display_name,
         inPreviewMode,
-        inBetaMode
+        inBetaMode,
     })
 }
 

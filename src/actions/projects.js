@@ -5,6 +5,9 @@ import * as R from 'ramda'
 import * as ActionConstants from '../constants/actions'
 import {isValidMobileWorkflow} from '../utils/workflow-utils'
 
+import * as theme from '../theme'
+import * as colorModes from './colorModes';
+
 const productionParams = {
     mobile_friendly: true,
     launch_approved: true,

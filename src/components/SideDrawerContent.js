@@ -87,7 +87,10 @@ export class SideDrawerContent extends Component {
           </TouchableOpacity>
         </View>
 
-        <Separator color="white" style={styles.separatorPadding} />
+        <Separator
+            color="white"
+            style={styles.separatorPadding}
+          />
         
         <MenuButton 
           onPress={this.goHome} 

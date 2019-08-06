@@ -50,7 +50,7 @@ export class Question extends Component {
     return (
       <View style={styles.questionContainer}>
           <View style={styles.markdown}>
-            <SizedMarkdown>
+            <SizedMarkdown inMuseumMode={this.props.inMuseumMode}>
               {this.state.question}
             </SizedMarkdown>
           </View>
@@ -106,7 +106,12 @@ Question.propTypes = {
   taskHelp: PropTypes.string,
   setQuestionContainerHeight: PropTypes.func,
   questionContainerHeight: PropTypes.number,
-  onPressImage: PropTypes.func
+  onPressImage: PropTypes.func,
+  inMuseumMode: PropTypes.bool,
+}
+
+Question.defaultProps = {
+  inMuseumMode: false,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question)
