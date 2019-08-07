@@ -23,6 +23,8 @@ import ClassifierButton from './ClassifierButton'
 import FullScreenImage from '../FullScreenImage'
 import TapableSubject from './TapableSubject';
 
+import * as colorModes from '../../actions/colorModes'
+
 class QuestionClassifier extends Component {
 
     constructor(props) {
@@ -125,10 +127,11 @@ class QuestionClassifier extends Component {
           </View>
 
       const question =
-          <View>
+          <View style={colorModes.contentBackgroundColorFor(this.props.project.toString())}>
             <Question
               question={task.question}
               workflowID={workflow.id}
+              inMuseumMode={this.props.project.toString()}
               onPressImage={(src, question) => {
                 this.setState({ 
                   showFullSize: true,
@@ -147,7 +150,7 @@ class QuestionClassifier extends Component {
 
       const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
       const classificationPanel =
-          <View style={styles.classificationPanel}>
+          <View style={[styles.classificationPanel, colorModes.framingBackgroundColorFor(this.props.project.toString())]}>
             <ClassificationPanel
               hasTutorial = { !R.isEmpty(tutorial) }
               isQuestionVisible = {isQuestionVisible }
@@ -167,7 +170,7 @@ class QuestionClassifier extends Component {
                   ref={ref => this.scrollView = ref}
                 >
                   <View style={styles.backgroundView} />
-                  <View style={styles.classifierContainer}>
+                  <View style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.project.toString())]}>
                     <View onLayout={({nativeEvent}) => this.setState({imageDimensions: {width: nativeEvent.layout.width, height: nativeEvent.layout.height}})}>
                       <TapableSubject
                         height={300}
@@ -278,11 +281,9 @@ const styles = EStyleSheet.create({
 	classifierContainer: {
 		paddingHorizontal: 15,
 		paddingVertical: 15,
-		backgroundColor: 'white'
   },
   tutorialContainer: {
     flex: 1,
-    backgroundColor: 'white',
     marginHorizontal: 25
   },
   scrollView: {
@@ -290,7 +291,6 @@ const styles = EStyleSheet.create({
     marginHorizontal: 25
   },
   backgroundView: {
-    backgroundColor: 'white',
     height: 200,
     position: 'absolute',
     top: -200,
