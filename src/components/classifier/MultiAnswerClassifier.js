@@ -129,6 +129,7 @@ class MultiAnswerClassifier extends Component {
             <View style={styles.tutorialContainer}>
                 <Tutorial
                     projectName={project.display_name}
+                    inMuseumMode={this.props.project.toString()}
                     isInitialTutorial={needsTutorial}
                     tutorial={tutorial}
                     finishTutorial={() => this.finishTutorial()}
@@ -184,7 +185,8 @@ class MultiAnswerClassifier extends Component {
                             ref={ref => this.scrollView = ref}
                         >
                             <View style={styles.backgroundView}/>
-                            <View style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.project.toString())]}>
+                            <View
+                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.project.toString())]}>
                                 <View onLayout={({nativeEvent}) => this.setState({
                                     imageDimensions: {
                                         width: nativeEvent.layout.width,

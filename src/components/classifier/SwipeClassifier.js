@@ -147,6 +147,7 @@ export class SwipeClassifier extends React.Component {
     const tutorial =
       <Tutorial
         projectName={this.props.project.display_name}
+        inMuseumMode={this.props.project.toString()}
         isInitialTutorial={this.props.needsTutorial}
         tutorial={this.props.tutorial}
         finishTutorial={() => this.finishTutorial()}

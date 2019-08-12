@@ -16,6 +16,8 @@ import Button from '../Button'
 import TutorialStep from './TutorialStep'
 import FontedText from '../common/FontedText';
 
+import * as colorModes from '../../actions/colorModes'
+
 const topPadding = (Platform.OS === 'ios') ? 10 : 0
 
 export class Tutorial extends Component {
@@ -34,6 +36,7 @@ export class Tutorial extends Component {
         <TutorialStep
           key={`TUTORIAL_STEP_${index}`}
           markdownContent={step.content}
+          inMuseumMode={this.props.inMuseumMode}
           mediaUri={this.props.tutorial.mediaResources && this.props.tutorial.mediaResources[step.media] ? this.props.tutorial.mediaResources[step.media].src : null}
         />
       )
@@ -107,7 +110,7 @@ export class Tutorial extends Component {
       </FontedText>
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]}>
         { this.props.isInitialTutorial ? tutorialHeader : null}
         <View style={styles.container}>
           <Swiper
@@ -131,7 +134,7 @@ export class Tutorial extends Component {
 
 const styles = EStyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   firstTutorialContainer: {
     flex: 1,
@@ -210,6 +213,11 @@ Tutorial.propTypes = {
   projectName: PropTypes.string,
   finishTutorial: PropTypes.func,
   isInitialTutorial: PropTypes.bool,
+  inMuseumMode: PropTypes.bool,
+}
+
+Tutorial.defaultProps = {
+  inMuseumMode: false,
 }
 
 export default Tutorial
