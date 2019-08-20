@@ -105,7 +105,7 @@ export class Tutorial extends Component {
         text={'Let\s Go!'} />
 
     const tutorialHeader =
-      <FontedText style={styles.tutorialHeader}>
+      <FontedText style={[styles.tutorialHeader, {color: colorModes.textColorFor(this.props.inMuseumMode)}]}>
         {`${this.props.projectName} - Tutorial`}
       </FontedText>
 

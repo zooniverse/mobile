@@ -104,11 +104,12 @@ class ClassifierContainer extends Component {
 
 const styles = {
     container: {
-        flex: 1
+        flex: 1,
     }
 }
 
 ClassifierContainer.propTypes = {
+    inMuseumMode: PropTypes.bool,
     inBetaMode: PropTypes.bool.isRequired,
     children: PropTypes.element.isRequired,
     project: PropTypes.shape({
@@ -119,6 +120,10 @@ ClassifierContainer.propTypes = {
     guide: PropTypes.shape({
         
     })
+}
+
+ClassifierContainer.defaultProps = {
+    inMuseumMode: false
 }
 
 export default ClassifierContainer

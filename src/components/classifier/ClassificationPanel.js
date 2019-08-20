@@ -16,15 +16,15 @@ class ClassificationPanel extends Component {
       <View style={styles.tabContainer}>
         <TouchableOpacity
           onPress={ () => { this.props.setQuestionVisibility(true) } }
-          style={ this.props.isQuestionVisible ? [styles.tab] : [styles.tab, styles.deselectedTab] }>
-          <FontedText style={styles.tabText}>
+          style={ this.props.isQuestionVisible ? [styles.tab] : [styles.tab, colorModes.deselectedTabColorFor(this.props.inMuseumMode)] }>
+          <FontedText style={[styles.tabText, {color: colorModes.textColorFor(this.props.inMuseumMode)}]}>
             QUESTION
           </FontedText>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={ () => { this.props.setQuestionVisibility(false) } }
-          style={ this.props.isQuestionVisible ? [styles.tab, styles.deselectedTab] : [styles.tab] }>
-          <FontedText style={styles.tabText}>
+          style={ this.props.isQuestionVisible ? [styles.tab, colorModes.deselectedTabColorFor(this.props.inMuseumMode)] : [styles.tab] }>
+          <FontedText style={[styles.tabText, {color: colorModes.textColorFor(this.props.inMuseumMode)}]}>
             TUTORIAL
           </FontedText>
         </TouchableOpacity>
@@ -55,9 +55,6 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     marginTop: 1,
-  },
-  deselectedTab: {
-    backgroundColor: '$lightestGrey',
   },
   tabText: {
     fontSize: DeviceInfo.isTablet() ? 22 : 14,

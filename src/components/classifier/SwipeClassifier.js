@@ -23,6 +23,8 @@ import { getTaskFromWorkflow, getAnswersFromWorkflow } from '../../utils/workflo
 import { markdownContainsImage } from '../../utils/markdownUtils'
 import ClassifierContainer from './ClassifierContainer'
 
+import * as colorModes from '../../actions/colorModes'
+
 const mapStateToProps = (state, ownProps) => {
   return {
     task: getTaskFromWorkflow(ownProps.workflow),
@@ -154,9 +156,10 @@ export class SwipeClassifier extends React.Component {
       />
 
     const question =
-      <View>
+      <View style={colorModes.contentBackgroundColorFor(this.props.project.toString())}>
         <Question
           question={this.props.task.question}
+          inMuseumMode={this.props.project.toString()}
           workflowID={this.props.workflow.id}
           onPressImage={(src, question) => {
             this.setState({ 
@@ -227,6 +230,7 @@ export class SwipeClassifier extends React.Component {
           hasTutorial = { !R.isEmpty(this.props.tutorial) }
           isQuestionVisible = {this.state.isQuestionVisible }
           setQuestionVisibility = { this.setQuestionVisibility }
+          inMuseumMode={this.props.project.toString()}
         >
             {
               this.state.isQuestionVisible ? 
@@ -250,9 +254,10 @@ export class SwipeClassifier extends React.Component {
       </View>
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.toString())]}>
         <ClassifierContainer
           inBetaMode={this.props.inBetaMode}
+          inMuseumMode={this.props.project.toString()}
           project={this.props.project}
           help={this.props.task.help}
           guide={this.props.guide}
@@ -297,7 +302,7 @@ const styles = EStyleSheet.create({
   },
   classifier: {
     flex: 1,
-    margin: 15
+    margin: 15,
   }
 })
 

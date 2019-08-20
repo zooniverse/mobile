@@ -22,6 +22,14 @@ export function separatorColorFor(museumMode) {
     )
 }
 
+export function deselectedTabColorFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {backgroundColor: '#282828'},
+        {backgroundColor: '$lightestGrey'}
+    )
+}
+
 export function helpTextColorFor(museumMode) {
     return switchOn(
         museumMode,
