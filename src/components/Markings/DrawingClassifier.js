@@ -137,7 +137,7 @@ class DrawingClassifier extends Component {
         const tutorial =
             <Tutorial
                 projectName={this.props.project.display_name}
-                inMuseumMode={this.props.project.toString()}
+                inMuseumMode={this.props.project.in_museum_mode}
                 isInitialTutorial={this.props.needsTutorial}
                 tutorial={this.props.tutorial}
                 finishTutorial={() => this.finishTutorial()}
@@ -317,6 +317,7 @@ DrawingClassifier.propTypes = {
     ),
     instructions: PropTypes.string,
     display_name: PropTypes.string,
+    in_museum_mode: PropTypes.bool,
     project: PropTypes.shape({
         display_name: PropTypes.string,
         id: PropTypes.string

@@ -2,7 +2,7 @@ export function framingBackgroundColorFor(museumMode) {
     return switchOn(
         museumMode,
         {backgroundColor: '#2D2D2D'},
-        {backgroundColor: '#ff4500'}
+        {backgroundColor: '#eff2f5'}
     )
 }
 

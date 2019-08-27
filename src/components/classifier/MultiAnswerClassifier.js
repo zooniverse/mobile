@@ -129,7 +129,7 @@ class MultiAnswerClassifier extends Component {
             <View style={styles.tutorialContainer}>
                 <Tutorial
                     projectName={project.display_name}
-                    inMuseumMode={this.props.project.toString()}
+                    inMuseumMode={this.props.project.in_museum_mode}
                     isInitialTutorial={needsTutorial}
                     tutorial={tutorial}
                     finishTutorial={() => this.finishTutorial()}
@@ -142,7 +142,7 @@ class MultiAnswerClassifier extends Component {
                 <Question
                     question={task.question}
                     workflowID={workflow.id}
-                    inMuseumMode={this.props.project.toString()}
+                    inMuseumMode={this.props.project.in_museum_mode}
                     onPressImage={(src, question) => {
                         this.setState({
                             showFullSize: true,
@@ -169,7 +169,7 @@ class MultiAnswerClassifier extends Component {
                     hasTutorial={!R.isEmpty(tutorial)}
                     isQuestionVisible={isQuestionVisible}
                     setQuestionVisibility={this.setQuestionVisibility()}
-                    inMuseumMode={this.props.project.toString()}
+                    inMuseumMode={this.props.project.in_museum_mode}
                 >
                     {
                         isQuestionVisible &&
@@ -186,7 +186,7 @@ class MultiAnswerClassifier extends Component {
                         >
                             <View style={styles.backgroundView}/>
                             <View
-                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.project.toString())]}>
+                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
                                 <View onLayout={({nativeEvent}) => this.setState({
                                     imageDimensions: {
                                         width: nativeEvent.layout.width,
@@ -230,14 +230,14 @@ class MultiAnswerClassifier extends Component {
                                 (task.help || R.length(guide.items) > 0) &&
                                 <Separator
                                     style={styles.separator}
-                                    inMuseumMode={this.props.project.toString()}
+                                    inMuseumMode={this.props.project.in_museum_mode}
                                 />
                             }
                             {//SWITCHING TO NIGHTMODE
                                 task.help !== null &&
                                 <NeedHelpButton
                                     onPress={() => this.classifierContainer.displayHelpModal()}
-                                    inMuseumMode={this.props.project.toString()}
+                                    inMuseumMode={this.props.project.in_museum_mode}
                                 />
                             }
                             {
@@ -263,7 +263,7 @@ class MultiAnswerClassifier extends Component {
 
         //SWITCHING TO NIGHTMODE
         return (
-            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.toString())]}>
+            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
                     project={project}
@@ -282,6 +282,7 @@ MultiAnswerClassifier.propTypes = {
     project: PropTypes.object,
     workflow: PropTypes.object,
     display_name: PropTypes.string,
+    in_museum_mode: PropTypes.bool,
     inPreviewMode: PropTypes.bool,
     inBetaMode: PropTypes.bool,
     guide: PropTypes.object,
@@ -309,7 +310,6 @@ const styles = EStyleSheet.create({
     classifierContainer: {
         paddingHorizontal: 15,
         paddingVertical: 15,
-        backgroundColor: '#ff4500'
     },
     tutorialContainer: {
         flex: 1,

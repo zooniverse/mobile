@@ -90,11 +90,6 @@ export function fetchProjects() {
                     // Then load the avatars and workflows
                     Promise.all(projectDetailCalls)
                         .then(() => {
-                            allProjects.forEach(project => {
-                                console.log(project.display_name)
-                                console.log(project.inMuseumMode)
-                                console.log(project.avatar_src)
-                            })
                             dispatch(addProjects(allProjects))
                             dispatch(addProjectsSuccess);
                             resolve(allProjects)

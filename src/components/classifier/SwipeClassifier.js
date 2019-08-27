@@ -149,17 +149,17 @@ export class SwipeClassifier extends React.Component {
     const tutorial =
       <Tutorial
         projectName={this.props.project.display_name}
-        inMuseumMode={this.props.project.toString()}
+        inMuseumMode={this.props.project.in_museum_mode}
         isInitialTutorial={this.props.needsTutorial}
         tutorial={this.props.tutorial}
         finishTutorial={() => this.finishTutorial()}
       />
 
     const question =
-      <View style={colorModes.contentBackgroundColorFor(this.props.project.toString())}>
+      <View style={colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)}>
         <Question
           question={this.props.task.question}
-          inMuseumMode={this.props.project.toString()}
+          inMuseumMode={this.props.project.in_museum_mode}
           workflowID={this.props.workflow.id}
           onPressImage={(src, question) => {
             this.setState({ 
@@ -230,7 +230,7 @@ export class SwipeClassifier extends React.Component {
           hasTutorial = { !R.isEmpty(this.props.tutorial) }
           isQuestionVisible = {this.state.isQuestionVisible }
           setQuestionVisibility = { this.setQuestionVisibility }
-          inMuseumMode={this.props.project.toString()}
+          inMuseumMode={this.props.project.in_museum_mode}
         >
             {
               this.state.isQuestionVisible ? 
@@ -254,10 +254,10 @@ export class SwipeClassifier extends React.Component {
       </View>
 
     return (
-      <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.toString())]}>
+      <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
         <ClassifierContainer
           inBetaMode={this.props.inBetaMode}
-          inMuseumMode={this.props.project.toString()}
+          inMuseumMode={this.props.project.in_museum_mode}
           project={this.props.project}
           help={this.props.task.help}
           guide={this.props.guide}
@@ -314,11 +314,12 @@ SwipeClassifier.propTypes = {
   annotations: PropTypes.object,
   workflowID: PropTypes.string,
   display_name: PropTypes.string,
+  in_museum_mode: PropTypes.bool, 
   workflow: PropTypes.shape({
-    first_task: PropTypes.string,
-    tasks: PropTypes.object,
-    configuration: PropTypes.object,
-    id: PropTypes.string
+  first_task: PropTypes.string,
+  tasks: PropTypes.object,
+  configuration: PropTypes.object,
+  id: PropTypes.string
   }),
   subject: PropTypes.shape({
     id: PropTypes.string,

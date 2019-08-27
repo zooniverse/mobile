@@ -120,7 +120,7 @@ class QuestionClassifier extends Component {
             <View style={styles.tutorialContainer}>
                 <Tutorial
                     projectName={project.display_name}
-                    inMuseumMode={this.props.project.toString()}
+                    inMuseumMode={this.props.project.in_museum_mode}
                     isInitialTutorial={needsTutorial}
                     tutorial={tutorial}
                     finishTutorial={() => this.finishTutorial()}
@@ -128,11 +128,11 @@ class QuestionClassifier extends Component {
             </View>
 
         const question =
-            <View style={colorModes.contentBackgroundColorFor(this.props.project.toString())}>
+            <View style={colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)}>
                 <Question
                     question={task.question}
                     workflowID={workflow.id}
-                    inMuseumMode={this.props.project.toString()}
+                    inMuseumMode={this.props.project.in_museum_mode}
                     onPressImage={(src, question) => {
                         this.setState({
                             showFullSize: true,
@@ -153,7 +153,7 @@ class QuestionClassifier extends Component {
         const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
         const classificationPanel =
             <View
-                style={[styles.classificationPanel, colorModes.framingBackgroundColorFor(this.props.project.toString())]}>
+                style={[styles.classificationPanel, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <ClassificationPanel
                     hasTutorial={!R.isEmpty(tutorial)}
                     isQuestionVisible={isQuestionVisible}
@@ -174,7 +174,7 @@ class QuestionClassifier extends Component {
                         >
                             <View style={styles.backgroundView}/>
                             <View
-                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.project.toString())]}>
+                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
                                 <View onLayout={({nativeEvent}) => this.setState({
                                     imageDimensions: {
                                         width: nativeEvent.layout.width,
@@ -265,6 +265,7 @@ QuestionClassifier.propTypes = {
     project: PropTypes.object,
     workflow: PropTypes.object,
     display_name: PropTypes.string,
+    in_museum_mode: PropTypes.bool,
     inPreviewMode: PropTypes.bool,
     inBetaMode: PropTypes.bool,
     guide: PropTypes.object,
