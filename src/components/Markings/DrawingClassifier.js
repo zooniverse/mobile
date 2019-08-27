@@ -316,10 +316,9 @@ DrawingClassifier.propTypes = {
         })
     ),
     instructions: PropTypes.string,
-    display_name: PropTypes.string,
-    in_museum_mode: PropTypes.bool,
     project: PropTypes.shape({
         display_name: PropTypes.string,
+        in_museum_mode: PropTypes.bool,
         id: PropTypes.string
     }),
     workflow: PropTypes.shape({

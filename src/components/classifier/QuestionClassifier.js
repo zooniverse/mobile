@@ -262,10 +262,11 @@ class QuestionClassifier extends Component {
 }
 
 QuestionClassifier.propTypes = {
-    project: PropTypes.object,
     workflow: PropTypes.object,
-    display_name: PropTypes.string,
-    in_museum_mode: PropTypes.bool,
+    project: PropTypes.shape({
+        display_name: PropTypes.string,
+        in_museum_mode: PropTypes.bool,
+    }),
     inPreviewMode: PropTypes.bool,
     inBetaMode: PropTypes.bool,
     guide: PropTypes.object,

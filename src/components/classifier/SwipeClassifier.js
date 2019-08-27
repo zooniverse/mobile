@@ -313,8 +313,6 @@ SwipeClassifier.propTypes = {
   isSuccess: PropTypes.bool,
   annotations: PropTypes.object,
   workflowID: PropTypes.string,
-  display_name: PropTypes.string,
-  in_museum_mode: PropTypes.bool, 
   workflow: PropTypes.shape({
   first_task: PropTypes.string,
   tasks: PropTypes.object,
@@ -333,6 +331,7 @@ SwipeClassifier.propTypes = {
   seenThisSession: PropTypes.array,
   project: PropTypes.shape({
     display_name: PropTypes.string,
+    in_museum_mode: PropTypes.bool,
     id: PropTypes.string
   }),
   tutorial: PropTypes.object,

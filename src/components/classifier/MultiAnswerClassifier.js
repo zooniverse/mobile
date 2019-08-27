@@ -136,7 +136,7 @@ class MultiAnswerClassifier extends Component {
                 />
             </View>
 
-        //SWITCHING TO NIGHTMODE
+
         const question =
             <View>
                 <Question
@@ -162,7 +162,7 @@ class MultiAnswerClassifier extends Component {
 
         const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
 
-        //SWITCHING TO NIGHTMODE
+
         const classificationPanel =
             <View style={styles.classificationPanel}>
                 <ClassificationPanel
@@ -179,7 +179,7 @@ class MultiAnswerClassifier extends Component {
                     }
                 </ClassificationPanel>
                 {
-                    isQuestionVisible ? //SWITCHING TO NIGHTMODE
+                    isQuestionVisible ?
                         <ScrollView
                             style={styles.scrollView}
                             ref={ref => this.scrollView = ref}
@@ -226,14 +226,14 @@ class MultiAnswerClassifier extends Component {
                                     onPress={this.submitClassification()}
                                 />
                             </View>
-                            { //SWITCHING TO NIGHTMODE
+                            {
                                 (task.help || R.length(guide.items) > 0) &&
                                 <Separator
                                     style={styles.separator}
                                     inMuseumMode={this.props.project.in_museum_mode}
                                 />
                             }
-                            {//SWITCHING TO NIGHTMODE
+                            {
                                 task.help !== null &&
                                 <NeedHelpButton
                                     onPress={() => this.classifierContainer.displayHelpModal()}
@@ -261,7 +261,7 @@ class MultiAnswerClassifier extends Component {
                 />
             </View>
 
-        //SWITCHING TO NIGHTMODE
+
         return (
             <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <ClassifierContainer
@@ -279,10 +279,12 @@ class MultiAnswerClassifier extends Component {
 }
 
 MultiAnswerClassifier.propTypes = {
-    project: PropTypes.object,
     workflow: PropTypes.object,
-    display_name: PropTypes.string,
-    in_museum_mode: PropTypes.bool,
+    project: PropTypes.shape({
+        display_name: PropTypes.string,
+        in_museum_mode: PropTypes.bool,
+        id: PropTypes.string
+    }),
     inPreviewMode: PropTypes.bool,
     inBetaMode: PropTypes.bool,
     guide: PropTypes.object,
