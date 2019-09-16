@@ -8,9 +8,10 @@ import PageKeys from '../constants/PageKeys'
 
 const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, workflow) => {
     dispatch(setNavbarSettingsForPage({
-        title: project.display_name,
+        title: project.in_museum_mode ? 'ZOONIVERSE - DO REAL RESEARCH!' : project.display_name,
         isPreview: inPreviewMode,
-        showBack: true,
+        showBack: !project.in_museum_mode,
+        hambugerMenuShowing: !project.in_museum_mode,
         centerType: 'title'
     }, getPageKeyForWorkflowType(workflow.type)))
 
