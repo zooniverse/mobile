@@ -264,6 +264,7 @@ class QuestionClassifier extends Component {
 QuestionClassifier.propTypes = {
     workflow: PropTypes.object,
     project: PropTypes.shape({
+        id: PropTypes.number,
         display_name: PropTypes.string,
         in_museum_mode: PropTypes.bool,
     }),

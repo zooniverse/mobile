@@ -11,7 +11,6 @@ class SideDrawer extends Component {
 
         return (
             <Drawer
-                ref="drawer"
                 open={state.open}
                 onOpen={() => Actions.refresh({key: state.key, open: true})}
                 onClose={() => Actions.refresh({key: state.key, open: false})}
