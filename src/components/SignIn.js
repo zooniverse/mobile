@@ -76,7 +76,7 @@ export class SignIn extends React.Component {
   componentDidMount() {
     this.props.setNavbarSettingsForPage({
       centerType: 'logo',
-      showHamburgerMenu: false,
+      rgerMenu: false,
     })
   }
 

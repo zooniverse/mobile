@@ -11,7 +11,7 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
         title: project.in_museum_mode ? 'ZOONIVERSE - DO REAL RESEARCH!' : project.display_name,
         isPreview: inPreviewMode,
         showBack: !project.in_museum_mode,
-        hambugerMenuShowing: !project.in_museum_mode,
+        hamburgerMenuShowing: !project.in_museum_mode,
         centerType: 'title'
     }, getPageKeyForWorkflowType(workflow.type)))
 

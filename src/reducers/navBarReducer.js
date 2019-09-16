@@ -9,7 +9,7 @@ export const InitialNavBarState = {
 const defaultNavBarSettings = {
     title: '',
     showBack: false,
-    hambugerMenuShowing: true,
+    hamburgerMenuShowing: true,
     centerType: 'logo',
     isPreview: false
 }

@@ -4,7 +4,7 @@ import * as ActionConstants from '../constants/actions';
  * The Navbar settings available to set are:
  * title,
  * showBack,
- * hambugerMenuShowing,
+ * hamburgerMenuShowing,
  * centerType,
  * isPreview
 */

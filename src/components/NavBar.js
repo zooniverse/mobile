@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
     user: state.user,
     title: navbarSettings ? navbarSettings.title : '',
     showBack: navbarSettings ? navbarSettings.showBack : false,
-    hambugerMenuShowing: navbarSettings ? navbarSettings.hambugerMenuShowing : false,
+    hamburgerMenuShowing: navbarSettings ? navbarSettings.hamburgerMenuShowing : false,
     isPreview: navbarSettings ? navbarSettings.isPreview : false,
     centerType: navbarSettings ? navbarSettings.centerType : 'title'
   }
@@ -108,7 +108,7 @@ export class NavBar extends Component {
           <View style={[styles.navBar, selectBackgroundStyle(this.props.isPreview)]}>
             <LeftContainer isActive={this.props.showBack} />
             <CenterContainer />
-            <RightContainer isActive={this.props.hambugerMenuShowing} />
+            <RightContainer isActive={this.props.hamburgerMenuShowing} />
           </View>
           <View>
             { this.props.centerType === 'avatar' ? avatar : null }
@@ -188,7 +188,7 @@ NavBar.propTypes = {
   showLogo: PropTypes.bool,
   showAvatar: PropTypes.bool,
   showBack: PropTypes.bool,
-  hambugerMenuShowing: PropTypes.bool,
+  hamburgerMenuShowing: PropTypes.bool,
   onBack: PropTypes.func,
   user: PropTypes.object,
   title: PropTypes.string,

@@ -20,7 +20,7 @@ describe('Nav Bar Reducer', () => {
         const newSettings = {
             title: 'Tst',
             showBack: true,
-            hambugerMenuShowing: false,
+            hamburgerMenuShowing: false,
             centerType: 'title',
             isPreview: true
         }
