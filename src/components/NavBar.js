@@ -23,8 +23,8 @@ const mapStateToProps = (state) => {
     title: navbarSettings ? navbarSettings.title : '',
     showBack: navbarSettings ? navbarSettings.showBack : false,
     hamburgerMenuShowing: navbarSettings ? navbarSettings.hamburgerMenuShowing : false,
-    isPreview: navbarSettings ? navbarSettings.isPreview : false,
-    centerType: navbarSettings ? navbarSettings.centerType : 'title'
+    centerType: navbarSettings ? navbarSettings.centerType : 'title',
+    backgroundColor: navbarSettings ? navbarSettings.backgroundColor : '#000000',
   }
 }
 
@@ -105,7 +105,7 @@ export class NavBar extends Component {
 
     return (
         <View style={[styles.navBarContainer]}>
-          <View style={[styles.navBar, selectBackgroundStyle(this.props.isPreview)]}>
+          <View style={[styles.navBar, { backgroundColor: this.props.backgroundColor }]}>
             <LeftContainer isActive={this.props.showBack} />
             <CenterContainer />
             <RightContainer isActive={this.props.hamburgerMenuShowing} />
@@ -121,17 +121,7 @@ export class NavBar extends Component {
 const navBarHeight = 62
 const navBarPadding = 24
 
-const selectBackgroundStyle = (isPreview) => {
-  return isPreview ? styles.previewBackgroundColor : styles.defaultBackgroundColor
-}
-
 const styles = EStyleSheet.create({
-  defaultBackgroundColor: {
-    backgroundColor: '$headerColor',
-  },
-  previewBackgroundColor: {
-    backgroundColor: '$testRed'
-  },
   navBarContainer: {
     flexDirection: 'column',
   },
@@ -192,7 +182,7 @@ NavBar.propTypes = {
   onBack: PropTypes.func,
   user: PropTypes.object,
   title: PropTypes.string,
-  isPreview: PropTypes.bool,
+  backgroundColor: PropTypes.string,
   centerType: PropTypes.oneOf(['title', 'logo', 'avatar'])
 
 }
