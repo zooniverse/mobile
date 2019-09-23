@@ -194,7 +194,7 @@ NavBar.propTypes = {
 
 }
 NavBar.defaultProps = {
-  backgroundColor: theme.$headerColor,
+  backgroundColor: theme.$zooniverseTeal,
   centerType: 'title',
   hamburgerMenuShowing: false,
   showAvatar: false,

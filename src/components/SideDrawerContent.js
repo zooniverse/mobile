@@ -195,7 +195,7 @@ const styles = EStyleSheet.create({
     paddingLeft: 25
   },
   icon: {
-    color: '$headerColor',
+    color: '$zooniverseTeal',
     fontSize: 24,
     padding: 10
   },

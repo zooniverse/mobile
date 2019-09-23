@@ -19,7 +19,7 @@ const UnlinkedTask = (props) => {
         <Switch
           value={contains(idx, annotationValues)}
           style={styles.switchComponent}
-          trackColor={theme.$headerColor}
+          trackColor={theme.$zooniverseTeal}
           onValueChange={()=>props.onAnswered(props.unlinkedTaskKey, idx)}
         />
 

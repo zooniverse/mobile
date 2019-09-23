@@ -1,5 +1,4 @@
 export default {
-    $headerColor: 'rgba(0, 151, 157, 1)',
     $buttonColor: 'rgba(0, 151, 157, 1)',
     $registerButtonColor: 'rgba(12, 72, 129, 1)',
     $registerDisabledButtonColor: 'rgba(205,228,250, 1)',

@@ -80,7 +80,7 @@ class ProjectList extends Component {
             title,
             showBack: true,
             isPreview: inPreviewMode, //TODO: Decouple preview mode from the color of the safe area container
-            backgroundColor: inPreviewMode ? theme.$testRed : theme.$headerColor,
+            backgroundColor: inPreviewMode ? theme.$testRed : theme.$zooniverseTeal,
             centerType: 'title',
         }, PageKeys.ProjectList)
     }

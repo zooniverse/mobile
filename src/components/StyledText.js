@@ -36,11 +36,11 @@ const styles = EStyleSheet.create({
     lineHeight: 24
   },
   link: {
-    color: '$headerColor'
+    color: '$zooniverseTeal'
   },
   smallLink: {
     fontSize: 12,
-    color: '$headerColor'
+    color: '$zooniverseTeal'
   },
   small: {
     fontSize: 12,
