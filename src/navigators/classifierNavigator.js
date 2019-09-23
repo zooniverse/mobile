@@ -8,6 +8,7 @@ import PageKeys from '../constants/PageKeys'
 
 const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, workflow) => {
     dispatch(setNavbarSettingsForPage({
+        isPreview: inPreviewMode, //TODO: Decouple preview mode from the color of the safe area container
         title: project.in_museum_mode ? 'ZOONIVERSE - DO REAL RESEARCH!' : project.display_name,
         showBack: !project.in_museum_mode,
         hamburgerMenuShowing: !project.in_museum_mode,

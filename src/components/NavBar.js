@@ -15,16 +15,23 @@ import UserAvatar from './UserAvatar'
 import CircleRibbon from './CircleRibbon'
 import FontedText from './common/FontedText'
 
+import theme from '../theme'
+
 const mapStateToProps = (state) => {
   const { pageShowing, pageSettings } = state.navBar
   const navbarSettings = pageSettings[pageShowing]
+
+  if ( ! navbarSettings ) {
+    return {user: state.user,}
+  }
+
   return {
     user: state.user,
-    title: navbarSettings ? navbarSettings.title : '',
-    showBack: navbarSettings ? navbarSettings.showBack : false,
-    hamburgerMenuShowing: navbarSettings ? navbarSettings.hamburgerMenuShowing : false,
-    centerType: navbarSettings ? navbarSettings.centerType : 'title',
-    backgroundColor: navbarSettings ? navbarSettings.backgroundColor : '#000000',
+    title: navbarSettings.title,
+    showBack: navbarSettings.showBack,
+    hamburgerMenuShowing: navbarSettings.hamburgerMenuShowing,
+    centerType: navbarSettings.centerType,
+    backgroundColor: navbarSettings.backgroundColor,
   }
 }
 
@@ -187,9 +194,13 @@ NavBar.propTypes = {
 
 }
 NavBar.defaultProps = {
-  showLogo: false,
+  backgroundColor: theme.$headerColor,
+  centerType: 'title',
+  hamburgerMenuShowing: false,
   showAvatar: false,
-  title: undefined
+  showBack: false,
+  showLogo: false,
+  title: '',
 }
 
 export default connect(mapStateToProps)(NavBar)
