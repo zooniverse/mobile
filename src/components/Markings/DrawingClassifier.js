@@ -164,6 +164,7 @@ class DrawingClassifier extends Component {
                         showHelpButton={DeviceInfo.isTablet() && !R.isEmpty(this.props.help)}
                         onHelpButtonPressed={() => this.classificationContainer.displayHelpModal()}
                         showDrawingButtons={DeviceInfo.isTablet()}
+                        inMuseumMode={this.props.project.in_museum_mode}
                         onUndoButtonSelected={this.props.drawingActions.undoMostRecentEdit}
                         maxShapesDrawn={this.props.numberOfShapesDrawn >= tool.max}
                         drawingColor={tool.color}

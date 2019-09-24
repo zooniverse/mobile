@@ -198,6 +198,7 @@ class MultiAnswerClassifier extends Component {
                                         width={imageDimensions.width}
                                         subject={subject}
                                         alreadySeen={seenThisSession}
+                                        inMuseumMode={this.props.project.in_museum_mode}
                                         onPress={(imageSource) => this.setState({
                                             showFullSize: true,
                                             fullScreenImageSource: {uri: imageSource}

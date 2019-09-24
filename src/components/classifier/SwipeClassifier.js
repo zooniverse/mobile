@@ -112,9 +112,10 @@ export class SwipeClassifier extends React.Component {
       const shouldAnimateOverlay = this.props.subjectLists[this.state.swiperIndex].id === subject.id
 
       return this.state.panX ? (
-          <SwipeCard 
+          <SwipeCard
             subject={subject}
             seenThisSession={seenThisSession}
+            inMuseumMode={this.props.project.in_museum_mode}
             panX={this.state.panX}
             shouldAnimateOverlay={shouldAnimateOverlay}
             answers={this.props.answers}

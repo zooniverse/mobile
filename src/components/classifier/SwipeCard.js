@@ -107,6 +107,7 @@ class SwipeCard extends Component {
             panX,
             subject,
             seenThisSession,
+            inMuseumMode,
             answers,
             subjectDisplayWidth,
             subjectDisplayHeight,
@@ -143,7 +144,7 @@ class SwipeCard extends Component {
                 </View>
                 <View style={styles.overlayContainer} pointerEvents="none">
                     { this.props.shouldAnimateOverlay ? overlay : null }
-                    { alreadySeen ? <AlreadySeenBanner /> : null }
+                    { alreadySeen && !inMuseumMode ? <AlreadySeenBanner /> : null }
                 </View>
             </View>
         )
@@ -205,6 +206,7 @@ const styles = EStyleSheet.create({
 SwipeCard.propTypes = {
     subject: PropTypes.any,
     seenThisSession: PropTypes.bool,
+    inMuseumMode: PropTypes.bool,
     panX: PropTypes.object,
     shouldAnimateOverlay: PropTypes.bool,
     answers: PropTypes.array,
