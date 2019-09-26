@@ -93,6 +93,7 @@ class ClassifierContainer extends Component {
                 <TaskHelpModal
                     text={this.props.help}
                     isVisible={this.state.helpModalIsVisible}
+                    inMuseumMode={this.props.inMuseumMode}
                     onCloseRequested={ () => this.setState({helpModalIsVisible: false}) }
                 />
                 { this.state.isFieldGuideVisible ? fieldGuide : null }
