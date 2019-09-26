@@ -17,6 +17,8 @@ import AlreadySeenBanner from './AlreadySeenBanner'
 import SubjectOptionsBar from './SubjectOptionsBar'
 import SwipeCardSubjectsView from './SwipeCardSubjectsView';
 
+import * as colorModes from '../../actions/colorModes'
+
 const mapDispatchToProps = (dispatch) => ({
   imageActions: bindActionCreators(imageActions, dispatch)
 })
@@ -130,7 +132,7 @@ class SwipeCard extends Component {
 
         const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}
         return (
-            <View style={[styles.cardBackground, dimensionsStyle]}>
+            <View style={[styles.cardBackground, dimensionsStyle, colorModes.contentBackgroundColorFor(inMuseumMode)]}>
                 <SwipeCardSubjectsView
                     imageUris={localUris.map((uri) => `file://${uri}`)}
                     hasMultipleSubjects={subject.displays.length > 1}
@@ -160,7 +162,6 @@ const styles = EStyleSheet.create({
     cardBackground: {
         borderWidth: 1,
         borderColor: '#E2E5E9',
-        backgroundColor: 'white'
     },
     imageShadow: {
         backgroundColor: 'transparent',

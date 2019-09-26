@@ -87,7 +87,7 @@ class ClassifierContainer extends Component {
 
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.container]}>
                 {this.props.children}
                 { this.props.inBetaMode ? feedbackView : null }
                 <TaskHelpModal

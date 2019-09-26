@@ -27,6 +27,8 @@ import NativeImage from '../../nativeModules/NativeImage'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
 import DrawingHeader from './components/DrawingHeader'
 
+import * as colorModes from '../../actions/colorModes'
+
 const mapStateToProps = (state, ownProps) => {
     const subjectDimensions = state.classifier.subject ? state.classifier.subjectDimensions[state.classifier.subject.id] : null
 
@@ -144,17 +146,22 @@ class DrawingClassifier extends Component {
             />
 
         const classification =
-            <View style={styles.classificationContainer}>
+            <View style={[styles.classificationContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <DrawingHeader
+                    inMuseumMode={this.props.project.in_museum_mode}
                     horizontal={DeviceInfo.isTablet()}
                     question={
-                        <Question question={this.props.instructions}/>
+                        <Question
+                            question={this.props.instructions}
+                            inMuseumMode={this.props.project.in_museum_mode}
+                        />
                     }
                     instructions={
                         <ShapeInstructionsView
                             {...tool}
                             numberDrawn={this.props.numberOfShapesDrawn}
                             warnForRequirements={warnForRequirements}
+                            inMuseumMode={this.props.project.in_museum_mode}
                         />
                     }
                 />
@@ -205,7 +212,7 @@ class DrawingClassifier extends Component {
         const classificationView =
             <View style={[styles.container, classificationBottomPadding]}>
                 <ClassificationPanel
-                    containerStyle={styles.container}
+                    containerStyle={[styles.container, {backgroundColor: 'red'}]}
                     isFetching={this.props.isFetching}
                     hasTutorial={!R.isEmpty(this.props.tutorial)}
                     isQuestionVisible={isQuestionVisible}
@@ -214,15 +221,18 @@ class DrawingClassifier extends Component {
                     {isQuestionVisible ? classification : tutorial}
                 </ClassificationPanel>
                 {isQuestionVisible && !R.isEmpty(this.props.help) && !DeviceInfo.isTablet() &&
-                <NeedHelpButton onPress={() => this.classificationContainer.displayHelpModal()}/>}
+                <NeedHelpButton
+                    onPress={() => this.classificationContainer.displayHelpModal()}
+                    inMuseumMode={this.props.project.in_museum_mode}
+                />}
                 {isQuestionVisible && !R.empty(this.props.guide) && fieldGuideButton}
                 {isQuestionVisible && submitButton}
             </View>
 
-
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <ClassificationContainer
+                    inMuseumMode={this.props.project.in_museum_mode}
                     project={this.props.project}
                     inBetaMode={this.props.inBetaMode}
                     help={this.props.help}

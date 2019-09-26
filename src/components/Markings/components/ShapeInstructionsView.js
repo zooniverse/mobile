@@ -8,16 +8,18 @@ import DeviceInfo from 'react-native-device-info'
 
 import FontedText from '../../common/FontedText'
 
+import * as colorModes from '../../../actions/colorModes'
+
 const ShapeInstructionsView = (props) => {
     const warningStyle = props.warnForRequirements ? styles.warningText : {}
     return (
         <View style={styles.instructionsContainer} >
             <ShapePreview type={props.type} color={props.color} />
             <View style={styles.textContainer} >
-                <FontedText style={styles.label}>
+                <FontedText style={[styles.label, {color: colorModes.textColorFor(props.inMuseumMode)}]}>
                     {props.label}
                 </FontedText>
-                <FontedText style={styles.infoText}> 
+                <FontedText style={[styles.infoText, colorModes.ancillaryTextColorFor(props.inMuseumMode)]}>
                     <FontedText style={warningStyle}>
                         { warningText(parseInt(props.numberDrawn), parseInt(props.min), parseInt(props.max)) }
                     </FontedText>
@@ -47,7 +49,8 @@ ShapeInstructionsView.propTypes = {
     min: PropTypes.string,
     max: PropTypes.string,
     numberDrawn: PropTypes.number,
-    warnForRequirements: PropTypes.bool
+    warnForRequirements: PropTypes.bool,
+    inMuseumMode: PropTypes.bool,
 }
 
 /**
@@ -64,8 +67,9 @@ const ShapePreview = ({type, color}) => {
 }
 ShapePreview.propTypes = {
     type: PropTypes.oneOf(['rectangle']),
-    color: PropTypes.string
+    color: PropTypes.string,
 }
+
 
 const styles = EStyleSheet.create({
     container: {
@@ -86,7 +90,6 @@ const styles = EStyleSheet.create({
     },
     infoText: {
         fontSize: DeviceInfo.isTablet() ? 22 : 14,
-        color: '$headerGrey'
     },
     warningText: {
         fontWeight: 'bold',

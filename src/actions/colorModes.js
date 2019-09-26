@@ -38,6 +38,14 @@ export function helpTextColorFor(museumMode) {
     )
 }
 
+export function ancillaryTextColorFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {color: 'white'},
+        {color: '$headerGrey'}
+    )
+}
+
 export function textColorFor(museumMode) {
     return switchOn(
         museumMode,
