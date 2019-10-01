@@ -126,7 +126,7 @@ class MultiAnswerClassifier extends Component {
         }
 
         const renderTutorial = () =>
-            <View style={styles.tutorialContainer}>
+            <View style={[styles.tutorialContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <Tutorial
                     projectName={project.display_name}
                     inMuseumMode={this.props.project.in_museum_mode}
@@ -267,6 +267,7 @@ class MultiAnswerClassifier extends Component {
             <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
+                    inMuseumMode={this.props.project.in_museum_mode}
                     project={project}
                     help={task.help}
                     guide={guide}
@@ -316,7 +317,6 @@ const styles = EStyleSheet.create({
     },
     tutorialContainer: {
         flex: 1,
-        backgroundColor: 'white',
         marginHorizontal: 25
     },
     scrollView: {

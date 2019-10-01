@@ -10,14 +10,24 @@ import FontedText from '../../common/FontedText'
 import Separator from '../../common/Separator'
 import ShapeInstructionsView from './ShapeInstructionsView'
 
+import * as colorModes from '../../../actions/colorModes'
+
 const InstructionView = (props) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, colorModes.contentBackgroundColorFor(props.inMuseumMode)]}>
             <ShapeInstructionsView {...props} />
             <Separator style={styles.separator} />
             <View style={styles.instructionsContainer} >
-                <OptionButton type="cancel" onPress={props.onCancel} />
-                <OptionButton type="save" onPress={props.onSave} />
+                <OptionButton
+                    type="cancel"
+                    onPress={props.onCancel}
+                    inMuseumMode={props.inMuseumMode}
+                />
+                <OptionButton
+                    type="save"
+                    onPress={props.onSave}
+                    inMuseumMode={props.inMuseumMode}
+                />
             </View>
         </View>
     )
@@ -32,7 +42,8 @@ InstructionView.propTypes = {
     numberDrawn: PropTypes.number,
     onSave: PropTypes.func,
     onCancel: PropTypes.func,
-    warnForRequirements: PropTypes.bool
+    warnForRequirements: PropTypes.bool,
+    inMuseumMode: PropTypes.bool,
 }
 
 /**
@@ -55,13 +66,14 @@ ShapePreview.propTypes = {
 /**
  * Component that is just a styled buttones
  */
-const OptionButton =({type, onPress}) => {
+const OptionButton =({type, onPress, inMuseumMode}) => {
     const buttonStyle = [styles.buttonStyle]
-    const buttonTextStyle = [styles.buttonText]
+    const buttonTextStyle = [styles.buttonText, colorModes.textColorFor()]
     let buttonText = ''
     switch (type) {
         case 'cancel':
             buttonStyle.push(styles.cancelButton)
+            buttonTextStyle.push(colorModes.helpTextColorFor(inMuseumMode))
             buttonText = 'Cancel'
             break
         case 'save':
@@ -81,7 +93,8 @@ const OptionButton =({type, onPress}) => {
 }
 OptionButton.propTypes = {
     type: PropTypes.oneOf(['cancel', 'save']),
-    onPress: PropTypes.func
+    onPress: PropTypes.func,
+    inMuseumMode: PropTypes.bool,
 }
 
 const styles = EStyleSheet.create({

@@ -250,6 +250,7 @@ class QuestionClassifier extends Component {
             <View style={styles.container}>
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
+                    inMuseumMode={this.props.project.in_museum_mode}
                     project={project}
                     help={task.help}
                     guide={guide}

@@ -244,6 +244,7 @@ class DrawingClassifier extends Component {
                 <DrawingModal
                     tool={tool}
                     visible={this.state.isModalVisible}
+                    inMuseumMode={this.props.project.in_museum_mode}
                     imageSource={this.state.localImagePath}
                     onClose={() => this.setState({isModalVisible: false, modalHasBeenClosedOnce: true})}
                     warnForRequirements={this.state.modalHasBeenClosedOnce}
