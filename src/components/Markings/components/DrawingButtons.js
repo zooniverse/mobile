@@ -39,7 +39,10 @@ const DrawingButtons = (props) => {
                 props.showHelpButton &&
                 <View pointerEvents="box-none" style={styles.needHelpContainer}>
                     <View>
-                        <NeedHelpButton onPress={props.onHelpButtonPressed}/>
+                        <NeedHelpButton
+                            onPress={props.onHelpButtonPressed}
+                            inMuseumMode={props.inMuseumMode}
+                        />
                     </View>
                 </View>
             }
@@ -82,7 +85,8 @@ DrawingButtons.propTypes = {
     canUndo: PropTypes.bool,
     aShapeIsOutOfBounds: PropTypes.bool,
     showHelpButton: PropTypes.bool,
-    onHelpButtonPressed: PropTypes.func
+    onHelpButtonPressed: PropTypes.func,
+    inMuseumMode: PropTypes.bool,
 }
 
 DrawingButtons.defaultProps = {

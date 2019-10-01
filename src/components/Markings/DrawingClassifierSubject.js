@@ -105,6 +105,7 @@ class DrawingClassifierSubject extends Component {
                         canUndo={this.props.canUndo}
                         showDrawingButtons={this.props.showDrawingButtons}
                         canDraw={this.props.showDrawingButtons}
+                        inMuseumMode={this.props.inMuseumMode}
                     />
                 </View> 
                 { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView() }

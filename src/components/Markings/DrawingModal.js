@@ -90,6 +90,7 @@ class DrawingModal extends Component {
                             drawingColor={this.props.tool.color}
                             imageSource={this.props.imageSource}
                             canUndo={this.props.canUndo}
+                            inMuseumMode={this.props.inMuseumMode}
                         />
                         <InstructionView
                             {... this.props.tool}
