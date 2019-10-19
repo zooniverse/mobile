@@ -264,7 +264,7 @@ class MultiAnswerClassifier extends Component {
 
 
         return (
-            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
+            <View style={[styles.container, styles.dropShadow, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
                     inMuseumMode={this.props.project.in_museum_mode}
@@ -299,12 +299,21 @@ MultiAnswerClassifier.propTypes = {
     task: PropTypes.object,
     answers: PropTypes.array,
     classifierActions: PropTypes.any,
-    inMuseumMode: PropTypes.bool,
 }
 
 const styles = EStyleSheet.create({
     container: {
         flex: 1,
+    },
+    dropShadow: {
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 5
     },
     classificationPanel: {
         flex: 1,

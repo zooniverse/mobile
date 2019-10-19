@@ -9,7 +9,7 @@ export function framingBackgroundColorFor(museumMode) {
 export function contentBackgroundColorFor(museumMode) {
     return switchOn(
         museumMode,
-        {backgroundColor: '#333333'},
+        {backgroundColor: '#5c5c5c'},
         {backgroundColor: 'white'}
     )
 }
@@ -22,11 +22,19 @@ export function separatorColorFor(museumMode) {
     )
 }
 
-export function deselectedTabColorFor(museumMode) {
+export function selectedTextColorFor(museumMode) {
     return switchOn(
         museumMode,
-        {backgroundColor: '#282828'},
-        {backgroundColor: '$lightestGrey'}
+        {color: 'white'},
+        {color: 'black'}
+    )
+}
+
+export function deselectedTextColorFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {color: '#5C5C5C'},
+        {color: 'black'}
     )
 }
 

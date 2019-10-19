@@ -158,6 +158,7 @@ class QuestionClassifier extends Component {
                     hasTutorial={!R.isEmpty(tutorial)}
                     isQuestionVisible={isQuestionVisible}
                     setQuestionVisibility={this.setQuestionVisibility()}
+                    inMuseumMode={this.props.project.in_museum_mode}
                 >
                     {
                         isQuestionVisible &&
@@ -222,6 +223,7 @@ class QuestionClassifier extends Component {
                             {
                                 task.help !== null &&
                                 <NeedHelpButton
+                                    inMuseumMode={this.props.project.in_museum_mode}
                                     onPress={() => this.classifierContainer.displayHelpModal()}
                                 />
                             }
@@ -247,7 +249,7 @@ class QuestionClassifier extends Component {
             </View>
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, styles.dropshadow]}>
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
                     inMuseumMode={this.props.project.in_museum_mode}
@@ -287,6 +289,16 @@ QuestionClassifier.propTypes = {
 const styles = EStyleSheet.create({
     container: {
         flex: 1
+    },
+    dropShadow: {
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 5
     },
     classificationPanel: {
         flex: 1,

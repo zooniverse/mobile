@@ -16,15 +16,28 @@ class ClassificationPanel extends Component {
       <View style={styles.tabContainer}>
         <TouchableOpacity
           onPress={ () => { this.props.setQuestionVisibility(true) } }
-          style={ this.props.isQuestionVisible ? [styles.tab] : [styles.tab, colorModes.deselectedTabColorFor(this.props.inMuseumMode)] }>
-          <FontedText style={[styles.tabText, {color: colorModes.textColorFor(this.props.inMuseumMode)}]}>
+          style={ this.props.isQuestionVisible ?
+              [styles.tab,  colorModes.contentBackgroundColorFor(this.props.inMuseumMode)] :
+              [styles.tab,  colorModes.framingBackgroundColorFor(this.props.inMuseumMode)]
+          }>
+          <FontedText style={ this.props.isQuestionVisible ?
+            [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)] :
+            [styles.tabText, colorModes.deselectedTextColorFor(this.props.inMuseumMode)]
+          }>
             QUESTION
           </FontedText>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={ () => { this.props.setQuestionVisibility(false) } }
-          style={ this.props.isQuestionVisible ? [styles.tab, colorModes.deselectedTabColorFor(this.props.inMuseumMode)] : [styles.tab] }>
-          <FontedText style={[styles.tabText, {color: colorModes.textColorFor(this.props.inMuseumMode)}]}>
+          style={ this.props.isQuestionVisible ?
+              [styles.tab,  colorModes.framingBackgroundColorFor(this.props.inMuseumMode)] :
+              [styles.tab,  colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]
+
+          }>
+          <FontedText style={ this.props.isQuestionVisible ?
+            [styles.tabText, colorModes.deselectedTextColorFor(this.props.inMuseumMode)]:
+            [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)]
+          }>
             TUTORIAL
           </FontedText>
         </TouchableOpacity>

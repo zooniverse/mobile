@@ -217,6 +217,7 @@ class DrawingClassifier extends Component {
                     hasTutorial={!R.isEmpty(this.props.tutorial)}
                     isQuestionVisible={isQuestionVisible}
                     setQuestionVisibility={this.setQuestionVisibility}
+                    inMuseumMode={this.props.project.in_museum_mode}
                 >
                     {isQuestionVisible ? classification : tutorial}
                 </ClassificationPanel>
@@ -264,10 +265,18 @@ const styles = EStyleSheet.create({
         marginBottom: 25
     },
     classificationContainer: {
-        flex: 1
+        flex: 1,
     },
     container: {
         flex: 1,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
     },
     subjectContainer: {
         width: '100%',
