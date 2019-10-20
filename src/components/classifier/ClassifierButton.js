@@ -23,9 +23,6 @@ const ClassifierButton = (props) => {
             if (props.selected) {
                 buttonStyle.push(styles.selectedAnswerButton)
             }
-            if (props.blurred) {
-                buttonStyle.push(styles.answerButtonDisabled)
-            }
             break
         case 'guide':
             buttonStyle.push(styles.guideButton)

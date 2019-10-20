@@ -200,7 +200,7 @@ class QuestionClassifier extends Component {
                                             <ClassifierButton
                                                 selected={index === answerSelected}
                                                 inMuseumMode={this.props.project.in_museum_mode}
-                                                blurred={answerSelected !== -1 && index !== answerSelected}
+                                                disabled={answerSelected !== -1 && index !== answerSelected}
                                                 type="answer"
                                                 text={answer.label}
                                                 onPress={this.onOptionSelected(index)}
