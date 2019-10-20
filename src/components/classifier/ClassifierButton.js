@@ -15,7 +15,11 @@ const ClassifierButton = (props) => {
     switch (props.type) {
         case 'answer':
             textStyle.push(styles.answerButtonText)
-            buttonStyle.push(props.disabled ? styles.answerButtonDisabled : styles.answerButton)
+            if (props.disabled) {
+                buttonStyle.push(styles.answerButtonDisabled)
+            } else {
+                buttonStyle.push(styles.answerButton)
+            }
             if (props.selected) {
                 buttonStyle.push(styles.selectedAnswerButton)
             }

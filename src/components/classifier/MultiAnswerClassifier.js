@@ -209,8 +209,8 @@ class MultiAnswerClassifier extends Component {
                                     answers.map((answer, index) =>
                                         <View key={index} style={styles.buttonContainer}>
                                             <ClassifierButton
+                                                inMuseumMode={this.props.project.in_museum_mode}
                                                 selected={answersSelected.includes(index)}
-                                                blurred={!answersSelected.includes(index)}
                                                 type="answer"
                                                 text={answer.label}
                                                 onPress={this.onOptionSelected(answersSelected, index)}
@@ -221,7 +221,7 @@ class MultiAnswerClassifier extends Component {
                             </View>
                             <View style={styles.buttonContainer}>
                                 <ClassifierButton
-                                    disabled={answersSelected === []}
+                                    inMuseumMode={this.props.project.in_museum_mode}
                                     type="answer"
                                     text="Submit"
                                     onPress={this.submitClassification()}
@@ -244,6 +244,7 @@ class MultiAnswerClassifier extends Component {
                             {
                                 R.length(guide.items) > 0 &&
                                 <ClassifierButton
+                                    inMuseumMode={this.props.project.in_museum_mode}
                                     onPress={() => this.classifierContainer.displayFieldGuide()}
                                     style={styles.guideButton}
                                     text="Field Guide"
