@@ -22,6 +22,36 @@ export function separatorColorFor(museumMode) {
     )
 }
 
+export function selectedButtonStyleFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {
+            backgroundColor: '$buttonColor',
+            borderStyle: 'solid',
+            borderColor: 'white',
+            borderWidth: 1,
+        },
+        {
+            backgroundColor: '$selectedButton'
+        },
+    )
+}
+
+export function deselectedButtonStyleFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {
+            backgroundColor: '$transparent',
+            borderStyle: 'solid',
+            borderColor: 'white',
+            borderWidth: 1,
+        },
+        {
+            backgroundColor: '$buttonColor'
+        },
+    )
+}
+
 export function selectedTextColorFor(museumMode) {
     return switchOn(
         museumMode,

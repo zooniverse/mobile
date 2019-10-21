@@ -211,6 +211,7 @@ class QuestionClassifier extends Component {
                             </View>
                             <View style={styles.buttonContainer}>
                                 <ClassifierButton
+                                    inMuseumMode={this.props.project.in_museum_mode}
                                     disabled={answerSelected === -1}
                                     type="answer"
                                     text="Submit"

@@ -8,6 +8,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info'
 
 import FontedText from '../common/FontedText'
+import * as colorModes from '../../actions/colorModes'
 
 const ClassifierButton = (props) => {
     const buttonStyle = [props.style, styles.button]
@@ -81,6 +82,7 @@ const styles =EStyleSheet.create({
 })
 
 ClassifierButton.propTypes = {
+    inMuseumMode: PropTypes.bool,
     selected: PropTypes.bool,
     blurred: PropTypes.bool,
     disabled: PropTypes.any,
