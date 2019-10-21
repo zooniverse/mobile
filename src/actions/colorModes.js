@@ -22,32 +22,47 @@ export function separatorColorFor(museumMode) {
     )
 }
 
-export function selectedButtonStyleFor(museumMode) {
+export function disabledButtonStyleFor(museumMode) {
     return switchOn(
         museumMode,
         {
-            backgroundColor: '$buttonColor',
+            backgroundColor: '#2D2D2D',
             borderStyle: 'solid',
             borderColor: 'white',
             borderWidth: 1,
         },
         {
-            backgroundColor: '$selectedButton'
+            backgroundColor: 'rgba(0, 151, 157, .35)'
         },
     )
 }
 
-export function deselectedButtonStyleFor(museumMode) {
+export function selectedButtonStyleFor(museumMode) {
     return switchOn(
         museumMode,
         {
-            backgroundColor: '$transparent',
+            backgroundColor: 'rgba(0, 151, 157, 1)',
             borderStyle: 'solid',
             borderColor: 'white',
             borderWidth: 1,
         },
         {
-            backgroundColor: '$buttonColor'
+            backgroundColor: 'rgba(0, 52, 59, 1)'
+        },
+    )
+}
+
+export function unselectedButtonStyleFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {
+            backgroundColor: '#5c5c5c',
+            borderStyle: 'solid',
+            borderColor: 'white',
+            borderWidth: 1,
+        },
+        {
+            backgroundColor: 'rgba(0, 151, 157, 1)'
         },
     )
 }

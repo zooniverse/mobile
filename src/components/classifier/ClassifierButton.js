@@ -17,12 +17,11 @@ const ClassifierButton = (props) => {
         case 'answer':
             textStyle.push(styles.answerButtonText)
             if (props.disabled) {
-                buttonStyle.push(styles.answerButtonDisabled)
+                buttonStyle.push(colorModes.disabledButtonStyleFor(props.inMuseumMode))
+            } else if (props.selected) {
+                buttonStyle.push(colorModes.selectedButtonStyleFor(props.inMuseumMode))
             } else {
-                buttonStyle.push(styles.answerButton)
-            }
-            if (props.selected) {
-                buttonStyle.push(styles.selectedAnswerButton)
+                buttonStyle.push(colorModes.unselectedButtonStyleFor(props.inMuseumMode))
             }
             break
         case 'guide':
@@ -67,17 +66,8 @@ const styles =EStyleSheet.create({
             width: 2,
         },
       },
-      answerButton: {
-        backgroundColor: '$buttonColor'
-      },
-      selectedAnswerButton: {
-        backgroundColor: '$selectedButton'
-      },
-      answerButtonDisabled: {
-          backgroundColor: '$disabledButtonColor'
-      },
       answerButtonText: {
-        color: 'white', 
+        color: 'white',
       },
 })
 
