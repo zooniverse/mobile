@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react';
 import {
     StyleSheet,
     TouchableOpacity
@@ -10,51 +10,59 @@ import DeviceInfo from 'react-native-device-info'
 import FontedText from '../common/FontedText'
 import * as colorModes from '../../actions/colorModes'
 
-const ClassifierButton = (props) => {
-    const buttonStyle = [props.style, styles.button]
-    const textStyle = []
-    switch (props.type) {
-        case 'answer':
-            textStyle.push(styles.answerButtonText)
-            if (props.disabled) {
-                buttonStyle.push(colorModes.disabledButtonStyleFor(props.inMuseumMode))
-            } else if (props.selected) {
-                buttonStyle.push(colorModes.selectedButtonStyleFor(props.inMuseumMode))
-            } else {
-                buttonStyle.push(colorModes.unselectedButtonStyleFor(props.inMuseumMode))
-            }
-            break
-        case 'guide':
-            buttonStyle.push(styles.guideButton)
-            break
+class ClassifierButton extends Component {
+    constructor(props) {
+        super(props)
     }
-    return (
-        <TouchableOpacity
-            disabled={props.disabled}
-            onPress={props.onPress}
-            activeOpacity={0.5}
-            style={ buttonStyle }
-        >
-            <FontedText style={[styles.buttonText, textStyle]}>
-                { props.text }
-            </FontedText>
-        </TouchableOpacity>
-    )
+
+    render() {
+        const buttonStyle = [this.props.style, styles.button]
+        const textStyle = []
+
+        switch (this.props.type) {
+            case 'answer':
+                textStyle.push(styles.answerButtonText)
+                if (this.props.disabled) {
+                    buttonStyle.push(colorModes.disabledButtonStyleFor(this.props.inMuseumMode))
+                } else if (this.props.selected) {
+                    buttonStyle.push(colorModes.selectedButtonStyleFor(this.props.inMuseumMode))
+                } else {
+                    buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
+                }
+                break
+            case 'guide':
+                buttonStyle.push(styles.guideButton)
+                break
+        }
+
+        return (
+            <TouchableOpacity
+                disabled={this.props.disabled}
+                onPress={this.props.onPress}
+                activeOpacity={0.5}
+                style={buttonStyle}
+            >
+                <FontedText style={[styles.buttonText, textStyle]}>
+                    {this.props.text}
+                </FontedText>
+            </TouchableOpacity>
+        )
+    }
 }
 
 
-const styles =EStyleSheet.create({
+const styles = EStyleSheet.create({
     button: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      buttonText: {
+    },
+    buttonText: {
         fontSize: DeviceInfo.isTablet() ? 22 : 14,
         marginVertical: 11,
         marginHorizontal: 9
-      },
-      guideButton: {
+    },
+    guideButton: {
         borderWidth: StyleSheet.hairlineWidth,
         backgroundColor: 'white',
         borderColor: '$disabledIconColor',
@@ -65,10 +73,10 @@ const styles =EStyleSheet.create({
             height: 1,
             width: 2,
         },
-      },
-      answerButtonText: {
+    },
+    answerButtonText: {
         color: 'white',
-      },
+    },
 })
 
 ClassifierButton.propTypes = {
