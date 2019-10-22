@@ -20,7 +20,10 @@ import * as drawingActions from '../../actions/drawing'
 import ClassificationContainer from '../classifier/ClassifierContainer'
 import NeedHelpButton from '../classifier/NeedHelpButton'
 import OverlaySpinner from '../OverlaySpinner'
-import ClassifierButton from '../classifier/ClassifierButton'
+import {
+    GuideButton,
+    SubmitButton
+} from '../classifier/ClassifierButton'
 import Separator from '../common/Separator'
 import DrawingModal from './DrawingModal'
 import NativeImage from '../../nativeModules/NativeImage'
@@ -189,7 +192,7 @@ class DrawingClassifier extends Component {
 
         const fieldGuideButton =
             <View style={styles.fieldGuideContainer}>
-                <ClassifierButton
+                <GuideButton
                     onPress={() => this.classificationContainer.displayFieldGuide()}
                     type="guide"
                     text="Field Guide"
@@ -199,7 +202,7 @@ class DrawingClassifier extends Component {
             </View>
 
         const submitButton =
-            <ClassifierButton
+            <SubmitButton
                 disabled={R.keys(this.props.shapes).length < tool.min}
                 onPress={this.submitClassification}
                 style={styles.submitButton}

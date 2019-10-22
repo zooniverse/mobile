@@ -19,7 +19,12 @@ import Tutorial from './Tutorial';
 import OverlaySpinner from '../OverlaySpinner'
 import Question from './Question'
 import Separator from '../common/Separator'
-import ClassifierButton from './ClassifierButton'
+import {
+    AnswerButton,
+    GuideButton,
+    SubmitButton
+} from './ClassifierButton';
+
 import FullScreenImage from '../FullScreenImage'
 import TapableSubject from './TapableSubject';
 
@@ -197,7 +202,7 @@ class QuestionClassifier extends Component {
                                 {
                                     answers.map((answer, index) =>
                                         <View key={index} style={styles.buttonContainer}>
-                                            <ClassifierButton
+                                            <AnswerButton
                                                 selected={index === answerSelected}
                                                 inMuseumMode={this.props.project.in_museum_mode}
                                                 disabled={answerSelected !== -1 && index !== answerSelected}
@@ -210,7 +215,7 @@ class QuestionClassifier extends Component {
                                 }
                             </View>
                             <View style={styles.buttonContainer}>
-                                <ClassifierButton
+                                <SubmitButton
                                     inMuseumMode={this.props.project.in_museum_mode}
                                     disabled={answerSelected === -1}
                                     type="answer"
@@ -231,7 +236,7 @@ class QuestionClassifier extends Component {
                             }
                             {
                                 R.length(guide.items) > 0 &&
-                                <ClassifierButton
+                                <GuideButton
                                     onPress={() => this.classifierContainer.displayFieldGuide()}
                                     style={styles.guideButton}
                                     text="Field Guide"

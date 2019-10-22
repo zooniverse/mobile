@@ -19,7 +19,11 @@ import Tutorial from './Tutorial';
 import OverlaySpinner from '../OverlaySpinner'
 import Question from './Question'
 import Separator from '../common/Separator'
-import ClassifierButton from './ClassifierButton'
+import {
+    AnswerButton,
+    SubmitButton,
+    GuideButton
+} from './ClassifierButton'
 import FullScreenImage from '../FullScreenImage'
 import TapableSubject from './TapableSubject';
 
@@ -208,7 +212,7 @@ class MultiAnswerClassifier extends Component {
                                 {
                                     answers.map((answer, index) =>
                                         <View key={index} style={styles.buttonContainer}>
-                                            <ClassifierButton
+                                            <AnswerButton
                                                 inMuseumMode={this.props.project.in_museum_mode}
                                                 selected={answersSelected.includes(index)}
                                                 type="answer"
@@ -220,7 +224,7 @@ class MultiAnswerClassifier extends Component {
                                 }
                             </View>
                             <View style={styles.buttonContainer}>
-                                <ClassifierButton
+                                <SubmitButton
                                     inMuseumMode={this.props.project.in_museum_mode}
                                     type="answer"
                                     text="Submit"
@@ -243,7 +247,7 @@ class MultiAnswerClassifier extends Component {
                             }
                             {
                                 R.length(guide.items) > 0 &&
-                                <ClassifierButton
+                                <GuideButton
                                     inMuseumMode={this.props.project.in_museum_mode}
                                     onPress={() => this.classifierContainer.displayFieldGuide()}
                                     style={styles.guideButton}

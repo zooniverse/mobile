@@ -15,34 +15,22 @@ class ClassifierButton extends Component {
         super(props)
     }
 
-    render() {
-        const buttonStyle = [this.props.style, styles.button]
-        const textStyle = []
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+    }
 
-        switch (this.props.type) {
-            case 'answer':
-                textStyle.push(styles.answerButtonText)
-                if (this.props.disabled) {
-                    buttonStyle.push(colorModes.disabledButtonStyleFor(this.props.inMuseumMode))
-                } else if (this.props.selected) {
-                    buttonStyle.push(colorModes.selectedButtonStyleFor(this.props.inMuseumMode))
-                } else {
-                    buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
-                }
-                break
-            case 'guide':
-                buttonStyle.push(styles.guideButton)
-                break
-        }
+    render() {
+        this.setAdditionalStyles();
 
         return (
             <TouchableOpacity
                 disabled={this.props.disabled}
                 onPress={this.props.onPress}
                 activeOpacity={0.5}
-                style={buttonStyle}
+                style={[this.props.style, styles.button, this.buttonStyle]}
             >
-                <FontedText style={[styles.buttonText, textStyle]}>
+                <FontedText style={[styles.buttonText, this.textStyle]}>
                     {this.props.text}
                 </FontedText>
             </TouchableOpacity>
@@ -50,6 +38,52 @@ class ClassifierButton extends Component {
     }
 }
 
+class AnswerButton extends ClassifierButton {
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+        this.textStyle.push(styles.whiteButtonText)
+
+        if (this.props.disabled) {
+            this.buttonStyle.push(colorModes.disabledButtonStyleFor(this.props.inMuseumMode))
+        } else if (this.props.selected) {
+            this.buttonStyle.push(colorModes.selectedButtonStyleFor(this.props.inMuseumMode))
+        } else {
+            this.buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
+        }
+    }
+}
+
+class GuideButton extends ClassifierButton {
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+        this.buttonStyle.push(styles.guideButton)
+    }
+}
+
+class SubmitButton extends ClassifierButton {
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+        this.textStyle.push(colorModes.submitButtonTextColorFor(this.props.inMuseumMode))
+
+        if (this.props.disabled) {
+            this.buttonStyle.push(colorModes.disabledSubmitButtonStyleFor(this.props.inMuseumMode))
+        } else {
+            this.buttonStyle.push(colorModes.submitButtonStyleFor(this.props.inMuseumMode))
+        }
+    }
+}
+
+class SwipeButton extends ClassifierButton {
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+        this.textStyle.push(styles.whiteButtonText)
+        this.buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
+    }
+}
 
 const styles = EStyleSheet.create({
     button: {
@@ -74,7 +108,7 @@ const styles = EStyleSheet.create({
             width: 2,
         },
     },
-    answerButtonText: {
+    whiteButtonText: {
         color: 'white',
     },
 })
@@ -90,5 +124,5 @@ ClassifierButton.propTypes = {
     text: PropTypes.string.isRequired
 }
 
-export default ClassifierButton
+export {ClassifierButton, AnswerButton, GuideButton, SubmitButton, SwipeButton}
       

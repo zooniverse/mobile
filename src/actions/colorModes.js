@@ -63,6 +63,31 @@ export function unselectedButtonStyleFor(museumMode) {
     )
 }
 
+export function submitButtonStyleFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {backgroundColor: colors.mustard},
+        {backgroundColor: colors.teal},
+    )
+}
+
+export function disabledSubmitButtonStyleFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {backgroundColor: colors.transparentMustard},
+        {backgroundColor: colors.transparentTeal},
+    )
+}
+
+export function submitButtonTextColorFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {color: 'black'},
+        {color: 'white'}
+    )
+}
+
+
 export function selectedTextColorFor(museumMode) {
     return switchOn(
         museumMode,
@@ -128,5 +153,6 @@ const colors = {
     teal: 'rgba(0, 151, 157, 1)',
     turquoise: 'rgba(0,93,105,1)',
     transparentTeal: 'rgba(0, 151, 157, .35)',
-
+    mustard: '#F0B200',
+    transparentMustard: '#F0B20035',
 }
