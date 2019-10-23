@@ -206,7 +206,6 @@ class QuestionClassifier extends Component {
                                                 selected={index === answerSelected}
                                                 inMuseumMode={this.props.project.in_museum_mode}
                                                 disabled={answerSelected !== -1 && index !== answerSelected}
-                                                type="answer"
                                                 text={answer.label}
                                                 onPress={this.onOptionSelected(index)}
                                             />
@@ -218,7 +217,6 @@ class QuestionClassifier extends Component {
                                 <SubmitButton
                                     inMuseumMode={this.props.project.in_museum_mode}
                                     disabled={answerSelected === -1}
-                                    type="answer"
                                     text="Submit"
                                     onPress={this.submitClassification()}
                                 />

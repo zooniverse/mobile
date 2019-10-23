@@ -206,7 +206,6 @@ class DrawingClassifier extends Component {
                 disabled={R.keys(this.props.shapes).length < tool.min}
                 onPress={this.submitClassification}
                 style={styles.submitButton}
-                type="answer"
                 text="Submit"
             />
 

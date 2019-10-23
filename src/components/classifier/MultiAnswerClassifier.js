@@ -215,7 +215,6 @@ class MultiAnswerClassifier extends Component {
                                             <AnswerButton
                                                 inMuseumMode={this.props.project.in_museum_mode}
                                                 selected={answersSelected.includes(index)}
-                                                type="answer"
                                                 text={answer.label}
                                                 onPress={this.onOptionSelected(answersSelected, index)}
                                             />
@@ -226,7 +225,6 @@ class MultiAnswerClassifier extends Component {
                             <View style={styles.buttonContainer}>
                                 <SubmitButton
                                     inMuseumMode={this.props.project.in_museum_mode}
-                                    type="answer"
                                     text="Submit"
                                     onPress={this.submitClassification()}
                                 />

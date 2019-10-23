@@ -29,7 +29,6 @@ export class SwipeTabs extends Component {
                 onPress={this.props.onLeftButtonPressed}
                 style={[styles.growing, styles.leftButtonPadding]}
                 text={this.props.answers[0].label}
-                type="answer"
             />
 
         const rightButton =
@@ -37,7 +36,6 @@ export class SwipeTabs extends Component {
                 onPress={this.props.onRightButtonPressed}
                 style={styles.growing}
                 text={this.props.answers[1].label}
-                type="answer"
             />
 
         const fieldGuideButton =
@@ -45,7 +43,6 @@ export class SwipeTabs extends Component {
                 onPress={this.props.onFieldGuidePressed}
                 style={styles.leftButtonPadding}
                 text="Field Guide"
-                type="guide"
             />
 
         return (

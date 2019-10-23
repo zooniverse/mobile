@@ -120,7 +120,6 @@ ClassifierButton.propTypes = {
     disabled: PropTypes.any,
     style: PropTypes.any,
     onPress: PropTypes.func,
-    type: PropTypes.oneOf(['answer', 'guide']),
     text: PropTypes.string.isRequired
 }
 
