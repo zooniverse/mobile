@@ -203,6 +203,7 @@ class DrawingClassifier extends Component {
 
         const submitButton =
             <SubmitButton
+                inMuseumMode={this.props.project.in_museum_mode}
                 disabled={R.keys(this.props.shapes).length < tool.min}
                 onPress={this.submitClassification}
                 style={styles.submitButton}
@@ -228,8 +229,8 @@ class DrawingClassifier extends Component {
                     onPress={() => this.classificationContainer.displayHelpModal()}
                     inMuseumMode={this.props.project.in_museum_mode}
                 />}
-                {isQuestionVisible && !R.empty(this.props.guide) && fieldGuideButton}
                 {isQuestionVisible && submitButton}
+                {isQuestionVisible && this.props.guide.href && fieldGuideButton}
             </View>
 
         return (
@@ -315,7 +316,9 @@ DrawingClassifier.propTypes = {
     isSuccess: PropTypes.bool,
     isFailure: PropTypes.bool,
     isFetching: PropTypes.bool,
-    guide: PropTypes.shape({}),
+    guide: PropTypes.shape({
+        href: PropTypes.string,
+    }),
     tutorial: PropTypes.shape({}),
     needsTutorial: PropTypes.bool,
     usableSubjects: PropTypes.array,
