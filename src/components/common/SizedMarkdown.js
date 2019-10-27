@@ -51,7 +51,8 @@ class SizedMarkdown extends Component {
             text: {
                 fontFamily: 'Karla',
                 fontSize: isTablet ? 22 : 14,
-                color: colorModes.textColorFor(this.props.inMuseumMode)
+                fontWeight: isTablet ? 'bold' : 'normal',
+                color: colorModes.instructionsColorFor(this.props.inMuseumMode)
             },
             image: {
                 width: viewDimensions.width,

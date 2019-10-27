@@ -22,7 +22,7 @@ class ClassificationPanel extends Component {
           }>
           <FontedText style={ this.props.isQuestionVisible ?
             [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)] :
-            [styles.tabText, colorModes.deselectedTextColorFor(this.props.inMuseumMode)]
+            [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)]
           }>
             QUESTION
           </FontedText>
@@ -35,7 +35,7 @@ class ClassificationPanel extends Component {
 
           }>
           <FontedText style={ this.props.isQuestionVisible ?
-            [styles.tabText, colorModes.deselectedTextColorFor(this.props.inMuseumMode)]:
+            [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)]:
             [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)]
           }>
             TUTORIAL

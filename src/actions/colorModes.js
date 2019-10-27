@@ -128,6 +128,40 @@ export function textColorFor(museumMode) {
     )
 }
 
+export function instructionsColorFor(museumMode) {
+    return switchOn(
+        museumMode,
+        'white',
+        'black'
+    )
+}
+
+export function activeIconBackgroundColorFor(museumMode) {
+    return switchOn(
+        museumMode,
+        colors.seafoam,
+        colors.teal
+    )
+}
+
+export function activeIconForegroundColorFor(museumMode) {
+    return switchOn(
+        museumMode,
+        colors.mediumGrey,
+        'white'
+    )
+}
+
+export function inactiveIconForegroundColorFor(museumMode) {
+    return switchOn(
+        museumMode,
+        'white',
+        'rgba(92, 92, 92, 1)'
+    )
+}
+
+
+
 function switchOn(mode, withModeStyle, withoutModeStyle) {
     if (mode) {
         return withModeStyle

@@ -14,6 +14,7 @@ const DrawingButtons = (props) => {
     return (
         <View style={styles.container} >
             <CircleIconButton
+                inMuseumMode={props.inMuseumMode}
                 disabled={!props.canUndo}
                 type="undo"
                 activated={false}
@@ -21,7 +22,8 @@ const DrawingButtons = (props) => {
                 radius={circleRadius}
             />
             <View style={styles.drawingButtonsContainer}>
-                <CircleIconButton 
+                <CircleIconButton
+                    inMuseumMode={props.inMuseumMode}
                     style={styles.buttonPadding}
                     type="draw"
                     activated={props.highlightedButton === 'draw'}
@@ -29,6 +31,7 @@ const DrawingButtons = (props) => {
                     radius={circleRadius}
                 />
                 <CircleIconButton
+                    inMuseumMode={props.inMuseumMode}
                     type="erase"
                     activated={props.highlightedButton === 'erase' || props.aShapeIsOutOfBounds}
                     onPress={() => props.onModeButtonSelected('erase')}
