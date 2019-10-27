@@ -58,7 +58,10 @@ class GuideButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
         this.textStyle = []
+
+        this.textStyle.push(colorModes.selectedTextColorFor(this.props.inMuseumMode))
         this.buttonStyle.push(styles.guideButton)
+        this.buttonStyle.push(colorModes.guideButtonStyleFor(this.props.inMuseumMode))
     }
 }
 
@@ -80,6 +83,7 @@ class SwipeButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
         this.textStyle = []
+
         this.textStyle.push(styles.whiteButtonText)
         this.buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
     }
@@ -98,15 +102,7 @@ const styles = EStyleSheet.create({
     },
     guideButton: {
         borderWidth: StyleSheet.hairlineWidth,
-        backgroundColor: 'white',
-        borderColor: '$disabledIconColor',
-        shadowColor: 'rgba(0, 0, 0, 0.5)',
-        shadowOpacity: 1,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 1,
-            width: 2,
-        },
+        borderColor: '$zooniverseTeal',
     },
     whiteButtonText: {
         color: 'white',

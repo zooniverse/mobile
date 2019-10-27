@@ -160,6 +160,13 @@ export function inactiveIconForegroundColorFor(museumMode) {
     )
 }
 
+export function guideButtonStyleFor(museumMode) {
+    return switchOn(
+        museumMode,
+        {backgroundColor: 'transparent',},
+        {backgroundColor: 'white',}
+    )
+}
 
 
 function switchOn(mode, withModeStyle, withoutModeStyle) {
@@ -170,7 +177,7 @@ function switchOn(mode, withModeStyle, withoutModeStyle) {
     }
 }
 
-const styles =EStyleSheet.create({
+const styles = EStyleSheet.create({
     darkModeButtonBorder: {
         borderStyle: 'solid',
         borderColor: 'white',

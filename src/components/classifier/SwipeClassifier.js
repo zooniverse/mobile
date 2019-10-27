@@ -217,6 +217,7 @@ export class SwipeClassifier extends React.Component {
 
         const swipeTabs =
             <SwipeTabs
+                inMuseumMode={this.props.project.in_museum_mode}
                 guide={this.props.guide}
                 onLeftButtonPressed={() => {
                     this.swiper.swipeLeft()

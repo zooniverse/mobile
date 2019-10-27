@@ -40,6 +40,7 @@ export class SwipeTabs extends Component {
 
         const fieldGuideButton =
             <GuideButton
+                inMuseumMode={this.props.inMuseumMode}
                 onPress={this.props.onFieldGuidePressed}
                 style={styles.leftButtonPadding}
                 text="Field Guide"
@@ -75,6 +76,7 @@ const styles = EStyleSheet.create({
 })
 
 SwipeTabs.propTypes = {
+    inMuseumMode: PropTypes.bool,
     guide: PropTypes.object,
     onLeftButtonPressed: PropTypes.func,
     onRightButtonPressed: PropTypes.func,

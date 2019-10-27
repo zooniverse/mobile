@@ -193,6 +193,7 @@ class DrawingClassifier extends Component {
         const fieldGuideButton =
             <View style={styles.fieldGuideContainer}>
                 <GuideButton
+                    inMuseumMode={this.props.project.in_museum_mode}
                     onPress={() => this.classificationContainer.displayFieldGuide()}
                     type="guide"
                     text="Field Guide"

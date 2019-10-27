@@ -235,6 +235,7 @@ class QuestionClassifier extends Component {
                             {
                                 R.length(guide.items) > 0 &&
                                 <GuideButton
+                                    inMuseumMode={this.props.project.in_museum_mode}
                                     onPress={() => this.classifierContainer.displayFieldGuide()}
                                     style={styles.guideButton}
                                     text="Field Guide"
