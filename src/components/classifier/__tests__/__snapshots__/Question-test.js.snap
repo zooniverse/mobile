@@ -24,6 +24,7 @@ exports[`renders correctly (without task help) 1`] = `
               "color": "black",
               "fontFamily": "Karla",
               "fontSize": 14,
+              "fontWeight": "normal",
             },
           }
         }
@@ -59,6 +60,7 @@ exports[`renders correctly with task help 1`] = `
               "color": "black",
               "fontFamily": "Karla",
               "fontSize": 14,
+              "fontWeight": "normal",
             },
           }
         }

@@ -1,11 +1,5 @@
 import React, {Component} from 'react'
-import {
-    Platform,
-    ScrollView,
-    StyleSheet,
-    TouchableOpacity,
-    View
-} from 'react-native'
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Swiper from 'react-native-swiper';

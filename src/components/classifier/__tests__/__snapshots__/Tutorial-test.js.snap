@@ -99,6 +99,7 @@ exports[`renders correctly 1`] = `
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -196,6 +197,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -293,6 +295,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -330,7 +333,12 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             Object {
               "fontFamily": "Karla",
             },
-            undefined,
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
           ]
         }
       >
@@ -628,6 +636,7 @@ exports[`renders header if initial tutorial 1`] = `
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -725,6 +734,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -822,6 +832,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -859,7 +870,12 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             Object {
               "fontFamily": "Karla",
             },
-            undefined,
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
           ]
         }
       >
@@ -1111,6 +1127,7 @@ exports[`renders with no media 1`] = `
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -1179,6 +1196,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -1247,6 +1265,7 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -1284,7 +1303,12 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             Object {
               "fontFamily": "Karla",
             },
-            undefined,
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
           ]
         }
       >
