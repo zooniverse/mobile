@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Dimensions} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {
     TouchableOpacity,
@@ -62,7 +63,19 @@ class DrawingClassifier extends Component {
     constructor(props) {
         super(props)
 
+        const isPortrait = () => {
+            const dim = Dimensions.get('screen');
+            return dim.height >= dim.width;
+        };
+        Dimensions.addEventListener('change', () => {
+            this.setState({
+                orientation: isPortrait() ? 'portrait' : 'landscape'
+            });
+        });
+
+
         this.state = {
+            orientation: isPortrait() ? 'portrait' : 'landscape',
             imageIsLoaded: false,
             localImagePath: '',
             isQuestionVisible: !props.needsTutorial,
@@ -149,7 +162,8 @@ class DrawingClassifier extends Component {
             />
 
         const classification =
-            <View style={[styles.classificationContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
+            <View
+                style={[styles.classificationContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <DrawingHeader
                     inMuseumMode={this.props.project.in_museum_mode}
                     horizontal={DeviceInfo.isTablet()}
@@ -197,9 +211,8 @@ class DrawingClassifier extends Component {
                     onPress={() => this.classificationContainer.displayFieldGuide()}
                     type="guide"
                     text="Field Guide"
-                    style={styles.fieldGuideButton}
+                    style={[styles.fieldGuideButton, this.state.orientation === 'portrait' ? [] : styles.wideFieldGuide]}
                 />
-                <Separator style={styles.separator}/>
             </View>
 
         const submitButton =
@@ -207,31 +220,44 @@ class DrawingClassifier extends Component {
                 inMuseumMode={this.props.project.in_museum_mode}
                 disabled={R.keys(this.props.shapes).length < tool.min}
                 onPress={this.submitClassification}
-                style={styles.submitButton}
+                style={[styles.submitButton, this.state.orientation === 'portrait' ? [] : styles.wideSubmit]}
                 text="Submit"
             />
 
-        const {isQuestionVisible} = this.state
+        const {isQuestionVisible, orientation} = this.state
         const classificationBottomPadding = isQuestionVisible ? {} : styles.classificationBottomMargin
+
+        const classificationPanel = <ClassificationPanel
+            containerStyle={[styles.container]}
+            isFetching={this.props.isFetching}
+            hasTutorial={!R.isEmpty(this.props.tutorial)}
+            isQuestionVisible={isQuestionVisible}
+            setQuestionVisibility={this.setQuestionVisibility}
+            inMuseumMode={this.props.project.in_museum_mode}
+        >
+            {isQuestionVisible ? classification : tutorial}
+        </ClassificationPanel>;
+
+
+        const buttonView = <View
+            style={[orientation === 'portrait' ? styles.stacked : styles.sideBySide]}>
+            {this.props.guide.href && fieldGuideButton}
+            {submitButton}
+        </View>
+
+
+        const needHelpButton =
+            <NeedHelpButton
+                onPress={() => this.classificationContainer.displayHelpModal()}
+                inMuseumMode={this.props.project.in_museum_mode}
+            />;
+
         const classificationView =
             <View style={[styles.container, classificationBottomPadding]}>
-                <ClassificationPanel
-                    containerStyle={[styles.container]}
-                    isFetching={this.props.isFetching}
-                    hasTutorial={!R.isEmpty(this.props.tutorial)}
-                    isQuestionVisible={isQuestionVisible}
-                    setQuestionVisibility={this.setQuestionVisibility}
-                    inMuseumMode={this.props.project.in_museum_mode}
-                >
-                    {isQuestionVisible ? classification : tutorial}
-                </ClassificationPanel>
-                {isQuestionVisible && !R.isEmpty(this.props.help) && !DeviceInfo.isTablet() &&
-                <NeedHelpButton
-                    onPress={() => this.classificationContainer.displayHelpModal()}
-                    inMuseumMode={this.props.project.in_museum_mode}
-                />}
-                {isQuestionVisible && submitButton}
-                {isQuestionVisible && this.props.guide.href && fieldGuideButton}
+                {classificationPanel}
+                {isQuestionVisible && !R.isEmpty(this.props.help) && !DeviceInfo.isTablet() && needHelpButton}
+                {isQuestionVisible && buttonView}
+                <Separator style={styles.separator}/>
             </View>
 
         return (
@@ -292,21 +318,39 @@ const styles = EStyleSheet.create({
         margin: 20,
     },
     submitButton: {
-        marginHorizontal: 25,
-        marginVertical: 20
+        height: 45,
+        marginVertical: 20,
+    },
+    wideSubmit: {
+        width: '70%'
     },
     separator: {
         marginTop: 20
     },
     fieldGuideContainer: {
-        marginHorizontal: 25,
     },
     fieldGuideButton: {
-        height: 40
+        height: 45
+    },
+    wideFieldGuide: {
+        width: '50%'
     },
     subjectDisplayContainer: {
         flex: 1,
         margin: 10
+    },
+    sideBySide: {
+        marginTop: 15,
+        marginHorizontal: 20,
+        height: 45,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    stacked: {
+        marginHorizontal: 25,
+        marginTop: 20,
+        flexDirection: 'column',
+        justifyContent: 'space-around'
     }
 })
 
