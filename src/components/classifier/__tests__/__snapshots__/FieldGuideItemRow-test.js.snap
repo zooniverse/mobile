@@ -29,6 +29,9 @@ exports[`renders correctly 1`] = `
     style={
       Array [
         undefined,
+        Object {
+          "color": "black",
+        },
         Array [
           undefined,
         ],
