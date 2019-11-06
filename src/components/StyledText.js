@@ -8,7 +8,7 @@ import { append } from 'ramda'
 
 const StyledText = (props) => {
   let textStyle = ( props.textStyle ? [styles.defaultText, styles[props.textStyle]] : [styles.defaultText] )
-  textStyle = (props.additionalStyles ? append(props.additionalStyles, textStyle) : textStyle)
+  textStyle = (props.additionalStyles ? append(textStyle, props.additionalStyles) : textStyle)
 
   const { numberOfLines, ellipsizeMode } = props
   const ellipsisProps = (props.numberOfLines > 0 ? {numberOfLines, ellipsizeMode} : null)

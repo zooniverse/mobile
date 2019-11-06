@@ -82,6 +82,7 @@ class ClassifierContainer extends Component {
             <FieldGuide
                 guide={this.props.guide}
                 isVisible={this.state.isFieldGuideVisible}
+                inMuseumMode={this.props.inMuseumMode}
                 onClose={() => this.setState({isFieldGuideVisible: false})}
             />
 
