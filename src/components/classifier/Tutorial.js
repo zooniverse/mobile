@@ -98,7 +98,7 @@ export class Tutorial extends Component {
                 handlePress={this.props.finishTutorial}
                 additionalStyles={[styles.orangeButton]}
                 additionalTextStyles={[styles.blackText]}
-                text={'Let\s Go!'}/>
+                text={'Let\'s Go!'}/>
 
         const tutorialHeader =
             <FontedText style={[styles.tutorialHeader, {color: colorModes.textColorFor(this.props.inMuseumMode)}]}>
