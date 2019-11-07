@@ -32,9 +32,7 @@ export class FieldGuide extends Component {
             height: 0,
             headerHeight: 0
         }
-    }
 
-    componentWillMount() {
         this._panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => true,
             onStartShouldSetPanResponderCapture: () => true,
@@ -78,9 +76,10 @@ export class FieldGuide extends Component {
                 }
             },
         })
+
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(nextProps) {
         if ((this.props.isVisible !== nextProps.isVisible) && (nextProps.isVisible === true)) {
             this.open()
         }
@@ -207,7 +206,7 @@ export class FieldGuide extends Component {
                     styles.guideContainer,
                     {height: this.state.heightAnim},
                     colorModes.contentBackgroundColorFor(this.props.inMuseumMode)
-                    ]}>
+                ]}>
                     {showFieldGuideItemDetail ? itemDetail : fieldGuide}
                     {showFieldGuideItemDetail ? backIcon : null}
                     {closeIcon}
