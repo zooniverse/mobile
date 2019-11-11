@@ -1,18 +1,9 @@
 import React, {Component} from 'react'
-import {
-    StyleSheet,
-    TouchableOpacity,
-    View
-} from 'react-native'
+import {View} from 'react-native'
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
-import FontedText from '../common/FontedText'
-import FieldGuide from './FieldGuide'
 import {length} from 'ramda'
-import {
-    GuideButton,
-    SwipeButton
-} from './ClassifierButton';
+import {GuideButton, SwipeButton} from './ClassifierButton';
 
 export class SwipeTabs extends Component {
     constructor(props) {
