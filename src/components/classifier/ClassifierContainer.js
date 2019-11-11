@@ -82,17 +82,19 @@ class ClassifierContainer extends Component {
             <FieldGuide
                 guide={this.props.guide}
                 isVisible={this.state.isFieldGuideVisible}
+                inMuseumMode={this.props.inMuseumMode}
                 onClose={() => this.setState({isFieldGuideVisible: false})}
             />
 
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.container]}>
                 {this.props.children}
                 { this.props.inBetaMode ? feedbackView : null }
                 <TaskHelpModal
                     text={this.props.help}
                     isVisible={this.state.helpModalIsVisible}
+                    inMuseumMode={this.props.inMuseumMode}
                     onCloseRequested={ () => this.setState({helpModalIsVisible: false}) }
                 />
                 { this.state.isFieldGuideVisible ? fieldGuide : null }
@@ -104,11 +106,12 @@ class ClassifierContainer extends Component {
 
 const styles = {
     container: {
-        flex: 1
+        flex: 1,
     }
 }
 
 ClassifierContainer.propTypes = {
+    inMuseumMode: PropTypes.bool,
     inBetaMode: PropTypes.bool.isRequired,
     children: PropTypes.element.isRequired,
     project: PropTypes.shape({
@@ -119,6 +122,10 @@ ClassifierContainer.propTypes = {
     guide: PropTypes.shape({
         
     })
+}
+
+ClassifierContainer.defaultProps = {
+    inMuseumMode: false
 }
 
 export default ClassifierContainer

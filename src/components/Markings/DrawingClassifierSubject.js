@@ -105,10 +105,11 @@ class DrawingClassifierSubject extends Component {
                         canUndo={this.props.canUndo}
                         showDrawingButtons={this.props.showDrawingButtons}
                         canDraw={this.props.showDrawingButtons}
+                        inMuseumMode={this.props.inMuseumMode}
                     />
                 </View> 
                 { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView() }
-                { this.props.alreadySeen && this.props.imageIsLoaded && <AlreadySeenBanner /> }
+                { !this.props.inMuseumMode && this.props.alreadySeen && this.props.imageIsLoaded && <AlreadySeenBanner /> }
             </View>               
         )
     }
@@ -181,7 +182,8 @@ DrawingClassifierSubject.propTypes = {
     imageSource: PropTypes.string,
     canUndo: PropTypes.bool,
     showHelpButton: PropTypes.bool,
-    onHelpButtonPressed: PropTypes.func
+    onHelpButtonPressed: PropTypes.func,
+    inMuseumMode: PropTypes.bool,
 }
 
 export default DrawingClassifierSubject

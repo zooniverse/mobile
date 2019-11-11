@@ -5,8 +5,10 @@ import {
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import FontedText from '../common/FontedText'
 import PropTypes from 'prop-types';
+
+import FontedText from '../common/FontedText'
+import * as colorModes from '../../actions/colorModes'
 
 class ClassificationPanel extends Component {
   render() {
@@ -14,22 +16,35 @@ class ClassificationPanel extends Component {
       <View style={styles.tabContainer}>
         <TouchableOpacity
           onPress={ () => { this.props.setQuestionVisibility(true) } }
-          style={ this.props.isQuestionVisible ? [styles.tab] : [styles.tab, styles.deselectedTab] }>
-          <FontedText style={styles.tabText}>
+          style={ this.props.isQuestionVisible ?
+              [styles.tab,  colorModes.contentBackgroundColorFor(this.props.inMuseumMode)] :
+              [styles.tab,  colorModes.framingBackgroundColorFor(this.props.inMuseumMode)]
+          }>
+          <FontedText style={ this.props.isQuestionVisible ?
+            [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)] :
+            [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)]
+          }>
             QUESTION
           </FontedText>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={ () => { this.props.setQuestionVisibility(false) } }
-          style={ this.props.isQuestionVisible ? [styles.tab, styles.deselectedTab] : [styles.tab] }>
-          <FontedText style={styles.tabText}>
+          style={ this.props.isQuestionVisible ?
+              [styles.tab,  colorModes.framingBackgroundColorFor(this.props.inMuseumMode)] :
+              [styles.tab,  colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]
+
+          }>
+          <FontedText style={ this.props.isQuestionVisible ?
+            [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)]:
+            [styles.tabText, colorModes.selectedTextColorFor(this.props.inMuseumMode)]
+          }>
             TUTORIAL
           </FontedText>
         </TouchableOpacity>
       </View>
 
     return (
-        <View style={[styles.panelContainer, this.props.containerStyle]}>
+        <View style={[styles.panelContainer, this.props.containerStyle, colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]}>
           { this.props.hasTutorial ? tabs : null }
           { this.props.children }
         </View>
@@ -39,7 +54,6 @@ class ClassificationPanel extends Component {
 
 const styles = EStyleSheet.create({
   panelContainer: {
-    backgroundColor: 'white',
     marginTop: 15,
     marginBottom: 0,
     marginHorizontal: 25
@@ -55,9 +69,6 @@ const styles = EStyleSheet.create({
     flex: 1,
     marginTop: 1,
   },
-  deselectedTab: {
-    backgroundColor: '$lightestGrey',
-  },
   tabText: {
     fontSize: DeviceInfo.isTablet() ? 22 : 14,
     marginVertical: 15
@@ -71,5 +82,6 @@ ClassificationPanel.propTypes = {
   children: PropTypes.node,
   isQuestionVisible: PropTypes.bool,
   setQuestionVisibility: PropTypes.func,
+  inMuseumMode: PropTypes.bool,
 }
 export default ClassificationPanel

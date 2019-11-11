@@ -90,10 +90,12 @@ class DrawingModal extends Component {
                             drawingColor={this.props.tool.color}
                             imageSource={this.props.imageSource}
                             canUndo={this.props.canUndo}
+                            inMuseumMode={this.props.inMuseumMode}
                         />
                         <InstructionView
                             {... this.props.tool}
                             numberDrawn={this.props.numberOfShapesDrawn}
+                            inMuseumMode={this.props.inMuseumMode}
                             onCancel={() => this.onCancel({justClearInProgress: true})}
                             onSave={this.onSave}
                             warnForRequirements={this.props.warnForRequirements && this.props.numberOfShapesDrawn < this.props.tool.min}
@@ -146,7 +148,7 @@ const styles = EStyleSheet.create({
     },
     modal: {
         flex: 1,
-        marginTop: Platform.OS === 'ios' ? 50 : 0
+        marginTop: Platform.OS === 'ios' ? 50 : 0,
     }
 
 })
@@ -154,6 +156,7 @@ const styles = EStyleSheet.create({
 DrawingModal.propTypes = {
     canUndo: PropTypes.bool,
     shouldConfirmOnClose: PropTypes.bool,
+    inMuseumMode: PropTypes.bool,
     visible: PropTypes.bool,
     imageSource: PropTypes.string,
     onClose: PropTypes.func,

@@ -69,6 +69,7 @@ class DrawingToolView extends Component {
                             highlightedButton={this.state.mode}
                             canUndo={this.props.canUndo}
                             aShapeIsOutOfBounds={this.state.aShapeIsOutOfBounds}
+                            inMuseumMode={this.props.inMuseumMode}
                         />
                 }
             </View>
@@ -92,7 +93,8 @@ DrawingToolView.propTypes = {
     animateImage: PropTypes.func,
     canDraw: PropTypes.bool,
     onHelpButtonPressed: PropTypes.func,
-    showHelpButton: PropTypes.bool
+    showHelpButton: PropTypes.bool,
+    inMuseumMode: PropTypes.bool,
 }
 
 DrawingToolView.defaultProps = {

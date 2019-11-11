@@ -5,6 +5,7 @@ exports[`renders correctly 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "white",
         "height": 0,
       }
     }
@@ -42,6 +43,9 @@ exports[`renders correctly 1`] = `
               style={
                 Array [
                   undefined,
+                  Object {
+                    "color": "black",
+                  },
                   Array [
                     undefined,
                   ],
@@ -79,6 +83,9 @@ exports[`renders correctly 1`] = `
               style={
                 Array [
                   undefined,
+                  Object {
+                    "color": "black",
+                  },
                   Array [
                     undefined,
                   ],

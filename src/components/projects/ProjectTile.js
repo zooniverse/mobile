@@ -239,7 +239,7 @@ const styles = EStyleSheet.create({
         top: 15, 
     },
     bannerContainer: {
-        backgroundColor: '$headerColor',
+        backgroundColor: '$zooniverseTeal',
         shadowColor: 'black',
         shadowOffset: {width: 2, height: 2},
         shadowOpacity: .5,

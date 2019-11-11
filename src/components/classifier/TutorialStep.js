@@ -47,7 +47,9 @@ class TutorialStep extends Component {
                         }
 
                         <View style={styles.markdown} >
-                            <SizedMarkdown>
+                            <SizedMarkdown
+                                inMuseumMode={this.props.inMuseumMode}
+                            >
                                 { this.props.markdownContent }
                             </SizedMarkdown>
                         </View>
@@ -75,7 +77,8 @@ const styles = {
 TutorialStep.propTypes = {
     markdownContent: PropTypes.string,
     mediaUri: PropTypes.string,
-    width: PropTypes.number
+    width: PropTypes.number,
+    inMuseumMode: PropTypes.bool,
 }
 
 export default TutorialStep        

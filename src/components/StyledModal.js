@@ -12,6 +12,8 @@ import DeviceInfo from 'react-native-device-info'
 
 import FontedText from './common/FontedText';
 
+import * as colorModes from '../actions/colorModes'
+
 const mapStateToProps = (state) => ({
   device: state.app.device
 })
@@ -54,7 +56,7 @@ class StyledModal extends Component {
                 </View>
                 
               </View>
-              <View style={styles.contentContainer}>
+              <View style={[styles.contentContainer, colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]}>
                 { this.props.children }
               </View>
             </View>
@@ -96,7 +98,6 @@ const styles = EStyleSheet.create({
   contentContainer: {
     flex: 1,
     padding: isTablet ? 30 : 20,
-    backgroundColor: 'white'
   },
   closeButton: {
     alignItems: 'flex-end'
@@ -111,6 +112,7 @@ const styles = EStyleSheet.create({
 StyledModal.propTypes = {
   children: PropTypes.array,
   isVisible: PropTypes.bool,
+  inMuseumMode: PropTypes.bool,
   setVisibility: PropTypes.func,
   title: PropTypes.string.isRequired,
   device: PropTypes.shape({

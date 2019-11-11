@@ -18,6 +18,8 @@ import { GLOBALS } from '../../constants/globals'
 import { extractNonSwipeEnabledProjects, extractSwipeEnabledProjects } from '../../utils/projectUtils'
 import PageKeys from '../../constants/PageKeys'
 
+import theme from '../../theme'
+
 GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state, ownProps) => {
@@ -77,7 +79,8 @@ class ProjectList extends Component {
         navBarActions.setNavbarSettingsForPage({
             title,
             showBack: true,
-            isPreview: inPreviewMode,
+            isPreview: inPreviewMode, //TODO: Decouple preview mode from the color of the safe area container
+            backgroundColor: inPreviewMode ? theme.$testRed : theme.$zooniverseTeal,
             centerType: 'title',
         }, PageKeys.ProjectList)
     }

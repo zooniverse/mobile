@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react';
 import {
     StyleSheet,
     TouchableOpacity
@@ -8,86 +8,116 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info'
 
 import FontedText from '../common/FontedText'
+import * as colorModes from '../../actions/colorModes'
 
-const ClassifierButton = (props) => {
-    const buttonStyle = [props.style, styles.button]
-    const textStyle = []
-    switch (props.type) {
-        case 'answer':
-            textStyle.push(styles.answerButtonText)
-            buttonStyle.push(props.disabled ? styles.answerButtonDisabled : styles.answerButton)
-            if (props.selected) {
-                buttonStyle.push(styles.selectedAnswerButton)
-            }
-            if (props.blurred) {
-                buttonStyle.push(styles.answerButtonDisabled)
-            }
-            break
-        case 'guide':
-            buttonStyle.push(styles.guideButton)
-            break
+class ClassifierButton extends Component {
+    constructor(props) {
+        super(props)
     }
-    return (
-        <TouchableOpacity
-            disabled={props.disabled}
-            onPress={props.onPress}
-            activeOpacity={0.5}
-            style={ buttonStyle }
-        >
-            <FontedText style={[styles.buttonText, textStyle]}>
-                { props.text }
-            </FontedText>
-        </TouchableOpacity>
-    )
+
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+    }
+
+    render() {
+        this.setAdditionalStyles();
+
+        return (
+            <TouchableOpacity
+                disabled={this.props.disabled}
+                onPress={this.props.onPress}
+                activeOpacity={0.5}
+                style={[this.props.style, styles.button, this.buttonStyle]}
+            >
+                <FontedText style={[styles.buttonText, this.textStyle]}>
+                    {this.props.text}
+                </FontedText>
+            </TouchableOpacity>
+        )
+    }
 }
 
+class AnswerButton extends ClassifierButton {
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+        this.textStyle.push(styles.whiteButtonText)
 
-const styles =EStyleSheet.create({
+        if (this.props.disabled) {
+            this.buttonStyle.push(colorModes.disabledButtonStyleFor(this.props.inMuseumMode))
+        } else if (this.props.selected) {
+            this.buttonStyle.push(colorModes.selectedButtonStyleFor(this.props.inMuseumMode))
+        } else {
+            this.buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
+        }
+    }
+}
+
+class GuideButton extends ClassifierButton {
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+
+        this.textStyle.push(colorModes.selectedTextColorFor(this.props.inMuseumMode))
+        this.buttonStyle.push(styles.guideButton)
+        this.buttonStyle.push(colorModes.guideButtonStyleFor(this.props.inMuseumMode))
+    }
+}
+
+class SubmitButton extends ClassifierButton {
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+        this.textStyle.push(colorModes.submitButtonTextColorFor(this.props.inMuseumMode))
+
+        if (this.props.disabled) {
+            this.buttonStyle.push(colorModes.disabledSubmitButtonStyleFor(this.props.inMuseumMode))
+        } else {
+            this.buttonStyle.push(colorModes.submitButtonStyleFor(this.props.inMuseumMode))
+        }
+    }
+}
+
+class SwipeButton extends ClassifierButton {
+    setAdditionalStyles() {
+        this.buttonStyle = []
+        this.textStyle = []
+
+        this.textStyle.push(styles.whiteButtonText)
+        this.buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
+    }
+}
+
+const styles = EStyleSheet.create({
     button: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      buttonText: {
+    },
+    buttonText: {
         fontSize: DeviceInfo.isTablet() ? 22 : 14,
         marginVertical: 11,
         marginHorizontal: 9
-      },
-      guideButton: {
+    },
+    guideButton: {
         borderWidth: StyleSheet.hairlineWidth,
-        backgroundColor: 'white',
-        borderColor: '$disabledIconColor',
-        shadowColor: 'rgba(0, 0, 0, 0.5)',
-        shadowOpacity: 1,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 1,
-            width: 2,
-        },
-      },
-      answerButton: {
-        backgroundColor: '$buttonColor'
-      },
-      selectedAnswerButton: {
-        backgroundColor: '$selectedButton'
-      },
-      answerButtonDisabled: {
-          backgroundColor: '$disabledButtonColor'
-      },
-      answerButtonText: {
-        color: 'white', 
-      },
+        borderColor: '$zooniverseTeal',
+    },
+    whiteButtonText: {
+        color: 'white',
+    },
 })
 
 ClassifierButton.propTypes = {
+    inMuseumMode: PropTypes.bool,
     selected: PropTypes.bool,
     blurred: PropTypes.bool,
     disabled: PropTypes.any,
     style: PropTypes.any,
     onPress: PropTypes.func,
-    type: PropTypes.oneOf(['answer', 'guide']),
     text: PropTypes.string.isRequired
 }
 
-export default ClassifierButton
+export {ClassifierButton, AnswerButton, GuideButton, SubmitButton, SwipeButton}
       

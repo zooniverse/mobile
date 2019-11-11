@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View>
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "backgroundColor": "white",
+      },
+    ]
+  }
+>
   <View>
     <Swiper
       loop={false}
@@ -87,8 +96,10 @@ exports[`renders correctly 1`] = `
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -183,8 +194,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -279,8 +292,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -318,7 +333,12 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             Object {
               "fontFamily": "Karla",
             },
-            undefined,
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
           ]
         }
       >
@@ -501,14 +521,28 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
 `;
 
 exports[`renders header if initial tutorial 1`] = `
-<View>
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "backgroundColor": "white",
+      },
+    ]
+  }
+>
   <Text
     style={
       Array [
         Object {
           "fontFamily": "Karla",
         },
-        undefined,
+        Array [
+          undefined,
+          Object {
+            "color": "black",
+          },
+        ],
       ]
     }
   >
@@ -599,8 +633,10 @@ exports[`renders header if initial tutorial 1`] = `
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -695,8 +731,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -791,8 +829,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -830,7 +870,12 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             Object {
               "fontFamily": "Karla",
             },
-            undefined,
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
           ]
         }
       >
@@ -1013,7 +1058,16 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
 `;
 
 exports[`renders with no media 1`] = `
-<View>
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "backgroundColor": "white",
+      },
+    ]
+  }
+>
   <View>
     <Swiper
       loop={false}
@@ -1070,8 +1124,10 @@ exports[`renders with no media 1`] = `
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -1137,8 +1193,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -1204,8 +1262,10 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
                           "width": 0,
                         },
                         "text": Object {
+                          "color": "black",
                           "fontFamily": "Karla",
                           "fontSize": 14,
+                          "fontWeight": "normal",
                         },
                       }
                     }
@@ -1243,7 +1303,12 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
             Object {
               "fontFamily": "Karla",
             },
-            undefined,
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
           ]
         }
       >

@@ -52,6 +52,7 @@ class TapableSubject extends Component {
     render() {
         const {
             alreadySeen,
+            inMuseumMode,
             onPress,
             height,
             width,
@@ -126,7 +127,7 @@ class TapableSubject extends Component {
                                     )
                                 })
                             }
-                            { alreadySeen && <AlreadySeenBanner /> }
+                            { alreadySeen && !inMuseumMode && <AlreadySeenBanner /> }
                         </Animated.ScrollView>
                     :
                         <TouchableOpacity style={styles.imageContainer} onPress={() => onPress(subject.displays[0].src)}>
@@ -171,7 +172,8 @@ TapableSubject.propTypes = {
     subject: PropTypes.object,
     onPress: PropTypes.func,
     imageStyle: PropTypes.object,
-    alreadySeen: PropTypes.bool
+    alreadySeen: PropTypes.bool,
+    inMuseumMode: PropTypes.bool,
 }
 
 export default TapableSubject

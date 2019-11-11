@@ -265,7 +265,7 @@ class ShapeEditorSvg extends Component {
                             }}
                             key={index}
                             { ...shape }
-                            blurred={this.state.shapeToRemoveIndex === index}
+                            disabled={this.state.shapeToRemoveIndex === index}
                             displayToNativeRatioX={this.props.displayToNativeRatioX}
                             displayToNativeRatioY={this.props.displayToNativeRatioY}
                             showCorners={this.props.mode === 'draw' && selectedShape}

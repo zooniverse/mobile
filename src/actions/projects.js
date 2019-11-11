@@ -60,6 +60,7 @@ export function fetchProjects() {
                         })
                 }
 
+
                 projectCalls.push(fetchPaginatedProjects(productionParams));
                 projectCalls.push(fetchPaginatedProjects(betaParams));
 
@@ -82,7 +83,10 @@ export function fetchProjects() {
                     let projectDetailCalls = []
                     projectDetailCalls.push(getWorkflowsForProjects(allProjects))
                     const avatarCall = getAvatarsForProjects(allProjects)
+                    const museumModeCall = getMuseumRoleForProjects(allProjects)
+
                     projectDetailCalls = projectDetailCalls.concat(avatarCall)
+                    projectDetailCalls = projectDetailCalls.concat(museumModeCall)
                     // Then load the avatars and workflows
                     Promise.all(projectDetailCalls)
                         .then(() => {
@@ -106,13 +110,26 @@ export function fetchProjects() {
 
 const getAvatarsForProjects = projects => {
     return projects.map(project => {
-        return apiClient.type('avatars').get(project.links.avatar.id)
+        return apiClient.type('avatars')
+            .get(project.links.avatar.id)
             .then((avatar) => {
                 project.avatar_src = avatar.src
             })
             // Stub out avatar rejection because it is optional for projects to have avatars
             .catch(() => {
             });
+    })
+}
+
+const getMuseumRoleForProjects = projects => {
+    return projects.map(project => {
+        return apiClient.type('project_roles')
+            .get({id: project.links.project_roles})
+            .then((roles) => {
+                roles.forEach(role => {
+                    project.in_museum_mode = project.in_museum_mode || role.roles.includes('museum')
+                })
+            })
     })
 }
 

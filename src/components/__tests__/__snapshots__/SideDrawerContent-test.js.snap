@@ -49,6 +49,9 @@ exports[`renders correctly 1`] = `
         Array [
           undefined,
           Object {
+            "borderBottomColor": "#5c5c5c",
+          },
+          Object {
             "borderBottomColor": "white",
           },
         ]
