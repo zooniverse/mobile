@@ -187,6 +187,7 @@ export class FieldGuide extends Component {
         const itemDetail =
             <FieldGuideItemDetail
                 item={this.state.selectedItem}
+                inMuseumMode={this.props.inMuseumMode}
                 icons={icons}
                 heightAnim={this.state.heightAnim}
                 onClose={() => this.closeDetail()}
