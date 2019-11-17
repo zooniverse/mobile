@@ -31,19 +31,24 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage(),
-            new RNFirebasePackage(),
-            new RNFirebaseMessagingPackage(),
-            new BlurViewPackage(),
-            new RNFetchBlobPackage(),
-            new SplashScreenReactPackage(),
-            new MainApplicationPackage(),
-            new GoogleAnalyticsBridgePackage(),
-            new RNDeviceInfo()
-      );
+      List<ReactPackage> packages = new PackageList(this).getPackages();
+      // Packages that cannot be autolinked yet can be added manually here, for example:
+      // packages.add(new RNFirebasePackage())
+      return packages
+
+      // return Arrays.<ReactPackage>asList(
+      //     new MainReactPackage(),
+      //       new VectorIconsPackage(),
+      //       new SvgPackage(),
+      //       new RNFirebasePackage(),
+      //       new RNFirebaseMessagingPackage(),
+      //       new BlurViewPackage(),
+      //       new RNFetchBlobPackage(),
+      //       new SplashScreenReactPackage(),
+      //       new MainApplicationPackage(),
+      //       new GoogleAnalyticsBridgePackage(),
+      //       new RNDeviceInfo()
+      // );
     }
 
     @Override
