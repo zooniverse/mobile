@@ -33,15 +33,14 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       List<ReactPackage> packages = new PackageList(this).getPackages();
       // Packages that cannot be autolinked yet can be added manually here, for example:
-      // packages.add(new RNFirebasePackage())
+      packages.add(new RNFirebasePackage())
+      packages.add(new RNFirebaseMessagingPackage())
       return packages
 
       // return Arrays.<ReactPackage>asList(
       //     new MainReactPackage(),
       //       new VectorIconsPackage(),
       //       new SvgPackage(),
-      //       new RNFirebasePackage(),
-      //       new RNFirebaseMessagingPackage(),
       //       new BlurViewPackage(),
       //       new RNFetchBlobPackage(),
       //       new SplashScreenReactPackage(),
