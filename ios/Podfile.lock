@@ -142,6 +142,9 @@ PODS:
   - React-RCTWebSocket (0.60.0):
     - React-Core (= 0.60.0)
     - React-fishhook (= 0.60.0)
+  - RNFirebase (5.3.1):
+    - Firebase/Core
+    - React
   - RNSVG (9.13.3):
     - React
   - RNVectorIcons (6.6.0):
@@ -173,6 +176,7 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
+  - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - SocketRocket
@@ -236,6 +240,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   React-RCTWebSocket:
     :path: "../node_modules/react-native/Libraries/WebSocket"
+  RNFirebase:
+    :path: "../node_modules/react-native-firebase/ios"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -276,11 +282,12 @@ SPEC CHECKSUMS:
   React-RCTText: 685fca2e13b024271048e7e247ef24476f28a41e
   React-RCTVibration: 4ee1cf208ab17a50fafb1c16ffe28fe594a64e4f
   React-RCTWebSocket: fca087d583724aa0e5fef7d911f0f2a28d0f2736
+  RNFirebase: f20e5e4ceaa632aebb1a29a9a91022ae0469c633
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   yoga: 616fde658be980aa60a2158835170f3f9c2d04b4
 
-PODFILE CHECKSUM: 5a7503abf2758ebaf81f3b772c3872a5281188a7
+PODFILE CHECKSUM: 5a5532628b15cab32a0e3383734979e03560e112
 
 COCOAPODS: 1.7.5

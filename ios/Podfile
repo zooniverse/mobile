@@ -1,3 +1,4 @@
+platform :ios, '9.0'
 project './ZooniverseMobile.xcodeproj'
 
 target 'ZooniverseMobile' do
@@ -24,6 +25,7 @@ target 'ZooniverseMobile' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
   pod 'Firebase/Core'
   pod 'SocketRocket'
   pod 'Firebase/Messaging', '~> 5.15.0'
