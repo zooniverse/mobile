@@ -7,19 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
 		00E356F31AD99517003FC87E /* ZooniverseMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ZooniverseMobileTests.m */; };
-		0131039321EF836B00BF5E31 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0131038C21EF836200BF5E31 /* libRNBlur.a */; };
-		0131039A21EF838E00BF5E31 /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0131039921EF838500BF5E31 /* libRCTGoogleAnalyticsBridge.a */; };
 		013103D821EF882400BF5E31 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103AB21EF882400BF5E31 /* CoreData.framework */; };
 		013103DA21EF883300BF5E31 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103D921EF883300BF5E31 /* SystemConfiguration.framework */; };
 		013103DC21EF883E00BF5E31 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103DB21EF883E00BF5E31 /* libz.tbd */; };
 		013103DE21EF884C00BF5E31 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103DD21EF884C00BF5E31 /* libsqlite3.0.tbd */; };
-		013103E521EF8BED00BF5E31 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103E421EF8BE000BF5E31 /* libRNFetchBlob.a */; };
-		013103EF21EF8D2F00BF5E31 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103EC21EF8D2900BF5E31 /* libRNDeviceInfo.a */; };
 		013103F221EF8F9C00BF5E31 /* ImageSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 013103F121EF8F9C00BF5E31 /* ImageSizer.m */; };
 		013103F821EF90D600BF5E31 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013103F721EF90D600BF5E31 /* FirebaseManager.swift */; };
-		0131040221EF935300BF5E31 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103FF21EF934700BF5E31 /* libRCTPushNotification.a */; };
 		0131040521EF9EAA00BF5E31 /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0131040321EF9EAA00BF5E31 /* GoogleService-Info-dev.plist */; };
 		0131040621EF9EAA00BF5E31 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0131040421EF9EAA00BF5E31 /* GoogleService-Info-prod.plist */; };
 		0131041821EFA6C400BF5E31 /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0131041621EFA2E400BF5E31 /* Karla-Bold.ttf */; };
@@ -62,6 +56,7 @@
 		90AFD76EA6BE48E18C8A5CE9 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2539392C1D4BB39E4C95B6 /* Feather.ttf */; };
 		AD8554B47A0A48C5884EFE74 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3745B9B26B7647B0B8C0159A /* MaterialIcons.ttf */; };
 		BEF3DEE171264A16890EB383 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A11C9298D464F2786195E3A /* FontAwesome5_Brands.ttf */; };
+		C7B7C851238727C1005A340A /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103FF21EF934700BF5E31 /* libRCTPushNotification.a */; };
 		CB57BD9683ED461F840103D5 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03D1AE9D628A4CFCB802D3F3 /* Ionicons.ttf */; };
 		D0B24F31310E4E9D9EDD0538 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D49F13A3EEB40D58C32721C /* Entypo.ttf */; };
 		DB8FF29503DF468597017827 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BC1870428B840CAA004FEE7 /* FontAwesome.ttf */; };
@@ -524,17 +519,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0131040221EF935300BF5E31 /* libRCTPushNotification.a in Frameworks */,
-				013103EF21EF8D2F00BF5E31 /* libRNDeviceInfo.a in Frameworks */,
-				013103E521EF8BED00BF5E31 /* libRNFetchBlob.a in Frameworks */,
+				C7B7C851238727C1005A340A /* libRCTPushNotification.a in Frameworks */,
 				013103DE21EF884C00BF5E31 /* libsqlite3.0.tbd in Frameworks */,
 				013103DC21EF883E00BF5E31 /* libz.tbd in Frameworks */,
 				013103DA21EF883300BF5E31 /* SystemConfiguration.framework in Frameworks */,
 				013103D821EF882400BF5E31 /* CoreData.framework in Frameworks */,
-				0131039A21EF838E00BF5E31 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
-				0131039321EF836B00BF5E31 /* libRNBlur.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
-				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				EFFA73880A300AC6C1532822 /* libPods-ZooniverseMobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1765,7 +1755,11 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				"HEADER_SEARCH_PATHS[arch=*]" = "$(inherited) $(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/** $(SRCROOT)/../node_modules/react-native-svg/ios/RNSVG";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/RNSVG",
+				);
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.6.5;
@@ -1801,7 +1795,11 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				"HEADER_SEARCH_PATHS[arch=*]" = "$(inherited) $(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/** $(SRCROOT)/../node_modules/react-native-svg/ios/RNSVG";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/RNSVG",
+				);
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.6.6;

@@ -1,5 +1,5 @@
 platform :ios, '9.0'
-project './ZooniverseMobile.xcodeproj'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'ZooniverseMobile' do
   pod 'React', :path => '../node_modules/react-native/'
@@ -34,4 +34,5 @@ target 'ZooniverseMobile' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  use_native_modules!
 end
