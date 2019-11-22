@@ -40,9 +40,13 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
+<<<<<<< HEAD
 	<string></string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string></string>
+=======
+	<string/>
+>>>>>>> Allow App to Build on Android
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Library Access Warning</string>
 	<key>UIAppFonts</key>
@@ -56,21 +60,6 @@
 		<string>Karla-BoldItalic.ttf</string>
 		<string>Karla-Italic.ttf</string>
 		<string>Karla-Regular.ttf</string>
-		<string>AntDesign.ttf</string>
-		<string>Entypo.ttf</string>
-		<string>EvilIcons.ttf</string>
-		<string>Feather.ttf</string>
-		<string>FontAwesome.ttf</string>
-		<string>FontAwesome5_Brands.ttf</string>
-		<string>FontAwesome5_Regular.ttf</string>
-		<string>FontAwesome5_Solid.ttf</string>
-		<string>Foundation.ttf</string>
-		<string>Ionicons.ttf</string>
-		<string>MaterialCommunityIcons.ttf</string>
-		<string>MaterialIcons.ttf</string>
-		<string>Octicons.ttf</string>
-		<string>SimpleLineIcons.ttf</string>
-		<string>Zocial.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

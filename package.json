@@ -32,6 +32,7 @@
     "crypto-js": "^3.1.9-1",
     "envinfo": "^6.0.1",
     "jetifier": "^1.6.4",
+    "jsc-android": "^241213.1.0",
     "json5": "^2.1.0",
     "markdown-it": "^8.3.1",
     "metro": "^0.51.1",
