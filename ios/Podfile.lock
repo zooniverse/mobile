@@ -142,8 +142,6 @@ PODS:
     - React
   - react-native-netinfo (4.6.1):
     - React
-  - react-native-orientation (3.1.3):
-    - React
   - react-native-splash-screen (3.2.0):
     - React
   - React-RCTActionSheet (0.60.0):
@@ -204,7 +202,6 @@ DEPENDENCIES:
   - react-native-blur (from `../node_modules/react-native-blur`)
   - react-native-google-analytics-bridge (from `../node_modules/react-native-google-analytics-bridge`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
-  - react-native-orientation (from `../node_modules/react-native-orientation`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -273,8 +270,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-google-analytics-bridge"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
-  react-native-orientation:
-    :path: "../node_modules/react-native-orientation"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
   React-RCTActionSheet:
@@ -342,7 +337,6 @@ SPEC CHECKSUMS:
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
   react-native-google-analytics-bridge: 95334ced9e20c9e7a23a2b7a6e2ab878b0acdc61
   react-native-netinfo: 16c6408c311572f17f9ffc3fa12614489307b6cf
-  react-native-orientation: d4a97266b06ec8d45d74e626656a730ebbebbb6f
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: b27ff3cf3a68f917c46d2b94abf938b625b96570
   React-RCTAnimation: 9e4708e5bd65fca8285ce7c0aa076f3f4fa5c2f8
