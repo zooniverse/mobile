@@ -30,9 +30,11 @@ target 'ZooniverseMobile' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
-
-  use_native_modules!
   pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
 
+  target 'ZooniverseMobileTests' do
+    inherit! :search_paths
+  end
+
+  use_native_modules!
 end

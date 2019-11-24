@@ -16,7 +16,7 @@
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native-extended-stylesheet|react-native|react-navigation|react-native-vector-icons|react-native-loading-spinner-overlay)/)"
+      "node_modules/(?!(react-native-extended-stylesheet|react-native|react-native-webview|react-navigation|react-native-vector-icons|react-native-loading-spinner-overlay)/)"
     ],
     "modulePathIgnorePatterns": [
       "node_modules/react-native-deck-swiper/node_modules/react-native"
@@ -61,6 +61,7 @@
     "react-native-svg": "9.13.3",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-webview": "^7.5.1",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
@@ -80,11 +81,11 @@
     "eslint-plugin-react-native": "^2.0.0",
     "eslint-plugin-standard": "^2.0.0",
     "jest-cli": "23.6.0",
-    "@babel/core": "^7.4.4",
-    "@babel/runtime": "^7.4.5",
+    "@babel/core": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
     "babel-jest": "^24.8.0",
-    "jest": "^24.8.0",
-    "metro-react-native-babel-preset": "^0.54.0",
-    "react-test-renderer": "16.8.3"
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.55.0",
+    "react-test-renderer": "16.8.6"
   }
 }

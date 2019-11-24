@@ -67,7 +67,7 @@ export class ProjectDisciplines extends React.Component {
 
   componentDidMount() {
     this.props.setNavbarSettingsForPage({
-      centerType: 'avatar' 
+      centerType: 'avatar'
     }, PageKeys.ProjectDisciplines)
     if (this.shouldPromptForPermissions()) {
       setTimeout(()=> {
@@ -127,14 +127,14 @@ export class ProjectDisciplines extends React.Component {
   refreshProjects() {
     this.setState({refreshing: true});
     this.fetchProjectPromise = makeCancelable(this.props.projectActions.fetchProjects())
-    
+
     this.fetchProjectPromise
     .promise
     .then((projectList) => {
       this.fetchProjectPromise = null
       this.setState({refreshing: false});
 
-      // Handle push subscriptions 
+      // Handle push subscriptions
       const notificationProjects = extractSwipeEnabledProjects(projectList.filter(project => !project.isPreview))
       this.props.settingsActions.addUnusedProjectsToNotifications(notificationProjects)
     })
@@ -161,7 +161,7 @@ export class ProjectDisciplines extends React.Component {
       return isForLoggerInUser || isTagged || isBeta
     }
     const disciplineList = this.props.isSuccess ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES) : []
-    const listView = 
+    const listView =
       <FlatList
         contentContainerStyle={styles.listContainer}
         data={disciplineList}
@@ -178,7 +178,7 @@ export class ProjectDisciplines extends React.Component {
       <View style={activityIndicator}>
         <ActivityIndicator size="large" />
       </View>
-  
+
 
     return (
       <View style={styles.container}>
