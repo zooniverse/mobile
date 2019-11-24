@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "@react-native-community/netinfo": "^4.6.1",
+    "@react-native-firebase/app": "^6.0.4",
+    "@react-native-firebase/messaging": "^6.0.4",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "color": "^3.1.0",
     "crypto-js": "^3.1.9-1",
@@ -49,7 +51,6 @@
     "react-native-device-info": "2.1.2",
     "react-native-drawer": "^2.3.0",
     "react-native-extended-stylesheet": "^0.8.1",
-    "react-native-firebase": "^5.2.2",
     "react-native-google-analytics-bridge": "^5.0.0",
     "react-native-image-pan-zoom": "^2.0.16",
     "react-native-loading-spinner-overlay": "^0.5.2",

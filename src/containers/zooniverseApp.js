@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import firebase from 'react-native-firebase';
+import firebase from '@react-native-firebase/app';
+import '@react-native-firebase/messaging';
 
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
@@ -57,13 +58,13 @@ class ZooniverseApp extends Component {
 
   onFCMTokenReceived(token) {
     this.props.settingsActions.initializeSubscriptionsWithFirebase(token)
-  } 
+  }
 
   componentDidMount() {
     this.props.setNavbarSettingsForPage({
       centerType: 'avatar'
     })
-    
+
     // Initially set screen dimensions
     this.handleDimensionsChange({window: Dimensions.get('window')})
 
