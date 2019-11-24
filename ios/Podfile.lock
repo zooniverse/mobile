@@ -199,7 +199,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - react-native-blur (from `../node_modules/react-native-blur`)
+  - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
   - react-native-google-analytics-bridge (from `../node_modules/react-native-google-analytics-bridge`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -265,7 +265,7 @@ EXTERNAL SOURCES:
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-blur:
-    :path: "../node_modules/react-native-blur"
+    :path: "../node_modules/@react-native-community/blur"
   react-native-google-analytics-bridge:
     :path: "../node_modules/react-native-google-analytics-bridge"
   react-native-netinfo:
@@ -357,6 +357,6 @@ SPEC CHECKSUMS:
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   yoga: 616fde658be980aa60a2158835170f3f9c2d04b4
 
-PODFILE CHECKSUM: 97c1a7dcaef6d421c802d4920c78862226ba5296
+PODFILE CHECKSUM: 773d88b6bc24d131a1893a493f21083c4c745f09
 
 COCOAPODS: 1.7.5

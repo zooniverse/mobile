@@ -26,6 +26,7 @@
     }
   },
   "dependencies": {
+    "@react-native-community/blur": "^3.3.1",
     "@react-native-community/netinfo": "^4.6.1",
     "@react-native-firebase/app": "^6.0.4",
     "@react-native-firebase/messaging": "^6.0.4",
@@ -44,7 +45,6 @@
     "ramda": "^0.25.0",
     "react": "16.8.6",
     "react-native": "0.60.0",
-    "react-native-blur": "^3.2.2",
     "react-native-browser-builtins": "^2.0.3",
     "react-native-checkbox-field": "^2.0.2",
     "react-native-deck-swiper": "github:zooniverse/react-native-deck-swiper",

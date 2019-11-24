@@ -108,6 +108,7 @@ def pass = getPassword("android@zooniverse.org", "android_keystore")
 def useIntlJsc = false
 
 android {
+    buildToolsVersion '23.0.3'
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -122,6 +123,8 @@ android {
         versionCode 47
         versionName "2.6.8"
         multiDexEnabled true
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
     }
     signingConfigs {
         release {
@@ -167,6 +170,7 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_blur')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

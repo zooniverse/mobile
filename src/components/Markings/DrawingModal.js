@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { BlurView } from 'react-native-blur';
+import { BlurView } from '@react-native-community/blur';
 import { bindActionCreators } from 'redux'
 import R from 'ramda'
 import Theme from '../../theme'
@@ -77,7 +77,7 @@ class DrawingModal extends Component {
                 transparent
             >
                 <View style={styles.modal}>
-                    { 
+                    {
                         Platform.OS === 'ios' ?
                             <BlurView style={styles.blurView} blurType="light" />
                         :

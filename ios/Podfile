@@ -33,4 +33,6 @@ target 'ZooniverseMobile' do
 
 
   use_native_modules!
+  pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
+
 end
