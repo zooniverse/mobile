@@ -24,6 +24,12 @@ exports[`renders correctly 1`] = `
         style={
           Array [
             undefined,
+            Object {
+              "backgroundColor": "white",
+            },
+            Object {
+              "color": "black",
+            },
             Array [
               undefined,
             ],
@@ -98,7 +104,7 @@ exports[`renders correctly 1`] = `
             p {
               margin: 0;
             }
-            
+            body {color: #000000}
         </style>
     </head>
     <body>

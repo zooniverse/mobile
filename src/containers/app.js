@@ -88,7 +88,14 @@ export default class App extends Component {
         <PersistGate loading={null} persistor={persistor} onBeforeLift={this.onBeforeLift}>
           <SafeAreaContainer>
             <Router sceneStyle={styles.sharedSceneStyles} navBar={() => <NavBar />} onStateChange={this.onSceneChange}>
-              <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
+              <Drawer
+                  key="drawer"
+                  contentComponent={SideDrawerContent}
+                  open={false}
+                  drawerPosition="right"
+                  drawerLockMode="locked-closed"
+
+              >
                   <Scene key="main" tabs={false}>
                     <Scene key={PageKeys.SignIn} component={SignIn} duration={0} type="reset"  />
                     <Scene key={PageKeys.ZooniverseApp} component={ZooniverseApp}  initial />
