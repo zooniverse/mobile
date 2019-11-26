@@ -1757,7 +1757,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
-				PROVISIONING_PROFILE_SPECIFIER = "Chelsea's Personal apparently Certificate ProvPro";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.mobile.zooniverse";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
