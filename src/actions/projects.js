@@ -83,7 +83,7 @@ export function fetchProjects() {
                     let projectDetailCalls = []
                     projectDetailCalls.push(getWorkflowsForProjects(allProjects))
                     const avatarCall = getAvatarsForProjects(allProjects)
-                    const museumModeCall = tagMuseumRoleForProjects(allProjects, userProfile)
+                    const museumModeCall = tagMuseumRoleForProjects(allProjects)
 
                     projectDetailCalls = projectDetailCalls.concat(avatarCall)
                     if (userIsLoggedIn) {
@@ -123,7 +123,7 @@ const getAvatarsForProjects = projects => {
     })
 }
 
-const tagMuseumRoleForProjects = (projects) => {
+export const tagMuseumRoleForProjects = projects => {
     return apiClient.type('projects')
       .get({ current_user_roles: 'museum' })
       .then((museumProjects) => {
