@@ -1,15 +1,8 @@
 import React from 'react'
 import {
-<<<<<<< HEAD
-    Dimensions,
-    Linking,
-    Platform,
-    WebView,
-=======
   Dimensions,
   Linking,
   Platform,
->>>>>>> Update Snapshots, Mocks, and use new RN webview
 } from 'react-native'
 import { WebView } from 'react-native-webview';
 import EStyleSheet from 'react-native-extended-stylesheet'
