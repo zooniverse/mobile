@@ -83,10 +83,12 @@ export function fetchProjects() {
                     let projectDetailCalls = []
                     projectDetailCalls.push(getWorkflowsForProjects(allProjects))
                     const avatarCall = getAvatarsForProjects(allProjects)
-                    const museumModeCall = getMuseumRoleForProjects(allProjects)
+                    const museumModeCall = tagMuseumRoleForProjects(allProjects, userProfile)
 
                     projectDetailCalls = projectDetailCalls.concat(avatarCall)
-                    projectDetailCalls = projectDetailCalls.concat(museumModeCall)
+                    if (userIsLoggedIn) {
+                      projectDetailCalls = projectDetailCalls.concat(museumModeCall)
+                    }
                     // Then load the avatars and workflows
                     Promise.all(projectDetailCalls)
                         .then(() => {
@@ -121,16 +123,15 @@ const getAvatarsForProjects = projects => {
     })
 }
 
-const getMuseumRoleForProjects = projects => {
-    return projects.map(project => {
-        return apiClient.type('project_roles')
-            .get({id: project.links.project_roles})
-            .then((roles) => {
-                roles.forEach(role => {
-                    project.in_museum_mode = project.in_museum_mode || role.roles.includes('museum')
-                })
-            })
-    })
+const tagMuseumRoleForProjects = (projects) => {
+    return apiClient.type('projects')
+      .get({ current_user_roles: 'museum' })
+      .then((museumProjects) => {
+        const museumProjIds = museumProjects.map(project => project.id)
+        projects.forEach(project => {
+          project.in_museum_mode = project.in_museum_mode || museumProjIds.includes(project.id)
+        })
+      })
 }
 
 const getWorkflowsForProjects = projects => {
