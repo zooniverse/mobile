@@ -20,11 +20,11 @@ describe('function > tagMuseumRoleForProjects', function() {
       .spyOn(apiClient, 'type')
       .mockImplementation(() => {
         return {
-          get: () => Promise.resolve([])
+          get: () => Promise.resolve([{ id: '1' }])
         }
       })
     let projects = [{ id: '1' }, { id: '2' }]
     await tagMuseumRoleForProjects(projects)
-    expect(projects[0].in_museum_mode).toBe(false)
+    expect(projects[1].in_museum_mode).toBe(false)
   })
 })
