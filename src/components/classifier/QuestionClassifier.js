@@ -205,7 +205,7 @@ class QuestionClassifier extends Component {
                                             <AnswerButton
                                                 selected={index === answerSelected}
                                                 inMuseumMode={this.props.project.in_museum_mode}
-                                                disabled={answerSelected !== -1 && index !== answerSelected}
+                                                deselected={answerSelected !== -1 && index !== answerSelected}
                                                 text={answer.label}
                                                 onPress={this.onOptionSelected(index)}
                                             />
