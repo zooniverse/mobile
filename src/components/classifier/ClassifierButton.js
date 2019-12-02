@@ -44,7 +44,7 @@ class AnswerButton extends ClassifierButton {
         this.textStyle = []
         this.textStyle.push(styles.whiteButtonText)
 
-        if (this.props.disabled) {
+        if (this.props.deselected) {
             this.buttonStyle.push(colorModes.disabledButtonStyleFor(this.props.inMuseumMode))
         } else if (this.props.selected) {
             this.buttonStyle.push(colorModes.selectedButtonStyleFor(this.props.inMuseumMode))
@@ -112,6 +112,7 @@ const styles = EStyleSheet.create({
 ClassifierButton.propTypes = {
     inMuseumMode: PropTypes.bool,
     selected: PropTypes.bool,
+    deselected: PropTypes.bool, //Styling ONLY; does not affect whether users can interact with button
     blurred: PropTypes.bool,
     disabled: PropTypes.any,
     style: PropTypes.any,
