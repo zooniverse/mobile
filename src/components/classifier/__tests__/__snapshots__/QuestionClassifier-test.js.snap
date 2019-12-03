@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<SwipeClassifier
+  classifierActions={
+    Object {
+      "setClassifierTestMode": [Function],
+      "startNewClassification": [Function],
+    }
+  }
+  isFetching={false}
+  navBarActions={
+    Object {
+      "setColorForPageToDefault": [Function],
+      "setTitleForPage": [Function],
+    }
+  }
+  project={
+    Object {
+      "display_name": "Awesome project",
+    }
+  }
+  saveAnnotation={[Function]}
+  saveClassification={[Function]}
+  seenThisSession={Array []}
+  setIsFetching={[Function]}
+  startNewClassification={[Function]}
+  subject={
+    Object {
+      "display": Object {
+        "src": "blah.jpg",
+      },
+      "id": "23432432",
+    }
+  }
+  subjectSizes={
+    Object {
+      "resizedHeight": 100,
+      "resizedWidth": 100,
+    }
+  }
+  task={
+    Object {
+      "answers": Array [
+        Object {
+          "label": "Yes",
+        },
+        Object {
+          "label": "No",
+        },
+      ],
+      "question": "What was that?",
+    }
+  }
+  workflow={
+    Object {
+      "configuration": Object {
+        "pan_and_zoom": true,
+      },
+      "first_task": "T0",
+      "tasks": Object {
+        "T0": Object {
+          "answers": Array [
+            Object {
+              "label": "Yes",
+            },
+            Object {
+              "label": "No",
+            },
+          ],
+          "question": "What was that?",
+        },
+      },
+    }
+  }
+  workflowID="1"
+/>
+`;
