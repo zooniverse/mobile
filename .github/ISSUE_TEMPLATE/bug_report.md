@@ -9,7 +9,7 @@ assignees: ''
 
 In order to fix an issue, we need to be able to reproduce it. To give us the best chance of reproducing your issue, please follow these steps:
 
-1. Please check that you currently have the latest mobile app version (2.6.1 as of July 2, 2019) installed. If not, please update.
+1. Please check that you currently have the latest mobile app version (2.6.9 as of Dec 3, 2019) installed. If not, please update.
 
 In your issue, please include:
 
