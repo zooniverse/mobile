@@ -218,7 +218,7 @@ class DrawingClassifier extends Component {
         const submitButton =
             <SubmitButton
                 inMuseumMode={this.props.project.in_museum_mode}
-                disabled={R.keys(this.props.shapes).length < tool.min}
+                disabled={R.keys(this.props.shapes).length < tool.min || !this.state.imageIsLoaded}
                 onPress={this.submitClassification}
                 style={[styles.submitButton, this.state.orientation === 'portrait' ? [] : styles.wideSubmit]}
                 text="Submit"
