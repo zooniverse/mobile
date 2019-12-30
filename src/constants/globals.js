@@ -12,7 +12,7 @@ export const GLOBALS = {
     'medicine': 61744,
     'nature': 61739,
     'physics': 61740,
-    'social-science': 61745,
+    'social science': 61745,
     'zooniverse-logo': 61729
   },
   //description: 'Help review projects to see if they are ready for launch',
