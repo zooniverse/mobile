@@ -72,11 +72,10 @@ class EditableRect extends Component {
     }
 
     renderCloseButton() {
-        const buttonRadius = 20;
+        const buttonRadius = 24;
         const {
             width, height, nativeWidth, x, y, displayToNativeRatioX, onCloseLayout, onDelete, color
         } = this.props
-
 
         const normalizedX = width > 0 ? x : x + width
         const shapeRightX = normalizedX + Math.abs(width)
@@ -88,7 +87,7 @@ class EditableRect extends Component {
         const normalizedY = height > 0 ? y : y + height
         const newY = newX === 0 || normalizedY < buttonRadius
             ? normalizedY
-            : normalizedY - buttonRadius
+            : normalizedY - buttonRadius / 2
 
         return (
             <G x={newX} y={newY}>
