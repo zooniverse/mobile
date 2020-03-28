@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-     drawingActions: bindActionCreators(drawingActions, dispatch)
+    drawingActions: bindActionCreators(drawingActions, dispatch)
 })
 
 class MarkableImage extends Component {
@@ -53,13 +53,13 @@ class MarkableImage extends Component {
         this.props.drawingActions.mutateShapeAtIndex(modifications, index)
     }
 
-    onImageLayout({nativeEvent}) {
+    onImageLayout({ nativeEvent }) {
         const { height: containerHeight, width: containerWidth } = nativeEvent.layout
         const { naturalHeight, naturalWidth } = this.props.subjectDimensions
-        const aspectRatio = Math.min(containerHeight/naturalHeight, containerWidth/naturalWidth)
+        const aspectRatio = Math.min(containerHeight / naturalHeight, containerWidth / naturalWidth)
         const clientHeight = naturalHeight * aspectRatio
         const clientWidth = naturalWidth * aspectRatio
-        
+
         if (this.props.onContainerLayout) {
             this.props.onContainerLayout({
                 height: clientHeight,
@@ -77,16 +77,17 @@ class MarkableImage extends Component {
     render() {
         const { naturalHeight, naturalWidth } = this.props.subjectDimensions
         const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
+
         return (
             <View style={styles.svgContainer}>
-                <ImageBackground 
+                <ImageBackground
                     onLayout={this.onImageLayout}
                     style={styles.svgOverlayContainer}
-                    source={{uri: pathPrefix + this.props.source}}
+                    source={{ uri: pathPrefix + this.props.source }}
                     resizeMode="contain"
                 >
                     {
-                        this.state.isImageLoaded ? 
+                        this.state.isImageLoaded ?
                             <SvgOverlay
                                 canDraw={this.props.canDraw}
                                 nativeWidth={naturalWidth}
@@ -103,7 +104,7 @@ class MarkableImage extends Component {
                                 onShapeModified={this.onShapeModified}
                                 onShapeIsOutOfBoundsUpdates={this.props.onShapeIsOutOfBoundsUpdates}
                             />
-                        :
+                            :
                             null
                     }
                 </ImageBackground>
