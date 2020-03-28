@@ -17,13 +17,13 @@ const INITIAL_SQUARE_SIDE = 2
 
 /**
  * This class sits over the image and has 3 different modes
- * 
+ *
  * Draw - The Svg layer responds to pan gestures and will draw shapes based on the users inputs.
  *        Please not there are two different SVGs that get drawn. The preview shapes and the actual shape.
  *        The preview shapes are just feedback for the shape the user will draw
- * 
+ *
  * Edit - The shapes drawn become editable. The user may move the shapes and change its size.
- * 
+ *
  * Delete - The shape becomes deletable.
  */
 class SvgOverlay extends Component {
@@ -39,17 +39,17 @@ class SvgOverlay extends Component {
             previewSquareWidth: INITIAL_SQUARE_SIDE,
             previewSquareHeight: INITIAL_SQUARE_SIDE,
             // These values are the ratios of the the images display sizes to the images native size
-            displayToNativeRatioX: props.nativeWidth/props.width,
-            displayToNativeRatioY: props.nativeHeight/props.height
+            displayToNativeRatioX: props.nativeWidth / props.width,
+            displayToNativeRatioY: props.nativeHeight / props.height
         }
-          
-          this.onShapeEdited = this.onShapeEdited.bind(this)
-          this.onShapeDeleted = this.onShapeDeleted.bind(this)
-          this.onShapeCreated = this.onShapeCreated.bind(this)
+
+        this.onShapeEdited = this.onShapeEdited.bind(this)
+        this.onShapeDeleted = this.onShapeDeleted.bind(this)
+        this.onShapeCreated = this.onShapeCreated.bind(this)
     }
 
     componentDidUpdate(prevProps) {
-        const sizeChange = 
+        const sizeChange =
             prevProps.width !== this.props.width ||
             prevProps.height !== this.props.height ||
             prevProps.nativeWidth !== this.props.nativeWidth ||
@@ -57,8 +57,8 @@ class SvgOverlay extends Component {
 
         if (sizeChange) {
             this.setState({
-                displayToNativeRatioX: this.props.nativeWidth/this.props.width,
-                displayToNativeRatioY: this.props.nativeHeight/this.props.height
+                displayToNativeRatioX: this.props.nativeWidth / this.props.width,
+                displayToNativeRatioY: this.props.nativeHeight / this.props.height
             })
         }
     }
@@ -76,15 +76,16 @@ class SvgOverlay extends Component {
     }
 
     render() {
-        const sizeStyle = {height: this.props.height, width: this.props.width}
+        const sizeStyle = { height: this.props.height, width: this.props.width }
         return (
             <View style={sizeStyle} >
                 <View style={[styles.absolute, sizeStyle]}>
-                    <ShapeEditorSvg 
+                    <ShapeEditorSvg
                         viewBox={`0 0 ${this.props.nativeWidth} ${this.props.nativeHeight}`}
                         height={this.props.height}
                         width={this.props.width}
                         shapes={this.props.shapes}
+                        nativeWidth={this.props.nativeWidth}
                         mode={this.props.mode}
                         onShapeEdited={this.onShapeEdited}
                         onShapeDeleted={this.onShapeDeleted}
@@ -100,10 +101,10 @@ class SvgOverlay extends Component {
         )
     }
 
-    onShapeEdited(shapeIndex, {dx, dy, dw, dh}) {
+    onShapeEdited(shapeIndex, { dx, dy, dw, dh }) {
         this.props.onShapeModified({
-            dx, 
-            dy, 
+            dx,
+            dy,
             dw,
             dh
         }, shapeIndex)
