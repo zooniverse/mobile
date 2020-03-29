@@ -77,17 +77,17 @@ class EditableRect extends Component {
             width, height, nativeWidth, x, y, displayToNativeRatioX, onCloseLayout, onDelete, color
         } = this.props
 
-        const normalizedX = width > 0 ? x : x + width
-        const shapeRightX = normalizedX + Math.abs(width)
+        const absoluteX = width > 0 ? x : x + width
+        const shapeRightX = absoluteX + Math.abs(width)
         const newX = shapeRightX > nativeWidth - buttonRadius
-            ? Math.max(normalizedX - buttonRadius, 0)
+            ? Math.max(absoluteX - buttonRadius, 0)
             : shapeRightX
 
 
-        const normalizedY = height > 0 ? y : y + height
-        const newY = newX === 0 || normalizedY < buttonRadius
-            ? normalizedY
-            : normalizedY - buttonRadius / 2
+        const absoluteY = height > 0 ? y : y + height
+        const newY = newX === 0 || absoluteY < buttonRadius
+            ? absoluteY
+            : absoluteY - buttonRadius / 2
 
         return (
             <G x={newX} y={newY}>
