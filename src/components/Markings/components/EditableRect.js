@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import Color from 'color';
 
 import CloseButtonSVG from './CloseButtonSVG'
+import { calculateDeleteButtonPosition } from '../../../utils/shapeUtils'
 
 export const RectCorners = {
     upperLeft: 'upperLeft',
@@ -72,25 +73,14 @@ class EditableRect extends Component {
     }
 
     renderCloseButton() {
-        const buttonRadius = 24;
         const {
             width, height, nativeWidth, x, y, displayToNativeRatioX, onCloseLayout, onDelete, color
         } = this.props
 
-        const absoluteX = width > 0 ? x : x + width
-        const shapeRightX = absoluteX + Math.abs(width)
-        const newX = shapeRightX > nativeWidth - buttonRadius
-            ? Math.max(absoluteX - buttonRadius, 0)
-            : shapeRightX
-
-
-        const absoluteY = height > 0 ? y : y + height
-        const newY = newX === 0 || absoluteY < buttonRadius
-            ? absoluteY
-            : absoluteY - buttonRadius / 2
+        const closePosition = calculateDeleteButtonPosition(x, y, width, height, nativeWidth, displayToNativeRatioX)
 
         return (
-            <G x={newX} y={newY}>
+            <G x={closePosition.x} y={closePosition.y}>
                 <CloseButtonSVG
                     displayToNativeRatio={displayToNativeRatioX}
                     onLayout={onCloseLayout}
@@ -126,6 +116,7 @@ class EditableRect extends Component {
                                 fill={this.props.color}
                                 r={16 * this.props.displayToNativeRatioX}
                             />
+
                             <Circle
                                 ref={ref => this.upperRightCircle = ref}
                                 onLayout={(event) => this.props.onCornerLayout(event, RectCorners.upperRight)}
