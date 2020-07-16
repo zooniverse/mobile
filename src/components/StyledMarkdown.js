@@ -1,10 +1,10 @@
 import React from 'react'
 import {
-    Dimensions,
-    Linking,
-    Platform,
-    WebView,
+  Dimensions,
+  Linking,
+  Platform,
 } from 'react-native'
+import { WebView } from 'react-native-webview';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import defaultHTML from '../utils/default-md-html'
 import PropTypes from 'prop-types';

@@ -2,8 +2,6 @@ import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-jest.mock('WebView', () => 'WebView')
-
 import StyledMarkdown from '../StyledMarkdown'
 
 it('renders correctly', () => {

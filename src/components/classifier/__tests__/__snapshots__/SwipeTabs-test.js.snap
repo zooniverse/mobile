@@ -5,7 +5,9 @@ exports[`renders a button if there is a field guide 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -39,7 +41,9 @@ exports[`renders a button if there is a field guide 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -75,7 +79,9 @@ exports[`renders a button if there is a field guide 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -116,7 +122,9 @@ exports[`renders correctly and with no button if no field guide 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -150,7 +158,9 @@ exports[`renders correctly and with no button if no field guide 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}

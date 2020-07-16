@@ -8,7 +8,7 @@ import {
     Rect
 } from 'react-native-svg'
 import R from 'ramda'
-import { BlurView } from 'react-native-blur';
+import { BlurView } from '@react-native-community/blur';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AlreadySeenBanner from '../classifier/AlreadySeenBanner'
 import DrawingToolView from './components/DrawingToolView';
@@ -54,7 +54,7 @@ class DrawingClassifierSubject extends Component {
             switch (type) {
                 case ('rect'):
                     shapeArray.push(
-                        <Rect 
+                        <Rect
                             key={index}
                             fill="transparent"
                             stroke={shape.color}
@@ -64,7 +64,7 @@ class DrawingClassifierSubject extends Component {
                     )
             }
         }
-        
+
         R.mapObjIndexed(convertObjectToComponent, this.props.shapes)
         return shapeArray
     }
@@ -107,10 +107,10 @@ class DrawingClassifierSubject extends Component {
                         canDraw={this.props.showDrawingButtons}
                         inMuseumMode={this.props.inMuseumMode}
                     />
-                </View> 
+                </View>
                 { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView() }
                 { !this.props.inMuseumMode && this.props.alreadySeen && this.props.imageIsLoaded && <AlreadySeenBanner /> }
-            </View>               
+            </View>
         )
     }
 }

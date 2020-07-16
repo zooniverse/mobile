@@ -314,7 +314,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
     <View />
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -373,7 +375,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -409,7 +413,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -445,7 +451,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -481,7 +489,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -851,7 +861,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
     <View />
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -910,7 +922,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -946,7 +960,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -982,7 +998,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1018,7 +1036,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1284,7 +1304,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
     <View />
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -1343,7 +1365,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1379,7 +1403,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1415,7 +1441,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1451,7 +1479,9 @@ This brief tutorial will teach you how to discover polygonal ridges on Mars. By 
       </View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}

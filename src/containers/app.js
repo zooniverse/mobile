@@ -3,9 +3,9 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   AppState,
-  NetInfo,
   Platform,
 } from 'react-native'
+import NetInfo from '@react-native-community/netinfo';
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'

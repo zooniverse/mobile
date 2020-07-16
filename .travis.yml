@@ -6,3 +6,5 @@ node_js:
 
 install:
   - npm install
+  - npm install react-native-vector-icons --save
+  - sed -i -- 's/class Icon extends PureComponent {/class Icon extends PureComponent {constructor(props) { super(props) }/g' node_modules/react-native-vector-icons/lib/create-icon-set.js
