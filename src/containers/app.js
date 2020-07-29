@@ -37,6 +37,12 @@ import SafeAreaContainer from './SafeAreaContainer'
 import { setPageShowing } from '../actions/navBar'
 import NavBar from '../components/NavBar';
 import PageKeys from '../constants/PageKeys'
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+    dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
+    enableNative: process.env.NODE_ENV === 'production' ? true : false,
+});
 
 const persistConfig = {
   key: 'root',

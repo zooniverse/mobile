@@ -65,7 +65,7 @@ export class ProjectDisciplines extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setNavbarSettingsForPage({
+      this.props.setNavbarSettingsForPage({
       centerType: 'avatar'
     }, PageKeys.ProjectDisciplines)
     if (this.shouldPromptForPermissions()) {
