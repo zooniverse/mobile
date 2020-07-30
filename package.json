@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "patch-package && sed -i -- 's/class Icon extends PureComponent {/class Icon extends > PureComponent {constructor(props) { super(props) }/g' node_modules/react-native-vector-icons/lib/create-icon-set.js; sed -i -- 's/class Icon extends PureComponent {/class Icon extends PureComponent {constructor(props) { super(props) }/g' node_modules/react-native-vector-icons/lib/create-icon-set.js; # see https://github.com/oblador/react-native-vector-icons/issues/1046#issuecomment-546112745",
+    "postinstall": "sed -i -- 's/class Icon extends PureComponent {/class Icon extends PureComponent {constructor(props) { super(props) }/g' node_modules/react-native-vector-icons/lib/create-icon-set.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android --appIdSuffix 'debug'",
     "ios": "react-native run-ios",
