@@ -2,10 +2,9 @@ sudo: false
 
 language: node_js
 node_js:
-  - "8.3.0"
+  - "8.5.0"
 
 install:
-  - npm install @sentry/cli
   - npm install
   - npm install react-native-vector-icons --save
   - sed -i -- 's/class Icon extends PureComponent {/class Icon extends PureComponent {constructor(props) { super(props) }/g' node_modules/react-native-vector-icons/lib/create-icon-set.js
