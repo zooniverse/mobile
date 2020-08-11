@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 
 class Workflow extends Component {
   render() {
-    return (
+      return (
       <TouchableOpacity
         style={styles.workflowRow}
         onPress={() => this.props.openMobileProject(this.props.workflow.id)}>
