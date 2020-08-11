@@ -50,3 +50,7 @@ Which should contain the keystore file name and alias. Talk to Will Granger (wil
     - The command `react-native run-android` will install the build, but fail in launching the app due to a bug with the `react-native` script with having a seperate `applicationId` for development builds.
 
 [![pullreminders](https://pullreminders.com/badge.svg)](https://pullreminders.com?ref=badge)
+
+## If you Work for The Zooniverse
+
+You may also want to set up error reporting from your local copy of the application to our reporting service, Sentry. [Here are instructions on how to do that!](https://github.com/zooniverse/mobile/wiki/Enabling-Sentry-for-your-Local-Builds)
