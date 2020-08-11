@@ -42,7 +42,8 @@ export function fetchProjects() {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
             dispatch(addProjectsRequest)
-            getAuthUser().then((userProfile) => {
+            getAuthUser()
+                .then((userProfile) => {
                 const userIsLoggedIn = userProfile !== null
                 let projectCalls = []
                 let allProjects = []
@@ -105,6 +106,8 @@ export function fetchProjects() {
                         dispatch(addProjectsFailure);
                         reject(error)
                     })
+            }).catch(() => {
+                // Stub out avatar rejection because it is optional for users to have avatars
             })
         })
     }
