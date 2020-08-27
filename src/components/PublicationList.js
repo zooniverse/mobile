@@ -43,12 +43,10 @@ export class PublicationList extends React.Component {
     super(props)
   }
 
-  componentWillMount() {
-    this.props.fetchPublications()
-  }
-
   componentDidMount() {
-    this.props.setNavbarSettingsForPage({
+      this.props.fetchPublications()
+
+      this.props.setNavbarSettingsForPage({
       title: 'Publications',
       showBack: true,
       centerType: 'title'

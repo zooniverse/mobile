@@ -40,12 +40,10 @@ class ZooWebView extends React.Component {
     this.state = { canGoBack: false }
   }
 
-  componentWillMount() {
-    this.props.setIsFetching(true)
-  }
-
   componentDidMount() {
-    this.props.navBarActions.setNavbarSettingsForPage({
+      this.props.setIsFetching(true)
+
+      this.props.navBarActions.setNavbarSettingsForPage({
       title: this.props.project.display_name,
       showBack: true,
       centerType: 'title'
