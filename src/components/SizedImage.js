@@ -17,7 +17,7 @@ class SizedImage extends React.Component {
      }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.animateImage()
   }
 
