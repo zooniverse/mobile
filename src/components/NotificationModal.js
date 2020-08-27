@@ -36,9 +36,9 @@ class NotificationModal extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) {
-      const notification = this.props.notificationPayload
+    static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState && prevState !== nextProps) {
+      const notification = prevState.notificationPayload
       if (Platform.OS === 'ios'){
         if (notification._alert !== undefined) {
           notificationTitle = notification._alert.title
