@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Dimensions} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+
 import {
     TouchableOpacity,
     View
@@ -27,7 +28,6 @@ import {
 } from '../classifier/ClassifierButton'
 import Separator from '../common/Separator'
 import DrawingModal from './DrawingModal'
-import NativeImage from '../../nativeModules/NativeImage'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
 import DrawingHeader from './components/DrawingHeader'
 
@@ -111,12 +111,16 @@ class DrawingClassifier extends Component {
         const {subject} = this.props
         if (prevProps.subject !== subject && subject) {
             this.props.imageActions.loadImageToCache(subject.displays[0].src).then(localImagePath => {
-                new NativeImage(localImagePath).getImageSize().then(({width, height}) => {
-                    this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
-                    this.setState({
-                        imageIsLoaded: true,
-                        localImagePath
-                    })
+                //Image dimensions have to be present, but are not used.
+                //Prior to this commit we were using an image resizing solution that broke on Android.
+                //Now the image automatically resizes to fit the available space on both iOS and Android.
+                height = 200
+                width = 200
+
+                this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
+                this.setState({
+                    imageIsLoaded: true,
+                    localImagePath
                 })
             })
         }
@@ -326,8 +330,7 @@ const styles = EStyleSheet.create({
     separator: {
         marginTop: 20
     },
-    fieldGuideContainer: {
-    },
+    fieldGuideContainer: {},
     fieldGuideButton: {
         height: 45
     },
