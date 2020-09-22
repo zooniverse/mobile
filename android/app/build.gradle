@@ -175,6 +175,8 @@ dependencies {
     implementation project(':@react-native-community_blur')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'com.facebook.fresco:animated-gif:2.0.0' //gif support
+
 
     // JSC from node_modules
     if (useIntlJsc) {
