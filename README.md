@@ -4,7 +4,7 @@ More detailed information on the [wiki](https://github.com/zooniverse/mobile/wik
 The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-native/) app that allows folks like you and me to contribute to astronomy, ecology, and anthropology research from their couch, bathtub, or bus stop (but don't swipe and drive, please).
 
 ## Setting Up for Local Development
-Setting up to work on a react-native app is a little tricky, and setting up to work on this one in particular is trickier. The guide below attempts to be comprehensive. If you run into any further issues while attempting to get set up, please reach out to either Will Granger (will@zooniverse.org) or Chelsea Troy (chelsea@zooniverse.org)
+Setting up to work on a react-native app is a little tricky, and setting up to work on this one in particular is trickier. The guide below attempts to be comprehensive. If you run into any further issues while attempting to get set up, please reach out to Chelsea Troy (chelsea@zooniverse.org)
 
 ### Preparing The React Native Framework
 #### Requirements:
