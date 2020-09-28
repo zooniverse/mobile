@@ -22,6 +22,12 @@ import theme from '../../theme'
 
 GoogleAnalytics.trackEvent('view', 'Project')
 
+const isComplete = (completenessString) => {
+    const completenessFloat = Number.parseFloat(completenessString)
+    const isComplete = !Number.isNaN(completenessFloat) && completenessFloat >= 1
+    return isComplete
+}
+
 const mapStateToProps = (state, ownProps) => {
     const { selectedProjectTag } = ownProps;
     const inPreviewMode = selectedProjectTag === 'preview'
@@ -38,7 +44,18 @@ const mapStateToProps = (state, ownProps) => {
         projectList = state.projects.betaProjectList
     }
     else {
-        projectList = state.projects.projectList.filter((project) => R.contains(selectedProjectTag, project.tags))
+        projectList = state.projects.projectList
+            .filter((project) => R.contains(selectedProjectTag, project.tags))
+            .sort(function(firstProject, secondProject) {
+                if (!isComplete(firstProject.completeness) && isComplete(secondProject.completeness)) {
+                    return -1;
+                }
+                if (!isComplete(secondProject.completeness) && isComplete(firstProject.completeness)) {
+                    return 1;
+                }
+                return 0;
+                }
+            )
     }
 
     // Seperate out the native workflows and non-native workflows    
