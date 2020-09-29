@@ -18,15 +18,11 @@ import { GLOBALS } from '../../constants/globals'
 import { extractNonSwipeEnabledProjects, extractSwipeEnabledProjects } from '../../utils/projectUtils'
 import PageKeys from '../../constants/PageKeys'
 
+import * as projectDisplay from '../../displayOptions/projectDisplay'
+
 import theme from '../../theme'
 
 GoogleAnalytics.trackEvent('view', 'Project')
-
-const isComplete = (completenessString) => {
-    const completenessFloat = Number.parseFloat(completenessString)
-    const isComplete = !Number.isNaN(completenessFloat) && completenessFloat >= 1
-    return isComplete
-}
 
 const mapStateToProps = (state, ownProps) => {
     const { selectedProjectTag } = ownProps;
@@ -44,18 +40,9 @@ const mapStateToProps = (state, ownProps) => {
         projectList = state.projects.betaProjectList
     }
     else {
-        projectList = state.projects.projectList
-            .filter((project) => R.contains(selectedProjectTag, project.tags))
-            .sort(function(firstProject, secondProject) {
-                if (!isComplete(firstProject.completeness) && isComplete(secondProject.completeness)) {
-                    return -1;
-                }
-                if (!isComplete(secondProject.completeness) && isComplete(firstProject.completeness)) {
-                    return 1;
-                }
-                return 0;
-                }
-            )
+        projectList = projectDisplay.sortUnfinishedFirst(
+            state.projects.projectList
+            .filter((project) => R.contains(selectedProjectTag, project.tags)))
     }
 
     // Seperate out the native workflows and non-native workflows    
