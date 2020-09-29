@@ -1,6 +1,6 @@
 
 
-const isComplete = (completenessString) => {
+export function isComplete(completenessString) {
     const completenessFloat = Number.parseFloat(completenessString)
     const isComplete = !Number.isNaN(completenessFloat) && completenessFloat >= 1
     return isComplete

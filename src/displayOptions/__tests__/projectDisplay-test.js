@@ -1,4 +1,9 @@
-import {sortUnfinishedFirst} from '../projectDisplay'
+import {isComplete, sortUnfinishedFirst} from '../projectDisplay'
+
+it('identifies which projects are complete', () => {
+    expect(isComplete("0.01")).toEqual(false)
+    expect(isComplete("1.00")).toEqual(true)
+})
 
 it('sorts the projects so incomplete ones appear before complete ones', () => {
     const projects = [

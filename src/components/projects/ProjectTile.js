@@ -21,6 +21,8 @@ import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
 import theme from '../../theme'
 
+import * as projectDisplay from '../../displayOptions/projectDisplay'
+
 const horizontalPadding = 15
 
 const mapStateToProps = (state, ownProps) => ({
@@ -60,7 +62,7 @@ class ProjectTile extends Component {
                 {this._overlayBanner()}
             </View>
         const workflowsView = R.addIndex(R.map)((workflow, index) => {
-            const shouldShowBanner = isComplete(workflow.completeness) && !this.props.inPreviewMode
+            const shouldShowBanner = projectDisplay.isComplete(workflow.completeness) && !this.props.inPreviewMode
             return (
                 <View key={index}>
                     <Separator />
@@ -127,11 +129,11 @@ class ProjectTile extends Component {
     render() {
         let shouldDisplayIsOutOfData = false
         if (!this.props.containsNativeWorkflows) {
-            const projectIsComplete = isComplete(this.props.project.completeness)
+            const projectIsComplete = projectDisplay.isComplete(this.props.project.completeness)
             shouldDisplayIsOutOfData = projectIsComplete
         }
         else if (!this.props.containsMultipleNativeWorkflows) {
-            const workflowIsComplete = isComplete(this.props.project.workflows[0].completeness)
+            const workflowIsComplete = projectDisplay.isComplete(this.props.project.workflows[0].completeness)
             shouldDisplayIsOutOfData = workflowIsComplete
         }
 
@@ -180,12 +182,6 @@ class ProjectTile extends Component {
             </Animated.View>
         );
     }
-}
-
-const isComplete = (completenessString) => {
-    const completenessFloat = Number.parseFloat(completenessString)
-    const isComplete = !Number.isNaN(completenessFloat) && completenessFloat >= 1
-    return isComplete
 }
 
 const PhoneIcon = () => {
