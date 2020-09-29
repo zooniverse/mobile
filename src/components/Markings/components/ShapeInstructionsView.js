@@ -8,7 +8,7 @@ import DeviceInfo from 'react-native-device-info'
 
 import FontedText from '../../common/FontedText'
 
-import * as colorModes from '../../../actions/colorModes'
+import * as colorModes from '../../../displayOptions/colorModes'
 
 const ShapeInstructionsView = (props) => {
     const warningStyle = props.warnForRequirements ? styles.warningText : {}

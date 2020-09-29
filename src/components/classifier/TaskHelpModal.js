@@ -9,7 +9,7 @@ import SizedMarkdown from '../common/SizedMarkdown'
 import Button from '../Button'
 import PropTypes from 'prop-types';
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 
 export class TaskHelpModal extends Component {

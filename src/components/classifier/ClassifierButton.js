@@ -8,7 +8,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info'
 
 import FontedText from '../common/FontedText'
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 class ClassifierButton extends Component {
     constructor(props) {

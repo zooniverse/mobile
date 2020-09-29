@@ -17,7 +17,7 @@ import AlreadySeenBanner from './AlreadySeenBanner'
 import SubjectOptionsBar from './SubjectOptionsBar'
 import SwipeCardSubjectsView from './SwipeCardSubjectsView';
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const mapDispatchToProps = (dispatch) => ({
   imageActions: bindActionCreators(imageActions, dispatch)

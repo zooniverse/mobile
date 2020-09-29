@@ -8,7 +8,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 import StyledText from '../StyledText'
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const FieldGuideItemRow = (props) => {
     const itemIcon = props.icons[props.item.icon]

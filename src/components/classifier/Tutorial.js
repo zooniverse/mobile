@@ -10,7 +10,7 @@ import Button from '../Button'
 import TutorialStep from './TutorialStep'
 import FontedText from '../common/FontedText';
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const topPadding = (Platform.OS === 'ios') ? 10 : 0
 

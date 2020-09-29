@@ -10,7 +10,7 @@ import StyledText from '../StyledText'
 import SizedImage from '../SizedImage'
 import Button from '../Button'
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const ITEM_ICON_RADIUS = 50
 

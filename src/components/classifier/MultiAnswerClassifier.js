@@ -27,7 +27,7 @@ import {
 import FullScreenImage from '../FullScreenImage'
 import TapableSubject from './TapableSubject';
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 class MultiAnswerClassifier extends Component {
 

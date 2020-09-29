@@ -4,7 +4,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 
-import * as colorModes from '../../../actions/colorModes'
+import * as colorModes from '../../../displayOptions/colorModes'
 
 const DrawingHeader = (props) => {
     return props.horizontal ? 

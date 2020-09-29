@@ -7,7 +7,7 @@ import Markdown from 'react-native-simple-markdown'
 import PropTypes from 'prop-types'
 
 import { markdownImageRule } from '../../utils/markdownUtils'
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 /**
  * Component that wraps the markdown library we use.

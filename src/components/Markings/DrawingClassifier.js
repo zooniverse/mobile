@@ -31,7 +31,7 @@ import DrawingModal from './DrawingModal'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
 import DrawingHeader from './components/DrawingHeader'
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const mapStateToProps = (state, ownProps) => {
     const subjectDimensions = state.classifier.subject ? state.classifier.subjectDimensions[state.classifier.subject.id] : null
