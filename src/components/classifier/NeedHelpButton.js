@@ -6,7 +6,7 @@ import DeviceInfo from 'react-native-device-info'
 import FontedText from '../common/FontedText'
 import PropTypes from 'prop-types'
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 export class NeedHelpButton extends Component {
 

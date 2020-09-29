@@ -23,7 +23,7 @@ import {getTaskFromWorkflow, getAnswersFromWorkflow} from '../../utils/workflow-
 import {markdownContainsImage} from '../../utils/markdownUtils'
 import ClassifierContainer from './ClassifierContainer'
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const mapStateToProps = (state, ownProps) => {
     return {

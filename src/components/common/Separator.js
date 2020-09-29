@@ -5,7 +5,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const Separator = ({style, color, inMuseumMode}) => {
     let separatorStyle = [styles.defaultStyle, colorModes.separatorColorFor(inMuseumMode)]

@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
 import {addIndex, isEmpty, map} from 'ramda'
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const MAX_DEFAULT_HEIGHT = Dimensions.get('window').height * .6
 const MIN_HEIGHT = 33

@@ -12,7 +12,7 @@ import DeviceInfo from 'react-native-device-info'
 
 import FontedText from './common/FontedText';
 
-import * as colorModes from '../actions/colorModes'
+import * as colorModes from '../displayOptions/colorModes'
 
 const mapStateToProps = (state) => ({
   device: state.app.device

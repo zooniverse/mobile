@@ -10,7 +10,7 @@ import FontedText from '../../common/FontedText'
 import Separator from '../../common/Separator'
 import ShapeInstructionsView from './ShapeInstructionsView'
 
-import * as colorModes from '../../../actions/colorModes'
+import * as colorModes from '../../../displayOptions/colorModes'
 
 const InstructionView = (props) => {
     return (

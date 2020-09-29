@@ -9,7 +9,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info';
 
-import * as colorModes from '../../actions/colorModes'
+import * as colorModes from '../../displayOptions/colorModes'
 
 const CircleIconButton = ({ style, activated, type, onPress, disabled, radius, inMuseumMode }) => {
     const circleStyle = {
