@@ -29,7 +29,9 @@ GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
 
 const mapStateToProps = (state) => {
-  const nativePreviewProjects = state.projects.previewProjectList.filter((project) => R.any((workflow) => workflow.mobile_verified)(project.workflows))
+  const nativePreviewProjects = state.projects.previewProjectList.filter(
+      (project) => R.any((workflow) => workflow.mobile_verified)(project.workflows)
+  )
   const hasPreviewProjects = !R.isEmpty(nativePreviewProjects)
   const hasBetaProjects = !R.isEmpty(state.projects.betaProjectList.count)
   return {
@@ -111,7 +113,7 @@ export class ProjectDisciplines extends React.Component {
 
   _renderItem({item}) {
     const { faIcon, value, label, color, description } = item
-    return (
+      return (
       <Discipline
         faIcon={faIcon}
         icon={value}
@@ -154,10 +156,11 @@ export class ProjectDisciplines extends React.Component {
 
     const disciplineInProjectList = (discipline) => {
       const {user, hasPreviewProjects, hasRecentProjects, hasBetaProjects} = this.props
-      const isForLoggerInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects ).includes(discipline.value)
+      const isForLoggedInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects ).includes(discipline.value)
       const isTagged = this.props.projectList.find((project) => project.tags.includes(discipline.value)) !== undefined
       const isBeta = hasBetaProjects && discipline.value === 'beta'
-      return isForLoggerInUser || isTagged || isBeta
+      const isForAllProjects = discipline.value === 'all projects'
+      return isForLoggedInUser || isTagged || isBeta || isForAllProjects
     }
     const disciplineList = this.props.isSuccess ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES) : []
     const listView =
