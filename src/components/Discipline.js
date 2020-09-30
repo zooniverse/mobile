@@ -80,7 +80,9 @@ const styles = EStyleSheet.create({
     height: 90,
     marginHorizontal: widths.containerHorizontalMargin,
     marginTop: 10,
-    marginBottom: 0
+    marginBottom: 0,
+    borderRadius:20,
+
   },
   title: {
     color: '$textColor',
