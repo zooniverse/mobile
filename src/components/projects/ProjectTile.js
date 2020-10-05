@@ -127,15 +127,12 @@ class ProjectTile extends Component {
     }
 
     render() {
-        let shouldDisplayIsOutOfData = false
-        if (!this.props.containsNativeWorkflows) {
-            const projectIsComplete = projectDisplay.isComplete(this.props.project.completeness)
-            shouldDisplayIsOutOfData = projectIsComplete
-        }
-        else if (!this.props.containsMultipleNativeWorkflows) {
-            const workflowIsComplete = projectDisplay.isComplete(this.props.project.workflows[0].completeness)
-            shouldDisplayIsOutOfData = workflowIsComplete
-        }
+        shouldDisplayIsOutOfData = projectDisplay.mobileWorkflowsCompleteFor(
+            this.props.project,
+            this.props.containsNativeWorkflows,
+            this.props.containsMultipleNativeWorkflows
+        )
+        console.log(this.props.project.display_name + " workflows all complete: " + shouldDisplayIsOutOfData.toString())
 
         const avatarUri = R.prop('avatar_src', this.props.project);
         const avatarSource = avatarUri !== undefined ? { uri: avatarUri } : require('../../../images/teal-wallpaper.png');

@@ -102,12 +102,12 @@ class ProjectList extends Component {
     }
 
     renderItem({item}) {
-        console.log(item.display_name)
-        console.log(item.completeness)
-
         switch (item.displayType) {
             case 'project': 
-                return <ProjectTile project={item} inPreviewMode={this.props.inPreviewMode} inBetaMode={this.props.inBetaMode}/>
+                return <ProjectTile
+                    project={item}
+                    inPreviewMode={this.props.inPreviewMode}
+                    inBetaMode={this.props.inBetaMode}/>
             case 'spacer':
                 return <View style={styles.spacer} />
             case 'header':
