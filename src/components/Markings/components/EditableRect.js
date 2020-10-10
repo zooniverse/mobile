@@ -7,9 +7,6 @@ import {
 import PropTypes from 'prop-types'
 import Color from 'color';
 
-import CloseButtonSVG from './CloseButtonSVG'
-import { calculateDeleteButtonPosition } from '../../../utils/shapeUtils'
-
 export const RectCorners = {
     upperLeft: 'upperLeft',
     upperRight: 'upperRight',
@@ -72,22 +69,49 @@ class EditableRect extends Component {
         return newDimensions
     }
 
-    renderCloseButton() {
+    renderCorners() {
         const {
-            width, height, nativeWidth, x, y, displayToNativeRatioX, onCloseLayout, onDelete, color
+            width, height, x, y, displayToNativeRatioX, onCornerLayout, isDeletable, color
         } = this.props
 
-        const closePosition = calculateDeleteButtonPosition(x, y, width, height, nativeWidth, displayToNativeRatioX)
+        const cornerColor = isDeletable ? 'red' : color
 
         return (
-            <G x={closePosition.x} y={closePosition.y}>
-                <CloseButtonSVG
-                    displayToNativeRatio={displayToNativeRatioX}
-                    onLayout={onCloseLayout}
-                    color={color}
-                    onPress={onDelete}
+            <G>
+                <Circle
+                    ref={ref => this.upperLeftCircle = ref}
+                    onLayout={(event) => onCornerLayout(event, RectCorners.upperLeft)}
+                    cx={x}
+                    cy={y}
+                    fill={cornerColor}
+                    r={16 * displayToNativeRatioX}
                 />
-            </G>
+
+                <Circle
+                    ref={ref => this.upperRightCircle = ref}
+                    onLayout={(event) => onCornerLayout(event, RectCorners.upperRight)}
+                    cx={x + width}
+                    cy={y}
+                    fill={cornerColor}
+                    r={16 * displayToNativeRatioX}
+                />
+                <Circle
+                    ref={ref => this.bottomLeftCircle = ref}
+                    onLayout={(event) => onCornerLayout(event, RectCorners.bottomLeft)}
+                    cx={x}
+                    cy={height + y}
+                    fill={cornerColor}
+                    r={16 * displayToNativeRatioX}
+                />
+                <Circle
+                    ref={ref => this.bottomRightCircle = ref}
+                    onLayout={(event) => onCornerLayout(event, RectCorners.bottomRight)}
+                    cx={width + x}
+                    cy={height + y}
+                    fill={cornerColor}
+                    r={16 * displayToNativeRatioX}
+                />
+            </G> : null
         )
     }
 
@@ -101,51 +125,12 @@ class EditableRect extends Component {
                     y={this.props.y}
                     width={this.props.width}
                     height={this.props.height}
-                    stroke={this.props.color}
+                    stroke={this.props.isDeletable ? 'red' : this.props.color}
                     strokeWidth={4 * this.props.displayToNativeRatioX}
                     fill={this.props.blurred ? Color(this.props.color).alpha(0.3).toString() : 'transparent'}
                 />
                 {
-                    this.props.showCorners ?
-                        <G>
-                            <Circle
-                                ref={ref => this.upperLeftCircle = ref}
-                                onLayout={(event) => this.props.onCornerLayout(event, RectCorners.upperLeft)}
-                                cx={this.props.x}
-                                cy={this.props.y}
-                                fill={this.props.color}
-                                r={16 * this.props.displayToNativeRatioX}
-                            />
-
-                            <Circle
-                                ref={ref => this.upperRightCircle = ref}
-                                onLayout={(event) => this.props.onCornerLayout(event, RectCorners.upperRight)}
-                                cx={this.props.x + this.props.width}
-                                cy={this.props.y}
-                                fill={this.props.color}
-                                r={16 * this.props.displayToNativeRatioX}
-                            />
-                            <Circle
-                                ref={ref => this.bottomLeftCircle = ref}
-                                onLayout={(event) => this.props.onCornerLayout(event, RectCorners.bottomLeft)}
-                                cx={this.props.x}
-                                cy={this.props.height + this.props.y}
-                                fill={this.props.color}
-                                r={16 * this.props.displayToNativeRatioX}
-                            />
-                            <Circle
-                                ref={ref => this.bottomRightCircle = ref}
-                                onLayout={(event) => this.props.onCornerLayout(event, RectCorners.bottomRight)}
-                                cx={this.props.width + this.props.x}
-                                cy={this.props.height + this.props.y}
-                                fill={this.props.color}
-                                r={16 * this.props.displayToNativeRatioX}
-                            />
-                        </G> : null
-                }
-
-                {
-                    this.props.isDeletable && this.renderCloseButton(this.props)
+                    (this.props.showCorners || this.props.isDeletable) && this.renderCorners(this.props)
                 }
             </G>
         )

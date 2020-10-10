@@ -11,28 +11,6 @@ export const drawingTouchState = {
     bottomRight: true
 }
 
-export const calculateDeleteButtonPosition = (
-    x, y, width, height, nativeWidth, displayToNativeRatioX
-) => {
-    const buttonRadius = 26 * displayToNativeRatioX;
-
-    const absoluteX = width > 0 ? x : x + width
-    const shapeRightX = absoluteX + Math.abs(width)
-    const newX = shapeRightX > nativeWidth - buttonRadius
-        ? Math.max(absoluteX - buttonRadius, 0)
-        : shapeRightX
-
-
-    const absoluteY = height > 0 ? y : y + height
-    const newY = newX === 0 || absoluteY < buttonRadius
-        ? absoluteY
-        : absoluteY - buttonRadius / 2
-
-    return { x: newX, y: newY }
-}
-
-
-
 /**
  * This function receives and x,y coordinate and determines if
  * the coordinate is within the bounds of the shape.

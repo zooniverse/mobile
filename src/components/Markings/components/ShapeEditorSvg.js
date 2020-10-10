@@ -13,7 +13,6 @@ import EditableRect from './EditableRect'
 import {
     analyzeCoordinateWithShape,
     calculateShapeChanges,
-    isCoordinateWithinSquare,
     isShapeOutOfBounds,
     drawingTouchState
 } from '../../../utils/shapeUtils'
@@ -67,24 +66,30 @@ class ShapeEditorSvg extends Component {
             previewShapeDimensions: this.previewShapeInitialDimensions()
         }
 
-        this.erasePanResponder = PanResponder.create({
+        let erasePanResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => this.props.mode === 'erase',
             onStartShouldSetPanResponderCapture: () => this.props.mode === 'erase',
             onMoveShouldSetPanResponder: () => this.props.mode === 'erase',
             onMoveShouldSetPanResponderCapture: () => this.props.mode === 'erase',
             onPanResponderGrant: (evt) => {
                 const { locationX, locationY } = evt.nativeEvent
-                let keyToDelete = null
-                R.forEachObjIndexed((closeShape, key) => {
-                    if (isCoordinateWithinSquare(locationX, locationY, closeShape)) {
-                        keyToDelete = key
-                    }
-                }, this.closeLocations)
-                this.props.onShapeDeleted(keyToDelete)
-            }
-        })
 
-        this.editPanResponder = PanResponder.create({
+                // Determine if the user is touching a shape and where in the shape they are touching
+                const analyzedLocations = R.mapObjIndexed((shape, key) => {
+                    return analyzeCoordinateWithShape(locationX, locationY, shape, this.cornerLocations[key])
+                }, this.shapeLocations)
+                const allShapesTouched = R.pickBy((analysis) => analysis.withinSquare, analyzedLocations)
+
+                // If a shape is being touched, remove it
+                if (R.keys(allShapesTouched).length > 0) {
+                    const touchedShapeIndex = R.keys(allShapesTouched)[0]
+                    this.props.onShapeDeleted(touchedShapeIndex)
+                }
+            }
+
+        });
+
+        let editPanResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => this.props.mode === 'draw',
             onStartShouldSetPanResponderCapture: () => this.props.mode === 'draw',
             onMoveShouldSetPanResponder: () => this.props.mode === 'draw',
@@ -198,6 +203,9 @@ class ShapeEditorSvg extends Component {
             },
             onShouldBlockNativeResponder: () => false
         });
+
+        this.erasePanResponder = erasePanResponder;
+        this.editPanResponder = editPanResponder;
     }
 
     componentDidUpdate(prevProps) {
