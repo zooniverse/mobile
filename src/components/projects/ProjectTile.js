@@ -21,6 +21,8 @@ import Separator from '../common/Separator'
 import PopupMessage from './PopupMessage'
 import theme from '../../theme'
 
+import * as projectDisplay from '../../displayOptions/projectDisplay'
+
 const horizontalPadding = 15
 
 const mapStateToProps = (state, ownProps) => ({
@@ -60,7 +62,7 @@ class ProjectTile extends Component {
                 {this._overlayBanner()}
             </View>
         const workflowsView = R.addIndex(R.map)((workflow, index) => {
-            const shouldShowBanner = isComplete(workflow.completeness) && !this.props.inPreviewMode
+            const shouldShowBanner = projectDisplay.isComplete(workflow.completeness) && !this.props.inPreviewMode
             return (
                 <View key={index}>
                     <Separator />
@@ -125,15 +127,12 @@ class ProjectTile extends Component {
     }
 
     render() {
-        let shouldDisplayIsOutOfData = false
-        if (!this.props.containsNativeWorkflows) {
-            const projectIsComplete = isComplete(this.props.project.completeness)
-            shouldDisplayIsOutOfData = projectIsComplete
-        }
-        else if (!this.props.containsMultipleNativeWorkflows) {
-            const workflowIsComplete = isComplete(this.props.project.workflows[0].completeness)
-            shouldDisplayIsOutOfData = workflowIsComplete
-        }
+        shouldDisplayIsOutOfData = projectDisplay.mobileWorkflowsCompleteFor(
+            this.props.project,
+            this.props.containsNativeWorkflows,
+            this.props.containsMultipleNativeWorkflows
+        )
+        console.log(this.props.project.display_name + " workflows all complete: " + shouldDisplayIsOutOfData.toString())
 
         const avatarUri = R.prop('avatar_src', this.props.project);
         const avatarSource = avatarUri !== undefined ? { uri: avatarUri } : require('../../../images/teal-wallpaper.png');
@@ -180,12 +179,6 @@ class ProjectTile extends Component {
             </Animated.View>
         );
     }
-}
-
-const isComplete = (completenessString) => {
-    const completenessFloat = Number.parseFloat(completenessString)
-    const isComplete = !Number.isNaN(completenessFloat) && completenessFloat >= 1
-    return isComplete
 }
 
 const PhoneIcon = () => {
@@ -239,7 +232,7 @@ const styles = EStyleSheet.create({
         top: 15, 
     },
     bannerContainer: {
-        backgroundColor: '$headerColor',
+        backgroundColor: '$zooniverseTeal',
         shadowColor: 'black',
         shadowOffset: {width: 2, height: 2},
         shadowOpacity: .5,

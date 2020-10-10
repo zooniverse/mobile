@@ -5,7 +5,9 @@ exports[`renders a button if there is a field guide 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -14,6 +16,7 @@ exports[`renders a button if there is a field guide 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "rgba(0, 151, 157, 1)",
           "opacity": 1,
         }
       }
@@ -38,7 +41,9 @@ exports[`renders a button if there is a field guide 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -47,6 +52,7 @@ exports[`renders a button if there is a field guide 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "white",
           "opacity": 1,
         }
       }
@@ -59,7 +65,11 @@ exports[`renders a button if there is a field guide 1`] = `
             },
             Array [
               undefined,
-              Array [],
+              Array [
+                Object {
+                  "color": "black",
+                },
+              ],
             ],
           ]
         }
@@ -69,7 +79,9 @@ exports[`renders a button if there is a field guide 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -78,6 +90,7 @@ exports[`renders a button if there is a field guide 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "rgba(0, 151, 157, 1)",
           "opacity": 1,
         }
       }
@@ -109,7 +122,9 @@ exports[`renders correctly and with no button if no field guide 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -118,6 +133,7 @@ exports[`renders correctly and with no button if no field guide 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "rgba(0, 151, 157, 1)",
           "opacity": 1,
         }
       }
@@ -142,7 +158,9 @@ exports[`renders correctly and with no button if no field guide 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={false}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -151,6 +169,7 @@ exports[`renders correctly and with no button if no field guide 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "rgba(0, 151, 157, 1)",
           "opacity": 1,
         }
       }

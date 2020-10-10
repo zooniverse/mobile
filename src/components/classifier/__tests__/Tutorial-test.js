@@ -3,7 +3,6 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { Tutorial } from '../Tutorial'
 
-jest.mock('WebView', () => 'WebView')
 jest.mock('../../SizedImage', () => 'SizedImage');
 
 const tutorial = {

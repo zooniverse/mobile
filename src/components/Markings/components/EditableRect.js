@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import Color from 'color';
 
 import CloseButtonSVG from './CloseButtonSVG'
+import { calculateDeleteButtonPosition } from '../../../utils/shapeUtils'
 
 export const RectCorners = {
     upperLeft: 'upperLeft',
@@ -21,15 +22,15 @@ class EditableRect extends Component {
     /**
      * Because Svgs don't plug in to react-native's animation engine,
      * we have to update their props natively.
-     * 
+     *
      * This function handles updating the props of the svgs of this component by
      * taking an object of deltas
-     * 
+     *
      * @param {An object that contains deltas to be applied to the shape} deltas
      */
-    update({dx, dy, dw, dh}) {        
+    update({ dx, dy, dw, dh }) {
         const newWidth = this.props.width + dw < 0.1 ? this.props.width + dw + 1 : this.props.width + dw
-        const newHeight = this.props.height + dh < 0.1 ? this.props.height + dh + 1: this.props.height + dh
+        const newHeight = this.props.height + dh < 0.1 ? this.props.height + dh + 1 : this.props.height + dh
         const newX = this.props.x + dx < 0.1 ? this.props.x + dx + 1 : this.props.x + dx
         const newY = this.props.y + dy < 0.1 ? this.props.y + dy + 1 : this.props.y + dy
 
@@ -49,7 +50,7 @@ class EditableRect extends Component {
             && this.upperRightCircle
             && this.bottomRightCircle
             && this.bottomLeftCircle
-            ) {
+        ) {
             this.upperLeftCircle.setNativeProps({
                 cx: `${newX}`,
                 cy: `${newY}`,
@@ -71,6 +72,25 @@ class EditableRect extends Component {
         return newDimensions
     }
 
+    renderCloseButton() {
+        const {
+            width, height, nativeWidth, x, y, displayToNativeRatioX, onCloseLayout, onDelete, color
+        } = this.props
+
+        const closePosition = calculateDeleteButtonPosition(x, y, width, height, nativeWidth, displayToNativeRatioX)
+
+        return (
+            <G x={closePosition.x} y={closePosition.y}>
+                <CloseButtonSVG
+                    displayToNativeRatio={displayToNativeRatioX}
+                    onLayout={onCloseLayout}
+                    color={color}
+                    onPress={onDelete}
+                />
+            </G>
+        )
+    }
+
     render() {
         return (
             <G>
@@ -86,7 +106,7 @@ class EditableRect extends Component {
                     fill={this.props.blurred ? Color(this.props.color).alpha(0.3).toString() : 'transparent'}
                 />
                 {
-                    this.props.showCorners ? 
+                    this.props.showCorners ?
                         <G>
                             <Circle
                                 ref={ref => this.upperLeftCircle = ref}
@@ -96,6 +116,7 @@ class EditableRect extends Component {
                                 fill={this.props.color}
                                 r={16 * this.props.displayToNativeRatioX}
                             />
+
                             <Circle
                                 ref={ref => this.upperRightCircle = ref}
                                 onLayout={(event) => this.props.onCornerLayout(event, RectCorners.upperRight)}
@@ -122,22 +143,9 @@ class EditableRect extends Component {
                             />
                         </G> : null
                 }
+
                 {
-                    
-                    this.props.isDeletable ?
-                        <G
-                            x={this.props.width > 0 ? this.props.width + this.props.x : this.props.x}
-                            y={(this.props.height > 0 ? this.props.y : this.props.y - Math.abs(this.props.height)) - (15 * this.props.displayToNativeRatioY)}
-                        >
-                            <CloseButtonSVG
-                                displayToNativeRatio={this.props.displayToNativeRatioX}
-                                onLayout={this.props.onCloseLayout}
-                                color={this.props.color}
-                                onPress={this.props.onDelete}
-                            />
-                        </G>
-                    :
-                        null
+                    this.props.isDeletable && this.renderCloseButton(this.props)
                 }
             </G>
         )
@@ -150,6 +158,7 @@ EditableRect.propTypes = {
     displayToNativeRatioY: PropTypes.number,
     x: PropTypes.number,
     y: PropTypes.number,
+    nativeWidth: PropTypes.number.isRequired,
     width: PropTypes.number,
     height: PropTypes.number,
     color: PropTypes.string,

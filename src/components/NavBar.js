@@ -15,16 +15,23 @@ import UserAvatar from './UserAvatar'
 import CircleRibbon from './CircleRibbon'
 import FontedText from './common/FontedText'
 
+import theme from '../theme'
+
 const mapStateToProps = (state) => {
   const { pageShowing, pageSettings } = state.navBar
   const navbarSettings = pageSettings[pageShowing]
+
+  if ( ! navbarSettings ) {
+    return {user: state.user,}
+  }
+
   return {
     user: state.user,
-    title: navbarSettings ? navbarSettings.title : '',
-    showBack: navbarSettings ? navbarSettings.showBack : false,
-    hambugerMenuShowing: navbarSettings ? navbarSettings.hambugerMenuShowing : false,
-    isPreview: navbarSettings ? navbarSettings.isPreview : false,
-    centerType: navbarSettings ? navbarSettings.centerType : 'title'
+    title: navbarSettings.title,
+    showBack: navbarSettings.showBack,
+    hamburgerMenuShowing: navbarSettings.hamburgerMenuShowing,
+    centerType: navbarSettings.centerType,
+    backgroundColor: navbarSettings.backgroundColor,
   }
 }
 
@@ -105,10 +112,10 @@ export class NavBar extends Component {
 
     return (
         <View style={[styles.navBarContainer]}>
-          <View style={[styles.navBar, selectBackgroundStyle(this.props.isPreview)]}>
+          <View style={[styles.navBar, { backgroundColor: this.props.backgroundColor }]}>
             <LeftContainer isActive={this.props.showBack} />
             <CenterContainer />
-            <RightContainer isActive={this.props.hambugerMenuShowing} />
+            <RightContainer isActive={this.props.hamburgerMenuShowing} />
           </View>
           <View>
             { this.props.centerType === 'avatar' ? avatar : null }
@@ -121,17 +128,7 @@ export class NavBar extends Component {
 const navBarHeight = 62
 const navBarPadding = 24
 
-const selectBackgroundStyle = (isPreview) => {
-  return isPreview ? styles.previewBackgroundColor : styles.defaultBackgroundColor
-}
-
 const styles = EStyleSheet.create({
-  defaultBackgroundColor: {
-    backgroundColor: '$headerColor',
-  },
-  previewBackgroundColor: {
-    backgroundColor: '$testRed'
-  },
   navBarContainer: {
     flexDirection: 'column',
   },
@@ -188,18 +185,22 @@ NavBar.propTypes = {
   showLogo: PropTypes.bool,
   showAvatar: PropTypes.bool,
   showBack: PropTypes.bool,
-  hambugerMenuShowing: PropTypes.bool,
+  hamburgerMenuShowing: PropTypes.bool,
   onBack: PropTypes.func,
   user: PropTypes.object,
   title: PropTypes.string,
-  isPreview: PropTypes.bool,
+  backgroundColor: PropTypes.string,
   centerType: PropTypes.oneOf(['title', 'logo', 'avatar'])
 
 }
 NavBar.defaultProps = {
-  showLogo: false,
+  backgroundColor: theme.$zooniverseTeal,
+  centerType: 'title',
+  hamburgerMenuShowing: false,
   showAvatar: false,
-  title: undefined
+  showBack: false,
+  showLogo: false,
+  title: '',
 }
 
 export default connect(mapStateToProps)(NavBar)

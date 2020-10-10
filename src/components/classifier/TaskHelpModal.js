@@ -9,6 +9,8 @@ import SizedMarkdown from '../common/SizedMarkdown'
 import Button from '../Button'
 import PropTypes from 'prop-types';
 
+import * as colorModes from '../../displayOptions/colorModes'
+
 
 export class TaskHelpModal extends Component {
   constructor(props) {
@@ -27,12 +29,15 @@ export class TaskHelpModal extends Component {
       <View>
         <StyledModal
           title="Help"
+          inMuseumMode={this.props.inMuseumMode}
           isVisible={this.props.isVisible}
           setVisibility={this.setVisibility}
         >
 
-          <ScrollView style={styles.markdownContainer}>
-            <SizedMarkdown>
+          <ScrollView style={[styles.markdownContainer, colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]}>
+            <SizedMarkdown
+                inMuseumMode={this.props.inMuseumMode}
+            >
               {this.props.text}
             </SizedMarkdown>
           </ScrollView>
@@ -62,7 +67,8 @@ const styles = EStyleSheet.create({
 TaskHelpModal.propTypes = {
     isVisible: PropTypes.bool,
     text: PropTypes.string,
-    onCloseRequested: PropTypes.func
+    onCloseRequested: PropTypes.func,
+    inMuseumMode: PropTypes.bool,
 }
 
 export default TaskHelpModal

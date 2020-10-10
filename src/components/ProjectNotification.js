@@ -26,7 +26,7 @@ export class ProjectNotification extends Component {
         <Switch
           value={this.props.notification}
           style={styles.switchComponent}
-          trackColor={theme.$headerColor}
+          trackColor={theme.$zooniverseTeal}
           onValueChange={(checked) => this.props.updateProjectNotification(checked)}
         />
 

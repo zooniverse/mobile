@@ -3,9 +3,9 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   AppState,
-  NetInfo,
   Platform,
 } from 'react-native'
+import NetInfo from '@react-native-community/netinfo';
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
 import thunkMiddleware from 'redux-thunk'
@@ -37,6 +37,12 @@ import SafeAreaContainer from './SafeAreaContainer'
 import { setPageShowing } from '../actions/navBar'
 import NavBar from '../components/NavBar';
 import PageKeys from '../constants/PageKeys'
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+    dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
+    enableNative: process.env.NODE_ENV === 'production' ? true : false,
+});
 
 const persistConfig = {
   key: 'root',
@@ -88,7 +94,14 @@ export default class App extends Component {
         <PersistGate loading={null} persistor={persistor} onBeforeLift={this.onBeforeLift}>
           <SafeAreaContainer>
             <Router sceneStyle={styles.sharedSceneStyles} navBar={() => <NavBar />} onStateChange={this.onSceneChange}>
-              <Drawer key="drawer" contentComponent={SideDrawerContent} open={false} drawerPosition="right">
+              <Drawer
+                  key="drawer"
+                  contentComponent={SideDrawerContent}
+                  open={false}
+                  drawerPosition="right"
+                  drawerLockMode="locked-closed"
+
+              >
                   <Scene key="main" tabs={false}>
                     <Scene key={PageKeys.SignIn} component={SignIn} duration={0} type="reset"  />
                     <Scene key={PageKeys.ZooniverseApp} component={ZooniverseApp}  initial />

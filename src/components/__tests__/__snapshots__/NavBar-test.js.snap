@@ -12,14 +12,18 @@ exports[`renders correctly with defaults 1`] = `
     style={
       Array [
         undefined,
-        undefined,
+        Object {
+          "backgroundColor": "rgba(0, 151, 157, 1)",
+        },
       ]
     }
   >
     <View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -58,11 +62,27 @@ exports[`renders correctly with defaults 1`] = `
         </Text>
       </View>
     </View>
-    <View />
+    <View>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
     <View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -118,14 +138,18 @@ exports[`renders correctly with title 1`] = `
     style={
       Array [
         undefined,
-        undefined,
+        Object {
+          "backgroundColor": "rgba(0, 151, 157, 1)",
+        },
       ]
     }
   >
     <View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -164,11 +188,27 @@ exports[`renders correctly with title 1`] = `
         </Text>
       </View>
     </View>
-    <View />
+    <View>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            undefined,
+          ]
+        }
+      >
+        OHai
+      </Text>
+    </View>
     <View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}

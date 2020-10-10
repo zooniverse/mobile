@@ -18,6 +18,9 @@ import com.android.build.OutputFile
  *   // the entry file for bundle generation
  *   entryFile: "index.android.js",
  *
+ *   // https://facebook.github.io/react-native/docs/performance#enable-the-ram-format
+ *   bundleCommand: "ram-bundle",
+ *
  *   // whether to bundle JS and assets in debug mode
  *   bundleInDebug: false,
  *
@@ -77,6 +80,7 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/@sentry/react-native/sentry.gradle"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 /**
@@ -95,7 +99,17 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 def pass = getPassword("android@zooniverse.org", "android_keystore")
 
+/**
+ * Use international variant JavaScriptCore
+ * International variant includes ICU i18n library and necessary data allowing to use
+ * e.g. Date.toLocaleString and String.localeCompare that give correct results
+ * when using with locales other than en-US.
+ * Note that this variant is about 6MiB larger per architecture than default.
+ */
+def useIntlJsc = false
+
 android {
+    buildToolsVersion '23.0.3'
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -107,9 +121,11 @@ android {
         applicationId "com.zooniversemobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 27
-        versionName "2.4.0"
+        versionCode 47
+        versionName "2.6.8"
         multiDexEnabled true
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
     }
     signingConfigs {
         release {
@@ -143,8 +159,8 @@ android {
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
-            // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2, "arm64-v8a": 3, "x86_64": 4]
+            // https://developer.android.com/studio/build/configure-apk-splits.html
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3, "x86_64": 4]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
@@ -155,19 +171,19 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-svg')
-    implementation project(path: ':react-native-firebase', configuration: 'default')
     implementation project(':react-native-vector-icons')
-    implementation project(':react-native-blur')
-    implementation project(':rn-fetch-blob')
-    implementation project(':react-native-splash-screen')
-    implementation 'com.android.support:multidex:1.0.0'
-    implementation project(':react-native-google-analytics-bridge')
-    implementation project(':react-native-device-info')
+    implementation project(':@react-native-community_blur')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation 'com.google.firebase:firebase-core:16.0.7'
-    implementation "com.google.firebase:firebase-messaging:17.3.4"
+    implementation 'com.facebook.fresco:animated-gif:2.0.0' //gif support
+
+
+    // JSC from node_modules
+    if (useIntlJsc) {
+        implementation 'org.webkit:android-jsc-intl:+'
+    } else {
+        implementation 'org.webkit:android-jsc:+'
+    }
 }
 
 // Run this once to be able to run the application with BUCK
@@ -178,3 +194,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

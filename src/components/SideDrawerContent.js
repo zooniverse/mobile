@@ -87,7 +87,10 @@ export class SideDrawerContent extends Component {
           </TouchableOpacity>
         </View>
 
-        <Separator color="white" style={styles.separatorPadding} />
+        <Separator
+            color="white"
+            style={styles.separatorPadding}
+          />
         
         <MenuButton 
           onPress={this.goHome} 
@@ -192,7 +195,7 @@ const styles = EStyleSheet.create({
     paddingLeft: 25
   },
   icon: {
-    color: '$headerColor',
+    color: '$zooniverseTeal',
     fontSize: 24,
     padding: 10
   },

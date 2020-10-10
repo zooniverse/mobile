@@ -22,7 +22,7 @@ export default FontedText;
 
 const styles = {
     fontStyle: {
-        fontFamily: 'Karla'
+        fontFamily: 'Karla',
     }
 }
 

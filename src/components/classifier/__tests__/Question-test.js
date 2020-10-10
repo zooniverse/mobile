@@ -1,7 +1,6 @@
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
-jest.mock('WebView', () => 'WebView')
 import { Question } from '../Question'
 
 it('renders correctly (without task help)', () => {

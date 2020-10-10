@@ -7,6 +7,7 @@ import Markdown from 'react-native-simple-markdown'
 import PropTypes from 'prop-types'
 
 import { markdownImageRule } from '../../utils/markdownUtils'
+import * as colorModes from '../../displayOptions/colorModes'
 
 /**
  * Component that wraps the markdown library we use.
@@ -47,7 +48,12 @@ class SizedMarkdown extends Component {
     render() {
         const { viewDimensions } = this.state
         const customStyles = {
-            ...markdownStyles,
+            text: {
+                fontFamily: 'Karla',
+                fontSize: isTablet ? 22 : 14,
+                fontWeight: isTablet ? 'bold' : 'normal',
+                color: colorModes.instructionsColorFor(this.props.inMuseumMode)
+            },
             image: {
                 width: viewDimensions.width,
                 height: viewDimensions.height
@@ -64,15 +70,14 @@ class SizedMarkdown extends Component {
 }
 
 const isTablet = DeviceInfo.isTablet()
-const markdownStyles = {
-    text: {
-        fontFamily: 'Karla',
-        fontSize: isTablet ? 22 : 14
-    }
-}
 
 SizedMarkdown.propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
+    inMuseumMode: PropTypes.bool,
+}
+
+SizedMarkdown.defaultProps = {
+    inMuseumMode: false
 }
 
 export default SizedMarkdown

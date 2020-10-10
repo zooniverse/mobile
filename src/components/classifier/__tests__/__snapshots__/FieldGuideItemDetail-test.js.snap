@@ -24,6 +24,12 @@ exports[`renders correctly 1`] = `
         style={
           Array [
             undefined,
+            Object {
+              "backgroundColor": "white",
+            },
+            Object {
+              "color": "black",
+            },
             Array [
               undefined,
             ],
@@ -35,18 +41,29 @@ exports[`renders correctly 1`] = `
     </View>
     <View
       style={
-        Object {
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "overflow": "hidden",
+          },
+          undefined,
+        ]
       }
     >
-      <RCTWebView
+      <RNCWebView
         automaticallyAdjustContentInsets={true}
+        cacheEnabled={true}
+        domStorageEnabled={true}
+        javaScriptEnabled={true}
         messagingEnabled={false}
+        onContentProcessDidTerminate={[Function]}
+        onHttpError={[Function]}
         onLoadingError={[Function]}
         onLoadingFinish={[Function]}
+        onLoadingProgress={[Function]}
         onLoadingStart={[Function]}
         onMessage={[Function]}
+        onNavigationStateChange={[Function]}
         onShouldStartLoadWithRequest={[Function]}
         scalesPageToFit={true}
         source={
@@ -98,7 +115,7 @@ exports[`renders correctly 1`] = `
             p {
               margin: 0;
             }
-            
+            body {color: #000000}
         </style>
     </head>
     <body>
@@ -136,6 +153,7 @@ exports[`renders correctly 1`] = `
           Array [
             Object {
               "flex": 1,
+              "overflow": "hidden",
             },
             Object {
               "backgroundColor": "#ffffff",
@@ -149,11 +167,14 @@ exports[`renders correctly 1`] = `
             ],
           ]
         }
+        useSharedProcessPool={true}
       />
     </View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}

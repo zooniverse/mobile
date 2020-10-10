@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import {Dimensions} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+
 import {
     TouchableOpacity,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import R from 'ramda'
 import DeviceInfo from 'react-native-device-info';
 
@@ -20,12 +22,16 @@ import * as drawingActions from '../../actions/drawing'
 import ClassificationContainer from '../classifier/ClassifierContainer'
 import NeedHelpButton from '../classifier/NeedHelpButton'
 import OverlaySpinner from '../OverlaySpinner'
-import ClassifierButton from '../classifier/ClassifierButton'
+import {
+    GuideButton,
+    SubmitButton
+} from '../classifier/ClassifierButton'
 import Separator from '../common/Separator'
 import DrawingModal from './DrawingModal'
-import NativeImage from '../../nativeModules/NativeImage'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
 import DrawingHeader from './components/DrawingHeader'
+
+import * as colorModes from '../../displayOptions/colorModes'
 
 const mapStateToProps = (state, ownProps) => {
     const subjectDimensions = state.classifier.subject ? state.classifier.subjectDimensions[state.classifier.subject.id] : null
@@ -57,7 +63,19 @@ class DrawingClassifier extends Component {
     constructor(props) {
         super(props)
 
+        const isPortrait = () => {
+            const dim = Dimensions.get('screen');
+            return dim.height >= dim.width;
+        };
+        Dimensions.addEventListener('change', () => {
+            this.setState({
+                orientation: isPortrait() ? 'portrait' : 'landscape'
+            });
+        });
+
+
         this.state = {
+            orientation: isPortrait() ? 'portrait' : 'landscape',
             imageIsLoaded: false,
             localImagePath: '',
             isQuestionVisible: !props.needsTutorial,
@@ -77,7 +95,7 @@ class DrawingClassifier extends Component {
     }
 
     componentDidMount() {
-        const { inPreviewMode, classifierActions } = this.props
+        const {inPreviewMode, classifierActions} = this.props
         classifierActions.setClassifierTestMode(inPreviewMode)
     }
 
@@ -90,22 +108,26 @@ class DrawingClassifier extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { subject } = this.props
+        const {subject} = this.props
         if (prevProps.subject !== subject && subject) {
             this.props.imageActions.loadImageToCache(subject.displays[0].src).then(localImagePath => {
-                new NativeImage(localImagePath).getImageSize().then(({width, height}) => {
-                    this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
-                    this.setState({
-                        imageIsLoaded: true,
-                        localImagePath
-                    })
+                //Image dimensions have to be present, but are not used.
+                //Prior to this commit we were using an image resizing solution that broke on Android.
+                //Now the image automatically resizes to fit the available space on both iOS and Android.
+                height = 200
+                width = 200
+
+                this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
+                this.setState({
+                    imageIsLoaded: true,
+                    localImagePath
                 })
             })
         }
     }
 
     setQuestionVisibility(isVisible) {
-        this.setState({ isQuestionVisible: isVisible })
+        this.setState({isQuestionVisible: isVisible})
     }
 
     finishTutorial() {
@@ -127,7 +149,7 @@ class DrawingClassifier extends Component {
 
     render() {
         if (this.props.isFetching || !this.props.isSuccess) {
-            return <OverlaySpinner overrideVisibility={this.props.isFetching} />
+            return <OverlaySpinner overrideVisibility={this.props.isFetching}/>
         }
 
         // We validate that tools has at least one element earlier
@@ -137,31 +159,40 @@ class DrawingClassifier extends Component {
         const tutorial =
             <Tutorial
                 projectName={this.props.project.display_name}
+                inMuseumMode={this.props.project.in_museum_mode}
                 isInitialTutorial={this.props.needsTutorial}
                 tutorial={this.props.tutorial}
                 finishTutorial={() => this.finishTutorial()}
             />
 
         const classification =
-            <View style={styles.classificationContainer}>
+            <View
+                style={[styles.classificationContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <DrawingHeader
+                    inMuseumMode={this.props.project.in_museum_mode}
                     horizontal={DeviceInfo.isTablet()}
                     question={
-                        <Question question={this.props.instructions}/>
+                        <Question
+                            question={this.props.instructions}
+                            inMuseumMode={this.props.project.in_museum_mode}
+                        />
                     }
                     instructions={
                         <ShapeInstructionsView
-                            { ...tool }
+                            {...tool}
                             numberDrawn={this.props.numberOfShapesDrawn}
                             warnForRequirements={warnForRequirements}
+                            inMuseumMode={this.props.project.in_museum_mode}
                         />
                     }
                 />
-                <TouchableOpacity disabled={DeviceInfo.isTablet()} onPress={() => this.setState({isModalVisible: true})} style={styles.subjectDisplayContainer} >
+                <TouchableOpacity disabled={DeviceInfo.isTablet()} onPress={() => this.setState({isModalVisible: true})}
+                                  style={styles.subjectDisplayContainer}>
                     <DrawingClassifierSubject
-                        showHelpButton={DeviceInfo.isTablet() && !R.isEmpty(this.props.help) }
+                        showHelpButton={DeviceInfo.isTablet() && !R.isEmpty(this.props.help)}
                         onHelpButtonPressed={() => this.classificationContainer.displayHelpModal()}
                         showDrawingButtons={DeviceInfo.isTablet()}
+                        inMuseumMode={this.props.project.in_museum_mode}
                         onUndoButtonSelected={this.props.drawingActions.undoMostRecentEdit}
                         maxShapesDrawn={this.props.numberOfShapesDrawn >= tool.max}
                         drawingColor={tool.color}
@@ -172,53 +203,71 @@ class DrawingClassifier extends Component {
                         showBlurView={!DeviceInfo.isTablet() && R.isEmpty(this.props.shapes)}
                         alreadySeen={this.props.subject.already_seen}
                         subjectDimensions={this.props.subjectDimensions}
-                        displayToNativeRatio={this.props.subjectDimensions.naturalWidth/this.state.subjectDimensions.clientWidth}
+                        displayToNativeRatio={this.props.subjectDimensions.naturalWidth / this.state.subjectDimensions.clientWidth}
                     />
                 </TouchableOpacity>
             </View>
 
-        const fieldGuideButton = 
+        const fieldGuideButton =
             <View style={styles.fieldGuideContainer}>
-                <ClassifierButton
+                <GuideButton
+                    inMuseumMode={this.props.project.in_museum_mode}
                     onPress={() => this.classificationContainer.displayFieldGuide()}
                     type="guide"
                     text="Field Guide"
-                    style={styles.fieldGuideButton}
+                    style={[styles.fieldGuideButton, this.state.orientation === 'portrait' ? [] : styles.wideFieldGuide]}
                 />
-                <Separator style={styles.separator}/>
             </View>
 
-        const submitButton = 
-            <ClassifierButton
-                disabled={R.keys(this.props.shapes).length < tool.min}
+        const submitButton =
+            <SubmitButton
+                inMuseumMode={this.props.project.in_museum_mode}
+                disabled={R.keys(this.props.shapes).length < tool.min || !this.state.imageIsLoaded}
                 onPress={this.submitClassification}
-                style={styles.submitButton}
-                type="answer"
+                style={[styles.submitButton, this.state.orientation === 'portrait' ? [] : styles.wideSubmit]}
                 text="Submit"
             />
 
-        const { isQuestionVisible } = this.state
+        const {isQuestionVisible, orientation} = this.state
         const classificationBottomPadding = isQuestionVisible ? {} : styles.classificationBottomMargin
+
+        const classificationPanel = <ClassificationPanel
+            containerStyle={[styles.container]}
+            isFetching={this.props.isFetching}
+            hasTutorial={!R.isEmpty(this.props.tutorial)}
+            isQuestionVisible={isQuestionVisible}
+            setQuestionVisibility={this.setQuestionVisibility}
+            inMuseumMode={this.props.project.in_museum_mode}
+        >
+            {isQuestionVisible ? classification : tutorial}
+        </ClassificationPanel>;
+
+
+        const buttonView = <View
+            style={[orientation === 'portrait' ? styles.stacked : styles.sideBySide]}>
+            {this.props.guide.href && fieldGuideButton}
+            {submitButton}
+        </View>
+
+
+        const needHelpButton =
+            <NeedHelpButton
+                onPress={() => this.classificationContainer.displayHelpModal()}
+                inMuseumMode={this.props.project.in_museum_mode}
+            />;
+
         const classificationView =
             <View style={[styles.container, classificationBottomPadding]}>
-                <ClassificationPanel
-                    containerStyle={styles.container}
-                    isFetching={this.props.isFetching}
-                    hasTutorial={!R.isEmpty(this.props.tutorial)}
-                    isQuestionVisible={isQuestionVisible}
-                    setQuestionVisibility={this.setQuestionVisibility}
-                >
-                    {isQuestionVisible ? classification : tutorial}
-                </ClassificationPanel>
-                {isQuestionVisible && !R.isEmpty(this.props.help) && !DeviceInfo.isTablet() && <NeedHelpButton onPress={() => this.classificationContainer.displayHelpModal()} /> }
-                {isQuestionVisible && !R.empty(this.props.guide) && fieldGuideButton}
-                { isQuestionVisible && submitButton }
+                {classificationPanel}
+                {isQuestionVisible && !R.isEmpty(this.props.help) && !DeviceInfo.isTablet() && needHelpButton}
+                {isQuestionVisible && buttonView}
+                <Separator style={styles.separator}/>
             </View>
 
-
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
                 <ClassificationContainer
+                    inMuseumMode={this.props.project.in_museum_mode}
                     project={this.props.project}
                     inBetaMode={this.props.inBetaMode}
                     help={this.props.help}
@@ -229,7 +278,8 @@ class DrawingClassifier extends Component {
                 </ClassificationContainer>
                 <DrawingModal
                     tool={tool}
-                    visible={this.state.isModalVisible} 
+                    visible={this.state.isModalVisible}
+                    inMuseumMode={this.props.project.in_museum_mode}
                     imageSource={this.state.localImagePath}
                     onClose={() => this.setState({isModalVisible: false, modalHasBeenClosedOnce: true})}
                     warnForRequirements={this.state.modalHasBeenClosedOnce}
@@ -249,10 +299,17 @@ const styles = EStyleSheet.create({
         marginBottom: 25
     },
     classificationContainer: {
-        flex: 1
+        flex: 1,
     },
     container: {
         flex: 1,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
     },
     subjectContainer: {
         width: '100%',
@@ -264,21 +321,38 @@ const styles = EStyleSheet.create({
         margin: 20,
     },
     submitButton: {
-        marginHorizontal: 25,
-        marginVertical: 20
+        height: 45,
+        marginVertical: 20,
+    },
+    wideSubmit: {
+        width: '70%'
     },
     separator: {
         marginTop: 20
     },
-    fieldGuideContainer: {
-        marginHorizontal: 25,
-    },
+    fieldGuideContainer: {},
     fieldGuideButton: {
-        height: 40
+        height: 45
+    },
+    wideFieldGuide: {
+        width: '50%'
     },
     subjectDisplayContainer: {
         flex: 1,
         margin: 10
+    },
+    sideBySide: {
+        marginTop: 15,
+        marginHorizontal: 20,
+        height: 45,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    stacked: {
+        marginHorizontal: 25,
+        marginTop: 20,
+        flexDirection: 'column',
+        justifyContent: 'space-around'
     }
 })
 
@@ -289,7 +363,9 @@ DrawingClassifier.propTypes = {
     isSuccess: PropTypes.bool,
     isFailure: PropTypes.bool,
     isFetching: PropTypes.bool,
-    guide: PropTypes.shape({}),
+    guide: PropTypes.shape({
+        href: PropTypes.string,
+    }),
     tutorial: PropTypes.shape({}),
     needsTutorial: PropTypes.bool,
     usableSubjects: PropTypes.array,
@@ -313,9 +389,9 @@ DrawingClassifier.propTypes = {
         })
     ),
     instructions: PropTypes.string,
-    display_name: PropTypes.string,
     project: PropTypes.shape({
         display_name: PropTypes.string,
+        in_museum_mode: PropTypes.bool,
         id: PropTypes.string
     }),
     workflow: PropTypes.shape({

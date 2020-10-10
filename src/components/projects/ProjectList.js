@@ -18,6 +18,10 @@ import { GLOBALS } from '../../constants/globals'
 import { extractNonSwipeEnabledProjects, extractSwipeEnabledProjects } from '../../utils/projectUtils'
 import PageKeys from '../../constants/PageKeys'
 
+import * as projectDisplay from '../../displayOptions/projectDisplay'
+
+import theme from '../../theme'
+
 GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state, ownProps) => {
@@ -25,18 +29,24 @@ const mapStateToProps = (state, ownProps) => {
     const inPreviewMode = selectedProjectTag === 'preview'
     const inBetaMode = selectedProjectTag === 'beta'
     let projectList
-    
+
+    projectList = projectDisplay.sortUnfinishedFirst(state.projects.projectList)
+
     // Grab all of the projects from the selected Project Tag
     if (selectedProjectTag === 'recent') {
-      const activeProjects = R.filter((project) => { return project.activity_count > 0 }, state.user.projects);
-      projectList = state.projects.projectList.filter((project) => R.keys(activeProjects).includes(project.id));
+        const activeProjects = R.filter((project) => {
+            return project.activity_count > 0
+        }, state.user.projects);
+        projectList = projectList.filter((project) => R.keys(activeProjects).includes(project.id));
+    } else if (selectedProjectTag === 'all projects') {
+        projectList = projectList
     } else if (inPreviewMode) {
         projectList = state.projects.previewProjectList
     } else if (inBetaMode) {
         projectList = state.projects.betaProjectList
     }
     else {
-        projectList = state.projects.projectList.filter((project) => R.contains(selectedProjectTag, project.tags))
+        projectList = projectList.filter((project) => R.contains(selectedProjectTag, project.tags))
     }
 
     // Seperate out the native workflows and non-native workflows    
@@ -77,7 +87,8 @@ class ProjectList extends Component {
         navBarActions.setNavbarSettingsForPage({
             title,
             showBack: true,
-            isPreview: inPreviewMode,
+            isPreview: inPreviewMode, //TODO: Decouple preview mode from the color of the safe area container
+            backgroundColor: inPreviewMode ? theme.$testRed : theme.$zooniverseTeal,
             centerType: 'title',
         }, PageKeys.ProjectList)
     }
@@ -93,7 +104,10 @@ class ProjectList extends Component {
     renderItem({item}) {
         switch (item.displayType) {
             case 'project': 
-                return <ProjectTile project={item} inPreviewMode={this.props.inPreviewMode} inBetaMode={this.props.inBetaMode}/>
+                return <ProjectTile
+                    project={item}
+                    inPreviewMode={this.props.inPreviewMode}
+                    inBetaMode={this.props.inBetaMode}/>
             case 'spacer':
                 return <View style={styles.spacer} />
             case 'header':

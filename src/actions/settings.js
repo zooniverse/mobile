@@ -1,9 +1,9 @@
 import * as ActionConstants from '../constants/actions'
-import firebase from 'react-native-firebase';
+import firebase from '@react-native-firebase/app';
 
 /**
  * These are the topic names we subscribe to Firebase with
- * NOTE: 
+ * NOTE:
  *  It is very important that these don't change. If they
  *  change then we will not be able to properly send push
  *  notifications for what people are subscribed for.
@@ -20,12 +20,12 @@ const updateSubscriptionOfTopic = (subscribe, topicName) => {
     } else {
         firebase.messaging().unsubscribeFromTopic(topicName);
     }
-} 
+}
 
 export const addUnusedProjectsToNotifications = (projects) => {
     return (dispatch, getState) => {
         const { projectSpecificNotifications } = getState().settings
-        
+
         // Subscribe to new projects
         projects.forEach( project => {
             if (!projectSpecificNotifications.some( storedProject => storedProject.id === project.id )) {
@@ -43,7 +43,7 @@ export const addUnusedProjectsToNotifications = (projects) => {
 }
 
 const addProjectToSubscriptions = project => {
-    return dispatch => {     
+    return dispatch => {
         updateSubscriptionOfTopic(true, project.id)
         dispatch({
             type: ActionConstants.ADD_PROJECT_SUBSCRIPTION,
@@ -86,7 +86,7 @@ export const updateEnableNotifications = (enabled) => {
             urgentHelpNotification,
             projectSpecificNotifications
         } = getState().settings
-    
+
         updateSubscriptionOfTopic(newProjectNotifications && enabled, TopicNames.newProjects)
         updateSubscriptionOfTopic(newBetaNotifications && enabled, TopicNames.newBetaProjects)
         updateSubscriptionOfTopic(urgentHelpNotification && enabled, TopicNames.urgentNotifications)

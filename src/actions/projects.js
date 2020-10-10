@@ -16,6 +16,7 @@ const productionParams = {
 const betaParams = {
     mobile_friendly: true,
     beta_approved: true,
+    launch_approved: false,
     include: 'avatar',
     sort: 'display_name',
     live: true,
@@ -41,7 +42,8 @@ export function fetchProjects() {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
             dispatch(addProjectsRequest)
-            getAuthUser().then((userProfile) => {
+            getAuthUser()
+                .then((userProfile) => {
                 const userIsLoggedIn = userProfile !== null
                 let projectCalls = []
                 let allProjects = []
@@ -52,13 +54,13 @@ export function fetchProjects() {
                         .then((projects) => {
                             const taggedProjects = tagProjects(projects, false)
                             allProjects = allProjects.concat(taggedProjects)
-
                             if (taggedProjects.length === 20) {
                                 var currentPage = _page + 1
                                 return fetchPaginatedProjects(params, currentPage)
                             }
                         })
                 }
+
 
                 projectCalls.push(fetchPaginatedProjects(productionParams));
                 projectCalls.push(fetchPaginatedProjects(betaParams));
@@ -82,7 +84,12 @@ export function fetchProjects() {
                     let projectDetailCalls = []
                     projectDetailCalls.push(getWorkflowsForProjects(allProjects))
                     const avatarCall = getAvatarsForProjects(allProjects)
+                    const museumModeCall = tagMuseumRoleForProjects(allProjects)
+
                     projectDetailCalls = projectDetailCalls.concat(avatarCall)
+                    if (userIsLoggedIn) {
+                      projectDetailCalls = projectDetailCalls.concat(museumModeCall)
+                    }
                     // Then load the avatars and workflows
                     Promise.all(projectDetailCalls)
                         .then(() => {
@@ -99,6 +106,8 @@ export function fetchProjects() {
                         dispatch(addProjectsFailure);
                         reject(error)
                     })
+            }).catch(() => {
+                // Stub out avatar rejection because it is optional for users to have avatars
             })
         })
     }
@@ -106,7 +115,8 @@ export function fetchProjects() {
 
 const getAvatarsForProjects = projects => {
     return projects.map(project => {
-        return apiClient.type('avatars').get(project.links.avatar.id)
+        return apiClient.type('avatars')
+            .get(project.links.avatar.id)
             .then((avatar) => {
                 project.avatar_src = avatar.src
             })
@@ -116,19 +126,41 @@ const getAvatarsForProjects = projects => {
     })
 }
 
+export const tagMuseumRoleForProjects = projects => {
+    return apiClient.type('projects')
+      .get({ current_user_roles: 'museum' })
+      .then((museumProjects) => {
+        const museumProjIds = museumProjects.map(project => project.id)
+        projects.forEach(project => {
+          project.in_museum_mode = project.in_museum_mode || museumProjIds.includes(project.id)
+        })
+      })
+}
+
 const getWorkflowsForProjects = projects => {
     const projectIds = projects.map((project) => project.id)
 
-    return apiClient.type('workflows').get({mobile_friendly: true, active: true, project_id: projectIds})
-        .then(workflows => {
-            workflows.forEach(workflow => {
-                workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
-                const project = projects.find(project => project.id === workflow.links.project)
-                if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
-                    project.workflows = R.append(workflow, project.workflows)
+    let fetchPaginatedWorkflows = (params, _page = 1) => {
+        return apiClient.type('workflows')
+            .get({...params, ...{page: _page}})
+            .then((workflows) => {
+                workflows.forEach(workflow => {
+                    workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
+
+                    const project = projects.find(project => project.id === workflow.links.project)
+                    if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
+                        project.workflows = R.append(workflow, project.workflows)
+                    }
+                })
+
+                if (workflows.length === 20) {
+                    var currentPage = _page + 1
+                    return fetchPaginatedWorkflows(params, currentPage)
                 }
             })
-        })
+    }
+
+    fetchPaginatedWorkflows({mobile_friendly: true, active: true, project_id: projectIds})
 };
 
 const addOwnerProjectId = (project) => ({

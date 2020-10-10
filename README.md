@@ -4,7 +4,7 @@ More detailed information on the [wiki](https://github.com/zooniverse/mobile/wik
 The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-native/) app that allows folks like you and me to contribute to astronomy, ecology, and anthropology research from their couch, bathtub, or bus stop (but don't swipe and drive, please).
 
 ## Setting Up for Local Development
-Setting up to work on a react-native app is a little tricky, and setting up to work on this one in particular is trickier. The guide below attempts to be comprehensive. If you run into any further issues while attempting to get set up, please reach out to either Will Granger (will@zooniverse.org) or Chelsea Troy (chelsea@zooniverse.org)
+Setting up to work on a react-native app is a little tricky, and setting up to work on this one in particular is trickier. The guide below attempts to be comprehensive. If you run into any further issues while attempting to get set up, please reach out to Chelsea Troy (chelsea@zooniverse.org)
 
 ### Preparing The React Native Framework
 #### Requirements:
@@ -14,9 +14,6 @@ Setting up to work on a react-native app is a little tricky, and setting up to w
 1. Follow the instructions for Android and iOS setup in [this guide](https://facebook.github.io/react-native/docs/getting-started.html).
 1. Clone down this repo and navigate to its directory (called `mobile`).
 1. Run `npm install` (later, if you need to reinstall dependencies for some reason, you can run `rm -rf node_modules/ && npm install`)
-1. Open the `mobile` directory in your IDE of choice. navigate to `node_modules/react-native-deck-swiper/node_modules` and delete the `react-native` directory you find in there.
-    - When we run the app, the presence of this version of react-native in addition to the dependency for the app itself creates a conflict. You'll know that this is what you're running into if you get an error about @hasteImpl returning two modules of the same name.
-    - This happens because zooniverse has its own fork of the `react-native-deck-swiper` module. Although we have removed `react-native` from the `package.json`, something else in it must be requiring this dependency. It's on the list of issues to address, to have our dependency fork not ship with this copy of `react-native`.
 1. Run `npm start`.
 
 ### Setting up to run on iOS
@@ -24,9 +21,13 @@ Setting up to work on a react-native app is a little tricky, and setting up to w
  - XCode 10.1 or 10.2
  - An iPhone X Simulator, which you can run from XCode.
 #### Steps:
-1. Open XCode, and in XCode open `mobile/ios/ZooniverseMobile.xcworkspace`. We now need to manually link up the `react-native-svg` dependency. Follow [these instructions](http://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking) to manually link `RNSVG.xcodeproj`, found at `mobile/node_modules/react-native-svg/ios/RNSVG.xcodeproj`. For our app, you _do_ need to do step 3 in that tutorial, adding `$(SRCROOT)/../node_modules/react-native-svg/ios/RNSVG` to our Header Search Paths for both debug and release at Build Settings > Header Search Paths.
-1. Switch the project to the XCode Legacy Build System as described [here](https://github.com/facebook/react-native/issues/19573) under the section named **"Opting out of the new Xcode build system."**
-1. Build and run the project from XCode on an iPhone X simulator, or run `react-native run-ios`. Shortly, your simulator should boot with the Zooniverse app on it.
+On the command line, from the `mobile` directory, run:
+1. `cd ios && rm -rf Podfile.lock && pod install && cd ..`. You may need to `brew install cocoapods` first.
+2. `react-native run-ios`
+
+#### iOS Build Troubleshooting:
+ - You _may_ need to manually link up the `react-native-svg` dependency. Open XCode, and in XCode open `mobile/ios/ZooniverseMobile.xcworkspace`. Follow [these instructions](http://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking) to manually link `RNSVG.xcodeproj`, found at `mobile/node_modules/react-native-svg/ios/RNSVG.xcodeproj`. For our app, you _do_ need to do step 3 in that tutorial, adding `$(SRCROOT)/../node_modules/react-native-svg/ios/RNSVG` to our Header Search Paths for both debug and release at Build Settings > Header Search Paths.
+ - Switch the project to the XCode Legacy Build System as described [here](https://github.com/facebook/react-native/issues/19573) under the section named **"Opting out of the new Xcode build system."**
 
 **Note**:  There is a bug in Xcode 8 with react-native's RCTWebSocket.  If you receive an error, follow the instructions here:
 http://stackoverflow.com/questions/38710654/rctwebsocket-ignoring-return-value-of-function-declared-with-warn-unused-resul
@@ -49,3 +50,7 @@ Which should contain the keystore file name and alias. Talk to Will Granger (wil
     - The command `react-native run-android` will install the build, but fail in launching the app due to a bug with the `react-native` script with having a seperate `applicationId` for development builds.
 
 [![pullreminders](https://pullreminders.com/badge.svg)](https://pullreminders.com?ref=badge)
+
+## If you Work for The Zooniverse
+
+You may also want to set up error reporting from your local copy of the application to our reporting service, Sentry. [Here are instructions on how to do that!](https://github.com/zooniverse/mobile/wiki/Enabling-Sentry-for-your-Local-Builds)

@@ -8,7 +8,9 @@ exports[`renders correctly 1`] = `
     />
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -49,6 +51,9 @@ exports[`renders correctly 1`] = `
         Array [
           undefined,
           Object {
+            "borderBottomColor": "#5c5c5c",
+          },
+          Object {
             "borderBottomColor": "white",
           },
         ]
@@ -58,7 +63,9 @@ exports[`renders correctly 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -88,7 +95,9 @@ exports[`renders correctly 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -118,7 +127,9 @@ exports[`renders correctly 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -148,7 +159,9 @@ exports[`renders correctly 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -190,7 +203,9 @@ exports[`renders correctly 1`] = `
   <View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -226,7 +241,9 @@ exports[`renders correctly 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -262,7 +279,9 @@ exports[`renders correctly 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -298,7 +317,9 @@ exports[`renders correctly 1`] = `
     </View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -337,7 +358,9 @@ exports[`renders correctly 1`] = `
     <View>
       <View
         accessible={true}
+        clickable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}

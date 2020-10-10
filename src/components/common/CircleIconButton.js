@@ -9,19 +9,23 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info';
 
-import Theme from '../../theme'
+import * as colorModes from '../../displayOptions/colorModes'
 
-const CircleIconButton = ({ style, activated, type, onPress, disabled, radius }) => {
+const CircleIconButton = ({ style, activated, type, onPress, disabled, radius, inMuseumMode }) => {
     const circleStyle = {
         width: radius * 2,
         height: radius * 2,
         borderRadius: radius,
-        backgroundColor: activated ? Theme.$zooniverseTeal : 'transparent',
+        backgroundColor: activated ?
+            colorModes.activeIconBackgroundColorFor(inMuseumMode)
+            : 'transparent',
         borderWidth: DeviceInfo.isTablet() ? 2 : 1,
-        borderColor: Theme.$zooniverseTeal
+        borderColor: colorModes.activeIconBackgroundColorFor(inMuseumMode),
     }
 
-    const iconColor = activated ? 'white' : 'rgba(92, 92, 92, 1)'
+    const iconColor = activated ?
+        colorModes.activeIconForegroundColorFor(inMuseumMode)
+        : colorModes.inactiveIconForegroundColorFor(inMuseumMode)
     const opacity = {opacity: disabled ? 0.5 : 1}
 
     return (
@@ -73,7 +77,8 @@ CircleIconButton.propTypes = {
     disabled: PropTypes.bool,
     onPress: PropTypes.func,
     type: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
+    inMuseumMode: PropTypes.bool,
 }
 
 const styles = EStyleSheet.create({

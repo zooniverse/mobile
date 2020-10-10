@@ -29,7 +29,9 @@ GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
 GoogleAnalytics.trackEvent('view', 'Home')
 
 const mapStateToProps = (state) => {
-  const nativePreviewProjects = state.projects.previewProjectList.filter((project) => R.any((workflow) => workflow.mobile_verified)(project.workflows))
+  const nativePreviewProjects = state.projects.previewProjectList.filter(
+      (project) => R.any((workflow) => workflow.mobile_verified)(project.workflows)
+  )
   const hasPreviewProjects = !R.isEmpty(nativePreviewProjects)
   const hasBetaProjects = !R.isEmpty(state.projects.betaProjectList.count)
   return {
@@ -65,8 +67,8 @@ export class ProjectDisciplines extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setNavbarSettingsForPage({
-      centerType: 'avatar' 
+      this.props.setNavbarSettingsForPage({
+      centerType: 'avatar'
     }, PageKeys.ProjectDisciplines)
     if (this.shouldPromptForPermissions()) {
       setTimeout(()=> {
@@ -111,7 +113,7 @@ export class ProjectDisciplines extends React.Component {
 
   _renderItem({item}) {
     const { faIcon, value, label, color, description } = item
-    return (
+      return (
       <Discipline
         faIcon={faIcon}
         icon={value}
@@ -126,14 +128,14 @@ export class ProjectDisciplines extends React.Component {
   refreshProjects() {
     this.setState({refreshing: true});
     this.fetchProjectPromise = makeCancelable(this.props.projectActions.fetchProjects())
-    
+
     this.fetchProjectPromise
     .promise
     .then((projectList) => {
       this.fetchProjectPromise = null
       this.setState({refreshing: false});
 
-      // Handle push subscriptions 
+      // Handle push subscriptions
       const notificationProjects = extractSwipeEnabledProjects(projectList.filter(project => !project.isPreview))
       this.props.settingsActions.addUnusedProjectsToNotifications(notificationProjects)
     })
@@ -154,13 +156,14 @@ export class ProjectDisciplines extends React.Component {
 
     const disciplineInProjectList = (discipline) => {
       const {user, hasPreviewProjects, hasRecentProjects, hasBetaProjects} = this.props
-      const isForLoggerInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects ).includes(discipline.value)
+      const isForLoggedInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects ).includes(discipline.value)
       const isTagged = this.props.projectList.find((project) => project.tags.includes(discipline.value)) !== undefined
       const isBeta = hasBetaProjects && discipline.value === 'beta'
-      return isForLoggerInUser || isTagged || isBeta
+      const isForAllProjects = discipline.value === 'all projects'
+      return isForLoggedInUser || isTagged || isBeta || isForAllProjects
     }
     const disciplineList = this.props.isSuccess ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES) : []
-    const listView = 
+    const listView =
       <FlatList
         contentContainerStyle={styles.listContainer}
         data={disciplineList}
@@ -177,7 +180,7 @@ export class ProjectDisciplines extends React.Component {
       <View style={activityIndicator}>
         <ActivityIndicator size="large" />
       </View>
-  
+
 
     return (
       <View style={styles.container}>

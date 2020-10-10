@@ -14,6 +14,7 @@ const DrawingButtons = (props) => {
     return (
         <View style={styles.container} >
             <CircleIconButton
+                inMuseumMode={props.inMuseumMode}
                 disabled={!props.canUndo}
                 type="undo"
                 activated={false}
@@ -21,7 +22,8 @@ const DrawingButtons = (props) => {
                 radius={circleRadius}
             />
             <View style={styles.drawingButtonsContainer}>
-                <CircleIconButton 
+                <CircleIconButton
+                    inMuseumMode={props.inMuseumMode}
                     style={styles.buttonPadding}
                     type="draw"
                     activated={props.highlightedButton === 'draw'}
@@ -29,6 +31,7 @@ const DrawingButtons = (props) => {
                     radius={circleRadius}
                 />
                 <CircleIconButton
+                    inMuseumMode={props.inMuseumMode}
                     type="erase"
                     activated={props.highlightedButton === 'erase' || props.aShapeIsOutOfBounds}
                     onPress={() => props.onModeButtonSelected('erase')}
@@ -39,7 +42,10 @@ const DrawingButtons = (props) => {
                 props.showHelpButton &&
                 <View pointerEvents="box-none" style={styles.needHelpContainer}>
                     <View>
-                        <NeedHelpButton onPress={props.onHelpButtonPressed}/>
+                        <NeedHelpButton
+                            onPress={props.onHelpButtonPressed}
+                            inMuseumMode={props.inMuseumMode}
+                        />
                     </View>
                 </View>
             }
@@ -82,7 +88,8 @@ DrawingButtons.propTypes = {
     canUndo: PropTypes.bool,
     aShapeIsOutOfBounds: PropTypes.bool,
     showHelpButton: PropTypes.bool,
-    onHelpButtonPressed: PropTypes.func
+    onHelpButtonPressed: PropTypes.func,
+    inMuseumMode: PropTypes.bool,
 }
 
 DrawingButtons.defaultProps = {

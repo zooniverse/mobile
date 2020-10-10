@@ -6,6 +6,9 @@ exports[`renders correctly 1`] = `
     Array [
       undefined,
       undefined,
+      Object {
+        "backgroundColor": "white",
+      },
     ]
   }
 />

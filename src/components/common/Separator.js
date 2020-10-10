@@ -5,8 +5,10 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 
-const Separator = ({style, color}) => {
-    let separatorStyle = [styles.defaultStyle]
+import * as colorModes from '../../displayOptions/colorModes'
+
+const Separator = ({style, color, inMuseumMode}) => {
+    let separatorStyle = [styles.defaultStyle, colorModes.separatorColorFor(inMuseumMode)]
     if (color) {
         separatorStyle.push({borderBottomColor: color})
     }
@@ -20,7 +22,6 @@ const Separator = ({style, color}) => {
 
 const styles = EStyleSheet.create({
     defaultStyle: {
-        borderBottomColor: '$borderGrey',
         borderBottomWidth: 1,
         maxHeight: 0,
         flex: 1
@@ -29,7 +30,12 @@ const styles = EStyleSheet.create({
 
 Separator.propTypes = {
     style: PropTypes.any,
-    color: PropTypes.string
+    color: PropTypes.string,
+    inMuseumMode: PropTypes.bool,
+}
+
+Separator.defaultProps = {
+    inMuseumMode: false
 }
 
 export default Separator;
