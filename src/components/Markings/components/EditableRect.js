@@ -116,6 +116,7 @@ class EditableRect extends Component {
     }
 
     render() {
+        const rectangleModeColor = this.props.isDeletable ? 'red' : this.props.color
         return (
             <G>
                 <Rect
@@ -125,9 +126,9 @@ class EditableRect extends Component {
                     y={this.props.y}
                     width={this.props.width}
                     height={this.props.height}
-                    stroke={this.props.isDeletable ? 'red' : this.props.color}
+                    stroke={rectangleModeColor}
                     strokeWidth={4 * this.props.displayToNativeRatioX}
-                    fill={this.props.blurred ? Color(this.props.color).alpha(0.3).toString() : 'transparent'}
+                    fill={this.props.isDeletable ? Color(rectangleModeColor).alpha(0.5).toString() : 'transparent'}
                 />
                 {
                     (this.props.showCorners || this.props.isDeletable) && this.renderCorners(this.props)
