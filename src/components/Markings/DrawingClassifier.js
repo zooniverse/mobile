@@ -113,7 +113,7 @@ class DrawingClassifier extends Component {
             this.props.imageActions.loadImageToCache(subject.displays[0].src).then(localImagePath => {
                 if (Platform.OS === 'android') {
                     width = 200
-                    height = 280
+                    height = 240
                     this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
                 } else {    //this is the appropriate behavior. It's just broken on Android right now.
                     Image.getSize(localImagePath, (width, height) => {
