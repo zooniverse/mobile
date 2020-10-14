@@ -129,7 +129,7 @@ const styles = {
 MarkableImage.defaultProps = {
     subjectDimensions: {
         naturalWidth: 200,
-        naturalHeight: 240
+        naturalHeight: 260
     },
 }
 
