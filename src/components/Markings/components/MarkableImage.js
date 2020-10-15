@@ -126,6 +126,13 @@ const styles = {
     },
 }
 
+MarkableImage.defaultProps = {
+    subjectDimensions: {
+        naturalWidth: 200,
+        naturalHeight: 260
+    },
+}
+
 MarkableImage.propTypes = {
     subjectDimensions: PropTypes.shape({
         naturalWidth: PropTypes.number,

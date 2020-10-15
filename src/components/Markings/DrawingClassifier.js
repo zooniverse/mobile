@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Dimensions} from 'react-native'
+import {Dimensions, Image, Platform} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 import {
@@ -111,13 +111,16 @@ class DrawingClassifier extends Component {
         const {subject} = this.props
         if (prevProps.subject !== subject && subject) {
             this.props.imageActions.loadImageToCache(subject.displays[0].src).then(localImagePath => {
-                //Image dimensions have to be present, but are not used.
-                //Prior to this commit we were using an image resizing solution that broke on Android.
-                //Now the image automatically resizes to fit the available space on both iOS and Android.
-                height = 200
-                width = 200
+                if (Platform.OS === 'android') {
+                    width = 200
+                    height = 260
+                    this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
+                } else {    //this is the appropriate behavior. It's just broken on Android right now.
+                    Image.getSize(localImagePath, (width, height) => {
+                        this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
+                    })
+                }
 
-                this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
                 this.setState({
                     imageIsLoaded: true,
                     localImagePath
