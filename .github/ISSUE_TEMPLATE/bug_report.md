@@ -1,15 +1,8 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: bug
-assignees: ''
-
----
+## Thank you for reporting a bug!
 
 In order to fix an issue, we need to be able to reproduce it. To give us the best chance of reproducing your issue, please follow these steps:
 
-1. Please check that you currently have the latest mobile app version (2.6.9 as of Dec 3, 2019) installed. If not, please update.
+1. Please check that you currently have the latest mobile app version installed. If not, please update.
 
 In your issue, please include:
 
