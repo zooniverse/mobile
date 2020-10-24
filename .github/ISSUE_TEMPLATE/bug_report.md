@@ -3,6 +3,7 @@
 In order to fix an issue, we need to be able to reproduce it. To give us the best chance of reproducing your issue, please follow these steps:
 
 1. Please check that you currently have the latest mobile app version installed. If not, please update.
+2. Please check that the [open issues](https://github.com/zooniverse/mobile/projects/6) do not already address the bug you are reporting. If so, you can comment on that issue to let us know that we should prioritize it!
 
 In your issue, please include:
 
