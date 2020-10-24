@@ -1,4 +1,4 @@
-More detailed information on the [wiki](https://github.com/zooniverse/mobile/wiki)
+More detailed information on the [wiki](https://github.com/zooniverse/mobile/wiki). In particular, check out our [contributor guidelines](https://github.com/zooniverse/mobile/wiki/Contributor-Guidelines)!
 
 # Zooniverse Mobile App
 The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-native/) app that allows folks like you and me to contribute to astronomy, ecology, and anthropology research from their couch, bathtub, or bus stop (but don't swipe and drive, please).
@@ -34,15 +34,20 @@ http://stackoverflow.com/questions/38710654/rctwebsocket-ignoring-return-value-o
 
 ### Android
 #### Requirements:
- - Android Studio (these instructions developed with AS 3.1.1)
+ - Android Studio (these instructions developed with AS 3.6.3)
  - You'll need at least one emulator.  To get one:
     *  Within Android Studio, open the "AVD Manager" -  in the toolbar click the icon with the purple device and small android (fourth from the right)
     *  Click 'Create Virtual Device' - bottom left-hand corner
     *  Create at least one using the latest Android Release (Nougat).  I have a few different size and Android Release configurations
  - Also you'll need a Gradle properties file outside the project for keeping secrets that aren't checked into source control. This should be in ~/.gradle/gradle.properties and contain the following:
-`MYAPP_RELEASE_STORE_FILE=`
-`MYAPP_RELEASE_KEY_ALIAS=`
-Which should contain the keystore file name and alias. Talk to Will Granger (will@zooniverse.org) for more information on this.
+```
+MYAPP_RELEASE_STORE_FILE=/path/to/your/keystore.jks
+MYAPP_RELEASE_KEY_ALIAS=android
+MYAPP_RELEASE_STORE_PASSWORD=android
+MYAPP_RELEASE_KEY_PASSWORD=**you can find this in passbolt**
+```
+
+You will have to get the key _itself_ from an existing maintainer. We are looking for a way to securely store this so you can get it without worrying about corruption. You don't need it to build for debugging—only for release to the Play Store.
 #### Steps:
 1. To run in the emulator from the command line (you'll need device connected or emulator already running): `npm run android`. Shortly, your emulator should boot with the Zooniverse app on it.
     - You need to have either a device emulator open already or a physical device plugged into your computer. Otherwise, you'll need to run through Android Studio
