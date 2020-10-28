@@ -178,11 +178,6 @@ class ProjectList extends Component {
             }
         } else {
             if (!R.isEmpty(swipeEnabledProjects)) {
-                // Add Header
-                if (!this.props.inBetaMode) {
-                    projects.push({displayType: 'header', text: 'Made For Mobile'})
-                    fillLineWithSpacers(projects)
-                }
 
                 // Add Projects
                 projects = [...projects, ...swipeEnabledProjects.map(tagAsProject)]
@@ -190,13 +185,16 @@ class ProjectList extends Component {
             }
     
             if (!R.isEmpty(nonSwipeEnabledProjects)) {
-                // Add Header
-                projects.push({displayType: 'header', text: 'In-Browser Experience'})
-                fillLineWithSpacers(projects)
-
-                // Add Projects
-                projects = [...projects, ...nonSwipeEnabledProjects.map(tagAsProject)]
-                fillLineWithSpacers(projects)
+                // Do nothing. For now, we no longer want
+                // to show browser-only projects in the mobile app.
+                // I am leaving the conditional in because
+                // We discovered an issue with WebView on release day
+                // and needed to fix this fast, and we didn't seem
+                // 100% sure if we wanted to remove browser-only
+                // projects forever.
+                //TODO in 2021: If we get to 2021 and folks seem happy
+                // with the choice to remove the browser projects, let's
+                // pull this conditional out.
             }
         }      
 
