@@ -121,8 +121,8 @@ android {
         applicationId "com.zooniversemobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 47
-        versionName "2.6.8"
+        versionCode 53
+        versionName "2.8.2"
         multiDexEnabled true
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
@@ -130,9 +130,9 @@ android {
     signingConfigs {
         release {
             storeFile file(MYAPP_RELEASE_STORE_FILE)
-            storePassword pass
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
             keyAlias MYAPP_RELEASE_KEY_ALIAS
-            keyPassword pass
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
         }
     }
     splits {
@@ -172,7 +172,6 @@ android {
 
 dependencies {
     implementation project(':react-native-vector-icons')
-    implementation project(':@react-native-community_blur')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'com.facebook.fresco:animated-gif:2.0.0' //gif support
