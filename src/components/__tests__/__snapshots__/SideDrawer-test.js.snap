@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <Drawer
   closedDrawerOffset={-3}
-  content={<Connect(SideDrawerContent) />}
+  content={<UNDEFINED />}
   onClose={[Function]}
   onOpen={[Function]}
   open={true}

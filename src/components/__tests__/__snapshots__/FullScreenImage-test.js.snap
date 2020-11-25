@@ -9,7 +9,7 @@ exports[`renders correctly 1`] = `
   visible={true}
 >
   <View>
-    <Connect(ZoomableImage)
+    <UNDEFINED
       handlePress={[Function]}
       source={
         Object {
@@ -40,7 +40,7 @@ exports[`renders hidden correctly 1`] = `
   visible={false}
 >
   <View>
-    <Connect(ZoomableImage)
+    <UNDEFINED
       handlePress={[Function]}
       source={
         Object {

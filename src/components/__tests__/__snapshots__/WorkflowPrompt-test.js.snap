@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`passes false to Modal when not visible 1`] = `
-<Connect(StyledModal)
+<UNDEFINED
   isVisible={false}
   setVisibility={[Function]}
 >
@@ -106,11 +106,11 @@ exports[`passes false to Modal when not visible 1`] = `
     handlePress={[Function]}
     text="Cancel"
   />
-</Connect(StyledModal)>
+</UNDEFINED>
 `;
 
 exports[`renders correctly when visible 1`] = `
-<Connect(StyledModal)
+<UNDEFINED
   isVisible={true}
   setVisibility={[Function]}
 >
@@ -215,5 +215,5 @@ exports[`renders correctly when visible 1`] = `
     handlePress={[Function]}
     text="Cancel"
   />
-</Connect(StyledModal)>
+</UNDEFINED>
 `;
