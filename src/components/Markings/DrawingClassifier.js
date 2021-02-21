@@ -11,6 +11,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import R from 'ramda'
 import DeviceInfo from 'react-native-device-info';
+import ImageSize from 'react-native-image-size'
 
 import ClassificationPanel from '../classifier/ClassificationPanel'
 import DrawingClassifierSubject from './DrawingClassifierSubject'
@@ -100,7 +101,12 @@ class DrawingClassifier extends Component {
     }
 
     submitClassification() {
-        this.props.classifierActions.submitDrawingClassification(this.props.shapes, this.props.workflow, this.props.subject, this.state.subjectDimensions)
+        this.props.classifierActions.submitDrawingClassification(
+            this.props.shapes,
+            this.props.workflow,
+            this.props.subject,
+            this.state.subjectDimensions
+        )
         this.setState({
             modalHasBeenClosedOnce: false,
             imageIsLoaded: false
@@ -111,10 +117,13 @@ class DrawingClassifier extends Component {
         const {subject} = this.props
         if (prevProps.subject !== subject && subject) {
             this.props.imageActions.loadImageToCache(subject.displays[0].src).then(localImagePath => {
-                if (Platform.OS === 'android') {
-                    width = 200
-                    height = 260
-                    this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
+                if (Platform.OS === 'android') { 
+                    ImageSize.getSize(localImagePath).then(size => {
+                        const width = size.width
+                        const height = size.height
+
+                        this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
+                    })
                 } else {    //this is the appropriate behavior. It's just broken on Android right now.
                     Image.getSize(localImagePath, (width, height) => {
                         this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
