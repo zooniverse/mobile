@@ -117,11 +117,10 @@ class DrawingClassifier extends Component {
         const {subject} = this.props
         if (prevProps.subject !== subject && subject) {
             this.props.imageActions.loadImageToCache(subject.displays[0].src).then(localImagePath => {
-                if (Platform.OS === 'android') { 
-                    ImageSize.getSize(localImagePath).then(size => {
-                        const width = size.width
-                        const height = size.height
-
+                if (Platform.OS === 'android') {
+                    // This isn't using the cache because Image.getSize can't fetch from a local
+                    // path on Android. We tried EVERYTHING.
+                    Image.getSize(subject.displays[0].src, (width, height) => {
                         this.props.classifierActions.setSubjectSizeInWorkflow(subject.id, {width, height})
                     })
                 } else {    //this is the appropriate behavior. It's just broken on Android right now.
