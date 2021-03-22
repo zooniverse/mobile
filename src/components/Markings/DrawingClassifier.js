@@ -11,7 +11,6 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import R from 'ramda'
 import DeviceInfo from 'react-native-device-info';
-import ImageSize from 'react-native-image-size'
 
 import ClassificationPanel from '../classifier/ClassificationPanel'
 import DrawingClassifierSubject from './DrawingClassifierSubject'
