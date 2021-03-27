@@ -69,6 +69,26 @@ it('gets a subject location ', () => {
   expect(getSubjectLocation(subject)).toEqual(returnSubject)
 })
 
+it('passes a good drawing workflow', () => {
+  let testWorkflow = Object.assign({}, mockWorkflow)
+  testWorkflow.first_task = 'T0'
+  testWorkflow.tasks['T0'] = {
+    help: 'Good luck!',
+    instruction: 'Draw on the cat!',
+    tools: [
+      {
+        color: '#00ff00',
+        details: [],
+        label: 'Rectangle Tool',
+        type: 'rectangle'
+      }
+    ],
+    type: 'drawing',
+  }
+  
+  expect(isValidMobileWorkflow(testWorkflow)).toBeTruthy()
+})
+
 it('passes a good single question workflow', () => {
   let testWorkflow = Object.assign({}, mockWorkflow)
   testWorkflow.first_task = 'T0'
@@ -118,6 +138,125 @@ it('passes a good multiple question workflow', () => {
   }
   
   expect(isValidMobileWorkflow(testWorkflow)).toBeTruthy()
+})
+
+it('fails a bad drawing workflow with more than one task', () => {
+  let testWorkflow = Object.assign({}, mockWorkflow)
+  testWorkflow.first_task = 'T0'
+  testWorkflow.tasks = {
+    T0: {
+      help: 'Good luck!',
+      instruction: 'Draw on the cat!',
+      next: 'T1',
+      tools: [
+        {
+          color: '#00ff00',
+          details: [],
+          label: 'Rectangle Tool',
+          type: 'rectangle'
+        }
+      ],
+      type: 'drawing',
+    },
+    T1: {
+      answers: [
+        { label: 'Yes' },
+        { label: 'No' }
+      ],
+      help: 'Good luck!',
+      question: 'Cats?',
+      type: 'single',
+    }
+  }
+
+  expect(isValidMobileWorkflow(testWorkflow)).toBeFalsy()
+})
+
+it('fails a bad drawing workflow with undefined first task', () => {
+  let testWorkflow = Object.assign({}, mockWorkflow)
+  testWorkflow.tasks['T0'] = {
+    help: 'Good luck!',
+    instruction: 'Draw on the cat!',
+    tools: [
+      {
+        color: '#00ff00',
+        details: [],
+        label: 'Rectangle Tool',
+        type: 'rectangle'
+      }
+    ],
+    type: 'drawing',
+  }
+  testWorkflow.first_task = ''
+  
+  expect(isValidMobileWorkflow(testWorkflow)).toBeFalsy()
+})
+
+it('fails a bad drawing workflow with instructions length > 200', () => {
+  let testWorkflow = Object.assign({}, mockWorkflow)
+  testWorkflow.first_task = 'T0'
+  testWorkflow.tasks['T0'] = {
+    help: 'Good luck!',
+    instruction: 'i'.repeat(201),
+    tools: [
+      {
+        color: '#00ff00',
+        details: [],
+        label: 'Rectangle Tool',
+        type: 'rectangle'
+      }
+    ],
+    type: 'drawing',
+  }
+  
+  expect(isValidMobileWorkflow(testWorkflow)).toBeFalsy()
+})
+
+it('fails a bad drawing workflow with more than one drawing tool', () => {
+  let testWorkflow = Object.assign({}, mockWorkflow)
+  testWorkflow.first_task = 'T0'
+  testWorkflow.tasks['T0'] = {
+    help: 'Good luck!',
+    instruction: 'Draw on the cat!',
+    tools: [
+      {
+        color: '#00ff00',
+        details: [],
+        label: 'Rectangle Tool',
+        type: 'rectangle'
+      },
+      {
+        color: '#ff0000',
+        details: [],
+        label: 'Rectangle Tool',
+        type: 'rectangle'
+      },
+    ],
+    type: 'drawing',
+  }
+  
+  expect(isValidMobileWorkflow(testWorkflow)).toBeFalsy()
+})
+
+it('fails a bad drawing workflow with any tool other than rectangle', () => {
+  let testWorkflow = Object.assign({}, mockWorkflow)
+  testWorkflow.first_task = 'T0'
+  testWorkflow.tasks['T0'] = {
+    help: 'Good luck!',
+    instruction: 'Draw on the cat!',
+    tools: [
+      {
+        color: '#ff0000',
+        details: [],
+        label: 'Point Tool',
+        size: 'small',
+        type: 'point'
+      }
+    ],
+    type: 'drawing',
+  }
+  
+  expect(isValidMobileWorkflow(testWorkflow)).toBeFalsy()
 })
 
 it('fails a bad question workflow with more than one task', () => {
