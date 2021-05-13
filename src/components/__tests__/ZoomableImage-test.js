@@ -3,6 +3,8 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { ZoomableImage } from '../ZoomableImage'
 
+jest.mock('Dimensions')
+
 const imageSource = {
   uri: 'https://placekitten.com/200/300'
 }
