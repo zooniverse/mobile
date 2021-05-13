@@ -3,6 +3,8 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import Workflow from '../Workflow'
 
+jest.mock('Dimensions')
+
 const workflow = {
   id: '1',
   display_name: 'Nice workflow',
