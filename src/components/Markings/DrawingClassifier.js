@@ -100,7 +100,12 @@ class DrawingClassifier extends Component {
     }
 
     submitClassification() {
-        this.props.classifierActions.submitDrawingClassification(this.props.shapes, this.props.workflow, this.props.subject, this.state.subjectDimensions)
+        this.props.classifierActions.submitDrawingClassification(
+            this.props.shapes,
+            this.props.workflow,
+            this.props.subject,
+            this.state.subjectDimensions
+        )
         this.setState({
             modalHasBeenClosedOnce: false,
             imageIsLoaded: false
