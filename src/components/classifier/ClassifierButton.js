@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info'
 
+import SizedMarkdown from '../common/SizedMarkdown'
 import FontedText from '../common/FontedText'
 import * as colorModes from '../../displayOptions/colorModes'
 
@@ -30,9 +31,11 @@ class ClassifierButton extends Component {
                 activeOpacity={0.5}
                 style={[this.props.style, styles.button, this.buttonStyle]}
             >
-                <FontedText style={[styles.buttonText, this.textStyle]}>
+                <SizedMarkdown
+                    inMuseumMode={this.props.inMuseumMode}
+                >
                     {this.props.text}
-                </FontedText>
+                </SizedMarkdown>
             </TouchableOpacity>
         )
     }
@@ -42,6 +45,7 @@ class AnswerButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
         this.textStyle = []
+        this.buttonStyle.push({padding: 10})
         this.textStyle.push(styles.whiteButtonText)
 
         if (this.props.deselected) {

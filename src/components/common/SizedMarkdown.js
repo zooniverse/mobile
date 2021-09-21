@@ -47,6 +47,7 @@ class SizedMarkdown extends Component {
 
     render() {
         const { viewDimensions } = this.state
+        const imageHeight = Math.min(viewDimensions.height, 80)
         const customStyles = {
             text: {
                 fontFamily: 'Karla',
@@ -56,7 +57,7 @@ class SizedMarkdown extends Component {
             },
             image: {
                 width: viewDimensions.width,
-                height: viewDimensions.height
+                height: imageHeight
             }
         }
         return (
