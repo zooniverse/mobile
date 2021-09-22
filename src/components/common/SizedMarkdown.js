@@ -47,17 +47,21 @@ class SizedMarkdown extends Component {
 
     render() {
         const { viewDimensions } = this.state
-        const imageHeight = Math.min(viewDimensions.height, 80)
+
+        //We limit the width and height so any button images
+        const buttonImageHeight = Math.min(viewDimensions.height, 80)
+        const buttonImageWidth = Math.min(viewDimensions.width, 100)
+
         const customStyles = {
             text: {
                 fontFamily: 'Karla',
                 fontSize: isTablet ? 22 : 14,
                 fontWeight: isTablet ? 'bold' : 'normal',
-                color: colorModes.instructionsColorFor(this.props.inMuseumMode)
+                color: colorModes.instructionsColorFor(this.props.inMuseumMode),
             },
             image: {
-                width: viewDimensions.width,
-                height: imageHeight
+                width: this.props.forButton ? buttonImageWidth : viewDimensions.width,
+                height: this.props.forButton ? buttonImageHeight : viewDimensions.height,
             }
         }
         return (
@@ -75,10 +79,12 @@ const isTablet = DeviceInfo.isTablet()
 SizedMarkdown.propTypes = {
     children: PropTypes.node,
     inMuseumMode: PropTypes.bool,
+    forButton: PropTypes.bool,
 }
 
 SizedMarkdown.defaultProps = {
-    inMuseumMode: false
+    inMuseumMode: false,
+    forButton: false
 }
 
 export default SizedMarkdown

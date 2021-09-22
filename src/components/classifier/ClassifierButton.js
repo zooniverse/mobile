@@ -32,6 +32,7 @@ class ClassifierButton extends Component {
                 style={[this.props.style, styles.button, this.buttonStyle]}
             >
                 <SizedMarkdown
+                    forButton={true}
                     inMuseumMode={this.props.inMuseumMode}
                 >
                     {this.props.text}
