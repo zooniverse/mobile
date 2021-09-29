@@ -52,12 +52,19 @@ class SizedMarkdown extends Component {
         const buttonImageHeight = Math.min(viewDimensions.height, 80)
         const buttonImageWidth = Math.min(viewDimensions.width, 100)
 
+        // Stylistic vertical centering options weren't affecting this view
+        // so we're vertically centering text manually on buttons.
+        // DRAWBACK: text longer than one line will look weird
+        const fontSize = isTablet ? 22 : 14
+        const textCenteringHeight = (buttonImageHeight / 2) - (fontSize / 2)
+
         const customStyles = {
             text: {
                 fontFamily: 'Karla',
-                fontSize: isTablet ? 22 : 14,
+                fontSize: fontSize,
                 fontWeight: isTablet ? 'bold' : 'normal',
                 color: colorModes.instructionsColorFor(this.props.inMuseumMode),
+                paddingTop: this.props.forButton ? textCenteringHeight : 0,
             },
             image: {
                 width: this.props.forButton ? buttonImageWidth : viewDimensions.width,
