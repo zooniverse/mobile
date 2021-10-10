@@ -125,6 +125,14 @@ PODS:
     - React-jsi (= 0.62.3)
     - React-jsiexecutor (= 0.62.3)
     - Yoga
+  - React-Core/CoreModulesHeaders (0.62.3):
+    - Folly (= 2018.10.22.00)
+    - glog
+    - React-Core/Default
+    - React-cxxreact (= 0.62.3)
+    - React-jsi (= 0.62.3)
+    - React-jsiexecutor (= 0.62.3)
+    - Yoga
   - React-Core/Default (0.62.3):
     - Folly (= 2018.10.22.00)
     - glog
@@ -190,6 +198,14 @@ PODS:
     - React-jsi (= 0.62.3)
     - React-jsiexecutor (= 0.62.3)
     - Yoga
+  - React-Core/RCTPushNotificationHeaders (0.62.3):
+    - Folly (= 2018.10.22.00)
+    - glog
+    - React-Core/Default
+    - React-cxxreact (= 0.62.3)
+    - React-jsi (= 0.62.3)
+    - React-jsiexecutor (= 0.62.3)
+    - Yoga
   - React-Core/RCTSettingsHeaders (0.62.3):
     - Folly (= 2018.10.22.00)
     - glog
@@ -222,6 +238,13 @@ PODS:
     - React-jsi (= 0.62.3)
     - React-jsiexecutor (= 0.62.3)
     - Yoga
+  - React-CoreModules (0.62.3):
+    - FBReactNativeSpec (= 0.62.3)
+    - Folly (= 2018.10.22.00)
+    - RCTTypeSafety (= 0.62.3)
+    - React-Core/CoreModulesHeaders (= 0.62.3)
+    - React-RCTImage (= 0.62.3)
+    - ReactCommon/turbomodule/core (= 0.62.3)
   - React-cxxreact (0.62.3):
     - boost-for-react-native (= 1.63.0)
     - DoubleConversion
@@ -291,6 +314,11 @@ PODS:
     - RCTTypeSafety (= 0.62.3)
     - React-Core/RCTNetworkHeaders (= 0.62.3)
     - ReactCommon/turbomodule/core (= 0.62.3)
+  - React-RCTPushNotification (0.62.3):
+    - FBReactNativeSpec (= 0.62.3)
+    - RCTTypeSafety (= 0.62.3)
+    - React-Core/RCTPushNotificationHeaders (= 0.62.3)
+    - ReactCommon/turbomodule/core (= 0.62.3)
   - React-RCTSettings (0.62.3):
     - FBReactNativeSpec (= 0.62.3)
     - Folly (= 2018.10.22.00)
@@ -355,6 +383,7 @@ DEPENDENCIES:
   - React-Core (from `../node_modules/react-native/`)
   - React-Core/DevSupport (from `../node_modules/react-native/`)
   - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
+  - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
@@ -370,6 +399,7 @@ DEPENDENCIES:
   - React-RCTImage (from `../node_modules/react-native/Libraries/Image`)
   - React-RCTLinking (from `../node_modules/react-native/Libraries/LinkingIOS`)
   - React-RCTNetwork (from `../node_modules/react-native/Libraries/Network`)
+  - React-RCTPushNotification (from `../node_modules/react-native/Libraries/PushNotificationIOS`)
   - React-RCTSettings (from `../node_modules/react-native/Libraries/Settings`)
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
@@ -424,6 +454,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/"
   React-Core:
     :path: "../node_modules/react-native/"
+  React-CoreModules:
+    :path: "../node_modules/react-native/React/CoreModules"
   React-cxxreact:
     :path: "../node_modules/react-native/ReactCommon/cxxreact"
   React-jsi:
@@ -454,6 +486,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/LinkingIOS"
   React-RCTNetwork:
     :path: "../node_modules/react-native/Libraries/Network"
+  React-RCTPushNotification:
+    :path: "../node_modules/react-native/Libraries/PushNotificationIOS"
   React-RCTSettings:
     :path: "../node_modules/react-native/Libraries/Settings"
   React-RCTText:
@@ -505,6 +539,7 @@ SPEC CHECKSUMS:
   RCTTypeSafety: 9c1123190d064e9077e4dba96d51b93d10e0a8a5
   React: 1618bf33d410e5c30e313341fad837d7a82ae75e
   React-Core: 033265923ba9f8d3aff2a01465656d733763cf3d
+  React-CoreModules: 6b34e0e134014a7fb03c0c7b4f9832d90d8cbfec
   React-cxxreact: f2e92695b9f589b282aa32600764c3360cfbada4
   React-jsi: ef7ed91688be7e01bc78080062b428ce1bcd79d0
   React-jsiexecutor: d664a436303eb2cf9919df250f40ce5cf5e99fbe
@@ -520,6 +555,7 @@ SPEC CHECKSUMS:
   React-RCTImage: 52e151112199cc145107bb457e1df70ada999e40
   React-RCTLinking: 9ef27375004b7a3a2194f042f50d7c17dc92b91a
   React-RCTNetwork: 5057bcebafde579a78fcf477e19beef2a461b375
+  React-RCTPushNotification: b627def3a5bdd29acc1d267da65f6827cdafadb7
   React-RCTSettings: 5f6ec67d0d61c3d12f116b9314c4f3bcaf3e43df
   React-RCTText: fc8aaead300090f23dd0974545d75e3c43883922
   React-RCTVibration: 36a70f1015574284fa6770993c1e83a1f85dbabc
@@ -535,6 +571,6 @@ SPEC CHECKSUMS:
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: b5db822228963b87948afa7a5a531088607151dc
 
-PODFILE CHECKSUM: 11a1f7e2ab9afe2414190bccecdaf4b0b1c8847c
+PODFILE CHECKSUM: 3e93fbacbf5220a943fd75b44329c3a6077630ac
 
 COCOAPODS: 1.10.0
