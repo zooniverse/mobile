@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 #import <FirebaseMessaging/FIRMessaging.h>
+#import <UserNotifications/UNUserNotificationCenter.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate, RCTBridgeDelegate>
 

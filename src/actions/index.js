@@ -13,9 +13,11 @@ export const SIGN_IN = 'SIGN_IN'
 
 import store from 'react-native-simple-store'
 import apiClient from 'panoptes-client/lib/api-client'
-import { PUBLICATIONS } from '../constants/publications'
-import { Alert, Platform, PushNotificationIOS, NativeModules } from 'react-native'
-import { addIndex, filter, forEach, head, intersection, keys, map, merge, prop, sortBy } from 'ramda'
+import {PUBLICATIONS} from '../constants/publications'
+import {Alert, Platform} from 'react-native'
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
+
+import {addIndex, forEach, head, keys, map} from 'ramda'
 
 export function setState(stateKey, value) {
   return { type: SET_STATE, stateKey, value }

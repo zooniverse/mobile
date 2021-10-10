@@ -198,14 +198,6 @@ PODS:
     - React-jsi (= 0.62.3)
     - React-jsiexecutor (= 0.62.3)
     - Yoga
-  - React-Core/RCTPushNotificationHeaders (0.62.3):
-    - Folly (= 2018.10.22.00)
-    - glog
-    - React-Core/Default
-    - React-cxxreact (= 0.62.3)
-    - React-jsi (= 0.62.3)
-    - React-jsiexecutor (= 0.62.3)
-    - Yoga
   - React-Core/RCTSettingsHeaders (0.62.3):
     - Folly (= 2018.10.22.00)
     - glog
@@ -314,11 +306,6 @@ PODS:
     - RCTTypeSafety (= 0.62.3)
     - React-Core/RCTNetworkHeaders (= 0.62.3)
     - ReactCommon/turbomodule/core (= 0.62.3)
-  - React-RCTPushNotification (0.62.3):
-    - FBReactNativeSpec (= 0.62.3)
-    - RCTTypeSafety (= 0.62.3)
-    - React-Core/RCTPushNotificationHeaders (= 0.62.3)
-    - ReactCommon/turbomodule/core (= 0.62.3)
   - React-RCTSettings (0.62.3):
     - FBReactNativeSpec (= 0.62.3)
     - Folly (= 2018.10.22.00)
@@ -346,6 +333,8 @@ PODS:
     - React-jsi (= 0.62.3)
     - ReactCommon/callinvoker (= 0.62.3)
   - rn-fetch-blob (0.11.2):
+    - React-Core
+  - RNCPushNotificationIOS (1.10.1):
     - React-Core
   - RNDeviceInfo (2.1.2):
     - React
@@ -399,12 +388,12 @@ DEPENDENCIES:
   - React-RCTImage (from `../node_modules/react-native/Libraries/Image`)
   - React-RCTLinking (from `../node_modules/react-native/Libraries/LinkingIOS`)
   - React-RCTNetwork (from `../node_modules/react-native/Libraries/Network`)
-  - React-RCTPushNotification (from `../node_modules/react-native/Libraries/PushNotificationIOS`)
   - React-RCTSettings (from `../node_modules/react-native/Libraries/Settings`)
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
+  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
@@ -486,8 +475,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/LinkingIOS"
   React-RCTNetwork:
     :path: "../node_modules/react-native/Libraries/Network"
-  React-RCTPushNotification:
-    :path: "../node_modules/react-native/Libraries/PushNotificationIOS"
   React-RCTSettings:
     :path: "../node_modules/react-native/Libraries/Settings"
   React-RCTText:
@@ -498,6 +485,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   rn-fetch-blob:
     :path: "../node_modules/rn-fetch-blob"
+  RNCPushNotificationIOS:
+    :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNFBApp:
@@ -555,12 +544,12 @@ SPEC CHECKSUMS:
   React-RCTImage: 52e151112199cc145107bb457e1df70ada999e40
   React-RCTLinking: 9ef27375004b7a3a2194f042f50d7c17dc92b91a
   React-RCTNetwork: 5057bcebafde579a78fcf477e19beef2a461b375
-  React-RCTPushNotification: b627def3a5bdd29acc1d267da65f6827cdafadb7
   React-RCTSettings: 5f6ec67d0d61c3d12f116b9314c4f3bcaf3e43df
   React-RCTText: fc8aaead300090f23dd0974545d75e3c43883922
   React-RCTVibration: 36a70f1015574284fa6770993c1e83a1f85dbabc
   ReactCommon: 3ea86417fa6e432b500579df40b057df54cfb4d4
   rn-fetch-blob: f525a73a78df9ed5d35e67ea65e79d53c15255bc
+  RNCPushNotificationIOS: 089da3b657e1e3d464f38195fd2e3069608ef5af
   RNDeviceInfo: fd8296de6fca8b743cdc499b896f48e8a9f1faf5
   RNFBApp: 7b539bb25520fa73d6a240f5c6ea569e27683645
   RNFBMessaging: c55142d3b2d34d706bf12bd5eef9ef35254c2df1
@@ -571,6 +560,6 @@ SPEC CHECKSUMS:
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: b5db822228963b87948afa7a5a531088607151dc
 
-PODFILE CHECKSUM: 3e93fbacbf5220a943fd75b44329c3a6077630ac
+PODFILE CHECKSUM: 22511d12e5d6eb890e8c16778452046007deb411
 
 COCOAPODS: 1.10.0

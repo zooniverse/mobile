@@ -61,7 +61,6 @@
 		B432817BE3FE49938A7C7135 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 233F2C9B319141459195487F /* EvilIcons.ttf */; };
 		B7FA60BE1459481D9D2D314B /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BA0E1F0AFB5439F9AD7CE4B /* Octicons.ttf */; };
 		BB183F25BF0A44C3B3398553 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50668F84F0AD4F0DB170C64C /* MaterialIcons.ttf */; };
-		C7F02BC8238A1C2400D8CA45 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013103FF21EF934700BF5E31 /* libRCTPushNotification.a */; };
 		D767270FFFB94166B1B98CAC /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B224AC04F5944DCB6F68B90 /* MaterialCommunityIcons.ttf */; };
 		E1F2D9FE3E75402A923C7580 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67963A9FC74E42BCB3574116 /* FontAwesome5_Regular.ttf */; };
 		EA8F530681694D32BFDB345A /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D161CCBBF61348A498443925 /* Zocial.ttf */; };
@@ -488,7 +487,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7F02BC8238A1C2400D8CA45 /* libRCTPushNotification.a in Frameworks */,
 				013103DE21EF884C00BF5E31 /* libsqlite3.0.tbd in Frameworks */,
 				013103DC21EF883E00BF5E31 /* libz.tbd in Frameworks */,
 				013103DA21EF883300BF5E31 /* SystemConfiguration.framework in Frameworks */,
