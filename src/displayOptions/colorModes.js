@@ -129,10 +129,13 @@ export function textColorFor(museumMode) {
 }
 
 export function instructionsColorFor(museumMode) {
+    // Keeping this function for styling consistency and flexibility, but
+    // With the button colors we've chosen right now, white
+    // Is higher contrast than black even in not-museum-mode
     return switchOn(
         museumMode,
         'white',
-        'black'
+        'white'
     )
 }
 
