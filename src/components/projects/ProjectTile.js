@@ -132,7 +132,6 @@ class ProjectTile extends Component {
             this.props.containsNativeWorkflows,
             this.props.containsMultipleNativeWorkflows
         )
-        console.log(this.props.project.display_name + " workflows all complete: " + shouldDisplayIsOutOfData.toString())
 
         const avatarUri = R.prop('avatar_src', this.props.project);
         const avatarSource = avatarUri !== undefined ? { uri: avatarUri } : require('../../../images/teal-wallpaper.png');
