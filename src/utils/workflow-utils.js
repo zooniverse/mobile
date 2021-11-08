@@ -28,8 +28,17 @@ const isValidQuestionWorkflow = (workflow) => {
   if (!workflow.first_task) {
     return false
   }
+  
   const firstTask = workflow.tasks[workflow.first_task]
+  
+  if (firstTask === undefined) {
+    return false
+  }
 
+  if (firstTask.type !== 'single' && firstTask.type !== 'multiple') {
+    return false
+  }
+  
   const hasSingleTask = workflowHasSingleTask(workflow)
 
   const shortcut = workflow.tasks[firstTask.unlinkedTask]
