@@ -38,5 +38,13 @@ target 'ZooniverseMobile' do
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
 
+  pre_install do |installer|
+    puts("Image fix for ios14: remove this when upgradeing to >= 0.63.3")
+    find = "_currentFrame.CGImage;"
+    replace = "_currentFrame.CGImage ;} else { [super displayLayer:layer];"
+    op = `sed -ie "s/#{find}/#{replace}/" ../node_modules/react-native/Libraries/Image/RCTUIImageViewAnimated.m`
+    puts("Image fix for ios14 done")
+  end
+
   use_native_modules!
 end
