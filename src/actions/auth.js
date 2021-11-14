@@ -21,7 +21,8 @@ export function signIn(login, password) {
     dispatch(setState('loadingText', 'Signing In...'))
     dispatch(setState('errorMessage', null))
     dispatch(checkIsConnected()).then(() => {
-      auth.signIn({login: login, password: password}).then((user) => {
+      //Autofill adds a space to the username, so we remove that here
+      auth.signIn({login: login.trim(), password: password}).then((user) => {
         user.isGuestUser = false
         user.projects = {}
         dispatch(setUser(user));
