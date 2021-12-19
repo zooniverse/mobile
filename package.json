@@ -64,6 +64,7 @@
     "react-native-svg": "9.13.3",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^7.0.0",
+    "react-native-video": "^5.2.0",
     "react-native-webview": "^7.5.1",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",

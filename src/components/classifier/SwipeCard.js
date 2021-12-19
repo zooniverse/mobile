@@ -57,7 +57,6 @@ class SwipeCard extends Component {
                     RNFetchBlob.fs.unlink(uri)
                 }
             })
-
             this.setState({
                 localUris,
             })
