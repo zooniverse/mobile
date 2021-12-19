@@ -41,13 +41,13 @@ export class Question extends Component {
     const questionWithoutImages = removeImagesFrom(props.question)
     this.state = {
       imageSource,
-      question: questionWithoutImages
+      question: questionWithoutImages,
     }
   }
 
 
   render() {
-    return (
+      return (
       <View style={styles.questionContainer}>
           <View style={styles.markdown}>
             <SizedMarkdown inMuseumMode={this.props.inMuseumMode}>

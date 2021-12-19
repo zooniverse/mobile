@@ -271,6 +271,11 @@ PODS:
     - React
   - react-native-splash-screen (3.2.0):
     - React
+  - react-native-video (5.2.0):
+    - React-Core
+    - react-native-video/Video (= 5.2.0)
+  - react-native-video/Video (5.2.0):
+    - React-Core
   - react-native-webview (7.5.1):
     - React
   - React-RCTActionSheet (0.62.3):
@@ -381,6 +386,7 @@ DEPENDENCIES:
   - react-native-google-analytics-bridge (from `../node_modules/react-native-google-analytics-bridge`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -461,6 +467,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
@@ -537,6 +545,7 @@ SPEC CHECKSUMS:
   react-native-google-analytics-bridge: 95334ced9e20c9e7a23a2b7a6e2ab878b0acdc61
   react-native-netinfo: 16c6408c311572f17f9ffc3fa12614489307b6cf
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
+  react-native-video: 77ce22be7abff9e373527ca10106a99dea3ba56c
   react-native-webview: b7ad1323338cb52e370bb07d6141308953ff2440
   React-RCTActionSheet: abb6e20cdc3710d3442d735cdb2c641a5597f35d
   React-RCTAnimation: cacf34437277ae266c95896f40eb4e7604017132
