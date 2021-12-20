@@ -2,7 +2,8 @@ import React from 'react'
 import {
     Modal,
     TouchableOpacity,
-    View
+    View,
+    Dimensions
 } from 'react-native'
 import FontedText from './common/FontedText'
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -16,17 +17,21 @@ class FullScreenImage extends React.Component {
     render() {
         function displayWithRequisiteComponent(uri, handlePress) {
             if (uri.slice(uri.length - 4).match('.mp4')) {
+                return <Video
+                    source={{uri: uri}}
+                    style={{
+                        width: Dimensions.get('window').width,
+                        height: Dimensions.get('window').height
+                    }}
+                    controls={true}
+                    repeat={true}
+                />
+
+            } else {
                 return <ZoomableImage
                     source={uri}
                     handlePress={handlePress}
                 />;
-            } else {
-                return <Video
-                    source={{uri: uri}}
-                    style={{width: 1, height: 1}}
-                    controls={true}
-                    repeat={true}
-                />
             }
         }
 
