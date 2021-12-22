@@ -18,7 +18,7 @@ class ClassifierButton extends Component {
 
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = []
+        this.textStyle = {}
     }
 
     render() {
@@ -33,7 +33,7 @@ class ClassifierButton extends Component {
             >
                 <SizedMarkdown
                     forButton={true}
-                    inMuseumMode={this.props.inMuseumMode}
+                    style={this.textStyle}
                 >
                     {this.props.text}
                 </SizedMarkdown>
@@ -45,9 +45,12 @@ class ClassifierButton extends Component {
 class AnswerButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = []
+        this.textStyle = {}
         this.buttonStyle.push({padding: 10})
-        this.textStyle.push(styles.whiteButtonText)
+        this.textStyle = {
+            ...this.textStyle,
+            ...styles.whiteButtonText
+        }
 
         if (this.props.deselected) {
             this.buttonStyle.push(colorModes.disabledButtonStyleFor(this.props.inMuseumMode))
@@ -62,9 +65,12 @@ class AnswerButton extends ClassifierButton {
 class GuideButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = []
+        this.textStyle = {}
 
-        this.textStyle.push(colorModes.selectedTextColorFor(this.props.inMuseumMode))
+        this.textStyle = {
+            ...this.textStyle,
+            ...colorModes.selectedTextColorFor(this.props.inMuseumMode)
+        }
         this.buttonStyle.push(styles.guideButton)
         this.buttonStyle.push(colorModes.guideButtonStyleFor(this.props.inMuseumMode))
     }
@@ -73,8 +79,11 @@ class GuideButton extends ClassifierButton {
 class SubmitButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = []
-        this.textStyle.push(colorModes.submitButtonTextColorFor(this.props.inMuseumMode))
+        this.textStyle = {}
+        this.textStyle = {
+            ...this.textStyle,
+            ...colorModes.submitButtonTextColorFor(this.props.inMuseumMode)
+        }
 
         if (this.props.disabled) {
             this.buttonStyle.push(colorModes.disabledSubmitButtonStyleFor(this.props.inMuseumMode))
@@ -87,9 +96,12 @@ class SubmitButton extends ClassifierButton {
 class SwipeButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = []
+        this.textStyle = {}
 
-        this.textStyle.push(styles.whiteButtonText)
+        this.textStyle = {
+            ...this.textStyle,
+            ...styles.whiteButtonText
+        }
         this.buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
     }
 }
