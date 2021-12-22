@@ -60,17 +60,21 @@ class SizedMarkdown extends Component {
 
         const customStyles = {
             text: {
-                fontFamily: 'Karla',
-                fontSize: fontSize,
-                fontWeight: isTablet ? 'bold' : 'normal',
-                color: colorModes.instructionsColorFor(this.props.inMuseumMode),
-                paddingTop: this.props.forButton ? textCenteringHeight : 0,
+                ...{
+                    fontFamily: 'Karla',
+                    fontSize: fontSize,
+                    fontWeight: isTablet ? 'bold' : 'normal',
+                    color: 'black',
+                    paddingTop: this.props.forButton ? textCenteringHeight : 0,
+                },
+                ...this.props.style
             },
             image: {
                 width: this.props.forButton ? buttonImageWidth : viewDimensions.width,
                 height: this.props.forButton ? buttonImageHeight : viewDimensions.height,
             }
         }
+
         return (
             <View onLayout={this.onViewLayout}>
                 <Markdown rules={markdownImageRule} styles={customStyles}>
@@ -87,6 +91,7 @@ SizedMarkdown.propTypes = {
     children: PropTypes.node,
     inMuseumMode: PropTypes.bool,
     forButton: PropTypes.bool,
+    style: PropTypes.object,
 }
 
 SizedMarkdown.defaultProps = {
