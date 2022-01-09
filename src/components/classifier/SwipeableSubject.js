@@ -13,7 +13,7 @@ import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator'
 import PaginationBar from './PaginationBar'
 import Video from 'react-native-video'
 
-class SwipeCardSubjectsView extends Component {
+class SwipeableSubject extends Component {
     constructor(props) {
         super(props);
 
@@ -136,7 +136,7 @@ class SwipeCardSubjectsView extends Component {
     }
 }
 
-SwipeCardSubjectsView.propTypes = {
+SwipeableSubject.propTypes = {
     imageUris: PropTypes.array,
     hasMultipleSubjects: PropTypes.bool,
     onDisplayImageChange: PropTypes.func,
@@ -176,4 +176,4 @@ const styles = EStyleSheet.create({
     }
 })
 
-export default SwipeCardSubjectsView;
+export default SwipeableSubject;

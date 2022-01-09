@@ -7,13 +7,13 @@ import {
 } from 'react-native'
 import FontedText from './common/FontedText'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import ZoomableImage from './ZoomableImage'
+import ZoomableMedia from './ZoomableImage'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types'
 import Video from 'react-native-video'
 
 
-class FullScreenImage extends React.Component {
+class FullScreenMedia extends React.Component {
     render() {
         function displayWithRequisiteComponent(uri, handlePress) {
             if (uri.slice(uri.length - 4).match('.mp4')) {
@@ -28,7 +28,7 @@ class FullScreenImage extends React.Component {
                 />
 
             } else {
-                return <ZoomableImage
+                return <ZoomableMedia
                     source={uri}
                     handlePress={handlePress}
                 />;
@@ -108,11 +108,11 @@ const styles = EStyleSheet.create({
     }
 })
 
-FullScreenImage.propTypes = {
+FullScreenMedia.propTypes = {
     source: PropTypes.object,
     isVisible: PropTypes.bool,
     handlePress: PropTypes.func,
     question: PropTypes.string
 }
 
-export default FullScreenImage
+export default FullScreenMedia
