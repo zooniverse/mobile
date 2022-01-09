@@ -1,19 +1,19 @@
 import 'react-native'
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow';
-import FullScreenImage from '../FullScreenImage'
+import FullScreenMedia from '../FullScreenMedia'
 
 const imageSource = {
   uri: 'https://placekitten.com/200/300'
 }
 
-jest.mock('../ZoomableImage', () => 'ZoomableImage')
+jest.mock('../ZoomableMedia', () => 'ZoomableImage')
 
 const renderer = new ShallowRenderer();
 
 it('renders correctly', () => {
   const tree = renderer.render(
-    <FullScreenImage
+    <FullScreenMedia
       source={imageSource}
       handlePress={jest.fn}
       isVisible={true}
@@ -25,7 +25,7 @@ it('renders correctly', () => {
 
 it('renders hidden correctly', () => {
   const tree = renderer.render(
-    <FullScreenImage
+    <FullScreenMedia
       source={imageSource}
       handlePress={jest.fn}
       isVisible={false}

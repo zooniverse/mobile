@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
      drawingActions: bindActionCreators(drawingActions, dispatch)
 })
 
-class DrawingModal extends Component {
+class DrawableSubject extends Component {
 
     constructor(props) {
         super(props)
@@ -153,7 +153,7 @@ const styles = EStyleSheet.create({
 
 })
 
-DrawingModal.propTypes = {
+DrawableSubject.propTypes = {
     canUndo: PropTypes.bool,
     shouldConfirmOnClose: PropTypes.bool,
     inMuseumMode: PropTypes.bool,
@@ -179,4 +179,4 @@ DrawingModal.propTypes = {
     numberOfShapesDrawn: PropTypes.number
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DrawingModal)
+export default connect(mapStateToProps, mapDispatchToProps)(DrawableSubject)

@@ -13,7 +13,7 @@ import Tutorial from './Tutorial'
 import SwipeTabs from './SwipeTabs'
 import NeedHelpButton from './NeedHelpButton'
 import OverlaySpinner from '../OverlaySpinner'
-import FullScreenImage from '../FullScreenImage'
+import FullScreenMedia from '../FullScreenMedia'
 import UnlinkedTask from './UnlinkedTask'
 import Swiper from 'react-native-deck-swiper'
 import R from 'ramda'
@@ -255,7 +255,7 @@ export class SwipeClassifier extends React.Component {
                     onPress={() => this.classifierContainer.displayHelpModal()}
                     inMuseumMode={this.props.project.in_museum_mode}
                 /> : null}
-                <FullScreenImage
+                <FullScreenMedia
                     source={{uri: this.state.fullScreenImageSource}}
                     isVisible={this.state.showFullSize}
                     handlePress={() => this.setState({fullScreenQuestion: '', showFullSize: false})}

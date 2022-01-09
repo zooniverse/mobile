@@ -7,11 +7,11 @@ import {
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
-import LoadableImage from '../common/LoadableImage'
+import LoadableMedia from '../common/LoadableMedia'
 import AlreadySeenBanner from './AlreadySeenBanner'
 import PaginationBar from './PaginationBar';
 
-class TapableSubject extends Component {
+class TappableSubject extends Component {
     constructor(props) {
         super(props)
 
@@ -118,7 +118,7 @@ class TapableSubject extends Component {
                                                     }
                                                 }}
                                             >
-                                                <LoadableImage
+                                                <LoadableMedia
                                                     source={{uri: display.src}}
                                                     style={[{height, width: width - 60}, styles.imageBackground]}
                                                 />
@@ -131,7 +131,7 @@ class TapableSubject extends Component {
                         </Animated.ScrollView>
                     :
                         <TouchableOpacity style={styles.imageContainer} onPress={() => onPress(subject.displays[0].src)}>
-                            <LoadableImage
+                            <LoadableMedia
                                 source={{uri: subject.displays[0].src}}
                                 style={{height, width}}
                             />
@@ -166,7 +166,7 @@ const styles = EStyleSheet.create({
     }
 })
 
-TapableSubject.propTypes = {
+TappableSubject.propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
     subject: PropTypes.object,
@@ -176,4 +176,4 @@ TapableSubject.propTypes = {
     inMuseumMode: PropTypes.bool,
 }
 
-export default TapableSubject
+export default TappableSubject

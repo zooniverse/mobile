@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 
-import MarkableImage from './MarkableImage'
+import MarkableMedia from './MarkableImage'
 import DrawingButtons from './DrawingButtons'
 import SubjectLoadingIndicator from '../../common/SubjectLoadingIndicator'
 
@@ -46,7 +46,7 @@ class DrawingToolView extends Component {
                 {
                     this.props.imageIsLoaded ? 
                         <Animated.View style={[styles.container, {transform: [{scale: this.state.scale}]}]} >
-                            <MarkableImage
+                            <MarkableMedia
                                 onContainerLayout={this.props.onContainerLayout}
                                 drawingColor={this.props.drawingColor}
                                 source={this.props.imageSource}

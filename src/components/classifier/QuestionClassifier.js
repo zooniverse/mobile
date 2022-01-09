@@ -25,8 +25,8 @@ import {
     SubmitButton
 } from './ClassifierButton';
 
-import FullScreenImage from '../FullScreenImage'
-import TapableSubject from './TapableSubject';
+import FullScreenMedia from '../FullScreenMedia'
+import TappableSubject from './TappableSubject';
 
 import * as colorModes from '../../displayOptions/colorModes'
 
@@ -187,7 +187,7 @@ class QuestionClassifier extends Component {
                                         height: nativeEvent.layout.height
                                     }
                                 })}>
-                                    <TapableSubject
+                                    <TappableSubject
                                         height={300}
                                         width={imageDimensions.width}
                                         subject={subject}
@@ -246,7 +246,7 @@ class QuestionClassifier extends Component {
                         :
                         renderTutorial()
                 }
-                <FullScreenImage
+                <FullScreenMedia
                     source={fullScreenImageSource}
                     isVisible={showFullSize}
                     handlePress={() => this.setState({fullScreenQuestion: '', showFullSize: false})}

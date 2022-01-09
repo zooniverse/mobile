@@ -27,7 +27,7 @@ import {
     SubmitButton
 } from '../classifier/ClassifierButton'
 import Separator from '../common/Separator'
-import DrawingModal from './DrawingModal'
+import DrawingModal from './DrawableSubject'
 import ShapeInstructionsView from './components/ShapeInstructionsView';
 import DrawingHeader from './components/DrawingHeader'
 
