@@ -1504,7 +1504,7 @@
 				);
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.8.2;
+				MARKETING_VERSION = 2.9.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1512,7 +1512,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
-				PROVISIONING_PROFILE_SPECIFIER = "Release 2.7.1 Use This Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "Chelseas Distro Provisioning Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -1544,7 +1544,7 @@
 				);
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.8.2;
+				MARKETING_VERSION = 2.9.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1552,7 +1552,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
-				PROVISIONING_PROFILE_SPECIFIER = "Release 2.7.1 Use This Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "Chelseas Distro Provisioning Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
