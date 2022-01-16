@@ -121,8 +121,8 @@ android {
         applicationId "com.zooniversemobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 53
-        versionName "2.8.2"
+        versionCode 56
+        versionName "2.9.0"
         multiDexEnabled true
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
@@ -187,10 +187,10 @@ dependencies {
 
 // Run this once to be able to run the application with BUCK
 // puts all compile dependencies into folder libs for BUCK to use
-task copyDownloadableDepsToLibs(type: Copy) {
-    from configurations.compile
-    into 'libs'
-}
+//task copyDownloadableDepsToLibs(type: Copy) {
+//    from configurations.compile
+//    into 'libs'
+//}
 
 apply plugin: 'com.google.gms.google-services'
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
