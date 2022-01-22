@@ -14,8 +14,6 @@ import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
 import com.facebook.react.ReactActivity;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import org.devio.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
@@ -45,21 +43,6 @@ public class MainActivity extends ReactActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         SplashScreen.show(this);
-    }
-
-    private boolean playServicesAvailable() {
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
-                        .show();
-            } else {
-                finish();
-            }
-            return false;
-        }
-        return true;
     }
 
     private void sendNotification(String messageTitle, String messageBody, String projectID) {
