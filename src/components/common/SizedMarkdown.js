@@ -65,7 +65,7 @@ class SizedMarkdown extends Component {
                     fontSize: fontSize,
                     fontWeight: isTablet ? 'bold' : 'normal',
                     color: 'black',
-                    paddingTop: this.props.forButton ? textCenteringHeight : 0,
+                    justifyContent: 'center',
                 },
                 ...this.props.style
             },

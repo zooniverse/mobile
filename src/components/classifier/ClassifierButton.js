@@ -8,7 +8,6 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info'
 
 import SizedMarkdown from '../common/SizedMarkdown'
-import FontedText from '../common/FontedText'
 import * as colorModes from '../../displayOptions/colorModes'
 
 class ClassifierButton extends Component {
@@ -46,7 +45,9 @@ class AnswerButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
         this.buttonStyle.push({padding: 10})
-        this.textStyle = styles.whiteButtonText
+        this.textStyle = {
+            ...styles.whiteButtonText
+        }
 
         if (this.props.deselected) {
             this.buttonStyle.push(colorModes.disabledButtonStyleFor(this.props.inMuseumMode))
@@ -62,7 +63,6 @@ class GuideButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
         this.textStyle = {
-            ...{paddingBottom:5},
             ...colorModes.selectedTextColorFor(this.props.inMuseumMode)
         }
 
@@ -74,7 +74,9 @@ class GuideButton extends ClassifierButton {
 class SubmitButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = colorModes.submitButtonTextColorFor(this.props.inMuseumMode)
+        this.textStyle = {
+            ...colorModes.submitButtonTextColorFor(this.props.inMuseumMode)
+        }
 
         if (this.props.disabled) {
             this.buttonStyle.push(colorModes.disabledSubmitButtonStyleFor(this.props.inMuseumMode))
@@ -87,7 +89,10 @@ class SubmitButton extends ClassifierButton {
 class SwipeButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = styles.whiteButtonText
+        this.textStyle = {
+            ...styles.whiteButtonText
+        }
+
         this.buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
     }
 }
