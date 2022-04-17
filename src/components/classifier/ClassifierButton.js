@@ -102,6 +102,7 @@ const styles = EStyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 12
     },
     buttonText: {
         fontSize: DeviceInfo.isTablet() ? 22 : 14,
