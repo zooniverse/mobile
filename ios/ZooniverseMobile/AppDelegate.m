@@ -12,7 +12,6 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import "ZooniverseMobile-Swift.h"
 #import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
 
@@ -40,9 +39,6 @@
   rootView.loadingViewFadeDelay = 0.30;
   rootView.loadingViewFadeDuration = 0.30;
 
-  [FirebaseManager.shared configureFirebase];
-  [application registerForRemoteNotifications];
-  
   return YES;
 }
 

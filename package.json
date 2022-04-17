@@ -29,8 +29,6 @@
     "@react-native-community/blur": "^3.6.0",
     "@react-native-community/netinfo": "^4.6.1",
     "@react-native-community/push-notification-ios": "^1.10.1",
-    "@react-native-firebase/app": "^14.2.2",
-    "@react-native-firebase/messaging": "^14.2.2",
     "@sentry/react-native": "3.2.10",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "color": "^3.1.0",

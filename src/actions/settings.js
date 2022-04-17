@@ -1,5 +1,4 @@
 import * as ActionConstants from '../constants/actions'
-import firebase from '@react-native-firebase/app';
 
 /**
  * These are the topic names we subscribe to Firebase with
@@ -15,11 +14,6 @@ const TopicNames = {
 }
 
 const updateSubscriptionOfTopic = (subscribe, topicName) => {
-    if (subscribe) {
-        firebase.messaging().subscribeToTopic(topicName);
-    } else {
-        firebase.messaging().unsubscribeFromTopic(topicName);
-    }
 }
 
 export const addUnusedProjectsToNotifications = (projects) => {
@@ -132,27 +126,4 @@ export const updateUrgentHelpNotifications = (enabled) => {
 }
 
 export const initializeSubscriptionsWithFirebase = (token) => {
-    return (dispatch, getState) => {
-        const {
-            fcmToken,
-            newProjectNotifications,
-            newBetaNotifications,
-            urgentHelpNotification,
-            projectSpecificNotifications
-        } = getState().settings;
-
-        if (fcmToken !== token) {
-            updateSubscriptionOfTopic(newProjectNotifications, TopicNames.newProjects)
-            updateSubscriptionOfTopic(newBetaNotifications, TopicNames.newBetaProjects)
-            updateSubscriptionOfTopic(urgentHelpNotification, TopicNames.urgentNotifications)
-            projectSpecificNotifications.forEach(project => {
-                updateSubscriptionOfTopic(project.subscribed, project.id)
-            })
-
-            dispatch({
-                type: ActionConstants.NOTIFICATIONS_INITIALIZED,
-                token
-            })
-        }
-    }
 }
