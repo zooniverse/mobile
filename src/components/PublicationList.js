@@ -18,7 +18,7 @@ import { addIndex, defaultTo, keys, map } from 'ramda'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys';
 
-GoogleAnalytics.trackEvent('view', 'Publication List')
+// GoogleAnalytics.trackEvent('view', 'Publication List')
 
 const mapStateToProps = (state) => ({
   user: state.user,

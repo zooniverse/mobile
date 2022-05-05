@@ -96,7 +96,7 @@ class ProjectTile extends Component {
     _onMainViewPress() {
         const { workflows, display_name, redirect } = this.props.project
         
-        GoogleAnalytics.trackEvent('view', display_name)
+        // GoogleAnalytics.trackEvent('view', display_name)
 
         if (workflows.length > 1) {
             Animated.timing(this.state.popupOpacity, { toValue: 1, duration: 300 }).start(() => {

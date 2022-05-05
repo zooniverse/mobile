@@ -19,7 +19,7 @@ class Publication extends Component {
   }
 
   handlePress() {
-    GoogleAnalytics.trackEvent('view', 'publication')
+    // GoogleAnalytics.trackEvent('view', 'publication')
 
     const zurl=this.props.publication.href
     Linking.canOpenURL(zurl).then(supported => {

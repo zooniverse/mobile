@@ -18,7 +18,7 @@ class Discipline extends Component {
   }
 
   handleClick() {
-    GoogleAnalytics.trackEvent('view', this.props.tag)
+    // GoogleAnalytics.trackEvent('view', this.props.tag)
     const navigationProps = {selectedProjectTag: this.props.tag, color: this.props.color}
     Actions.ProjectList(navigationProps)
   }

@@ -80,7 +80,7 @@ export class Register extends React.Component {
   }
 
   handleOpenPrivacyPolicy() {
-    GoogleAnalytics.trackEvent('view', 'Privacy Policy')
+    // GoogleAnalytics.trackEvent('view', 'Privacy Policy')
 
     const url='https://www.zooniverse.org/privacy'
     Linking.canOpenURL(url).then(supported => {

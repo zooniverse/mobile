@@ -173,7 +173,7 @@ const SocialMediaLink = ({mediaLink, iconName}) =>
   </TouchableOpacity>
 
 const openSocialMediaLink = (link) => {
-  GoogleAnalytics.trackEvent('view', link)
+  // GoogleAnalytics.trackEvent('view', link)
 
   Linking.canOpenURL(link).then(supported => {
     if (supported) {

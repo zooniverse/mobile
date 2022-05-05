@@ -25,8 +25,8 @@ import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
-GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
-GoogleAnalytics.trackEvent('view', 'Home')
+// GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
+// GoogleAnalytics.trackEvent('view', 'Home')
 
 const mapStateToProps = (state) => {
   const nativePreviewProjects = state.projects.previewProjectList.filter(

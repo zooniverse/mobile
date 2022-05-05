@@ -21,7 +21,7 @@ import theme from '../../theme'
 import { setNavbarSettingsForPage } from '../../actions/navBar'
 import PageKeys from '../../constants/PageKeys'
 
-GoogleAnalytics.trackEvent('view', 'Notification Settings')
+// GoogleAnalytics.trackEvent('view', 'Notification Settings')
 
 const mapStateToProps = (state) => {
   const {

@@ -22,7 +22,7 @@ import * as projectDisplay from '../../displayOptions/projectDisplay'
 
 import theme from '../../theme'
 
-GoogleAnalytics.trackEvent('view', 'Project')
+// GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state, ownProps) => {
     const { selectedProjectTag } = ownProps;

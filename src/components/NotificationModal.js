@@ -62,7 +62,7 @@ class NotificationModal extends Component {
   }
 
   handleClick() {
-    GoogleAnalytics.trackEvent('view from notification', this.props.notificationProject.display_name)
+    // GoogleAnalytics.trackEvent('view from notification', this.props.notificationProject.display_name)
 
     const zurl=`http://zooniverse.org/projects/${this.props.notificationProject.slug}`
     Linking.canOpenURL(zurl).then(supported => {
