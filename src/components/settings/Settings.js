@@ -15,13 +15,10 @@ import { connect } from 'react-redux'
 import {
   checkPushPermissions,
 } from '../../actions/index'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import * as settingsActions from '../../actions/settings'
 import theme from '../../theme'
 import { setNavbarSettingsForPage } from '../../actions/navBar'
 import PageKeys from '../../constants/PageKeys'
-
-GoogleAnalytics.trackEvent('view', 'Notification Settings')
 
 const mapStateToProps = (state) => {
   const {

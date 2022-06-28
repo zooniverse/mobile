@@ -4,7 +4,6 @@ import {
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
@@ -18,7 +17,6 @@ class Discipline extends Component {
   }
 
   handleClick() {
-    GoogleAnalytics.trackEvent('view', this.props.tag)
     const navigationProps = {selectedProjectTag: this.props.tag, color: this.props.color}
     Actions.ProjectList(navigationProps)
   }

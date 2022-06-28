@@ -14,7 +14,6 @@ import FontedText from './common/FontedText'
 import Separator from './common/Separator'
 import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
 
 const mapStateToProps = (state) => ({
@@ -173,8 +172,6 @@ const SocialMediaLink = ({mediaLink, iconName}) =>
   </TouchableOpacity>
 
 const openSocialMediaLink = (link) => {
-  GoogleAnalytics.trackEvent('view', link)
-
   Linking.canOpenURL(link).then(supported => {
     if (supported) {
       Linking.openURL(link);

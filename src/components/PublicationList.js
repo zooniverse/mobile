@@ -13,12 +13,9 @@ import PublicationFilter from './PublicationFilter'
 import NavBar from './NavBar'
 import { fetchPublications, setState } from '../actions/index'
 import { connect } from 'react-redux'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { addIndex, defaultTo, keys, map } from 'ramda'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys';
-
-GoogleAnalytics.trackEvent('view', 'Publication List')
 
 const mapStateToProps = (state) => ({
   user: state.user,
