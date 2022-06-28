@@ -67,11 +67,6 @@ class ZooniverseApp extends Component {
 
     removeLeftOverImages(this.props.images)
     this.props.imageActions.clearImageLocations()
-
-  }
-
-  componentWillUnmount() {
-    this.onTokenRefreshListener()
   }
 
   render() {
