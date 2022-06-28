@@ -12,7 +12,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import * as R from 'ramda';
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import {Actions} from 'react-native-router-flux'
 
 import navigateToClassifier from '../../navigators/classifierNavigator'
@@ -96,8 +95,6 @@ class ProjectTile extends Component {
     _onMainViewPress() {
         const { workflows, display_name, redirect } = this.props.project
         
-        GoogleAnalytics.trackEvent('view', display_name)
-
         if (workflows.length > 1) {
             Animated.timing(this.state.popupOpacity, { toValue: 1, duration: 300 }).start(() => {
                 setTimeout(() => {

@@ -13,8 +13,6 @@ import Button from './Button'
 import { connect } from 'react-redux'
 import { fetchNotificationProject } from '../actions/index'
 import { isEmpty, findIndex, propEq } from 'ramda'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
-
 
 let notificationTitle, notificationBody, projectID
 
@@ -62,8 +60,6 @@ class NotificationModal extends Component {
   }
 
   handleClick() {
-    GoogleAnalytics.trackEvent('view from notification', this.props.notificationProject.display_name)
-
     const zurl=`http://zooniverse.org/projects/${this.props.notificationProject.slug}`
     Linking.canOpenURL(zurl).then(supported => {
       if (supported) {
