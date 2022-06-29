@@ -184,10 +184,6 @@ PODS:
   - React-jsinspector (0.62.3)
   - react-native-blur (0.8.0):
     - React
-  - react-native-google-analytics-bridge (5.9.0):
-    - react-native-google-analytics-bridge/Core (= 5.9.0)
-  - react-native-google-analytics-bridge/Core (5.9.0):
-    - React
   - react-native-netinfo (4.6.1):
     - React
   - react-native-splash-screen (3.2.0):
@@ -295,7 +291,6 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
-  - react-native-google-analytics-bridge (from `../node_modules/react-native-google-analytics-bridge`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-video (from `../node_modules/react-native-video`)
@@ -356,8 +351,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-blur:
     :path: "../node_modules/@react-native-community/blur"
-  react-native-google-analytics-bridge:
-    :path: "../node_modules/react-native-google-analytics-bridge"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-splash-screen:
@@ -418,7 +411,6 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d664a436303eb2cf9919df250f40ce5cf5e99fbe
   React-jsinspector: 74f6ea8f9d38ff44cc8f9867b2ecc9130d6cc2e5
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
-  react-native-google-analytics-bridge: 95334ced9e20c9e7a23a2b7a6e2ab878b0acdc61
   react-native-netinfo: 16c6408c311572f17f9ffc3fa12614489307b6cf
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-video: 77ce22be7abff9e373527ca10106a99dea3ba56c
