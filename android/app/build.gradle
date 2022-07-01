@@ -121,7 +121,7 @@ android {
         applicationId "com.zooniversemobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 56
+        versionCode 57
         versionName "2.9.0"
         multiDexEnabled true
         renderscriptTargetApi 23
