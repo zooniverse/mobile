@@ -15,7 +15,7 @@ import * as imageActions from '../../actions/images'
 import FontedText from '../common/FontedText'
 import AlreadySeenBanner from './AlreadySeenBanner'
 import SubjectOptionsBar from './SubjectOptionsBar'
-import SwipeCardSubjectsView from './SwipeCardSubjectsView';
+import SwipeableSubject from './SwipeableSubject';
 
 import * as colorModes from '../../displayOptions/colorModes'
 
@@ -57,7 +57,6 @@ class SwipeCard extends Component {
                     RNFetchBlob.fs.unlink(uri)
                 }
             })
-
             this.setState({
                 localUris,
             })
@@ -133,7 +132,7 @@ class SwipeCard extends Component {
         const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}
         return (
             <View style={[styles.cardBackground, dimensionsStyle, colorModes.contentBackgroundColorFor(inMuseumMode)]}>
-                <SwipeCardSubjectsView
+                <SwipeableSubject
                     imageUris={localUris.map((uri) => `file://${uri}`)}
                     hasMultipleSubjects={subject.displays.length > 1}
                     onDisplayImageChange={(uri) => this.setState({ displayImageUri: uri })}

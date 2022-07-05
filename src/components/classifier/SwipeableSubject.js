@@ -11,8 +11,9 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator'
 import PaginationBar from './PaginationBar'
+import Video from 'react-native-video'
 
-class SwipeCardSubjectsView extends Component {
+class SwipeableSubject extends Component {
     constructor(props) {
         super(props);
 
@@ -50,6 +51,25 @@ class SwipeCardSubjectsView extends Component {
         const { pagerDimensions, imageIndex } = this.state;
         const { imageUris, hasMultipleSubjects, onDisplayImageChange } = this.props;
         const imagesAreLoaded = !R.isEmpty(imageUris);
+
+        function displayInRequisiteComponent(uri) {
+            if (uri.slice(uri.length - 4).match('.mp4')) {
+                return <Video
+                    source={{ uri: uri }}
+                    style={{ width: pagerDimensions.width, height: pagerDimensions.height }}
+                    controls={true}
+                    repeat={true}
+                />
+            } else {
+                return <Image
+                    style={[styles.image, styles.imageShadow]}
+                    source={{uri}}
+                    resizeMethod="resize"
+                    resizeMode="contain"
+                />;
+            }
+        }
+
         return (
             <View style={styles.cardContainer}>
                 {
@@ -99,16 +119,11 @@ class SwipeCardSubjectsView extends Component {
                         {
                             imagesAreLoaded ?
                                 imageUris.map((uri, index) =>
-                                    <View 
+                                    <View
                                         style={[styles.borderView, pagerDimensions]}
                                         key={`SWIPER_IMAGE_${index}`}
                                     >
-                                            <Image
-                                                style={[styles.image, styles.imageShadow]}
-                                                source={{uri}}
-                                                resizeMethod="resize" 
-                                                resizeMode="contain"
-                                            />
+                                        {displayInRequisiteComponent(uri)}
                                     </View>
                                 )
                             :
@@ -121,7 +136,7 @@ class SwipeCardSubjectsView extends Component {
     }
 }
 
-SwipeCardSubjectsView.propTypes = {
+SwipeableSubject.propTypes = {
     imageUris: PropTypes.array,
     hasMultipleSubjects: PropTypes.bool,
     onDisplayImageChange: PropTypes.func,
@@ -161,4 +176,4 @@ const styles = EStyleSheet.create({
     }
 })
 
-export default SwipeCardSubjectsView;
+export default SwipeableSubject;

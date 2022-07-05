@@ -6,7 +6,6 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
 import R from 'ramda'
 import DeviceInfo from 'react-native-device-info'
@@ -21,8 +20,6 @@ import PageKeys from '../../constants/PageKeys'
 import * as projectDisplay from '../../displayOptions/projectDisplay'
 
 import theme from '../../theme'
-
-GoogleAnalytics.trackEvent('view', 'Project')
 
 const mapStateToProps = (state, ownProps) => {
     const { selectedProjectTag } = ownProps;

@@ -16,7 +16,6 @@ import Input from './Input'
 import OverlaySpinner from './OverlaySpinner'
 import StyledText from './StyledText'
 import Checkbox from './Checkbox'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { any, isEmpty, converge, isNil, or } from 'ramda'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
@@ -80,8 +79,6 @@ export class Register extends React.Component {
   }
 
   handleOpenPrivacyPolicy() {
-    GoogleAnalytics.trackEvent('view', 'Privacy Policy')
-
     const url='https://www.zooniverse.org/privacy'
     Linking.canOpenURL(url).then(supported => {
       if (supported) {

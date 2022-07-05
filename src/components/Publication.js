@@ -9,7 +9,6 @@ import {
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import StyledText from './StyledText'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 class Publication extends Component {
@@ -19,8 +18,6 @@ class Publication extends Component {
   }
 
   handlePress() {
-    GoogleAnalytics.trackEvent('view', 'publication')
-
     const zurl=this.props.publication.href
     Linking.canOpenURL(zurl).then(supported => {
       if (supported) {

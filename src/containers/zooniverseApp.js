@@ -7,8 +7,6 @@ import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import firebase from '@react-native-firebase/app';
-import '@react-native-firebase/messaging';
 
 import ProjectDisciplines from '../components/ProjectDisciplines'
 import NotificationModal from '../components/NotificationModal'
@@ -46,7 +44,6 @@ class ZooniverseApp extends Component {
   constructor(props) {
     super(props);
 
-    this.onFCMTokenReceived = this.onFCMTokenReceived.bind(this);
   }
 
   handleDimensionsChange(dimensions) {
@@ -56,9 +53,6 @@ class ZooniverseApp extends Component {
     })
   }
 
-  onFCMTokenReceived(token) {
-    this.props.settingsActions.initializeSubscriptionsWithFirebase(token)
-  }
 
   componentDidMount() {
     this.props.setNavbarSettingsForPage({
@@ -73,13 +67,6 @@ class ZooniverseApp extends Component {
 
     removeLeftOverImages(this.props.images)
     this.props.imageActions.clearImageLocations()
-
-    firebase.messaging().getToken().then(this.onFCMTokenReceived);
-    this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(this.onFCMTokenReceived);
-  }
-
-  componentWillUnmount() {
-    this.onTokenRefreshListener()
   }
 
   render() {

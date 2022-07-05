@@ -6,14 +6,11 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types'
 
 import StyledText from './StyledText'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
-
-GoogleAnalytics.trackEvent('view', 'About page')
 
 class About extends React.Component {
 

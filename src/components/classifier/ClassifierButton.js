@@ -8,7 +8,6 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info'
 
 import SizedMarkdown from '../common/SizedMarkdown'
-import FontedText from '../common/FontedText'
 import * as colorModes from '../../displayOptions/colorModes'
 
 class ClassifierButton extends Component {
@@ -45,10 +44,8 @@ class ClassifierButton extends Component {
 class AnswerButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = {}
         this.buttonStyle.push({padding: 10})
         this.textStyle = {
-            ...this.textStyle,
             ...styles.whiteButtonText
         }
 
@@ -65,12 +62,10 @@ class AnswerButton extends ClassifierButton {
 class GuideButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = {}
-
         this.textStyle = {
-            ...this.textStyle,
             ...colorModes.selectedTextColorFor(this.props.inMuseumMode)
         }
+
         this.buttonStyle.push(styles.guideButton)
         this.buttonStyle.push(colorModes.guideButtonStyleFor(this.props.inMuseumMode))
     }
@@ -79,9 +74,7 @@ class GuideButton extends ClassifierButton {
 class SubmitButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = {}
         this.textStyle = {
-            ...this.textStyle,
             ...colorModes.submitButtonTextColorFor(this.props.inMuseumMode)
         }
 
@@ -96,12 +89,10 @@ class SubmitButton extends ClassifierButton {
 class SwipeButton extends ClassifierButton {
     setAdditionalStyles() {
         this.buttonStyle = []
-        this.textStyle = {}
-
         this.textStyle = {
-            ...this.textStyle,
             ...styles.whiteButtonText
         }
+
         this.buttonStyle.push(colorModes.unselectedButtonStyleFor(this.props.inMuseumMode))
     }
 }
@@ -111,6 +102,7 @@ const styles = EStyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 12
     },
     buttonText: {
         fontSize: DeviceInfo.isTablet() ? 22 : 14,

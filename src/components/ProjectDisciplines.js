@@ -12,7 +12,6 @@ import R from 'ramda'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { GLOBALS, loggedInDisciplineTags } from '../constants/globals'
-import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import PropTypes from 'prop-types';
 import Discipline from './Discipline'
 import { setPushPrompted } from '../actions/user'
@@ -24,9 +23,6 @@ import { extractSwipeEnabledProjects } from '../utils/projectUtils'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-
-GoogleAnalytics.setTrackerId(GLOBALS.GOOGLE_ANALYTICS_TRACKING)
-GoogleAnalytics.trackEvent('view', 'Home')
 
 const mapStateToProps = (state) => {
   const nativePreviewProjects = state.projects.previewProjectList.filter(

@@ -56,7 +56,6 @@ class SizedMarkdown extends Component {
         // so we're vertically centering text manually on buttons.
         // DRAWBACK: text longer than one line will look weird
         const fontSize = isTablet ? 22 : 14
-        const textCenteringHeight = (buttonImageHeight / 2) - (fontSize / 2)
 
         const customStyles = {
             text: {
@@ -65,7 +64,7 @@ class SizedMarkdown extends Component {
                     fontSize: fontSize,
                     fontWeight: isTablet ? 'bold' : 'normal',
                     color: 'black',
-                    paddingTop: this.props.forButton ? textCenteringHeight : 0,
+                    justifyContent: 'center',
                 },
                 ...this.props.style
             },

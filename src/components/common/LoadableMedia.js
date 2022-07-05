@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 import SubjectLoadingIndicator from './SubjectLoadingIndicator'
 
-class LoadableImage extends Component {
+class LoadableMedia extends Component {
 
     constructor(props) {
         super(props)
@@ -70,9 +70,9 @@ const styles = EStyleSheet.create({
 
 })
 
-LoadableImage.propTypes = {
+LoadableMedia.propTypes = {
     style: PropTypes.any,
     source: PropTypes.object,
 }
 
-export default LoadableImage;
+export default LoadableMedia;

@@ -31,7 +31,6 @@ target 'ZooniverseMobile' do
   pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
   pod 'ReactCommon/turbomodule/core', :path => '../node_modules/react-native/ReactCommon'
 
-  pod 'Firebase/Core'
   pod 'SocketRocket'
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
