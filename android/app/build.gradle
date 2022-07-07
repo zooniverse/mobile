@@ -76,7 +76,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-        entryFile: "index.js"
+        entryFile: "index.js",
+        enableHermes: true, // clean and rebuild if changing (/mobile: cd android && ./gradlew clean)
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -175,6 +176,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'com.facebook.fresco:animated-gif:2.0.0' //gif support
+    implementation 'com.facebook.soloader:soloader:0.9.0+'
     implementation 'io.sentry:sentry-android:5.2.4'
 
 
