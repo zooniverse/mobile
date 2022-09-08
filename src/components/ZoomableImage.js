@@ -14,10 +14,10 @@ const mapStateToProps = (state) => ({
 
 export class ZoomableImage extends Component {
   render() {
-    let uri = this.props.source.uri
-    if (this.props.images[this.props.source.uri]) {
+    let uri = this.props.uri
+    if (this.props.images[this.props.uri]) {
       const pathPrefix = Platform.OS === 'android' ? 'file://' : ''
-      uri = pathPrefix + this.props.images[this.props.source.uri]
+      uri = pathPrefix + this.props.images[this.props.uri]
     }
     
     return (
@@ -32,7 +32,7 @@ export class ZoomableImage extends Component {
         panToMove
       >
         <Image
-          source={ {uri} }
+          source={{ uri }}
           style={{width: Dimensions.get('window').width - 75, height: Dimensions.get('window').height - 75}} 
           resizeMethod="resize"
           resizeMode="contain"
@@ -44,9 +44,7 @@ export class ZoomableImage extends Component {
 
 
 ZoomableImage.propTypes = {
-  source: PropTypes.shape({
-    uri: PropTypes.string,
-  }),
+  uri: PropTypes.string,
   handlePress: PropTypes.func,
   images: PropTypes.object
 }
