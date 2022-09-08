@@ -7,11 +7,10 @@ import {
 } from 'react-native'
 import FontedText from './common/FontedText'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import ZoomableMedia from './ZoomableImage'
+import ZoomableImage from './ZoomableImage'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types'
 import Video from 'react-native-video'
-
 
 class FullScreenMedia extends React.Component {
     render() {
@@ -28,8 +27,8 @@ class FullScreenMedia extends React.Component {
                 />
 
             } else {
-                return <ZoomableMedia
-                    source={uri}
+                return <ZoomableImage
+                    uri={uri}
                     handlePress={handlePress}
                 />;
             }
