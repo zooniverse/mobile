@@ -24,6 +24,7 @@ class FullScreenMedia extends React.Component {
                     }}
                     controls={true}
                     repeat={true}
+                    resizeMode='contain'
                 />
 
             } else {
