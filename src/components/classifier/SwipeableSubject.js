@@ -59,6 +59,7 @@ class SwipeableSubject extends Component {
                     style={{ width: pagerDimensions.width, height: pagerDimensions.height }}
                     controls={true}
                     repeat={true}
+                    resizeMode='contain'
                 />
             } else {
                 return <Image
