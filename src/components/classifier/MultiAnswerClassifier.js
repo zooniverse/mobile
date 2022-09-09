@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    Platform,
     ScrollView,
     View
 } from 'react-native';
@@ -8,6 +9,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 import R from 'ramda';
+import Video from 'react-native-video'
 
 import {getTaskFromWorkflow, getAnswersFromWorkflow} from '../../utils/workflow-utils'
 import {markdownContainsImage} from '../../utils/markdownUtils'
@@ -26,6 +28,7 @@ import {
 } from './ClassifierButton'
 import FullScreenMedia from '../FullScreenMedia'
 import TappableSubject from './TappableSubject';
+import SubjectOptionsBar from './SubjectOptionsBar'
 
 import * as colorModes from '../../displayOptions/colorModes'
 
@@ -166,7 +169,10 @@ class MultiAnswerClassifier extends Component {
 
         const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
 
-
+        const uri = subject.displays[0].src
+        const video = uri.slice(uri.length - 4).match('.mp4')
+        const showSubjectOptionsBar = video && Platform.OS === 'android'
+        
         const classificationPanel =
             <View style={styles.classificationPanel}>
                 <ClassificationPanel
@@ -197,17 +203,44 @@ class MultiAnswerClassifier extends Component {
                                         height: nativeEvent.layout.height
                                     }
                                 })}>
-                                    <TappableSubject
-                                        height={300}
-                                        width={imageDimensions.width}
-                                        subject={subject}
-                                        alreadySeen={seenThisSession}
-                                        inMuseumMode={this.props.project.in_museum_mode}
-                                        onPress={(imageSource) => this.setState({
-                                            showFullSize: true,
-                                            fullScreenImageSource: {uri: imageSource}
-                                        })}
-                                    />
+                                    {video ?
+                                        <View key={`MULTI_ANSWER_VIDEO_${uri}`}>
+                                            <Video
+                                                source={{ uri: uri }}
+                                                style={{
+                                                    width: imageDimensions.width,
+                                                    height: 300
+                                                }}
+                                                controls={true}
+                                                repeat={true}
+                                                resizeMode='contain'
+                                            />
+                                            {showSubjectOptionsBar ?
+                                                <View style={styles.optionsBarContainer}>
+                                                    <SubjectOptionsBar
+                                                        numberOfSelections={subject.displays.length}
+                                                        onExpandButtonPressed={() => this.setState({
+                                                            showFullSize: true,
+                                                            fullScreenImageSource: {uri: uri}
+                                                        })}
+                                                    />
+                                                </View>
+                                                : null
+                                            }
+                                        </View>
+                                        :                                    
+                                        <TappableSubject
+                                            height={300}
+                                            width={imageDimensions.width}
+                                            subject={subject}
+                                            alreadySeen={seenThisSession}
+                                            inMuseumMode={this.props.project.in_museum_mode}
+                                            onPress={(imageSource) => this.setState({
+                                                showFullSize: true,
+                                                fullScreenImageSource: {uri: imageSource}
+                                            })}
+                                        />
+                                    }
                                 </View>
                                 {
                                     answers.map((answer, index) =>
