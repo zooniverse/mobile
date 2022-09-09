@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
     Animated,
     Dimensions,
+    Platform,
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
@@ -130,6 +131,9 @@ class SwipeCard extends Component {
             </Animated.View >
 
         const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}
+        const video = displayImageUri.slice(displayImageUri.length - 4).match('.mp4')
+        const hideSubjectOptionsBar = video && Platform.OS === 'ios'
+
         return (
             <View style={[styles.cardBackground, dimensionsStyle, colorModes.contentBackgroundColorFor(inMuseumMode)]}>
                 <SwipeableSubject
@@ -137,12 +141,15 @@ class SwipeCard extends Component {
                     hasMultipleSubjects={subject.displays.length > 1}
                     onDisplayImageChange={(uri) => this.setState({ displayImageUri: uri })}
                 />
-                <View style={styles.optionsBarContainer}>
-                    <SubjectOptionsBar
-                        numberOfSelections={subject.displays.length}
-                        onExpandButtonPressed={() => onExpandButtonPressed(displayImageUri)}
-                    />
-                </View>
+                {hideSubjectOptionsBar ?
+                    null : 
+                    <View style={styles.optionsBarContainer}>
+                        <SubjectOptionsBar
+                            numberOfSelections={subject.displays.length}
+                            onExpandButtonPressed={() => onExpandButtonPressed(displayImageUri)}
+                        />
+                    </View>
+                }
                 <View style={styles.overlayContainer} pointerEvents="none">
                     { this.props.shouldAnimateOverlay ? overlay : null }
                     { alreadySeen && !inMuseumMode ? <AlreadySeenBanner /> : null }
