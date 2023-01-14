@@ -37,7 +37,7 @@
     "jetifier": "^1.6.4",
     "jsc-android": "^241213.1.0",
     "json5": "^2.2.3",
-    "markdown-it": "^8.3.1",
+    "markdown-it": "^13.0.1",
     "metro": "^0.51.1",
     "panoptes-client": "^3.0.0-rc.0",
     "patch-package": "^6.2.0",
