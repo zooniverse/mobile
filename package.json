@@ -41,7 +41,7 @@
     "metro": "^0.51.1",
     "panoptes-client": "^3.0.0-rc.0",
     "patch-package": "^6.2.0",
-    "prop-types": "^15.6.0",
+    "prop-types": "^15.8.1",
     "ramda": "^0.25.0",
     "react": "16.8.6",
     "react-native": "0.62.3",
