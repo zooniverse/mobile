@@ -44,7 +44,7 @@
     "prop-types": "^15.8.1",
     "ramda": "^0.25.0",
     "react": "16.8.6",
-    "react-native": "0.62.3",
+    "react-native": "0.71.5",
     "react-native-browser-builtins": "^2.0.3",
     "react-native-checkbox-field": "^2.0.2",
     "react-native-deck-swiper": "github:zooniverse/react-native-deck-swiper",
