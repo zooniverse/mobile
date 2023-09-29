@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Drawer from 'react-native-drawer'
 import SideDrawerContent from './SideDrawerContent'
-import {Actions, DefaultRenderer} from 'react-native-router-flux'
+// import {Actions, DefaultRenderer} from 'react-native-router-flux'
 import PropTypes from 'prop-types';
 
 class SideDrawer extends Component {
@@ -12,8 +12,8 @@ class SideDrawer extends Component {
         return (
             <Drawer
                 open={state.open}
-                onOpen={() => Actions.refresh({key: state.key, open: true})}
-                onClose={() => Actions.refresh({key: state.key, open: false})}
+                // onOpen={() => Actions.refresh({key: state.key, open: true})}
+                // onClose={() => Actions.refresh({key: state.key, open: false})}
                 type="overlay"
                 side="right"
                 content={<SideDrawerContent/>}
@@ -26,7 +26,7 @@ class SideDrawer extends Component {
                     main: {opacity: (2 - ratio) / 2}
                 })}
             >
-                <DefaultRenderer navigationState={children[0]} onNavigate={this.props.onNavigate}/>
+                {/* <DefaultRenderer navigationState={children[0]} onNavigate={this.props.onNavigate}/> */}
             </Drawer>
         )
     }

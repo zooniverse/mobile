@@ -5,7 +5,7 @@ import {
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 
 import BetaFeedbackView from './BetaFeedbackView'
 import { filledInFormUrl } from '../../utils/googleFormUtils'
@@ -38,7 +38,7 @@ class ClassifierContainer extends Component {
           this.props.project.display_name,
           this.props.project.id,
           Platform.OS)
-        Actions.WebView({uri: url, loadingText: 'Loading Feedback Form'})
+        // Actions.WebView({uri: url, loadingText: 'Loading Feedback Form'})
       }
     
     onFeedbackViewLayout({nativeEvent}) {
@@ -47,7 +47,8 @@ class ClassifierContainer extends Component {
           Animated.timing(this.state.feedbackViewHeight, {
             duration: 300,
             delay: 500,
-            toValue: height
+            toValue: height,
+            useNativeDriver: false,
           }).start()
         }
     }
@@ -86,7 +87,7 @@ class ClassifierContainer extends Component {
                 onClose={() => this.setState({isFieldGuideVisible: false})}
             />
 
-
+        
         return (
             <View style={[styles.container]}>
                 {this.props.children}

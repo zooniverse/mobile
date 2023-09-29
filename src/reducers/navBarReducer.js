@@ -17,9 +17,11 @@ const defaultNavBarSettings = {
 export default function navBar(state=InitialNavBarState, action) {
     switch (action.type) {
         case ActionConstants.SET_NAVBAR:
+            const pageSettings = R.set(R.lensProp(action.page), R.merge(defaultNavBarSettings, action.settings), state.pageSettings)
+            // console.log({pageSettings})
             return { 
                 ...state,
-                pageSettings: R.set(R.lensProp(action.page), R.merge(defaultNavBarSettings, action.settings), state.pageSettings)
+                pageSettings
             } 
         case ActionConstants.SET_PAGE_SHOWING:
             return { ...state, pageShowing: action.page }

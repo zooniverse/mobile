@@ -1,54 +1,65 @@
-import React, { Component } from 'react';
-import {
-  TouchableOpacity,
-  View
-} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet'
-import { Actions } from 'react-native-router-flux'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import React, {Component} from 'react';
+import {TouchableOpacity, View} from 'react-native';
+
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {Actions} from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
-import ZooIcon from './ZooIcon'
-import FontedText from '../components/common/FontedText'
+import ZooIcon from './ZooIcon';
+import FontedText from '../components/common/FontedText';
+import PageKeys from '../constants/PageKeys';
 
 class Discipline extends Component {
   constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    const navigationProps = {selectedProjectTag: this.props.tag, color: this.props.color}
-    Actions.ProjectList(navigationProps)
+    const navigationProps = {
+      selectedProjectTag: this.props.tag,
+      color: this.props.color,
+    };
+    // Actions.ProjectList(navigationProps);
+    this.props.navigation.navigate(PageKeys.ProjectList, {...navigationProps});
   }
 
   render() {
-    const customIconSize = this.props.tag === 'preview' ? { fontSize: 45 } : []
+    const customIconSize = this.props.tag === 'preview' ? {fontSize: 45} : [];
     return (
-      <TouchableOpacity
-        onPress={this.handleClick}>
-        <View style={[styles.titleContainer, { backgroundColor: this.props.color }]}>
+      <TouchableOpacity onPress={this.handleClick}>
+        <View
+          style={[styles.titleContainer, {backgroundColor: this.props.color}]}>
           <View style={styles.zooIconContainer}>
-            { this.props.faIcon
-              ? <Icon name={this.props.faIcon} style={[styles.icon, styles.faIcon, styles.zooIconContainer, customIconSize]} />
-              : <ZooIcon iconName={this.props.icon} /> }
+            {this.props.faIcon ? (
+              <Icon
+                name={this.props.faIcon}
+                style={[
+                  styles.icon,
+                  styles.faIcon,
+                  styles.zooIconContainer,
+                  customIconSize,
+                ]}
+              />
+            ) : (
+              <ZooIcon iconName={this.props.icon} />
+            )}
           </View>
           <View style={styles.textContainer}>
-            <FontedText 
+            <FontedText
               style={styles.title}
               numberOfLines={1}
-              ellipsizeMode={'tail'}
-            >{
-              this.props.title}
+              ellipsizeMode={'tail'}>
+              {this.props.title}
             </FontedText>
-            { this.props.description ? 
-              <FontedText 
+            {this.props.description ? (
+              <FontedText
                 style={styles.description}
                 numberOfLines={1}
-                ellipsizeMode={'tail'}
-              > 
-                { this.props.description }
-              </FontedText> 
-              : null }
+                ellipsizeMode={'tail'}>
+                {this.props.description}
+              </FontedText>
+            ) : null}
           </View>
           <Icon name="chevron-right" style={styles.chevronIcon} />
         </View>
@@ -62,10 +73,13 @@ const widths = {
   containerHorizontalMargin: 10,
   zooIconContainerWidth: 80,
   rightIconWidth: 20,
-}
+};
 
-const titleSurroundWidth = widths.rightIconWidth + widths.zooIconContainerWidth +
-  (widths.containerHorizontalMargin * 2) + (widths.containerHorizontalPadding * 2)
+const titleSurroundWidth =
+  widths.rightIconWidth +
+  widths.zooIconContainerWidth +
+  widths.containerHorizontalMargin * 2 +
+  widths.containerHorizontalPadding * 2;
 
 const styles = EStyleSheet.create({
   $titleSurroundWidth: titleSurroundWidth,
@@ -79,8 +93,7 @@ const styles = EStyleSheet.create({
     marginHorizontal: widths.containerHorizontalMargin,
     marginTop: 10,
     marginBottom: 0,
-    borderRadius:20,
-
+    borderRadius: 20,
   },
   title: {
     color: '$textColor',
@@ -90,7 +103,7 @@ const styles = EStyleSheet.create({
   },
   description: {
     color: '$textColor',
-    fontSize: 16
+    fontSize: 16,
   },
   icon: {
     fontSize: 30,
@@ -101,15 +114,15 @@ const styles = EStyleSheet.create({
     color: '$textColor',
   },
   faIcon: {
-    paddingLeft: 10
+    paddingLeft: 10,
   },
-  zooIconContainer:{
-    width: widths.zooIconContainerWidth
+  zooIconContainer: {
+    width: widths.zooIconContainerWidth,
   },
   textContainer: {
     flexDirection: 'column',
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 Discipline.propTypes = {
@@ -118,7 +131,7 @@ Discipline.propTypes = {
   title: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  description: PropTypes.string
-}
+  description: PropTypes.string,
+};
 
-export default Discipline
+export default Discipline;

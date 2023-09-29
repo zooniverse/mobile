@@ -18,7 +18,7 @@ const mapStateToProps = (state) => ({
   projects: state.user.projects,
   totalClassifications: state.user.totalClassifications || 0
 })
-
+ 
 export class CircleRibbon extends Component {
   getPointOnCircle(amount, radius) {
     const degrees = amount * 360
@@ -43,6 +43,7 @@ export class CircleRibbon extends Component {
     const allProjects = map((key) => {
       return this.props.projects[key]
     }, keys(this.props.projects))
+    
 
     let projects = filter((project) => { return project.activity_count > 0 }, allProjects)
 

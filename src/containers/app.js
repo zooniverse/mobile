@@ -1,42 +1,40 @@
-import React, {Component} from 'react'
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension';
-import {
-  AppState,
-  Platform,
-} from 'react-native'
+import React, {Component} from 'react';
+import {createStore, applyMiddleware} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {AppState, Platform, Text, View} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
-import { Provider } from 'react-redux'
-import reducer from '../reducers/index'
-import thunkMiddleware from 'redux-thunk'
-import {Scene, Router, Drawer, Actions} from 'react-native-router-flux'
-import { setIsConnected, setState } from '../actions/index'
-import { loadUserData } from '../actions/user'
-import { setSession } from '../actions/session'
-import EStyleSheet from 'react-native-extended-stylesheet'
+import {Provider} from 'react-redux';
+import reducer from '../reducers/index';
+import thunkMiddleware from 'redux-thunk';
+// import {Scene, Router, Drawer, Actions} from 'react-native-router-flux';
+import {setIsConnected, setState} from '../actions/index';
+import {loadUserData} from '../actions/user';
+import {setSession} from '../actions/session';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import SplashScreen from 'react-native-splash-screen';
-import ZooniverseApp from './zooniverseApp'
-import ProjectList from '../components/projects/ProjectList'
-import ProjectDisciplines from '../components/ProjectDisciplines'
-import About from '../components/About'
-import PublicationList from '../components/PublicationList'
-import SignIn from '../components/SignIn'
-import Register from '../components/Register'
-import Settings from '../components/settings/Settings'
-import SideDrawerContent from '../components/SideDrawerContent'
-import ZooWebView from '../components/ZooWebView'
-import SwipeClassifier from '../components/classifier/SwipeClassifier'
-import WebViewScreen from '../components/WebViewScreen'
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import { PersistGate } from 'redux-persist/integration/react'
-import DrawingClassifier from '../components/Markings/DrawingClassifier'
-import QuestionClassifier from '../components/classifier/QuestionClassifier'
-import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier'
-import SafeAreaContainer from './SafeAreaContainer'
-import { setPageShowing } from '../actions/navBar'
+import ZooniverseApp from './zooniverseApp';
+import ProjectList from '../components/projects/ProjectList';
+import ProjectDisciplines from '../components/ProjectDisciplines';
+import About from '../components/About';
+import PublicationList from '../components/PublicationList';
+import SignIn from '../components/SignIn';
+import Register from '../components/Register';
+import Settings from '../components/settings/Settings';
+import SideDrawerContent from '../components/SideDrawerContent';
+import ZooWebView from '../components/ZooWebView';
+import SwipeClassifier from '../components/classifier/SwipeClassifier';
+import WebViewScreen from '../components/WebViewScreen';
+import {persistStore, persistReducer} from 'redux-persist';
+import {PersistGate} from 'redux-persist/integration/react';
+import DrawingClassifier from '../components/Markings/DrawingClassifier';
+import QuestionClassifier from '../components/classifier/QuestionClassifier';
+import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier';
+import SafeAreaContainer from './SafeAreaContainer';
+import {setPageShowing} from '../actions/navBar';
 import NavBar from '../components/NavBar';
-import PageKeys from '../constants/PageKeys'
+import PageKeys from '../constants/PageKeys';
+import RootNavigator from '../navigation/RootNavigator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
@@ -46,54 +44,61 @@ Sentry.init({
 
 const persistConfig = {
   key: 'root',
-  storage,
-  whitelist: ['images', 'user', 'settings'] // All these stores will be persisted
+  storage: AsyncStorage,
+  whitelist: ['images', 'user', 'settings'], // All these stores will be persisted
 };
 
-const persistedReducer = persistReducer(persistConfig, reducer)
-const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
-const persistor = persistStore(store)
-
+const persistedReducer = persistReducer(persistConfig, reducer);
+const store = createStore(
+  persistedReducer,
+  composeWithDevTools(applyMiddleware(thunkMiddleware)),
+);
+const persistor = persistStore(store);
 
 export default class App extends Component {
   componentDidMount() {
-    if (Platform.OS === 'android') {
-      SplashScreen.hide()
-    }
+    // if (Platform.OS === 'android') {
+    SplashScreen.hide();
+    // }
 
     const handleAppStateChange = currentAppState => {
       if (currentAppState === 'active') {
-        store.dispatch(loadUserData())
+        store.dispatch(loadUserData());
       }
-    }
-    AppState.addEventListener('change', handleAppStateChange)
+    };
+    AppState.addEventListener('change', handleAppStateChange);
 
-    const dispatchConnected = isConnected => store.dispatch(setIsConnected(isConnected))
-    NetInfo.isConnected.fetch().then(isConnected => {
-      store.dispatch(setState('isConnected', isConnected))
-      NetInfo.isConnected.addEventListener('connectionChange', dispatchConnected)
-    })
+    const dispatchConnected = isConnected =>
+      store.dispatch(setIsConnected(isConnected));
+    NetInfo.fetch().then(state => {
+      store.dispatch(setState('isConnected', state.isConnected.isConnected));
+      NetInfo.addEventListener(state => dispatchConnected(state));
+    });
   }
 
   /**
    * This function is called after the persistent store has been loaded
    */
   onBeforeLift() {
-    store.dispatch(loadUserData())
-    store.dispatch(setSession())
-    store.dispatch(setPageShowing(PageKeys.ZooniverseApp))
+    store.dispatch(loadUserData());
+    store.dispatch(setSession());
+    store.dispatch(setPageShowing(PageKeys.ZooniverseApp));
   }
 
-  onSceneChange() {
-    store.dispatch(setPageShowing(Actions.currentScene))
-  }
+  // onSceneChange() {
+  //   store.dispatch(setPageShowing(Actions.currentScene));
+  // }
 
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor} onBeforeLift={this.onBeforeLift}>
+        <PersistGate
+          loading={null}
+          persistor={persistor}
+          onBeforeLift={this.onBeforeLift}>
           <SafeAreaContainer>
-            <Router sceneStyle={styles.sharedSceneStyles} navBar={() => <NavBar />} onStateChange={this.onSceneChange}>
+            <RootNavigator />
+            {/* <Router sceneStyle={styles.sharedSceneStyles} navBar={() => <NavBar />} onStateChange={this.onSceneChange}>
               <Drawer
                   key="drawer"
                   contentComponent={SideDrawerContent}
@@ -119,7 +124,7 @@ export default class App extends Component {
                     <Scene key={PageKeys.MultiAnswerClassifier} component={MultiAnswerClassifier} />
                   </Scene>
               </Drawer>
-            </Router>
+            </Router> */}
           </SafeAreaContainer>
         </PersistGate>
       </Provider>
@@ -129,6 +134,6 @@ export default class App extends Component {
 
 const styles = EStyleSheet.create({
   sharedSceneStyles: {
-    backgroundColor: '$backgroundColor'
-  }
-})
+    backgroundColor: '$backgroundColor',
+  },
+});

@@ -31,8 +31,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  register() {
-    dispatch(register())
+  register(navigation) {
+    dispatch(register(navigation))
   },
   setField(fieldName, text) {
     dispatch(setState(`registration.${fieldName}`, text))
@@ -60,7 +60,7 @@ export class Register extends React.Component {
     this.props.setError(error)
 
     if (!error) {
-      this.props.register()
+      this.props.register(this.props.navigation)
     }
   }
 

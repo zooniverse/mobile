@@ -11,7 +11,7 @@ import NavBar from './NavBar'
 import { setState, setIsFetching } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {Actions} from 'react-native-router-flux'
+// import {Actions} from 'react-native-router-flux'
 import OverlaySpinner from './OverlaySpinner'
 import PropTypes from 'prop-types';
 import * as navBarActions from '../actions/navBar'
@@ -104,7 +104,7 @@ class ZooWebView extends React.Component {
     if ((this.state.canGoBack) && (this.props.webViewNavCounter > 1)){
       this.refs[WEBVIEW_REF].goBack()
     } else {
-      Actions.pop()
+      // Actions.pop()
     }
   }
 

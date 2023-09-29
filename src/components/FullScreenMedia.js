@@ -79,7 +79,7 @@ const styles = EStyleSheet.create({
     closeIcon: {
         backgroundColor: 'transparent',
         position: 'absolute',
-        top: 13,
+        top: 35,
         right: 5
     },
     icon: {

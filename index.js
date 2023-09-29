@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Platform,
-  StatusBar,
-  View
-} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet'
-import App from './src/containers/app'
-import theme from './src/theme'
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
+
+import 'react-native-gesture-handler';
+import React, {Component} from 'react';
+import {AppRegistry, Platform, StatusBar, View} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import App from './src/containers/app';
+import theme from './src/theme';
 
 class ZooniverseMobile extends Component {
   render() {
-    
     return (
       <View style={styles.container}>
         <PlatformSpecificStatusBar />
@@ -24,16 +23,12 @@ class ZooniverseMobile extends Component {
 const PlatformSpecificStatusBar = () => {
   if (Platform.OS === 'ios') {
     return (
-      <StatusBar
-        barStyle="light-content"
-        hidden={false}
-        translucent={false}
-      />
+      <StatusBar barStyle="light-content" hidden={false} translucent={false} />
     );
   }
 
   return null;
-}
+};
 
 const styles = EStyleSheet.create({
   container: {
