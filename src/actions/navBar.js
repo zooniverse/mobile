@@ -7,22 +7,19 @@ import * as ActionConstants from '../constants/actions';
  * hamburgerMenuShowing,
  * centerType,
  * isPreview
- */
-export const setNavbarSettingsForPage = (settings, page) => {
-    // console.log('set navbar settings', settings, page)
-  return ({
+*/
+export const setNavbarSettingsForPage = (settings, page) => ({
     type: ActionConstants.SET_NAVBAR,
     settings,
-    page,
-  });
-};
+    page
+})
 
 export const NavBarPageTitles = {
-  classifier: 'Classifier',
-  drawingClassifier: 'DrawingClassifier',
-};
+    classifier: 'Classifier',
+    drawingClassifier: 'DrawingClassifier'
+}
 
-export const setPageShowing = page => ({
-  type: ActionConstants.SET_PAGE_SHOWING,
-  page,
-});
+export const setPageShowing = (page) => ({
+    type: ActionConstants.SET_PAGE_SHOWING,
+    page
+})

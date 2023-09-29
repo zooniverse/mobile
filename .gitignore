@@ -57,6 +57,7 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+/vendor/bundle/
 
 # VSCode settings/workspace settings
 .vscode
