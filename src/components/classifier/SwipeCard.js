@@ -76,7 +76,6 @@ class SwipeCard extends Component {
     }
 
     componentWillUnmount() {
-        // Dimensions.removeEventListener('change', this.handleDimensionsChange)
 
         this.state.localUris.forEach((uri) => {
             RNFetchBlob.fs.exists(uri)

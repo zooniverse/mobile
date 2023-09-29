@@ -97,7 +97,6 @@ export class NavBar extends Component {
 
     const RightContainer = ({ isActive }) => {
       const colorStyle = isActive ? {} : styles.disabledIcon
-
       return (
         <View>
           <TouchableOpacity

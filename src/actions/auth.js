@@ -1,5 +1,4 @@
 import auth from 'panoptes-client/lib/auth'
-// import { Actions, ActionConst } from 'react-native-router-flux'
 import {
   checkIsConnected,
   setState,
@@ -33,7 +32,6 @@ export function signIn(login, password, navigation) {
         ])
       }).then(() => {
         dispatch(setIsFetching(false))
-        // Actions.ZooniverseApp({type: ActionConst.RESET})  // Go to home screen
         navigation.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
@@ -64,7 +62,6 @@ export function register(navigation) {
         user.projects = {}
         dispatch(setUser(user))
         dispatch(setIsFetching(false))
-        // Actions.ZooniverseApp({type: ActionConst.RESET})
         navigation.navigate('ZooniverseApp');
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
@@ -83,7 +80,6 @@ export function signOut(navigation) {
     auth.signOut()
     dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
-    // Actions.SignIn()
     navRef.navigate('SignIn');
   }
 }
@@ -91,7 +87,6 @@ export function signOut(navigation) {
 export function continueAsGuest(navigation) {
   return dispatch => {
     dispatch(setIsGuestUser(true))
-    // Actions.ZooniverseApp({type: ActionConst.RESET})
     navRef.navigate('SignIn');
   }
 }

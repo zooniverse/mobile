@@ -1,7 +1,6 @@
 import apiClient from 'panoptes-client/lib/api-client'
 import R from 'ramda'
 import { setState } from '../actions/index'
-// import { Actions } from 'react-native-router-flux'
 import { Alert, Platform, Image} from 'react-native'
 import { getAuthUser } from '../actions/auth'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
@@ -11,6 +10,7 @@ import {
   constructDrawingAnnotations
 } from '../utils/annotationUtils'
 import { clearShapes } from './drawing'
+import { navRef } from '../navigation/RootNavigator';
 
 export function addSubjectsForWorklow(workflowId) {
   return dispatch => {
@@ -42,9 +42,9 @@ export function startNewClassification(workflow, project) {
       dispatch(classifierDataSuccess)
     })
     .catch((error) => {
-      // Alert.alert('Error', `Sorry, the following error occured when loading this workflow. ${error}`,
-      //   [{text: 'Go Back', onPress: () => { Actions.pop()}}]
-      // )
+      Alert.alert('Error', `Sorry, the following error occured when loading this workflow. ${error}`,
+        [{text: 'Go Back', onPress: () => {     navRef.goBack() }}]
+      )
     })
   }
 }

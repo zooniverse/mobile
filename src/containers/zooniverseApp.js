@@ -55,10 +55,6 @@ class ZooniverseApp extends Component {
   }
 
   componentDidMount() {
-    // console.log(
-    //   'update the navbar settings ',
-    //   this.props.setNavbarSettingsForPage,
-    // );
     this.props.setNavbarSettingsForPage({
       centerType: 'avatar',
     });

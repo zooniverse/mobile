@@ -1,57 +1,57 @@
-import React, {Component} from 'react';
-import {createStore, applyMiddleware} from 'redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import {AppState, Platform, Text, View} from 'react-native';
-import NetInfo from '@react-native-community/netinfo';
-import {Provider} from 'react-redux';
-import reducer from '../reducers/index';
-import thunkMiddleware from 'redux-thunk';
+import React, { Component } from "react";
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { AppState, Platform, Text, View } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
+import { Provider } from "react-redux";
+import reducer from "../reducers/index";
+import thunkMiddleware from "redux-thunk";
 // import {Scene, Router, Drawer, Actions} from 'react-native-router-flux';
-import {setIsConnected, setState} from '../actions/index';
-import {loadUserData} from '../actions/user';
-import {setSession} from '../actions/session';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import SplashScreen from 'react-native-splash-screen';
-import ZooniverseApp from './zooniverseApp';
-import ProjectList from '../components/projects/ProjectList';
-import ProjectDisciplines from '../components/ProjectDisciplines';
-import About from '../components/About';
-import PublicationList from '../components/PublicationList';
-import SignIn from '../components/SignIn';
-import Register from '../components/Register';
-import Settings from '../components/settings/Settings';
-import SideDrawerContent from '../components/SideDrawerContent';
-import ZooWebView from '../components/ZooWebView';
-import SwipeClassifier from '../components/classifier/SwipeClassifier';
-import WebViewScreen from '../components/WebViewScreen';
-import {persistStore, persistReducer} from 'redux-persist';
-import {PersistGate} from 'redux-persist/integration/react';
-import DrawingClassifier from '../components/Markings/DrawingClassifier';
-import QuestionClassifier from '../components/classifier/QuestionClassifier';
-import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier';
-import SafeAreaContainer from './SafeAreaContainer';
-import {setPageShowing} from '../actions/navBar';
-import NavBar from '../components/NavBar';
-import PageKeys from '../constants/PageKeys';
-import RootNavigator from '../navigation/RootNavigator';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Sentry from '@sentry/react-native';
+import { setIsConnected, setState } from "../actions/index";
+import { loadUserData } from "../actions/user";
+import { setSession } from "../actions/session";
+import EStyleSheet from "react-native-extended-stylesheet";
+import SplashScreen from "react-native-splash-screen";
+import ZooniverseApp from "./zooniverseApp";
+import ProjectList from "../components/projects/ProjectList";
+import ProjectDisciplines from "../components/ProjectDisciplines";
+import About from "../components/About";
+import PublicationList from "../components/PublicationList";
+import SignIn from "../components/SignIn";
+import Register from "../components/Register";
+import Settings from "../components/settings/Settings";
+import SideDrawerContent from "../components/SideDrawerContent";
+import ZooWebView from "../components/ZooWebView";
+import SwipeClassifier from "../components/classifier/SwipeClassifier";
+import WebViewScreen from "../components/WebViewScreen";
+import { persistStore, persistReducer } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import DrawingClassifier from "../components/Markings/DrawingClassifier";
+import QuestionClassifier from "../components/classifier/QuestionClassifier";
+import MultiAnswerClassifier from "../components/classifier/MultiAnswerClassifier";
+import SafeAreaContainer from "./SafeAreaContainer";
+import { setPageShowing } from "../actions/navBar";
+import NavBar from "../components/NavBar";
+import PageKeys from "../constants/PageKeys";
+import RootNavigator from "../navigation/RootNavigator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Sentry from "@sentry/react-native";
 
 Sentry.init({
-    dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
-    enableNative: process.env.NODE_ENV === 'production' ? true : false,
+  dsn: "https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400",
+  enableNative: process.env.NODE_ENV === "production" ? true : false,
 });
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: AsyncStorage,
-  whitelist: ['images', 'user', 'settings'], // All these stores will be persisted
+  whitelist: ["images", "user", "settings"], // All these stores will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 const store = createStore(
   persistedReducer,
-  composeWithDevTools(applyMiddleware(thunkMiddleware)),
+  composeWithDevTools(applyMiddleware(thunkMiddleware))
 );
 const persistor = persistStore(store);
 
@@ -61,18 +61,18 @@ export default class App extends Component {
     SplashScreen.hide();
     // }
 
-    const handleAppStateChange = currentAppState => {
-      if (currentAppState === 'active') {
+    const handleAppStateChange = (currentAppState) => {
+      if (currentAppState === "active") {
         store.dispatch(loadUserData());
       }
     };
-    AppState.addEventListener('change', handleAppStateChange);
+    AppState.addEventListener("change", handleAppStateChange);
 
-    const dispatchConnected = isConnected =>
+    const dispatchConnected = (isConnected) =>
       store.dispatch(setIsConnected(isConnected));
-    NetInfo.fetch().then(state => {
-      store.dispatch(setState('isConnected', state.isConnected.isConnected));
-      NetInfo.addEventListener(state => dispatchConnected(state));
+    NetInfo.fetch().then((state) => {
+      store.dispatch(setState("isConnected", state.isConnected.isConnected));
+      NetInfo.addEventListener((state) => dispatchConnected(state));
     });
   }
 
@@ -95,7 +95,8 @@ export default class App extends Component {
         <PersistGate
           loading={null}
           persistor={persistor}
-          onBeforeLift={this.onBeforeLift}>
+          onBeforeLift={this.onBeforeLift}
+        >
           <SafeAreaContainer>
             <RootNavigator />
             {/* <Router sceneStyle={styles.sharedSceneStyles} navBar={() => <NavBar />} onStateChange={this.onSceneChange}>
@@ -134,6 +135,6 @@ export default class App extends Component {
 
 const styles = EStyleSheet.create({
   sharedSceneStyles: {
-    backgroundColor: '$backgroundColor',
+    backgroundColor: "$backgroundColor",
   },
 });

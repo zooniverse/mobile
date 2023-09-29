@@ -1,51 +1,50 @@
-import React, {Component} from 'react';
-import {FlatList, View} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-import R from 'ramda';
-import DeviceInfo from 'react-native-device-info';
+import React, { Component } from "react";
+import { FlatList, View } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import R from "ramda";
+import DeviceInfo from "react-native-device-info";
 
-import ProjectTile from './ProjectTile';
-import FontedText from '../common/FontedText';
-import * as navBarActions from '../../actions/navBar';
-import {GLOBALS} from '../../constants/globals';
+import ProjectTile from "./ProjectTile";
+import FontedText from "../common/FontedText";
+import * as navBarActions from "../../actions/navBar";
+import { GLOBALS } from "../../constants/globals";
 import {
   extractNonSwipeEnabledProjects,
   extractSwipeEnabledProjects,
-} from '../../utils/projectUtils';
-import PageKeys from '../../constants/PageKeys';
+} from "../../utils/projectUtils";
+import PageKeys from "../../constants/PageKeys";
 
-import * as projectDisplay from '../../displayOptions/projectDisplay';
+import * as projectDisplay from "../../displayOptions/projectDisplay";
 
-import theme from '../../theme';
+import theme from "../../theme";
 
 const mapStateToProps = (state, ownProps) => {
-
-  const {selectedProjectTag} = ownProps.route.params;
-  const inPreviewMode = selectedProjectTag === 'preview';
-  const inBetaMode = selectedProjectTag === 'beta';
+  const { selectedProjectTag } = ownProps.route.params;
+  const inPreviewMode = selectedProjectTag === "preview";
+  const inBetaMode = selectedProjectTag === "beta";
   let projectList;
 
   projectList = projectDisplay.sortUnfinishedFirst(state.projects.projectList);
   // Grab all of the projects from the selected Project Tag
-  if (selectedProjectTag === 'recent') {
-    const activeProjects = R.filter(project => {
+  if (selectedProjectTag === "recent") {
+    const activeProjects = R.filter((project) => {
       return project.activity_count > 0;
     }, state.user.projects);
-    projectList = projectList.filter(project =>
-      R.keys(activeProjects).includes(project.id),
+    projectList = projectList.filter((project) =>
+      R.keys(activeProjects).includes(project.id)
     );
-  } else if (selectedProjectTag === 'all projects') {
+  } else if (selectedProjectTag === "all projects") {
     projectList = projectList;
   } else if (inPreviewMode) {
     projectList = state.projects.previewProjectList;
   } else if (inBetaMode) {
     projectList = state.projects.betaProjectList;
   } else {
-    projectList = projectList.filter(project =>
-      R.contains(selectedProjectTag, project.tags),
+    projectList = projectList.filter((project) =>
+      R.contains(selectedProjectTag, project.tags)
     );
   }
 
@@ -67,7 +66,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   navBarActions: bindActionCreators(navBarActions, dispatch),
 });
 
@@ -82,9 +81,9 @@ class ProjectList extends Component {
 
   componentDidMount() {
     const { navBarActions, inPreviewMode } = this.props;
-    const {selectedProjectTag} = this.props.route.params
+    const { selectedProjectTag } = this.props.route.params;
     const title = GLOBALS.DISCIPLINES.find(
-      element => element.value === selectedProjectTag,
+      (element) => element.value === selectedProjectTag
     ).label;
     // console.log('set pl settings')
     navBarActions.setNavbarSettingsForPage(
@@ -93,24 +92,23 @@ class ProjectList extends Component {
         showBack: true,
         isPreview: inPreviewMode, //TODO: Decouple preview mode from the color of the safe area container
         backgroundColor: inPreviewMode ? theme.$testRed : theme.$zooniverseTeal,
-        centerType: 'title',
+        centerType: "title",
       },
-      PageKeys.ProjectList,
+      PageKeys.ProjectList
     );
   }
 
   emptyText() {
     if (!this.props.isLoading) {
-      return 'Sorry, but you have no mobile friendly projects to display';
+      return "Sorry, but you have no mobile friendly projects to display";
     } else {
-      return 'Loading Projects...';
+      return "Loading Projects...";
     }
   }
-  
-  
+
   renderItem({ item }) {
     switch (item.displayType) {
-      case 'project':
+      case "project":
         return (
           <ProjectTile
             project={item}
@@ -119,9 +117,9 @@ class ProjectList extends Component {
             navigation={this.props.navigation}
           />
         );
-      case 'spacer':
+      case "spacer":
         return <View style={styles.spacer} />;
-      case 'header':
+      case "header":
         return (
           <FontedText style={styles.sectionHeader}> {item.text} </FontedText>
         );
@@ -158,14 +156,14 @@ class ProjectList extends Component {
    * This way when our next section starts, the header will be at the beginning of a line
    */
   render() {
-    const fillLineWithSpacers = projects => {
+    const fillLineWithSpacers = (projects) => {
       while (projects.length % ColumnNumbers !== 0) {
-        projects.push({displayType: 'spacer'});
+        projects.push({ displayType: "spacer" });
       }
     };
 
-    const tagAsProject = project =>
-      R.set(R.lensProp('displayType'), 'project', project);
+    const tagAsProject = (project) =>
+      R.set(R.lensProp("displayType"), "project", project);
     const {
       inPreviewMode,
       ownerIds,
@@ -177,12 +175,12 @@ class ProjectList extends Component {
     if (inPreviewMode) {
       if (!R.isEmpty(ownerIds)) {
         // Add Header
-        projects.push({displayType: 'header', text: 'Your Projects'});
+        projects.push({ displayType: "header", text: "Your Projects" });
         fillLineWithSpacers(projects);
 
         // Add Projects
         const ownerProjects = swipeEnabledProjects
-          .filter(project => ownerIds.includes(project.id))
+          .filter((project) => ownerIds.includes(project.id))
           .map(tagAsProject);
         projects = [...projects, ...ownerProjects];
         fillLineWithSpacers(projects);
@@ -190,12 +188,12 @@ class ProjectList extends Component {
 
       if (!R.isEmpty(collaboratorIds)) {
         // Add Header
-        projects.push({displayType: 'header', text: 'Collaborations'});
+        projects.push({ displayType: "header", text: "Collaborations" });
         fillLineWithSpacers(projects);
 
         // Add Projects
         const collaboratorProjects = swipeEnabledProjects
-          .filter(project => collaboratorIds.includes(project.id))
+          .filter((project) => collaboratorIds.includes(project.id))
           .map(tagAsProject);
         projects = [...projects, ...collaboratorProjects];
         fillLineWithSpacers(projects);
@@ -232,8 +230,8 @@ class ProjectList extends Component {
         renderItem={this.renderItem}
         ListEmptyComponent={() => (
           <FontedText style={styles.emptyComponent}>
-            {' '}
-            {this.emptyText()}{' '}
+            {" "}
+            {this.emptyText()}{" "}
           </FontedText>
         )}
         keyExtractor={(item, index) => `${index}`}
@@ -245,8 +243,8 @@ class ProjectList extends Component {
 const ListHeaderComponent = () => {
   return (
     <FontedText style={styles.listHeader}>
-      {'Thank you for volunteering to beta test projects in development.\n\n' +
-        'Your feedback here will help new projects join the Zooniverse.'}
+      {"Thank you for volunteering to beta test projects in development.\n\n" +
+        "Your feedback here will help new projects join the Zooniverse."}
     </FontedText>
   );
 };
@@ -257,10 +255,10 @@ const styles = EStyleSheet.create({
     paddingTop: 35,
   },
   listHeader: {
-    color: '$headerGrey',
-    fontWeight: 'bold',
+    color: "$headerGrey",
+    fontWeight: "bold",
     fontSize: 16,
-    textAlign: 'justify',
+    textAlign: "justify",
     marginHorizontal: 25,
     marginBottom: 25,
   },
@@ -271,13 +269,13 @@ const styles = EStyleSheet.create({
     fontSize: 26,
     marginLeft: 25,
     marginBottom: 20,
-    fontWeight: 'bold',
-    color: '$headerGrey',
+    fontWeight: "bold",
+    color: "$headerGrey",
   },
   emptyComponent: {
-    fontStyle: 'italic',
+    fontStyle: "italic",
     marginHorizontal: 20,
-    color: '$headerGrey',
+    color: "$headerGrey",
   },
   spacer: {
     flex: 1,

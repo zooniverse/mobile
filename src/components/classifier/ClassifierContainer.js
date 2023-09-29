@@ -5,12 +5,12 @@ import {
     View
 } from 'react-native'
 import PropTypes from 'prop-types'
-// import { Actions } from 'react-native-router-flux';
 
 import BetaFeedbackView from './BetaFeedbackView'
 import { filledInFormUrl } from '../../utils/googleFormUtils'
 import TaskHelpModal from './TaskHelpModal'
 import FieldGuide from './FieldGuide'
+import PageKeys from '../../constants/PageKeys'
 
 /**
  * This class handles all of the shared functionality between different classifiers
@@ -37,8 +37,8 @@ class ClassifierContainer extends Component {
         const url = filledInFormUrl(
           this.props.project.display_name,
           this.props.project.id,
-          Platform.OS)
-        // Actions.WebView({uri: url, loadingText: 'Loading Feedback Form'})
+            Platform.OS)
+          navRef.navigate(PageKeys.WebView, {uri: url, loadingText: 'Loading Feedback Form'})
       }
     
     onFeedbackViewLayout({nativeEvent}) {
@@ -87,7 +87,7 @@ class ClassifierContainer extends Component {
                 onClose={() => this.setState({isFieldGuideVisible: false})}
             />
 
-        
+
         return (
             <View style={[styles.container]}>
                 {this.props.children}

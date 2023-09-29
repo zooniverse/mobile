@@ -17,7 +17,7 @@ class Discipline extends Component {
   }
 
   handleClick() {
-    const navigationProps = { selectedProjectTag: this.props.tag, color: this.props.color }
+    const navigationProps = {selectedProjectTag: this.props.tag, color: this.props.color}
     this.props.navigation.navigate(PageKeys.ProjectList, {...navigationProps});
   }
 

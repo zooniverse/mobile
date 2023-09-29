@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import {
   Alert,
   Animated,
@@ -6,21 +6,21 @@ import {
   Linking,
   TouchableOpacity,
   View,
-} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import * as R from 'ramda';
+} from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Icon from "react-native-vector-icons/FontAwesome";
+import * as R from "ramda";
 // import {Actions} from 'react-native-router-flux'
 
-import navigateToClassifier from '../../navigators/classifierNavigator';
-import FontedText from '../common/FontedText';
-import Separator from '../common/Separator';
-import PopupMessage from './PopupMessage';
-import theme from '../../theme';
+import navigateToClassifier from "../../navigators/classifierNavigator";
+import FontedText from "../common/FontedText";
+import Separator from "../common/Separator";
+import PopupMessage from "./PopupMessage";
+import theme from "../../theme";
 
-import * as projectDisplay from '../../displayOptions/projectDisplay';
+import * as projectDisplay from "../../displayOptions/projectDisplay";
 
 const horizontalPadding = 15;
 
@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     ownProps.inPreviewMode,
     ownProps.inBetaMode,
     ownProps.project,
-    ownProps.navigation,
+    ownProps.navigation
   ),
 });
 
@@ -56,7 +56,7 @@ class ProjectTile extends Component {
     return (
       <View style={bannerStyle}>
         <FontedText style={styles.bannerText}>
-          {this.props.inPreviewMode ? 'PREVIEW' : 'OUT OF DATA'}
+          {this.props.inPreviewMode ? "PREVIEW" : "OUT OF DATA"}
         </FontedText>
       </View>
     );
@@ -64,7 +64,7 @@ class ProjectTile extends Component {
 
   _workFlowList = () => {
     const mobileVerifiedWorkflows = this.props.project.workflows.filter(
-      workflow => workflow.mobile_verified,
+      (workflow) => workflow.mobile_verified
     );
     const overlayBanner = (
       <View style={styles.bannerView}>{this._overlayBanner()}</View>
@@ -78,7 +78,8 @@ class ProjectTile extends Component {
           <Separator />
           <View>
             <TouchableOpacity
-              onPress={() => this.props.navigateToClassifier(workflow)}>
+              onPress={() => this.props.navigateToClassifier(workflow)}
+            >
               <View style={styles.cell}>
                 <View style={styles.descriptionContent}>
                   {shouldShowBanner ? overlayBanner : null}
@@ -99,7 +100,7 @@ class ProjectTile extends Component {
   };
 
   _onMainViewPress() {
-    const {workflows, display_name, redirect} = this.props.project;
+    const { workflows, display_name, redirect } = this.props.project;
 
     if (workflows.length > 1) {
       Animated.timing(this.state.popupOpacity, {
@@ -107,7 +108,7 @@ class ProjectTile extends Component {
         duration: 300,
       }).start(() => {
         setTimeout(() => {
-          Animated.timing(this.state.popupOpacity, {toValue: 0}).start();
+          Animated.timing(this.state.popupOpacity, { toValue: 0 }).start();
         }, 1200);
       });
     } else if (workflows.length === 1) {
@@ -116,20 +117,20 @@ class ProjectTile extends Component {
       this._openURL(redirect);
     } else {
       // Actions.ZooWebView({project: this.props.project})
-      this.props.navigation.navigate('ZooWebView', {
+      this.props.navigation.navigate("ZooWebView", {
         project: this.props.project,
       });
     }
   }
 
   _openURL(url) {
-    Linking.canOpenURL(url).then(supported => {
+    Linking.canOpenURL(url).then((supported) => {
       if (supported) {
         Linking.openURL(url);
       } else {
         Alert.alert(
-          'Error',
-          'Sorry, but it looks like you are unable to open the project in your default browser.',
+          "Error",
+          "Sorry, but it looks like you are unable to open the project in your default browser."
         );
       }
     });
@@ -139,17 +140,17 @@ class ProjectTile extends Component {
     shouldDisplayIsOutOfData = projectDisplay.mobileWorkflowsCompleteFor(
       this.props.project,
       this.props.containsNativeWorkflows,
-      this.props.containsMultipleNativeWorkflows,
+      this.props.containsMultipleNativeWorkflows
     );
 
-    const avatarUri = R.prop('avatar_src', this.props.project);
+    const avatarUri = R.prop("avatar_src", this.props.project);
     const avatarSource =
       avatarUri !== undefined
-        ? {uri: avatarUri}
-        : require('../../../images/teal-wallpaper.png');
+        ? { uri: avatarUri }
+        : require("../../../images/teal-wallpaper.png");
     const borderColorTransform = this.state.popupOpacity.interpolate({
       inputRange: [0, 1],
-      outputRange: [theme.$borderGrey, 'black'],
+      outputRange: [theme.$borderGrey, "black"],
     });
     const popupStyle = {
       marginTop: -this.state.popupHeight,
@@ -157,7 +158,8 @@ class ProjectTile extends Component {
     };
     return (
       <Animated.View
-        style={[styles.mainContainer, {borderColor: borderColorTransform}]}>
+        style={[styles.mainContainer, { borderColor: borderColorTransform }]}
+      >
         <TouchableOpacity onPress={this._onMainViewPress}>
           <View style={styles.contentContainer}>
             <Image
@@ -184,10 +186,11 @@ class ProjectTile extends Component {
             </View>
           </View>
           <Animated.View
-            onLayout={event =>
-              this.setState({popupHeight: event.nativeEvent.layout.height})
+            onLayout={(event) =>
+              this.setState({ popupHeight: event.nativeEvent.layout.height })
             }
-            style={popupStyle}>
+            style={popupStyle}
+          >
             <PopupMessage />
           </Animated.View>
           {this.props.project.workflows.length > 1
@@ -202,7 +205,7 @@ class ProjectTile extends Component {
 const PhoneIcon = () => {
   return (
     <Image
-      source={require('../../../images/mobile-friendly.png')}
+      source={require("../../../images/mobile-friendly.png")}
       style={styles.phoneIcon}
     />
   );
@@ -211,10 +214,10 @@ const PhoneIcon = () => {
 const styles = EStyleSheet.create({
   mainContainer: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: "column",
     marginHorizontal: horizontalPadding,
     borderWidth: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   avatar: {
     height: 220,
@@ -222,14 +225,14 @@ const styles = EStyleSheet.create({
   descriptionContainer: {
     paddingVertical: 20,
     paddingHorizontal: 15,
-    flexDirection: 'row',
+    flexDirection: "row",
     flexGrow: 1,
   },
   descriptionContent: {
     flex: 1,
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 14,
   },
   separator: {
@@ -245,47 +248,47 @@ const styles = EStyleSheet.create({
     marginRight: 15,
   },
   bannerOverlay: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     top: 15,
   },
   bannerContainer: {
-    backgroundColor: '$zooniverseTeal',
-    shadowColor: 'black',
-    shadowOffset: {width: 2, height: 2},
+    backgroundColor: "$zooniverseTeal",
+    shadowColor: "black",
+    shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 4,
   },
   testBannerStyle: {
-    backgroundColor: '$testRed',
+    backgroundColor: "$testRed",
   },
   bannerText: {
     paddingHorizontal: 15,
     paddingVertical: 4,
-    color: 'white',
-    fontWeight: 'bold',
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 2},
+    color: "white",
+    fontWeight: "bold",
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.22,
     shadowRadius: 2,
   },
   cell: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 15,
   },
   cellTitle: {
-    fontWeight: 'bold',
-    color: '$headerGrey',
+    fontWeight: "bold",
+    color: "$headerGrey",
     paddingVertical: 15,
     paddingRight: 15,
     flex: 1,
   },
   chevronContainer: {
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   chevronIcon: {
     fontSize: 15,
-    color: '$chevronGrey',
+    color: "$chevronGrey",
   },
   cellsContainer: {
     paddingHorizontal: 0,
@@ -296,7 +299,7 @@ const styles = EStyleSheet.create({
     width: 129,
   },
   contentContainer: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
 });
 

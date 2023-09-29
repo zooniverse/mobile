@@ -35,14 +35,6 @@ class SwipeableSubject extends Component {
         }
     }
 
-    componentDidMount() {
-        // Dimensions.addEventListener('change', this.handleDimensionsChange);
-    }
-
-    componentWillUnmount() {
-        // Dimensions.removeEventListener('change', this.handleDimensionsChange)
-    }
-
     componentDidUpdate(prevProps) {
         if (R.isEmpty(prevProps.imageUris) && !R.isEmpty(this.props.imageUris)) {
             this.props.onDisplayImageChange(this.props.imageUris[0]);
