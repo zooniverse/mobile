@@ -1,47 +1,46 @@
-import React from "react";
+import React from 'react'
 import {
   Alert,
   Linking,
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
-} from "react-native";
-import EStyleSheet from "react-native-extended-stylesheet";
-import PropTypes from "prop-types";
-import { signIn, continueAsGuest } from "../actions/auth";
-import { connect } from "react-redux";
-import Button from "./Button";
-import Input from "./Input";
-import OverlaySpinner from "./OverlaySpinner";
-import StyledText from "./StyledText";
-import { setNavbarSettingsForPage } from "../actions/navBar";
-import PageKeys from "../constants/PageKeys";
+  View
+} from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
+import PropTypes from 'prop-types';
+import { signIn, continueAsGuest } from '../actions/auth'
+import { connect } from 'react-redux';
+import Button from './Button'
+import Input from './Input'
+import OverlaySpinner from './OverlaySpinner'
+import StyledText from './StyledText'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
 
 const mapStateToProps = (state) => ({
   isFetching: state.main.isFetching,
   errorMessage: state.main.errorMessage,
-});
+})
 
 const mapDispatchToProps = (dispatch) => ({
   signIn(login, password, navigation) {
-    dispatch(signIn(login, password, navigation));
+    dispatch(signIn(login, password, navigation))
   },
   continueAsGuest(navigation) {
-    dispatch(continueAsGuest(navigation));
+    dispatch(continueAsGuest(navigation))
   },
-  setNavbarSettingsForPage: (settings) =>
-    dispatch(setNavbarSettingsForPage(settings, PageKeys.SignIn)),
-});
+  setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.SignIn))
+})
 
 export class SignIn extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { login: "", password: "" };
-    this.handleRegistration = this.handleRegistration.bind(this);
-    this.handleResetPassword = this.handleResetPassword.bind(this);
-    this.handleSignIn = this.handleSignIn.bind(this);
-    this.continueAsGuest = this.continueAsGuest.bind(this);
+    super(props)
+    this.state = {login: '', password: ''}
+    this.handleRegistration = this.handleRegistration.bind(this)
+    this.handleResetPassword = this.handleResetPassword.bind(this)
+    this.handleSignIn = this.handleSignIn.bind(this)
+    this.continueAsGuest = this.continueAsGuest.bind(this)
   }
 
   handleRegistration() {
@@ -49,15 +48,15 @@ export class SignIn extends React.Component {
   }
 
   handleResetPassword() {
-    const zurl = "http://zooniverse.org/reset-password";
-    Linking.canOpenURL(zurl).then((supported) => {
+    const zurl='http://zooniverse.org/reset-password'
+    Linking.canOpenURL(zurl).then(supported => {
       if (supported) {
         Linking.openURL(zurl);
       } else {
         Alert.alert(
-          "Error",
-          "Sorry, but it looks like you are unable to reset your password in your default browser."
-        );
+          'Error',
+          'Sorry, but it looks like you are unable to reset your password in your default browser.',
+        )
       }
     });
   }
@@ -65,63 +64,57 @@ export class SignIn extends React.Component {
   handleSignIn() {
     //prevent red screen of death thrown by a console.error in javascript-client
     /* eslint-disable no-console */
-
-    console.reportErrorsAsExceptions = false;
-    this.props.signIn(
-      this.state.login,
-      this.state.password,
-      this.props.navigation
-    );
+    console.reportErrorsAsExceptions = false
+    this.props.signIn(this.state.login, this.state.password, this.props.navigation)
   }
 
   continueAsGuest() {
-    this.props.continueAsGuest(this.props.navigation);
+    this.props.continueAsGuest(this.props.navigation)
   }
 
   componentDidMount() {
     this.props.setNavbarSettingsForPage({
-      centerType: "logo",
+      centerType: 'logo',
       showHamburgerMenu: false,
-    });
+    })
   }
 
   render() {
-    const signInDisabled =
-      this.state.login === "" || this.state.password === "" ? true : false;
-    const continueTinted = !signInDisabled;
+    const signInDisabled = ( (this.state.login === '') || (this.state.password ===  '') ? true : false )
+    const continueTinted = !signInDisabled
 
-    const errorMessage = (
-      <StyledText textStyle={"errorMessage"} text={this.props.errorMessage} />
-    );
+    const errorMessage =
+      <StyledText
+      textStyle={'errorMessage'}
+      text={ this.props.errorMessage } />
 
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.signInContainer}>
-            <StyledText textStyle={"headerText"} text={"SIGN IN"} />
+            <StyledText
+              textStyle={'headerText'}
+              text={'SIGN IN'} />
             <Input
-              labelText={"Username or Email Address"}
-              handleOnChangeText={(login) => this.setState({ login })}
-            />
+              labelText={'Username or Email Address'}
+              handleOnChangeText={(login) => this.setState({login})} />
             <Input
-              labelText={"Password"}
+              labelText={'Password'}
               passwordField={true}
-              handleOnChangeText={(password) => this.setState({ password })}
-            />
-            {this.props.errorMessage ? errorMessage : null}
+              handleOnChangeText={(password) => this.setState({password})} />
+            { this.props.errorMessage ? errorMessage : null }
             <TouchableOpacity
-              onPress={this.handleResetPassword}
-              style={styles.forgotPasswordContainer}
-            >
-              <StyledText textStyle={"link"} text={"Forget your password?"} />
+              onPress={this.handleResetPassword} style={styles.forgotPasswordContainer}>
+              <StyledText
+                textStyle={'link'}
+                text={ 'Forget your password?' } />
             </TouchableOpacity>
 
             <Button
               handlePress={this.handleSignIn}
               disabled={signInDisabled}
-              buttonStyle={signInDisabled ? "disabledButton" : null}
-              text={"Sign In"}
-            />
+              buttonStyle={ signInDisabled ? 'disabledButton' : null }
+              text={'Sign In'} />
 
             <View style={styles.lined}>
               <View style={styles.lineThrough} />
@@ -131,18 +124,16 @@ export class SignIn extends React.Component {
 
             <Button
               handlePress={this.continueAsGuest}
-              buttonStyle={continueTinted ? "disabledButton" : null}
-              text={"Continue without signing in"}
-            />
+              buttonStyle={ continueTinted ? 'disabledButton' : null }
+              text={'Continue without signing in'} />
 
             <Button
               handlePress={this.handleRegistration}
-              buttonStyle={"registerButton"}
-              text={"Register for account"}
-            />
+              buttonStyle={'registerButton'}
+              text={'Register for account'} />
           </View>
         </ScrollView>
-        {this.props.isFetching ? <OverlaySpinner /> : null}
+        { this.props.isFetching ? <OverlaySpinner /> : null }
       </View>
     );
   }
@@ -150,39 +141,39 @@ export class SignIn extends React.Component {
 
 const styles = EStyleSheet.create({
   scrollView: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   container: {
     flex: 1,
   },
   signInContainer: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     margin: 30,
     marginTop: 20,
   },
   lined: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 20,
     marginTop: 20,
-    marginBottom: 10,
+    marginBottom: 10
   },
   lineThrough: {
     flex: 1,
     height: 1,
-    backgroundColor: "black",
+    backgroundColor: 'black'
   },
   centerText: {
     height: 20,
     lineHeight: 20,
-    margin: 20,
+    margin: 20
   },
   forgotPasswordContainer: {
     paddingTop: 10,
-    paddingBottom: 10,
-  },
+    paddingBottom: 10
+  }
 });
 
 SignIn.propTypes = {
@@ -190,6 +181,6 @@ SignIn.propTypes = {
   signIn: PropTypes.func,
   continueAsGuest: PropTypes.func,
   errorMessage: PropTypes.string,
-  setNavbarSettingsForPage: PropTypes.func,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+  setNavbarSettingsForPage: PropTypes.func
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

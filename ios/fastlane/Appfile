@@ -1,0 +1,8 @@
+app_identifier("org.mobile.zooniverse") # The bundle identifier of your app
+apple_id("collab@zooniverse.org") # Your Apple email address
+
+itc_team_id("118392663") # App Store Connect Team ID
+team_id("888MXXMABP") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
