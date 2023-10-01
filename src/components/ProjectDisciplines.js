@@ -1,37 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
   FlatList,
   Platform,
   RefreshControl,
-  View,
-} from "react-native";
-import EStyleSheet from "react-native-extended-stylesheet";
-import R from "ramda";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { GLOBALS, loggedInDisciplineTags } from "../constants/globals";
-import PropTypes from "prop-types";
-import Discipline from "./Discipline";
-import { setPushPrompted } from "../actions/user";
-import FontedText from "../components/common/FontedText";
-import * as projectActions from "../actions/projects";
-import * as settingsActions from "../actions/settings";
-import { makeCancelable } from "../utils/promiseUtils";
-import { extractSwipeEnabledProjects } from "../utils/projectUtils";
-import { setNavbarSettingsForPage } from "../actions/navBar";
-import PageKeys from "../constants/PageKeys";
-import PushNotificationIOS from "@react-native-community/push-notification-ios";
-import { useRoute } from "@react-navigation/native";
+  View
+} from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
+import R from 'ramda'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { GLOBALS, loggedInDisciplineTags } from '../constants/globals'
+import PropTypes from 'prop-types';
+import Discipline from './Discipline'
+import { setPushPrompted } from '../actions/user'
+import FontedText from '../components/common/FontedText'
+import * as projectActions from '../actions/projects'
+import * as settingsActions from '../actions/settings'
+import { makeCancelable } from '../utils/promiseUtils'
+import { extractSwipeEnabledProjects } from '../utils/projectUtils'
+import { setNavbarSettingsForPage } from '../actions/navBar'
+import PageKeys from '../constants/PageKeys'
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import { useRoute } from '@react-navigation/native';
 
 const mapStateToProps = (state) => {
   const nativePreviewProjects = state.projects.previewProjectList.filter(
-    (project) =>
-      R.any((workflow) => workflow.mobile_verified)(project.workflows)
-  );
-  const hasPreviewProjects = !R.isEmpty(nativePreviewProjects);
-  const hasBetaProjects = !R.isEmpty(state.projects.betaProjectList.count);
+      (project) => R.any((workflow) => workflow.mobile_verified)(project.workflows)
+  )
+  const hasPreviewProjects = !R.isEmpty(nativePreviewProjects)
+  const hasBetaProjects = !R.isEmpty(state.projects.betaProjectList.count)
   return {
     user: state.user,
     isGuestUser: state.user.isGuestUser,
@@ -41,19 +40,18 @@ const mapStateToProps = (state) => {
     hasBetaProjects,
     hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
     isSuccess: state.projects.isSuccess,
-    isLoading: state.projects.isLoading,
-  };
-};
+    isLoading: state.projects.isLoading
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
-  setNavbarSettingsForPage: (settings, page) =>
-    dispatch(setNavbarSettingsForPage(settings, page)),
+  setNavbarSettingsForPage: (settings, page) => dispatch(setNavbarSettingsForPage(settings, page)),
   projectActions: bindActionCreators(projectActions, dispatch),
   settingsActions: bindActionCreators(settingsActions, dispatch),
   setPushPrompted(value) {
-    dispatch(setPushPrompted(value));
+    dispatch(setPushPrompted(value))
   },
-});
+})
 
 function ProjectDisciplines({ ...props }) {
   const [refreshing, setRefreshing] = useState(true);
@@ -62,7 +60,7 @@ function ProjectDisciplines({ ...props }) {
   useEffect(() => {
     props.setNavbarSettingsForPage(
       {
-        centerType: "avatar",
+        centerType: 'avatar',
       },
       PageKeys.ProjectDisciplines
     );
@@ -89,28 +87,22 @@ function ProjectDisciplines({ ...props }) {
   }, [route]);
 
   function shouldPromptForPermissions() {
-    return Platform.OS === "ios" && !props.user.pushPrompted;
+    return Platform.OS === 'ios' && !props.user.pushPrompted;
   }
 
   const promptRequestPermissions = () => {
     PushNotificationIOS.checkPermissions((permissions) => {
-      if (permissions.alert === 0) {
+      if (permissions.alert === 0){
         Alert.alert(
-          "Allow Notifications?",
-          "Zooniverse would like to occasionally send you info about new projects or projects needing help.",
+          'Allow Notifications?',
+          'Zooniverse would like to occasionally send you info about new projects or projects needing help.',
           [
-            {
-              text: "Not Now",
-              onPress: () => requestIOSPermissions(false),
-            },
-            {
-              text: "OK",
-              onPress: () => requestIOSPermissions(true),
-            },
+            {text: 'Not Now', onPress: () => requestIOSPermissions(false)},
+            {text: 'OK', onPress: () => requestIOSPermissions(true)},
           ]
-        );
+        )
       }
-    });
+    })
   };
 
   function requestIOSPermissions(accepted) {
@@ -136,14 +128,12 @@ function ProjectDisciplines({ ...props }) {
   }
 
   function refreshProjects() {
-    // setState({refreshing: true});
     setRefreshing(true);
     fetchProjectPromise = makeCancelable(props.projectActions.fetchProjects());
 
     fetchProjectPromise.promise
       .then((projectList) => {
         fetchProjectPromise = null;
-        // setState({refreshing: false});
         setRefreshing(false);
 
         // Handle push subscriptions
@@ -157,15 +147,15 @@ function ProjectDisciplines({ ...props }) {
       .catch((error) => {
         if (!error.isCanceled) {
           Alert.alert(
-            "Error",
-            "The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n" +
+            'Error',
+            'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' +
               error
           );
         }
       });
   }
   const totalClassifications = props.user.totalClassifications;
-  const pluralizeClassification = totalClassifications > 1 ? "S" : "";
+  const pluralizeClassification = totalClassifications > 1 ? 'S' : '';
   const totalClassificationsDisiplay = (
     <FontedText style={styles.totalClassifications}>
       {`${totalClassifications} TOTAL CLASSIFICATION${pluralizeClassification}`}
@@ -184,8 +174,8 @@ function ProjectDisciplines({ ...props }) {
       props.projectList.find((project) =>
         project.tags.includes(discipline.value)
       ) !== undefined;
-    const isBeta = hasBetaProjects && discipline.value === "beta";
-    const isForAllProjects = discipline.value === "all projects";
+    const isBeta = hasBetaProjects && discipline.value === 'beta';
+    const isForAllProjects = discipline.value === 'all projects';
     return isForLoggedInUser || isTagged || isBeta || isForAllProjects;
   };
   const disciplineList = props.isSuccess
@@ -212,7 +202,7 @@ function ProjectDisciplines({ ...props }) {
     <View style={styles.container}>
       <View style={styles.subNavContainer}>
         <FontedText style={styles.userName}>
-          {props.isGuestUser ? "Guest User" : props.user.display_name}
+          {props.isGuestUser ? 'Guest User' : props.user.display_name}
         </FontedText>
         {/* {totalClassifications > 0 ? totalClassificationsDisiplay : null} */}
       </View>
@@ -226,28 +216,27 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   subNavContainer: {
-    paddingTop: Platform.OS === "ios" ? 25 : 74,
+    paddingTop: Platform.OS === 'ios' ? 25 : 74,
     paddingBottom: 25,
-    alignItems: "center",
-    justifyContent: "flex-start",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   userName: {
-    color: "$headerGrey",
+    color: '$headerGrey',
     fontSize: 26,
     lineHeight: 31,
-    marginTop: 50,
   },
   totalClassifications: {
-    color: "$headerGrey",
+    color: '$headerGrey',
     fontSize: 14,
-    fontWeight: "bold",
-    lineHeight: 17,
+    fontWeight: 'bold',
+    lineHeight: 17
   },
   signOut: {
-    backgroundColor: "$transparent",
+    backgroundColor: '$transparent',
   },
   signOutText: {
-    color: "$darkTextColor",
+    color: '$darkTextColor',
     fontSize: 11,
   },
   messageContainer: {
@@ -260,11 +249,11 @@ const styles = EStyleSheet.create({
   activityIndicator: {
     flex: 1,
     paddingBottom: 75,
-    justifyContent: "center",
+    justifyContent: 'center'
   },
   listContainer: {
-    paddingBottom: 25,
-  },
+    paddingBottom: 25
+  }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)

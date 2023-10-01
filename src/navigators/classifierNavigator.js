@@ -5,7 +5,7 @@ import * as drawingActions from '../actions/drawing'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 
-const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, workflow) => {
+const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, navigation, workflow) => {
     dispatch(setNavbarSettingsForPage({
         isPreview: inPreviewMode, //TODO: Decouple preview mode from the color of the safe area container
         title: project.in_museum_mode ? 'ZOONIVERSE - DO REAL RESEARCH!' : project.display_name,
@@ -17,16 +17,16 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
 
     switch (workflow.type) {
         case 'drawing':
-            navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch.navigation);
+            navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
             break;
         case 'single':
-            navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch.navigation);
+            navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
             break;
         case 'multiple':
-            navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch.navigation);
+            navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
             break;
         case 'swipe':
-            navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch.navigation);
+            navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
             break;
     }
 })

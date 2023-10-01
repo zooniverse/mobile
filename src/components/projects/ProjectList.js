@@ -106,7 +106,8 @@ class ProjectList extends Component {
                 return <ProjectTile
                     project={item}
                     inPreviewMode={this.props.inPreviewMode}
-                    inBetaMode={this.props.inBetaMode}/>
+                    inBetaMode={this.props.inBetaMode}
+                    navigation={this.props.navigation}/>
             case 'spacer':
                 return <View style={styles.spacer} />
             case 'header':

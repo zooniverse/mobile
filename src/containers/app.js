@@ -68,12 +68,9 @@ export default class App extends Component {
     AppState.addEventListener('change', handleAppStateChange)
 
     const dispatchConnected = isConnected => store.dispatch(setIsConnected(isConnected))
-    NetInfo.isConnected.fetch().then(isConnected => {
-      store.dispatch(setState('isConnected', isConnected))
-      NetInfo.fetch().then((state) => {
-        store.dispatch(setState("isConnected", state.isConnected.isConnected));
-        NetInfo.addEventListener((state) => dispatchConnected(state));
-      })
+    NetInfo.fetch().then((state) => {
+      store.dispatch(setState("isConnected", state.isConnected.isConnected));
+      NetInfo.addEventListener((state) => dispatchConnected(state));
     })
   }
 

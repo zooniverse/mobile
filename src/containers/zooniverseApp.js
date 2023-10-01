@@ -76,7 +76,7 @@ class ZooniverseApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ProjectDisciplines />
+        <ProjectDisciplines navigation={this.props.navigation}  />
         {/* This component has errors in getDerivedStateFromProps and doesn't look like it's being used. Commenting out for now.*/}
         {/* <NotificationModal
           isVisible={this.props.isModalVisible}
