@@ -228,6 +228,9 @@ Register.propTypes = {
   errorMessage: PropTypes.string,
   registration: PropTypes.object,
   setNavbarSettingsForPage: PropTypes.func,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

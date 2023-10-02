@@ -181,6 +181,9 @@ SignIn.propTypes = {
   signIn: PropTypes.func,
   continueAsGuest: PropTypes.func,
   errorMessage: PropTypes.string,
-  setNavbarSettingsForPage: PropTypes.func
+  setNavbarSettingsForPage: PropTypes.func,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

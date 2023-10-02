@@ -225,6 +225,7 @@ const styles = EStyleSheet.create({
     color: '$headerGrey',
     fontSize: 26,
     lineHeight: 31,
+    marginTop: 50,
   },
   totalClassifications: {
     color: '$headerGrey',
