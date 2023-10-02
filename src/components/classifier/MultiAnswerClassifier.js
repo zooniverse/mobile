@@ -271,7 +271,7 @@ class MultiAnswerClassifier extends Component {
                                 task.help !== null &&
                                 <NeedHelpButton
                                     onPress={() => this.classifierContainer.displayHelpModal()}
-                                    inMuseumMode={this.props.route.params.route.params.project.in_museum_mode}
+                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                                 />
                             }
                             {
