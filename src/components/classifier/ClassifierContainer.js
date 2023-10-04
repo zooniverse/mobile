@@ -11,7 +11,7 @@ import { filledInFormUrl } from '../../utils/googleFormUtils'
 import TaskHelpModal from './TaskHelpModal'
 import FieldGuide from './FieldGuide'
 import PageKeys from '../../constants/PageKeys'
-import { navRef } from '../navigation/RootNavigator';
+import { navRef } from '../../navigation/RootNavigator';
 
 /**
  * This class handles all of the shared functionality between different classifiers

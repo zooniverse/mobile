@@ -5,7 +5,7 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
 
 ### Preparing The React Native Framework
 #### Requirements:
- - Node >= 16
+ - Node >= 16 (Recommend >= 18)
 #### Steps:
 1. Follow the instructions for Android and iOS setup in [this guide](https://reactnative.dev/docs/environment-setup).
 2. Clone down this repo and navigate to its directory (called `mobile`).

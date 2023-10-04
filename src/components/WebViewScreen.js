@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
     ActivityIndicator,
     View,
-    WebView
 } from 'react-native'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -11,6 +10,7 @@ import { connect } from 'react-redux'
 import FontedText from './common/FontedText'
 import PageKeys from '../constants/PageKeys'
 import { setNavbarSettingsForPage } from '../actions/navBar'
+import WebView from 'react-native-webview'
 
 class WebViewScreen extends Component {
 
