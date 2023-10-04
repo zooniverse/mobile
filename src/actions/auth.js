@@ -62,7 +62,7 @@ export function register(navigation) {
         user.projects = {}
         dispatch(setUser(user))
         dispatch(setIsFetching(false))
-        navigation.navigate('ZooniverseApp');
+        navigation.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
         dispatch(setIsFetching(false))
@@ -87,6 +87,6 @@ export function signOut(navigation) {
 export function continueAsGuest(navigation) {
   return dispatch => {
     dispatch(setIsGuestUser(true))
-    navRef.navigate('SignIn');
+    navRef.navigate('ZooniverseApp', {refresh: true});
   }
 }

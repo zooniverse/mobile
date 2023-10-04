@@ -196,7 +196,7 @@ const styles = EStyleSheet.create({
         backgroundColor: 'white'
     },
     avatar: {
-        height: 175,
+        height: 220,
     },
     descriptionContainer: {
         paddingVertical: 20, 

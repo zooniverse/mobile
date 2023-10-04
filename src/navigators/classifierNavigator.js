@@ -56,7 +56,7 @@ function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow,
     });
 }
 
-function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
     navigation.navigate("QuestionClassifier", {
@@ -68,7 +68,7 @@ function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workfl
     });
 }
 
-function navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+function navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
     navigation.navigate("MultiAnswerClassifier", {
@@ -80,7 +80,7 @@ function navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, wor
     });
 }
 
-function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(drawingActions.clearShapes())
     dispatch(classifierActions.startNewClassification(workflow, project))
