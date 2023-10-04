@@ -11,6 +11,7 @@ import { filledInFormUrl } from '../../utils/googleFormUtils'
 import TaskHelpModal from './TaskHelpModal'
 import FieldGuide from './FieldGuide'
 import PageKeys from '../../constants/PageKeys'
+import { navRef } from '../navigation/RootNavigator';
 
 /**
  * This class handles all of the shared functionality between different classifiers
@@ -38,7 +39,7 @@ class ClassifierContainer extends Component {
           this.props.project.display_name,
           this.props.project.id,
             Platform.OS)
-          navRef.navigate(PageKeys.WebView, {uri: url, loadingText: 'Loading Feedback Form'})
+        navRef.navigate(PageKeys.WebView, { uri: url, loadingText: 'Loading Feedback Form' })
       }
     
     onFeedbackViewLayout({nativeEvent}) {
