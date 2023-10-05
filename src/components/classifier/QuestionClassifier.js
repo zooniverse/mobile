@@ -156,7 +156,7 @@ class QuestionClassifier extends Component {
         const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
         const classificationPanel =
             <View
-                style={[styles.classificationPanel, colorModes.framingBackgroundColorFor(this.props.route.params.project.route.params.in_museum_mode)]}>
+                style={[styles.classificationPanel, colorModes.framingBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
                 <ClassificationPanel
                     hasTutorial={!R.isEmpty(tutorial)}
                     isQuestionVisible={isQuestionVisible}
