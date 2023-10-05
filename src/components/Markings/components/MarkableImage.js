@@ -12,9 +12,21 @@ import SvgOverlay from './SvgOverlay'
 
 const mapStateToProps = (state) => {
     const { id } = state.classifier.subject
+
+    let subjectDimensions = {
+        naturalWidth: 200,
+        naturalHeight: 260
+    };
+
+    // If the image cannot be found it will use 0 height/width which will error the svg.
+    // This check ensures there's a height/width before updating.
+    if (state.classifier.subjectDimensions[id] && state.classifier.subjectDimensions[id].naturalWidth && state.classifier.subjectDimensions[id].naturalHeight) {
+        subjectDimensions = state.classifier.subjectDimensions[id]
+    }
+
     return {
         shapes: state.drawing.shapesInProgress,
-        subjectDimensions: state.classifier.subjectDimensions[id]
+        subjectDimensions
     }
 }
 

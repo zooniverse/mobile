@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+    Dimensions,
     View
 } from 'react-native'
 import PropTypes from 'prop-types';
@@ -27,17 +28,17 @@ import * as colorModes from '../../displayOptions/colorModes'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        task: getTaskFromWorkflow(ownProps.workflow),
-        answers: R.reverse(getAnswersFromWorkflow(ownProps.workflow)),
+        task: getTaskFromWorkflow(ownProps.route.params.workflow),
+        answers: R.reverse(getAnswersFromWorkflow(ownProps.route.params.workflow)),
         isSuccess: state.classifier.isSuccess,
         isFailure: state.classifier.isFailure,
         isFetching: state.classifier.isFetching,
-        annotations: state.classifier.annotations[ownProps.workflow.id] || {},
-        guide: state.classifier.guide[ownProps.workflow.id] || {},
-        tutorial: state.classifier.tutorial[ownProps.workflow.id] || {},
-        needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
-        subjectLists: state.classifier.subjectLists[ownProps.workflow.id] || [],
-        subjectsSeenThisSession: state.classifier.seenThisSession[ownProps.workflow.id] || []
+        annotations: state.classifier.annotations[ownProps.route.params.workflow.id] || {},
+        guide: state.classifier.guide[ownProps.route.params.workflow.id] || {},
+        tutorial: state.classifier.tutorial[ownProps.route.params.workflow.id] || {},
+        needsTutorial: state.classifier.needsTutorial[ownProps.route.params.workflow.id] || false,
+        subjectLists: state.classifier.subjectLists[ownProps.route.params.workflow.id] || [],
+        subjectsSeenThisSession: state.classifier.seenThisSession[ownProps.route.params.workflow.id] || []
     }
 }
 
@@ -73,6 +74,9 @@ export class SwipeClassifier extends React.Component {
         this.setState({
             swiperDimensions: {width, height},
         })
+
+        // Need to force update the swiper or else the first image will be height/width 0.
+        this.swiper.forceUpdate();
     }
 
     setQuestionVisibility(isVisible) {
@@ -81,22 +85,22 @@ export class SwipeClassifier extends React.Component {
 
     finishTutorial() {
         if (this.props.needsTutorial) {
-            this.props.classifierActions.setTutorialCompleted(this.props.workflow.id, this.props.project.id)
+            this.props.classifierActions.setTutorialCompleted(this.props.route.params.workflow.id, this.props.route.params.project.id)
         } else {
             this.setQuestionVisibility(true)
         }
     }
 
     onAnswered = (answer, subject) => {
-        const {id, first_task} = this.props.workflow
+        const {id, first_task} = this.props.route.params.workflow
         this.props.classifierActions.addAnnotationToTask(id, first_task, answer, false)
-        this.props.classifierActions.saveClassification(this.props.workflow, subject, this.state.swiperDimensions)
+        this.props.classifierActions.saveClassification(this.props.route.params.workflow, subject, this.state.swiperDimensions)
     }
 
     onSwiped = (subjectIndex) => {
         this.setState({swiperIndex: this.state.swiperIndex + 1})
         if (subjectIndex > this.props.subjectLists.length - 8) {
-            this.props.classifierActions.addSubjectsForWorklow(this.props.workflow.id)
+            this.props.classifierActions.addSubjectsForWorklow(this.props.route.params.workflow.id)
         }
     }
 
@@ -111,24 +115,22 @@ export class SwipeClassifier extends React.Component {
         const seenThisSession = R.indexOf(subject.id, this.props.subjectsSeenThisSession) >= 0
         const shouldAnimateOverlay = this.props.subjectLists[this.state.swiperIndex].id === subject.id
 
-        return this.state.panX ? (
-            <SwipeCard
-                subject={subject}
-                seenThisSession={seenThisSession}
-                inMuseumMode={this.props.project.in_museum_mode}
-                panX={this.state.panX}
-                shouldAnimateOverlay={shouldAnimateOverlay}
-                answers={this.props.answers}
-                onExpandButtonPressed={this.expandImage}
-                subjectDisplayWidth={this.state.swiperDimensions.width}
-                subjectDisplayHeight={this.state.swiperDimensions.height}
-            />
-        ) : <View/>
+        return <SwipeCard
+            subject={subject}
+            seenThisSession={seenThisSession}
+            inMuseumMode={this.props.route.params.project.in_museum_mode}
+            panX={this.state.panX}
+            shouldAnimateOverlay={shouldAnimateOverlay}
+            answers={this.props.answers}
+            onExpandButtonPressed={this.expandImage}
+            subjectDisplayWidth={this.state.swiperDimensions.width}
+            subjectDisplayHeight={this.state.swiperDimensions.height}
+        />
     }
 
     onUnlinkedTaskAnswered = (task, value) => {
         const taskAnnotations = this.props.annotations[task] || []
-        const {id} = this.props.workflow
+        const {id} = this.props.route.params.workflow
         if (R.contains(value, taskAnnotations)) {
             this.props.classifierActions.removeAnnotationFromTask(id, task, value)
         } else {
@@ -149,19 +151,19 @@ export class SwipeClassifier extends React.Component {
 
         const tutorial =
             <Tutorial
-                projectName={this.props.project.display_name}
-                inMuseumMode={this.props.project.in_museum_mode}
+                projectName={this.props.route.params.project.display_name}
+                inMuseumMode={this.props.route.params.project.in_museum_mode}
                 isInitialTutorial={this.props.needsTutorial}
                 tutorial={this.props.tutorial}
                 finishTutorial={() => this.finishTutorial()}
             />
 
         const question =
-            <View style={colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)}>
+            <View style={colorModes.contentBackgroundColorFor(this.props.route.params.project.in_museum_mode)}>
                 <Question
                     question={this.props.task.question}
-                    inMuseumMode={this.props.project.in_museum_mode}
-                    workflowID={this.props.workflow.id}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
+                    workflowID={this.props.route.params.workflow.id}
                     onPressImage={(src, question) => {
                         this.setState({
                             showFullSize: true,
@@ -178,12 +180,27 @@ export class SwipeClassifier extends React.Component {
                         null
                 }
             </View>
+        const windowWidth = Dimensions.get('window').width
+
+        const swiperLabelStyle = {
+            label: {
+                color: 'white',
+                fontWeight: 'normal',
+            },
+            wrapper: {
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                width: this.state.swiperDimensions.width,
+                height: this.state.swiperDimensions.height,
+            },
+        };
 
         const classifier =
             <View style={styles.classifier} onLayout={this.onClassifierLayout.bind(this)}>
-                <Swiper
-                    verticalInitiation={false}
-                    ref={swiper => this.swiper = swiper}
+               <Swiper
+                    ref={swiper => (this.swiper = swiper)}
                     cardHorizontalMargin={0}
                     keyExtractor={cardData => cardData.id}
                     cards={this.props.subjectLists}
@@ -191,16 +208,40 @@ export class SwipeClassifier extends React.Component {
                     cardVerticalMargin={0}
                     marginTop={0}
                     backgroundColor="transparent"
-                    onSwiped={this.onSwiped}
-                    onSwipedRight={(cardIndex) => this.onAnswered(0, this.props.subjectLists[cardIndex])}
-                    onSwipedLeft={(cardIndex) => this.onAnswered(1, this.props.subjectLists[cardIndex])}
+                    onSwipedAll={this.onSwiped}
+                    onSwipedRight={cardIndex =>
+                        this.onAnswered(0, this.props.subjectLists[cardIndex])
+                    }
+                    onSwipedLeft={cardIndex =>
+                        this.onAnswered(1, this.props.subjectLists[cardIndex])
+                    }
                     cardIndex={this.state.swiperIndex}
                     disableTopSwipe
                     disableBottomSwipe
                     outputRotationRange={['-30deg', '0deg', '30deg']}
-                    nextCardYOffset={-15}
-                    panXListener={(panX) => this.setState({panX})}
+                    overlayOpacityHorizontalThreshold={10}
                     swipeAnimationDuration={500}
+                    animateOverlayLabelsOpacity
+                    animateCardOpacity
+                    inputOverlayLabelsOpacityRangeX={[
+                        -windowWidth / 4,
+                        0,
+                        windowWidth / 4,
+                    ]}
+                    outputOverlayLabelsOpacityRangeX={[1, 0, 1]}
+                    verticalSwipe={false}
+                    stackSeparation={-18}
+                    stackSize={2}
+                    overlayLabels={{
+                        left: {
+                            title: 'No',
+                            style: swiperLabelStyle,
+                        },
+                        right: {
+                            title: 'Yes',
+                            style: swiperLabelStyle,
+                        },
+                    }}
                 />
             </View>
 
@@ -208,7 +249,7 @@ export class SwipeClassifier extends React.Component {
             <View>
                 <UnlinkedTask
                     unlinkedTaskKey={this.props.task.unlinkedTask}
-                    unlinkedTask={this.props.workflow.tasks[this.props.task.unlinkedTask]}
+                    unlinkedTask={this.props.route.params.workflow.tasks[this.props.task.unlinkedTask]}
                     annotation={this.props.annotations[this.props.task.unlinkedTask]}
                     onAnswered={this.onUnlinkedTaskAnswered}
                 />
@@ -217,7 +258,7 @@ export class SwipeClassifier extends React.Component {
 
         const swipeTabs =
             <SwipeTabs
-                inMuseumMode={this.props.project.in_museum_mode}
+                inMuseumMode={this.props.route.params.project.in_museum_mode}
                 guide={this.props.guide}
                 onLeftButtonPressed={() => {
                     this.swiper.swipeLeft()
@@ -237,7 +278,7 @@ export class SwipeClassifier extends React.Component {
                     hasTutorial={!R.isEmpty(this.props.tutorial)}
                     isQuestionVisible={this.state.isQuestionVisible}
                     setQuestionVisibility={this.setQuestionVisibility}
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                 >
                     {
                         this.state.isQuestionVisible ?
@@ -253,7 +294,7 @@ export class SwipeClassifier extends React.Component {
                 {this.state.isQuestionVisible ? swipeTabs : null}
                 {this.state.isQuestionVisible && this.props.task.help ? <NeedHelpButton
                     onPress={() => this.classifierContainer.displayHelpModal()}
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                 /> : null}
                 <FullScreenMedia
                     source={{uri: this.state.fullScreenImageSource}}
@@ -264,11 +305,11 @@ export class SwipeClassifier extends React.Component {
             </View>
 
         return (
-            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
+            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
                 <ClassifierContainer
-                    inBetaMode={this.props.inBetaMode}
-                    inMuseumMode={this.props.project.in_museum_mode}
-                    project={this.props.project}
+                    inBetaMode={this.props.route.params.inBetaMode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
+                    project={this.props.route.params.project}
                     help={this.props.task.help}
                     guide={this.props.guide}
                     ref={ref => this.classifierContainer = ref}

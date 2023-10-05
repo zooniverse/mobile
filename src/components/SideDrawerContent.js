@@ -7,7 +7,6 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import FontedText from './common/FontedText'
@@ -15,6 +14,7 @@ import Separator from './common/Separator'
 import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import {DrawerActions} from '@react-navigation/native';
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -22,8 +22,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  signOut() {
-    dispatch(signOut())
+  signOut(navigation) {
+    dispatch(signOut(navigation))
   },
 })
 
@@ -40,37 +40,37 @@ export class SideDrawerContent extends Component {
   }
 
   close() {
-    Actions.drawerClose();
+    this.props.navigation.dispatch(DrawerActions.closeDrawer());
   }
 
   goHome(){
     this.close()
-    Actions.reset('ZooniverseApp')
+    this.props.navigation.navigate('ZooniverseApp', {refresh: true});
   }
 
   signIn(){
     this.close()
-    Actions.SignIn()
+    this.props.navigation.navigate('SignIn');
   }
 
   signOut(){
     this.close()
-    this.props.signOut()
+    this.props.signOut(this.props.navigation);
   }
 
   goToAbout(){
     this.close()
-    Actions.About()
+    this.props.navigation.navigate('About');
   }
 
   goToPublications(){
     this.close()
-    Actions.Publications()
+    this.props.navigation.navigate('Publications');
   }
 
   settings(){
     this.close()
-    Actions.Settings()
+    this.props.navigation.navigate('Settings');
   }
 
   render() {
@@ -189,7 +189,8 @@ const styles = EStyleSheet.create({
     backgroundColor: 'rgba(0,93,105,1)',
     flex: 1,
     paddingTop: 15,
-    paddingLeft: 25
+    paddingLeft: 25,
+    zIndex: 200,
   },
   icon: {
     color: '$zooniverseTeal',
@@ -259,7 +260,11 @@ SocialMediaLink.propTypes = {
 SideDrawerContent.propTypes = {
   user: PropTypes.object,
   isGuestUser: PropTypes.bool,
-  signOut: PropTypes.func
+  signOut: PropTypes.func,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  }).isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideDrawerContent)

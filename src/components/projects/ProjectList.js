@@ -22,7 +22,7 @@ import * as projectDisplay from '../../displayOptions/projectDisplay'
 import theme from '../../theme'
 
 const mapStateToProps = (state, ownProps) => {
-    const { selectedProjectTag } = ownProps;
+    const { selectedProjectTag } = ownProps.route.params;
     const inPreviewMode = selectedProjectTag === 'preview'
     const inBetaMode = selectedProjectTag === 'beta'
     let projectList
@@ -79,7 +79,9 @@ class ProjectList extends Component {
     }
 
     componentDidMount() {
-        const { selectedProjectTag, navBarActions, inPreviewMode } = this.props;
+      const { navBarActions, inPreviewMode } = this.props;
+      const { selectedProjectTag } = this.props.route.params;
+
         const title = GLOBALS.DISCIPLINES.find((element) => element.value === selectedProjectTag).label
         navBarActions.setNavbarSettingsForPage({
             title,
@@ -104,7 +106,8 @@ class ProjectList extends Component {
                 return <ProjectTile
                     project={item}
                     inPreviewMode={this.props.inPreviewMode}
-                    inBetaMode={this.props.inBetaMode}/>
+                    inBetaMode={this.props.inBetaMode}
+                    navigation={this.props.navigation}/>
             case 'spacer':
                 return <View style={styles.spacer} />
             case 'header':

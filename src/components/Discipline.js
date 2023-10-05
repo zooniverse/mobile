@@ -4,11 +4,11 @@ import {
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
-import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
 import ZooIcon from './ZooIcon'
 import FontedText from '../components/common/FontedText'
+import PageKeys from '../constants/PageKeys';
 
 class Discipline extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Discipline extends Component {
 
   handleClick() {
     const navigationProps = {selectedProjectTag: this.props.tag, color: this.props.color}
-    Actions.ProjectList(navigationProps)
+    this.props.navigation.navigate(PageKeys.ProjectList, {...navigationProps});
   }
 
   render() {
@@ -118,7 +118,10 @@ Discipline.propTypes = {
   title: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  description: PropTypes.string
+  description: PropTypes.string,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired
 }
 
 export default Discipline

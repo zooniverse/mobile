@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
-import {Actions} from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
 
@@ -16,6 +15,7 @@ import CircleRibbon from './CircleRibbon'
 import FontedText from './common/FontedText'
 
 import theme from '../theme'
+import { DrawerActions } from '@react-navigation/native';
 
 const mapStateToProps = (state) => {
   const { pageShowing, pageSettings } = state.navBar
@@ -45,12 +45,12 @@ export class NavBar extends Component {
     if (this.props.onBack) {
       this.props.onBack()
     } else {
-      Actions.pop()
+      this.props.navigation.goBack();
     }
   }
 
-  handleSideDrawer(){
-    Actions.drawerOpen()
+  handleSideDrawer() {
+    this.props.navigation.dispatch(DrawerActions.openDrawer())
   }
 
   render() {
@@ -95,7 +95,7 @@ export class NavBar extends Component {
       )
     }
 
-    const RightContainer = ({isActive}) => {
+    const RightContainer = ({ isActive }) => {
       const colorStyle = isActive ? {} : styles.disabledIcon
       return (
         <View>
@@ -190,8 +190,12 @@ NavBar.propTypes = {
   user: PropTypes.object,
   title: PropTypes.string,
   backgroundColor: PropTypes.string,
-  centerType: PropTypes.oneOf(['title', 'logo', 'avatar'])
-
+  centerType: PropTypes.oneOf(['title', 'logo', 'avatar']),
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  }).isRequired
 }
 NavBar.defaultProps = {
   backgroundColor: theme.$zooniverseTeal,

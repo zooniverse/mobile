@@ -3,15 +3,11 @@ More detailed information on the [wiki](https://github.com/zooniverse/mobile/wik
 # Zooniverse Mobile App
 The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-native/) app that allows folks like you and me to contribute to astronomy, ecology, and anthropology research from their couch, bathtub, or bus stop (but don't swipe and drive, please).
 
-## Setting Up for Local Development
-Setting up to work on a react-native app is a little tricky, and setting up to work on this one in particular is trickier. The guide below attempts to be comprehensive. If you run into any further issues while attempting to get set up, please reach out to contact@zooniverse.org.
-
 ### Preparing The React Native Framework
 #### Requirements:
- - Node >= 10
- - React Native CLI (`npm install -g react-native-cli` - may need sudo/admin depending on your setup)
+ - Node >= 16 (Recommend >= 18)
 #### Steps:
-1. Follow the instructions for Android and iOS setup in [this guide](https://reactnative.dev/docs/0.62/environment-setup).
+1. Follow the instructions for Android and iOS setup in [this guide](https://reactnative.dev/docs/environment-setup).
 2. Clone down this repo and navigate to its directory (called `mobile`).
 3. Run `npm install` (later, if you need to reinstall dependencies for some reason, you can run `rm -rf node_modules/ && npm install`)
 4. Run `npm start`.
@@ -22,10 +18,11 @@ Setting up to work on a react-native app is a little tricky, and setting up to w
 #### Requirements:
  - XCode
  - An iPhone X Simulator, which you can run from XCode.
+ - To run on an iOS device see [Running on device - iOS]https://reactnative.dev/docs/running-on-device?platform=ios
 #### Steps:
 On the command line, from the `mobile` directory, run:
 1. `cd ios && rm -rf Podfile.lock && pod install && cd ..`. You may need to `brew install cocoapods` first.
-2. `react-native run-ios`
+2. `npm run ios`
 
 ### Android
 #### Requirements:
@@ -34,6 +31,7 @@ On the command line, from the `mobile` directory, run:
     *  Within Android Studio, open the "AVD Manager" -  in the toolbar click the icon with the purple device and small android (fourth from the right)
     *  Click 'Create Virtual Device' - bottom left-hand corner
     *  Create at least one using the latest Android Release.  I have a few different size and Android Release configurations
+ - You can also use an Android device that is plugged into your computer. Run `adb devices` and confirm you see your device listed. If not use [Running on device - android]https://reactnative.dev/docs/running-on-device?platform=android for troubleshooting
  - Also you'll need a Gradle properties file outside the project for keeping secrets that aren't checked into source control. This should be in ~/.gradle/gradle.properties and contain the following:
 ```
 MYAPP_RELEASE_STORE_FILE=/path/to/your/keystore.jks
@@ -52,3 +50,9 @@ You will have to get the key _itself_ from an existing maintainer. We are lookin
 ## If you Work for The Zooniverse
 
 You may also want to set up error reporting from your local copy of the application to our reporting service, Sentry. [Here are instructions on how to do that!](https://github.com/zooniverse/mobile/wiki/Enabling-Sentry-for-your-Local-Builds)
+
+### Tools:
+This project is setup with Reactotron. Learn more [here](https://github.com/infinitered/reactotron). Reactotron is useful for:
+1. Inspecting network requestsl.
+2. As an alternative for console.log (Separates the logs for each device/simulator being used).
+In order to use with an android device/emulator you must run `adb reverse tcp:9090 tcp:9090` before running the project.

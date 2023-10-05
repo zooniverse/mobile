@@ -11,7 +11,6 @@ export const STORE_USER = 'STORE_USER'
 export const GET_USER_STORE = 'GET_USER_STORE'
 export const SIGN_IN = 'SIGN_IN'
 
-import store from 'react-native-simple-store'
 import apiClient from 'panoptes-client/lib/api-client'
 import {PUBLICATIONS} from '../constants/publications'
 import {Alert, Platform} from 'react-native'
@@ -45,29 +44,6 @@ export function setError(errorMessage) {
 
 export function setProjectList(projectList) {
   return { type: SET_PROJECT_LIST, projectList }
-}
-
-export function syncStore(name) {
-  return (dispatch, getState) => {
-    const contents = getState().main[name]
-    return store.save(`@zooniverse:${name}`, {
-        contents
-    })
-  }
-}
-
-export function setFromStore(name) {
-  return dispatch => {
-    return new Promise ((resolve, reject) => {
-      store.get(`@zooniverse:${name}`).then(json => {
-        dispatch(setState(name, json['contents']))
-        return resolve()
-      }).catch(() => { //default to redux store defaults
-        dispatch(syncStore(name))
-        return reject()
-      })
-    })
-  }
 }
 
 export function checkIsConnected() {
@@ -113,17 +89,6 @@ export function fetchNotificationProject(projectID) {
       dispatch(setState('notificationProject', head(projects)))
     }).catch((error) => {
       dispatch(setError('The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error,))
-    })
-  }
-}
-
-
-export function loadRecents() {
-  return (dispatch) => {
-    return new Promise((resolve) => {
-      dispatch(setFromStore('recentsList')).then(() => {
-        return resolve()
-      })
     })
   }
 }

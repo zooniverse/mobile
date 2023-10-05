@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {
-    Animated,
-    Dimensions,
     Platform,
     View
 } from 'react-native'
@@ -13,7 +11,6 @@ import { bindActionCreators } from 'redux'
 
 
 import * as imageActions from '../../actions/images'
-import FontedText from '../common/FontedText'
 import AlreadySeenBanner from './AlreadySeenBanner'
 import SubjectOptionsBar from './SubjectOptionsBar'
 import SwipeableSubject from './SwipeableSubject';
@@ -44,9 +41,6 @@ class SwipeCard extends Component {
     }
 
     componentDidMount() {
-        this.listenerId = this.props.panX.addListener((value) => {
-            this.setState({ overlayAnswerIndex: value.value < 0 ? 0 : 1})
-        })
 
         // Load all images to cache
         const loadImagePromises = this.props.subject.displays.map( ({src}) => {
@@ -82,8 +76,6 @@ class SwipeCard extends Component {
     }
 
     componentWillUnmount() {
-        this.props.panX.removeListener(this.listenerId)
-        Dimensions.removeEventListener('change', this.handleDimensionsChange)
 
         this.state.localUris.forEach((uri) => {
             RNFetchBlob.fs.exists(uri)
@@ -116,19 +108,8 @@ class SwipeCard extends Component {
             onExpandButtonPressed
         } = this.props;
 
-        const windowWidth = Dimensions.get('window').width
-        const opacity = panX.interpolate({
-            inputRange: [-windowWidth/4, 0, windowWidth/4],
-            outputRange: [1, 0, 1]
-          })
         const alreadySeen = (subject.already_seen || seenThisSession)
     
-        const overlay =
-            <Animated.View style={[styles.overlayContainer, styles.overlayBackground, { opacity }]}>
-                <FontedText style={styles.overlayText}>
-                    { answers[overlayAnswerIndex].label }
-                </FontedText>
-            </Animated.View >
 
         const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}
         const video = displayImageUri.slice(displayImageUri.length - 4).match('.mp4')
@@ -151,7 +132,6 @@ class SwipeCard extends Component {
                     </View>
                 }
                 <View style={styles.overlayContainer} pointerEvents="none">
-                    { this.props.shouldAnimateOverlay ? overlay : null }
                     { alreadySeen && !inMuseumMode ? <AlreadySeenBanner /> : null }
                 </View>
             </View>

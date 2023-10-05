@@ -29,6 +29,10 @@ build/
 .gradle
 local.properties
 *.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
 
 # node.js
 #
@@ -57,6 +61,7 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+/vendor/bundle/
 
 # VSCode settings/workspace settings
 .vscode

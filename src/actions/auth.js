@@ -1,5 +1,4 @@
 import auth from 'panoptes-client/lib/auth'
-import { Actions, ActionConst } from 'react-native-router-flux'
 import {
   checkIsConnected,
   setState,
@@ -7,6 +6,7 @@ import {
 } from '../actions/index'
 import { loadUserAvatar, loadUserProjects, setIsGuestUser, setUser } from '../actions/user'
 import * as ActionConstants from '../constants/actions'
+import { navRef } from '../navigation/RootNavigator';
 
 export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
@@ -15,7 +15,7 @@ export function getAuthUser() {
   return auth.checkCurrent();
 }
 
-export function signIn(login, password) {
+export function signIn(login, password, navigation) {
   return dispatch => {
     dispatch(setIsFetching(true))
     dispatch(setState('loadingText', 'Signing In...'))
@@ -32,7 +32,7 @@ export function signIn(login, password) {
         ])
       }).then(() => {
         dispatch(setIsFetching(false))
-        Actions.ZooniverseApp({type: ActionConst.RESET})  // Go to home screen
+        navigation.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
         dispatch(setIsFetching(false))
@@ -44,7 +44,7 @@ export function signIn(login, password) {
   }
 }
 
-export function register() {
+export function register(navigation) {
   return (dispatch, getState) => {
     dispatch(setIsFetching(true))
     dispatch(setState('errorMessage', ''))
@@ -62,7 +62,7 @@ export function register() {
         user.projects = {}
         dispatch(setUser(user))
         dispatch(setIsFetching(false))
-        Actions.ZooniverseApp({type: ActionConst.RESET})
+        navigation.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
         dispatch(setIsFetching(false))
@@ -75,18 +75,18 @@ export function register() {
 }
 
 
-export function signOut() {
+export function signOut(navigation) {
   return dispatch => {
     auth.signOut()
     dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
-    Actions.SignIn()
+    navRef.navigate('SignIn');
   }
 }
 
-export function continueAsGuest() {
+export function continueAsGuest(navigation) {
   return dispatch => {
     dispatch(setIsGuestUser(true))
-    Actions.ZooniverseApp({type: ActionConst.RESET})
+    navRef.navigate('ZooniverseApp', {refresh: true});
   }
 }

@@ -15,7 +15,6 @@ import Button from './Button'
 import Input from './Input'
 import OverlaySpinner from './OverlaySpinner'
 import StyledText from './StyledText'
-import { Actions } from 'react-native-router-flux'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 
@@ -25,11 +24,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  signIn(login, password) {
-    dispatch(signIn(login, password))
+  signIn(login, password, navigation) {
+    dispatch(signIn(login, password, navigation))
   },
-  continueAsGuest() {
-    dispatch(continueAsGuest())
+  continueAsGuest(navigation) {
+    dispatch(continueAsGuest(navigation))
   },
   setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.SignIn))
 })
@@ -45,7 +44,7 @@ export class SignIn extends React.Component {
   }
 
   handleRegistration() {
-    Actions.Register()
+    this.props.navigation.navigate("Register");
   }
 
   handleResetPassword() {
@@ -66,11 +65,11 @@ export class SignIn extends React.Component {
     //prevent red screen of death thrown by a console.error in javascript-client
     /* eslint-disable no-console */
     console.reportErrorsAsExceptions = false
-    this.props.signIn(this.state.login, this.state.password)
+    this.props.signIn(this.state.login, this.state.password, this.props.navigation)
   }
 
   continueAsGuest() {
-    this.props.continueAsGuest()
+    this.props.continueAsGuest(this.props.navigation)
   }
 
   componentDidMount() {
@@ -182,6 +181,9 @@ SignIn.propTypes = {
   signIn: PropTypes.func,
   continueAsGuest: PropTypes.func,
   errorMessage: PropTypes.string,
-  setNavbarSettingsForPage: PropTypes.func
+  setNavbarSettingsForPage: PropTypes.func,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

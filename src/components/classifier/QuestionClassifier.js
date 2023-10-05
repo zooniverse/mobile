@@ -53,7 +53,7 @@ class QuestionClassifier extends Component {
 
     finishTutorial() {
         if (this.props.needsTutorial) {
-            this.props.classifierActions.setTutorialCompleted(this.props.workflow.id, this.props.project.id)
+            this.props.classifierActions.setTutorialCompleted(this.props.route.params.workflow.id, this.props.route.params.project.id)
         } else {
             this.setQuestionVisibility()(true)
         }
@@ -73,9 +73,10 @@ class QuestionClassifier extends Component {
         return () => {
             const {
                 classifierActions,
-                workflow,
                 subject
             } = this.props
+
+            const { workflow } = this.props.route.params;
             const {id, first_task} = workflow
             const {
                 answerSelected,
@@ -98,15 +99,13 @@ class QuestionClassifier extends Component {
             isSuccess,
             needsTutorial,
             tutorial,
-            project,
-            workflow,
             subject,
             subjectsSeenThisSession,
             task,
-            inBetaMode,
             guide,
             answers
         } = this.props
+        const { project, workflow, inBetaMode } = this.props.route.params;
 
         const {
             answerSelected,
@@ -125,7 +124,7 @@ class QuestionClassifier extends Component {
             <View style={styles.tutorialContainer}>
                 <Tutorial
                     projectName={project.display_name}
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                     isInitialTutorial={needsTutorial}
                     tutorial={tutorial}
                     finishTutorial={() => this.finishTutorial()}
@@ -133,11 +132,11 @@ class QuestionClassifier extends Component {
             </View>
 
         const question =
-            <View style={colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)}>
+            <View style={colorModes.contentBackgroundColorFor(this.props.route.params.project.in_museum_mode)}>
                 <Question
                     question={task.question}
                     workflowID={workflow.id}
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                     onPressImage={(src, question) => {
                         this.setState({
                             showFullSize: true,
@@ -158,12 +157,12 @@ class QuestionClassifier extends Component {
         const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
         const classificationPanel =
             <View
-                style={[styles.classificationPanel, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
+                style={[styles.classificationPanel, colorModes.framingBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
                 <ClassificationPanel
                     hasTutorial={!R.isEmpty(tutorial)}
                     isQuestionVisible={isQuestionVisible}
                     setQuestionVisibility={this.setQuestionVisibility()}
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                 >
                     {
                         isQuestionVisible &&
@@ -180,7 +179,7 @@ class QuestionClassifier extends Component {
                         >
                             <View style={styles.backgroundView}/>
                             <View
-                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
+                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
                                 <View onLayout={({nativeEvent}) => this.setState({
                                     imageDimensions: {
                                         width: nativeEvent.layout.width,
@@ -192,7 +191,7 @@ class QuestionClassifier extends Component {
                                         width={imageDimensions.width}
                                         subject={subject}
                                         alreadySeen={seenThisSession}
-                                        inMuseumMode={this.props.project.in_museum_mode}
+                                        inMuseumMode={this.props.route.params.project.in_museum_mode}
                                         onPress={(imageSource) => this.setState({
                                             showFullSize: true,
                                             fullScreenImageSource: {uri: imageSource}
@@ -204,7 +203,7 @@ class QuestionClassifier extends Component {
                                         <View key={index} style={styles.buttonContainer}>
                                             <AnswerButton
                                                 selected={index === answerSelected}
-                                                inMuseumMode={this.props.project.in_museum_mode}
+                                                inMuseumMode={this.props.route.params.project.in_museum_mode}
                                                 deselected={answerSelected !== -1 && index !== answerSelected}
                                                 text={answer.label}
                                                 onPress={this.onOptionSelected(index)}
@@ -215,7 +214,7 @@ class QuestionClassifier extends Component {
                             </View>
                             <View style={styles.buttonContainer}>
                                 <SubmitButton
-                                    inMuseumMode={this.props.project.in_museum_mode}
+                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                                     disabled={answerSelected === -1}
                                     text="Submit"
                                     onPress={this.submitClassification()}
@@ -228,14 +227,14 @@ class QuestionClassifier extends Component {
                             {
                                 task.help !== null &&
                                 <NeedHelpButton
-                                    inMuseumMode={this.props.project.in_museum_mode}
+                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                                     onPress={() => this.classifierContainer.displayHelpModal()}
                                 />
                             }
                             {
                                 R.length(guide.items) > 0 &&
                                 <GuideButton
-                                    inMuseumMode={this.props.project.in_museum_mode}
+                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                                     onPress={() => this.classifierContainer.displayFieldGuide()}
                                     style={styles.guideButton}
                                     text="Field Guide"
@@ -258,7 +257,7 @@ class QuestionClassifier extends Component {
             <View style={[styles.container, styles.dropshadow]}>
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                     project={project}
                     help={task.help}
                     guide={guide}
@@ -343,17 +342,17 @@ const styles = EStyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        task: getTaskFromWorkflow(ownProps.workflow),
-        answers: getAnswersFromWorkflow(ownProps.workflow),
+        task: getTaskFromWorkflow(ownProps.route.params.workflow),
+        answers: getAnswersFromWorkflow(ownProps.route.params.workflow),
         isSuccess: state.classifier.isSuccess,
         isFailure: state.classifier.isFailure,
         isFetching: state.classifier.isFetching,
-        annotations: state.classifier.annotations[ownProps.workflow.id] || {},
-        guide: state.classifier.guide[ownProps.workflow.id] || {},
-        tutorial: state.classifier.tutorial[ownProps.workflow.id] || {},
-        needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
+        annotations: state.classifier.annotations[ownProps.route.params.workflow.id] || {},
+        guide: state.classifier.guide[ownProps.route.params.workflow.id] || {},
+        tutorial: state.classifier.tutorial[ownProps.route.params.workflow.id] || {},
+        needsTutorial: state.classifier.needsTutorial[ownProps.route.params.workflow.id] || false,
         subject: state.classifier.subject || {},
-        subjectsSeenThisSession: state.classifier.seenThisSession[ownProps.workflow.id] || []
+        subjectsSeenThisSession: state.classifier.seenThisSession[ownProps.route.params.workflow.id] || []
     }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -23,6 +23,7 @@ import { extractSwipeEnabledProjects } from '../utils/projectUtils'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import { useRoute } from '@react-navigation/native';
 
 const mapStateToProps = (state) => {
   const nativePreviewProjects = state.projects.previewProjectList.filter(
@@ -52,64 +53,68 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-export class ProjectDisciplines extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      refreshing: true
-  }
+function ProjectDisciplines({ ...props }) {
+  const [refreshing, setRefreshing] = useState(true);
+  const route = useRoute();
 
-    this.refreshProjects = this.refreshProjects.bind(this)
-  }
-
-  componentDidMount() {
-      this.props.setNavbarSettingsForPage({
-      centerType: 'avatar'
-    }, PageKeys.ProjectDisciplines)
-    if (this.shouldPromptForPermissions()) {
-      setTimeout(()=> {
-        this.promptRequestPermissions()
-      }, 500)
+  useEffect(() => {
+    props.setNavbarSettingsForPage(
+      {
+        centerType: 'avatar',
+      },
+      PageKeys.ProjectDisciplines
+    );
+    if (shouldPromptForPermissions()) {
+      setTimeout(() => {
+        promptRequestPermissions();
+      }, 500);
     }
 
-    this.refreshProjects()
-  }
+    refreshProjects();
 
-  componentWillUnmount() {
-    if (this.fetchProjectPromise) {
-      this.fetchProjectPromise.cancel()
+    return () => {
+      if (this.fetchProjectPromise) {
+        this.fetchProjectPromise.cancel();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (route?.params?.refresh) {
+      route.params.refresh = false;
+      refreshProjects();
     }
+  }, [route]);
+
+  function shouldPromptForPermissions() {
+    return Platform.OS === 'ios' && !props.user.pushPrompted;
   }
 
-  shouldPromptForPermissions() {
-    return ((Platform.OS === 'ios') && (!this.props.user.pushPrompted))
-  }
-
-  promptRequestPermissions = () => {
+  const promptRequestPermissions = () => {
     PushNotificationIOS.checkPermissions((permissions) => {
       if (permissions.alert === 0){
         Alert.alert(
           'Allow Notifications?',
           'Zooniverse would like to occasionally send you info about new projects or projects needing help.',
           [
-            {text: 'Not Now', onPress: () => this.requestIOSPermissions(false)},
-            {text: 'OK', onPress: () => this.requestIOSPermissions(true)},
+            {text: 'Not Now', onPress: () => requestIOSPermissions(false)},
+            {text: 'OK', onPress: () => requestIOSPermissions(true)},
           ]
         )
       }
     })
-  }
+  };
 
-  requestIOSPermissions(accepted) {
+  function requestIOSPermissions(accepted) {
     if (accepted) {
-      PushNotificationIOS.requestPermissions()
+      PushNotificationIOS.requestPermissions();
     }
-    this.props.setPushPrompted(true)
+    props.setPushPrompted(true);
   }
 
-  _renderItem({item}) {
-    const { faIcon, value, label, color, description } = item
-      return (
+  function renderItem({ item, navigation }) {
+    const { faIcon, value, label, color, description } = item;
+    return (
       <Discipline
         faIcon={faIcon}
         icon={value}
@@ -117,79 +122,93 @@ export class ProjectDisciplines extends React.Component {
         tag={value}
         color={color}
         description={description}
+        navigation={props.navigation}
       />
     );
   }
 
-  refreshProjects() {
-    this.setState({refreshing: true});
-    this.fetchProjectPromise = makeCancelable(this.props.projectActions.fetchProjects())
+  function refreshProjects() {
+    setRefreshing(true);
+    fetchProjectPromise = makeCancelable(props.projectActions.fetchProjects());
 
-    this.fetchProjectPromise
-    .promise
-    .then((projectList) => {
-      this.fetchProjectPromise = null
-      this.setState({refreshing: false});
+    fetchProjectPromise.promise
+      .then((projectList) => {
+        fetchProjectPromise = null;
+        setRefreshing(false);
 
-      // Handle push subscriptions
-      const notificationProjects = extractSwipeEnabledProjects(projectList.filter(project => !project.isPreview))
-      this.props.settingsActions.addUnusedProjectsToNotifications(notificationProjects)
-    })
-    .catch((error) => {
-      if (!error.isCanceled) {
-        Alert.alert( 'Error', 'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' + error)
+        // Handle push subscriptions
+        const notificationProjects = extractSwipeEnabledProjects(
+          projectList.filter((project) => !project.isPreview)
+        );
+        props.settingsActions.addUnusedProjectsToNotifications(
+          notificationProjects
+        );
+      })
+      .catch((error) => {
+        if (!error.isCanceled) {
+          Alert.alert(
+            'Error',
+            'The following error occurred.  Please close down Zooniverse and try again.  If it persists please notify us.  \n\n' +
+              error
+          );
+        }
+      });
+  }
+  const totalClassifications = props.user.totalClassifications;
+  const pluralizeClassification = totalClassifications > 1 ? 'S' : '';
+  const totalClassificationsDisiplay = (
+    <FontedText style={styles.totalClassifications}>
+      {`${totalClassifications} TOTAL CLASSIFICATION${pluralizeClassification}`}
+    </FontedText>
+  );
+
+  const disciplineInProjectList = (discipline) => {
+    const { user, hasPreviewProjects, hasRecentProjects, hasBetaProjects } =
+      props;
+    const isForLoggedInUser =
+      !user.isGuestUser &&
+      loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects).includes(
+        discipline.value
+      );
+    const isTagged =
+      props.projectList.find((project) =>
+        project.tags.includes(discipline.value)
+      ) !== undefined;
+    const isBeta = hasBetaProjects && discipline.value === 'beta';
+    const isForAllProjects = discipline.value === 'all projects';
+    return isForLoggedInUser || isTagged || isBeta || isForAllProjects;
+  };
+  const disciplineList = props.isSuccess
+    ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES)
+    : [];
+  const listView = (
+    <FlatList
+      contentContainerStyle={styles.listContainer}
+      data={disciplineList}
+      renderItem={(item) => renderItem(item, props.navigation)}
+      keyExtractor={(item, index) => `${index}`}
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={refreshProjects} />
       }
-    })
-  }
-
-  render() {
-    const totalClassifications = this.props.user.totalClassifications
-    const pluralizeClassification = ( totalClassifications > 1 ? 'S' : '' )
-    const totalClassificationsDisiplay =
-      <FontedText style={styles.totalClassifications}>
-        {`${totalClassifications} TOTAL CLASSIFICATION${pluralizeClassification}`}
-      </FontedText>
-
-    const disciplineInProjectList = (discipline) => {
-      const {user, hasPreviewProjects, hasRecentProjects, hasBetaProjects} = this.props
-      const isForLoggedInUser = !user.isGuestUser && loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects ).includes(discipline.value)
-      const isTagged = this.props.projectList.find((project) => project.tags.includes(discipline.value)) !== undefined
-      const isBeta = hasBetaProjects && discipline.value === 'beta'
-      const isForAllProjects = discipline.value === 'all projects'
-      return isForLoggedInUser || isTagged || isBeta || isForAllProjects
-    }
-    const disciplineList = this.props.isSuccess ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES) : []
-    const listView =
-      <FlatList
-        contentContainerStyle={styles.listContainer}
-        data={disciplineList}
-        renderItem={this._renderItem}
-        keyExtractor={(item, index) => `${index}`}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this.refreshProjects}
-          />}
-      />
-    const activityIndicator =
-      <View style={activityIndicator}>
-        <ActivityIndicator size="large" />
+    />
+  );
+  const activityIndicator = (
+    <View style={activityIndicator}>
+      <ActivityIndicator size="large" />
+    </View>
+  );
+  return (
+    <View style={styles.container}>
+      <View style={styles.subNavContainer}>
+        <FontedText style={styles.userName}>
+          {props.isGuestUser ? 'Guest User' : props.user.display_name}
+        </FontedText>
+        {/* {totalClassifications > 0 ? totalClassificationsDisiplay : null} */}
       </View>
-
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.subNavContainer}>
-            <FontedText style={styles.userName}>
-              { this.props.isGuestUser ? 'Guest User' : this.props.user.display_name }
-            </FontedText>
-            { totalClassifications > 0 ? totalClassificationsDisiplay : null }
-        </View>
-        { this.props.isLoading && !this.props.isSuccess ? activityIndicator : listView }
-      </View>
-    );
-  }
+      {props.isLoading && !props.isSuccess ? activityIndicator : listView}
+    </View>
+  );
 }
 
 const styles = EStyleSheet.create({
@@ -206,6 +225,7 @@ const styles = EStyleSheet.create({
     color: '$headerGrey',
     fontSize: 26,
     lineHeight: 31,
+    marginTop: 50,
   },
   totalClassifications: {
     color: '$headerGrey',
@@ -236,20 +256,5 @@ const styles = EStyleSheet.create({
     paddingBottom: 25
   }
 });
-
-ProjectDisciplines.propTypes = {
-  user: PropTypes.object,
-  isGuestUser: PropTypes.bool,
-  setPushPrompted: PropTypes.func,
-  projectList: PropTypes.array,
-  isSuccess: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  projectActions: PropTypes.any,
-  settingsActions: PropTypes.any,
-  hasRecentProjects: PropTypes.bool,
-  hasPreviewProjects: PropTypes.bool,
-  hasBetaProjects: PropTypes.bool,
-  setNavbarSettingsForPage: PropTypes.func,
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDisciplines)

@@ -18,14 +18,18 @@ import * as appActions from '../actions/app'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-  isFetching: state.main.isFetching,
-  isConnected: state.main.isConnected,
-  isModalVisible: state.main.isModalVisible || false,
-  notificationPayload: state.main.notificationPayload || {},
-  images: state.images
-})
+const mapStateToProps = (state) => {
+  const isConnected = state.main.isConnected && state.main.isConnected.isConnected
+
+  return {
+    user: state.user,
+    isFetching: state.main.isFetching,
+    isConnected,
+    isModalVisible: state.main.isModalVisible || false,
+    notificationPayload: state.main.notificationPayload || {},
+    images: state.images
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   setModalVisibility(value) {
@@ -72,10 +76,11 @@ class ZooniverseApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ProjectDisciplines />
-        <NotificationModal
+        <ProjectDisciplines navigation={this.props.navigation}  />
+        {/* This component has errors in getDerivedStateFromProps and doesn't look like it's being used. Commenting out for now.*/}
+        {/* <NotificationModal
           isVisible={this.props.isModalVisible}
-          setVisibility={this.props.setModalVisibility}/>
+          setVisibility={this.props.setModalVisibility}/> */}
       </View>
     )
   }

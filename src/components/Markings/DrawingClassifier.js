@@ -40,9 +40,9 @@ const mapStateToProps = (state, ownProps) => {
         isSuccess: state.classifier.isSuccess,
         isFailure: state.classifier.isFailure,
         isFetching: state.classifier.isFetching,
-        guide: state.classifier.guide[ownProps.workflow.id] || {},
-        tutorial: state.classifier.tutorial[ownProps.workflow.id] || {},
-        needsTutorial: state.classifier.needsTutorial[ownProps.workflow.id] || false,
+        guide: state.classifier.guide[ownProps.route.params.workflow.id] || {},
+        tutorial: state.classifier.tutorial[ownProps.route.params.workflow.id] || {},
+        needsTutorial: state.classifier.needsTutorial[ownProps.route.params.workflow.id] || false,
         subject: state.classifier.subject,
         shapes: DeviceInfo.isTablet() ? state.drawing.shapesInProgress : state.drawing.shapes,
         workflowOutOfSubjects: state.classifier.workflowOutOfSubjects,
@@ -102,7 +102,7 @@ class DrawingClassifier extends Component {
     submitClassification() {
         this.props.classifierActions.submitDrawingClassification(
             this.props.shapes,
-            this.props.workflow,
+            this.props.route.params.workflow,
             this.props.subject,
             this.state.subjectDimensions
         )
@@ -142,7 +142,7 @@ class DrawingClassifier extends Component {
 
     finishTutorial() {
         if (this.props.needsTutorial) {
-            this.props.classifierActions.setTutorialCompleted(this.props.workflow.id, this.props.project.id)
+            this.props.classifierActions.setTutorialCompleted(this.props.route.params.workflow.id, this.props.route.params.project.id)
         } else {
             this.setQuestionVisibility(true)
         }
@@ -163,13 +163,13 @@ class DrawingClassifier extends Component {
         }
 
         // We validate that tools has at least one element earlier
-        const tool = this.props.tools[0]
+        const tool = this.props.route.params.tools[0]
         const warnForRequirements = this.state.modalHasBeenClosedOnce && R.keys(this.props.shapes).length < tool.min
 
         const tutorial =
             <Tutorial
-                projectName={this.props.project.display_name}
-                inMuseumMode={this.props.project.in_museum_mode}
+                projectName={this.props.route.params.project.display_name}
+                inMuseumMode={this.props.route.params.project.in_museum_mode}
                 isInitialTutorial={this.props.needsTutorial}
                 tutorial={this.props.tutorial}
                 finishTutorial={() => this.finishTutorial()}
@@ -177,14 +177,14 @@ class DrawingClassifier extends Component {
 
         const classification =
             <View
-                style={[styles.classificationContainer, colorModes.contentBackgroundColorFor(this.props.project.in_museum_mode)]}>
+                style={[styles.classificationContainer, colorModes.contentBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
                 <DrawingHeader
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                     horizontal={DeviceInfo.isTablet()}
                     question={
                         <Question
-                            question={this.props.instructions}
-                            inMuseumMode={this.props.project.in_museum_mode}
+                            question={this.props.route.params.instructions}
+                            inMuseumMode={this.props.route.params.project.in_museum_mode}
                         />
                     }
                     instructions={
@@ -192,7 +192,7 @@ class DrawingClassifier extends Component {
                             {...tool}
                             numberDrawn={this.props.numberOfShapesDrawn}
                             warnForRequirements={warnForRequirements}
-                            inMuseumMode={this.props.project.in_museum_mode}
+                            inMuseumMode={this.props.route.params.project.in_museum_mode}
                         />
                     }
                 />
@@ -202,7 +202,7 @@ class DrawingClassifier extends Component {
                         showHelpButton={DeviceInfo.isTablet() && !R.isEmpty(this.props.help)}
                         onHelpButtonPressed={() => this.classificationContainer.displayHelpModal()}
                         showDrawingButtons={DeviceInfo.isTablet()}
-                        inMuseumMode={this.props.project.in_museum_mode}
+                        inMuseumMode={this.props.route.params.project.in_museum_mode}
                         onUndoButtonSelected={this.props.drawingActions.undoMostRecentEdit}
                         maxShapesDrawn={this.props.numberOfShapesDrawn >= tool.max}
                         drawingColor={tool.color}
@@ -221,7 +221,7 @@ class DrawingClassifier extends Component {
         const fieldGuideButton =
             <View style={styles.fieldGuideContainer}>
                 <GuideButton
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                     onPress={() => this.classificationContainer.displayFieldGuide()}
                     type="guide"
                     text="Field Guide"
@@ -231,7 +231,7 @@ class DrawingClassifier extends Component {
 
         const submitButton =
             <SubmitButton
-                inMuseumMode={this.props.project.in_museum_mode}
+                inMuseumMode={this.props.route.params.project.in_museum_mode}
                 disabled={R.keys(this.props.shapes).length < tool.min || !this.state.imageIsLoaded}
                 onPress={this.submitClassification}
                 style={[styles.submitButton, this.state.orientation === 'portrait' ? [] : styles.wideSubmit]}
@@ -247,7 +247,7 @@ class DrawingClassifier extends Component {
             hasTutorial={!R.isEmpty(this.props.tutorial)}
             isQuestionVisible={isQuestionVisible}
             setQuestionVisibility={this.setQuestionVisibility}
-            inMuseumMode={this.props.project.in_museum_mode}
+            inMuseumMode={this.props.route.params.project.in_museum_mode}
         >
             {isQuestionVisible ? classification : tutorial}
         </ClassificationPanel>;
@@ -263,7 +263,7 @@ class DrawingClassifier extends Component {
         const needHelpButton =
             <NeedHelpButton
                 onPress={() => this.classificationContainer.displayHelpModal()}
-                inMuseumMode={this.props.project.in_museum_mode}
+                inMuseumMode={this.props.route.params.project.in_museum_mode}
             />;
 
         const classificationView =
@@ -275,10 +275,10 @@ class DrawingClassifier extends Component {
             </View>
 
         return (
-            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.project.in_museum_mode)]}>
+            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
                 <ClassificationContainer
-                    inMuseumMode={this.props.project.in_museum_mode}
-                    project={this.props.project}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
+                    project={this.props.route.params.project}
                     inBetaMode={this.props.inBetaMode}
                     help={this.props.help}
                     ref={(ref => this.classificationContainer = ref)}
@@ -289,7 +289,7 @@ class DrawingClassifier extends Component {
                 <DrawingModal
                     tool={tool}
                     visible={this.state.isModalVisible}
-                    inMuseumMode={this.props.project.in_museum_mode}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
                     imageSource={this.state.localImagePath}
                     onClose={() => this.setState({isModalVisible: false, modalHasBeenClosedOnce: true})}
                     warnForRequirements={this.state.modalHasBeenClosedOnce}

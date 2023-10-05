@@ -12,7 +12,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import * as R from 'ramda';
-import {Actions} from 'react-native-router-flux'
 
 import navigateToClassifier from '../../navigators/classifierNavigator'
 import FontedText from '../common/FontedText'
@@ -29,7 +28,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    navigateToClassifier: navigateToClassifier(dispatch, ownProps.inPreviewMode, ownProps.inBetaMode, ownProps.project)
+    navigateToClassifier: navigateToClassifier(dispatch, ownProps.inPreviewMode, ownProps.inBetaMode, ownProps.project, ownProps.navigation)
 })
 
 class ProjectTile extends Component {
@@ -106,7 +105,9 @@ class ProjectTile extends Component {
         } else if (redirect) {
             this._openURL(redirect)
         } else {
-            Actions.ZooWebView({project: this.props.project})
+          this.props.navigation.navigate("ZooWebView", {
+            project: this.props.project,
+          });
         }
     }
 
@@ -195,7 +196,7 @@ const styles = EStyleSheet.create({
         backgroundColor: 'white'
     },
     avatar: {
-        height: 175,
+        height: 220,
     },
     descriptionContainer: {
         paddingVertical: 20, 

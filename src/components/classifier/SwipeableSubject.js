@@ -3,7 +3,9 @@ import {
     Dimensions,
     Image,
     ScrollView,
-    View
+    TouchableWithoutFeedback,
+    View,
+    Platform
 } from 'react-native';
 import PropTypes from 'prop-types';
 import R from 'ramda';
@@ -31,14 +33,6 @@ class SwipeableSubject extends Component {
         if (this.pager) {
             setTimeout(() => this.pager.scrollTo({y: 0}), 300)
         }
-    }
-
-    componentDidMount() {
-        Dimensions.addEventListener('change', this.handleDimensionsChange);
-    }
-
-    componentWillUnmount() {
-        Dimensions.removeEventListener('change', this.handleDimensionsChange)
     }
 
     componentDidUpdate(prevProps) {
@@ -117,19 +111,23 @@ class SwipeableSubject extends Component {
                             }
                         }}
                     >
-                        {
-                            imagesAreLoaded ?
-                                imageUris.map((uri, index) =>
-                                    <View
-                                        style={[styles.borderView, pagerDimensions]}
-                                        key={`SWIPER_IMAGE_${index}`}
-                                    >
-                                        {displayInRequisiteComponent(uri)}
-                                    </View>
-                                )
-                            :
-                                <SubjectLoadingIndicator multipleSubjects={hasMultipleSubjects} />
-                        }
+                        <TouchableWithoutFeedback>
+                            <View>
+                                {
+                                    imagesAreLoaded ?
+                                        imageUris.map((uri, index) =>
+                                            <View
+                                                style={[styles.borderView, pagerDimensions]}
+                                                key={`SWIPER_IMAGE_${index}`}
+                                            >
+                                                {displayInRequisiteComponent(uri)}
+                                            </View>
+                                        )
+                                    :
+                                        <SubjectLoadingIndicator multipleSubjects={hasMultipleSubjects} />
+                                    }
+                                </View>
+                            </TouchableWithoutFeedback>
                     </ScrollView>
                 </View>
             </View>
@@ -162,7 +160,11 @@ const styles = EStyleSheet.create({
         },
     },
     image: {
-        borderRadius: 2,
+        ...Platform.select({
+            ios: {
+                borderRadius: 2 // There's a bug on Android with image contain and borderRadius that gives it a red background. For now, only apply to iOS.
+            }
+        }),
         flex: 1
     },
     borderView: {

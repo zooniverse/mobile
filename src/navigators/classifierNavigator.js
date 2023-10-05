@@ -1,4 +1,3 @@
-import {Actions} from 'react-native-router-flux'
 import R from 'ramda'
 
 import * as classifierActions from '../actions/classifier'
@@ -6,7 +5,7 @@ import * as drawingActions from '../actions/drawing'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 
-const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, workflow) => {
+const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, navigation, workflow) => {
     dispatch(setNavbarSettingsForPage({
         isPreview: inPreviewMode, //TODO: Decouple preview mode from the color of the safe area container
         title: project.in_museum_mode ? 'ZOONIVERSE - DO REAL RESEARCH!' : project.display_name,
@@ -18,16 +17,16 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
 
     switch (workflow.type) {
         case 'drawing':
-            navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
+            navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
             break;
         case 'single':
-            navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
+            navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
             break;
         case 'multiple':
-            navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
+            navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
             break;
         case 'swipe':
-            navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch);
+            navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
             break;
     }
 })
@@ -45,54 +44,54 @@ function getPageKeyForWorkflowType(workflowType) {
     }
 }
 
-function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
-    Actions.SwipeClassifier({ 
-        project,
-        workflow,
-        display_name: project.display_name,
-        inPreviewMode,
-        inBetaMode
-    })
+    navigation.navigate("SwipeClassifier", {
+      project,
+      workflow,
+      display_name: project.display_name,
+      inPreviewMode,
+      inBetaMode,
+    });
 }
 
-function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
-    Actions.QuestionClassifier({ 
-        project,
-        workflow,
-        display_name: project.display_name,
-        inPreviewMode,
-        inBetaMode
-    })
+    navigation.navigate("QuestionClassifier", {
+      project,
+      workflow,
+      display_name: project.display_name,
+      inPreviewMode,
+      inBetaMode,
+    });
 }
 
-function navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+function navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
-    Actions.MultiAnswerClassifier({
-        project,
-        workflow,
-        display_name: project.display_name,
-        inPreviewMode,
-        inBetaMode,
-    })
+    navigation.navigate("MultiAnswerClassifier", {
+      project,
+      workflow,
+      display_name: project.display_name,
+      inPreviewMode,
+      inBetaMode,
+    });
 }
 
-function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch) {
+function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(drawingActions.clearShapes())
     dispatch(classifierActions.startNewClassification(workflow, project))
-    Actions.DrawingClassifier({
-        ...parseDrawingTask(workflow),
-        project,
-        workflow,
-        display_name: project.display_name,
-        inPreviewMode,
-        inBetaMode
-    })
+    navigation.navigate("DrawingClassifier", {
+      ...parseDrawingTask(workflow),
+      project,
+      workflow,
+      display_name: project.display_name,
+      inPreviewMode,
+      inBetaMode,
+    });
 }
 
 /**
