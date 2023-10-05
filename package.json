@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "android": "react-native run-android --appIdSuffix 'debug'",
-    "ios": "react-native run-ios",
+    "start": "npm start",
+    "android": "npm run android",
+    "ios": "npm run ios",
     "test": "NODE_ENV=staging jest --runInBand",
     "test:watch": "npm test -- --watch"
   },

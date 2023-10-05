@@ -73,9 +73,10 @@ class QuestionClassifier extends Component {
         return () => {
             const {
                 classifierActions,
-                workflow,
                 subject
             } = this.props
+
+            const { workflow } = this.props.route.params;
             const {id, first_task} = workflow
             const {
                 answerSelected,

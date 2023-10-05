@@ -41,7 +41,7 @@ class TappableSubject extends Component {
         // Typical usage (don't forget to compare props):
         if (this.props.subject !== prevProps.subject) {
             if (this.scrollView) {
-                this.scrollView.getNode().scrollTo({x: 0})
+                this.scrollView.scrollTo({x: 0})
             }
             this.setState({
                 imageIndex: 0
@@ -109,9 +109,9 @@ class TappableSubject extends Component {
                                                         onPress(display.src)
                                                     } else {
                                                         index === subject.displays.length - 1 ?
-                                                            this.scrollView.getNode().scrollToEnd()
+                                                            this.scrollView.scrollToEnd()
                                                         :
-                                                            this.scrollView.getNode().scrollTo({
+                                                            this.scrollView.scrollTo({
                                                                 x: index * width - 40,
                                                                 animated: true
                                                             })
