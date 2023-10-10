@@ -113,7 +113,8 @@ export class Tutorial extends Component {
                         ref={ref => this.swiper = ref}
                         showsPagination={false}
                         loop={false}
-                        onIndexChanged={(index) => this.setState({step: index})}
+                        onIndexChanged={(index) => this.setState({ step: index })}
+                        loadMinimal={true}
                     >
                         {tutorialSteps}
                     </Swiper>
