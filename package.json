@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "npm start",
-    "android": "npm run android",
-    "ios": "npm run ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "test": "NODE_ENV=staging jest --runInBand",
     "test:watch": "npm test -- --watch"
   },
