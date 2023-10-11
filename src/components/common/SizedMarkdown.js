@@ -3,7 +3,8 @@ import {
     View
 } from 'react-native'
 import DeviceInfo from 'react-native-device-info'
-import Markdown from 'react-native-simple-markdown'
+import Markdown from 'react-native-markdown-package';
+import MarkdownButton from 'react-native-simple-markdown'
 import PropTypes from 'prop-types'
 
 import { markdownImageRule } from '../../utils/markdownUtils'
@@ -45,14 +46,6 @@ class SizedMarkdown extends Component {
         })
     }
 
-    // Fixes: https://github.com/zooniverse/mobile/issues/412
-    addLineBreak(content) {
-        const newContent = content.replace(/\n/g, (m) => {
-            return m + m;
-        });
-        return newContent;
-  }
-
     render() {
         const { viewDimensions } = this.state
 
@@ -82,11 +75,23 @@ class SizedMarkdown extends Component {
             }
         }
 
+        /**
+         * The reasoning behind the two Markdown libraries.
+         * react-native-simple-markdown works great with buttons & buttons with markdown images. 
+         *  I cannot find a replacement library without breaking images.
+         * react-native-markdown-package works great with things like bold and newline characters.
+         */
         return (
             <View onLayout={this.onViewLayout}>
+                {this.props.forButton ? (
+                    <MarkdownButton rules={markdownImageRule} styles={customStyles}>
+                        { this.props.children }
+                    </MarkdownButton>
+                ): (
                     <Markdown rules={markdownImageRule} styles={customStyles}>
-                    {this.addLineBreak(this.props.children)}
+                        { this.props.children }
                     </Markdown>
+                )}
             </View>
         )
     }
