@@ -84,9 +84,9 @@ class SizedMarkdown extends Component {
 
         return (
             <View onLayout={this.onViewLayout}>
-                <Markdown rules={markdownImageRule} styles={customStyles}>
+                    <Markdown rules={markdownImageRule} styles={customStyles}>
                     {this.addLineBreak(this.props.children)}
-                </Markdown>
+                    </Markdown>
             </View>
         )
     }
