@@ -84,10 +84,10 @@ export function fetchProjects() {
                     let projectDetailCalls = []
                     projectDetailCalls.push(getWorkflowsForProjects(allProjects))
                     const avatarCall = getAvatarsForProjects(allProjects)
-                    const museumModeCall = tagMuseumRoleForProjects(allProjects)
-
+                    
                     projectDetailCalls = projectDetailCalls.concat(avatarCall)
                     if (userIsLoggedIn) {
+                      const museumModeCall = tagMuseumRoleForProjects(allProjects)
                       projectDetailCalls = projectDetailCalls.concat(museumModeCall)
                     }
                     // Then load the avatars and workflows
