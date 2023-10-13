@@ -45,6 +45,11 @@ class SizedMarkdown extends Component {
         })
     }
 
+    // Fixes: https://github.com/zooniverse/mobile/issues/412
+    addLineBreak(content) {
+        return content.replace(/\n/g, (n) => n + n);
+    }
+
     render() {
         const { viewDimensions } = this.state
 
@@ -77,7 +82,7 @@ class SizedMarkdown extends Component {
         return (
             <View onLayout={this.onViewLayout}>
                 <Markdown rules={markdownImageRule} styles={customStyles}>
-                    { this.props.children }
+                    {this.addLineBreak(this.props.children)}
                 </Markdown>
             </View>
         )
