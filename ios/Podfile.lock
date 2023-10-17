@@ -388,7 +388,7 @@ PODS:
     - react-native-video/Video (= 5.2.1)
   - react-native-video/Video (5.2.1):
     - React-Core
-  - react-native-webview (13.6.2):
+  - react-native-webview (13.6.0):
     - React-Core
   - React-NativeModulesApple (0.72.4):
     - hermes-engine
@@ -544,16 +544,16 @@ PODS:
   - RNScreens (3.25.0):
     - React-Core
     - React-RCTImage
-  - RNSentry (5.11.1):
+  - RNSentry (5.10.0):
     - React-Core
-    - Sentry/HybridSDK (= 8.13.0)
+    - Sentry/HybridSDK (= 8.11.0)
   - RNSVG (13.14.0):
     - React-Core
   - RNVectorIcons (10.0.0):
     - React-Core
-  - Sentry/HybridSDK (8.13.0):
-    - SentryPrivate (= 8.13.0)
-  - SentryPrivate (8.13.0)
+  - Sentry/HybridSDK (8.11.0):
+    - SentryPrivate (= 8.11.0)
+  - SentryPrivate (8.11.0)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -814,7 +814,7 @@ SPEC CHECKSUMS:
   react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
-  react-native-webview: 8fc09f66a1a5b16bbe37c3878fda27d5982bb776
+  react-native-webview: 669ae162965f629a8d6a4bdd3b99a304d36ef1f2
   React-NativeModulesApple: edb5ace14f73f4969df6e7b1f3e41bef0012740f
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
   React-RCTActionSheet: 02904b932b50e680f4e26e7a686b33ebf7ef3c00
@@ -840,11 +840,11 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: ab2e96c6d5591c3dfbb38a464f54c8d17fb34a87
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
-  RNSentry: e668d4e68fe09d475dc084bab81f02c3be2db173
+  RNSentry: 11917f7bf3e28806aca4c2791c6ba7522d8f09fe
   RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
-  Sentry: a067ca1db308066097314d8478e9682f3b575dee
-  SentryPrivate: 917c91aeb0f199cd079404fab2b50c83e4bad25c
+  Sentry: 39d57e691e311bdb73bc1ab5bbebbd6bc890050d
+  SentryPrivate: 48712023cdfd523735c2edb6b06bedf26c4730a3
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
