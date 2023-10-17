@@ -41,7 +41,7 @@ const collaboratorParams = {
 export function fetchProjects() {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            dispatch(addProjectsRequest)
+            // dispatch(addProjectsRequest)
             getAuthUser()
                 .then((userProfile) => {
                 const userIsLoggedIn = userProfile !== null
@@ -70,12 +70,12 @@ export function fetchProjects() {
                     projectCalls.push(apiClient.type('projects').get(ownerParams).then(projects => {
                         const taggedProjects = tagProjects(projects, true)
                         allProjects = allProjects.concat(taggedProjects)
-                        taggedProjects.forEach((project) => dispatch(addOwnerProjectId(project)))
+                        // taggedProjects.forEach((project) => dispatch(addOwnerProjectId(project)))
                     }));
                     projectCalls.push(apiClient.type('projects').get(collaboratorParams).then(projects => {
                         const taggedProjects = tagProjects(projects, true)
                         allProjects = allProjects.concat(taggedProjects)
-                        taggedProjects.forEach((project) => dispatch(addCollaboratorProjectId(project)))
+                        // taggedProjects.forEach((project) => dispatch(addCollaboratorProjectId(project)))
                     }));
                 }
 
@@ -93,17 +93,17 @@ export function fetchProjects() {
                     // Then load the avatars and workflows
                     Promise.all(projectDetailCalls)
                         .then(() => {
-                            dispatch(addProjects(allProjects))
-                            dispatch(addProjectsSuccess);
+                            // dispatch(addProjects(allProjects))
+                            // dispatch(addProjectsSuccess);
                             resolve(allProjects)
                         })
                         .catch((error) => {
-                            dispatch(addProjectsFailure);
+                            // dispatch(addProjectsFailure);
                             reject(error)
                         })
                 })
                     .catch((error) => {
-                        dispatch(addProjectsFailure);
+                        // dispatch(addProjectsFailure);
                         reject(error)
                     })
             }).catch(() => {
