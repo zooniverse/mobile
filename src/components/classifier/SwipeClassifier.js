@@ -242,6 +242,7 @@ export class SwipeClassifier extends React.Component {
                             style: swiperLabelStyle,
                         },
                     }}
+                    loadMinimal={true}
                 />
             </View>
 
