@@ -112,7 +112,10 @@ const RootNavigator = () => {
       ref={navRef}
       onStateChange={() => {
         const newRoute = navRef.getCurrentRoute();
-        dispatch(setPageShowing(newRoute.name));
+        // Make sure the newRoute has a name.
+        if (newRoute?.name) {
+          dispatch(setPageShowing(newRoute.name));
+        }
       }}>
       <DrawerNavigator />
     </NavigationContainer>

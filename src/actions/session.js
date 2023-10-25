@@ -30,7 +30,7 @@ export function setSession() {
       })
       .catch(() => {
         stored = generateSessionID()
-        dispatch(storeSession(stored))
+        storeSession(stored)
         dispatch(setState('session', stored))
       });
   };
