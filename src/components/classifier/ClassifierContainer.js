@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 
-import BetaFeedbackView from './BetaFeedbackView'
 import { filledInFormUrl } from '../../utils/googleFormUtils'
 import TaskHelpModal from './TaskHelpModal'
 import FieldGuide from './FieldGuide'
@@ -25,33 +24,7 @@ class ClassifierContainer extends Component {
             helpModalIsVisible: false
         }
 
-        this.onFeedbackViewLayout = this.onFeedbackViewLayout.bind(this)
-        this.navigateToFeedback = this.navigateToFeedback.bind(this)
         this.displayHelpModal = this.displayHelpModal.bind(this)
-    }
-
-    /**
-     * The following methods handle the beta feedback view functionality
-     */
-
-    navigateToFeedback() {
-        const url = filledInFormUrl(
-          this.props.project.display_name,
-          this.props.project.id,
-            Platform.OS)
-        navRef.navigate(PageKeys.WebView, { uri: url, loadingText: 'Loading Feedback Form' })
-      }
-    
-    onFeedbackViewLayout({nativeEvent}) {
-        const { height } = nativeEvent.layout
-        if (height !== this.state.feedbackViewHeight) {
-          Animated.timing(this.state.feedbackViewHeight, {
-            duration: 300,
-            delay: 500,
-            toValue: height,
-            useNativeDriver: false,
-          }).start()
-        }
     }
 
     /**
@@ -72,14 +45,6 @@ class ClassifierContainer extends Component {
 
     render() {
 
-        const feedbackView = 
-            <Animated.View style={{height: this.state.feedbackViewHeight}}>
-                <BetaFeedbackView
-                    onLayout={this.onFeedbackViewLayout}
-                    onPress={this.navigateToFeedback}
-                />
-            </Animated.View>
-
         const fieldGuide =
             <FieldGuide
                 guide={this.props.guide}
@@ -92,7 +57,6 @@ class ClassifierContainer extends Component {
         return (
             <View style={[styles.container]}>
                 {this.props.children}
-                { this.props.inBetaMode ? feedbackView : null }
                 <TaskHelpModal
                     text={this.props.help}
                     isVisible={this.state.helpModalIsVisible}
