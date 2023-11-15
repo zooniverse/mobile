@@ -7,6 +7,7 @@ import {
 import { loadUserAvatar, loadUserProjects, setIsGuestUser, setUser } from '../actions/user'
 import * as ActionConstants from '../constants/actions'
 import { navRef } from '../navigation/RootNavigator';
+import { PushNotifications } from '../notifications/PushNotifications';
 
 export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
@@ -26,6 +27,9 @@ export function signIn(login, password, navigation) {
         user.isGuestUser = false
         user.projects = {}
         dispatch(setUser(user));
+        console.log('user signed in, get classifications')
+        PushNotifications.subTopicClassifiedProjects(user.id);
+
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),

@@ -8,6 +8,7 @@ import {
 } from '../actions/index'
 import { getAuthUser } from '../actions/auth'
 import * as ActionConstants from '../constants/actions'
+import { PushNotifications } from '../notifications/PushNotifications'
 
 export function loadUserData() {
   return (dispatch, getState) => {
@@ -19,6 +20,10 @@ export function loadUserData() {
         if (userResource === null) {
           dispatch(signOut())
           return Promise.resolve()
+        }
+
+        if (userResource?.id) {
+          PushNotifications.subTopicClassifiedProjects(userResource.id);
         }
         
         return Promise.all([
