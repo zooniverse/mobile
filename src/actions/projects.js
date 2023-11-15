@@ -90,12 +90,14 @@ export function fetchProjects() {
                       const museumModeCall = tagMuseumRoleForProjects(allProjects)
                       projectDetailCalls = projectDetailCalls.concat(museumModeCall)
                     }
+
+                    const filterOutFinished = allProjects.filter(project => project.state !== 'finished')
                     // Then load the avatars and workflows
                     Promise.all(projectDetailCalls)
                         .then(() => {
-                            dispatch(addProjects(allProjects))
+                            dispatch(addProjects(filterOutFinished))
                             dispatch(addProjectsSuccess);
-                            resolve(allProjects)
+                            resolve(filterOutFinished)
                         })
                         .catch((error) => {
                             dispatch(addProjectsFailure);
