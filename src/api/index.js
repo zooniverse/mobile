@@ -1,12 +1,10 @@
 import apiClient from 'panoptes-client/lib/api-client';
-import reactotron from 'reactotron-react-native';
 
 export const getAllUserClassifications = async (userId) => {
   let classifications = [];
   let page = 1;
 
   while (page) {
-    reactotron.log({ page });
     try {
       const getClassifications = await apiClient
         .type('classifications')

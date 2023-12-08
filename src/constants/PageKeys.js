@@ -12,7 +12,8 @@ const PageKeys = {
     QuestionClassifier: 'QuestionClassifier',
     MultiAnswerClassifier: 'MultiAnswerClassifier',
     WebView: 'WebView',
-    DrawingClassifier: 'DrawingClassifier'
+    DrawingClassifier: 'DrawingClassifier',
+    NotificationLandingPageScreen: 'NotificationLandingPageScreen'
 }
 
 export default PageKeys

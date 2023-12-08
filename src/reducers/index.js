@@ -8,6 +8,7 @@ import classifier from './classifierReducer'
 import images from './imagesReducer'
 import settings from './settingsReducer'
 import drawing from './drawingReducer'
+import notifications from './notificationsSlice'
 
 export const InitialState = {
   registration: { global_email_communication: true },
@@ -72,5 +73,6 @@ export default combineReducers({
   classifier,
   images,
   settings,
-  drawing
+  drawing,
+  notifications
 })

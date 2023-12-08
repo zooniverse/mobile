@@ -78,16 +78,6 @@ export class Settings extends React.Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        <SettingHeader text="General Settings" />
-        <View style={styles.workflowContainer}>
-          <SettingsToggle
-            title="Show all workflows"
-            description="Includes non-native workflows"
-            onToggle={() => {this.props.settingsActions.updateShowAllWorkflow(!this.props.showAllWorkflows)}}
-            value={this.props.showAllWorkflows}
-          />
-        </View>
-        <Separator style={styles.titlePadding} color={theme.$seperator}/>
         <View>
           <SettingHeader text="Notification Settings" />
         </View>

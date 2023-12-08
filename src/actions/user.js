@@ -23,7 +23,7 @@ export function loadUserData() {
         }
 
         if (userResource?.id) {
-          PushNotifications.subTopicClassifiedProjects(userResource.id);
+          PushNotifications.subTopicClassifiedProjects(userResource);
         }
         
         return Promise.all([

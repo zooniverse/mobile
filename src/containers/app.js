@@ -39,7 +39,6 @@ import RootNavigator from "../navigation/RootNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Sentry from '@sentry/react-native';
 import { PushNotifications } from '../notifications/PushNotifications';
-import reactotron from 'reactotron-react-native';
 
 Sentry.init({
     dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
@@ -49,7 +48,7 @@ Sentry.init({
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['images', 'user', 'settings'] // All these stores will be persisted
+  whitelist: ['images', 'user', 'settings', 'notifications'] // All these stores will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer)
@@ -60,13 +59,12 @@ const persistor = persistStore(store)
 export default class App extends Component {
   componentDidMount() {
     SplashScreen.hide()
-    console.log('enable push')
     
     PushNotifications.setupPushNotifications(store);
+    PushNotifications.handleIncomingNotifications();
 
     const handleAppStateChange = currentAppState => {
       if (currentAppState === 'active') {
-        reactotron.log('load user data')
         store.dispatch(loadUserData())
       }
     }
@@ -83,7 +81,6 @@ export default class App extends Component {
    * This function is called after the persistent store has been loaded
    */
   onBeforeLift() {
-    reactotron.log('on before lift')
     store.dispatch(loadUserData())
     store.dispatch(setSession())
     store.dispatch(setPageShowing(PageKeys.ZooniverseApp))

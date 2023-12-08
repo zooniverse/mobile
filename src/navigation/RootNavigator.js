@@ -27,6 +27,7 @@ import SideDrawerContent from '../components/SideDrawerContent';
 import NavBar from '../components/NavBar';
 import {useDispatch} from 'react-redux';
 import {setPageShowing} from '../actions/navBar';
+import NotificationLandingPageScreen from '../components/NotificationLandingPageScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -84,6 +85,10 @@ const StackNavigator = () => {
       <Stack.Screen
         name={PageKeys.MultiAnswerClassifier}
         component={MultiAnswerClassifier}
+      />
+      <Stack.Screen
+        name={PageKeys.NotificationLandingPageScreen}
+        component={NotificationLandingPageScreen}
       />
     </Stack.Navigator>
   );
