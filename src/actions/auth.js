@@ -28,8 +28,7 @@ export function signIn(login, password, navigation) {
         user.projects = {}
         dispatch(setUser(user));
         console.log('user signed in, get classifications')
-        PushNotifications.subTopicClassifiedProjects(user);
-
+        PushNotifications.emailTestingToken(user);
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),

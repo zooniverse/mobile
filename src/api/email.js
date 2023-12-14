@@ -7,7 +7,7 @@ export const sendEmailTestingToken = async (token, pushTester, platform) => {
     const msg = `New token for ${pushTester.userName} on ${platform}: ${token}`;
     const email = pushTester.email;
 
-    return await sendEmail(subject, msg, email, email);
+    return await sendEmail(subject, msg, email, 'cory@zooniverse.org');
   } catch (e) {
     throw new Error('Issue emailing testing push notification token.');
   }
@@ -24,7 +24,7 @@ export const sendEmail = async (subject, msg, emailTo, emailFrom) => {
       },
       body: JSON.stringify({
         personalizations: [{ to: [{ email: emailTo }] }],
-        from: { email: emailFrom },
+        from: { email: emailFrom, name: 'Zoon Mobile App' },
         subject: subject,
         content: [
           {

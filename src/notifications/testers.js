@@ -6,11 +6,12 @@
  */
 export const pushTesters = [
   {
-    userName: 'zootester1',
-    email: 'collab@zooniverse.com',
-  },
-  {
     userName: 'corychambers',
     email: 'cory@zooniverse.org',
   },
 ];
+
+// Add zootester1 through zootester10
+for (let i = 1; i <= 10; i++) {
+  pushTesters.push({userName: `zootester${i}`, email: 'android@zooniverse.org'})
+}

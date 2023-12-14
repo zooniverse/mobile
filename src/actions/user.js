@@ -22,10 +22,6 @@ export function loadUserData() {
           return Promise.resolve()
         }
 
-        if (userResource?.id) {
-          PushNotifications.subTopicClassifiedProjects(userResource);
-        }
-        
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),

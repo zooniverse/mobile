@@ -24,6 +24,7 @@ import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useRoute } from '@react-navigation/native';
+import { PushNotifications } from '../notifications/PushNotifications';
 
 const mapStateToProps = (state) => {
   const nativePreviewProjects = state.projects.previewProjectList.filter(
@@ -140,9 +141,7 @@ function ProjectDisciplines({ ...props }) {
         const notificationProjects = extractSwipeEnabledProjects(
           projectList.filter((project) => !project.isPreview)
         );
-        props.settingsActions.addUnusedProjectsToNotifications(
-          notificationProjects
-        );
+        PushNotifications.updateProjectListNotifications(notificationProjects, props.user)
       })
       .catch((error) => {
         if (!error.isCanceled) {

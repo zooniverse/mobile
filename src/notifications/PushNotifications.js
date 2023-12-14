@@ -3,18 +3,20 @@ import { Platform, PermissionsAndroid } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { getAllUserClassifications } from '../api';
-import {
-  updateBetaNotifications,
-  updateEnableNotifications,
-  updateNewProjectNotifications,
-  updateUrgentHelpNotifications,
-} from '../actions/settings';
 import { store } from '../containers/app';
 import { sendEmailTestingToken } from '../api/email';
 import { navRef } from '../navigation/RootNavigator';
 import PageKeys from '../constants/PageKeys';
 import { addNotification } from '../reducers/notificationsSlice';
+import {
+  setInitialSettings,
+  setNotificationProjects,
+  toggleEnabledNotifications,
+  toggleNewBetaProjects,
+  toggleNewProjects,
+  toggleNotificationProject,
+  toggleUrgentHelpAlerts,
+} from '../reducers/notificationSettingsSlice';
 import { pushTesters } from './testers';
 
 export const ALL_NOTIFICATIONS = 'all_notifications';
@@ -22,46 +24,95 @@ export const NEW_PROJECTS = 'new_projects';
 export const NEW_BETA_PROJECTS = 'new_beta_projects';
 export const URGENT_HELP = 'urgent_help';
 export const PROJECT_SPECIFIC = 'project_';
-const INITIAL_SETTINGS_SET = 'INITIAL_SETTINGS_SET';
-const SETTING_TRUE = 'SETTING_TRUE';
-const SETTING_FALSE = 'SETTING_FALSE';
 const EMAILED_TESTING_TOKEN = 'EMAILED_TESTING_TOKEN';
 
 class FirebaseNotifications {
-  /**
-   * This should run when the user data is loaded or when the user logins.
-   * It'll check the projects the user has classified on and subscribe
-   * to those push notification topics.
-   */
-  async subTopicClassifiedProjects(user) {
-    if (!this.checkIfEnabled) return;
+  getProjectSubscriptionName = (projectId) => `${PROJECT_SPECIFIC}${projectId}`;
+  async updateProjectListNotifications(projectList, user) {
+    if (!Array.isArray(projectList) || projectList.length === 0) return;
+    const { projectSpecificNotifications } =
+      store.getState().notificationSettings;
+    const enabled = await this.checkIfEnabled();
 
-    // Email a testing token if applicable.
-    this.emailTestingToken(user);
-
-    getAllUserClassifications(user.id)
-      .then((res) => {
-        if (Array.isArray(res)) {
-          let projectIds = [];
-          for (const classification of res) {
-            const projectId = classification?.links?.project;
-            if (projectId && !projectIds.includes(projectId)) {
-              projectIds.push(projectId);
-            }
-          }
-
-          for (const projectId of projectIds) {
-            /**
-             * Runs in the background.
-             * No then/catch because there's no action to take if it succeeds or fails.
-             */
-            this.updateTopic(`${PROJECT_SPECIFIC}${projectId}`, true)
-          }
+    // New updated list of projects
+    let updatedProjectNotificationList = [];
+    const loggedOut = user?.isGuestUser;
+    let classifiedProjects = {};
+    if (!loggedOut) {
+      for (const projectId in user.projects) {
+        if (user.projects[projectId]?.activity_count > 0) {
+          classifiedProjects[projectId] = true;
         }
-      })
-      .catch((err) => {
-        throw new Error('Failed to get user classifications', err.message);
-      });
+      }
+    }
+
+    // Loop through existing list, removed old projects, check if defaults need set.
+    for (const pushProject of projectSpecificNotifications) {
+      if (!projectList.some((project) => project.id === pushProject.id)) {
+        // Unsubscribe from topic.
+        this.updateTopic(
+          this.getProjectSubscriptionName(pushProject.id),
+          false
+        );
+      } else {
+        // We have their classified projects and they have not had their default set.
+        if (!pushProject.defaultSet && !loggedOut) {
+          const subscribed = pushProject.id in classifiedProjects;
+          if (subscribed) {
+            // Subscribe to firebase topic
+            this.updateTopic(
+              this.getProjectSubscriptionName(pushProject.id),
+              true
+            );
+          }
+          /**
+           * They are now subscribed if classified and the default is set.
+           * If they haven't classified set defaultSet to false.
+           * The goal is to keep checking each time in the event that they do classify we want to toggle on.
+           */
+          updatedProjectNotificationList.push({
+            ...pushProject,
+            subscribed,
+            defaultSet: subscribed,
+          });
+        } else {
+          updatedProjectNotificationList.push(pushProject);
+        }
+      }
+    }
+
+    // Loop through projects list to see if new projects need added.
+    for (const project of projectList) {
+      if (
+        !updatedProjectNotificationList.some(
+          (pushProjectId) => pushProjectId.id === project.id
+        )
+      ) {
+        if (!loggedOut && enabled) {
+          const subscribed = project.id in classifiedProjects;
+          if (subscribed) {
+            // New project, user has classified, subscribe to Firebase topic.
+            this.updateTopic(this.getProjectSubscriptionName(project.id), true);
+          }
+          updatedProjectNotificationList.push({
+            id: project.id,
+            displayName: project.display_name,
+            subscribed,
+            defaultSet: subscribed,
+          });
+        } else {
+          // User is not logged in, set to false and set defaultSet to false so you can check again when they log in.
+          updatedProjectNotificationList.push({
+            id: project.id,
+            displayName: project.display_name,
+            subscribed: false,
+            defaultSet: false,
+          });
+        }
+      }
+    }
+
+    store.dispatch(setNotificationProjects(updatedProjectNotificationList));
   }
 
   /**
@@ -70,13 +121,18 @@ class FirebaseNotifications {
    * This is used to send test messages in Firebase console.
    */
   async emailTestingToken(user) {
+    const enabled = await this.checkIfEnabled();
+    if (!enabled) {
+      return;
+    }
+
     const userName = user?.login;
 
     try {
       const pushTester = pushTesters.find((p) => p.userName === userName);
       if (pushTester) {
         // Check if the token has already been emailed, it should only email once.
-        const alreadyEmailed = await this.getTestingTokenEmailed();
+        const alreadyEmailed = await this.getTestingTokenEmailed(userName);
         if (!alreadyEmailed) {
           // Get the token, email it, and then mark in local storage that it has been sent.
           const token = await messaging().getToken();
@@ -86,7 +142,7 @@ class FirebaseNotifications {
             Platform.OS
           );
           if (sendEmail) {
-            this.setTestingTokenEmailed();
+            this.setTestingTokenEmailed(userName);
           }
         }
       }
@@ -132,69 +188,98 @@ class FirebaseNotifications {
    * Set global settings.
    */
   async setupPushNotifications() {
-    try {
-      // Check if initial settings have already been set, this should only happen once.
-      const alreadySet = await this.getInitialSettings();
-      if (alreadySet) {
-        return;
-      }
+    const { initialSettingsSet } =
+      store.getState().notificationSettings;
 
-      // Check if push is enabled and set the initial settings.
-      const enabled = await this.checkIfEnabled();
-      this.setInitialSettings(enabled);
-    } catch {
-      throw new Error('Issue setting the initial settings.');
+    // Initial settings already set, nothing else to do here.
+    if (initialSettingsSet) {
+      return;
     }
+
+    const enabled = await this.checkIfEnabled();
+    this.setInitialSettingsAndSubscriptions(enabled);
   }
-
-  // Check if the initial global push settings have already been set.
-  getInitialSettings = async () => {
-    try {
-      const value = await AsyncStorage.getItem(INITIAL_SETTINGS_SET);
-      if (value !== null) {
-        return true;
-      }
-    } catch (e) {
-      return false;
-    }
-  };
-
   /**
    * Sets the global push settings.
    * 1) Updates in redux.
    * 2) Subscribes to the global push topics in Firebase.
    */
-  setInitialSettings = async (value) => {
-    try {
-      // Update redux.
-      store.dispatch(updateEnableNotifications(value));
-      store.dispatch(updateNewProjectNotifications(value));
-      store.dispatch(updateBetaNotifications(value));
-      store.dispatch(updateUrgentHelpNotifications(value));
+  setInitialSettingsAndSubscriptions = async (value) => {
 
-      // Update firebase.
-      if (value) {
-        this.updateTopic(ALL_NOTIFICATIONS, true);
-        this.updateTopic(NEW_PROJECTS, true);
-        this.updateTopic(NEW_BETA_PROJECTS, true);
-        this.updateTopic(URGENT_HELP, true);
-      }
+    // Update redux.
+    store.dispatch(setInitialSettings(value));
 
-      // Set local storage so it only initializes them once.
-      const initialSettings = value ? SETTING_TRUE : SETTING_FALSE;
-      await AsyncStorage.setItem(INITIAL_SETTINGS_SET, initialSettings);
-    } catch (e) {
-      throw new Error(
-        'There was an issue setting initial push settings',
-        e.message
-      );
+    // Update firebase.
+    if (value) {
+      this.updateTopic(ALL_NOTIFICATIONS, true);
+      this.updateTopic(NEW_PROJECTS, true);
+      this.updateTopic(NEW_BETA_PROJECTS, true);
+      this.updateTopic(URGENT_HELP, true);
     }
   };
 
+  settingToggled = async (setting, value) => {
+    if (setting === ALL_NOTIFICATIONS) {
+      const {
+        newProjects,
+        newBetaProjects,
+        urgentHelpAlerts,
+        projectSpecificNotifications,
+      } = store.getState().notificationSettings;
+
+      // If global settings are toggled on, either subscribe them if "Enable Notifications" is toggled on or unsubscribe if off
+      if (newProjects) {
+        this.updateTopic(NEW_PROJECTS, value);
+      }
+
+      if (newBetaProjects) {
+        this.updateTopic(NEW_BETA_PROJECTS, value);
+      }
+
+      if (urgentHelpAlerts) {
+        this.updateTopic(URGENT_HELP, value);
+      }
+
+      // Loop through the projects and do the same.
+      for (const project of projectSpecificNotifications) {
+        if (project.subscribed) {
+          this.updateTopic(this.getProjectSubscriptionName(project.id), value);
+        }
+      }
+
+      this.updateTopic(ALL_NOTIFICATIONS, value);
+
+      store.dispatch(toggleEnabledNotifications(value));
+    } else if (setting === NEW_PROJECTS) {
+      store.dispatch(toggleNewProjects(value));
+    } else if (setting === NEW_BETA_PROJECTS) {
+      store.dispatch(toggleNewBetaProjects(value));
+    } else if (setting === URGENT_HELP) {
+      store.dispatch(toggleUrgentHelpAlerts(value));
+    }
+
+    this.updateTopic(setting, value);
+  };
+
+  projectSettingToggled = async (project, value) => {
+    this.updateTopic(this.getProjectSubscriptionName(project.id), value);
+
+    const updatedProject = {
+      id: project.id,
+      displayName: project.displayName,
+      subscribed: value,
+      defaultSet: true,
+    };
+
+    store.dispatch(toggleNotificationProject(updatedProject));
+  };
+
   // Check if the initial global push settings have already been set.
-  getTestingTokenEmailed = async () => {
+  getTestingTokenEmailed = async (userName) => {
     try {
-      const value = await AsyncStorage.getItem(EMAILED_TESTING_TOKEN);
+      const value = await AsyncStorage.getItem(
+        `${EMAILED_TESTING_TOKEN}_${userName}`
+      );
       if (value !== null) {
         return true;
       }
@@ -204,9 +289,12 @@ class FirebaseNotifications {
   };
 
   // Set that the initial global push settings have already been set.
-  setTestingTokenEmailed = async () => {
+  setTestingTokenEmailed = async (userName) => {
     try {
-      await AsyncStorage.setItem(EMAILED_TESTING_TOKEN, 'true');
+      await AsyncStorage.setItem(
+        `${EMAILED_TESTING_TOKEN}_${userName}`,
+        'true'
+      );
     } catch (e) {
       throw new Error(
         'There was an issue setting emailed testing token',
@@ -226,7 +314,6 @@ class FirebaseNotifications {
 
   // Message handlers
   handleIncomingNotifications() {
-
     // App in background - save notification to local storage and navigate to notifications screen.
     messaging().onNotificationOpenedApp((msg) => {
       this.saveMessageToLocalStorage(msg);
@@ -251,7 +338,6 @@ class FirebaseNotifications {
     messaging().onMessage((msg) => {
       this.saveMessageToLocalStorage(msg);
     });
-
   }
 
   async saveMessageToLocalStorage(msg) {

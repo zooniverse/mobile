@@ -48,19 +48,21 @@ Sentry.init({
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['images', 'user', 'settings', 'notifications'] // All these stores will be persisted
+  whitelist: ['images', 'user', 'settings', 'notifications', 'notificationSettings'] // All these stores will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer)
 export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
-const persistor = persistStore(store)
+const persistor = persistStore(store, {}, () => {
+  // Setup push notifications here because you want to make sure existing settings are loaded.
+  PushNotifications.setupPushNotifications();
+})
 
 
 export default class App extends Component {
   componentDidMount() {
     SplashScreen.hide()
     
-    PushNotifications.setupPushNotifications(store);
     PushNotifications.handleIncomingNotifications();
 
     const handleAppStateChange = currentAppState => {

@@ -9,6 +9,7 @@ import images from './imagesReducer'
 import settings from './settingsReducer'
 import drawing from './drawingReducer'
 import notifications from './notificationsSlice'
+import notificationSettings from './notificationSettingsSlice'
 
 export const InitialState = {
   registration: { global_email_communication: true },
@@ -74,5 +75,6 @@ export default combineReducers({
   images,
   settings,
   drawing,
-  notifications
+  notifications,
+  notificationSettings
 })
