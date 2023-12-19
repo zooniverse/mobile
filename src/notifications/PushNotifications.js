@@ -18,6 +18,7 @@ import {
   toggleUrgentHelpAlerts,
 } from '../reducers/notificationSettingsSlice';
 import { pushTesters } from './testers';
+import { getAllUserClassifications } from '../api';
 
 export const ALL_NOTIFICATIONS = 'all_notifications';
 export const NEW_PROJECTS = 'new_projects';
@@ -28,6 +29,7 @@ const EMAILED_TESTING_TOKEN = 'EMAILED_TESTING_TOKEN';
 
 class FirebaseNotifications {
   getProjectSubscriptionName = (projectId) => `${PROJECT_SPECIFIC}${projectId}`;
+
   async updateProjectListNotifications(projectList, user) {
     if (!Array.isArray(projectList) || projectList.length === 0) return;
     const { projectSpecificNotifications } =
@@ -39,11 +41,7 @@ class FirebaseNotifications {
     const loggedOut = user?.isGuestUser;
     let classifiedProjects = {};
     if (!loggedOut) {
-      for (const projectId in user.projects) {
-        if (user.projects[projectId]?.activity_count > 0) {
-          classifiedProjects[projectId] = true;
-        }
-      }
+      classifiedProjects = await getAllUserClassifications(user.id);
     }
 
     // Loop through existing list, removed old projects, check if defaults need set.
@@ -113,6 +111,20 @@ class FirebaseNotifications {
     }
 
     store.dispatch(setNotificationProjects(updatedProjectNotificationList));
+  }
+
+  async userClassifiedProject(projectId) {
+    const { projectSpecificNotifications } =
+      store.getState().notificationSettings;
+
+    const project = projectSpecificNotifications.find(
+      (p) => p.id === projectId
+    );
+
+    if (project && !project?.defaultSet) {
+      this.projectSettingToggled(project, true);
+    }
+
   }
 
   /**
@@ -188,8 +200,7 @@ class FirebaseNotifications {
    * Set global settings.
    */
   async setupPushNotifications() {
-    const { initialSettingsSet } =
-      store.getState().notificationSettings;
+    const { initialSettingsSet } = store.getState().notificationSettings;
 
     // Initial settings already set, nothing else to do here.
     if (initialSettingsSet) {
@@ -205,7 +216,6 @@ class FirebaseNotifications {
    * 2) Subscribes to the global push topics in Firebase.
    */
   setInitialSettingsAndSubscriptions = async (value) => {
-
     // Update redux.
     store.dispatch(setInitialSettings(value));
 

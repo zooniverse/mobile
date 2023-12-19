@@ -1,7 +1,7 @@
 import apiClient from 'panoptes-client/lib/api-client';
 
 export const getAllUserClassifications = async (userId) => {
-  let classifications = [];
+  let classifications = {};
   let page = 1;
 
   while (page) {
@@ -11,7 +11,11 @@ export const getAllUserClassifications = async (userId) => {
         .get({ user_id: userId, page });
 
       if (Array.isArray(getClassifications)) {
-        classifications = [...classifications, ...getClassifications];
+        getClassifications.forEach(c => {
+          if (c?.links?.project) {
+            classifications[c.links.project] = true;
+          }
+        })
         page = getClassifications.length === 20 ? ++page : false;
         continue;
       }

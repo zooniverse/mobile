@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, Text, FlatList, Image, Alert } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +18,7 @@ function NotificationLandingPageScreen({ route }) {
   const [expandedNotification, setExpandedNotification] = useState(
     route?.params?.newNotification ?? null
   );
+  const checkedForProjects = useRef(false); // Used to ensure the setTimeout is only run once.
 
   // Take the list of notifications and associate with a cooresponding project.
   const notificationsWithProject = [];
@@ -38,11 +39,13 @@ function NotificationLandingPageScreen({ route }) {
    * being stuck in a loading state.
    */
   useEffect(() => {
+    if (checkedForProjects.current) return;
     let projectTimeout;
 
     if (projectList.length === 0) {
       setLoading(true);
       projectTimeout = setTimeout(() => {
+        checkedForProjects.current = true;
         setLoading(false);
         Alert.alert(
           'Cannot retrieve projects',
@@ -51,6 +54,7 @@ function NotificationLandingPageScreen({ route }) {
       }, 20000);
     } else {
       setLoading(false);
+      checkedForProjects.current = true;
     }
 
     return () => clearTimeout(projectTimeout);

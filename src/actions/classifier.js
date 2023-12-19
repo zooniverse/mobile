@@ -11,6 +11,7 @@ import {
 } from '../utils/annotationUtils'
 import { clearShapes } from './drawing'
 import { navRef } from '../navigation/RootNavigator';
+import { PushNotifications } from '../notifications/PushNotifications'
 
 export function addSubjectsForWorklow(workflowId) {
   return dispatch => {
@@ -105,7 +106,11 @@ export function saveClassification(workflow, subject, displayDimensions) {
           workflow: workflow.id,
           subjects: [subject.id]
         }
-      }).save()
+      }).save().then(res => {
+        if (res.completed && res?.links?.project) {
+          PushNotifications.userClassifiedProject(res.links.project)
+        }
+      })
       // Add more subjects if we are getting close to running out
       const subjectList = classifier.subjectLists[workflow.id] || []
       const subjectsSeenThisSession = classifier.seenThisSession[workflow.id] || []
@@ -144,7 +149,11 @@ export function submitDrawingClassification(shapes, workflow, subject, {clientHe
         workflow: workflow.id,
         subjects: [subject.id]
       }
-    }).save()
+    }).save().then(res => {
+      if (res.completed && res?.links?.project) {
+        PushNotifications.userClassifiedProject(res.links.project)
+      }
+    })
     
     // Add more subjects if we are getting close to running out
     const subjectList = classifier.subjectLists[workflow.id] || []
