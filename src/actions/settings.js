@@ -1,10 +1,21 @@
 import * as ActionConstants from '../constants/actions'
-import { ALL_NOTIFICATIONS, NEW_BETA_PROJECTS, NEW_PROJECTS, PROJECT_SPECIFIC, PushNotifications, URGENT_HELP } from '../notifications/PushNotifications'
 
 /**
- * When projects are refreshed it will unsubscribe any projects
- * that were removed and subscribe any projects that were added.
+ * These are the topic names we subscribe to Firebase with
+ * NOTE:
+ *  It is very important that these don't change. If they
+ *  change then we will not be able to properly send push
+ *  notifications for what people are subscribed for.
  */
+const TopicNames = {
+    newProjects: 'new_projects',
+    newBetaProjects: 'new_beta_projects',
+    urgentNotifications: 'urgent_notifications'
+}
+
+const updateSubscriptionOfTopic = (subscribe, topicName) => {
+}
+
 export const addUnusedProjectsToNotifications = (projects) => {
     return (dispatch, getState) => {
         const { projectSpecificNotifications } = getState().settings
@@ -25,10 +36,9 @@ export const addUnusedProjectsToNotifications = (projects) => {
     }
 }
 
-// Subscribe to project topic.
 const addProjectToSubscriptions = project => {
     return dispatch => {
-        PushNotifications.updateTopic(`${PROJECT_SPECIFIC}${project.id}`, true)
+        updateSubscriptionOfTopic(true, project.id)
         dispatch({
             type: ActionConstants.ADD_PROJECT_SUBSCRIPTION,
             project
@@ -36,10 +46,9 @@ const addProjectToSubscriptions = project => {
     }
 }
 
-// Unsubscribe to project topic.
 const removeProjectFromSubscriptions = project => {
     return dispatch => {
-        PushNotifications.updateTopic(`${PROJECT_SPECIFIC}${project.id}`, false)
+        updateSubscriptionOfTopic(false, project.id)
         dispatch({
             type: ActionConstants.REMOVE_PROJECT_SUBSCRIPTION,
             project
@@ -47,10 +56,9 @@ const removeProjectFromSubscriptions = project => {
     }
 }
 
-// Update project topic that was toggled in the settings.
 export const updateProjectSubsciption = (projectId, subscribed) => {
     return dispatch => {
-        PushNotifications.updateTopic(`${PROJECT_SPECIFIC}${projectId}`, subscribed)
+        updateSubscriptionOfTopic(subscribed, projectId)
         dispatch({
             type: ActionConstants.UPDATE_SUBSCRIPTION_TO_PROJECT,
             subscribe: subscribed,
@@ -64,14 +72,6 @@ export const updateShowAllWorkflow = (enabled) => ({
     enabled
 })
 
-/**
- * When "Enable Notifications" is toggled from the settings menu it will
- * update the "all_notifications" subscription and will also update all of 
- * the other subscriptions by either unsubscribing from them or subscribing if
- * "Enable Notifications" is toggled on AND that individual setting is also toggled on.
- * The individual settings are saved in state even though they might be unsubscribed
- * from Firebase.
- */
 export const updateEnableNotifications = (enabled) => {
     return (dispatch, getState) => {
         const {
@@ -81,15 +81,11 @@ export const updateEnableNotifications = (enabled) => {
             projectSpecificNotifications
         } = getState().settings
 
-        // Update subscription of global settings.
-        PushNotifications.updateTopic(ALL_NOTIFICATIONS, enabled);
-        PushNotifications.updateTopic(NEW_PROJECTS, newProjectNotifications && enabled);
-        PushNotifications.updateTopic(NEW_BETA_PROJECTS,newBetaNotifications && enabled);
-        PushNotifications.updateTopic(URGENT_HELP, urgentHelpNotification && enabled);
-
-        // Update subscription for each project.
+        updateSubscriptionOfTopic(newProjectNotifications && enabled, TopicNames.newProjects)
+        updateSubscriptionOfTopic(newBetaNotifications && enabled, TopicNames.newBetaProjects)
+        updateSubscriptionOfTopic(urgentHelpNotification && enabled, TopicNames.urgentNotifications)
         projectSpecificNotifications.forEach(project => {
-            PushNotifications.updateTopic(`${PROJECT_SPECIFIC}${project.id}`, project.subscribed && enabled)
+            updateSubscriptionOfTopic(project.subscribed && enabled, project.id)
         })
 
         dispatch({
@@ -99,10 +95,9 @@ export const updateEnableNotifications = (enabled) => {
     }
 }
 
-// When "New Projects" is toggled from the settings menu.
 export const updateNewProjectNotifications = (enabled) => {
     return dispatch => {
-        PushNotifications.updateTopic(NEW_PROJECTS, enabled);
+        updateSubscriptionOfTopic(enabled, TopicNames.newProjects)
         dispatch({
             type: ActionConstants.UPDATE_NEW_PROJECT_NOTIICATIONS,
             enabled
@@ -110,10 +105,9 @@ export const updateNewProjectNotifications = (enabled) => {
     }
 }
 
-// When "New Beta Projects" is toggled from the settings menu.
 export const updateBetaNotifications = (enabled) => {
     return dispatch => {
-        PushNotifications.updateTopic(NEW_BETA_PROJECTS, enabled);
+        updateSubscriptionOfTopic(enabled, TopicNames.newBetaProjects)
         dispatch({
             type: ActionConstants.UPDATE_BETA_NOTIFICATIONS,
             enabled
@@ -121,13 +115,15 @@ export const updateBetaNotifications = (enabled) => {
     }
 }
 
-// When "Urgent help alerts" is toggled from the settings menu.
 export const updateUrgentHelpNotifications = (enabled) => {
     return dispatch => {
-        PushNotifications.updateTopic(URGENT_HELP, enabled);
+        updateSubscriptionOfTopic(enabled, TopicNames.urgentNotifications)
         dispatch({
             type: ActionConstants.UPDATE_URGENT_HELP_NOTIFICATIONS,
             enabled
         })
     }
+}
+
+export const initializeSubscriptionsWithFirebase = (token) => {
 }
