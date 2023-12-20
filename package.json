@@ -41,7 +41,6 @@
     "color": "^4.2.3",
     "crypto-js": "^4.1.1",
     "markdown-it": "^13.0.1",
-    "moment-js": "^1.1.15",
     "panoptes-client": "^5.5.5",
     "prop-types": "^15.8.1",
     "ramda": "0.25.0",

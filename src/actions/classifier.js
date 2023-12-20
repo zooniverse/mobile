@@ -108,6 +108,7 @@ export function saveClassification(workflow, subject, displayDimensions) {
         }
       }).save().then(res => {
         if (res.completed && res?.links?.project) {
+          // If user classified on project for the first time, toggle on the notification setting.
           PushNotifications.userClassifiedProject(res.links.project)
         }
       })
@@ -151,6 +152,7 @@ export function submitDrawingClassification(shapes, workflow, subject, {clientHe
       }
     }).save().then(res => {
       if (res.completed && res?.links?.project) {
+        // If user classified on project for the first time, toggle on the notification setting.
         PushNotifications.userClassifiedProject(res.links.project)
       }
     })

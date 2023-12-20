@@ -27,7 +27,8 @@ export function signIn(login, password, navigation) {
         user.isGuestUser = false
         user.projects = {}
         dispatch(setUser(user));
-        console.log('user signed in, get classifications')
+
+        // Check if logged in user is a tester and email a testing push token.
         PushNotifications.emailTestingToken(user);
         return Promise.all([
           dispatch(loadUserAvatar()),
