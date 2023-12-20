@@ -9,6 +9,7 @@ import { setNavbarSettingsForPage } from '../actions/navBar';
 import PageKeys from '../constants/PageKeys';
 import Notification from './notifications/Notification';
 import OverlaySpinner from './OverlaySpinner';
+import { extractSwipeEnabledProjects } from '../utils/projectUtils';
 
 function NotificationLandingPageScreen({ route }) {
   const dispatch = useDispatch();
@@ -20,10 +21,14 @@ function NotificationLandingPageScreen({ route }) {
   );
   const checkedForProjects = useRef(false); // Used to ensure the setTimeout is only run once.
 
+  const filteredProjects = extractSwipeEnabledProjects(
+    projectList.filter((project) => !project.isPreview).filter( project => !project.isPreview && project.launch_approved )
+  );
+
   // Take the list of notifications and associate with a cooresponding project.
   const notificationsWithProject = [];
   notifications.forEach((notification) => {
-    const hasProject = projectList.find((p) => p.id === notification.projectId);
+    const hasProject = filteredProjects.find((p) => p.id === notification.projectId);
     if (hasProject) {
       notificationsWithProject.push({ ...notification, project: hasProject });
     }
@@ -42,7 +47,7 @@ function NotificationLandingPageScreen({ route }) {
     if (checkedForProjects.current) return;
     let projectTimeout;
 
-    if (projectList.length === 0) {
+    if (filteredProjects.length === 0) {
       setLoading(true);
       projectTimeout = setTimeout(() => {
         checkedForProjects.current = true;
@@ -58,7 +63,7 @@ function NotificationLandingPageScreen({ route }) {
     }
 
     return () => clearTimeout(projectTimeout);
-  }, [projectList]);
+  }, [filteredProjects]);
 
   // Update the navigation header with the title and zoon icon.
   useEffect(() => {
