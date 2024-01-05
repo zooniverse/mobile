@@ -7,6 +7,7 @@ import {
 import { loadUserAvatar, loadUserProjects, setIsGuestUser, setUser } from '../actions/user'
 import * as ActionConstants from '../constants/actions'
 import { navRef } from '../navigation/RootNavigator';
+import { PushNotifications } from '../notifications/PushNotifications';
 
 export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
@@ -26,6 +27,9 @@ export function signIn(login, password, navigation) {
         user.isGuestUser = false
         user.projects = {}
         dispatch(setUser(user));
+
+        // Check if logged in user is a tester and email a testing push token.
+        PushNotifications.emailTestingToken(user);
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),
