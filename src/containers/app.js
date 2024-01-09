@@ -21,7 +21,7 @@ import PageKeys from '../constants/PageKeys'
 import RootNavigator from "../navigation/RootNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Sentry from '@sentry/react-native';
-import { PushNotifications } from '../notifications/PushNotifications';
+import { PushNotifications, IncomingNotifications } from '../notifications';
 
 Sentry.init({
     dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
@@ -46,7 +46,7 @@ export default class App extends Component {
   componentDidMount() {
     SplashScreen.hide()
     
-    PushNotifications.handleIncomingNotifications();
+    IncomingNotifications.handleIncomingNotifications();
 
     const handleAppStateChange = currentAppState => {
       if (currentAppState === 'active') {
