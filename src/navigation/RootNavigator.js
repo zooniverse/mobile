@@ -16,9 +16,7 @@ import About from '../components/About';
 import ProjectList from '../components/projects/ProjectList';
 import Register from '../components/Register';
 import Settings from '../components/settings/Settings';
-import ZooWebView from '../components/ZooWebView';
 import SwipeClassifier from '../components/classifier/SwipeClassifier';
-import WebViewScreen from '../components/WebViewScreen';
 import DrawingClassifier from '../components/Markings/DrawingClassifier';
 import QuestionClassifier from '../components/classifier/QuestionClassifier';
 import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier';
@@ -62,16 +60,10 @@ const StackNavigator = () => {
       <Stack.Screen name={PageKeys.Register} component={Register} />
       <Stack.Screen name={PageKeys.Settings} component={Settings} />
       <Stack.Screen
-        name={PageKeys.ZooWebView}
-        component={ZooWebView}
-        duration={0}
-      />
-      <Stack.Screen
         name={PageKeys.SwipeClassifier}
         component={SwipeClassifier}
         panHandlers={null}
       />
-      <Stack.Screen name={PageKeys.WebView} component={WebViewScreen} />
       <Stack.Screen
         name={PageKeys.DrawingClassifier}
         drawerLockMode={'locked-closed'}

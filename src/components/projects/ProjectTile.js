@@ -92,7 +92,7 @@ class ProjectTile extends Component {
     }
 
     _onMainViewPress() {
-        const { workflows, display_name, redirect } = this.props.project
+        const { workflows, display_name } = this.props.project
         
         if (workflows.length > 1) {
             Animated.timing(this.state.popupOpacity, { toValue: 1, duration: 300 }).start(() => {
@@ -102,27 +102,9 @@ class ProjectTile extends Component {
             });
         } else if (workflows.length === 1) {
             this.props.navigateToClassifier(R.head(workflows))
-        } else if (redirect) {
-            this._openURL(redirect)
-        } else {
-          this.props.navigation.navigate("ZooWebView", {
-            project: this.props.project,
-          });
         }
     }
 
-    _openURL(url){
-        Linking.canOpenURL(url).then(supported => {
-            if (supported) {
-                Linking.openURL(url);
-            } else {
-                Alert.alert(
-                    'Error',
-                    'Sorry, but it looks like you are unable to open the project in your default browser.',
-                )
-            }
-        })
-    }
 
     render() {
         shouldDisplayIsOutOfData = projectDisplay.mobileWorkflowsCompleteFor(
