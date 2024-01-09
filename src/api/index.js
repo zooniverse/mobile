@@ -11,18 +11,18 @@ export const getAllUserClassifications = async (userId) => {
         .get({ user_id: userId, page });
 
       if (Array.isArray(getClassifications)) {
-        getClassifications.forEach(c => {
+        getClassifications.forEach((c) => {
           if (c?.links?.project) {
             classifications[c.links.project] = true;
           }
-        })
+        });
         page = getClassifications.length === 20 ? ++page : false;
         continue;
       }
 
       break;
     } catch (err) {
-      throw new Error('Error getting all user classifications', err.message);
+      throw new Error(`Error getting all user classifications ${err.message}`);
     }
   }
 

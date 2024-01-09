@@ -45,7 +45,7 @@ function Settings(props) {
         <SettingHeader text="Notification Settings" />
       </View>
       <FontedText style={styles.disclosureText}>
-        The Zooniverse app can occassionally send you updates about new projects
+        The Zooniverse app can occasionally send you updates about new projects
         or projects you might be interested in.
       </FontedText>
       <SettingsToggle

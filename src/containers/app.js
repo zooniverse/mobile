@@ -3,7 +3,6 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   AppState,
-  Platform,
 } from 'react-native'
 import NetInfo from '@react-native-community/netinfo';
 import { Provider } from 'react-redux'
@@ -14,26 +13,10 @@ import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import SplashScreen from 'react-native-splash-screen';
-import ZooniverseApp from './zooniverseApp'
-import ProjectList from '../components/projects/ProjectList'
-import ProjectDisciplines from '../components/ProjectDisciplines'
-import About from '../components/About'
-import PublicationList from '../components/PublicationList'
-import SignIn from '../components/SignIn'
-import Register from '../components/Register'
-import Settings from '../components/settings/Settings'
-import SideDrawerContent from '../components/SideDrawerContent'
-import ZooWebView from '../components/ZooWebView'
-import SwipeClassifier from '../components/classifier/SwipeClassifier'
-import WebViewScreen from '../components/WebViewScreen'
 import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-import DrawingClassifier from '../components/Markings/DrawingClassifier'
-import QuestionClassifier from '../components/classifier/QuestionClassifier'
-import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier'
 import SafeAreaContainer from './SafeAreaContainer'
 import { setPageShowing } from '../actions/navBar'
-import NavBar from '../components/NavBar';
 import PageKeys from '../constants/PageKeys'
 import RootNavigator from "../navigation/RootNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
