@@ -2,7 +2,8 @@ import erasClient from 'panoptes-client/lib/eras-client';
 
 export const getAllUserClassifications = async (userId, token) => {
   const classifications = {};
-  const url = `https://eras.zooniverse.org/classifications/users/${userId}?project_contributions=true`;
+  const domain = process.env.NODE_ENV === 'production' ? 'https://eras.zooniverse.org/' : 'https://eras-staging.zooniverse.org/';
+  const url = `${domain}classifications/users/${userId}?project_contributions=true`;
 
   try {
     const response = await fetch(url, {
