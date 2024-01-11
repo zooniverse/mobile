@@ -1,29 +1,25 @@
-import apiClient from 'panoptes-client/lib/api-client';
+import erasClient from 'panoptes-client/lib/eras-client';
 
-export const getAllUserClassifications = async (userId) => {
-  let classifications = {};
-  let page = 1;
+export const getAllUserClassifications = async (userId, token) => {
+  const classifications = {};
+  const url = `https://eras.zooniverse.org/classifications/users/${userId}?project_contributions=true`;
 
-  while (page) {
-    try {
-      const getClassifications = await apiClient
-        .type('classifications')
-        .get({ user_id: userId, page });
-
-      if (Array.isArray(getClassifications)) {
-        getClassifications.forEach((c) => {
-          if (c?.links?.project) {
-            classifications[c.links.project] = true;
-          }
-        });
-        page = getClassifications.length === 20 ? ++page : false;
-        continue;
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+    });
+    const respJson = await response.json();
+    if (Array.isArray(respJson?.project_contributions)) {
+      for (const contribution of respJson.project_contributions) {
+        classifications[contribution.project_id] = true;
       }
-
-      break;
-    } catch (err) {
-      throw new Error(`Error getting all user classifications ${err.message}`);
     }
+  } catch (e) {
+    return {};
   }
 
   return classifications;

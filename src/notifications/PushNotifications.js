@@ -36,8 +36,9 @@ class FirebaseNotifications {
     let updatedProjectNotificationList = [];
     const loggedOut = user?.isGuestUser;
     let classifiedProjects = {};
-    if (!loggedOut) {
-      classifiedProjects = await getAllUserClassifications(user.id);
+    if (!loggedOut && user?._client?.headers?.Authorization && user?.id) {
+      const userToken = user?._client?.headers?.Authorization;
+      classifiedProjects = await getAllUserClassifications(user.id, userToken);
     }
 
     // Loop through existing list, removed old projects, check if defaults need set.
