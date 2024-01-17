@@ -79,7 +79,7 @@ android {
         applicationId "com.zooniversemobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 75
+        versionCode 76
         versionName "2.11.0"
     }
     signingConfigs {

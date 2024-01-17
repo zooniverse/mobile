@@ -1,5 +1,3 @@
-import erasClient from 'panoptes-client/lib/eras-client';
-
 export const getAllUserClassifications = async (userId, token) => {
   const classifications = {};
   const domain = process.env.NODE_ENV === 'production' ? 'https://eras.zooniverse.org/' : 'https://eras-staging.zooniverse.org/';
