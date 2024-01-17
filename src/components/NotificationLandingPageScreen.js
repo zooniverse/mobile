@@ -22,7 +22,7 @@ function NotificationLandingPageScreen({ route }) {
   const checkedForProjects = useRef(false); // Used to ensure the setTimeout is only run once.
 
   const filteredProjects = extractSwipeEnabledProjects(
-    projectList.filter((project) => !project.isPreview).filter( project => !project.isPreview && project.launch_approved )
+    projectList.filter( project => !project.isPreview && project.launch_approved )
   );
 
   // Take the list of notifications and associate with a cooresponding project.

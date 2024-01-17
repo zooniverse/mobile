@@ -1,13 +1,9 @@
 import { Platform, PermissionsAndroid } from 'react-native';
 
 import messaging from '@react-native-firebase/messaging';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { store } from '../containers/app';
 import { sendEmailTestingToken } from '../api/email';
-import { navRef } from '../navigation/RootNavigator';
-import PageKeys from '../constants/PageKeys';
-import { addNotification } from '../reducers/notificationsSlice';
 import {
   setInitialSettings,
   setNotificationProjects,
@@ -19,13 +15,13 @@ import {
 } from '../reducers/notificationSettingsSlice';
 import { pushTesters } from './testers';
 import { getAllUserClassifications } from '../api';
+import { getTestingTokenEmailed, setTestingTokenEmailed } from './testingTokenStorage';
 
 export const ALL_NOTIFICATIONS = 'all_notifications';
 export const NEW_PROJECTS = 'new_projects';
 export const NEW_BETA_PROJECTS = 'new_beta_projects';
 export const URGENT_HELP = 'urgent_help';
 export const PROJECT_SPECIFIC = 'project_';
-const EMAILED_TESTING_TOKEN = 'EMAILED_TESTING_TOKEN';
 
 class FirebaseNotifications {
   getProjectSubscriptionName = (projectId) => `${PROJECT_SPECIFIC}${projectId}`;
@@ -40,8 +36,9 @@ class FirebaseNotifications {
     let updatedProjectNotificationList = [];
     const loggedOut = user?.isGuestUser;
     let classifiedProjects = {};
-    if (!loggedOut) {
-      classifiedProjects = await getAllUserClassifications(user.id);
+    if (!loggedOut && user?._client?.headers?.Authorization && user?.id) {
+      const userToken = user?._client?.headers?.Authorization;
+      classifiedProjects = await getAllUserClassifications(user.id, userToken);
     }
 
     // Loop through existing list, removed old projects, check if defaults need set.
@@ -124,7 +121,6 @@ class FirebaseNotifications {
     if (project && !project?.defaultSet) {
       this.projectSettingToggled(project, true);
     }
-
   }
 
   /**
@@ -144,7 +140,7 @@ class FirebaseNotifications {
       const pushTester = pushTesters.find((p) => p.userName === userName);
       if (pushTester) {
         // Check if the token has already been emailed, it should only email once.
-        const alreadyEmailed = await this.getTestingTokenEmailed(userName);
+        const alreadyEmailed = await getTestingTokenEmailed(userName);
         if (!alreadyEmailed) {
           // Get the token, email it, and then mark in local storage that it has been sent.
           const token = await messaging().getToken();
@@ -154,7 +150,7 @@ class FirebaseNotifications {
             Platform.OS
           );
           if (sendEmail) {
-            this.setTestingTokenEmailed(userName);
+            setTestingTokenEmailed(userName);
           }
         }
       }
@@ -284,35 +280,6 @@ class FirebaseNotifications {
     store.dispatch(toggleNotificationProject(updatedProject));
   };
 
-  // Check if the initial global push settings have already been set.
-  getTestingTokenEmailed = async (userName) => {
-    try {
-      const value = await AsyncStorage.getItem(
-        `${EMAILED_TESTING_TOKEN}_${userName}`
-      );
-      if (value !== null) {
-        return true;
-      }
-    } catch (e) {
-      return false;
-    }
-  };
-
-  // Set that the initial global push settings have already been set.
-  setTestingTokenEmailed = async (userName) => {
-    try {
-      await AsyncStorage.setItem(
-        `${EMAILED_TESTING_TOKEN}_${userName}`,
-        'true'
-      );
-    } catch (e) {
-      throw new Error(
-        'There was an issue setting emailed testing token',
-        e.message
-      );
-    }
-  };
-
   // Subscribes or unsubscribes from the Firebase topic.
   updateTopic = (topic, subStatus) => {
     if (subStatus) {
@@ -321,50 +288,6 @@ class FirebaseNotifications {
       messaging().unsubscribeFromTopic(topic);
     }
   };
-
-  // Message handlers
-  handleIncomingNotifications() {
-    // App in background - save notification to local storage and navigate to notifications screen.
-    messaging().onNotificationOpenedApp((msg) => {
-      this.saveMessageToLocalStorage(msg);
-      navRef.navigate(PageKeys.NotificationLandingPageScreen, {
-        newNotification: msg?.messageId,
-      });
-    });
-
-    // App is closed - save notification to local storage and navigate to notifications screen.
-    messaging()
-      .getInitialNotification()
-      .then((remoteMessage) => {
-        if (remoteMessage) {
-          this.saveMessageToLocalStorage(remoteMessage);
-          navRef.navigate(PageKeys.NotificationLandingPageScreen, {
-            newNotification: remoteMessage?.messageId,
-          });
-        }
-      });
-
-    // App is in foreground - save notification to local storage but do not navigate.
-    messaging().onMessage((msg) => {
-      this.saveMessageToLocalStorage(msg);
-    });
-  }
-
-  async saveMessageToLocalStorage(msg) {
-    const projectId = msg?.data?.project_id;
-
-    // Need the project id.
-    if (!projectId) return;
-    const msgData = {
-      title: msg?.notification?.title ?? '',
-      body: msg?.notification?.body ?? '',
-      timestamp: msg?.sentTime,
-      id: msg?.messageId,
-      projectId,
-    };
-
-    store.dispatch(addNotification(msgData));
-  }
 }
 
 export const PushNotifications = new FirebaseNotifications();

@@ -139,7 +139,7 @@ function ProjectDisciplines({ ...props }) {
 
         // Handle push subscriptions
         const notificationProjects = extractSwipeEnabledProjects(
-          projectList.filter((project) => !project.isPreview).filter( project => !project.isPreview && project.launch_approved )
+          projectList.filter( project => !project.isPreview && project.launch_approved )
         );
         PushNotifications.updateProjectListNotifications(notificationProjects, props.user)
       })
