@@ -19,7 +19,7 @@ const SettingText = ({ text }) => (
   <FontedText style={styles.text}>{text}</FontedText>
 );
 
-const OpenInBrowser = () => (
+const OpenInBrowserIcon = () => (
   <Feather
     name="external-link"
     color="#5C5C5C"
@@ -47,9 +47,24 @@ export const PlatformSetting = ({ text, link }) => (
     style={{ flexDirection: 'row', marginVertical: 6 }}
   >
     <SettingText text={text} />
-    <OpenInBrowser />
+    <OpenInBrowserIcon />
   </TouchableOpacity>
 );
+
+const trackBarStyles = {
+  height: 8,
+  width: 23,
+  activeBackgroundColor: '#ADDDE0',
+  inActiveBackgroundColor: '#A6A7A9',
+}
+
+const thumbButtonStyles = {
+  width: 14,
+  height: 14,
+  radius: 7,
+  activeBackgroundColor: '#005D69',
+  inActiveBackgroundColor: '#EBEBEB'
+}
 
 export const SettingsToggle = ({
   onToggle,
@@ -66,19 +81,8 @@ export const SettingsToggle = ({
           value={value}
           onPress={onToggle}
           disabled={disabled}
-          trackBar={{
-            height: 8,
-            width: 23,
-            activeBackgroundColor: '#ADDDE0',
-            inActiveBackgroundColor: '#A6A7A9',
-          }}
-          thumbButton={{
-            width: 14,
-            height: 14,
-            radius: 7,
-            activeBackgroundColor: '#005D69',
-            inActiveBackgroundColor: '#EBEBEB'
-          }}
+          trackBar={trackBarStyles}
+          thumbButton={thumbButtonStyles}
         />
         <View style={styles.toggleTextContainer}>
           <SettingText text={title} />
