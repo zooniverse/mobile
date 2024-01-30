@@ -8,7 +8,10 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import Feather from 'react-native-vector-icons/Feather'
+import Fontisto from 'react-native-vector-icons/Fontisto'
+import LinearGradient from 'react-native-linear-gradient';
+import DeviceInfo from 'react-native-device-info'
 import FontedText from './common/FontedText'
 import Separator from './common/Separator'
 import { signOut } from '../actions/auth'
@@ -39,6 +42,8 @@ export class SideDrawerContent extends Component {
     this.settings = this.settings.bind(this)
     this.signIn = this.signIn.bind(this)
     this.notifications = this.notifications.bind(this)
+    this.privacy = this.privacy.bind(this)
+    this.contactUs = this.contactUs.bind(this)
   }
 
   close() {
@@ -80,6 +85,32 @@ export class SideDrawerContent extends Component {
     this.props.navigation.navigate(PageKeys.NotificationLandingPageScreen)
   }
 
+  privacy() {
+    const privacyLink = 'https://www.zooniverse.org/privacy';
+    Linking.canOpenURL(privacyLink).then(supported => {
+      if (supported) {
+        Linking.openURL(privacyLink);
+      } else {
+        Alert.alert(
+          'Error', 'Sorry, but it looks like you are unable to open the link ' + privacyLink + ' in your default browser.',
+        )
+      }
+    });
+  }
+
+  contactUs() {
+    const contactLink = 'https://www.zooniverse.org/about/contact';
+    Linking.canOpenURL(contactLink).then(supported => {
+      if (supported) {
+        Linking.openURL(contactLink);
+      } else {
+        Alert.alert(
+          'Error', 'Sorry, but it looks like you are unable to open the link ' + contactLink + ' in your default browser.',
+        )
+      }
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -89,14 +120,21 @@ export class SideDrawerContent extends Component {
             style={styles.logoStyle} 
           />
           <TouchableOpacity onPress={this.close} >
-            <SimpleLineIcons name="close" style={styles.closeIcon} />
+            <Fontisto name="close" style={styles.closeIcon} />
           </TouchableOpacity>
         </View>
 
-        <Separator
+        {/* <Separator
             color="white"
             style={styles.separatorPadding}
-          />
+        /> */}
+        
+        <LinearGradient
+          colors={['rgba(0,93,105,1)', '#FFFFFF', 'rgba(0,93,105,1)']}
+          style={styles.linearGradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        />
         
         <MenuButton 
           onPress={this.goHome} 
@@ -113,7 +151,7 @@ export class SideDrawerContent extends Component {
         
         <MenuButton 
           onPress={this.goToAbout} 
-          text={'About'} 
+          text={'About the Zooniverse'} 
         />
 
         <MenuButton 
@@ -131,7 +169,33 @@ export class SideDrawerContent extends Component {
           text={'Notifications'} 
         />
 
-        <FontedText style={styles.connextText}>
+        <Menuheader title="ABOUT" />
+
+        <MenuButton 
+          onPress={this.privacy} 
+          text={'Privacy'}
+          externalOpenIcon={true}
+        />
+
+        <MenuButton 
+          text={`Version ${DeviceInfo.getVersion()}/${DeviceInfo.getBuildNumber()}`}
+        />
+
+        <Menuheader title="HELP" />
+
+        <MenuButton 
+          onPress={this.contactUs} 
+          text={'Contact us'}
+          externalOpenIcon={true}
+        />
+
+        { this.props.isGuestUser ? null :
+          <MenuButton 
+            onPress={this.signOut}
+            text={'Sign Out'}
+          />
+        }
+        {/* <FontedText style={styles.connextText}>
           CONNECT
         </FontedText>
 
@@ -153,30 +217,46 @@ export class SideDrawerContent extends Component {
             mediaLink="https://plus.google.com/+ZooniverseOrgReal/"
             iconName="google-plus"
           />
-        </View>
+        </View> */}
 
-        <View style={styles.signOutView}>
+        {/* <View style={styles.signOutView}>
           { this.props.isGuestUser ? null :
             <MenuButton 
               onPress={this.signOut}
               text={'Sign Out'}
             />
           }
-        </View>
+        </View> */}
 
       </View>
     )
   }
 }
 
-const MenuButton = ({onPress, text}) => 
-  <View style={styles.linkContainer}>
-    <TouchableOpacity onPress={onPress}>
+const Menuheader = ({ title }) => (
+  <View>
+    <FontedText style={styles.menuHeader}>{title}</FontedText>
+  </View>
+)
+
+const MenuButton = ({ onPress = false, text, externalOpenIcon = false }) => {
+  return onPress ? (
+    <TouchableOpacity onPress={onPress} style={styles.linkContainer}>
       <FontedText style={styles.menuButtonText}>
         {text}
       </FontedText>
+      {externalOpenIcon && (
+        <Feather name="external-link" color="#fff" size={18} style={{marginLeft: 8, marginTop: 4}} />
+      )}
     </TouchableOpacity>
-  </View>
+  ) : (
+      <View style={styles.linkContainer}>
+        <FontedText style={styles.menuButtonText}>
+          {text}
+        </FontedText>
+      </View>
+  )
+}
 
 const SocialMediaLink = ({mediaLink, iconName}) => 
   <TouchableOpacity onPress={() => openSocialMediaLink(mediaLink)}>
@@ -200,22 +280,38 @@ const styles = EStyleSheet.create({
   container: {
     backgroundColor: 'rgba(0,93,105,1)',
     flex: 1,
-    paddingTop: 15,
+    // paddingTop: 15,
     paddingLeft: 25,
     zIndex: 200,
+    // borderBottomLeftRadius: 16,
+    // borderTopLeftRadius: 16,
   },
   icon: {
     color: '$zooniverseTeal',
     fontSize: 24,
     padding: 10
   },
+  linearGradient: {
+    height: 1,
+    width: '90%',
+  },
   linkContainer: {
-    paddingTop: 17.5,
-    paddingBottom: 17.5
+    paddingTop: 8,
+    paddingBottom: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   menuButtonText: {
-    fontSize: 22,
-    color: 'white'
+    fontSize: 24,
+    lineHeight: 28.06,
+    color: '#fff',
+  },
+  menuHeader: {
+    fontSize: 16,
+    lineHeight: 18.7,
+    letterSpacing: 1.5,
+    color: '#fff',
+    paddingVertical: 8,
   },
   socialMediaContainer: {
     flexDirection: 'row',
@@ -237,19 +333,19 @@ const styles = EStyleSheet.create({
     marginRight: 25,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   logoStyle: {
-    width: 125,
-    height: 15,
-    resizeMode: 'contain'
+    width: 173.77,
+    height: 20,
+    resizeMode: 'contain',
   },
   closeIcon: {
     fontSize: 20,
     color: 'white'
   },
   separatorPadding: {
-    marginBottom: 18
+    marginBottom: 8
   },
   connextText: {
     marginTop: 45,

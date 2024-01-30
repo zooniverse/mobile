@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, ScrollView, StyleSheet, FlatList, Text } from 'react-native';
-import { SettingHeader, SettingsToggle } from './settingsComponents';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  FlatList,
+} from 'react-native';
+import { PlatformSetting, SettingHeader, SettingsToggle } from './settingsComponents';
 import FontedText from '../common/FontedText';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNavbarSettingsForPage } from '../../actions/navBar';
@@ -23,7 +28,11 @@ function Settings(props) {
     projectSpecificNotifications,
   } = useSelector((state) => state.notificationSettings);
 
-  const sortedProjects = [...projectSpecificNotifications].sort((a, b) => a.displayName.localeCompare(b.displayName));
+  const {isGuestUser} = useSelector(state => state.user)
+
+  const sortedProjects = [...projectSpecificNotifications].sort((a, b) =>
+    a.displayName.localeCompare(b.displayName)
+  );
 
   // Update the navigation header with the title and zoon icon.
   useEffect(() => {
@@ -33,6 +42,7 @@ function Settings(props) {
           title: 'Settings',
           showBack: true,
           centerType: 'title',
+          showIcon: true
         },
         PageKeys.Settings
       )
@@ -41,12 +51,20 @@ function Settings(props) {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      {!isGuestUser && (
+        <View>
+          <View>
+            <SettingHeader text="Platform Settings" />
+          </View>
+          <PlatformSetting text="Zooniverse account information" link="https://www.zooniverse.org/settings" />
+          <PlatformSetting text="Delete my account" link="https://panoptes.zooniverse.org/profile" />
+        </View>
+      )}
       <View>
         <SettingHeader text="Notification Settings" />
       </View>
       <FontedText style={styles.disclosureText}>
-        The Zooniverse app can occasionally send you updates about new projects
-        or projects you might be interested in.
+      The Zooniverse can occasionally send you updates about new projects or projects you might be interested in.
       </FontedText>
       <SettingsToggle
         style={styles.toggleSpacing}
@@ -56,7 +74,7 @@ function Settings(props) {
             !enableNotifications
           )
         }
-        title="Enable Notifications"
+        title="Enable notifications"
         value={enableNotifications}
       />
       <SettingsToggle
@@ -64,7 +82,7 @@ function Settings(props) {
         onToggle={() => {
           PushNotifications.settingToggled(NEW_PROJECTS, !newProjects);
         }}
-        title="New Projects"
+        title="New projects"
         value={newProjects}
         disabled={!enableNotifications}
       />
@@ -73,7 +91,7 @@ function Settings(props) {
         onToggle={() => {
           PushNotifications.settingToggled(NEW_BETA_PROJECTS, !newBetaProjects);
         }}
-        title="New Beta Projects"
+        title="New beta projects"
         value={newBetaProjects}
         disabled={!enableNotifications}
       />
@@ -82,13 +100,13 @@ function Settings(props) {
         onToggle={() => {
           PushNotifications.settingToggled(URGENT_HELP, !urgentHelpAlerts);
         }}
-        title="Urgent Help Alerts"
-        description="Notifications when projects need timely help"
+        title="Urgent help alerts"
+        description="Notifications when projects need timely help."
         value={urgentHelpAlerts}
         disabled={!enableNotifications}
       />
       <FontedText style={styles.projectHeader}>
-        Project-specific Notifications
+        Project-specific notifications
       </FontedText>
       <FlatList
         data={sortedProjects}
@@ -111,14 +129,20 @@ function Settings(props) {
 
 const styles = StyleSheet.create({
   toggleSpacing: {
-    paddingBottom: 15,
+    paddingBottom: 8,
   },
   disclosureText: {
-    paddingBottom: 20,
+    fontSize: 13,
+    lineHeight: 16.37,
+    color: '#5C5C5C',
+    paddingBottom: 8,
   },
   projectHeader: {
-    fontSize: 18,
-    paddingBottom: 15,
+    fontSize: 16,
+    lineHeight: 18.7,
+    fontWeight: '700',
+    paddingBottom: 8,
+    marginTop: 8,
   },
   separatorStyle: {
     paddingTop: 10,
@@ -131,7 +155,9 @@ const styles = StyleSheet.create({
     paddingBottom: 35,
   },
   scrollViewContainer: {
-    padding: 25,
+    padding: 16,
+    backgroundColor: '#fff',
+    flex: 1,
   },
 });
 

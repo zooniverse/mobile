@@ -155,13 +155,13 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   leftIcon: {
-    paddingLeft: 25,
+    paddingLeft: 16,
     paddingRight: 15,
     fontSize: 26
   },
   rightIcon: {
     paddingLeft: 15,
-    paddingRight: 25,
+    paddingRight: 16,
     alignContent: 'flex-end',
     fontSize: 26
   },
