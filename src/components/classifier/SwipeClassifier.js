@@ -95,6 +95,7 @@ export class SwipeClassifier extends React.Component {
         const {id, first_task} = this.props.route.params.workflow
         this.props.classifierActions.addAnnotationToTask(id, first_task, answer, false)
         this.props.classifierActions.saveClassification(this.props.route.params.workflow, subject, this.state.swiperDimensions)
+        this.setState({swiperIndex: this.state.swiperIndex + 1})
     }
 
     onSwiped = (subjectIndex) => {
