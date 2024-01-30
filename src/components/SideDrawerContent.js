@@ -123,11 +123,6 @@ export class SideDrawerContent extends Component {
             <Fontisto name="close" style={styles.closeIcon} />
           </TouchableOpacity>
         </View>
-
-        {/* <Separator
-            color="white"
-            style={styles.separatorPadding}
-        /> */}
         
         <LinearGradient
           colors={['rgba(0,93,105,1)', '#FFFFFF', 'rgba(0,93,105,1)']}
@@ -248,11 +243,8 @@ const styles = EStyleSheet.create({
   container: {
     backgroundColor: 'rgba(0,93,105,1)',
     flex: 1,
-    // paddingTop: 15,
     paddingLeft: 25,
     zIndex: 200,
-    // borderBottomLeftRadius: 16,
-    // borderTopLeftRadius: 16,
   },
   icon: {
     color: '$zooniverseTeal',
