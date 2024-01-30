@@ -29,6 +29,7 @@ const mapStateToProps = (state) => {
     user: state.user,
     title: navbarSettings.title,
     showBack: navbarSettings.showBack,
+    showIcon: navbarSettings.showIcon,
     hamburgerMenuShowing: navbarSettings.hamburgerMenuShowing,
     centerType: navbarSettings.centerType,
     backgroundColor: navbarSettings.backgroundColor,
@@ -80,8 +81,20 @@ export class NavBar extends Component {
       );
     };
 
-    const LeftContainer = ({isActive}) => {
+    const LeftContainer = ({isActive, showIcon}) => {
       const colorStyle = isActive ? {} : styles.disabledIcon
+
+      if (showIcon) {
+        return (
+          <View>
+            <Image
+              source={require('../../images/zooni-nav-logo.png')}
+              style={styles.navIcon}
+            />
+          </View>
+        )
+      }
+      
       return (
         <View>
           <TouchableOpacity
@@ -113,7 +126,7 @@ export class NavBar extends Component {
     return (
         <View style={[styles.navBarContainer]}>
           <View style={[styles.navBar, { backgroundColor: this.props.backgroundColor }]}>
-            <LeftContainer isActive={this.props.showBack} />
+          <LeftContainer isActive={this.props.showBack} showIcon={this.props.showIcon} />
             <CenterContainer />
             <RightContainer isActive={this.props.hamburgerMenuShowing} />
           </View>
@@ -156,6 +169,14 @@ const styles = EStyleSheet.create({
     backgroundColor: '$transparent',
     color: '$textColor',
   },
+  navIcon: {
+    width: 22,
+    height: 22,
+    color: '#fff',
+    marginLeft: 16,
+    alignSelf: 'center',
+    marginTop: 4,
+  },
   title: {
     color: '$textColor',
     fontSize: 24,
@@ -185,6 +206,7 @@ NavBar.propTypes = {
   showLogo: PropTypes.bool,
   showAvatar: PropTypes.bool,
   showBack: PropTypes.bool,
+  showIcons: PropTypes.bool,
   hamburgerMenuShowing: PropTypes.bool,
   onBack: PropTypes.func,
   user: PropTypes.object,
@@ -203,6 +225,7 @@ NavBar.defaultProps = {
   hamburgerMenuShowing: false,
   showAvatar: false,
   showBack: false,
+  showIcon:  false,
   showLogo: false,
   title: '',
 }

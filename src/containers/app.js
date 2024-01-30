@@ -3,7 +3,6 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   AppState,
-  Platform,
 } from 'react-native'
 import NetInfo from '@react-native-community/netinfo';
 import { Provider } from 'react-redux'
@@ -14,28 +13,15 @@ import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import SplashScreen from 'react-native-splash-screen';
-import ZooniverseApp from './zooniverseApp'
-import ProjectList from '../components/projects/ProjectList'
-import ProjectDisciplines from '../components/ProjectDisciplines'
-import About from '../components/About'
-import PublicationList from '../components/PublicationList'
-import SignIn from '../components/SignIn'
-import Register from '../components/Register'
-import Settings from '../components/settings/Settings'
-import SideDrawerContent from '../components/SideDrawerContent'
-import SwipeClassifier from '../components/classifier/SwipeClassifier'
 import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-import DrawingClassifier from '../components/Markings/DrawingClassifier'
-import QuestionClassifier from '../components/classifier/QuestionClassifier'
-import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier'
 import SafeAreaContainer from './SafeAreaContainer'
 import { setPageShowing } from '../actions/navBar'
-import NavBar from '../components/NavBar';
 import PageKeys from '../constants/PageKeys'
 import RootNavigator from "../navigation/RootNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Sentry from '@sentry/react-native';
+import { PushNotifications, IncomingNotifications } from '../notifications';
 
 Sentry.init({
     dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
@@ -45,17 +31,22 @@ Sentry.init({
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['images', 'user', 'settings'] // All these stores will be persisted
+  whitelist: ['images', 'user', 'settings', 'notifications', 'notificationSettings'] // All these stores will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer)
-const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
-const persistor = persistStore(store)
+export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
+const persistor = persistStore(store, {}, () => {
+  // Setup push notifications here because you want to make sure existing settings are loaded.
+  PushNotifications.setupPushNotifications();
+})
 
 
 export default class App extends Component {
   componentDidMount() {
     SplashScreen.hide()
+    
+    IncomingNotifications.handleIncomingNotifications();
 
     const handleAppStateChange = currentAppState => {
       if (currentAppState === 'active') {

@@ -68,3 +68,6 @@ buck-out/
 
 # VSCode settings/workspace settings
 .vscode
+
+# Used for tokens
+.env

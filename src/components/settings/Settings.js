@@ -1,189 +1,138 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { View, ScrollView, StyleSheet, FlatList, Text } from 'react-native';
+import { SettingHeader, SettingsToggle } from './settingsComponents';
+import FontedText from '../common/FontedText';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNavbarSettingsForPage } from '../../actions/navBar';
+import PageKeys from '../../constants/PageKeys';
 import {
-  FlatList,
-  ScrollView,
-  View
-} from 'react-native'
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux'
-import EStyleSheet from 'react-native-extended-stylesheet'
-import { SettingsToggle, SettingHeader } from './settingsComponents'
-import NavBar from '../NavBar'
-import FontedText from '../common/FontedText'
-import Separator from '../common/Separator'
-import { connect } from 'react-redux'
-import {
-  checkPushPermissions,
-} from '../../actions/index'
-import * as settingsActions from '../../actions/settings'
-import theme from '../../theme'
-import { setNavbarSettingsForPage } from '../../actions/navBar'
-import PageKeys from '../../constants/PageKeys'
+  ALL_NOTIFICATIONS,
+  NEW_BETA_PROJECTS,
+  NEW_PROJECTS,
+  PushNotifications,
+  URGENT_HELP,
+} from '../../notifications/PushNotifications';
 
-const mapStateToProps = (state) => {
+function Settings(props) {
+  const dispatch = useDispatch();
   const {
-    showAllWorkflows,
     enableNotifications,
-    newProjectNotifications,
-    newBetaNotifications,
-    urgentHelpNotification,
-    projectSpecificNotifications
-  } = state.settings
+    newProjects,
+    newBetaProjects,
+    urgentHelpAlerts,
+    projectSpecificNotifications,
+  } = useSelector((state) => state.notificationSettings);
 
-  return {
-    notifications: state.main.notifications,
-    projectList: state.projects.projectList || [],
-    isFetching: state.main.isFetching,
-    errorMessage: state.main.errorMessage,
-    pushEnabled: state.main.pushEnabled,
-    showAllWorkflows,
-    enableNotifications,
-    newProjectNotifications,
-    newBetaNotifications,
-    urgentHelpNotification,
-    projectSpecificNotifications
-  }
-}
+  const sortedProjects = [...projectSpecificNotifications].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
-const mapDispatchToProps = (dispatch) => ({
-  checkPushPermissions(){
-    dispatch(checkPushPermissions())
-  },
-  settingsActions: bindActionCreators(settingsActions, dispatch),
-  setNavbarSettingsForPage: (settings) => dispatch(setNavbarSettingsForPage(settings, PageKeys.Settings))
-})
-
-export class Settings extends React.Component {
-  componentDidMount() {
-    this.props.checkPushPermissions()
-    this.props.setNavbarSettingsForPage({
-      title: 'Settings',
-      showBack: true,
-      centerType: 'title'
-    })
-  }
-
-  renderSettingsToggle = ({item}) => {
-    const {subscribed, id, display_name } = item
-    return (
-      <SettingsToggle
-        value={subscribed}
-        onToggle={() => {this.props.settingsActions.updateProjectSubsciption(id, !subscribed)}}
-        title={display_name}
-        disabled={!this.props.enableNotifications}
-      />
-    )
-  }
-
-  render() {
-    return (
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        <SettingHeader text="General Settings" />
-        <View style={styles.workflowContainer}>
-          <SettingsToggle
-            title="Show all workflows"
-            description="Includes non-native workflows"
-            onToggle={() => {this.props.settingsActions.updateShowAllWorkflow(!this.props.showAllWorkflows)}}
-            value={this.props.showAllWorkflows}
-          />
-        </View>
-        <Separator style={styles.titlePadding} color={theme.$seperator}/>
-        <View>
-          <SettingHeader text="Notification Settings" />
-        </View>
-        <FontedText style={styles.disclosureText}> 
-          The Zooniverse app can occassionally send you updates about new projects or projects you might be interested in.
-        </FontedText>
-        <SettingsToggle
-          style={styles.toggleSpacing}
-          onToggle={() => {this.props.settingsActions.updateEnableNotifications(!this.props.enableNotifications)}}
-          title='Enable Notifications'
-          value={this.props.enableNotifications}
-        />
-        <SettingsToggle
-          style={styles.toggleSpacing}
-          onToggle={() => {this.props.settingsActions.updateNewProjectNotifications(!this.props.newProjectNotifications)}}
-          title='New Projects'
-          value={this.props.newProjectNotifications}
-          disabled={!this.props.enableNotifications}
-        />
-        <SettingsToggle
-          style={styles.toggleSpacing}
-          onToggle={() => {this.props.settingsActions.updateBetaNotifications(!this.props.newBetaNotifications)}}
-          title='New Beta Projects'
-          value={this.props.newBetaNotifications}
-          disabled={!this.props.enableNotifications}
-        />
-        <SettingsToggle
-          style={styles.toggleSpacing}
-          onToggle={() => {this.props.settingsActions.updateUrgentHelpNotifications(!this.props.urgentHelpNotification)}}
-          title='Urgent Help Alerts'
-          description='Notifications when projects need timely help'
-          value={this.props.urgentHelpNotification}
-          disabled={!this.props.enableNotifications}
-        />
-        <FontedText style={styles.projectHeader}>
-          Project-specific Notifications
-        </FontedText>
-        <FlatList
-          data={this.props.projectSpecificNotifications}
-          renderItem={this.renderSettingsToggle}
-          ItemSeparatorComponent={() => <View style={styles.separatorStyle}/>}
-          keyExtractor={ item => item.id }
-        />
-      </ScrollView>
+  // Update the navigation header with the title and zoon icon.
+  useEffect(() => {
+    dispatch(
+      setNavbarSettingsForPage(
+        {
+          title: 'Settings',
+          showBack: true,
+          centerType: 'title',
+        },
+        PageKeys.Settings
+      )
     );
-  }
+  }, []);
+
+  return (
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <View>
+        <SettingHeader text="Notification Settings" />
+      </View>
+      <FontedText style={styles.disclosureText}>
+        The Zooniverse app can occasionally send you updates about new projects
+        or projects you might be interested in.
+      </FontedText>
+      <SettingsToggle
+        style={styles.toggleSpacing}
+        onToggle={() =>
+          PushNotifications.settingToggled(
+            ALL_NOTIFICATIONS,
+            !enableNotifications
+          )
+        }
+        title="Enable Notifications"
+        value={enableNotifications}
+      />
+      <SettingsToggle
+        style={styles.toggleSpacing}
+        onToggle={() => {
+          PushNotifications.settingToggled(NEW_PROJECTS, !newProjects);
+        }}
+        title="New Projects"
+        value={newProjects}
+        disabled={!enableNotifications}
+      />
+      <SettingsToggle
+        style={styles.toggleSpacing}
+        onToggle={() => {
+          PushNotifications.settingToggled(NEW_BETA_PROJECTS, !newBetaProjects);
+        }}
+        title="New Beta Projects"
+        value={newBetaProjects}
+        disabled={!enableNotifications}
+      />
+      <SettingsToggle
+        style={styles.toggleSpacing}
+        onToggle={() => {
+          PushNotifications.settingToggled(URGENT_HELP, !urgentHelpAlerts);
+        }}
+        title="Urgent Help Alerts"
+        description="Notifications when projects need timely help"
+        value={urgentHelpAlerts}
+        disabled={!enableNotifications}
+      />
+      <FontedText style={styles.projectHeader}>
+        Project-specific Notifications
+      </FontedText>
+      <FlatList
+        data={sortedProjects}
+        renderItem={({ item }) => (
+          <SettingsToggle
+            value={item.subscribed}
+            onToggle={() => {
+              PushNotifications.projectSettingToggled(item, !item.subscribed);
+            }}
+            title={item.displayName}
+            disabled={!enableNotifications}
+          />
+        )}
+        ItemSeparatorComponent={() => <View style={styles.separatorStyle} />}
+        keyExtractor={(item) => item.id}
+      />
+    </ScrollView>
+  );
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   toggleSpacing: {
-    paddingBottom: 15
+    paddingBottom: 15,
   },
   disclosureText: {
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   projectHeader: {
-    color: '$headerGrey',
     fontSize: 18,
-    paddingBottom: 15
-  }, 
+    paddingBottom: 15,
+  },
   separatorStyle: {
-    paddingTop: 10
+    paddingTop: 10,
   },
   titlePadding: {
-    paddingBottom: 30
+    paddingBottom: 30,
   },
   workflowContainer: {
     paddingTop: 20,
-    paddingBottom: 35
+    paddingBottom: 35,
   },
   scrollViewContainer: {
-    padding: 25
-  }
+    padding: 25,
+  },
 });
 
-Settings.propTypes = {
-  notifications: PropTypes.shape({
-    general: PropTypes.bool,
-  }),
-  settings: PropTypes.shape({
-    promptForWorkflow: PropTypes.bool,
-  }),
-  projectList: PropTypes.array,
-  isFetching: PropTypes.bool,
-  pushEnabled: PropTypes.bool,
-  errorMessage: PropTypes.string,
-  updateGeneralNotification: PropTypes.func,
-  checkPushPermissions: PropTypes.func,
-  showAllWorkflows: PropTypes.bool,
-  enableNotifications: PropTypes.bool,
-  newProjectNotifications: PropTypes.bool,
-  newBetaNotifications: PropTypes.bool,
-  urgentHelpNotification: PropTypes.bool,
-  projectSpecificNotifications: PropTypes.array,
-  settingsActions: PropTypes.any,
-  setNavbarSettingsForPage: PropTypes.func
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Settings)
+export default Settings;

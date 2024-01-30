@@ -15,6 +15,7 @@ import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {DrawerActions} from '@react-navigation/native';
+import PageKeys from '../constants/PageKeys'
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -37,6 +38,7 @@ export class SideDrawerContent extends Component {
     this.goToPublications = this.goToPublications.bind(this)
     this.settings = this.settings.bind(this)
     this.signIn = this.signIn.bind(this)
+    this.notifications = this.notifications.bind(this)
   }
 
   close() {
@@ -71,6 +73,11 @@ export class SideDrawerContent extends Component {
   settings(){
     this.close()
     this.props.navigation.navigate('Settings');
+  }
+
+  notifications() {
+    this.close()
+    this.props.navigation.navigate(PageKeys.NotificationLandingPageScreen)
   }
 
   render() {
@@ -117,6 +124,11 @@ export class SideDrawerContent extends Component {
         <MenuButton 
           onPress={this.settings} 
           text={'Settings'} 
+        />
+
+        <MenuButton 
+          onPress={this.notifications} 
+          text={'Notifications'} 
         />
 
         <FontedText style={styles.connextText}>
