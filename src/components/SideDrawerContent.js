@@ -42,8 +42,6 @@ export class SideDrawerContent extends Component {
     this.settings = this.settings.bind(this)
     this.signIn = this.signIn.bind(this)
     this.notifications = this.notifications.bind(this)
-    this.privacy = this.privacy.bind(this)
-    this.contactUs = this.contactUs.bind(this)
   }
 
   close() {
@@ -85,27 +83,13 @@ export class SideDrawerContent extends Component {
     this.props.navigation.navigate(PageKeys.NotificationLandingPageScreen)
   }
 
-  privacy() {
-    const privacyLink = 'https://www.zooniverse.org/privacy';
-    Linking.canOpenURL(privacyLink).then(supported => {
+  openLink(link) {
+    Linking.canOpenURL(link).then(supported => {
       if (supported) {
-        Linking.openURL(privacyLink);
+        Linking.openURL(link);
       } else {
         Alert.alert(
-          'Error', 'Sorry, but it looks like you are unable to open the link ' + privacyLink + ' in your default browser.',
-        )
-      }
-    });
-  }
-
-  contactUs() {
-    const contactLink = 'https://www.zooniverse.org/about/contact';
-    Linking.canOpenURL(contactLink).then(supported => {
-      if (supported) {
-        Linking.openURL(contactLink);
-      } else {
-        Alert.alert(
-          'Error', 'Sorry, but it looks like you are unable to open the link ' + contactLink + ' in your default browser.',
+          'Error', 'Sorry, but it looks like you are unable to open the link ' + link + ' in your default browser.',
         )
       }
     });
@@ -167,7 +151,7 @@ export class SideDrawerContent extends Component {
         <Menuheader title="ABOUT" />
 
         <MenuButton 
-          onPress={this.privacy} 
+          onPress={() => this.openLink('https://www.zooniverse.org/privacy')} 
           text={'Privacy'}
           externalOpenIcon={true}
         />
@@ -179,7 +163,7 @@ export class SideDrawerContent extends Component {
         <Menuheader title="HELP" />
 
         <MenuButton 
-          onPress={this.contactUs} 
+          onPress={() => this.openLink('https://www.zooniverse.org/about/contact')} 
           text={'Contact us'}
           externalOpenIcon={true}
         />
