@@ -195,38 +195,6 @@ export class SideDrawerContent extends Component {
             text={'Sign Out'}
           />
         }
-        {/* <FontedText style={styles.connextText}>
-          CONNECT
-        </FontedText>
-
-
-        <View style={styles.socialMediaContainer}>
-          <SocialMediaLink 
-            mediaLink="https://twitter.com/the_zooniverse"
-            iconName="twitter"
-          />
-          <SocialMediaLink 
-            mediaLink="http://www.facebook.com/therealzooniverse"
-            iconName="facebook-f"
-          />
-          <SocialMediaLink 
-            mediaLink="http://dailyzooniverse.tumblr.com/"
-            iconName="tumblr"
-          />
-          <SocialMediaLink 
-            mediaLink="https://plus.google.com/+ZooniverseOrgReal/"
-            iconName="google-plus"
-          />
-        </View> */}
-
-        {/* <View style={styles.signOutView}>
-          { this.props.isGuestUser ? null :
-            <MenuButton 
-              onPress={this.signOut}
-              text={'Sign Out'}
-            />
-          }
-        </View> */}
 
       </View>
     )
