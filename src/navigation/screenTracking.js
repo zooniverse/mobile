@@ -12,6 +12,7 @@ export const gaTrackScreen = (route) => {
     });
   };
 
+  // For classifiers use the project slug. For project list add the type of project list. For anything else convert to title case.
   switch (route.name) {
     case 'QuestionClassifier':
       name = route?.params?.project?.slug ?? route.name;
