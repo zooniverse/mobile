@@ -8,7 +8,10 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import Feather from 'react-native-vector-icons/Feather'
+import Fontisto from 'react-native-vector-icons/Fontisto'
+import LinearGradient from 'react-native-linear-gradient';
+import DeviceInfo from 'react-native-device-info'
 import FontedText from './common/FontedText'
 import Separator from './common/Separator'
 import { signOut } from '../actions/auth'
@@ -80,6 +83,18 @@ export class SideDrawerContent extends Component {
     this.props.navigation.navigate(PageKeys.NotificationLandingPageScreen)
   }
 
+  openLink(link) {
+    Linking.canOpenURL(link).then(supported => {
+      if (supported) {
+        Linking.openURL(link);
+      } else {
+        Alert.alert(
+          'Error', 'Sorry, but it looks like you are unable to open the link ' + link + ' in your default browser.',
+        )
+      }
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -89,14 +104,16 @@ export class SideDrawerContent extends Component {
             style={styles.logoStyle} 
           />
           <TouchableOpacity onPress={this.close} >
-            <SimpleLineIcons name="close" style={styles.closeIcon} />
+            <Fontisto name="close" style={styles.closeIcon} />
           </TouchableOpacity>
         </View>
-
-        <Separator
-            color="white"
-            style={styles.separatorPadding}
-          />
+        
+        <LinearGradient
+          colors={['rgba(0,93,105,1)', '#FFFFFF', 'rgba(0,93,105,1)']}
+          style={styles.linearGradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        />
         
         <MenuButton 
           onPress={this.goHome} 
@@ -113,7 +130,7 @@ export class SideDrawerContent extends Component {
         
         <MenuButton 
           onPress={this.goToAbout} 
-          text={'About'} 
+          text={'About the Zooniverse'} 
         />
 
         <MenuButton 
@@ -131,52 +148,62 @@ export class SideDrawerContent extends Component {
           text={'Notifications'} 
         />
 
-        <FontedText style={styles.connextText}>
-          CONNECT
-        </FontedText>
+        <Menuheader title="ABOUT" />
 
+        <MenuButton 
+          onPress={() => this.openLink('https://www.zooniverse.org/privacy')} 
+          text={'Privacy'}
+          externalOpenIcon={true}
+        />
 
-        <View style={styles.socialMediaContainer}>
-          <SocialMediaLink 
-            mediaLink="https://twitter.com/the_zooniverse"
-            iconName="twitter"
-          />
-          <SocialMediaLink 
-            mediaLink="http://www.facebook.com/therealzooniverse"
-            iconName="facebook-f"
-          />
-          <SocialMediaLink 
-            mediaLink="http://dailyzooniverse.tumblr.com/"
-            iconName="tumblr"
-          />
-          <SocialMediaLink 
-            mediaLink="https://plus.google.com/+ZooniverseOrgReal/"
-            iconName="google-plus"
-          />
-        </View>
+        <MenuButton 
+          text={`Version ${DeviceInfo.getVersion()}/${DeviceInfo.getBuildNumber()}`}
+        />
 
-        <View style={styles.signOutView}>
-          { this.props.isGuestUser ? null :
-            <MenuButton 
-              onPress={this.signOut}
-              text={'Sign Out'}
-            />
-          }
-        </View>
+        <Menuheader title="HELP" />
+
+        <MenuButton 
+          onPress={() => this.openLink('https://www.zooniverse.org/about/contact')} 
+          text={'Contact us'}
+          externalOpenIcon={true}
+        />
+
+        { this.props.isGuestUser ? null :
+          <MenuButton 
+            onPress={this.signOut}
+            text={'Sign Out'}
+          />
+        }
 
       </View>
     )
   }
 }
 
-const MenuButton = ({onPress, text}) => 
-  <View style={styles.linkContainer}>
-    <TouchableOpacity onPress={onPress}>
+const Menuheader = ({ title }) => (
+  <View>
+    <FontedText style={styles.menuHeader}>{title}</FontedText>
+  </View>
+)
+
+const MenuButton = ({ onPress = false, text, externalOpenIcon = false }) => {
+  return onPress ? (
+    <TouchableOpacity onPress={onPress} style={styles.linkContainer}>
       <FontedText style={styles.menuButtonText}>
         {text}
       </FontedText>
+      {externalOpenIcon && (
+        <Feather name="external-link" color="#fff" size={18} style={{marginLeft: 8, marginTop: 4}} />
+      )}
     </TouchableOpacity>
-  </View>
+  ) : (
+      <View style={styles.linkContainer}>
+        <FontedText style={styles.menuButtonText}>
+          {text}
+        </FontedText>
+      </View>
+  )
+}
 
 const SocialMediaLink = ({mediaLink, iconName}) => 
   <TouchableOpacity onPress={() => openSocialMediaLink(mediaLink)}>
@@ -200,7 +227,6 @@ const styles = EStyleSheet.create({
   container: {
     backgroundColor: 'rgba(0,93,105,1)',
     flex: 1,
-    paddingTop: 15,
     paddingLeft: 25,
     zIndex: 200,
   },
@@ -209,13 +235,27 @@ const styles = EStyleSheet.create({
     fontSize: 24,
     padding: 10
   },
+  linearGradient: {
+    height: 1,
+    width: '90%',
+  },
   linkContainer: {
-    paddingTop: 17.5,
-    paddingBottom: 17.5
+    paddingTop: 8,
+    paddingBottom: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   menuButtonText: {
-    fontSize: 22,
-    color: 'white'
+    fontSize: 24,
+    lineHeight: 28.06,
+    color: '#fff',
+  },
+  menuHeader: {
+    fontSize: 16,
+    lineHeight: 18.7,
+    letterSpacing: 1.5,
+    color: '#fff',
+    paddingVertical: 8,
   },
   socialMediaContainer: {
     flexDirection: 'row',
@@ -237,19 +277,19 @@ const styles = EStyleSheet.create({
     marginRight: 25,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   logoStyle: {
-    width: 125,
-    height: 15,
-    resizeMode: 'contain'
+    width: 173.77,
+    height: 20,
+    resizeMode: 'contain',
   },
   closeIcon: {
     fontSize: 20,
     color: 'white'
   },
   separatorPadding: {
-    marginBottom: 18
+    marginBottom: 8
   },
   connextText: {
     marginTop: 45,
