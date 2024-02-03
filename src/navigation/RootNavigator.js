@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Dimensions} from 'react-native';
 
 import {
   NavigationContainer,
@@ -26,6 +26,7 @@ import NavBar from '../components/NavBar';
 import {useDispatch} from 'react-redux';
 import {setPageShowing} from '../actions/navBar';
 import NotificationLandingPageScreen from '../components/NotificationLandingPageScreen';
+import { gaTrackScreen } from './screenTracking';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -91,6 +92,10 @@ const DrawerNavigator = () => {
     <Drawer.Navigator
       screenOptions={{
         drawerPosition: 'right',
+        drawerType: 'front',
+        drawerStyle: {
+          width: Dimensions.get('window').width * .75,
+        },
         headerShown: false,
         headerMode: 'float',
         swipeEnabled: true,
@@ -109,6 +114,7 @@ const RootNavigator = () => {
       ref={navRef}
       onStateChange={() => {
         const newRoute = navRef.getCurrentRoute();
+        gaTrackScreen(newRoute)
         // Make sure the newRoute has a name.
         if (newRoute?.name) {
           dispatch(setPageShowing(newRoute.name));
