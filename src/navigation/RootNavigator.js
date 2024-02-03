@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Dimensions} from 'react-native';
 
 import {
   NavigationContainer,
@@ -92,6 +92,10 @@ const DrawerNavigator = () => {
     <Drawer.Navigator
       screenOptions={{
         drawerPosition: 'right',
+        drawerType: 'front',
+        drawerStyle: {
+          width: Dimensions.get('window').width * .75,
+        },
         headerShown: false,
         headerMode: 'float',
         swipeEnabled: true,
