@@ -1,4 +1,5 @@
 $RNFirebaseAsStaticFramework = true
+$RNFirebaseAnalyticsWithoutAdIdSupport = true
 
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
@@ -30,6 +31,7 @@ end
 target 'ZooniverseMobile' do
   use_frameworks! :linkage => :static
   config = use_native_modules!
+  pod 'Firebase/AnalyticsWithoutAdIdSupport'
 
   # Flags change depending on the env values.
   flags = get_default_flags()
