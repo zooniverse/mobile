@@ -40,6 +40,7 @@ export class NavBar extends Component {
   constructor(props) {
     super(props)
     this.handleOnBack = this.handleOnBack.bind(this)
+    this.navigateHome = this.navigateHome.bind(this)
   }
 
   handleOnBack(){
@@ -48,6 +49,10 @@ export class NavBar extends Component {
     } else {
       this.props.navigation.goBack();
     }
+  }
+
+  navigateHome() {
+    this.props.navigation.navigate('ZooniverseApp', { refresh: false });
   }
 
   handleSideDrawer() {
@@ -86,12 +91,12 @@ export class NavBar extends Component {
 
       if (showIcon) {
         return (
-          <View>
+          <TouchableOpacity onPress={this.navigateHome}>
             <Image
               source={require('../../images/zooni-nav-logo.png')}
               style={styles.navIcon}
             />
-          </View>
+          </TouchableOpacity>
         )
       }
       
