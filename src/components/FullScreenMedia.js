@@ -10,7 +10,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import ZoomableImage from './ZoomableImage'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types'
- import VideoPlayer from 'react-native-video-controls';
+import VideoPlayer from 'react-native-video-controls';
 
 class FullScreenMedia extends React.Component {
     render() {
