@@ -10,13 +10,13 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import ZoomableImage from './ZoomableImage'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types'
-import Video from 'react-native-video'
+import VideoPlayer from 'react-native-video-controls';
 
 class FullScreenMedia extends React.Component {
     render() {
         function displayWithRequisiteComponent(uri, handlePress) {
             if (uri.slice(uri.length - 4).match('.mp4')) {
-                return <Video
+                return <VideoPlayer
                     source={{uri: uri}}
                     style={{
                         width: Dimensions.get('window').width,
@@ -25,6 +25,9 @@ class FullScreenMedia extends React.Component {
                     controls={true}
                     repeat={true}
                     resizeMode='contain'
+                    disableFullscreen
+                    disableBack
+                    disableVolume
                 />
 
             } else {
