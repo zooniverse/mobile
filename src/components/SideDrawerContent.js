@@ -38,7 +38,6 @@ export class SideDrawerContent extends Component {
     this.goHome = this.goHome.bind(this)
     this.signOut = this.signOut.bind(this)
     this.goToAbout = this.goToAbout.bind(this)
-    this.goToPublications = this.goToPublications.bind(this)
     this.settings = this.settings.bind(this)
     this.signIn = this.signIn.bind(this)
     this.notifications = this.notifications.bind(this)
@@ -66,11 +65,6 @@ export class SideDrawerContent extends Component {
   goToAbout(){
     this.close()
     this.props.navigation.navigate('About');
-  }
-
-  goToPublications(){
-    this.close()
-    this.props.navigation.navigate('Publications');
   }
 
   settings(){
@@ -134,8 +128,9 @@ export class SideDrawerContent extends Component {
         />
 
         <MenuButton 
-          onPress={this.goToPublications} 
-          text={'Publications'} 
+          onPress={() => this.openLink('https://www.zooniverse.org/about/publications')} 
+          text={'Publications'}
+          externalOpenIcon={true}
         />
 
         <MenuButton 
