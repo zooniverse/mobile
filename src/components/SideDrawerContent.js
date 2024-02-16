@@ -3,6 +3,7 @@ import {
   Alert,
   Image,
   Linking,
+  ScrollView,
   TouchableOpacity,
   View
 } from 'react-native'
@@ -13,7 +14,6 @@ import Fontisto from 'react-native-vector-icons/Fontisto'
 import LinearGradient from 'react-native-linear-gradient';
 import DeviceInfo from 'react-native-device-info'
 import FontedText from './common/FontedText'
-import Separator from './common/Separator'
 import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
@@ -108,68 +108,68 @@ export class SideDrawerContent extends Component {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
         />
-        
+        <ScrollView>
         <MenuButton 
-          onPress={this.goHome} 
-          text={'Home'} 
-        />
-        
-        { this.props.isGuestUser ? 
-          <MenuButton 
-            onPress={this.signIn} 
-            text={'Sign In / Register'} 
-          /> 
-          : null 
-        }
-        
-        <MenuButton 
-          onPress={this.goToAbout} 
-          text={'About the Zooniverse'} 
-        />
-
-        <MenuButton 
-          onPress={() => this.openLink('https://www.zooniverse.org/about/publications')} 
-          text={'Publications'}
-          externalOpenIcon={true}
-        />
-
-        <MenuButton 
-          onPress={this.settings} 
-          text={'Settings'} 
-        />
-
-        <MenuButton 
-          onPress={this.notifications} 
-          text={'Notifications'} 
-        />
-
-        <Menuheader title="ABOUT" />
-
-        <MenuButton 
-          onPress={() => this.openLink('https://www.zooniverse.org/privacy')} 
-          text={'Privacy'}
-          externalOpenIcon={true}
-        />
-
-        <MenuButton 
-          text={`Version ${DeviceInfo.getVersion()}/${DeviceInfo.getBuildNumber()}`}
-        />
-
-        <Menuheader title="HELP" />
-
-        <MenuButton 
-          onPress={() => this.openLink('https://www.zooniverse.org/about/contact')} 
-          text={'Contact us'}
-          externalOpenIcon={true}
-        />
-
-        { this.props.isGuestUser ? null :
-          <MenuButton 
-            onPress={this.signOut}
-            text={'Sign Out'}
+            onPress={this.goHome} 
+            text={'Home'} 
           />
-        }
+          
+          { this.props.isGuestUser ? 
+            <MenuButton 
+              onPress={this.signIn} 
+              text={'Sign In / Register'} 
+            /> 
+            : null 
+          }
+          
+          <MenuButton 
+            onPress={this.goToAbout} 
+            text={'About the Zooniverse'} 
+          />
 
+          <MenuButton 
+            onPress={() => this.openLink('https://www.zooniverse.org/about/publications')} 
+            text={'Publications'}
+            externalOpenIcon={true}
+          />
+
+          <MenuButton 
+            onPress={this.settings} 
+            text={'Settings'} 
+          />
+
+          <MenuButton 
+            onPress={this.notifications} 
+            text={'Notifications'} 
+          />
+
+          <Menuheader title="ABOUT" />
+
+          <MenuButton 
+            onPress={() => this.openLink('https://www.zooniverse.org/privacy')} 
+            text={'Privacy'}
+            externalOpenIcon={true}
+          />
+
+          <MenuButton 
+            text={`Version ${DeviceInfo.getVersion()}/${DeviceInfo.getBuildNumber()}`}
+          />
+
+          <Menuheader title="HELP" />
+
+          <MenuButton 
+            onPress={() => this.openLink('https://www.zooniverse.org/about/contact')} 
+            text={'Contact us'}
+            externalOpenIcon={true}
+          />
+
+          { this.props.isGuestUser ? null :
+            <MenuButton 
+              onPress={this.signOut}
+              text={'Sign Out'}
+            />
+          }
+        </ScrollView>
       </View>
     )
   }
@@ -275,7 +275,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'space-between',
   },
   logoStyle: {
-    width: 173.77,
+    width: '70%',
     height: 20,
     resizeMode: 'contain',
   },
