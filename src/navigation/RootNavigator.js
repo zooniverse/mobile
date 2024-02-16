@@ -11,7 +11,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PageKeys from '../constants/PageKeys';
 import SignIn from '../components/SignIn';
 import ProjectDisciplines from '../components/ProjectDisciplines';
-import PublicationList from '../components/PublicationList';
 import About from '../components/About';
 import ProjectList from '../components/projects/ProjectList';
 import Register from '../components/Register';
@@ -56,7 +55,6 @@ const StackNavigator = () => {
         component={ProjectDisciplines}
       />
       <Stack.Screen name={PageKeys.About} component={About} />
-      <Stack.Screen name={PageKeys.Publications} component={PublicationList} />
       <Stack.Screen name={PageKeys.ProjectList} component={ProjectList} />
       <Stack.Screen name={PageKeys.Register} component={Register} />
       <Stack.Screen name={PageKeys.Settings} component={Settings} />

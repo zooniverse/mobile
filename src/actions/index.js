@@ -12,7 +12,6 @@ export const GET_USER_STORE = 'GET_USER_STORE'
 export const SIGN_IN = 'SIGN_IN'
 
 import apiClient from 'panoptes-client/lib/api-client'
-import {PUBLICATIONS} from '../constants/publications'
 import {Alert, Platform} from 'react-native'
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
@@ -55,31 +54,6 @@ export function checkIsConnected() {
         return reject('Sorry, but you must be connected to the internet to use Zooniverse')
       }
     })
-  }
-}
-
-export function fetchPublications() {
-  return dispatch => {
-    map((key) => {
-      addIndex(forEach)(
-        (project, idx) => {
-          dispatch(setState(`publications.${key}.projects.${idx}.publications`, project.publications))
-          dispatch(setState(`publications.${key}.projects.${idx}.slug`, project.slug))
-
-          if (project.slug) {
-            apiClient.type('projects').get({ slug: project.slug, cards: true }).then((project) => {
-              dispatch(setState(`publications.${key}.projects.${idx}.display_name`, head(project).display_name))
-              dispatch(setState(`publications.${key}.projects.${idx}.avatar_src`, head(project).avatar_src))
-            })
-          } else {
-            dispatch(setState(`publications.${key}.projects.${idx}.display_name`, 'Meta Studies'))
-            dispatch(setState(`publications.${key}.projects.${idx}.avatar_src`, ''))
-          }
-
-        },
-        PUBLICATIONS[key]
-      )
-    }, keys(PUBLICATIONS))
   }
 }
 

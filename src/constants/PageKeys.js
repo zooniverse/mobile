@@ -3,7 +3,6 @@ const PageKeys = {
     ZooniverseApp: 'ZooniverseApp',
     ProjectDisciplines: 'ProjectDisciplines',
     About: 'About',
-    Publications: 'Publications',
     ProjectList: 'ProjectList',
     Register: 'Register',
     Settings: 'Settings',
