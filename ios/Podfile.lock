@@ -405,7 +405,7 @@ PODS:
     - react-native-video/Video (= 5.2.1)
   - react-native-video/Video (5.2.1):
     - React-Core
-  - react-native-webview (13.7.0):
+  - react-native-webview (13.8.1):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - React-NativeModulesApple (0.72.4):
@@ -520,7 +520,7 @@ PODS:
     - React-perflogger (= 0.72.4)
   - rn-fetch-blob (0.12.0):
     - React-Core
-  - RNCAsyncStorage (1.21.0):
+  - RNCAsyncStorage (1.22.0):
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
@@ -540,9 +540,10 @@ PODS:
     - FirebaseCoreExtension (= 10.20.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (1.10.3):
+  - RNGestureHandler (2.15.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNReanimated (3.6.2):
+  - RNReanimated (3.7.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - ReactCommon/turbomodule/core
@@ -815,7 +816,7 @@ SPEC CHECKSUMS:
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
-  react-native-webview: 2be9e91c8b27924b19c4e80ce86f312a3f9ff86f
+  react-native-webview: a2272b7db020753dfc9bac620dc5eadfcf1415d6
   React-NativeModulesApple: 18496bbd735260b50cbe59b652cf1b05d8126465
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
   React-RCTActionSheet: 02904b932b50e680f4e26e7a686b33ebf7ef3c00
@@ -834,15 +835,15 @@ SPEC CHECKSUMS:
   React-utils: 7fef99cb0992be59378eb57bf28ef9f43e5bbc8e
   ReactCommon: 4d59831d2c919a3b38d01efa43501f23e3527cc5
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNCAsyncStorage: 618d03a5f52fbccb3d7010076bc54712844c18ef
+  RNCAsyncStorage: c43e6d71e13bb4748503797784839e0fbbf89d56
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNCPushNotificationIOS: 64218f3c776c03d7408284a819b2abfda1834bc8
   RNDeviceInfo: db5c64a060e66e5db3102d041ebe3ef307a85120
   RNFBAnalytics: 5a58b636d8533fc17b44b689212e921747373854
   RNFBApp: a4f5b074984cf612e4c97d68b42be690c59e2638
   RNFBMessaging: 1e7415390ae579c5949505a0709686a2de8a47e5
-  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNReanimated: 6cbeb21f7def739dd4eabc2bae634a2ff2539802
+  RNGestureHandler: 6a0bca5c5b2fb62211e9a75d5f4ed877817c4412
+  RNReanimated: 0f4742827f6364455d957e5cc5cf4a18f221e845
   RNScreens: 1c2444658fbb696a094272d946708167b1f63409
   RNSentry: 9a8aebd354d3b47c428c72ec7264b7822cf4f3c2
   RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
