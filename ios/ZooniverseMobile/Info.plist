@@ -42,7 +42,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Library Access Warning</string>
 	<key>UIAppFonts</key>
@@ -56,10 +56,6 @@
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>Feather.ttf</string>
-		<string>Karla-Bold.ttf</string>
-		<string>Karla-BoldItalic.ttf</string>
-		<string>Karla-Italic.ttf</string>
-		<string>Karla-Regular.ttf</string>
 		<string>FontAwesome.ttf</string>
 		<string>FontAwesome5_Brands.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
@@ -72,6 +68,10 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
+		<string>Karla-Bold.ttf</string>
+		<string>Karla-BoldItalic.ttf</string>
+		<string>Karla-Italic.ttf</string>
+		<string>Karla-Regular.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
