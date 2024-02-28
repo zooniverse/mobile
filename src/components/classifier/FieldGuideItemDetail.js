@@ -18,7 +18,7 @@ const FieldGuideItemDetail = (props) => {
     return (
         <ScrollView style={styles.itemDetailContainer}>
             <View onLayout={props.setHeaderHeight}>
-                {props.icons[props.item.icon] && props.icons[props.item.icon].src
+                {props.icons?.[props.item.icon]?.src
                     ? <SizedImage
                         source={{uri: props.icons[props.item.icon].src}}
                         maxHeight={ITEM_ICON_RADIUS * 2}
