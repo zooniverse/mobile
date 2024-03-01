@@ -45,7 +45,7 @@ You will have to get the key _itself_ from an existing maintainer. We are lookin
 1. To run in the emulator from the command line (you'll need device connected or emulator already running): `npm run android`. Shortly, your emulator should boot with the Zooniverse app on it.
     - You need to have either a device emulator open already or a physical device plugged into your computer. Otherwise, you'll need to run through Android Studio
     - If Android studio prompts you to update Gradle files, you should do it.
-    - The command `react-native run-android` will install the build, but fail in launching the app due to a bug with the `react-native` script with having a seperate `applicationId` for development builds.
+    - The command `react-native run-android` will install the build, but fail in launching the app due to a bug with the `react-native` script with having a separate `applicationId` for development builds.
 
 ## If you Work for The Zooniverse
 
