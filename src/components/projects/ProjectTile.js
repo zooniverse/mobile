@@ -132,7 +132,6 @@ class ProjectTile extends Component {
                             source= {avatarSource}
                         />
                         <View style={styles.descriptionContainer}>
-                            {this.props.containsNativeWorkflows ? <PhoneIcon /> : null}
                             <View style={styles.descriptionContent}>
                                 <FontedText style={styles.title} numberOfLines={1}>
                                     {this.props.project.title}
@@ -159,15 +158,6 @@ class ProjectTile extends Component {
         );
     }
 }
-
-const PhoneIcon = () => {
-    return (
-        <Image 
-            source={require('../../../images/mobile-friendly.png')}
-            style={styles.phoneIcon}
-        />
-    );
-};
 
 const styles = EStyleSheet.create({
     mainContainer: {
