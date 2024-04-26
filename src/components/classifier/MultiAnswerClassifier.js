@@ -21,16 +21,15 @@ import Tutorial from './Tutorial';
 import OverlaySpinner from '../OverlaySpinner'
 import Question from './Question'
 import Separator from '../common/Separator'
-import {
-    AnswerButton,
-    SubmitButton,
-    GuideButton
-} from './ClassifierButton'
 import FullScreenMedia from '../FullScreenMedia'
 import TappableSubject from './TappableSubject';
 import SubjectOptionsBar from './SubjectOptionsBar'
 
 import * as colorModes from '../../displayOptions/colorModes'
+import FieldGuideBtn from './FieldGuideBtn';
+import ClassifierHeader from '../../navigation/ClassifierHeader';
+import ButtonAnswer from './ButtonAnswer';
+import ButtonLarge from './ButtonLarge';
 
 class MultiAnswerClassifier extends Component {
 
@@ -143,7 +142,7 @@ class MultiAnswerClassifier extends Component {
 
 
         const question =
-            <View>
+            <View style={styles.questionContainer}>
                 <Question
                     question={task.question}
                     workflowID={workflow.id}
@@ -170,7 +169,9 @@ class MultiAnswerClassifier extends Component {
         const uri = subject.displays[0].src
         const video = uri.slice(uri.length - 4).match('.mp4')
         const showSubjectOptionsBar = video && Platform.OS === 'android'
-        
+        const fullWidthAnswers = answers.some(a => a.label.length >= 30)
+        const answerContainerStyles = fullWidthAnswers ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' };
+
         const classificationPanel =
             <View style={styles.classificationPanel}>
                 <ClassificationPanel
@@ -188,103 +189,100 @@ class MultiAnswerClassifier extends Component {
                 </ClassificationPanel>
                 {
                     isQuestionVisible ?
-                        <ScrollView
-                            style={styles.scrollView}
-                            ref={ref => this.scrollView = ref}
-                        >
-                            <View style={styles.backgroundView}/>
-                            <View
-                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
-                                <View onLayout={({nativeEvent}) => this.setState({
-                                    imageDimensions: {
-                                        width: nativeEvent.layout.width,
-                                        height: nativeEvent.layout.height
-                                    }
-                                })}>
-                                    {video ?
-                                        <View key={`MULTI_ANSWER_VIDEO_${uri}`}>
-                                            <Video
-                                                source={{ uri: uri }}
-                                                style={{
-                                                    width: imageDimensions.width,
-                                                    height: 300
-                                                }}
-                                                controls={true}
-                                                repeat={true}
-                                                resizeMode='contain'
-                                            />
-                                            {showSubjectOptionsBar ?
-                                                <View style={styles.optionsBarContainer}>
-                                                    <SubjectOptionsBar
-                                                        numberOfSelections={subject.displays.length}
-                                                        onExpandButtonPressed={() => this.setState({
-                                                            showFullSize: true,
-                                                            fullScreenImageSource: {uri: uri}
-                                                        })}
-                                                    />
-                                                </View>
-                                                : null
-                                            }
-                                        </View>
-                                        :                                    
-                                        <TappableSubject
-                                            height={300}
-                                            width={imageDimensions.width}
-                                            subject={subject}
-                                            alreadySeen={seenThisSession}
-                                            inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                            onPress={(imageSource) => this.setState({
-                                                showFullSize: true,
-                                                fullScreenImageSource: {uri: imageSource}
-                                            })}
+                        <>
+                            <View style={styles.flex}  onLayout={({nativeEvent}) => this.setState({
+                                imageDimensions: {
+                                    width: nativeEvent.layout.width,
+                                    height: nativeEvent.layout.height
+                                }
+                            })}>
+                                {video ?
+                                    <View key={`MULTI_ANSWER_VIDEO_${uri}`}>
+                                        <Video
+                                            source={{ uri: uri }}
+                                            style={{
+                                                width: imageDimensions.width,
+                                                height: 300
+                                            }}
+                                            controls={true}
+                                            repeat={true}
+                                            resizeMode='contain'
                                         />
-                                    }
-                                </View>
-                                {
-                                    answers.map((answer, index) =>
-                                        <View key={index} style={styles.buttonContainer}>
-                                            <AnswerButton
-                                                inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                                selected={answersSelected.includes(index)}
-                                                text={answer.label}
-                                                onPress={this.onOptionSelected(answersSelected, index)}
-                                            />
-                                        </View>
-                                    )
+                                        {showSubjectOptionsBar ?
+                                            <View style={styles.optionsBarContainer}>
+                                                <SubjectOptionsBar
+                                                    numberOfSelections={subject.displays.length}
+                                                    onExpandButtonPressed={() => this.setState({
+                                                        showFullSize: true,
+                                                        fullScreenImageSource: {uri: uri}
+                                                    })}
+                                                />
+                                            </View>
+                                            : null
+                                        }
+                                    </View>
+                                    :                                    
+                                    <TappableSubject
+                                        height={300}
+                                        width={imageDimensions.width}
+                                        subject={subject}
+                                        alreadySeen={seenThisSession}
+                                        inMuseumMode={this.props.route.params.project.in_museum_mode}
+                                        onPress={(imageSource) => this.setState({
+                                            showFullSize: true,
+                                            fullScreenImageSource: {uri: imageSource}
+                                        })}
+                                    />
                                 }
                             </View>
+                    <View style={styles.scrollView}>
+                        <ScrollView
+                            ref={ref => this.scrollView = ref}
+                        >
+                            <View
+                                style={[styles.classifierContainer]}>
+                                
+                                <View style={[styles.answerButtonContainer, answerContainerStyles]}>
+                                {
+                                    answers.map((answer, index) =>
+                                    <View key={index} >
+                                        <ButtonAnswer
+                                            selected={answersSelected.includes(index)}
+                                            text={answer.label}
+                                            onPress={this.onOptionSelected(answersSelected, index)}
+                                            fullWidth={fullWidthAnswers}
+                                        />   
+                                    </View>
+                                    )
+                                }
+                                </View>
+                            </View>
                             <View style={styles.buttonContainer}>
-                                <SubmitButton
-                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
+                                <ButtonLarge
                                     text="Submit"
                                     onPress={this.submitClassification()}
                                 />
                             </View>
-                            {
-                                (task.help || R.length(guide.items) > 0) &&
-                                <Separator
-                                    style={styles.separator}
-                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                />
-                            }
+                            </ScrollView>
                             {
                                 task.help !== null &&
-                                <NeedHelpButton
-                                    onPress={() => this.classifierContainer.displayHelpModal()}
-                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                />
+                                <View style={styles.needHelpContainer}>
+                                    <NeedHelpButton
+                                        onPress={() => this.classifierContainer.displayHelpModal()}
+                                        inMuseumMode={this.props.route.params.project.in_museum_mode}
+                                        />
+                                </View>
                             }
                             {
                                 R.length(guide.items) > 0 &&
-                                <GuideButton
-                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                    onPress={() => this.classifierContainer.displayFieldGuide()}
-                                    style={styles.guideButton}
-                                    text="Field Guide"
-                                    type="guide"
-                                />
+
+                                <View style={styles.fieldGuideBtnContainer}>
+                                    <FieldGuideBtn onPress={() => this.classifierContainer.displayFieldGuide()} />
+                                </View>
                             }
-                        </ScrollView>
+                        </View>
+                        </>
+                       
                         :
                         renderTutorial()
                 }
@@ -296,9 +294,9 @@ class MultiAnswerClassifier extends Component {
                 />
             </View>
 
-
         return (
             <View style={[styles.container, styles.dropShadow, colorModes.framingBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
+                <ClassifierHeader project={project} />
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -336,6 +334,10 @@ MultiAnswerClassifier.propTypes = {
 }
 
 const styles = EStyleSheet.create({
+    answerButtonContainer: {
+        marginHorizontal: 12,
+        paddingVertical: 16,
+    },
     container: {
         flex: 1,
     },
@@ -352,19 +354,17 @@ const styles = EStyleSheet.create({
     classificationPanel: {
         flex: 1,
         overflow: 'visible',
-        marginBottom: 15,
+        backgroundColor: '#EBEBEB',
     },
     classifierContainer: {
-        paddingHorizontal: 15,
         paddingVertical: 15,
     },
     tutorialContainer: {
         flex: 1,
-        marginHorizontal: 25
     },
     scrollView: {
         flex: 1,
-        marginHorizontal: 25
+        backgroundColor: '#EBEBEB',
     },
     backgroundView: {
         backgroundColor: 'white',
@@ -376,12 +376,31 @@ const styles = EStyleSheet.create({
     },
     buttonContainer: {
         marginTop: 10,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 16,
     },
     separator: {
         marginTop: 25
     },
     guideButton: {
         marginTop: 15
+    },
+    needHelpContainer: {
+        alignItems: 'center',
+        marginTop: 16,
+    },
+    questionContainer: {
+        backgroundColor: '#EBEBEB',
+        paddingVertical: 16
+    },
+    flex: {
+        flex: 1,
+    },
+    fieldGuideBtnContainer: {
+        alignItems: 'center',
+        marginTop: 20,
     }
 })
 

@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import {
-    Platform,
-    View
-} from 'react-native'
+import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import RNFetchBlob from 'rn-fetch-blob'
@@ -12,10 +9,8 @@ import { bindActionCreators } from 'redux'
 
 import * as imageActions from '../../actions/images'
 import AlreadySeenBanner from './AlreadySeenBanner'
-import SubjectOptionsBar from './SubjectOptionsBar'
 import SwipeableSubject from './SwipeableSubject';
 
-import * as colorModes from '../../displayOptions/colorModes'
 
 const mapDispatchToProps = (dispatch) => ({
   imageActions: bindActionCreators(imageActions, dispatch)
@@ -91,46 +86,34 @@ class SwipeCard extends Component {
     }
 
     render() {
-        const { 
-            localUris,
-            overlayAnswerIndex,
-            displayImageUri
-        } = this.state;
+        const { localUris } = this.state;
 
         const { 
-            panX,
             subject,
             seenThisSession,
             inMuseumMode,
-            answers,
             subjectDisplayWidth,
             subjectDisplayHeight,
-            onExpandButtonPressed
+            onExpandButtonPressed,
+            swiping,
+            currentCard
         } = this.props;
 
         const alreadySeen = (subject.already_seen || seenThisSession)
     
 
-        const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}
-        const video = displayImageUri.slice(displayImageUri.length - 4).match('.mp4')
-        const hideSubjectOptionsBar = video && Platform.OS === 'ios'
-
+        const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}   
+        
         return (
-            <View style={[styles.cardBackground, dimensionsStyle, colorModes.contentBackgroundColorFor(inMuseumMode)]}>
+            <View style={dimensionsStyle}>
                 <SwipeableSubject
                     imageUris={localUris.map((uri) => `file://${uri}`)}
                     hasMultipleSubjects={subject.displays.length > 1}
                     onDisplayImageChange={(uri) => this.setState({ displayImageUri: uri })}
+                    onExpandButtonPressed={(uri) => onExpandButtonPressed(uri)}
+                    swiping={swiping}
+                    currentCard={currentCard}
                 />
-                {hideSubjectOptionsBar ?
-                    null : 
-                    <View style={styles.optionsBarContainer}>
-                        <SubjectOptionsBar
-                            numberOfSelections={subject.displays.length}
-                            onExpandButtonPressed={() => onExpandButtonPressed(displayImageUri)}
-                        />
-                    </View>
-                }
                 <View style={styles.overlayContainer} pointerEvents="none">
                     { alreadySeen && !inMuseumMode ? <AlreadySeenBanner /> : null }
                 </View>
@@ -144,10 +127,6 @@ export default connect(null, mapDispatchToProps)(SwipeCard)
 const styles = EStyleSheet.create({
     container: {
         flex: 1
-    },
-    cardBackground: {
-        borderWidth: 1,
-        borderColor: '#E2E5E9',
     },
     imageShadow: {
         backgroundColor: 'transparent',
@@ -201,4 +180,6 @@ SwipeCard.propTypes = {
     onExpandButtonPressed: PropTypes.any,
     subjectDisplayWidth: PropTypes.number,
     subjectDisplayHeight: PropTypes.number,
+    swiping: PropTypes.bool,
+    currentCard: PropTypes.bool
 }

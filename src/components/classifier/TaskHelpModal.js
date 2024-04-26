@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import {
   ScrollView,
+  TouchableOpacity,
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import StyledModal from '../StyledModal'
 import SizedMarkdown from '../common/SizedMarkdown'
-import Button from '../Button'
 import PropTypes from 'prop-types';
+import Modal from "react-native-modal";
 
-import * as colorModes from '../../displayOptions/colorModes'
+import ButtonLarge from './ButtonLarge'
+import FontedText from '../common/FontedText'
+import Icon from 'react-native-vector-icons/Fontisto'
 
 
 export class TaskHelpModal extends Component {
@@ -26,29 +28,27 @@ export class TaskHelpModal extends Component {
 
   render() {
     return (
-      <View>
-        <StyledModal
-          title="Help"
-          inMuseumMode={this.props.inMuseumMode}
-          isVisible={this.props.isVisible}
-          setVisibility={this.setVisibility}
-        >
-
-          <ScrollView style={[styles.markdownContainer, colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]}>
-            <SizedMarkdown
-                inMuseumMode={this.props.inMuseumMode}
-            >
-              {this.props.text}
-            </SizedMarkdown>
-          </ScrollView>
-
-          <Button
-            handlePress={this.props.onCloseRequested}
-            buttonStyle={'tealButton'}
-            additionalTextStyles={styles.buttonStyle}
-            text={'Close'} 
-          />
-        </StyledModal>
+      <View >
+        <Modal isVisible={this.props.isVisible} >
+          <View style={styles.modalContainer}>
+            <View style={styles.helpCloseContainer}>
+              <FontedText style={styles.helpText}>HELP</FontedText>
+              <TouchableOpacity onPress={this.props.onCloseRequested}>
+                <Icon name="close" color="#005D69" size={22} />
+              </TouchableOpacity>
+            </View>
+            <ScrollView style={[styles.markdownContainer]}>
+              <SizedMarkdown
+                  inMuseumMode={this.props.inMuseumMode}
+              >
+                {this.props.text}
+              </SizedMarkdown>
+            </ScrollView>
+            <View style={styles.closeBtnContainer}>
+              <ButtonLarge text="Close" onPress={this.props.onCloseRequested}  />
+            </View>
+          </View>
+        </Modal>
       </View>
     )
   }
@@ -61,6 +61,31 @@ const styles = EStyleSheet.create({
   },
   buttonStyle: {
     textAlign: 'center'
+  },
+  helpText: {
+    fontWeight: '600',
+    fontSize: 18,
+    letterSpacing: 0.05,
+    lineHeight: 21.04,
+    color: '#005D69'
+  },
+  modalContainer: {
+    flex: 1,
+    borderRadius: 16,
+    marginTop: 124,
+    backgroundColor: '#fff',
+    padding: 18
+  },
+  helpCloseContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16
+  },
+  closeBtnContainer: {
+    width: 190,
+    marginTop: 16,
+    alignSelf: 'center'
   }
 })
 
