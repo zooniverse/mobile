@@ -69,10 +69,10 @@ const styles = EStyleSheet.create({
         flex: 1,
     },
     image: {
-        flex: 1, // Allows the image to expand
-        width: undefined, // Ensures width and height are not constrained by specific values
+        flex: 1,
+        width: undefined,
         height: undefined,
-        alignSelf: 'stretch', // Stretches the image to the boundaries of its container
+        alignSelf: 'stretch',
     },
 
 })

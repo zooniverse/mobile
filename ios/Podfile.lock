@@ -396,7 +396,7 @@ PODS:
     - React-Core
   - react-native-netinfo (9.5.0):
     - React-Core
-  - react-native-safe-area-context (4.9.0):
+  - react-native-safe-area-context (4.10.1):
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
@@ -405,7 +405,7 @@ PODS:
     - react-native-video/Video (= 5.2.1)
   - react-native-video/Video (5.2.1):
     - React-Core
-  - react-native-webview (13.8.4):
+  - react-native-webview (13.8.6):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - React-NativeModulesApple (0.72.4):
@@ -526,7 +526,7 @@ PODS:
     - React
   - RNCPushNotificationIOS (1.11.0):
     - React-Core
-  - RNDeviceInfo (10.13.1):
+  - RNDeviceInfo (10.13.2):
     - React-Core
   - RNFBAnalytics (18.9.0):
     - Firebase/AnalyticsWithoutAdIdSupport (= 10.20.0)
@@ -543,13 +543,14 @@ PODS:
   - RNGestureHandler (2.16.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNReanimated (3.8.1):
+  - RNReanimated (3.9.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - ReactCommon/turbomodule/core
-  - RNScreens (3.30.1):
+  - RNScreens (3.31.1):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
+    - React-RCTImage
   - RNSentry (5.16.0):
     - hermes-engine
     - React-Core
@@ -813,10 +814,10 @@ SPEC CHECKSUMS:
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
   react-native-blur: c4da0fcd0bb056420f62be1b2573987a69308c91
   react-native-netinfo: 48c5f79a84fbc3ba1d28a8b0d04adeda72885fa8
-  react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
+  react-native-safe-area-context: dcab599c527c2d7de2d76507a523d20a0b83823d
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
-  react-native-webview: d861cf0e5a24b6027764aca2b4a03884a1705934
+  react-native-webview: 14f6b3904d934533d65e01376752efaf4a45ece4
   React-NativeModulesApple: 18496bbd735260b50cbe59b652cf1b05d8126465
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
   React-RCTActionSheet: 02904b932b50e680f4e26e7a686b33ebf7ef3c00
@@ -838,13 +839,13 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNCPushNotificationIOS: 64218f3c776c03d7408284a819b2abfda1834bc8
-  RNDeviceInfo: 4f9c7cfd6b9db1b05eb919620a001cf35b536423
+  RNDeviceInfo: 42aadf1282ffa0a88dc38a504a7be145eb010dfa
   RNFBAnalytics: aec413bc1623191bdb7d0378c49b92d8c289b05b
   RNFBApp: 9b25191f7a5e72c185b7e43fffb0d906869c4659
   RNFBMessaging: 99621af036e0aa85506390f77d79c9e6353aacca
   RNGestureHandler: 3ca879eb9e4fbddcf90539dac20992ddfe6d63a3
-  RNReanimated: 87c5d25efb8f4b122e16e992b6f1bfbb2a9bbab3
-  RNScreens: f3591fdf4b0da62d23be5bbe76791f39c54a1893
+  RNReanimated: 65ea8b9347cf9d2f16402355aae86e35d6905385
+  RNScreens: 396c07678c1c35614bc5feba74a56df387bf1965
   RNSentry: 9a8aebd354d3b47c428c72ec7264b7822cf4f3c2
   RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
   RNVectorIcons: 6731bd488db95f4197433b30d81d03dc228b367e

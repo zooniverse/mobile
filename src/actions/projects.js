@@ -9,7 +9,7 @@ const productionParams = {
     mobile_friendly: true,
     launch_approved: true,
     live: true,
-    include: 'avatar,background',
+    include: 'avatar',
     sort: 'display_name',
 }
 
@@ -17,7 +17,7 @@ const betaParams = {
     mobile_friendly: true,
     beta_approved: true,
     launch_approved: false,
-    include: 'avatar,background',
+    include: 'avatar',
     sort: 'display_name',
     live: true,
 }
@@ -25,7 +25,7 @@ const betaParams = {
 const ownerParams = {
     mobile_friendly: true,
     live: false,
-    include: 'avatar,background',
+    include: 'avatar',
     sort: 'display_name',
     current_user_roles: 'owner'
 }
@@ -33,7 +33,7 @@ const ownerParams = {
 const collaboratorParams = {
     mobile_friendly: true,
     live: false,
-    include: 'avatar,background',
+    include: 'avatar',
     sort: 'display_name',
     current_user_roles: 'collaborator'
 }
@@ -80,7 +80,7 @@ export function fetchProjects() {
                 }
 
                 // First Load the projects
-                    Promise.all(projectCalls).then(() => {
+                Promise.all(projectCalls).then(() => {
                     let projectDetailCalls = []
                     projectDetailCalls.push(getWorkflowsForProjects(allProjects))
                     const avatarCall = getAvatarsForProjects(allProjects)
@@ -135,7 +135,7 @@ const getBackgroundImageForProject = projects => {
     return projects.map(project => {
         return apiClient.type('backgrounds')
         .get(project.links.background.id)
-        .then((background) => {
+            .then((background) => {
             project.background = background;
         })
         .catch(error => {
