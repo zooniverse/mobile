@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {    ScrollView,
-    View
-} from 'react-native';
+import { ScrollView, View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
