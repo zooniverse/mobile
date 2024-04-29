@@ -85,7 +85,6 @@ function metadataToRules(metadata = {}) {
 
 // Filters a workflow's tasks object to an object of `taskId: [feedback rules]` pairs
 function getFeedbackFromTasks(tasks) {
-  // reactotron.log('get feedback from tasks', tasks)
   return _.reduce(
     tasks,
     (result, task, taskId) => {
