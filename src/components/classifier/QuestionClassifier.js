@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {
-    ScrollView,
+import {    ScrollView,
     View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -29,6 +28,8 @@ import FullScreenMedia from '../FullScreenMedia'
 import TappableSubject from './TappableSubject';
 
 import * as colorModes from '../../displayOptions/colorModes'
+import { getDataForFeedbackModal, isFeedbackActive } from '../../utils/feedback';
+import FeedbackModal from './FeedbackModal';
 
 class QuestionClassifier extends Component {
 
@@ -41,7 +42,8 @@ class QuestionClassifier extends Component {
             fullScreenImageSource: {uri: ''},
             fullScreenQuestion: '',
             imageDimensions: {width: 0, height: 0},
-            answerSelected: -1
+            answerSelected: -1,
+            feedbackModal: {},
         }
     }
 
@@ -69,28 +71,43 @@ class QuestionClassifier extends Component {
         }
     }
 
-    submitClassification() {
-        return () => {
-            const {
-                classifierActions,
-                subject
-            } = this.props
-
-            const { workflow } = this.props.route.params;
-            const {id, first_task} = workflow
-            const {
-                answerSelected,
-                imageDimensions
-            } = this.state
-
-            this.scrollView.scrollTo({x: 0, y: 0})
-            classifierActions.addAnnotationToTask(id, first_task, answerSelected, false)
-            classifierActions.saveClassification(workflow, subject, imageDimensions)
-
-            this.setState({
-                answerSelected: -1
-            })
+    submitClassificationPressed() {
+        const {
+            classifierActions,
+            subject
+        } = this.props
+        const {
+            answerSelected,
+            imageDimensions
+        } = this.state
+        const { workflow, project } = this.props.route.params;
+        const {id, first_task} = workflow
+        const feedbackActive = isFeedbackActive(project, subject, workflow);
+        if (feedbackActive) {
+            const modalData = getDataForFeedbackModal(subject, workflow, answerSelected);
+            if (modalData) {
+                const onClose = () => {
+                    this.setState({ feedbackModal: {} })
+                    this.submitClassification(classifierActions, id, first_task, answerSelected, workflow, subject, imageDimensions);
+                }
+                this.scrollView.scrollTo({x: 0, y: 0})
+                this.setState({ feedbackModal: { ...modalData, onClose } })
+                return;
+            }
         }
+        
+        this.scrollView.scrollTo({ x: 0, y: 0 })
+        this.submitClassification(classifierActions, id, first_task, answerSelected, workflow, subject, imageDimensions);
+       
+    }
+
+    submitClassification(classifierActions, id, first_task, answerSelected, workflow, subject, imageDimensions) {
+        classifierActions.addAnnotationToTask(id, first_task, answerSelected, false)
+        classifierActions.saveClassification(workflow, subject, imageDimensions)
+
+        this.setState({
+            answerSelected: -1
+        })
     }
 
     render() {
@@ -217,7 +234,7 @@ class QuestionClassifier extends Component {
                                     inMuseumMode={this.props.route.params.project.in_museum_mode}
                                     disabled={answerSelected === -1}
                                     text="Submit"
-                                    onPress={this.submitClassification()}
+                                    onPress={() => this.submitClassificationPressed()}
                                 />
                             </View>
                             {
@@ -251,6 +268,13 @@ class QuestionClassifier extends Component {
                     handlePress={() => this.setState({fullScreenQuestion: '', showFullSize: false})}
                     question={fullScreenQuestion}
                 />
+                {this.state.feedbackModal?.show && (
+                    <FeedbackModal
+                        correct={this.state.feedbackModal?.correct}
+                        message={this.state.feedbackModal.message}
+                        onClose={this.state.feedbackModal.onClose}
+                    />
+                )}
             </View>
 
         return (
