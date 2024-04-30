@@ -45,9 +45,10 @@ const isValidQuestionWorkflow = (workflow) => {
 
   const questionNotTooLong = firstTask.question.length < 200
   const notTooManyShortcuts = shortcut ? shortcut.answers.length <= 2 : true
-  const doesNotUseFeedback = firstTask.feedback ? !firstTask.feedback.enabled : true;
+  const usesFeedback = firstTask.feedback ? firstTask.feedback.enabled : false;
 
-  if (hasSingleTask && questionNotTooLong && notTooManyShortcuts && doesNotUseFeedback) {
+  // Feedback will have multiple tasks so you chec that the workflow has a single task OR is feedback.
+  if ((hasSingleTask || usesFeedback)&& questionNotTooLong && notTooManyShortcuts) {
     workflow.type = firstTask.type
 
     const hasTwoAnswers = firstTask.answers.length === 2
