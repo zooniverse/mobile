@@ -9,7 +9,7 @@ const productionParams = {
     mobile_friendly: true,
     launch_approved: true,
     live: true,
-    include: 'avatar',
+    include: 'avatar,background',
     sort: 'display_name',
 }
 
@@ -17,7 +17,7 @@ const betaParams = {
     mobile_friendly: true,
     beta_approved: true,
     launch_approved: false,
-    include: 'avatar',
+    include: 'avatar,background',
     sort: 'display_name',
     live: true,
 }
@@ -25,7 +25,7 @@ const betaParams = {
 const ownerParams = {
     mobile_friendly: true,
     live: false,
-    include: 'avatar',
+    include: 'avatar,background',
     sort: 'display_name',
     current_user_roles: 'owner'
 }
@@ -33,7 +33,7 @@ const ownerParams = {
 const collaboratorParams = {
     mobile_friendly: true,
     live: false,
-    include: 'avatar',
+    include: 'avatar,background',
     sort: 'display_name',
     current_user_roles: 'collaborator'
 }
