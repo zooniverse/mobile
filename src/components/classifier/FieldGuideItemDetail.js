@@ -8,9 +8,8 @@ import PropTypes from 'prop-types';
 import StyledMarkdown from '../StyledMarkdown'
 import StyledText from '../StyledText'
 import SizedImage from '../SizedImage'
-import Button from '../Button'
 
-import * as colorModes from '../../displayOptions/colorModes'
+import ButtonLarge from './ButtonLarge';
 
 const ITEM_ICON_RADIUS = 50
 
@@ -28,19 +27,16 @@ const FieldGuideItemDetail = (props) => {
                 }
                 <StyledText additionalStyles={[
                     styles.itemDetailTitle,
-                    colorModes.contentBackgroundColorFor(props.inMuseumMode),
-                    colorModes.selectedTextColorFor(props.inMuseumMode)
                 ]} text={props.item.title}/>
             </View>
             <StyledMarkdown
                 markdown={props.item.content}
                 onReceivedHeight={props.setContentHeight}
-                extraCSS={props.inMuseumMode ? 'body {color: #FFFFFF}' : 'body {color: #000000}'}
+                extraCSS={ 'body {color: #000000}'}
             />
-            <Button
-                handlePress={props.onClose}
-                additionalStyles={[styles.backButton]}
-                text={'< Back'}/>
+            <View style={{marginVertical: 8, alignItems: 'center'}}>
+                <ButtonLarge text="< Back" onPress={props.onClose} />
+            </View>
         </ScrollView>
     )
 }
@@ -48,7 +44,6 @@ const FieldGuideItemDetail = (props) => {
 const styles = EStyleSheet.create({
     itemDetailContainer: {
         paddingHorizontal: 15,
-        marginTop: 30,
     },
     itemDetailIcon: {
         alignSelf: 'center',

@@ -90,6 +90,9 @@ export function fetchProjects() {
                       const museumModeCall = tagMuseumRoleForProjects(allProjects)
                       projectDetailCalls = projectDetailCalls.concat(museumModeCall)
                     }
+                        
+                    const projectBackgroundCall = getBackgroundImageForProject(allProjects)
+                    projectDetailCalls.concat(projectBackgroundCall)    
 
                     const filterOutFinished = allProjects.filter(project => project.state !== 'finished')
                     // Then load the avatars and workflows
@@ -128,6 +131,19 @@ const getAvatarsForProjects = projects => {
     })
 }
 
+const getBackgroundImageForProject = projects => {
+    return projects.map(project => {
+        return apiClient.type('backgrounds')
+        .get(project.links.background.id)
+            .then((background) => {
+            project.background = background;
+        })
+        .catch(error => {
+          return { src: '' };
+        });
+    })
+}
+
 export const tagMuseumRoleForProjects = projects => {
     return apiClient.type('projects')
       .get({ current_user_roles: 'museum' })
@@ -148,7 +164,7 @@ const getWorkflowsForProjects = projects => {
             .then((workflows) => {
                 workflows.forEach(workflow => {
                     workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
-
+                    
                     const project = projects.find(project => project.id === workflow.links.project)
                     if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
                         project.workflows = R.append(workflow, project.workflows)

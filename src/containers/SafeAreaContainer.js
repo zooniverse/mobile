@@ -3,16 +3,25 @@ import {
     SafeAreaView,
     View
  } from 'react-native'
-import { connect }  from 'react-redux'
+import { connect, useSelector }  from 'react-redux'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 const SafeAreaContainer = (props) => {
-    const backgroundStyle = props.isPreview ? styles.previewBackground : styles.defaultBackground
+    const { pageShowing } = useSelector(state => state.navBar)
+
+    // Apply different colors for preview, classifier, and everything else.
+    let backgroundStyle = props.isPreview ? styles.previewBackground : styles.defaultBackground
+    let bottomBackgroundColor = styles.bottomDefaultColor
+    const classifierPages = ['QuestionClassifier', 'SwipeClassifier', 'MultiAnswerClassifier', 'DrawingClassifier']
+    if (classifierPages.includes(pageShowing)) {
+        backgroundStyle = styles.classifier;
+        bottomBackgroundColor = styles.bottomClassiferColor;
+    }
     return (
         <View style={[styles.container, backgroundStyle]}>
             <SafeAreaView style={[styles.topSafeAreaContainer, backgroundStyle]} />
-            <SafeAreaView style={styles.bottomSafeAreaView}>
+            <SafeAreaView style={[styles.bottomSafeAreaView, bottomBackgroundColor]}>
                 { props.children }
             </SafeAreaView>
         </View>
@@ -26,16 +35,21 @@ const styles = EStyleSheet.create({
     previewBackground: {
         backgroundColor: '$testRed'
     },
+    classifier: {
+        backgroundColor: 'black', // Black top safe area for classifier screens
+    },
     container: {
         flex: 1,
     },
     bottomSafeAreaView: {
         flex: 1,
-        backgroundColor: '$backgroundColor'
-      },
-      topSafeAreaView: {
-        flex:0,
-      }
+    },
+    bottomDefaultColor: {
+        backgroundColor: '$backgroundColor',
+    },
+    bottomClassiferColor: {
+        backgroundColor: 'white', // White bottom safe area to blend with Field Guide button.
+    },
 })
 
 SafeAreaContainer.propTypes = {

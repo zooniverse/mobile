@@ -47,7 +47,7 @@ class SizedMarkdown extends Component {
 
     // Fixes: https://github.com/zooniverse/mobile/issues/412
     addLineBreak(content) {
-        return content.replace(/\n/g, (n) => n + n);
+        return content ? content.replace(/\n/g, (n) => n + n) : content;
     }
 
     render() {

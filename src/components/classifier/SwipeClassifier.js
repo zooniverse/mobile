@@ -24,7 +24,8 @@ import {getTaskFromWorkflow, getAnswersFromWorkflow} from '../../utils/workflow-
 import {markdownContainsImage} from '../../utils/markdownUtils'
 import ClassifierContainer from './ClassifierContainer'
 
-import * as colorModes from '../../displayOptions/colorModes'
+import ClassifierHeader from '../../navigation/ClassifierHeader';
+import FieldGuideBtn from './FieldGuideBtn';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -61,7 +62,8 @@ export class SwipeClassifier extends React.Component {
             swiperDimensions: {
                 width: 1,
                 height: 1
-            }
+            },
+            swiping: false,
         }
 
         this.onAnswered = this.onAnswered.bind(this)
@@ -112,7 +114,7 @@ export class SwipeClassifier extends React.Component {
         })
     }
 
-    renderCard = (subject) => {
+    renderCard = (subject, index) => {
         const seenThisSession = R.indexOf(subject.id, this.props.subjectsSeenThisSession) >= 0
         const shouldAnimateOverlay = this.props.subjectLists[this.state.swiperIndex].id === subject.id
 
@@ -126,6 +128,8 @@ export class SwipeClassifier extends React.Component {
             onExpandButtonPressed={this.expandImage}
             subjectDisplayWidth={this.state.swiperDimensions.width}
             subjectDisplayHeight={this.state.swiperDimensions.height}
+            swiping={this.state.swiping}
+            currentCard={index === this.state.swiperIndex}
         />
     }
 
@@ -160,7 +164,7 @@ export class SwipeClassifier extends React.Component {
             />
 
         const question =
-            <View style={colorModes.contentBackgroundColorFor(this.props.route.params.project.in_museum_mode)}>
+            <View style={styles.questionContainer}>
                 <Question
                     question={this.props.task.question}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -199,13 +203,13 @@ export class SwipeClassifier extends React.Component {
         };
 
         const classifier =
-            <View style={styles.classifier} onLayout={this.onClassifierLayout.bind(this)}>
+            <View style={styles.container} onLayout={this.onClassifierLayout.bind(this)}>
                <Swiper
                     ref={swiper => (this.swiper = swiper)}
                     cardHorizontalMargin={0}
                     keyExtractor={cardData => cardData.id}
                     cards={this.props.subjectLists}
-                    renderCard={this.renderCard}
+                    renderCard={(cardData, cardIndex) => this.renderCard(cardData, cardIndex)}
                     cardVerticalMargin={0}
                     marginTop={0}
                     backgroundColor="transparent"
@@ -216,6 +220,8 @@ export class SwipeClassifier extends React.Component {
                     onSwipedLeft={cardIndex =>
                         this.onAnswered(1, this.props.subjectLists[cardIndex])
                     }
+                    dragStart={() => this.setState({dragging: true})}
+                    dragEnd={() => this.setState({dragging: false})}
                     cardIndex={this.state.swiperIndex}
                     disableTopSwipe
                     disableBottomSwipe
@@ -231,7 +237,7 @@ export class SwipeClassifier extends React.Component {
                     ]}
                     outputOverlayLabelsOpacityRangeX={[1, 0, 1]}
                     verticalSwipe={false}
-                    stackSeparation={-18}
+                    stackSeparation={-10}
                     stackSize={2}
                     overlayLabels={{
                         left: {
@@ -275,7 +281,7 @@ export class SwipeClassifier extends React.Component {
         const classificationPanel =
             <View style={styles.classificationPanel}>
                 <ClassificationPanel
-                    containerStyle={[styles.container, styles.dropShadow]}
+                    containerStyle={[styles.classificationContainer]}
                     isFetching={this.props.isFetching}
                     hasTutorial={!R.isEmpty(this.props.tutorial)}
                     isQuestionVisible={this.state.isQuestionVisible}
@@ -288,16 +294,26 @@ export class SwipeClassifier extends React.Component {
                                 {question}
                                 {classifier}
                                 {unlinkedTask}
+                                {this.state.isQuestionVisible ? swipeTabs : null}
+                                {this.state.isQuestionVisible && this.props.task.help ? (
+                                    <View style={styles.needHelpContainer}>
+                                        <NeedHelpButton
+                                            onPress={() => this.classifierContainer.displayHelpModal()}
+                                            inMuseumMode={this.props.route.params.project.in_museum_mode}
+                                        />
+                                    </View>
+                                ) : null}
+                                {this.props?.guide?.items?.length > 0 && (
+                                    <View style={styles.fieldGuideBtnContainer}>
+                                        <FieldGuideBtn onPress={() => this.classifierContainer.displayFieldGuide()} />
+                                    </View>
+                                )}
                             </View>
                             :
                             tutorial
                     }
+         
                 </ClassificationPanel>
-                {this.state.isQuestionVisible ? swipeTabs : null}
-                {this.state.isQuestionVisible && this.props.task.help ? <NeedHelpButton
-                    onPress={() => this.classifierContainer.displayHelpModal()}
-                    inMuseumMode={this.props.route.params.project.in_museum_mode}
-                /> : null}
                 <FullScreenMedia
                     source={{uri: this.state.fullScreenImageSource}}
                     isVisible={this.state.showFullSize}
@@ -307,7 +323,8 @@ export class SwipeClassifier extends React.Component {
             </View>
 
         return (
-            <View style={[styles.container, colorModes.framingBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
+            <View style={styles.container}>
+                <ClassifierHeader project={this.props.route?.params?.project}/>
                 <ClassifierContainer
                     inBetaMode={this.props.route.params.inBetaMode}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -327,6 +344,10 @@ const styles = EStyleSheet.create({
     container: {
         flex: 1,
     },
+    classificationContainer: {
+        flex: 1,
+        backgroundColor: '#EBEBEB',
+    },
     dropShadow: {
         shadowColor: 'black',
         shadowOffset: {
@@ -339,7 +360,6 @@ const styles = EStyleSheet.create({
     classificationPanel: {
         flex: 1,
         overflow: 'visible',
-        marginBottom: 15
     },
     subjectContainer: {
         alignSelf: 'center',
@@ -362,9 +382,17 @@ const styles = EStyleSheet.create({
         paddingTop: 10,
         paddingHorizontal: 15
     },
-    classifier: {
-        flex: 1,
-        margin: 15,
+    needHelpContainer: {
+        alignItems: 'center',
+        marginTop: 16,
+    },
+    questionContainer: {
+        backgroundColor: '#EBEBEB',
+        paddingVertical: 16
+    },
+    fieldGuideBtnContainer: {
+        alignItems: 'center',
+        marginTop: 20,
     }
 })
 
