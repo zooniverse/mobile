@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import DeviceInfo from 'react-native-device-info';
 
-import FontedText from '../common/FontedText';
+import SizedMarkdown from '../common/SizedMarkdown';
 
 function ButtonAnswer({ selected, text, onPress, fullWidth }) {
   const isTablet = DeviceInfo.isTablet();
@@ -26,7 +26,7 @@ function ButtonAnswer({ selected, text, onPress, fullWidth }) {
 
   return (
     <TouchableOpacity style={buttonStyles} onPress={onPress}>
-      <FontedText style={[styles.text, {color}]}>{text}</FontedText>
+      <SizedMarkdown style={{...styles.text, color}} forButton={true}>{text}</SizedMarkdown>
     </TouchableOpacity>
   );
 }
