@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   fullContainer: {
-    flex: 1,
     paddingVertical: 6,
     paddingHorizontal: 12,
   },

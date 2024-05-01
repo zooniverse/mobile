@@ -169,7 +169,7 @@ class MultiAnswerClassifier extends Component {
         const uri = subject.displays[0].src
         const video = uri.slice(uri.length - 4).match('.mp4')
         const showSubjectOptionsBar = video && Platform.OS === 'android'
-        const fullWidthAnswers = answers.some(a => a.label.length >= 30)
+        const fullWidthAnswers = answers.some(a => a.label.length >= 25)
         const answerContainerStyles = fullWidthAnswers ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' };
 
         const classificationPanel =

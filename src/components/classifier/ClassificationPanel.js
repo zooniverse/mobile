@@ -75,10 +75,6 @@ class ClassificationPanel extends Component {
 }
 
 const styles = EStyleSheet.create({
-  noTabsFiller: {
-    height: 44, 
-    backgroundColor: '#EBEBEB',
-  },
   tabContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
