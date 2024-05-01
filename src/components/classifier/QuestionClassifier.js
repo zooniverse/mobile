@@ -172,7 +172,7 @@ class QuestionClassifier extends Component {
             </View>
 
         const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
-        const fullWidthAnswers = answers.some(a => a.label.length >= 30)
+        const fullWidthAnswers = answers.some(a => a.label.length >= 25)
         const answerContainerStyles = fullWidthAnswers ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' };
         const classificationPanel =
             <View

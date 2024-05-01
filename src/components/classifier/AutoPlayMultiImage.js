@@ -103,7 +103,7 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
     return (
       <TouchableOpacity
         onPress={() => pageDotPressed(dotIdx)}
-        style={{ marginTop: 8 }}
+        style={styles.dotContainer}
       >
         <FontAwesome
           key={dotIdx}
@@ -111,14 +111,14 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
           size={16}
           name={dotIdx === slideIndex ? 'circle' : 'circle-thin'}
           color="gray"
-          style={{ marginHorizontal: 6 }}
+          style={styles.dot}
         />
       </TouchableOpacity>
     );
   };
 
   return (
-    <View style={[styles.container, { borderWidth: 0, borderColor: 'blue' }]}>
+    <View style={styles.container}>
       <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
         <Image
           source={images[slideIndex]}
@@ -129,7 +129,7 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
       {showExpandImage && !longPress && (
         <TouchableOpacity
           onPress={() => expandImage(images[slideIndex]?.uri)}
-          style={{ position: 'absolute', right: 16, bottom: 16 }}
+          style={styles.expandContainer}
         >
           <ExpandImageIcon />
         </TouchableOpacity>
@@ -137,15 +137,7 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
       {
         // Only show the pagination dots if it is the current card on top
         currentCard && (
-          <View
-            style={{
-              flexDirection: 'row',
-              marginTop: 8,
-              flexWrap: 'wrap',
-              borderWidth: 0,
-              justifyContent: 'center',
-            }}
-          >
+          <View style={styles.dotsContainer}>
             {images.map((i, idx) => (
               <PaginateDot dotIdx={idx} key={idx} />
             ))}
@@ -161,6 +153,24 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     flex: 1,
+  },
+  dot: {
+    marginHorizontal: 6,
+  },
+  dotContainer: {
+    marginTop: 8,
+  },
+  dotsContainer: {
+    flexDirection: 'row',
+    marginTop: 8,
+    flexWrap: 'wrap',
+    borderWidth: 0,
+    justifyContent: 'center',
+  },
+  expandContainer: {
+    position: 'absolute',
+    right: 16,
+    bottom: 16,
   },
   image: {
     flex: 1, // Allows the image to expand

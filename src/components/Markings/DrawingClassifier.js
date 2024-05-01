@@ -329,7 +329,6 @@ const styles = EStyleSheet.create({
     },
     subjectContainer: {
         width: '100%',
-        backgroundColor: 'blue',
         flex: 1,
         alignSelf: 'center',
         justifyContent: 'center',
@@ -364,7 +363,6 @@ const styles = EStyleSheet.create({
     subjectDisplayContainer: {
         flex: 1,
         margin: 10,
-        minHeight: 320,
     },
     sideBySide: {
         marginTop: 15,

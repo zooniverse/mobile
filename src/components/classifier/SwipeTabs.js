@@ -16,7 +16,7 @@ export class SwipeTabs extends Component {
     
 
     render() {
-        const fullWidthAnswers = this.props.answers.some(a => a.label.length >= 30)
+        const fullWidthAnswers = this.props.answers.some(a => a.label.length >= 25)
         const answerContainerStyles = fullWidthAnswers ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' };
         const leftButton =
             <ButtonAnswer
@@ -32,20 +32,10 @@ export class SwipeTabs extends Component {
                 fullWidth={fullWidthAnswers}
             />
 
-        const fieldGuideButton =
-            <GuideButton
-                inMuseumMode={this.props.inMuseumMode}
-                onPress={this.props.onFieldGuidePressed}
-                style={styles.leftButtonPadding}
-                text="Field Guide"
-            />
-
         return (
-            <View>
-                <View style={[styles.container, answerContainerStyles]}>
-                    {leftButton}
-                    {rightButton}
-                </View>
+            <View style={[styles.container, answerContainerStyles]}>
+                {leftButton}
+                {rightButton}
             </View>
         )
     }
