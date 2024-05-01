@@ -55,7 +55,7 @@ class ClassificationPanel extends Component {
             color="#005D69"
             style={styles.icon}
           />
-          <FontedText style={[styles.tabText, {fontWeight: tabLeftFont}]}>
+          <FontedText style={[styles.tabText, {fontWeight: tabLeftFont, color}]}>
             TASK
           </FontedText>
         </TouchableOpacity>
