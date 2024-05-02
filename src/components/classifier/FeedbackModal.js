@@ -39,7 +39,7 @@ const FeedbackModal = ({ correct = false, message = '', onClose = false }) => {
             onPress={onClosePressed}
           >
             <FontedText style={styles.answerButtonText}>
-              {correct ? 'Great!' : 'Keep trying'}
+              {correct ? 'Correct!' : 'Incorrect'}
             </FontedText>
           </TouchableOpacity>
         </View>
