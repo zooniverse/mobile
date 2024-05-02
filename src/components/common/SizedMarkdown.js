@@ -7,7 +7,6 @@ import Markdown from 'react-native-simple-markdown'
 import PropTypes from 'prop-types'
 
 import { markdownImageRule } from '../../utils/markdownUtils'
-import * as colorModes from '../../displayOptions/colorModes'
 
 /**
  * Component that wraps the markdown library we use.
@@ -54,8 +53,8 @@ class SizedMarkdown extends Component {
         const { viewDimensions } = this.state
 
         //We limit the width and height so any button images
-        const buttonImageHeight = Math.min(viewDimensions.height, 80)
-        const buttonImageWidth = Math.min(viewDimensions.width, 100)
+        const buttonImageHeight = Math.min(viewDimensions.height, 50)
+        const buttonImageWidth = Math.min(viewDimensions.width, 50)
 
         // Stylistic vertical centering options weren't affecting this view
         // so we're vertically centering text manually on buttons.
@@ -70,12 +69,14 @@ class SizedMarkdown extends Component {
                     fontWeight: isTablet ? 'bold' : 'normal',
                     color: 'black',
                     justifyContent: 'center',
+                    alignSelf: 'center',
                 },
                 ...this.props.style
             },
             image: {
                 width: this.props.forButton ? buttonImageWidth : viewDimensions.width,
                 height: this.props.forButton ? buttonImageHeight : viewDimensions.height,
+                marginRight: 10,
             }
         }
 

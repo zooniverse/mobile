@@ -5,19 +5,38 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 
 import ExpandImageIcon from './ExpandImageIcon';
+import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
 
 const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showExpandImage, setShowExpandImage] = useState(false);
   const [longPress, setLongPress] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const intervalId = useRef(null);
   const pressTimer = useRef(null); // Timer to distinguish between tap and long press
+
+  // Preload images
+  useEffect(() => {
+    const preloadImages = async () => {
+      try {
+        await Promise.all(images.map((image) => Image.prefetch(image.uri)));
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error('Error preloading images', error);
+      }
+    };
+
+    if (images.length > 0) {
+      preloadImages();
+    }
+  }, [images]);
 
   // Start the slideshow auto-play with a setInterval.
   const startSlideshow = () => {
@@ -39,14 +58,14 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
 
   // When component loads start the slideshow. Only do this if it is the current card to prevent peformance issues and glitchy behavior.
   useEffect(() => {
-    if (currentCard) {
+    if (currentCard && imagesLoaded) {
       startSlideshow();
     }
 
     return () => {
       stopSlideshow();
     };
-  }, [currentCard]);
+  }, [currentCard, imagesLoaded]);
 
   // Handle when a paginate dot is pressed.
   const pageDotPressed = (dotIdx) => {
@@ -117,33 +136,79 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
     );
   };
 
+  const SlidesAndroid = () => {
+    return (
+      <View style={styles.container}>
+        {images.map((image, idx) => {
+          const flex = slideIndex === idx ? 1 : 0;
+          return (
+            <TouchableWithoutFeedback
+              onPressIn={onPressIn}
+              onPressOut={onPressOut}
+              key={idx}
+            >
+              <Image
+                source={image}
+                style={[styles.image, { flex }]}
+                resizeMode="contain"
+              />
+            </TouchableWithoutFeedback>
+          );
+        })}
+      </View>
+    );
+  };
+
+  /**
+   * iOS and Android need to be handled differently to optimize performance.
+   * Android cannot use the method that iOS uses where it swaps the image source
+   * or else it will cause a flashing of the images through the first iteration.
+   * Additionally, the iOS code cannot be extracted into it's own component as it 
+   * also causes a flashing. The current setup is the best for optimization.
+   */
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
-        <Image
-          source={images[slideIndex]}
-          style={styles.image}
-          resizeMode="contain"
-        />
-      </TouchableWithoutFeedback>
-      {showExpandImage && !longPress && (
-        <TouchableOpacity
-          onPress={() => expandImage(images[slideIndex]?.uri)}
-          style={styles.expandContainer}
-        >
-          <ExpandImageIcon />
-        </TouchableOpacity>
+      {!imagesLoaded ? (
+        <SubjectLoadingIndicator multipleSubjects={true} />
+      ) : (
+        <>
+          {Platform.OS === 'ios' ? (
+            <>
+              <TouchableWithoutFeedback
+                onPressIn={onPressIn}
+                onPressOut={onPressOut}
+              >
+                <Image
+                  source={images[slideIndex]}
+                  style={styles.image}
+                  resizeMode="contain"
+                />
+              </TouchableWithoutFeedback>
+              {showExpandImage && !longPress && (
+                <TouchableOpacity
+                  onPress={() => expandImage(images[slideIndex]?.uri)}
+                  style={styles.expandContainer}
+                >
+                  <ExpandImageIcon />
+                </TouchableOpacity>
+              )}
+            </>
+          ) : (
+            <SlidesAndroid />
+          )}
+
+          {
+            // Only show the pagination dots if it is the current card on top
+            currentCard && (
+              <View style={styles.dotsContainer}>
+                {images.map((i, idx) => (
+                  <PaginateDot dotIdx={idx} key={idx} />
+                ))}
+              </View>
+            )
+          }
+        </>
       )}
-      {
-        // Only show the pagination dots if it is the current card on top
-        currentCard && (
-          <View style={styles.dotsContainer}>
-            {images.map((i, idx) => (
-              <PaginateDot dotIdx={idx} key={idx} />
-            ))}
-          </View>
-        )
-      }
     </View>
   );
 };
@@ -153,6 +218,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     flex: 1,
+    width: '100%',
   },
   dot: {
     marginHorizontal: 6,
@@ -183,7 +249,7 @@ const styles = StyleSheet.create({
 AutoPlayMultiImage.propTypes = {
   images: PropTypes.array,
   swiping: PropTypes.bool,
-  expandImage: PropTypes.bool,
+  expandImage: PropTypes.func,
   currentCard: PropTypes.bool,
   dotIdx: PropTypes.number,
 };
