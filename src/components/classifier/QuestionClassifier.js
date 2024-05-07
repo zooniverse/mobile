@@ -353,7 +353,6 @@ const styles = EStyleSheet.create({
         left: 0,
         right: 0,
         alignItems: 'center',
-        marginTop: 20,
         height: 50,
 }
 })

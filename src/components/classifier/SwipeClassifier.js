@@ -392,7 +392,6 @@ const styles = EStyleSheet.create({
     },
     fieldGuideBtnContainer: {
         alignItems: 'center',
-        marginTop: 20,
     }
 })
 

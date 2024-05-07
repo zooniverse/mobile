@@ -379,7 +379,6 @@ const styles = EStyleSheet.create({
     },
     fieldGuideBtnContainer: {
         alignItems: 'center',
-        marginTop: 20,
     },
     toolNameDrawCountContainer: {
         height: 60
