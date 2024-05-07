@@ -10,7 +10,7 @@ export class NeedHelpButton extends Component {
 
     render() {
         return (
-            <TouchableOpacity onPress={this.props.onPress}>
+            <TouchableOpacity onPress={this.props.onPress} style={styles.container}>
                 <FontedText style={styles.needHelpText}>
                     I NEED HELP WITH THIS TASK
                 </FontedText>
@@ -29,6 +29,9 @@ NeedHelpButton.defaultProps = {
 }
 
 const styles = {
+    container: {
+        marginBottom: 12,
+    },
     needHelpText: {
         fontSize: 12,
         lineHeight: 14.03,
