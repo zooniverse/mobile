@@ -366,20 +366,14 @@ const styles = EStyleSheet.create({
     needHelpContainer: {
         alignItems: 'center',
         marginTop: 16,
-        marginBottom: 44,
     },
     questionContainer: {
         backgroundColor: '#EBEBEB',
         paddingVertical: 16
     },
     fieldGuideBtnContainer: {
-        position: 'absolute',
-        bottom: -16,
-        left: 0,
-        right: 0,
         alignItems: 'center',
-        height: 50,
-}
+    }
 })
 
 const mapStateToProps = (state, ownProps) => {

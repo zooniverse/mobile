@@ -47,15 +47,17 @@ export class Tutorial extends Component {
             )
         }
 
-        const navigation =
-            <View style={styles.navigation}>
-                {addIndex(map)(
-                    (step, idx) => {
-                        return renderCircle(this.state.step, idx)
-                    },
-                    steps
-                )}
-            </View>
+        const Navigation = () => {
+            const justifyContent = steps.length > 9 ? 'flex-start' : 'center';
+      
+            return (
+              <View style={[styles.navigation, { justifyContent }]}>
+                {addIndex(map)((step, idx) => {
+                  return renderCircle(this.state.step, idx);
+                }, steps)}
+              </View>
+            );
+          };
 
         const finishedButton =
             <ButtonLarge 
@@ -69,7 +71,7 @@ export class Tutorial extends Component {
             </FontedText>
 
         return (
-            <View style={[styles.container]}>
+            <View style={styles.container}>
                 {this.props.isInitialTutorial ? tutorialHeader : null}
                 <View style={styles.container}>
                     <Swiper
@@ -85,7 +87,7 @@ export class Tutorial extends Component {
                 <View style={styles.footer}>
                     <View style={styles.line}/>
                     {!hasNextStep && finishedButton}
-                    {totalSteps > 0 ? navigation : null}
+                    {totalSteps > 0 ? <Navigation /> : null}
                 </View>
             </View>
         )
@@ -117,12 +119,11 @@ const styles = EStyleSheet.create({
         alignItems: 'center',
     },
     navigation: {
-        alignSelf: 'stretch',
         flexDirection: 'row',
         alignItems: 'flex-end',
-        justifyContent: 'center',
+        flexWrap: 'wrap',
         marginVertical: 16,
-        height: 16,
+        minHeight: 16,
     },
     circleIcon: {
         fontSize: 12,
