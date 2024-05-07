@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   TouchableOpacity,
-  Platform,
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -26,7 +25,9 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
   useEffect(() => {
     const preloadImages = async () => {
       try {
-        await Promise.all(images.map((image) => Image.prefetch(image.uri)));
+        // Android has an issue where the images will flash during the first iteration unless you preload.
+        // I tried prefetch but the issue still occurred. Apparently, getSize will actually preload the images.
+        await Promise.all(images.map((image) => Image.getSize(image.uri)));
         setImagesLoaded(true);
       } catch (error) {
         console.error('Error preloading images', error);
@@ -136,47 +137,18 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
     );
   };
 
-  const SlidesAndroid = () => {
-    return (
-      <View style={styles.container}>
-        {images.map((image, idx) => {
-          const flex = slideIndex === idx ? 1 : 0;
-          return (
-            <TouchableWithoutFeedback
-              onPressIn={onPressIn}
-              onPressOut={onPressOut}
-              key={idx}
-            >
-              <Image
-                source={image}
-                style={[styles.image, { flex }]}
-                resizeMode="contain"
-              />
-            </TouchableWithoutFeedback>
-          );
-        })}
-      </View>
-    );
-  };
 
-  /**
-   * iOS and Android need to be handled differently to optimize performance.
-   * Android cannot use the method that iOS uses where it swaps the image source
-   * or else it will cause a flashing of the images through the first iteration.
-   * Additionally, the iOS code cannot be extracted into it's own component as it 
-   * also causes a flashing. The current setup is the best for optimization.
-   */
   return (
     <View style={styles.container}>
       {!imagesLoaded ? (
         <SubjectLoadingIndicator multipleSubjects={true} />
       ) : (
         <>
-          {Platform.OS === 'ios' ? (
             <>
               <TouchableWithoutFeedback
                 onPressIn={onPressIn}
                 onPressOut={onPressOut}
+                key={images[slideIndex].uri}
               >
                 <Image
                   source={images[slideIndex]}
@@ -184,19 +156,15 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
                   resizeMode="contain"
                 />
               </TouchableWithoutFeedback>
-              {showExpandImage && !longPress && (
-                <TouchableOpacity
-                  onPress={() => expandImage(images[slideIndex]?.uri)}
-                  style={styles.expandContainer}
-                >
-                  <ExpandImageIcon />
-                </TouchableOpacity>
-              )}
             </>
-          ) : (
-            <SlidesAndroid />
+          {showExpandImage && !longPress && (
+            <TouchableOpacity
+              onPress={() => expandImage(images[slideIndex]?.uri)}
+              style={styles.expandContainer}
+            >
+              <ExpandImageIcon />
+            </TouchableOpacity>
           )}
-
           {
             // Only show the pagination dots if it is the current card on top
             currentCard && (
