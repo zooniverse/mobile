@@ -148,7 +148,6 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
               <TouchableWithoutFeedback
                 onPressIn={onPressIn}
                 onPressOut={onPressOut}
-                key={images[slideIndex].uri}
               >
                 <Image
                   source={images[slideIndex]}
