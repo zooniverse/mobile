@@ -300,6 +300,7 @@ const styles = EStyleSheet.create({
         marginHorizontal: 16,
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 8,
     },
     centeredContent: {
         flex: 1,
