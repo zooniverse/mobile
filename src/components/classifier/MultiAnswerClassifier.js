@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
     Platform,
     ScrollView,
+    TouchableOpacity,
     View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -30,6 +31,7 @@ import FieldGuideBtn from './FieldGuideBtn';
 import ClassifierHeader from '../../navigation/ClassifierHeader';
 import ButtonAnswer from './ButtonAnswer';
 import ButtonLarge from './ButtonLarge';
+import ExpandImageIcon from './ExpandImageIcon';
 
 class MultiAnswerClassifier extends Component {
 
@@ -210,13 +212,12 @@ class MultiAnswerClassifier extends Component {
                                         />
                                         {showSubjectOptionsBar ?
                                             <View style={styles.optionsBarContainer}>
-                                                <SubjectOptionsBar
-                                                    numberOfSelections={subject.displays.length}
-                                                    onExpandButtonPressed={() => this.setState({
-                                                        showFullSize: true,
-                                                        fullScreenImageSource: {uri: uri}
-                                                    })}
-                                                />
+                                                <TouchableOpacity onPress={ () => this.setState({
+                                                    showFullSize: true,
+                                                    fullScreenImageSource: {uri: uri}
+                                                })}>
+                                                    <ExpandImageIcon />
+                                                </TouchableOpacity>
                                             </View>
                                             : null
                                         }
@@ -400,6 +401,11 @@ const styles = EStyleSheet.create({
     },
     fieldGuideBtnContainer: {
         alignItems: 'center',
+    },
+    optionsBarContainer: {
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
     }
 })
 

@@ -66,9 +66,7 @@ export class Tutorial extends Component {
             />
 
         const tutorialHeader =
-            <FontedText style={[styles.tutorialHeader]}>
-                {`${this.props.projectName} - Tutorial`}
-            </FontedText>
+            <FontedText style={[styles.tutorialHeader]}>TUTORIAL</FontedText>
 
         return (
             <View style={styles.container}>
@@ -168,12 +166,15 @@ const styles = EStyleSheet.create({
         backgroundColor: '$lightGreyBackground',
     },
     tutorialHeader: {
-        fontSize: 20,
+        fontSize: 18,
         marginHorizontal: 30,
         marginTop: 10,
         marginBottom: 10,
         paddingTop: topPadding,
         paddingBottom: 0,
+        fontWeight: '600',
+        letterSpacing: 0.05,
+        color: '#005D69'
     },
     markdown: {
         flex: 1,

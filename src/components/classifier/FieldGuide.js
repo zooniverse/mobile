@@ -127,7 +127,7 @@ export class FieldGuide extends Component {
     }
 
     setHeight(height) {
-        const newHeight = height + this.state.headerHeight + 16
+        const newHeight = height + this.state.headerHeight + 32
         this.setState({height: newHeight})
         this.animateHeight(newHeight < MAX_DEFAULT_HEIGHT ? newHeight : MAX_DEFAULT_HEIGHT)
     }
