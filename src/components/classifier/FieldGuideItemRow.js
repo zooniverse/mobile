@@ -24,8 +24,8 @@ const styles = EStyleSheet.create({
     itemRow: {
         width: '50%',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        height: 90,
+        justifyContent: 'flex-end',
+        height: 84,
         paddingVertical: 3,
         paddingHorizontal: 10,
     },

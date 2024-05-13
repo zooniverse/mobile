@@ -14,11 +14,13 @@ import { BlurView } from '@react-native-community/blur';
 import PropTypes from 'prop-types';
 
 function ClassifierHeader({ project }) {
+  const isPreview = project?.isPreview ?? false;
   const navigation = useNavigation();
   const title = project?.display_name;
   const bkgImage = project?.background?.src;
   const museumMode = project?.in_museum_mode;
   const titleWidth = museumMode ? '100%' : '70%';
+  const backgroundColor = isPreview ? '#e45a50' : '#005D69';
 
   const navigateHome = () => {
     navigation.navigate('ZooniverseApp', { refresh: false });
@@ -29,12 +31,14 @@ function ClassifierHeader({ project }) {
    */
   const HeaderContent = () => (
     <View style={styles.contentContainer}>
-      <BlurView
-        style={styles.fullSize}
-        blurType="dark"
-        blurAmount={1}
-        reducedTransparencyFallbackColor="black"
-      />
+      {!isPreview && (
+        <BlurView
+          style={styles.fullSize}
+          blurType="dark"
+          blurAmount={1}
+          reducedTransparencyFallbackColor="black"
+        />
+      )}
       {!museumMode && (
         <TouchableOpacity
           onPress={navigateHome}
@@ -60,7 +64,7 @@ function ClassifierHeader({ project }) {
 
   return (
     <View style={styles.container}>
-      {bkgImage ? (
+      {!isPreview && bkgImage ? (
         <ImageBackground
           source={{
             uri: bkgImage,
@@ -71,7 +75,7 @@ function ClassifierHeader({ project }) {
           <HeaderContent />
         </ImageBackground>
       ) : (
-        <View style={styles.headerContentContainer}>
+        <View style={[styles.headerContentContainer, { backgroundColor }]}>
           <HeaderContent />
         </View>
       )}
@@ -101,7 +105,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContentContainer: {
-    backgroundColor: '#005D69',
     flex: 1,
   },
   navIcon: {

@@ -56,7 +56,6 @@ export class TaskHelpModal extends Component {
 
 const styles = EStyleSheet.create({
   markdownContainer: {
-    flex: 1,
     paddingVertical: 5,
   },
   buttonStyle: {
@@ -70,11 +69,10 @@ const styles = EStyleSheet.create({
     color: '#005D69'
   },
   modalContainer: {
-    flex: 1,
     borderRadius: 16,
-    marginTop: 124,
     backgroundColor: '#fff',
-    padding: 18
+    padding: 18,
+    maxHeight: '80%'
   },
   helpCloseContainer: {
     flexDirection: 'row',

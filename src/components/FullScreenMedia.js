@@ -16,8 +16,11 @@ import { BlurView } from '@react-native-community/blur';
 
 class FullScreenMedia extends React.Component {
     render() {
-        function displayWithRequisiteComponent(uri, handlePress) {
-            if (uri.slice(uri.length - 4).match('.mp4')) {
+        const uri = this.props.source.uri;
+        const isVideo = uri.slice(uri.length - 4).match('.mp4');
+        const closeBottom = isVideo ? 100 : 42;
+        function displayWithRequisiteComponent(handlePress) {
+            if (isVideo) {
                 return <VideoPlayer
                     source={{uri: uri}}
                     style={{
@@ -61,14 +64,13 @@ class FullScreenMedia extends React.Component {
                     }
                     {
                         displayWithRequisiteComponent(
-                            this.props.source.uri,
                             this.props.handlePress
                         )
                     }
                     <TouchableOpacity
                         activeOpacity={0.5}
                         onPress={this.props.handlePress}
-                        style={styles.closeIcon}>
+                        style={[styles.closeIcon, {bottom: closeBottom}]}>
                         <Icon name="close" style={styles.icon}/>
                     </TouchableOpacity>
                 </View>
@@ -91,7 +93,6 @@ const styles = EStyleSheet.create({
     closeIcon: {
         backgroundColor: 'transparent',
         position: 'absolute',
-        bottom: 42,
         left: 0,
         right: 0,
         alignItems: 'center',
