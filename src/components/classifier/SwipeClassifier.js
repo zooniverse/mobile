@@ -196,7 +196,6 @@ export class SwipeClassifier extends React.Component {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'rgba(0, 0, 0, 0.2)',
                 width: this.state.swiperDimensions.width,
                 height: this.state.swiperDimensions.height,
             },
@@ -220,8 +219,8 @@ export class SwipeClassifier extends React.Component {
                     onSwipedLeft={cardIndex =>
                         this.onAnswered(1, this.props.subjectLists[cardIndex])
                     }
-                    dragStart={() => this.setState({dragging: true})}
-                    dragEnd={() => this.setState({dragging: false})}
+                    dragStart={() => this.setState({swiping: true})}
+                    dragEnd={() => this.setState({swiping: false})}
                     cardIndex={this.state.swiperIndex}
                     disableTopSwipe
                     disableBottomSwipe

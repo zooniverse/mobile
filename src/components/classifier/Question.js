@@ -49,7 +49,7 @@ export class Question extends Component {
   render() {
       return (
       <View style={styles.questionContainer}>
-          <View style={styles.markdown}>
+          <View>
             <SizedMarkdown inMuseumMode={this.props.inMuseumMode}>
               {this.state.question}
             </SizedMarkdown>
@@ -75,9 +75,6 @@ export class Question extends Component {
 }
 
 const styles = EStyleSheet.create({
-  markdown: {
-    flex: 1
-  },
   image: {
     flex: 1,
     paddingLeft: 15,
@@ -87,11 +84,10 @@ const styles = EStyleSheet.create({
   },
   questionContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'stretch',
     marginTop: 10,
     marginHorizontal: 20,
-
   },
   question: {
     flexDirection: 'row',

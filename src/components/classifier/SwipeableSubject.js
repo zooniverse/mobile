@@ -88,8 +88,10 @@ class SwipeableSubject extends Component {
       }
     }
 
+    const cardContainerBackgound = swiping ? 'transparent' :  '#EBEBEB'
+
     return (
-      <View style={styles.cardContainer}>
+      <View style={[styles.cardContainer, {backgroundColor: cardContainerBackgound}]}>
         <View
           style={styles.container}
           onLayout={(event) =>
@@ -132,7 +134,6 @@ const styles = EStyleSheet.create({
   cardContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#EBEBEB',
   },
   imageShadow: {
     backgroundColor: 'transparent',
