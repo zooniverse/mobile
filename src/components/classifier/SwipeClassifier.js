@@ -328,6 +328,7 @@ export class SwipeClassifier extends React.Component {
                         correct={this.state.feedbackModal?.correct}
                         message={this.state.feedbackModal.message}
                         onClose={this.state.feedbackModal.onClose}
+                        inMuseumMode={this.props.route.params.project.in_museum_mode}
                     />
                 )}
             </View>
