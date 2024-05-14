@@ -26,6 +26,8 @@ import ClassifierContainer from './ClassifierContainer'
 
 import ClassifierHeader from '../../navigation/ClassifierHeader';
 import FieldGuideBtn from './FieldGuideBtn';
+import { getDataForFeedbackModal, isFeedbackActive } from '../../utils/feedback';
+import FeedbackModal from './FeedbackModal';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -64,6 +66,7 @@ export class SwipeClassifier extends React.Component {
                 height: 1
             },
             swiping: false,
+            feedbackModal: {},
         }
 
         this.onAnswered = this.onAnswered.bind(this)
@@ -94,9 +97,25 @@ export class SwipeClassifier extends React.Component {
     }
 
     onAnswered = (answer, subject) => {
-        const {id, first_task} = this.props.route.params.workflow
+        const { workflow, project } = this.props.route.params;
+        const {id, first_task} = workflow
+        const feedbackActive = isFeedbackActive(project, subject, workflow);
+        if (feedbackActive) {
+            const modalData = getDataForFeedbackModal(subject, workflow, answer);
+            if (modalData) {
+                const onClose = () => {
+                    this.setState({ feedbackModal: {} })
+                    this.submitClassification(id, first_task, answer, workflow, subject);
+                }
+                this.setState({ feedbackModal: { ...modalData, onClose } })
+                return;
+            }
+        }
+    }
+
+    submitClassification(id, first_task, answer, workflow, subject) {
         this.props.classifierActions.addAnnotationToTask(id, first_task, answer, false)
-        this.props.classifierActions.saveClassification(this.props.route.params.workflow, subject, this.state.swiperDimensions)
+        this.props.classifierActions.saveClassification(workflow, subject, this.state.swiperDimensions)
         this.setState({swiperIndex: this.state.swiperIndex + 1})
     }
 
@@ -319,6 +338,14 @@ export class SwipeClassifier extends React.Component {
                     handlePress={() => this.setState({fullScreenQuestion: '', showFullSize: false})}
                     question={this.state.fullScreenQuestion}
                 />
+                {this.state.feedbackModal?.show && (
+                    <FeedbackModal
+                        correct={this.state.feedbackModal?.correct}
+                        message={this.state.feedbackModal.message}
+                        onClose={this.state.feedbackModal.onClose}
+                        inMuseumMode={this.props.route.params.project.in_museum_mode}
+                    />
+                )}
             </View>
 
         return (
