@@ -405,7 +405,7 @@ PODS:
     - react-native-video/Video (= 5.2.1)
   - react-native-video/Video (5.2.1):
     - React-Core
-  - react-native-webview (13.8.6):
+  - react-native-webview (13.10.2):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - React-NativeModulesApple (0.72.4):
@@ -540,10 +540,10 @@ PODS:
     - FirebaseCoreExtension (= 10.20.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.16.0):
+  - RNGestureHandler (2.16.2):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNReanimated (3.9.0):
+  - RNReanimated (3.11.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - ReactCommon/turbomodule/core
@@ -558,7 +558,7 @@ PODS:
     - Sentry/HybridSDK (= 8.17.1)
   - RNSVG (13.14.0):
     - React-Core
-  - RNVectorIcons (10.0.3):
+  - RNVectorIcons (10.1.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - Sentry/HybridSDK (8.17.1):
@@ -817,7 +817,7 @@ SPEC CHECKSUMS:
   react-native-safe-area-context: dcab599c527c2d7de2d76507a523d20a0b83823d
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
-  react-native-webview: 14f6b3904d934533d65e01376752efaf4a45ece4
+  react-native-webview: 6830a4a7c5c7dbe2a564f6b019c51349672a9b7c
   React-NativeModulesApple: 18496bbd735260b50cbe59b652cf1b05d8126465
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
   React-RCTActionSheet: 02904b932b50e680f4e26e7a686b33ebf7ef3c00
@@ -843,12 +843,12 @@ SPEC CHECKSUMS:
   RNFBAnalytics: aec413bc1623191bdb7d0378c49b92d8c289b05b
   RNFBApp: 9b25191f7a5e72c185b7e43fffb0d906869c4659
   RNFBMessaging: 99621af036e0aa85506390f77d79c9e6353aacca
-  RNGestureHandler: 3ca879eb9e4fbddcf90539dac20992ddfe6d63a3
-  RNReanimated: 65ea8b9347cf9d2f16402355aae86e35d6905385
+  RNGestureHandler: ee924bd0024545efc4bc88c1e856f24b785d2ca2
+  RNReanimated: fc537c9a29e55eb01c620f29b39554cfd68eef35
   RNScreens: 396c07678c1c35614bc5feba74a56df387bf1965
   RNSentry: 9a8aebd354d3b47c428c72ec7264b7822cf4f3c2
   RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
-  RNVectorIcons: 6731bd488db95f4197433b30d81d03dc228b367e
+  RNVectorIcons: 084c5c365eca594f94fda0192d8a380b2b40f9b5
   Sentry: d9f99f9cc13777c5d938650c1e1c85047bb4f0d1
   SentryPrivate: 839b1e58addf58624087a80b2628e543193fa8ef
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
