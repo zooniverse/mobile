@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Fontisto';
@@ -7,19 +7,28 @@ import { BlurView } from '@react-native-community/blur';
 
 import FontedText from '../common/FontedText';
 
-const FeedbackModal = ({ correct = false, message = '', onClose = false }) => {
-  const onClosePressed = () => {
+const FeedbackModal = ({
+  correct = false,
+  message = '',
+  onClose = false,
+  inMuseumMode = false,
+}) => {
+  useEffect(() => {
+    if (inMuseumMode) {
+      setTimeout(() => {
+        close();
+      }, 10000);
+    }
+  });
+
+  const close = () => {
     if (onClose) {
       onClose();
     }
   };
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      onRequestClose={onClosePressed}
-    >
+    <Modal animationType="slide" transparent={true} onRequestClose={close}>
       <View style={styles.container}>
         <BlurView blurType="dark" blurAmount={3} style={styles.blur} />
         <View style={styles.innerContainer}>
@@ -27,7 +36,7 @@ const FeedbackModal = ({ correct = false, message = '', onClose = false }) => {
             <FontedText style={styles.modalText}>
               {correct ? 'NICELY DONE' : 'NOT QUITE'}
             </FontedText>
-            <TouchableOpacity onPress={onClosePressed}>
+            <TouchableOpacity onPress={close}>
               <Icon name="close" style={styles.icon} size={18} />
             </TouchableOpacity>
           </View>
@@ -36,11 +45,9 @@ const FeedbackModal = ({ correct = false, message = '', onClose = false }) => {
           </View>
           <TouchableOpacity
             style={styles.answerButtonContainer}
-            onPress={onClosePressed}
+            onPress={close}
           >
-            <FontedText style={styles.answerButtonText}>
-              {correct ? 'Correct!' : 'Incorrect'}
-            </FontedText>
+            <FontedText style={styles.answerButtonText}>OK</FontedText>
           </TouchableOpacity>
         </View>
       </View>
@@ -123,6 +130,7 @@ FeedbackModal.propTypes = {
   correct: PropTypes.bool,
   message: PropTypes.string,
   onClose: PropTypes.func || PropTypes.bool,
+  inMuseumMode: PropTypes.bool,
 };
 
 export default FeedbackModal;
