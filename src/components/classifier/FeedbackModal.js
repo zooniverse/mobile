@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    alignSelf: 'stretch',
+    maxWidth: 1024,
+    width: '100%'
   },
   modalText: {
     fontSize: 18,
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#000',
     lineHeight: 18.7,
+    fontSize: 16,
   },
   titleCloseContainer: {
     flexDirection: 'row',
