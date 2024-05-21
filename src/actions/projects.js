@@ -160,7 +160,7 @@ const getWorkflowsForProjects = projects => {
 
     let fetchPaginatedWorkflows = (params, _page = 1) => {
         return apiClient.type('workflows')
-            .get({...params, ...{page: _page}})
+            .get({...params, ...{page: _page, sort: 'id'}})
             .then((workflows) => {
                 workflows.forEach(workflow => {
                     workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
