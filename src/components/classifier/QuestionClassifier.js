@@ -225,7 +225,7 @@ class QuestionClassifier extends Component {
                                     </View>
                                 </ScrollView>
                                 {
-                                    task.help !== null &&
+                                    task.help &&
                                     <View style={styles.needHelpContainer}>
                                         <NeedHelpButton
                                             inMuseumMode={this.props.route.params.project.in_museum_mode}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import R from 'ramda';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -8,6 +8,8 @@ import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
 import Video from 'react-native-video';
 import AutoPlayMultiImage from './AutoPlayMultiImage';
 import SwipeSingleImage from './SwipeSingleImage';
+import ExpandImageIcon from './ExpandImageIcon';
+import { isTablet } from 'react-native-device-info';
 
 class SwipeableSubject extends Component {
   constructor(props) {
@@ -65,17 +67,27 @@ class SwipeableSubject extends Component {
         // Handle single Image/Video
         const uri = imageUris[0];
         if (uri.slice(uri.length - 4).match('.mp4')) {
+          const height = isTablet() ? pagerDimensions.height : 300;
           return (
-            <Video
-              source={{ uri: uri }}
-              style={{
-                width: pagerDimensions.width,
-                height: pagerDimensions.height,
-              }}
-              controls={true}
-              repeat={true}
-              resizeMode="contain"
-            />
+            <View key={`MULTI_ANSWER_VIDEO_${uri}`}>
+              <Video
+                source={{ uri: uri }}
+                style={{
+                  width: pagerDimensions.width,
+                  height,
+                }}
+                controls={true}
+                repeat={true}
+                resizeMode="contain"
+              />
+              {Platform.OS === 'android' ? (
+                <View style={styles.optionsBarContainer}>
+                  <TouchableOpacity onPress={() => onExpandButtonPressed(uri)}>
+                    <ExpandImageIcon />
+                  </TouchableOpacity>
+                </View>
+              ) : null}
+            </View>
           );
         } else {
           return (
@@ -88,10 +100,15 @@ class SwipeableSubject extends Component {
       }
     }
 
-    const cardContainerBackgound = swiping ? 'transparent' :  '#EBEBEB'
+    const cardContainerBackgound = swiping ? 'transparent' : '#EBEBEB';
 
     return (
-      <View style={[styles.cardContainer, {backgroundColor: cardContainerBackgound}]}>
+      <View
+        style={[
+          styles.cardContainer,
+          { backgroundColor: cardContainerBackgound },
+        ]}
+      >
         <View
           style={styles.container}
           onLayout={(event) =>
@@ -161,6 +178,11 @@ const styles = EStyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  optionsBarContainer: {
+    position: 'absolute',
+    bottom: 36,
+    right: 16,
   },
 });
 

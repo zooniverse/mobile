@@ -24,7 +24,6 @@ import Question from './Question'
 import Separator from '../common/Separator'
 import FullScreenMedia from '../FullScreenMedia'
 import TappableSubject from './TappableSubject';
-import SubjectOptionsBar from './SubjectOptionsBar'
 
 import * as colorModes from '../../displayOptions/colorModes'
 import FieldGuideBtn from './FieldGuideBtn';
@@ -266,7 +265,7 @@ class MultiAnswerClassifier extends Component {
                             </View>
                             </ScrollView>
                             {
-                                task.help !== null &&
+                                task.help &&
                                 <View style={styles.needHelpContainer}>
                                     <NeedHelpButton
                                         onPress={() => this.classifierContainer.displayHelpModal()}

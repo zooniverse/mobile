@@ -174,7 +174,6 @@ SwipeCard.propTypes = {
     seenThisSession: PropTypes.bool,
     inMuseumMode: PropTypes.bool,
     panX: PropTypes.object,
-    shouldAnimateOverlay: PropTypes.bool,
     answers: PropTypes.array,
     imageActions: PropTypes.any,
     onExpandButtonPressed: PropTypes.any,

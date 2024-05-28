@@ -103,9 +103,6 @@ const DrawerNavigator = () => {
       screenOptions={{
         drawerPosition: 'right',
         drawerType: 'front',
-        drawerStyle: {
-          width: Dimensions.get('window').width * .75,
-        },
         headerShown: false,
         headerMode: 'float',
         swipeEnabled: true,
