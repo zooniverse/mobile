@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Platform, TouchableOpacity } from 'react-native';
+import { View, Platform, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import R from 'ramda';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -121,10 +121,12 @@ class SwipeableSubject extends Component {
           }
         >
           <View style={styles.container}>
-            {imagesAreLoaded ? (
-              <View style={[styles.borderView, pagerDimensions]}>
-                {displaySubject()}
-              </View>
+                {imagesAreLoaded ? (
+                    <TouchableWithoutFeedback>
+                        <View style={[styles.borderView, pagerDimensions]}>
+                            {displaySubject()}
+                        </View>
+                    </TouchableWithoutFeedback>
             ) : (
               <SubjectLoadingIndicator multipleSubjects={hasMultipleSubjects} />
             )}
