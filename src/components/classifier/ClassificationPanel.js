@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Platform,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -18,15 +19,19 @@ class ClassificationPanel extends Component {
     const tabRightOverride = this.props.isQuestionVisible ? inactiveTab : activeTab;
     const tabLeftFont = this.props.isQuestionVisible ? '700' : '400';
     const tabRightFont = this.props.isQuestionVisible ? '400' : '700';
-
     const hasTutorial = this.props.hasTutorial;
+    const iconSize = DeviceInfo.isTablet() ? 22 : 18
     const color = hasTutorial ? '#005D69' : '#A6A7A9'
+    const taskIconPadding = Platform.OS === 'android' ? 4 : 2
+    const tutorialIconPadding = Platform.OS === 'android' ? 2 : 1
+
+
     const TutorialIcon = () => <FontAwesome
       name="question-circle-o"
-      size={18}
+      size={iconSize}
         color={color}
-      style={styles.icon}
-    />
+        style={{paddingTop: tutorialIconPadding}}
+      />
     const TutorialText = () => <FontedText style={[styles.tabText, {fontWeight: tabRightFont, color}]}>
       TUTORIAL
     </FontedText>
@@ -51,9 +56,9 @@ class ClassificationPanel extends Component {
           style={ [styles.tab, {...tabLeftOverride}] }>
           <FontAwesome
             name="pencil-square-o"
-            size={18}
+            size={iconSize}
             color="#005D69"
-            style={styles.icon}
+            style={{paddingTop: taskIconPadding}}
           />
           <FontedText style={[styles.tabText, {fontWeight: tabLeftFont, color}]}>
             TASK
@@ -89,9 +94,8 @@ const styles = EStyleSheet.create({
   },
   tabText: {
     fontSize: DeviceInfo.isTablet() ? 22 : 16,
-    lineHeight: 18.7,
     letterSpacing: 1,
-    marginLeft: 8
+    marginLeft: 8,
   }
 })
 
