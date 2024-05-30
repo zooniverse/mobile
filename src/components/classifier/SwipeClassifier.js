@@ -111,6 +111,7 @@ export class SwipeClassifier extends React.Component {
                 return;
             }
         }
+        this.submitClassification(id, first_task, answer, workflow, subject);
     }
 
     submitClassification(id, first_task, answer, workflow, subject) {
