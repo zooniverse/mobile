@@ -27,30 +27,11 @@ class SwipeCard extends Component {
             overlayViewWidth: props.subjectDisplayWidth,
             overlayViewHeight: props.subjectDisplayHeight,
             overlayAnswerIndex: 0,
-            localUris: [],
             displayImageUri: '',
         }
         this.unlinkImageOnLoad = false
 
         this.updateOverlayImageForImageDimensions = this.updateOverlayImageForImageDimensions.bind(this)
-    }
-
-    componentDidMount() {
-
-        // Load all images to cache
-        const loadImagePromises = this.props.subject.displays.map( ({src}) => {
-            return this.props.imageActions.loadImageToCache(src)
-        })
-        Promise.all(loadImagePromises).then((localUris) => {
-            localUris.forEach( uri => {
-                if (this.unlinkImageOnLoad) {
-                    RNFetchBlob.fs.unlink(uri)
-                }
-            })
-            this.setState({
-                localUris,
-            })
-        })
     }
 
     componentDidUpdate(prevProps) {
@@ -70,23 +51,8 @@ class SwipeCard extends Component {
         });
     }
 
-    componentWillUnmount() {
-
-        this.state.localUris.forEach((uri) => {
-            RNFetchBlob.fs.exists(uri)
-            .then((fileExists) => {
-                if (fileExists) {
-                    this.props.imageActions.deleteImageLocation(uri)
-                    RNFetchBlob.fs.unlink(uri)
-                } else {
-                    this.unlinkImageOnLoad = true
-                }
-            })  
-        })      
-    }
 
     render() {
-        const { localUris } = this.state;
 
         const { 
             subject,
@@ -107,7 +73,7 @@ class SwipeCard extends Component {
         return (
             <View style={dimensionsStyle}>
                 <SwipeableSubject
-                    imageUris={localUris.map((uri) => `file://${uri}`)}
+                    imageUris={this.props.subject.displays.map(i => i?.src)}
                     hasMultipleSubjects={subject.displays.length > 1}
                     onDisplayImageChange={(uri) => this.setState({ displayImageUri: uri })}
                     onExpandButtonPressed={(uri) => onExpandButtonPressed(uri)}

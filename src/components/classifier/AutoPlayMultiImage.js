@@ -14,12 +14,30 @@ import ExpandImageIcon from './ExpandImageIcon';
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
 
 const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
+  const imagesRef = useRef(images);
   const [slideIndex, setSlideIndex] = useState(0);
   const [showExpandImage, setShowExpandImage] = useState(false);
   const [longPress, setLongPress] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const intervalId = useRef(null);
   const pressTimer = useRef(null); // Timer to distinguish between tap and long press
+  const swipingRef = useRef(swiping);
+
+  // Need to keep a ref for the deck swiper to handle touch/swipe events.
+  useEffect(() => {
+    swipingRef.current = swiping;
+  }, [swiping]);
+
+  useEffect(() => {
+    // If images change (subject was classified), reset the auto play.
+    if (JSON.stringify(imagesRef?.current) !== JSON.stringify(images)) {
+      imagesRef.current = images;
+      clearInterval(intervalId.current);
+      intervalId.current = null;
+      setSlideIndex(0);
+      startSlideshow();
+    }
+  }, [images]);
 
   // Preload images
   useEffect(() => {
@@ -27,7 +45,10 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
       try {
         // Android has an issue where the images will flash during the first iteration unless you preload.
         // I tried prefetch but the issue still occurred. Apparently, getSize will actually preload the images.
-        await Promise.all(images.map((image) => Image.getSize(image.uri)));
+        const localImages = images.every((i) => i?.uri?.startsWith('file://'));
+        if (!localImages) {
+          await Promise.all(images.map((image) => Image.getSize(image.uri)));
+        }
         setImagesLoaded(true);
       } catch (error) {
         console.error('Error preloading images', error);
@@ -92,7 +113,7 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
    */
   const onPressIn = () => {
     pressTimer.current = setTimeout(() => {
-      if (swiping) return; // Don't want swiping to interfere with the start/pausing.
+      if (swipingRef.current) return; // Don't want swiping to interfere with the start/pausing.
       setLongPress(true);
       stopSlideshow();
     }, 200);
@@ -102,21 +123,26 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
    * When the user presses out of an image it will check if the press was regestered as long or not.
    * If registered as a long press, then resume the auto-play.
    * If was not a long press, toggle the auto-play. Stop > Start & Start > Stop.
+   * 
+   * The 200ms timeout is because the press events are recognized before the swiping events but swipe
+   * events take precedence over the touch events. After 200ms then the swipingRef will be updated and
+   * you can determine if the gesture was a swipe or press.
    */
   const onPressOut = () => {
-    if (swiping) return; // Don't want swiping to interfere with the start/pausing.
     clearTimeout(pressTimer.current);
-
-    if (longPress) {
-      setLongPress(false); // Reset the longPress state
-      startSlideshow();
-    } else {
-      if (intervalId.current) {
-        stopSlideshow();
-      } else {
+    setTimeout(() => {
+      if (swipingRef.current) return; // Don't want swiping to interfere with the start/pausing.
+      if (longPress) {
+        setLongPress(false); // Reset the longPress state
         startSlideshow();
+      } else {
+        if (intervalId.current) {
+          stopSlideshow();
+        } else {
+          startSlideshow();
+        }
       }
-    }
+    }, 200);
   };
 
   const PaginateDot = ({ dotIdx }) => {
@@ -137,25 +163,24 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
     );
   };
 
-
   return (
     <View style={styles.container}>
       {!imagesLoaded ? (
         <SubjectLoadingIndicator multipleSubjects={true} />
       ) : (
         <>
-            <>
-              <TouchableWithoutFeedback
-                onPressIn={onPressIn}
-                onPressOut={onPressOut}
-              >
-                <Image
-                  source={images[slideIndex]}
-                  style={styles.image}
-                  resizeMode="contain"
-                />
-              </TouchableWithoutFeedback>
-            </>
+          <>
+            <TouchableWithoutFeedback
+              onPressIn={onPressIn}
+              onPressOut={onPressOut}
+            >
+              <Image
+                source={images[slideIndex]}
+                style={styles.image}
+                resizeMode="contain"
+              />
+            </TouchableWithoutFeedback>
+          </>
           {showExpandImage && !longPress && (
             <TouchableOpacity
               onPress={() => expandImage(images[slideIndex]?.uri)}
