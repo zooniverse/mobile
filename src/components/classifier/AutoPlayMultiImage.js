@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -46,8 +47,11 @@ const AutoPlayMultiImage = ({ images, swiping, expandImage, currentCard }) => {
         // Android has an issue where the images will flash during the first iteration unless you preload.
         // I tried prefetch but the issue still occurred. Apparently, getSize will actually preload the images.
         const localImages = images.every((i) => i?.uri?.startsWith('file://'));
-        if (!localImages) {
+        if (!localImages && Platform.OS === 'android') {
           await Promise.all(images.map((image) => Image.getSize(image.uri)));
+        }
+        if (Platform.OS === 'ios') { // Prevent showing blurred images by prefetching them first.
+          await Promise.all(images.map((image) => Image.prefetch(image.uri)));
         }
         setImagesLoaded(true);
       } catch (error) {
@@ -222,7 +226,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 8,
     flexWrap: 'wrap',
-    borderWidth: 0,
     justifyContent: 'center',
   },
   expandContainer: {
