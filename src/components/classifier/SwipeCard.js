@@ -27,11 +27,33 @@ class SwipeCard extends Component {
             overlayViewWidth: props.subjectDisplayWidth,
             overlayViewHeight: props.subjectDisplayHeight,
             overlayAnswerIndex: 0,
+            localUris: [],
             displayImageUri: '',
         }
         this.unlinkImageOnLoad = false
 
         this.updateOverlayImageForImageDimensions = this.updateOverlayImageForImageDimensions.bind(this)
+    }
+
+    componentDidMount() {
+        // For single image swipe, load into cache.
+        // Avoid doing this for multi-image swipe to avoid performance issues.
+        if (this.props.subject.displays.length > 1) return;
+
+        // Load all images to cache
+        const loadImagePromises = this.props.subject.displays.map( ({src}) => {
+            return this.props.imageActions.loadImageToCache(src)
+        })
+        Promise.all(loadImagePromises).then((localUris) => {
+            localUris.forEach( uri => {
+                if (this.unlinkImageOnLoad) {
+                    RNFetchBlob.fs.unlink(uri)
+                }
+            })
+            this.setState({
+                localUris,
+            })
+        })
     }
 
     componentDidUpdate(prevProps) {
@@ -51,8 +73,25 @@ class SwipeCard extends Component {
         });
     }
 
+    componentWillUnmount() {
+        if (this.props.subject.displays.length > 1) return;
+
+        this.state.localUris.forEach((uri) => {
+            RNFetchBlob.fs.exists(uri)
+            .then((fileExists) => {
+                if (fileExists) {
+                    this.props.imageActions.deleteImageLocation(uri)
+                    RNFetchBlob.fs.unlink(uri)
+                } else {
+                    this.unlinkImageOnLoad = true
+                }
+            })  
+        })      
+    }
+
 
     render() {
+        const { localUris } = this.state;
 
         const { 
             subject,
@@ -68,13 +107,17 @@ class SwipeCard extends Component {
         const alreadySeen = (subject.already_seen || seenThisSession)
     
 
-        const dimensionsStyle = {width: subjectDisplayWidth, height: subjectDisplayHeight}   
+        const dimensionsStyle = { width: subjectDisplayWidth, height: subjectDisplayHeight }   
+        
+        const hasMultipleSubjects = subject.displays.length > 1;
+        const imageUris = hasMultipleSubjects ? this.props.subject.displays.map(i => i?.src) : localUris.map((uri) => `file://${uri}`)
         
         return (
             <View style={dimensionsStyle}>
                 <SwipeableSubject
-                    imageUris={this.props.subject.displays.map(i => i?.src)}
-                    hasMultipleSubjects={subject.displays.length > 1}
+                    imageUris={imageUris}
+                    // imageUris={this.props.subject.displays.map(i => i?.src)}
+                    hasMultipleSubjects={hasMultipleSubjects}
                     onDisplayImageChange={(uri) => this.setState({ displayImageUri: uri })}
                     onExpandButtonPressed={(uri) => onExpandButtonPressed(uri)}
                     swiping={swiping}

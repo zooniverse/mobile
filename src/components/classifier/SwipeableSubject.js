@@ -50,7 +50,7 @@ class SwipeableSubject extends Component {
 
     function displaySubject() {
       // Handle single image/video or multi-frame accordingly.
-      if (imageUris.length > 1) {
+      if (hasMultipleSubjects) {
         // Multi-frame image
         const autoPlayImages = imageUris.map((i) => ({ uri: i }));
         return (
