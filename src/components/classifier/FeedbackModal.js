@@ -28,7 +28,7 @@ const FeedbackModal = ({
   };
 
   return (
-    <Modal animationType="slide" transparent={true} onRequestClose={close}>
+    <Modal animationType="fade" transparent={true} onRequestClose={close}>
       <View style={styles.container}>
         <BlurView blurType="dark" blurAmount={3} style={styles.blur} />
         <View style={styles.innerContainer}>
