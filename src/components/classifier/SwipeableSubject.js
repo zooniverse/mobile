@@ -123,9 +123,7 @@ class SwipeableSubject extends Component {
           <View style={styles.container}>
                 {imagesAreLoaded ? (
                     <TouchableWithoutFeedback>
-                        <View style={[styles.borderView, pagerDimensions]}>
                             {displaySubject()}
-                        </View>
                     </TouchableWithoutFeedback>
             ) : (
               <SubjectLoadingIndicator multipleSubjects={hasMultipleSubjects} />
