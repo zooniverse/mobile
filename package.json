@@ -37,7 +37,7 @@
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "@reduxjs/toolkit": "^1.9.7",
-    "@sentry/react-native": "5.16.0",
+    "@sentry/react-native": "5.23.1",
     "color": "^4.2.3",
     "crypto-js": "^4.2.0",
     "markdown-it": "^13.0.1",
