@@ -105,7 +105,7 @@ export class SwipeClassifier extends React.Component {
             if (modalData) {
                 const onClose = () => {
                     this.setState({ feedbackModal: {} })
-                    this.submitClassification(id, first_task, answer, workflow, subject);
+                    this.submitClassification(id, first_task, answer, workflow, subject, modalData.feedbackMeta);
                 }
                 this.setState({ feedbackModal: { ...modalData, onClose } })
                 return;
@@ -114,9 +114,9 @@ export class SwipeClassifier extends React.Component {
         this.submitClassification(id, first_task, answer, workflow, subject);
     }
 
-    submitClassification(id, first_task, answer, workflow, subject) {
+    submitClassification(id, first_task, answer, workflow, subject, feedbackMeta = null) {
         this.props.classifierActions.addAnnotationToTask(id, first_task, answer, false)
-        this.props.classifierActions.saveClassification(workflow, subject, this.state.swiperDimensions)
+        this.props.classifierActions.saveClassification(workflow, subject, this.state.swiperDimensions, feedbackMeta)
         this.setState({swiperIndex: this.state.swiperIndex + 1})
     }
 

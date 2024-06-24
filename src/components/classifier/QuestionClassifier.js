@@ -88,7 +88,7 @@ class QuestionClassifier extends Component {
             if (modalData) {
                 const onClose = () => {
                     this.setState({ feedbackModal: {} })
-                    this.submitClassification(classifierActions, id, first_task, answerSelected, workflow, subject, imageDimensions);
+                    this.submitClassification(classifierActions, id, first_task, answerSelected, workflow, subject, imageDimensions, modalData.feedbackMeta);
                 }
                 this.scrollView.scrollTo({x: 0, y: 0})
                 this.setState({ feedbackModal: { ...modalData, onClose } })
@@ -101,9 +101,9 @@ class QuestionClassifier extends Component {
        
     }
 
-    submitClassification(classifierActions, id, first_task, answerSelected, workflow, subject, imageDimensions) {
+    submitClassification(classifierActions, id, first_task, answerSelected, workflow, subject, imageDimensions, feedbackMeta = null) {
         classifierActions.addAnnotationToTask(id, first_task, answerSelected, false)
-        classifierActions.saveClassification(workflow, subject, imageDimensions)
+        classifierActions.saveClassification(workflow, subject, imageDimensions, feedbackMeta)
 
         this.setState({
             answerSelected: -1
