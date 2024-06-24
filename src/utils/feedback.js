@@ -9,15 +9,19 @@ export const getDataForFeedbackModal = (subject, workflow, answerSelected) => {
     const rulesFirstTask = rules[workflow?.first_task][0];
 
     const guessCorrect = checkAnswer(rulesFirstTask, answerSelected);
+    const modalData = {
+      show: true,
+      feedbackMeta: rules,
+    };
     if (guessCorrect === true) {
       return {
-        show: true,
+        ...modalData,
         correct: true,
         message: rulesFirstTask?.successMessage,
       };
     } else if (guessCorrect === false) {
       return {
-        show: true,
+        ...modalData,
         correct: false,
         message: rulesFirstTask?.failureMessage,
       };
