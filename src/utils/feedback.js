@@ -9,9 +9,15 @@ export const getDataForFeedbackModal = (subject, workflow, answerSelected) => {
     const rulesFirstTask = rules[workflow?.first_task][0];
 
     const guessCorrect = checkAnswer(rulesFirstTask, answerSelected);
+    const feedbackMeta = {};
+
+    // Add "successs" property to rules for feedback metadata.
+    for (const key in rules) {
+      feedbackMeta[key] = rules[key].map(r => ({ ...r, success: guessCorrect }))
+    }
     const modalData = {
       show: true,
-      feedbackMeta: rules,
+      feedbackMeta,
     };
     if (guessCorrect === true) {
       return {
