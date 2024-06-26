@@ -50,7 +50,7 @@ export function startNewClassification(workflow, project) {
   }
 }
 
-export function saveClassification(workflow, subject, displayDimensions) {
+export function saveClassification(workflow, subject, displayDimensions, feedbackMetadata = null) {
   return (dispatch, getState) => {
     const classifier = getState().classifier
     const subjectStartTime = classifier.subjectStartTime[workflow.id]
@@ -87,20 +87,24 @@ export function saveClassification(workflow, subject, displayDimensions) {
     Promise.all(sizePromises).then((imageDimensions) => {
       subjectDimensions = imageDimensions
     }).finally(() => {
+      const metadata = {
+        workflow_version: workflow.version,
+        started_at: subjectStartTime,
+        finished_at: subjectCompletionTime,
+        user_agent: `${Platform.OS} Mobile App`,
+        user_language: 'en',
+        utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
+        subject_dimensions: subjectDimensions,
+        viewport: { width: getState().app.device.width, height: getState().app.device.height },
+        session: getState().main.session.id
+      };
+      if (feedbackMetadata) {
+        metadata['feedback'] = feedbackMetadata;
+      }
       apiClient.type('classifications').create({
         completed: true,
         annotations,
-        metadata: {
-          workflow_version: workflow.version,
-          started_at: subjectStartTime,
-          finished_at: subjectCompletionTime,
-          user_agent: `${Platform.OS} Mobile App`,
-          user_language: 'en',
-          utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
-          subject_dimensions: subjectDimensions,
-          viewport: { width: getState().app.device.width, height: getState().app.device.height },
-          session: getState().main.session.id
-        },
+        metadata,
         links: {
           project: workflow.links.project,
           workflow: workflow.id,
