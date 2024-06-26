@@ -6,8 +6,8 @@ import {
 import PropTypes from 'prop-types'
 
 import MarkableMedia from './MarkableImage'
-import DrawingButtons from './DrawingButtons'
 import SubjectLoadingIndicator from '../../common/SubjectLoadingIndicator'
+import ButtonsDrawing from '../../classifier/ButtonsDrawing'
 
 class DrawingToolView extends Component {
     
@@ -60,17 +60,13 @@ class DrawingToolView extends Component {
                         <SubjectLoadingIndicator />
                 }
                 {
-                    this.props.showDrawingButtons && 
-                        <DrawingButtons
-                            showHelpButton={this.props.showHelpButton}
-                            onHelpButtonPressed={this.props.onHelpButtonPressed}
-                            onUndoButtonSelected={this.props.onUndoButtonSelected}
-                            onModeButtonSelected={buttonType => this.setState({mode: buttonType})}
-                            highlightedButton={this.state.mode}
-                            canUndo={this.props.canUndo}
-                            aShapeIsOutOfBounds={this.state.aShapeIsOutOfBounds}
-                            inMuseumMode={this.props.inMuseumMode}
-                        />
+                    this.props.showDrawingButtons &&
+                    <ButtonsDrawing
+                        canUndo={this.props.canUndo}
+                        onUndo={this.props.onUndoButtonSelected}
+                        onDraw={() => this.setState({ mode: 'draw' })}
+                        onDelete={() => this.setState({ mode: 'erase' })}
+                    />
                 }
             </View>
         )

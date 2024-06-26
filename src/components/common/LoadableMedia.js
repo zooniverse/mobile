@@ -38,7 +38,7 @@ class LoadableMedia extends Component {
         const { style, source } = this.props
 
         return (
-            <View style={style}>
+            <View style={styles.container}>
                 {
                     !this.state.loaded &&
                         <View style={[style, styles.loadingIndicator]} >
@@ -46,9 +46,9 @@ class LoadableMedia extends Component {
                         </View>
                 }
                 <Image
-                    source={source}
+                    source={source.uri}
                     resizeMode={'contain'}
-                    style={[style, styles.image]}
+                    style={[styles.image]}
                     onLoad={this._onLoad()} 
                     onLoadStart={this._onLoadStart()}
                 />
@@ -58,15 +58,22 @@ class LoadableMedia extends Component {
 }
 
 const styles = EStyleSheet.create({
-    image: {
-        position: 'absolute',
-        resizeMode: 'contain',
-    },
     loadingIndicator: {
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    container: {
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        flex: 1,
+    },
+    image: {
+        flex: 1,
+        width: undefined,
+        height: undefined,
+        alignSelf: 'stretch',
+    },
 
 })
 

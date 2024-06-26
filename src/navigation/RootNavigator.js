@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import {Dimensions} from 'react-native';
 
 import {
   NavigationContainer,
@@ -62,20 +62,32 @@ const StackNavigator = () => {
         name={PageKeys.SwipeClassifier}
         component={SwipeClassifier}
         panHandlers={null}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name={PageKeys.DrawingClassifier}
         drawerLockMode={'locked-closed'}
         panHandlers={null}
         component={DrawingClassifier}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name={PageKeys.QuestionClassifier}
         component={QuestionClassifier}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name={PageKeys.MultiAnswerClassifier}
         component={MultiAnswerClassifier}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name={PageKeys.NotificationLandingPageScreen}
@@ -91,9 +103,6 @@ const DrawerNavigator = () => {
       screenOptions={{
         drawerPosition: 'right',
         drawerType: 'front',
-        drawerStyle: {
-          width: Dimensions.get('window').width * .75,
-        },
         headerShown: false,
         headerMode: 'float',
         swipeEnabled: true,

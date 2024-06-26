@@ -108,7 +108,6 @@ class DrawingClassifierSubject extends Component {
                         inMuseumMode={this.props.inMuseumMode}
                     />
                 </View>
-                { this.props.showBlurView && this.props.imageIsLoaded && this.renderBlurView() }
                 { !this.props.inMuseumMode && this.props.alreadySeen && this.props.imageIsLoaded && <AlreadySeenBanner /> }
             </View>
         )
@@ -117,7 +116,7 @@ class DrawingClassifierSubject extends Component {
 
 const styles = {
     container: {
-        flex: 1
+        flex: 1,
     },
     backgroundImage: {
         flex: 1,

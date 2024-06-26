@@ -3,20 +3,20 @@ import {
     Alert,
     Platform,
     Modal,
-    View
+    View,
+    SafeAreaView
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { BlurView } from '@react-native-community/blur';
 import { bindActionCreators } from 'redux'
 import R from 'ramda'
-import Theme from '../../theme'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import CloseButton from '../common/CloseButton'
 import DrawingToolView from './components/DrawingToolView'
-import InstructionView from './components/InstructionView'
 
 import * as drawingActions from '../../actions/drawing'
+import ButtonsDrawingModal from '../classifier/ButtonsDrawingModal';
+import ToolNameDrawCount from './ToolNameDrawCount';
 
 const mapStateToProps = state => ({
     numberOfShapesDrawn: R.keys(state.drawing.shapesInProgress).length,
@@ -92,22 +92,11 @@ class DrawableSubject extends Component {
                             canUndo={this.props.canUndo}
                             inMuseumMode={this.props.inMuseumMode}
                         />
-                        <InstructionView
-                            {... this.props.tool}
-                            numberDrawn={this.props.numberOfShapesDrawn}
-                            inMuseumMode={this.props.inMuseumMode}
-                            onCancel={() => this.onCancel({justClearInProgress: true})}
-                            onSave={this.onSave}
-                            warnForRequirements={this.props.warnForRequirements && this.props.numberOfShapesDrawn < this.props.tool.min}
-                        />
+                        <SafeAreaView style={styles.bottomContainer}>
+                            <ToolNameDrawCount label={this.props.tool.label} number={this.props.numberOfShapesDrawn} />
+                            <ButtonsDrawingModal onCancel={() => this.onCancel({ justClearInProgress: true })} onSave={this.onSave} />
+                        </SafeAreaView>
                     </View>
-                    <CloseButton
-                        onPress={() => this.onCancel({justClearInProgress: false})}
-                        style={styles.closeButton}
-                        color={Theme.$zooniverseTeal}
-                        backgroundColor="white"
-                        size={34}
-                    />
                 </View>
             </Modal>
         )
@@ -115,6 +104,12 @@ class DrawableSubject extends Component {
 }
 
 const styles = EStyleSheet.create({
+    bottomContainer: {
+        backgroundColor: '#FFFFFD',
+        justifyContent: 'flex-end',
+        paddingTop: 40,
+        height: 140,
+    },
     blurView: {
         position: 'absolute',
         top: 0,
@@ -123,7 +118,7 @@ const styles = EStyleSheet.create({
         right: 0
     },
     androidBlurView: {
-        backgroundColor: 'rgba(255,255,255, 0.8)'
+        backgroundColor: '#272727'
     },
     closeButton: {
         position: 'absolute',
@@ -140,15 +135,14 @@ const styles = EStyleSheet.create({
         backgroundColor: 'white'
     },
     modalContainer: {
-        backgroundColor: 'rgba(237,240,243,1)',
+        backgroundColor: '#272727',
         flex: 1,
-        marginHorizontal: 25,
-        marginBottom: 25,
-        marginTop: 40
     },
     modal: {
         flex: 1,
-        marginTop: Platform.OS === 'ios' ? 50 : 0,
+        width: '100%',
+        paddingBottom: 20,
+        backgroundColor: 'white',
     }
 
 })

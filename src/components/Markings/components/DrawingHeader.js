@@ -4,24 +4,21 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 
-import * as colorModes from '../../../displayOptions/colorModes'
-
 const DrawingHeader = (props) => {
     return props.horizontal ? 
         <View style={styles.horizontalContainer}>
-            <View style={[styles.horizontalQuestionContainer, colorModes.contentBackgroundColorFor(props.inMuseumMode)]}>
+            <View style={styles.horizontalQuestionContainer}>
                 {props.question}
             </View>
-            <View style={[styles.horizontalInstructionContainer, colorModes.contentBackgroundColorFor(props.inMuseumMode)]}>
+            <View style={styles.horizontalInstructionContainer}>
                 {props.instructions}
             </View>
         </View>
     :
         <View>
-            <View style={[styles.verticalQuestionContainer, colorModes.contentBackgroundColorFor(props.inMuseumMode)]}>
+            <View style={styles.verticalQuestionContainer}>
                 {props.question}
             </View>
-            {props.instructions}
         </View>
 }
 

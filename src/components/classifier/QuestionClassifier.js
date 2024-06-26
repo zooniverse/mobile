@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    SafeAreaView,
     ScrollView,
     View
 } from 'react-native';
@@ -19,16 +20,14 @@ import Tutorial from './Tutorial';
 import OverlaySpinner from '../OverlaySpinner'
 import Question from './Question'
 import Separator from '../common/Separator'
-import {
-    AnswerButton,
-    GuideButton,
-    SubmitButton
-} from './ClassifierButton';
 
 import FullScreenMedia from '../FullScreenMedia'
 import TappableSubject from './TappableSubject';
 
-import * as colorModes from '../../displayOptions/colorModes'
+import ClassifierHeader from '../../navigation/ClassifierHeader';
+import FieldGuideBtn from './FieldGuideBtn';
+import ButtonLarge from './ButtonLarge';
+import ButtonAnswer from './ButtonAnswer';
 
 class QuestionClassifier extends Component {
 
@@ -121,7 +120,7 @@ class QuestionClassifier extends Component {
         }
 
         const renderTutorial = () =>
-            <View style={styles.tutorialContainer}>
+            <View style={styles.flex}>
                 <Tutorial
                     projectName={project.display_name}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -132,7 +131,7 @@ class QuestionClassifier extends Component {
             </View>
 
         const question =
-            <View style={colorModes.contentBackgroundColorFor(this.props.route.params.project.in_museum_mode)}>
+            <View style={styles.questionContainer}>
                 <Question
                     question={task.question}
                     workflowID={workflow.id}
@@ -155,9 +154,11 @@ class QuestionClassifier extends Component {
             </View>
 
         const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
+        const fullWidthAnswers = answers.some(a => a.label.length >= 25)
+        const answerContainerStyles = fullWidthAnswers ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' };
         const classificationPanel =
             <View
-                style={[styles.classificationPanel, colorModes.framingBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
+                style={[styles.classificationPanel]}>
                 <ClassificationPanel
                     hasTutorial={!R.isEmpty(tutorial)}
                     isQuestionVisible={isQuestionVisible}
@@ -173,75 +174,75 @@ class QuestionClassifier extends Component {
                 </ClassificationPanel>
                 {
                     isQuestionVisible ?
-                        <ScrollView
-                            style={styles.scrollView}
-                            ref={ref => this.scrollView = ref}
-                        >
-                            <View style={styles.backgroundView}/>
-                            <View
-                                style={[styles.classifierContainer, colorModes.contentBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
-                                <View onLayout={({nativeEvent}) => this.setState({
-                                    imageDimensions: {
-                                        width: nativeEvent.layout.width,
-                                        height: nativeEvent.layout.height
+                        <>
+                            <View style={styles.flex}  onLayout={({nativeEvent}) => this.setState({
+                                imageDimensions: {
+                                    width: nativeEvent.layout.width,
+                                    height: nativeEvent.layout.height
                                     }
-                                })}>
-                                    <TappableSubject
-                                        height={300}
-                                        width={imageDimensions.width}
-                                        subject={subject}
-                                        alreadySeen={seenThisSession}
-                                        inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                        onPress={(imageSource) => this.setState({
-                                            showFullSize: true,
-                                            fullScreenImageSource: {uri: imageSource}
-                                        })}
-                                    />
-                                </View>
-                                {
-                                    answers.map((answer, index) =>
-                                        <View key={index} style={styles.buttonContainer}>
-                                            <AnswerButton
-                                                selected={index === answerSelected}
-                                                inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                                deselected={answerSelected !== -1 && index !== answerSelected}
-                                                text={answer.label}
-                                                onPress={this.onOptionSelected(index)}
-                                            />
+                            })}>
+                                <TappableSubject
+                                    height={300}
+                                    width={imageDimensions.width}
+                                    subject={subject}
+                                    alreadySeen={seenThisSession}
+                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
+                                    onPress={(imageSource) => this.setState({
+                                        showFullSize: true,
+                                        fullScreenImageSource: {uri: imageSource}
+                                    })}
+                                />
+                            </View>
+                            <View style={styles.flex}>
+                                <ScrollView
+                                    ref={ref => this.scrollView = ref}
+                                >
+                                    <View
+                                        style={[styles.classifierContainer]}>
+                                    
+                                        <View style={[styles.answerButtonContainer, answerContainerStyles]}>
+
+                                        {
+                                            answers.map((answer, index) =>
+                                                <View key={index} >
+                                                    <ButtonAnswer 
+                                                        selected={index === answerSelected}
+                                                        text={answer.label}
+                                                        onPress={this.onOptionSelected(index)}
+                                                        fullWidth={fullWidthAnswers}
+                                                    />
+                                                </View>
+                                            )
+                                        }
                                         </View>
-                                    )
+                                    </View>
+                                    <View style={styles.buttonContainer}>
+                                        <ButtonLarge
+                                            disabled={answerSelected === -1}
+                                            text="Submit"
+                                            onPress={this.submitClassification()}
+                                        />
+                                    </View>
+                                </ScrollView>
+                                {
+                                    task.help &&
+                                    <View style={styles.needHelpContainer}>
+                                        <NeedHelpButton
+                                            inMuseumMode={this.props.route.params.project.in_museum_mode}
+                                            onPress={() => this.classifierContainer.displayHelpModal()}
+                                        />
+                                    </View>
+                                }
+                                {
+                                    R.length(guide.items) > 0 &&
+
+                                    <View style={styles.fieldGuideBtnContainer}>
+                                        <FieldGuideBtn onPress={() => this.classifierContainer.displayFieldGuide()} />
+                                    </View>
+
                                 }
                             </View>
-                            <View style={styles.buttonContainer}>
-                                <SubmitButton
-                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                    disabled={answerSelected === -1}
-                                    text="Submit"
-                                    onPress={this.submitClassification()}
-                                />
-                            </View>
-                            {
-                                (task.help || R.length(guide.items) > 0) &&
-                                <Separator style={styles.separator}/>
-                            }
-                            {
-                                task.help !== null &&
-                                <NeedHelpButton
-                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                    onPress={() => this.classifierContainer.displayHelpModal()}
-                                />
-                            }
-                            {
-                                R.length(guide.items) > 0 &&
-                                <GuideButton
-                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                    onPress={() => this.classifierContainer.displayFieldGuide()}
-                                    style={styles.guideButton}
-                                    text="Field Guide"
-                                    type="guide"
-                                />
-                            }
-                        </ScrollView>
+                        </>
                         :
                         renderTutorial()
                 }
@@ -252,9 +253,9 @@ class QuestionClassifier extends Component {
                     question={fullScreenQuestion}
                 />
             </View>
-
         return (
-            <View style={[styles.container, styles.dropshadow]}>
+            <SafeAreaView style={[styles.flex, styles.dropshadow]}>
+                <ClassifierHeader project={project}/>
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -265,7 +266,7 @@ class QuestionClassifier extends Component {
                 >
                     {needsTutorial ? renderTutorial() : classificationPanel}
                 </ClassifierContainer>
-            </View>
+            </SafeAreaView>
         );
     }
 }
@@ -292,8 +293,12 @@ QuestionClassifier.propTypes = {
 }
 
 const styles = EStyleSheet.create({
-    container: {
-        flex: 1
+    answerButtonContainer: {
+        marginHorizontal: 12,
+        paddingVertical: 16,
+    },
+    flex: {
+        flex: 1,
     },
     dropShadow: {
         shadowColor: 'black',
@@ -308,19 +313,10 @@ const styles = EStyleSheet.create({
     classificationPanel: {
         flex: 1,
         overflow: 'visible',
-        marginBottom: 15,
+        backgroundColor: '#EBEBEB',
     },
     classifierContainer: {
-        paddingHorizontal: 15,
         paddingVertical: 15,
-    },
-    tutorialContainer: {
-        flex: 1,
-        marginHorizontal: 25
-    },
-    scrollView: {
-        flex: 1,
-        marginHorizontal: 25
     },
     backgroundView: {
         height: 200,
@@ -330,13 +326,28 @@ const styles = EStyleSheet.create({
         right: 0,
     },
     buttonContainer: {
-        marginTop: 10
+        marginTop: 10,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 16,
     },
     separator: {
         marginTop: 25
     },
     guideButton: {
-        marginTop: 15
+        marginTop: 15,
+    },
+    needHelpContainer: {
+        alignItems: 'center',
+        marginTop: 16,
+    },
+    questionContainer: {
+        backgroundColor: '#EBEBEB',
+        paddingVertical: 16
+    },
+    fieldGuideBtnContainer: {
+        alignItems: 'center',
     }
 })
 

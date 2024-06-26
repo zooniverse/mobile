@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Switch,
   TouchableOpacity,
   View
 } from 'react-native'
@@ -8,7 +7,22 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 import FontedText from '../common/FontedText'
 import { addIndex, contains, map } from 'ramda'
-import theme from '../../theme'
+import Toggle from 'react-native-toggle-element'
+
+const trackBarStyles = {
+  height: 12,
+  width: 26,
+  activeBackgroundColor: '#ADDDE0',
+  inActiveBackgroundColor: '#A6A7A9',
+}
+
+const thumbButtonStyles = {
+  width: 18,
+  height: 18,
+  radius: 9,
+  activeBackgroundColor: '#005D69',
+  inActiveBackgroundColor: '#EBEBEB'
+}
 
 const UnlinkedTask = (props) => {
   const annotationValues = props.annotation || []
@@ -16,13 +30,12 @@ const UnlinkedTask = (props) => {
   const renderUnlinkedTask = ( answer, idx ) => {
     return (
       <View key={ idx } style={styles.rowContainer}>
-        <Switch
+        <Toggle
           value={contains(idx, annotationValues)}
-          style={styles.switchComponent}
-          trackColor={theme.$zooniverseTeal}
-          onValueChange={()=>props.onAnswered(props.unlinkedTaskKey, idx)}
+          onPress={()=>props.onAnswered(props.unlinkedTaskKey, idx)}
+          trackBar={trackBarStyles}
+          thumbButton={thumbButtonStyles}
         />
-
         <TouchableOpacity
           onPress={ ()=>props.onAnswered(props.unlinkedTaskKey, idx) }
           activeOpacity={0.5}
@@ -56,7 +69,7 @@ const styles = EStyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '85%',
+    marginVertical: 2,
   },
   switchComponent: {
     marginLeft: 0,

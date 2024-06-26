@@ -39,6 +39,7 @@ class SizedImage extends React.Component {
           toValue: resizedHeight,
           easing: Easing.linear,
           duration: 50,
+          useNativeDriver: false,
         }
       ).start()
 
@@ -48,6 +49,7 @@ class SizedImage extends React.Component {
           toValue: resizedWidth,
           easing: Easing.bezier(0, 1, 0.6, 1),
           duration: 50,
+          useNativeDriver: false,
         }
       ).start()
     })
@@ -59,6 +61,7 @@ class SizedImage extends React.Component {
       this.state.fadeAnim,
       { toValue: 1,
         duration: 200,
+        useNativeDriver: false,
       },
     ).start();
   }

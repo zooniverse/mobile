@@ -1,21 +1,26 @@
 import React from 'react'
 import {
-    Modal,
     TouchableOpacity,
     View,
-    Dimensions
+    Dimensions,
+    StyleSheet
 } from 'react-native'
+import Modal from "react-native-modal";
 import FontedText from './common/FontedText'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ZoomableImage from './ZoomableImage'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Fontisto'
 import PropTypes from 'prop-types'
 import VideoPlayer from 'react-native-video-controls';
+import { BlurView } from '@react-native-community/blur';
 
 class FullScreenMedia extends React.Component {
     render() {
-        function displayWithRequisiteComponent(uri, handlePress) {
-            if (uri.slice(uri.length - 4).match('.mp4')) {
+        const uri = this.props.source.uri;
+        const isVideo = uri.slice(uri.length - 4).match('.mp4');
+        const closeBottom = isVideo ? 100 : 42;
+        function displayWithRequisiteComponent(handlePress) {
+            if (isVideo) {
                 return <VideoPlayer
                     source={{uri: uri}}
                     style={{
@@ -40,12 +45,15 @@ class FullScreenMedia extends React.Component {
 
         return (
             <Modal
-                animationType={'fade'}
-                transparent={true}
-                onRequestClose={() => {
-                }}
+                style={styles.modalContainer}
+                coverScreen={false}
                 visible={this.props.isVisible}>
                 <View style={styles.container}>
+                    <BlurView
+                        blurType="dark"
+                        blurAmount={5}
+                        style={styles.blur}
+                    />
                     {
                         this.props.question ?
                             <FontedText style={styles.message}>
@@ -56,15 +64,14 @@ class FullScreenMedia extends React.Component {
                     }
                     {
                         displayWithRequisiteComponent(
-                            this.props.source.uri,
                             this.props.handlePress
                         )
                     }
                     <TouchableOpacity
                         activeOpacity={0.5}
                         onPress={this.props.handlePress}
-                        style={styles.closeIcon}>
-                        <Icon name="times" style={styles.icon}/>
+                        style={[styles.closeIcon, {bottom: closeBottom}]}>
+                        <Icon name="close" style={styles.icon}/>
                     </TouchableOpacity>
                 </View>
             </Modal>
@@ -73,8 +80,12 @@ class FullScreenMedia extends React.Component {
 }
 
 const styles = EStyleSheet.create({
+    blur: {
+        flex: 1,
+        ...StyleSheet.absoluteFillObject,
+    },
     container: {
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
@@ -82,13 +93,14 @@ const styles = EStyleSheet.create({
     closeIcon: {
         backgroundColor: 'transparent',
         position: 'absolute',
-        top: 35,
-        right: 5
+        left: 0,
+        right: 0,
+        alignItems: 'center',
     },
     icon: {
         backgroundColor: 'transparent',
-        color: 'white',
-        fontSize: 24,
+        color: 'rgba(255, 255, 255, 0.6)',
+        fontSize: 40,
         padding: 15,
     },
     rowContainer: {
@@ -108,6 +120,9 @@ const styles = EStyleSheet.create({
         color: '$transluscentWhite',
         fontSize: 20,
         padding: 5,
+    },
+    modalContainer: {
+        margin: 0,
     }
 })
 
