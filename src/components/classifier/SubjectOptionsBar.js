@@ -32,7 +32,7 @@ const styles = {
         padding: 15,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: 'rgba(238,241,244,1)'
+        backgroundColor: '#EBEBEB',
     },
     expandButtonIconStyle: {
         marginRight: 0,

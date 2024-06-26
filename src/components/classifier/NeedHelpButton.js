@@ -2,19 +2,17 @@ import React, { Component } from 'react'
 import {
     TouchableOpacity
 } from 'react-native'
-import DeviceInfo from 'react-native-device-info'
 import FontedText from '../common/FontedText'
 import PropTypes from 'prop-types'
 
-import * as colorModes from '../../displayOptions/colorModes'
 
 export class NeedHelpButton extends Component {
 
     render() {
         return (
-            <TouchableOpacity onPress={this.props.onPress}>
-                <FontedText style={[styles.needHelpText, colorModes.helpTextColorFor(this.props.inMuseumMode)]}>
-                    NEED SOME HELP WITH THIS TASK?
+            <TouchableOpacity onPress={this.props.onPress} style={styles.container}>
+                <FontedText style={styles.needHelpText}>
+                    I NEED HELP WITH THIS TASK
                 </FontedText>
             </TouchableOpacity>
         )
@@ -31,10 +29,14 @@ NeedHelpButton.defaultProps = {
 }
 
 const styles = {
+    container: {
+        marginBottom: 12,
+    },
     needHelpText: {
-        fontSize: DeviceInfo.isTablet() ? 22 : 14,
-        textAlign: 'center',
-        marginTop: 15,
+        fontSize: 12,
+        lineHeight: 14.03,
+        letterSpacing: 0.5,
+        color: '#272727'
     }
 }
 

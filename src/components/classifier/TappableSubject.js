@@ -8,8 +8,7 @@ import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 import LoadableMedia from '../common/LoadableMedia'
-import AlreadySeenBanner from './AlreadySeenBanner'
-import PaginationBar from './PaginationBar';
+import AutoPlayMultiImage from './AutoPlayMultiImage'
 
 class TappableSubject extends Component {
     constructor(props) {
@@ -51,8 +50,6 @@ class TappableSubject extends Component {
 
     render() {
         const {
-            alreadySeen,
-            inMuseumMode,
             onPress,
             height,
             width,
@@ -62,92 +59,25 @@ class TappableSubject extends Component {
         if (width === 0) {
             return <View style={{height, width}}/>
         }
-        return (
-            <View>
-                {
-                    subject.displays.length > 1 ?
-                        <Animated.ScrollView
-                            ref={ref => this.scrollView = ref}
-                            pagingEnabled
-                            decelerationRate="fast"
-                            snapToInterval={width - 40}
-                            horizontal
-                            style={{height, width}}
-                            contentContainerStyle={styles.scrollViewContainer}
-                            scrollEventThrottle={1}
-                            showsHorizontalScrollIndicator={false}
-                            onScroll={Animated.event(
-                                [
-                                    {
-                                        nativeEvent: {
-                                            contentOffset: {x: this.state.scrollViewOffset},
-                                        },
-                                    },
-                                ],
-                                {useNativeDriver: false},
-                            )}
-                        >
-                            {
-                                subject.displays.map((display, index) => {
-                                    return (
-                                        <Animated.View
-                                            key={index}
-                                            style={{
-                                                paddingHorizontal: this.state.scrollViewOffset.interpolate({
-                                                    inputRange: [
-                                                        width * index - width,
-                                                        width * index,
-                                                        width * index + width
-                                                    ],
-                                                outputRange: [0, 15, 0]
-                                                })
-                                            }}
-                                        >
-                                            <TouchableOpacity 
-                                                onPress={() => {
-                                                    if (index === this.state.imageIndex) {
-                                                        onPress(display.src)
-                                                    } else {
-                                                        index === subject.displays.length - 1 ?
-                                                            this.scrollView.scrollToEnd()
-                                                        :
-                                                            this.scrollView.scrollTo({
-                                                                x: index * width - 40,
-                                                                animated: true
-                                                            })
-                                                    }
-                                                }}
-                                            >
-                                                <LoadableMedia
-                                                    source={{uri: display.src}}
-                                                    style={[{height, width: width - 60}, styles.imageBackground]}
-                                                />
-                                            </TouchableOpacity> 
-                                        </Animated.View>
-                                    )
-                                })
-                            }
-                            { alreadySeen && !inMuseumMode && <AlreadySeenBanner /> }
-                        </Animated.ScrollView>
-                    :
-                        <TouchableOpacity style={styles.imageContainer} onPress={() => onPress(subject.displays[0].src)}>
-                            <LoadableMedia
-                                source={{uri: subject.displays[0].src}}
-                                style={{height, width}}
-                            />
-                        </TouchableOpacity> 
-                }
-                {
-                    subject.displays.length > 1 &&
-                        <View style={styles.paginationContainer}>
-                            <PaginationBar
-                                totalPages={subject.displays.length}
-                                pageIndex={this.state.imageIndex}
-                            />
-                        </View>
-                }
-            </View>
-        );
+        const imageUris = subject.displays.map(d => ({ uri: d.src }));
+
+        if (imageUris.length === 1) {
+            return <TouchableOpacity style={styles.imageContainer} onPress={() => onPress(subject.displays[0].src)}>
+                <LoadableMedia
+                    source={{uri: imageUris[0]}}
+                    style={{height, width}}
+                />
+            </TouchableOpacity> 
+        } else if (imageUris.length > 1) {
+            return <AutoPlayMultiImage
+                images={imageUris}
+                subjectDisplayWidth={width}
+                subjectDisplayHeight={height}
+                expandImage={onPress}
+                swiping={false}
+                currentCard={true}
+            />  
+        }
     }
 }
 

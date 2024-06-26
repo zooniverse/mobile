@@ -3,6 +3,7 @@ import {
     Animated,
     Dimensions,
     Easing,
+    FlatList,
     PanResponder,
     Platform,
     ScrollView,
@@ -12,11 +13,11 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import FieldGuideItemDetail from './FieldGuideItemDetail'
 import FieldGuideItemRow from './FieldGuideItemRow'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import PropTypes from 'prop-types';
-import {addIndex, isEmpty, map} from 'ramda'
+import {isEmpty} from 'ramda'
 
-import * as colorModes from '../../displayOptions/colorModes'
+import FieldGuideBtn from './FieldGuideBtn'
 
 const MAX_DEFAULT_HEIGHT = Dimensions.get('window').height * .6
 const MIN_HEIGHT = 33
@@ -48,7 +49,7 @@ export class FieldGuide extends Component {
 
                 Animated.event([
                     null, {dy: this.state.heightAnim}
-                ])(e, {dy: newVal});
+                ], {useNativeDriver: false})(e, {dy: newVal});
             },
             onPanResponderTerminationRequest: () => true,
             onPanResponderRelease: () => {
@@ -70,7 +71,8 @@ export class FieldGuide extends Component {
                         Animated.timing(this.state.heightAnim, {
                             toValue: adjustToHeight,
                             easing: Easing.out(Easing.ease),
-                            duration: 100
+                            duration: 100,
+                            useNativeDriver: false,
                         }).start()
                     }
                 }
@@ -108,6 +110,10 @@ export class FieldGuide extends Component {
         this.animateHeight(150)
     }
 
+    toggleOpenClose = () => {
+        this.closeDetail();
+    }
+
     animateHeight(toHeight, duration = 300) {
         Animated.timing(
             this.state.heightAnim,
@@ -115,12 +121,13 @@ export class FieldGuide extends Component {
                 toValue: toHeight,
                 easing: Easing.linear,
                 duration: duration,
+                useNativeDriver: false,
             }
         ).start()
     }
 
     setHeight(height) {
-        const newHeight = height + this.state.headerHeight
+        const newHeight = height + this.state.headerHeight + 32
         this.setState({height: newHeight})
         this.animateHeight(newHeight < MAX_DEFAULT_HEIGHT ? newHeight : MAX_DEFAULT_HEIGHT)
     }
@@ -128,21 +135,21 @@ export class FieldGuide extends Component {
     render() {
         const {items, icons} = this.props.guide
         const closeIcon =
-            <Animated.View style={[styles.close, {paddingBottom: this.state.heightAnim}]}>
+            <Animated.View style={[styles.close]}>
                 <TouchableOpacity
                     onPress={() => this.close()}
                     activeOpacity={0.5}
                     style={styles.navIconContainer}>
-                    <Icon name='chevron-down' style={styles.navIcon}/>
+                    <Icon name='chevron-down' size={30} style={styles.navIcon}/>
                 </TouchableOpacity>
             </Animated.View>
 
         const backIcon =
-            <Animated.View style={[styles.back, {paddingBottom: this.state.heightAnim}]}>
+            <Animated.View style={[styles.back]}>
                 <TouchableOpacity
                     onPress={() => this.closeDetail()}
                     activeOpacity={0.5}>
-                    <Icon name='chevron-left' style={styles.navIcon}/>
+                    <Icon name='chevron-left' size={30} style={styles.navIcon}/>
                 </TouchableOpacity>
             </Animated.View>
 
@@ -151,36 +158,26 @@ export class FieldGuide extends Component {
                 style={[styles.dragBarContainer, {bottom: this.state.heightAnim}]}
                 hitSlop={{top: 10, bottom: 10, left: 0, right: 0}}
                 {...this._panResponder.panHandlers}>
-                <View style={styles.dragBar}/>
-                <View style={styles.dragBarLineAbsoluteContainer}>
-                    <View style={styles.dragBarLineContainer}>
-                        <View style={styles.dragBarLine}/>
-                        <View style={styles.dragBarLine}/>
-                    </View>
+                <View style={{top: 1}}>
+                    <FieldGuideBtn onPress={this.toggleOpenClose} />
                 </View>
             </Animated.View>
 
-        const renderItemRow = (item = {}, icons = [], idx) => {
-            return (
-                <FieldGuideItemRow
-                    onPress={() => this.openDetail(item)}
-                    key={idx}
-                    item={item}
-                    icons={icons}
-                    inMuseumMode={this.props.inMuseumMode}
-                />
-            )
-        }
-
         const fieldGuide =
             <ScrollView>
-                <View onLayout={(event) => this.setHeight(event.nativeEvent.layout.height)}>
-                    {addIndex(map)(
-                        (item, idx) => {
-                            return renderItemRow(item, icons, idx)
-                        },
-                        items
-                    )}
+                <View style={styles.fieldGuideContainer} onLayout={(event) => this.setHeight(event.nativeEvent.layout.height)}>
+                    <FlatList
+                        data={items}
+                        numColumns={2}
+                        renderItem={({ item, index }) => <FieldGuideItemRow
+                            onPress={() => this.openDetail(item)}
+                            key={index}
+                            item={item}
+                            icons={icons}
+                            inMuseumMode={this.props.inMuseumMode}
+                            />
+                        }
+                    />
                 </View>
             </ScrollView>
 
@@ -206,11 +203,12 @@ export class FieldGuide extends Component {
                 <Animated.View style={[
                     styles.guideContainer,
                     {height: this.state.heightAnim},
-                    colorModes.contentBackgroundColorFor(this.props.inMuseumMode)
                 ]}>
+                    <View style={styles.backCloseContainer}>
+                        {showFieldGuideItemDetail ? backIcon : null}
+                        {closeIcon}
+                    </View>
                     {showFieldGuideItemDetail ? itemDetail : fieldGuide}
-                    {showFieldGuideItemDetail ? backIcon : null}
-                    {closeIcon}
                 </Animated.View>
                 {dragBar}
             </View>
@@ -219,6 +217,9 @@ export class FieldGuide extends Component {
 }
 
 const styles = EStyleSheet.create({
+    backCloseContainer: {
+        height: 40
+    },
     container: {
         position: 'absolute',
         bottom: 0,
@@ -231,65 +232,35 @@ const styles = EStyleSheet.create({
         left: 0,
         right: 0,
         height: 0,
-        shadowColor: 'rgba(0, 0, 0, 0.24)',
-        shadowOpacity: 0.8,
-        shadowRadius: 5,
-        shadowOffset: {
-            height: 1
-        },
+        borderTopWidth: 1,
+        borderColor: '#00979D',
+        backgroundColor: '#fff'
     },
     dragBarContainer: {
-        backgroundColor: 'white',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        height: 18
-    },
-    dragBar: {
-        height: 12,
-        backgroundColor: '$dragBarColor',
-    },
-    dragBarLineAbsoluteContainer: {
         backgroundColor: 'transparent',
         position: 'absolute',
-        top: 0,
         left: 0,
         right: 0,
-        height: 18
-    },
-    dragBarLineContainer: {
-        alignSelf: 'center',
-        backgroundColor: '$dragBarColor',
-        paddingTop: 4,
-        paddingBottom: 6,
-        paddingHorizontal: 10,
-        borderRadius: 4,
-    },
-    dragBarLine: {
-        backgroundColor: 'white',
-        alignSelf: 'center',
-        height: 2,
-        width: 13,
-        borderRadius: 2,
-        marginTop: 2,
+        alignItems: 'center',
     },
     navIcon: {
-        fontSize: 24,
         color: '$darkTeal',
-        lineHeight: 24,
     },
     back: {
         position: 'absolute',
-        bottom: -28,
-        left: 10,
+        left: 4,
+        top: 4,
         backgroundColor: 'transparent',
     },
     close: {
         position: 'absolute',
-        bottom: -25,
-        right: 15,
+        right: 4,
+        top: 4,
         backgroundColor: 'transparent',
     },
+    fieldGuideContainer: {
+        paddingBottom: 12
+    }
 })
 
 FieldGuide.propTypes = {

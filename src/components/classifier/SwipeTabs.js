@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {View} from 'react-native'
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
-import {length} from 'ramda'
-import {GuideButton, SwipeButton} from './ClassifierButton';
+import {GuideButton} from './ClassifierButton';
+import ButtonAnswer from './ButtonAnswer';
 
 export class SwipeTabs extends Component {
     constructor(props) {
@@ -13,37 +13,29 @@ export class SwipeTabs extends Component {
             isFieldGuideVisible: false,
         }
     }
+    
 
     render() {
+        const fullWidthAnswers = this.props.answers.some(a => a.label.length >= 25)
+        const answerContainerStyles = fullWidthAnswers ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' };
         const leftButton =
-            <SwipeButton
+            <ButtonAnswer
                 onPress={this.props.onLeftButtonPressed}
-                style={[styles.growing, styles.leftButtonPadding]}
                 text={this.props.answers[0].label}
+                fullWidth={fullWidthAnswers}
             />
 
         const rightButton =
-            <SwipeButton
+            <ButtonAnswer
                 onPress={this.props.onRightButtonPressed}
-                style={styles.growing}
                 text={this.props.answers[1].label}
-            />
-
-        const fieldGuideButton =
-            <GuideButton
-                inMuseumMode={this.props.inMuseumMode}
-                onPress={this.props.onFieldGuidePressed}
-                style={styles.leftButtonPadding}
-                text="Field Guide"
+                fullWidth={fullWidthAnswers}
             />
 
         return (
-            <View>
-                <View style={styles.container}>
-                    {leftButton}
-                    {length(this.props.guide.items) > 0 ? fieldGuideButton : null}
-                    {rightButton}
-                </View>
+            <View style={[styles.container, answerContainerStyles]}>
+                {leftButton}
+                {rightButton}
             </View>
         )
     }
@@ -51,12 +43,8 @@ export class SwipeTabs extends Component {
 
 const styles = EStyleSheet.create({
     container: {
-        marginHorizontal: 25,
-        marginTop: 15,
-        marginBottom: 5,
-        backgroundColor: 'transparent',
-        flexDirection: 'row',
-        justifyContent: 'space-around'
+        marginHorizontal: 12,
+        paddingVertical: 16,
     },
     leftButtonPadding: {
         marginRight: 20

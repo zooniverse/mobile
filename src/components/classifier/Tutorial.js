@@ -1,16 +1,15 @@
 import React, {Component} from 'react'
-import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native'
+import {Platform, StyleSheet, View} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import Swiper from 'react-native-swiper';
 import {addIndex, length, map} from 'ramda'
 import PropTypes from 'prop-types';
 
-import Button from '../Button'
 import TutorialStep from './TutorialStep'
 import FontedText from '../common/FontedText';
 
-import * as colorModes from '../../displayOptions/colorModes'
+import ButtonLarge from './ButtonLarge';
+import PaginateDot from './PaginateDot';
 
 const topPadding = (Platform.OS === 'ios') ? 10 : 0
 
@@ -36,77 +35,41 @@ export class Tutorial extends Component {
             )
         })
 
-        const hasPreviousStep = this.state.step > 0
-        const previousStep =
-            <TouchableOpacity
-                onPress={() => this.swiper.scrollBy(-1, false)}
-                style={styles.navIconContainer}>
-                <Icon name='chevron-left' style={styles.navIcon}/>
-            </TouchableOpacity>
-
-        const disabledPrevious =
-            <View style={styles.navIconContainer}>
-                <Icon name='chevron-left' style={[styles.navIcon, styles.disabledIcon]}/>
-            </View>
 
         const hasNextStep = (this.state.step + 1) < totalSteps
-        const nextStep =
-            <TouchableOpacity
-                onPress={() => this.swiper.scrollBy(1, false)}
-                style={styles.navIconContainer}>
-                <Icon name='chevron-right' style={styles.navIcon}/>
-            </TouchableOpacity>
-
-        const disabledNext =
-            <View style={styles.navIconContainer}>
-                <Icon name='chevron-right' style={[styles.navIcon, styles.disabledIcon]}/>
-            </View>
 
         const renderCircle = (currentStep, index) => {
             return (
-                <TouchableOpacity
-                    key={`PAGINATION_DOT_${index}`}
-                    onPress={() => this.swiper.scrollBy(index - this.state.step, false)}>
-                    <Icon
-                        name={currentStep === index ? 'circle' : 'circle-thin'}
-                        style={styles.circleIcon}/>
-                </TouchableOpacity>
+                <PaginateDot 
+                    onPress={() => this.swiper.scrollBy(index - this.state.step, false)}
+                    active={currentStep === index}
+                />
             )
         }
 
-        const navigation =
-            <View style={styles.navigation}>
-                {hasPreviousStep ? previousStep : disabledPrevious}
-                {addIndex(map)(
-                    (step, idx) => {
-                        return renderCircle(this.state.step, idx)
-                    },
-                    steps
-                )}
-                {hasNextStep ? nextStep : disabledNext}
-            </View>
-
-        const continueButton =
-            <Button
-                handlePress={() => this.swiper.scrollBy(1, false)}
-                additionalStyles={[styles.tealButton]}
-                additionalTextStyles={[styles.whiteText]}
-                text={'Continue'}/>
+        const Navigation = () => {
+            const justifyContent = steps.length > 9 ? 'flex-start' : 'center';
+      
+            return (
+              <View style={[styles.navigation, { justifyContent }]}>
+                {addIndex(map)((step, idx) => {
+                  return renderCircle(this.state.step, idx);
+                }, steps)}
+              </View>
+            );
+          };
 
         const finishedButton =
-            <Button
-                handlePress={this.props.finishTutorial}
-                additionalStyles={[styles.orangeButton]}
-                additionalTextStyles={[styles.blackText]}
-                text={'Let\'s Go!'}/>
+            <ButtonLarge 
+                text="Let's Go!"
+                onPress={this.props.finishTutorial}
+            />
 
         const tutorialHeader =
-            <FontedText style={[styles.tutorialHeader, {color: colorModes.textColorFor(this.props.inMuseumMode)}]}>
-                {`${this.props.projectName} - Tutorial`}
-            </FontedText>
+            <FontedText style={[styles.tutorialHeader]}>TUTORIAL</FontedText>
 
         return (
-            <View style={[styles.container, colorModes.contentBackgroundColorFor(this.props.inMuseumMode)]}>
+            <View style={styles.container}>
                 {this.props.isInitialTutorial ? tutorialHeader : null}
                 <View style={styles.container}>
                     <Swiper
@@ -121,8 +84,8 @@ export class Tutorial extends Component {
                 </View>
                 <View style={styles.footer}>
                     <View style={styles.line}/>
-                    {hasNextStep ? continueButton : finishedButton}
-                    {totalSteps > 0 ? navigation : null}
+                    {!hasNextStep && finishedButton}
+                    {totalSteps > 0 ? <Navigation /> : null}
                 </View>
             </View>
         )
@@ -131,7 +94,8 @@ export class Tutorial extends Component {
 
 const styles = EStyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#EBEBEB',
     },
     firstTutorialContainer: {
         flex: 1,
@@ -147,17 +111,17 @@ const styles = EStyleSheet.create({
         padding: 15
     },
     footer: {
-        height: 110,
         paddingVertical: 10,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
     navigation: {
-        alignSelf: 'stretch',
-        flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 5,
+        alignItems: 'flex-end',
+        flexWrap: 'wrap',
+        marginVertical: 16,
+        minHeight: 16,
     },
     circleIcon: {
         fontSize: 12,
@@ -202,12 +166,15 @@ const styles = EStyleSheet.create({
         backgroundColor: '$lightGreyBackground',
     },
     tutorialHeader: {
-        fontSize: 20,
+        fontSize: 18,
         marginHorizontal: 30,
         marginTop: 10,
-        marginBottom: 0,
+        marginBottom: 10,
         paddingTop: topPadding,
         paddingBottom: 0,
+        fontWeight: '600',
+        letterSpacing: 0.05,
+        color: '#005D69'
     },
     markdown: {
         flex: 1,
