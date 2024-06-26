@@ -65,8 +65,13 @@ export class SwipeClassifier extends React.Component {
                 width: 1,
                 height: 1
             },
+<<<<<<< HEAD
             swiping: false,
             feedbackModal: {},
+=======
+            feedbackModal: {},
+            swiping: false,
+>>>>>>> master
         }
 
         this.onAnswered = this.onAnswered.bind(this)
