@@ -238,7 +238,7 @@ class QuestionClassifier extends Component {
                                         <ButtonLarge
                                             disabled={answerSelected === -1}
                                             text="Submit"
-                                            onPress={this.submitClassification()}
+                                            onPress={() => this.submitClassificationPressed()}
                                         />
                                     </View>
                                 </ScrollView>
