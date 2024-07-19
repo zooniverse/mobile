@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Modal, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Fontisto';
@@ -13,18 +13,25 @@ const FeedbackModal = ({
   onClose = false,
   inMuseumMode = false,
 }) => {
+  const timeoutRef = useRef(null);
+
   useEffect(() => {
     if (inMuseumMode) {
-      setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         close();
       }, 10000);
     }
-  });
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [inMuseumMode]);
 
   const close = () => {
-    if (onClose) {
-      onClose();
-    }
+    clearTimeout(timeoutRef.current);
+    onClose();
   };
 
   return (
