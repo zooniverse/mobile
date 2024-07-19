@@ -136,8 +136,6 @@ export class SwipeClassifier extends React.Component {
 
     renderCard = (subject, index) => {
         const seenThisSession = R.indexOf(subject.id, this.props.subjectsSeenThisSession) >= 0
-        const shouldAnimateOverlay = this.props.subjectLists[this.state.swiperIndex].id === subject.id
-        
         // If mutliple images, only show top swipe card to prevent preformance issues.
         if (subject.displays.length > 1 && index !== this.state.swiperIndex) return null;
 
@@ -146,7 +144,6 @@ export class SwipeClassifier extends React.Component {
             seenThisSession={seenThisSession}
             inMuseumMode={this.props.route.params.project.in_museum_mode}
             panX={this.state.panX}
-            shouldAnimateOverlay={shouldAnimateOverlay}
             answers={this.props.answers}
             onExpandButtonPressed={this.expandImage}
             subjectDisplayWidth={this.state.swiperDimensions.width}
