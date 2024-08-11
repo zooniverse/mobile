@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Modal, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Fontisto';
@@ -15,6 +15,11 @@ const FeedbackModal = ({
 }) => {
   const timeoutRef = useRef(null);
 
+  const close = useCallback(() => {
+    clearTimeout(timeoutRef.current);
+    onClose();
+  }, [onClose]);
+
   useEffect(() => {
     if (inMuseumMode) {
       timeoutRef.current = setTimeout(() => {
@@ -27,12 +32,9 @@ const FeedbackModal = ({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [inMuseumMode]);
+  }, [inMuseumMode, close]);
 
-  const close = () => {
-    clearTimeout(timeoutRef.current);
-    onClose();
-  };
+
 
   return (
     <Modal animationType="fade" transparent={true} onRequestClose={close}>
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
 FeedbackModal.propTypes = {
   correct: PropTypes.bool,
   message: PropTypes.string,
-  onClose: PropTypes.func || PropTypes.bool,
+  onClose: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   inMuseumMode: PropTypes.bool,
 };
 
