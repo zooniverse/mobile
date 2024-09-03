@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Platform, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
-import R from 'ramda';
+import {isEmpty} from 'ramda';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator';
@@ -22,18 +22,29 @@ class SwipeableSubject extends Component {
       },
       imageIndex: 0,
     };
+    this.timeoutId = null; // Property to store the timeout ID
     this.handleDimensionsChange = this.handleDimensionsChange.bind(this);
   }
 
   handleDimensionsChange() {
     if (this.pager) {
-      setTimeout(() => this.pager.scrollTo({ y: 0 }), 300);
+      this.timeoutId = setTimeout(() => {
+        if (this.pager) {
+          this.pager.scrollTo({ y: 0 });
+        }
+      }, 300);
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (R.isEmpty(prevProps.imageUris) && !R.isEmpty(this.props.imageUris)) {
+    if (isEmpty(prevProps.imageUris) && !isEmpty(this.props.imageUris)) {
       this.props.onDisplayImageChange(this.props.imageUris[0]);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId); // Clear the timeout on unmount
     }
   }
 
@@ -46,7 +57,7 @@ class SwipeableSubject extends Component {
       swiping,
       currentCard,
     } = this.props;
-    const imagesAreLoaded = !R.isEmpty(imageUris);
+    const imagesAreLoaded = !isEmpty(imageUris);
 
     function displaySubject() {
       // Handle single image/video or multi-frame accordingly.
@@ -141,7 +152,7 @@ SwipeableSubject.propTypes = {
   onDisplayImageChange: PropTypes.func,
   swiping: PropTypes.bool,
   currentCard: PropTypes.bool,
-  onExpandButtonPressed: PropTypes.bool,
+  onExpandButtonPressed: PropTypes.func,
 };
 
 const styles = EStyleSheet.create({

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
 SwipeSingleImage.propTypes = {
   uri: PropTypes.string,
-  onExpandButtonPressed: PropTypes.bool,
+  onExpandButtonPressed: PropTypes.func,
 };
 
 export default SwipeSingleImage;
