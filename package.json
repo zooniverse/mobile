@@ -37,7 +37,7 @@
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.26",
     "@reduxjs/toolkit": "^1.9.7",
-    "@sentry/react-native": "^5.22.3",
+    "@sentry/react-native": "^5.33.1",
     "color": "^4.2.3",
     "crypto-js": "^4.2.0",
     "lodash": "^4.17.21",
