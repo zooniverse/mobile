@@ -32,7 +32,7 @@ class TutorialStep extends Component {
     }
 
     render() {
-        const isVideo = this.props.mediaUri.slice(this.props.mediaUri.length - 4).match('.mp4');
+        const isVideo = this.props.mediaUri && this.props.mediaUri.slice(this.props.mediaUri.length - 4).match('.mp4');
         return (
             <ScrollView ref={ref => this._scrollView = ref} style={styles.container}>
                 <View style={styles.container}>
