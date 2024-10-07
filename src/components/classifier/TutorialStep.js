@@ -54,7 +54,8 @@ class TutorialStep extends Component {
                                         disableVolume
                                         paused={!this.props.isActive}
                                     />
-                                </View>) : this.props?.mediaUri ? 
+                                </View>)
+                            : this.props?.mediaUri ? 
                                 <FittedImage 
                                     maxWidth={ImageWidth}
                                     maxHeight={ImageWidth}
