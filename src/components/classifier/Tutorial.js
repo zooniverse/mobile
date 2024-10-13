@@ -31,6 +31,7 @@ export class Tutorial extends Component {
                     markdownContent={step.content}
                     inMuseumMode={this.props.inMuseumMode}
                     mediaUri={this.props.tutorial.mediaResources && this.props.tutorial.mediaResources[step.media] ? this.props.tutorial.mediaResources[step.media].src : null}
+                    isActive={this.state.step === index}
                 />
             )
         })
