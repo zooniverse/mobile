@@ -25,6 +25,8 @@ import PageKeys from '../constants/PageKeys'
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useRoute } from '@react-navigation/native';
 import { PushNotifications } from '../notifications/PushNotifications';
+import ErasStats from './ErasStats';
+import theme from '../theme';
 
 const mapStateToProps = (state) => {
   const nativePreviewProjects = state.projects.previewProjectList.filter(
@@ -203,7 +205,8 @@ function ProjectDisciplines({ ...props }) {
         <FontedText style={styles.userName}>
           {props.isGuestUser ? 'Guest User' : props.user.display_name}
         </FontedText>
-        {/* {totalClassifications > 0 ? totalClassificationsDisiplay : null} */}
+        {props?.user?.login && <FontedText style={styles.loginName}>@{props.user.login}</FontedText>}
+        {!props.isGuestUser && <ErasStats user={props.user} />}
       </View>
       {props.isLoading && !props.isSuccess ? activityIndicator : listView}
     </View>
@@ -221,10 +224,13 @@ const styles = EStyleSheet.create({
     justifyContent: 'flex-start',
   },
   userName: {
-    color: '$headerGrey',
-    fontSize: 26,
-    lineHeight: 31,
+    color: theme.$zooniverseTeal,
+    fontSize: 24,
+    lineHeight: 28.06,
     marginTop: 50,
+    letterSpacing: 0.5,
+    fontWeight: '700',
+    textTransform: 'uppercase'
   },
   totalClassifications: {
     color: '$headerGrey',
@@ -253,6 +259,11 @@ const styles = EStyleSheet.create({
   },
   listContainer: {
     paddingBottom: 25
+  },
+  loginName: {
+    color: '$darkGrey',
+    fontSize: 16,
+    lineHeight: 18.7,
   }
 });
 
