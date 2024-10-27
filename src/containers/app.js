@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 import {
   AppState,
 } from 'react-native'
 import NetInfo from '@react-native-community/netinfo';
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index'
-import thunkMiddleware from 'redux-thunk'
+import { thunk } from 'redux-thunk'
 import { setIsConnected, setState } from '../actions/index'
 import { loadUserData } from '../actions/user'
 import { setSession } from '../actions/session'
@@ -35,7 +35,7 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer)
-export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)))
+export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)))
 const persistor = persistStore(store, {}, () => {
   // Setup push notifications here because you want to make sure existing settings are loaded.
   PushNotifications.setupPushNotifications();
