@@ -11,7 +11,6 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types';
 
 import UserAvatar from './UserAvatar'
-import CircleRibbon from './CircleRibbon'
 import FontedText from './common/FontedText'
 
 import theme from '../theme'
@@ -65,7 +64,6 @@ export class NavBar extends Component {
     const avatar =
       <View style={styles.userAvatarContainer}>
         <UserAvatar avatar={ userAvatar } isGuestUser={ this.props.user.isGuestUser } />
-        <CircleRibbon />
       </View>
 
     const CenterContainer = () => {
@@ -197,10 +195,9 @@ const styles = EStyleSheet.create({
   },
   userAvatarContainer: {
     flex: 1,
-    marginTop: -25,
+    marginTop: -35,
     alignSelf: 'center',
     alignItems: 'center',
-    height: 86
   },
   disabledIcon: {
     color: '$transparent'

@@ -4,6 +4,7 @@ import * as classifierActions from '../actions/classifier'
 import * as drawingActions from '../actions/drawing'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
+import theme from '../theme'
 
 const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, navigation, workflow) => {
     dispatch(setNavbarSettingsForPage({
@@ -12,7 +13,7 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
         showBack: !project.in_museum_mode,
         hamburgerMenuShowing: !project.in_museum_mode,
         centerType: 'title',
-        backgroundColor: inPreviewMode ? 'rgba(228,89,80,1)' : 'rgba(0, 151, 157, 1)'
+        backgroundColor: inPreviewMode ? 'rgba(228,89,80,1)' : theme.$zooniverseTeal
     }, getPageKeyForWorkflowType(workflow.type)))
 
     switch (workflow.type) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Image
+  Image,
+  View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
@@ -21,16 +22,25 @@ class UserAvatar extends Component {
           : require('../../images/simple-avatar.png') } /> )
 
     return (
-      this.props.isGuestUser ? guestUserLogo : avatar
+      <View style={styles.avatarContainer}>
+        {this.props.isGuestUser ? guestUserLogo : avatar}
+      </View>
     )
   }
 }
 
 const styles = EStyleSheet.create({
   $size: 86,
+  $conatinerSize: 98,
+  avatarContainer: {
+    width: '$conatinerSize',
+    height: '$conatinerSize',
+    borderRadius: '0.5 * $conatinerSize',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '$lightGreyBackground',
+  },
   avatar: {
-    borderWidth: 1,
-    borderColor: 'white',
     width: '$size',
     height: '$size',
     borderRadius: '0.5 * $size',

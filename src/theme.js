@@ -1,5 +1,5 @@
 export default {
-    $buttonColor: 'rgba(0, 151, 157, 1)',
+    $buttonColor: '#005D69',
     $registerButtonColor: 'rgba(12, 72, 129, 1)',
     $registerDisabledButtonColor: 'rgba(205,228,250, 1)',
     $disabledButtonColor: 'rgba(0, 151, 157, .35)',
@@ -17,7 +17,7 @@ export default {
     $lightGreyBackground: 'rgba(239, 242, 245, 1)',
     $greyBorder: 'rgba(0, 0, 0, .2)',
     $transluscentWhite: 'rgba(255, 255, 255, 0.8)',
-    $darkTeal: 'rgba(0, 116, 130, 1)',
+    $darkTeal: '#005D69',
     $lightestGrey: '#EFF3F6',
     $darkGrey: '#5C5C5C',
     $disabledIconColor: '#D5DCE4',
@@ -33,8 +33,11 @@ export default {
     $borderGrey: 'rgba(203, 204, 203, 1)',
     $chevronGrey: 'rgba(166,167,169,1)',
     $testRed: 'rgba(228,89,80,1)',
-    $zooniverseTeal: 'rgba(0, 151, 157, 1)',
+    $zooniverseTeal: '#005D69',
     $seperator: 'rgba(151, 151, 151, 1)',
     $classifierGrey: '#E2E5E9',
     $selectedButton: 'rgba(0, 52, 59, 1)',
+
+    $black: '#000000',
+    $disabledGrey: '#A6A7A9'
 }
