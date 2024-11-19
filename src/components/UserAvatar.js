@@ -31,11 +31,11 @@ class UserAvatar extends Component {
 
 const styles = EStyleSheet.create({
   $size: 86,
-  $conatinerSize: 98,
+  $containerSize: 98,
   avatarContainer: {
-    width: '$conatinerSize',
-    height: '$conatinerSize',
-    borderRadius: '0.5 * $conatinerSize',
+    width: '$containerSize',
+    height: '$containerSize',
+    borderRadius: '0.5 * $containerSize',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '$lightGreyBackground',

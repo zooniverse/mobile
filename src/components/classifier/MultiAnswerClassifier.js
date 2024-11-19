@@ -260,7 +260,7 @@ class MultiAnswerClassifier extends Component {
                             <View style={styles.buttonContainer}>
                                 <ButtonLarge
                                     text="Submit"
-                                    onPress={() => this.submitClassification()}
+                                    onPress={this.submitClassification()}
                                 />
                             </View>
                             </ScrollView>

@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import {
     Dimensions,
     ScrollView,
-    View
+    View,
+    Platform
 } from 'react-native'
 import PropTypes from 'prop-types'
 
 import FittedImage from '../common/FittedImage' 
 import SizedMarkdown from '../common/SizedMarkdown'
-import VideoPlayer from 'react-native-video-controls';
+import Video from 'react-native-video';
 
 const ImageWidth = Math.min(Dimensions.get('window').width - 100, 400)
 class TutorialStep extends Component {
@@ -40,19 +41,15 @@ class TutorialStep extends Component {
                         {
                             isVideo ? (
                                 <View style={styles.videoContainer}>
-                                    <VideoPlayer
+                                    <Video
                                         source={{uri: this.props.mediaUri}}
                                         style={{
                                             width: ImageWidth,
                                             height: (ImageWidth / 4) * 3.4
                                         }}
-                                        controls={true}
+                                        controls={Platform.OS === 'ios'}
                                         repeat={true}
                                         resizeMode='contain'
-                                        disableFullscreen
-                                        disableBack
-                                        disableVolume
-                                        paused={!this.props.isActive}
                                     />
                                 </View>)
                             : this.props?.mediaUri ? 
