@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {
     SafeAreaView,
     ScrollView,
-    View
+    View,
+    Platform,
+    TouchableOpacity
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {connect} from 'react-redux'
@@ -30,7 +32,8 @@ import ButtonLarge from './ButtonLarge';
 import ButtonAnswer from './ButtonAnswer';
 import { getDataForFeedbackModal, isFeedbackActive } from '../../utils/feedback';
 import FeedbackModal from './FeedbackModal';
-
+import Video from 'react-native-video'
+import ExpandImageIcon from './ExpandImageIcon';
 class QuestionClassifier extends Component {
 
     constructor(props) {
@@ -170,6 +173,9 @@ class QuestionClassifier extends Component {
                         null
                 }
             </View>
+        const uri = subject.displays[0]?.src;
+        const video = uri.slice(uri.length - 4).match('.mp4')
+        const showSubjectOptionsBar = video && Platform.OS === 'android'
 
         const seenThisSession = R.indexOf(subject.id, subjectsSeenThisSession) >= 0
         const fullWidthAnswers = answers.some(a => a.label.length >= 25)
@@ -199,17 +205,44 @@ class QuestionClassifier extends Component {
                                     height: nativeEvent.layout.height
                                     }
                             })}>
-                                <TappableSubject
-                                    height={300}
-                                    width={imageDimensions.width}
-                                    subject={subject}
-                                    alreadySeen={seenThisSession}
-                                    inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                    onPress={(imageSource) => this.setState({
-                                        showFullSize: true,
-                                        fullScreenImageSource: {uri: imageSource}
-                                    })}
-                                />
+                                 {video ?
+                                    <View key={`MULTI_ANSWER_VIDEO_${uri}`}>
+                                        <Video
+                                            source={{ uri: uri }}
+                                            style={{
+                                                width: imageDimensions.width,
+                                                height: 300
+                                            }}
+                                            controls={true}
+                                            repeat={true}
+                                            resizeMode='contain'
+                                        />
+                                        {showSubjectOptionsBar ?
+                                            <View style={styles.optionsBarContainer}>
+                                                <TouchableOpacity onPress={ () => this.setState({
+                                                    showFullSize: true,
+                                                    fullScreenImageSource: {uri: uri}
+                                                })}>
+                                                    <ExpandImageIcon />
+                                                </TouchableOpacity>
+                                            </View>
+                                            : null
+                                        }
+                                    </View>
+                                    :                                    
+                                    <TappableSubject
+                                        height={300}
+                                        width={imageDimensions.width}
+                                        subject={subject}
+                                        alreadySeen={seenThisSession}
+                                        inMuseumMode={this.props.route.params.project.in_museum_mode}
+                                        onPress={(imageSource) => this.setState({
+                                            showFullSize: true,
+                                            fullScreenImageSource: {uri: imageSource}
+                                        })}
+                                    />
+                                }
+                               
                             </View>
                             <View style={styles.flex}>
                                 <ScrollView
@@ -374,6 +407,11 @@ const styles = EStyleSheet.create({
     },
     fieldGuideBtnContainer: {
         alignItems: 'center',
+    },
+    optionsBarContainer: {
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
     }
 })
 
