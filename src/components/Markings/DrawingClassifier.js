@@ -30,6 +30,9 @@ import ButtonLarge from '../classifier/ButtonLarge'
 import FieldGuideBtn from '../classifier/FieldGuideBtn'
 import DrawingModeButton from './DrawingModeButton'
 import ToolNameDrawCount from './ToolNameDrawCount'
+import { getCurrentProjectLanguage, getPreferredLanguageFromProject, loadProjectTranslations } from '../../i18n'
+import { withTranslation } from 'react-i18next'
+import TranslationsLoadingIndicator from '../common/TranslationsLoadingIndicator'
 
 const mapStateToProps = (state, ownProps) => {
     const subjectDimensions = state.classifier.subject ? state.classifier.subjectDimensions[state.classifier.subject.id] : null
@@ -83,13 +86,40 @@ class DrawingClassifier extends Component {
                 clientWidth: 1
             },
             modalHasBeenClosedOnce: false,
-            showBlurView: true
+            showBlurView: true,
+            translationsLoading: false,
         }
 
         this.finishTutorial = this.finishTutorial.bind(this)
         this.setQuestionVisibility = this.setQuestionVisibility.bind(this)
         this.onImageLayout = this.onImageLayout.bind(this)
         this.submitClassification = this.submitClassification.bind(this)
+        this.loadedTranslationsRef = React.createRef();
+    }
+
+    // Update the loadProjectTranslations method
+    async loadTranslations(language, project, workflow, guide, tutorial) {
+        try {
+
+            this.setState({
+                translationsLoading: true,
+            })
+
+            await loadProjectTranslations(
+                language, 
+                project, 
+                workflow, 
+                guide, 
+                tutorial
+            );
+
+        } catch (error) {
+            console.warn('Error loading project translations:', error);
+        } finally {
+            this.setState({
+                translationsLoading: false,
+            })
+        }
     }
 
     componentDidMount() {
@@ -131,6 +161,17 @@ class DrawingClassifier extends Component {
                     localImagePath
                 })
             })
+        }
+
+        const { project, workflow } = this.props.route.params;
+        const guide = this.props.guide;
+        const tutorial = this.props.tutorial;
+        const languages = project?.available_languages ?? [];
+        
+        if (project?.id && workflow?.id && guide?.id && tutorial?.id && !this.loadedTranslationsRef.current) {
+            this.loadedTranslationsRef.current = true;
+            const defaultLanguage = getPreferredLanguageFromProject(languages);
+            this.loadTranslations(defaultLanguage, project, workflow, guide, tutorial)
         }
     }
 
@@ -182,7 +223,7 @@ class DrawingClassifier extends Component {
                     question={
                         <View style={styles.questionContainer}>
                             <Question
-                                question={this.props.route.params.instructions}
+                                question={this.props.t('workflow.tasks.T0.instruction', this.props.route.params.instructions, {ns: 'project', lng: getCurrentProjectLanguage()})}
                                 inMuseumMode={this.props.route.params.project.in_museum_mode}
                             />
                         </View>
@@ -227,7 +268,7 @@ class DrawingClassifier extends Component {
                 <View style={styles.buttonContainer}>
                     <ButtonLarge
                         disabled={R.keys(this.props.shapes).length < tool.min || !this.state.imageIsLoaded}
-                        text="Submit"
+                        text={this.props.t('Mobile.classifier.submit', 'Submit')}
                         onPress={this.submitClassification}
                     />
                 </View>
@@ -271,7 +312,10 @@ class DrawingClassifier extends Component {
 
         return (
             <View style={[styles.container]}>
-                <ClassifierHeader project={this.props.route?.params?.project}/>
+                <ClassifierHeader project={this.props.route?.params?.project} />
+                {this.state.translationsLoading && (
+                    <TranslationsLoadingIndicator />
+                )}
                 <ClassificationContainer
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
                     project={this.props.route.params.project}
@@ -447,4 +491,4 @@ DrawingClassifier.propTypes = {
     })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DrawingClassifier)
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(DrawingClassifier))

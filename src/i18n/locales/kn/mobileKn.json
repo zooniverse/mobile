@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "ಅತಿಥಿ ಬಳಕೆದಾರ"
+        },
+        "projectLabels": {
+            "allProjects": "ಎಲ್ಲಾ ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು",
+            "recent": "ಇತ್ತೀಚಿನ",
+            "preview": "ಪೂರ್ವವೀಕ್ಷಣೆ (ಪ್ರಿವ್ಯೂವ್‌)",
+            "humanitarian": "ಮಾನವೀಯತೆ"
+        },
+        "sideMenu": {
+            "home": "ಮುಖಪುಟ",
+            "aboutTheZooniverse": "Zooniverse ಬಗ್ಗೆ",
+            "help": "ಸಹಾಯ",
+            "version": "ಆವೃತ್ತಿ (ವರ್ಷನ್‌)"
+        },
+        "classifier": {
+            "help": "ಸಹಾಯ",
+            "loadingSubject": "ವಿಷಯವನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ",
+            "loadingSubjects": "ವಿಷಯಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ",
+            "submit": "ಸಲ್ಲಿಸಿ",
+            "enterDrawingMode": "ಚಿತ್ರ ಬಿಡಿಸುವ ಮೋಡ್‌ಗೆ ಪ್ರವೇಶಿಸಿ",
+            "countDrawn": "{{count}} ಚಿತ್ರಿಸಲಾಗಿದೆ",
+            "areYouSure": "ನೀವು ಖಚಿತವಾಗಿದ್ದೀರಾ?",
+            "eraseRecentEdits": "ಇದು ನಿಮ್ಮ ಇತ್ತೀಚಿನ ಎಡಿಟ್‌ಗಳನ್ನು ಅಳಿಸುತ್ತದೆ",
+            "eraseAllAnnotations": "ಇದು ನಿಮ್ಮ ಎಲ್ಲಾ ಅನೊಟೇಷನ್‌ಗಳನ್ನು ಅಳಿಸುತ್ತದೆ",
+            "yes": "ಹೌದು"
+        },
+        "signIn": {
+            "continueWithout": "ಸೈನ್ ಇನ್ ಮಾಡದೆಯೇ ಮುಂದುವರಿಸಿ",
+            "register": "ಖಾತೆಗೆ ನೋಂದಾಯಿಸಿಕೊಳ್ಳಿ"
+        }
+    }
+}

@@ -12,6 +12,7 @@ import Modal from "react-native-modal";
 import ButtonLarge from './ButtonLarge'
 import FontedText from '../common/FontedText'
 import Icon from 'react-native-vector-icons/Fontisto'
+import { withTranslation } from 'react-i18next';
 
 
 export class TaskHelpModal extends Component {
@@ -32,7 +33,7 @@ export class TaskHelpModal extends Component {
         <Modal isVisible={this.props.isVisible} >
           <View style={styles.modalContainer}>
             <View style={styles.helpCloseContainer}>
-              <FontedText style={styles.helpText}>HELP</FontedText>
+              <FontedText style={styles.helpText}>{this.props.t('Mobile.classifier.help', 'help')}</FontedText>
               <TouchableOpacity onPress={this.props.onCloseRequested}>
                 <Icon name="close" color="#005D69" size={22} />
               </TouchableOpacity>
@@ -45,7 +46,7 @@ export class TaskHelpModal extends Component {
               </SizedMarkdown>
             </ScrollView>
             <View style={styles.closeBtnContainer}>
-              <ButtonLarge text="Close" onPress={this.props.onCloseRequested}  />
+              <ButtonLarge text={this.props.t('classifier.close', 'bClose') } onPress={this.props.onCloseRequested}  />
             </View>
           </View>
         </Modal>
@@ -94,4 +95,4 @@ TaskHelpModal.propTypes = {
     inMuseumMode: PropTypes.bool,
 }
 
-export default TaskHelpModal
+export default withTranslation()(TaskHelpModal)

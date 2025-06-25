@@ -10,10 +10,13 @@ import StyledText from '../StyledText'
 import SizedImage from '../SizedImage'
 
 import ButtonLarge from './ButtonLarge';
+import { useTranslation } from 'react-i18next';
+import { getCurrentProjectLanguage } from '../../i18n';
 
 const ITEM_ICON_RADIUS = 50
 
 const FieldGuideItemDetail = (props) => {
+    const { t } = useTranslation();
     return (
         <ScrollView style={styles.itemDetailContainer}>
             <View onLayout={props.setHeaderHeight}>
@@ -27,10 +30,10 @@ const FieldGuideItemDetail = (props) => {
                 }
                 <StyledText additionalStyles={[
                     styles.itemDetailTitle,
-                ]} text={props.item.title}/>
+                ]} text={t(`fieldGuide.items.${props?.item?.index}.title`, props.item.title, {ns: 'project', lng: getCurrentProjectLanguage()})}/>
             </View>
             <StyledMarkdown
-                markdown={props.item.content}
+                markdown={t(`fieldGuide.items.${props?.item?.index}.content`, props.item.content, {ns: 'project', lng: getCurrentProjectLanguage()})}
                 onReceivedHeight={props.setContentHeight}
                 extraCSS={ 'body {color: #000000}'}
             />

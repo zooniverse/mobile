@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Host"
+        },
+        "projectLabels": {
+            "allProjects": "Všechny projekty",
+            "recent": "Nedávné",
+            "preview": "Náhled",
+            "humanitarian": "Humanitární"
+        },
+        "sideMenu": {
+            "home": "Domů",
+            "aboutTheZooniverse": "O Zooniverse",
+            "help": "Nápověda",
+            "version": "Verze"
+        },
+        "classifier": {
+            "help": "Nápověda",
+            "loadingSubject": "Načítáme subjekt",
+            "loadingSubjects": "Načítáme subjekty",
+            "submit": "Odeslat",
+            "enterDrawingMode": "Vstupte do režimu kreslení",
+            "countDrawn": "{{count}} zakresleno",
+            "areYouSure": "Opravdu?",
+            "eraseRecentEdits": "Vymažou se tím poslední úpravy",
+            "eraseAllAnnotations": "Vymažou se tím všechny vaše poznámky",
+            "yes": "Ano"
+        },
+        "signIn": {
+            "continueWithout": "Pokračovat bez přihlášení",
+            "register": "Registrovat nový účet"
+        }
+    }
+}

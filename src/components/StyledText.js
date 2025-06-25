@@ -30,6 +30,12 @@ const styles = EStyleSheet.create({
     letterSpacing: 1.5,
     marginBottom: 5
   },
+  headerTextUppercase: {
+    fontSize: 18,
+    letterSpacing: 1.5,
+    marginBottom: 5,
+    textTransform: 'uppercase'
+  },
   errorMessage: {
     color: 'red',
     marginBottom: 10,

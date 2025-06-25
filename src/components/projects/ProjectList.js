@@ -20,6 +20,10 @@ import PageKeys from '../../constants/PageKeys'
 import * as projectDisplay from '../../displayOptions/projectDisplay'
 
 import theme from '../../theme'
+import { withTranslation } from 'react-i18next'
+import i18next from 'i18next';
+import { loadProjectListTranslations } from '../../i18n'
+import languageOptions from '../../i18n/languages';
 
 const mapStateToProps = (state, ownProps) => {
     const { selectedProjectTag } = ownProps.route.params;
@@ -41,8 +45,9 @@ const mapStateToProps = (state, ownProps) => {
         projectList = state.projects.previewProjectList
     } else if (inBetaMode) {
         projectList = state.projects.betaProjectList
-    }
-    else {
+    } else if (selectedProjectTag === 'translated projects') {
+        projectList = projectList.filter(project => project.available_languages.includes(state.languageSettings.platformLanguage))
+    } else {
         projectList = projectList.filter((project) => R.contains(selectedProjectTag, project.tags))
     }
 
@@ -60,7 +65,8 @@ const mapStateToProps = (state, ownProps) => {
         collaboratorIds: state.projects.collaboratorIds,
         ownerIds: state.projects.ownerIds,
         inPreviewMode,
-        inBetaMode
+        inBetaMode,
+        platformLanguage: state.languageSettings.platformLanguage
     };
 }
 
@@ -79,10 +85,22 @@ class ProjectList extends Component {
     }
 
     componentDidMount() {
-      const { navBarActions, inPreviewMode } = this.props;
+      const { navBarActions, inPreviewMode, platformLanguage } = this.props;
       const { selectedProjectTag } = this.props.route.params;
 
-        const title = GLOBALS.DISCIPLINES.find((element) => element.value === selectedProjectTag).label
+        const translation = GLOBALS.DISCIPLINES.find((element) => element.value === selectedProjectTag)?.translation;
+        let title = GLOBALS.DISCIPLINES.find((element) => element.value === selectedProjectTag).label
+
+        if (selectedProjectTag === 'translated projects') {
+            const nativeLanguage = languageOptions[platformLanguage];
+            const projectsTranslation = this.props.t(translation, '');
+            if (nativeLanguage && projectsTranslation) {
+            title = `${projectsTranslation} ${nativeLanguage}`;
+            }
+        } else if (translation) {
+            title =  this.props.t(translation, title)
+        }
+
         navBarActions.setNavbarSettingsForPage({
             title,
             showBack: true,
@@ -197,6 +215,8 @@ class ProjectList extends Component {
                 // pull this conditional out.
             }
         }      
+        const translateProjects = projects.filter(p => p.available_languages.includes(i18next.language)).filter(p => !!p?.id).map(p => p.id);
+        loadProjectListTranslations(i18next.language, translateProjects)
 
         return (
             <FlatList
@@ -278,4 +298,4 @@ ProjectList.propTypes = {
     ownerIds: PropTypes.array
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectList)
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(ProjectList))

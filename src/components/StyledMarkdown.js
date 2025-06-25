@@ -56,7 +56,7 @@ class StyledMarkdown extends React.Component {
       .replace('$body', result)
       .replace('$extraCSS', this.props.extraCSS)
 
-        const displayWidth = this.props.width || Dimensions.get('window').width
+        const displayWidth = this.props.width || Dimensions.get('window').width - 30
 
         const webviewComponent =
             <WebView

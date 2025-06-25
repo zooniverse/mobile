@@ -22,6 +22,7 @@ import RootNavigator from "../navigation/RootNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Sentry from '@sentry/react-native';
 import { PushNotifications, IncomingNotifications } from '../notifications';
+import '../i18n';
 
 Sentry.init({
     dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
@@ -31,7 +32,7 @@ Sentry.init({
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['images', 'user', 'settings', 'notifications', 'notificationSettings'] // All these stores will be persisted
+  whitelist: ['images', 'user', 'settings', 'notifications', 'notificationSettings', 'languageSettings'] // All these stores will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer)

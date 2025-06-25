@@ -17,6 +17,7 @@ import DrawingToolView from './components/DrawingToolView'
 import * as drawingActions from '../../actions/drawing'
 import ButtonsDrawingModal from '../classifier/ButtonsDrawingModal';
 import ToolNameDrawCount from './ToolNameDrawCount';
+import { withTranslation } from 'react-i18next';
 
 const mapStateToProps = state => ({
     numberOfShapesDrawn: R.keys(state.drawing.shapesInProgress).length,
@@ -48,12 +49,22 @@ class DrawableSubject extends Component {
         }
 
         if (this.props.shouldConfirmOnClose) {
+            const cancelText = this.props.t('tasks.survey.cancel', 'Cancel');
+            const eraseConfirmMessage = justClearInProgress
+              ? this.props.t(
+                  'Mobile.classifier.eraseRecentEdits',
+                  'This will erase your most recent edits'
+                )
+              : this.props.t(
+                  'Mobile.classifier.eraseAllAnnotations',
+                  'This will erase all of your annotations'
+                );
             Alert.alert(
-                'Are you sure?',
-                `This will erase ${justClearInProgress ? 'your most recent edits' : 'all of your annotations.'}`,
+                this.props.t('Mobile.classifier.areYouSure', 'Are you sure?'),
+                eraseConfirmMessage,
                 [
-                    {text: 'Yes', onPress: onConfirm},
-                    {text: 'Cancel', style: 'cancel'},
+                    {text: this.props.t('Mobile.classifier.yes', 'Yes'), onPress: onConfirm},
+                    {text: cancelText, style: 'cancel'},
                 ],
                 { cancelable: false }
             )
@@ -173,4 +184,4 @@ DrawableSubject.propTypes = {
     numberOfShapesDrawn: PropTypes.number
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DrawableSubject)
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(DrawableSubject))

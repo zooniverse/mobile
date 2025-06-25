@@ -11,6 +11,8 @@ import TaskHelpModal from './TaskHelpModal'
 import FieldGuide from './FieldGuide'
 import PageKeys from '../../constants/PageKeys'
 import { navRef } from '../../navigation/RootNavigator';
+import { Translation } from 'react-i18next'
+import { getCurrentProjectLanguage } from '../../i18n'
 
 /**
  * This class handles all of the shared functionality between different classifiers
@@ -55,16 +57,21 @@ class ClassifierContainer extends Component {
 
 
         return (
-            <View style={[styles.container]}>
-                {this.props.children}
-                <TaskHelpModal
-                    text={this.props.help}
-                    isVisible={this.state.helpModalIsVisible}
-                    inMuseumMode={this.props.inMuseumMode}
-                    onCloseRequested={ () => this.setState({helpModalIsVisible: false}) }
-                />
-                { this.state.isFieldGuideVisible ? fieldGuide : null }
-            </View>
+            <Translation ns="project">
+                 { (t) => (
+                    <View style={[styles.container]}>
+                        {this.props.children}
+                        <TaskHelpModal
+                            text={t('workflow.tasks.T0.help', this.props.help, { ns: 'project', lng: getCurrentProjectLanguage() })}
+                            isVisible={this.state.helpModalIsVisible}
+                            inMuseumMode={this.props.inMuseumMode}
+                            onCloseRequested={ () => this.setState({helpModalIsVisible: false}) }
+                        />
+                        { this.state.isFieldGuideVisible ? fieldGuide : null }
+                    </View>
+                )}
+            </Translation>
+
         )
     }
 

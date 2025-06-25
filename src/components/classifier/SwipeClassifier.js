@@ -28,6 +28,9 @@ import ClassifierHeader from '../../navigation/ClassifierHeader';
 import FieldGuideBtn from './FieldGuideBtn';
 import { getDataForFeedbackModal, isFeedbackActive } from '../../utils/feedback';
 import FeedbackModal from './FeedbackModal';
+import { getCurrentProjectLanguage, getPreferredLanguageFromProject, loadProjectTranslations } from '../../i18n'
+import TranslationsLoadingIndicator from '../common/TranslationsLoadingIndicator';
+import { withTranslation } from 'react-i18next';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -67,11 +70,37 @@ export class SwipeClassifier extends React.Component {
             },
             feedbackModal: {},
             swiping: false,
+            translationsLoading: false,
         }
 
         this.onAnswered = this.onAnswered.bind(this)
         this.onSwiped = this.onSwiped.bind(this)
         this.expandImage = this.expandImage.bind(this)
+        this.loadedTranslationsRef = React.createRef();
+    }
+
+    // Update the loadProjectTranslations method
+    async loadTranslations(language, project, workflow, guide, tutorial) {
+        try {
+            this.setState({
+                translationsLoading: true,
+            })
+
+            await loadProjectTranslations(
+                language, 
+                project, 
+                workflow, 
+                guide, 
+                tutorial
+            );
+
+        } catch (error) {
+            console.warn('Error loading project translations:', error);
+        } finally {
+            this.setState({
+                translationsLoading: false,
+            })
+        }
     }
 
     onClassifierLayout({nativeEvent}) {
@@ -169,6 +198,18 @@ export class SwipeClassifier extends React.Component {
 
     }
 
+    componentDidUpdate() {
+        const { project, workflow } = this.props.route.params;
+        const guide = this.props.guide;
+        const tutorial = this.props.tutorial;
+        const languages = project?.available_languages ?? [];
+        if (project?.id && workflow?.id && guide?.id && tutorial?.id && !this.loadedTranslationsRef.current) {
+            this.loadedTranslationsRef.current = true;
+            const defaultLanguage = getPreferredLanguageFromProject(languages);
+            this.loadTranslations(defaultLanguage, project, workflow, guide, tutorial)
+        }
+    }
+
     render() {
         if (this.props.isFetching || !this.props.isSuccess) {
             return <OverlaySpinner overrideVisibility={this.props.isFetching}/>
@@ -186,7 +227,7 @@ export class SwipeClassifier extends React.Component {
         const question =
             <View style={styles.questionContainer}>
                 <Question
-                    question={this.props.task.question}
+                    question={this.props.t('workflow.tasks.T0.question', this.props.task.question, {ns: 'project', lng: getCurrentProjectLanguage()})}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
                     workflowID={this.props.route.params.workflow.id}
                     onPressImage={(src, question) => {
@@ -351,7 +392,10 @@ export class SwipeClassifier extends React.Component {
 
         return (
             <View style={styles.container}>
-                <ClassifierHeader project={this.props.route?.params?.project}/>
+                <ClassifierHeader project={this.props.route?.params?.project} />
+                {this.state.translationsLoading && (
+                    <TranslationsLoadingIndicator />
+                )}
                 <ClassifierContainer
                     inBetaMode={this.props.route.params.inBetaMode}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -460,4 +504,4 @@ SwipeClassifier.propTypes = {
     task: PropTypes.object
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SwipeClassifier)
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(SwipeClassifier))

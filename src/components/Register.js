@@ -22,6 +22,7 @@ import PageKeys from '../constants/PageKeys'
 
 import { isValidEmail } from '../utils/is-valid-email'
 import { isValidLogin } from '../utils/is-valid-login'
+import { Translation } from 'react-i18next';
 
 const mapStateToProps = (state) => ({
   isFetching: state.main.isFetching,
@@ -92,10 +93,13 @@ export class Register extends React.Component {
   }
 
   componentDidMount() {
+    const Title = <Translation ns="platform">
+      { (t) => (t('AuthModal.RegisterForm.register', 'Register'))}
+    </Translation>
     this.props.setNavbarSettingsForPage({
       showHamburgerMenu: false,
       showBack: true,
-      title: 'Register',
+      title: Title,
       centerType: 'title'
     })
   }
@@ -110,87 +114,91 @@ export class Register extends React.Component {
         text={ this.props.errorMessage } />
 
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.registerContainer}>
-            <Input
-              labelText={'User Name'}
-              handleOnChangeText={(text) => this.props.setField('login', text)} />
-            <Input
-              labelText={'Email address'}
-              keyboardType={'email-address'}
-              handleOnChangeText={(text) => this.props.setField('email', text)} />
+      <Translation ns="platform">
+        { (t) => (
+          <View style={styles.container}>
+            <ScrollView>
+              <View style={styles.registerContainer}>
+                <Input
+                  labelText={t('AuthModal.RegisterForm.username', 'User Name')}
+                  handleOnChangeText={(text) => this.props.setField('login', text)} />
+                <Input
+                  labelText={t('AuthModal.RegisterForm.email', 'Email Address')}
+                  keyboardType={'email-address'}
+                  handleOnChangeText={(text) => this.props.setField('email', text)} />
 
-            <View style={styles.rowContainer}>
-              <Input
-                labelText={'Password'}
-                addLabel={'Min 8 chars'}
-                inputStyle={'small'}
-                passwordField={!this.state.showPasswordText}
-                handleOnChangeText={(text) => this.props.setField('password', text)} />
+                <View style={styles.rowContainer}>
+                  <Input
+                    labelText={t('AuthModal.RegisterForm.password', 'Password')}
+                    addLabel={'Min 8 chars'}
+                    inputStyle={'small'}
+                    passwordField={!this.state.showPasswordText}
+                    handleOnChangeText={(text) => this.props.setField('password', text)} />
 
-                <View style={[styles.rowContainer, styles.checkboxRowContainer]}>
-                <Checkbox
-                    onSelect={() => this.setState({ showPasswordText: !this.state.showPasswordText })}
-                    selected={this.state.showPasswordText} />
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => this.setState({ showPasswordText: !this.state.showPasswordText })}>
+                    <View style={[styles.rowContainer, styles.checkboxRowContainer]}>
+                    <Checkbox
+                        onSelect={() => this.setState({ showPasswordText: !this.state.showPasswordText })}
+                        selected={this.state.showPasswordText} />
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      onPress={() => this.setState({ showPasswordText: !this.state.showPasswordText })}>
+                      <StyledText
+                        textStyle={'small'}
+                        text={ 'Show password' } />
+                    </TouchableOpacity>
+                    </View>
+                </View>
+
+                <Input
+                  labelText={t('AuthModal.RegisterForm.realName', 'Real name')}
+                  addLabel={'Optional'}
+                  subLabelText={t('AuthModal.RegisterForm.realNameHelp', 'We\'ll use this to give you credit in scientific papers, etc.')}
+                  handleOnChangeText={(text) => this.props.setField('credited_name', text)} />
+                <View style={styles.rowContainer}>
+                  <Checkbox
+                    onSelect={() => this.props.setField('global_email_communication', !emailChecked)}
+                    selected={emailChecked}
+                    leftAligned={true}
+                  />
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => this.props.setField('global_email_communication', !emailChecked)}>
+                    <StyledText
+                      textStyle={'small'}
+                      text={t('AuthModal.RegisterForm.emailListSignUp', 'It’s okay to send me email occasionally.')}
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                { this.props.errorMessage ? errorMessageDisplay : null }
+                <Button
+                  handlePress={this.handleRegister}
+                  disabled={registerDisabled}
+                  buttonStyle={ registerDisabled ? 'disabledRegisterButton' : 'registerButton' }
+                  text={t('AuthModal.RegisterForm.register', 'Register')} />
+
+                <View style={styles.privacyPolicyContainer}>
                   <StyledText
                     textStyle={'small'}
-                    text={ 'Show password' } />
-                </TouchableOpacity>
+                    text={ 'By signing up, I agree to Zooniverse\'s ' }
+                  />
+                  <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={this.handleOpenPrivacyPolicy}
+                    style={styles.touchContainer} >
+                    <StyledText
+                      textStyle={'smallLink'}
+                      text={t('ZooFooter.policyLabels.privacyPolicy', 'Privacy Policy')}
+                    />
+                  </TouchableOpacity>
                 </View>
-            </View>
 
-            <Input
-              labelText={'Real name'}
-              addLabel={'Optional'}
-              subLabelText={ 'We\'ll use this to give you credit in scientific papers, etc.' }
-              handleOnChangeText={(text) => this.props.setField('credited_name', text)} />
-            <View style={styles.rowContainer}>
-              <Checkbox
-                onSelect={() => this.props.setField('global_email_communication', !emailChecked)}
-                selected={emailChecked}
-                leftAligned={true}
-              />
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => this.props.setField('global_email_communication', !emailChecked)}>
-                <StyledText
-                  textStyle={'small'}
-                  text={ 'It’s okay to send me email occasionally.' }
-                />
-              </TouchableOpacity>
-            </View>
-
-            { this.props.errorMessage ? errorMessageDisplay : null }
-            <Button
-              handlePress={this.handleRegister}
-              disabled={registerDisabled}
-              buttonStyle={ registerDisabled ? 'disabledRegisterButton' : 'registerButton' }
-              text={'Register'} />
-
-            <View style={styles.privacyPolicyContainer}>
-              <StyledText
-                textStyle={'small'}
-                text={ 'By signing up, I agree to Zooniverse\'s ' }
-              />
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={this.handleOpenPrivacyPolicy}
-                style={styles.touchContainer} >
-                <StyledText
-                  textStyle={'smallLink'}
-                  text={'Privacy Policy'}
-                />
-              </TouchableOpacity>
-            </View>
-
+              </View>
+            </ScrollView>
+            { this.props.isFetching ? <OverlaySpinner /> : null }
           </View>
-        </ScrollView>
-        { this.props.isFetching ? <OverlaySpinner /> : null }
-      </View>
+        )}
+      </Translation>
     );
   }
 }

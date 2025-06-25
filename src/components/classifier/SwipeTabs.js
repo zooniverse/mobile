@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {GuideButton} from './ClassifierButton';
 import ButtonAnswer from './ButtonAnswer';
+import { withTranslation } from 'react-i18next';
+import { getCurrentProjectLanguage } from '../../i18n';
 
 export class SwipeTabs extends Component {
     constructor(props) {
@@ -21,14 +23,14 @@ export class SwipeTabs extends Component {
         const leftButton =
             <ButtonAnswer
                 onPress={this.props.onLeftButtonPressed}
-                text={this.props.answers[0].label}
+                text={this.props.t('workflow.tasks.T0.answers.1.label', this.props.answers[0].label, {ns: 'project', lng: getCurrentProjectLanguage()})}
                 fullWidth={fullWidthAnswers}
             />
 
         const rightButton =
             <ButtonAnswer
                 onPress={this.props.onRightButtonPressed}
-                text={this.props.answers[1].label}
+                text={this.props.t('workflow.tasks.T0.answers.0.label', this.props.answers[1].label, {ns: 'project', lng: getCurrentProjectLanguage()})}
                 fullWidth={fullWidthAnswers}
             />
 
@@ -63,4 +65,4 @@ SwipeTabs.propTypes = {
     answers: PropTypes.arrayOf(PropTypes.object)
 }
 
-export default SwipeTabs
+export default withTranslation()(SwipeTabs)

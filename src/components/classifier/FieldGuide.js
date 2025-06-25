@@ -100,8 +100,8 @@ export class FieldGuide extends Component {
         }, 200)
     }
 
-    openDetail(item) {
-        this.setState({selectedItem: item})
+    openDetail(item, index) {
+        this.setState({selectedItem: {...item, index}})
         this.animateHeight(150)
     }
 
@@ -170,8 +170,9 @@ export class FieldGuide extends Component {
                         data={items}
                         numColumns={2}
                         renderItem={({ item, index }) => <FieldGuideItemRow
-                            onPress={() => this.openDetail(item)}
+                            onPress={() => this.openDetail(item, index)}
                             key={index}
+                            index={index}
                             item={item}
                             icons={icons}
                             inMuseumMode={this.props.inMuseumMode}

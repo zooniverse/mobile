@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Baƙon Mai Akawun"
+        },
+        "projectLabels": {
+            "allProjects": "Dukkannin Ayyuka",
+            "recent": "Wanda ya gabata",
+            "preview": "Dubawa",
+            "humanitarian": "Na al'umma"
+        },
+        "sideMenu": {
+            "home": "Gida",
+            "aboutTheZooniverse": "Game da Zooniverse",
+            "help": "Taimako",
+            "version": "Siga"
+        },
+        "classifier": {
+            "help": "Taimako",
+            "loadingSubject": "Ana Buɗe Maudu'i",
+            "loadingSubjects": "Ana Buɗe Maudu'ai",
+            "submit": "Tura",
+            "enterDrawingMode": "Shigar da tsarin zane",
+            "countDrawn": "An zana {{count}}",
+            "areYouSure": "Shin kun tabbatar?",
+            "eraseRecentEdits": "Wannan zai share gyara na ƙarshe da kuka yi",
+            "eraseAllAnnotations": "Wannan zai share dukkannin tsokacinku",
+            "yes": "E"
+        },
+        "signIn": {
+            "continueWithout": "Ci gaba ba tare da rajista ba",
+            "register": "Yi rajista domin samun akawun"
+        }
+    }
+}

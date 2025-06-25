@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Korisnik gost"
+        },
+        "projectLabels": {
+            "allProjects": "Svi projekti",
+            "recent": "Nedavno",
+            "preview": "Pregled",
+            "humanitarian": "Humanitarni rad"
+        },
+        "sideMenu": {
+            "home": "Početna stranica",
+            "aboutTheZooniverse": "O Zooniverseu",
+            "help": "Pomoć",
+            "version": "Verzija"
+        },
+        "classifier": {
+            "help": "Pomoć",
+            "loadingSubject": "Učitavanje predmetnog elementa",
+            "loadingSubjects": "Učitavanje predmetnih elemenata",
+            "submit": "Podnesi",
+            "enterDrawingMode": "Uđi u način rada za crtanje",
+            "countDrawn": "{{count}} nacrtanih stavki",
+            "areYouSure": "Zaista to želite?",
+            "eraseRecentEdits": "Ovime će se izbrisati vaše najnovije izmjene",
+            "eraseAllAnnotations": "Ovime će se izbrisati sve vaše bilješke",
+            "yes": "Da"
+        },
+        "signIn": {
+            "continueWithout": "Nastavi bez prijave",
+            "register": "Registriraj račun"
+        }
+    }
+}

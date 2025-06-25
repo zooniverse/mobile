@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Gæstebruger"
+        },
+        "projectLabels": {
+            "allProjects": "Alle projekter",
+            "recent": "Nylige",
+            "preview": "Forhåndsvisning",
+            "humanitarian": "Humanitær"
+        },
+        "sideMenu": {
+            "home": "Hjem",
+            "aboutTheZooniverse": "Om Zooniverse",
+            "help": "Hjælp",
+            "version": "Version"
+        },
+        "classifier": {
+            "help": "Hjælp",
+            "loadingSubject": "Indlæser emne",
+            "loadingSubjects": "Indlæser emner",
+            "submit": "Indsend",
+            "enterDrawingMode": "Gå i tegnetilstand",
+            "countDrawn": "{{count}} er tegnet",
+            "areYouSure": "Er du sikker?",
+            "eraseRecentEdits": "Dette sletter dine seneste redigeringer",
+            "eraseAllAnnotations": "Dette sletter alle dine annoteringer",
+            "yes": "Ja"
+        },
+        "signIn": {
+            "continueWithout": "Fortsæt uden at logge ind",
+            ":register": "Tilmeld dig en konto"
+        }
+    }
+}

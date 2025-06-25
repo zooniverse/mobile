@@ -1,26 +1,30 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import Feather from 'react-native-vector-icons/Feather';
 import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 
 import FontedText from '../common/FontedText';
+import { useTranslation } from 'react-i18next';
 
 function FieldGuideBtn({ onPress }) {
+  const {t} = useTranslation()
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <LinearGradient
-        colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']}
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.5, y: 1 }}
-        locations={[0, 0.8201, 1]}
-        style={styles.gradient}
-      >
-        <Feather name="map" size={16} color="#005D69" />
-        <FontedText style={styles.text}>FIELD GUIDE</FontedText>
-      </LinearGradient>
-    </TouchableOpacity>
+    <View style={{ alignItems: 'center' }}>
+      <TouchableOpacity style={styles.container} onPress={onPress}>
+        <LinearGradient
+          colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.5, y: 1 }}
+          locations={[0, 0.8201, 1]}
+          style={styles.gradient}
+        >
+          <Feather name="map" size={16} color="#005D69" />
+          <FontedText style={styles.text}>{t('project.fieldGuide', 'FIELD GUIDE')}</FontedText>
+        </LinearGradient>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -31,11 +35,12 @@ const styles = StyleSheet.create({
     borderColor: '#00979D',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
-    width: 128,
+    alignSelf: 'flex-start',
     height: 40,
+    paddingHorizontal: 1, // small buffer to prevent clipping
   },
   gradient: {
-    width: '100%',
+    paddingHorizontal: 12,
     height: '100%',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
@@ -49,6 +54,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: '#005D69',
     marginLeft: 4,
+    textTransform: 'uppercase'
   },
 });
 

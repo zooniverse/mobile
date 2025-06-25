@@ -10,6 +10,7 @@ import settings from './settingsReducer'
 import drawing from './drawingReducer'
 import notifications from './notificationsSlice'
 import notificationSettings from './notificationSettingsSlice'
+import languageSettings from './languageSettingsSlice'
 
 export const InitialState = {
   registration: { global_email_communication: true },
@@ -76,5 +77,6 @@ export default combineReducers({
   settings,
   drawing,
   notifications,
-  notificationSettings
+  notificationSettings,
+  languageSettings
 })

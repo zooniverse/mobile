@@ -27,6 +27,8 @@ import { useRoute } from '@react-navigation/native';
 import { PushNotifications } from '../notifications/PushNotifications';
 import ErasStats from './ErasStats';
 import theme from '../theme';
+import { useTranslation } from 'react-i18next';
+import languageOptions from '../i18n/languages';
 
 const mapStateToProps = (state) => {
   const nativePreviewProjects = state.projects.previewProjectList.filter(
@@ -43,9 +45,10 @@ const mapStateToProps = (state) => {
     hasBetaProjects,
     hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
     isSuccess: state.projects.isSuccess,
-    isLoading: state.projects.isLoading
-  }
-}
+    isLoading: state.projects.isLoading,
+    platformLanguage: state.languageSettings.platformLanguage,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   setNavbarSettingsForPage: (settings, page) => dispatch(setNavbarSettingsForPage(settings, page)),
@@ -59,6 +62,7 @@ const mapDispatchToProps = (dispatch) => ({
 function ProjectDisciplines({ ...props }) {
   const [refreshing, setRefreshing] = useState(true);
   const route = useRoute();
+  const { t } = useTranslation('platform');
 
   useEffect(() => {
     props.setNavbarSettingsForPage(
@@ -116,12 +120,34 @@ function ProjectDisciplines({ ...props }) {
   }
 
   function renderItem({ item, navigation }) {
-    const { faIcon, value, label, color, description } = item;
+    const {
+      faIcon,
+      value,
+      label,
+      color,
+      description,
+      translation = null,
+    } = item;
+    let title = label;
+
+    if (translation) {
+      title = t(translation, title);
+    }
+
+    if (value === 'translated projects') {
+      title = 'Translated Projects';
+      const nativeLanguage = languageOptions[props.platformLanguage];
+      const projectsTranslation = t(translation, '');
+      if (nativeLanguage && projectsTranslation) {
+        title = `${projectsTranslation} ${nativeLanguage}`;
+      }
+    }
+
     return (
       <Discipline
         faIcon={faIcon}
         icon={value}
-        title={label}
+        title={title}
         tag={value}
         color={color}
         description={description}
@@ -177,7 +203,13 @@ function ProjectDisciplines({ ...props }) {
       ) !== undefined;
     const isBeta = hasBetaProjects && discipline.value === 'beta';
     const isForAllProjects = discipline.value === 'all projects';
-    return isForLoggedInUser || isTagged || isBeta || isForAllProjects;
+
+    const translated =
+      props.platformLanguage !== 'en' &&
+      discipline.value === 'translated projects';
+    return (
+      isForLoggedInUser || isTagged || isBeta || isForAllProjects || translated
+    );
   };
   const disciplineList = props.isSuccess
     ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES)
@@ -195,7 +227,7 @@ function ProjectDisciplines({ ...props }) {
     />
   );
   const activityIndicator = (
-    <View style={activityIndicator}>
+    <View style={styles.activityIndicator}>
       <ActivityIndicator size="large" />
     </View>
   );
@@ -203,9 +235,13 @@ function ProjectDisciplines({ ...props }) {
     <View style={styles.container}>
       <View style={styles.subNavContainer}>
         <FontedText style={styles.userName}>
-          {props.isGuestUser ? 'Guest User' : props.user.display_name}
+          {props.isGuestUser
+            ? t('Mobile.homeScreen.guestUser', 'Guest User')
+            : props.user.display_name}
         </FontedText>
-        {props?.user?.login && <FontedText style={styles.loginName}>@{props.user.login}</FontedText>}
+        {props?.user?.login && (
+          <FontedText style={styles.loginName}>@{props.user.login}</FontedText>
+        )}
         {!props.isGuestUser && <ErasStats user={props.user} />}
       </View>
       {props.isLoading && !props.isSuccess ? activityIndicator : listView}

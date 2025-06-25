@@ -19,6 +19,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {DrawerActions} from '@react-navigation/native';
 import PageKeys from '../constants/PageKeys'
+import { withTranslation } from 'react-i18next'
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -111,62 +112,62 @@ export class SideDrawerContent extends Component {
         <ScrollView>
         <MenuButton 
             onPress={this.goHome} 
-            text={'Home'} 
-          />
+            text={ this.props.t('Mobile.sideMenu.home', 'Home')} 
+            />
           
           { this.props.isGuestUser ? 
             <MenuButton 
-              onPress={this.signIn} 
-              text={'Sign In / Register'} 
+            onPress={this.signIn} 
+            text={ this.props.t('signIn.title', 'Sign In / Register')} 
             /> 
             : null 
           }
           
           <MenuButton 
             onPress={this.goToAbout} 
-            text={'About the Zooniverse'} 
+            text={ this.props.t('Mobile.sideMenu.aboutTheZooniverse', 'About the Zooniverse')} 
           />
 
           <MenuButton 
             onPress={() => this.openLink('https://www.zooniverse.org/about/publications')} 
-            text={'Publications'}
+            text={ this.props.t('about.index.nav.publications', 'Publications')} 
             externalOpenIcon={true}
           />
 
           <MenuButton 
             onPress={this.settings} 
-            text={'Settings'} 
+            text={ this.props.t('ZooHeader.UserMenu.userNavListLabels.settings', 'Settings')} 
           />
 
           <MenuButton 
             onPress={this.notifications} 
-            text={'Notifications'} 
+            text={ this.props.t('ZooHeader.SignedInUserNavigation.navListLabels.notifications_zero', 'Notifications')} 
           />
 
-          <Menuheader title="ABOUT" />
+          <Menuheader title={ this.props.t('ZooFooter.aboutLabels.about', 'about')} />
 
           <MenuButton 
             onPress={() => this.openLink('https://www.zooniverse.org/privacy')} 
-            text={'Privacy'}
+            text={ this.props.t('ZooFooter.policyLabels.privacyPolicy', 'Privacy Policy')} 
             externalOpenIcon={true}
           />
 
           <MenuButton 
-            text={`Version ${DeviceInfo.getVersion()}/${DeviceInfo.getBuildNumber()}`}
+            text={`${this.props.t('Mobile.sideMenu.version', 'Privacy')} ${DeviceInfo.getVersion()}/${DeviceInfo.getBuildNumber()}`}
           />
 
-          <Menuheader title="HELP" />
+          <Menuheader title={ this.props.t('Mobile.sideMenu.help', 'HELP')} />
 
           <MenuButton 
             onPress={() => this.openLink('https://www.zooniverse.org/about/contact')} 
-            text={'Contact us'}
+            text={ this.props.t('ZooFooter.aboutLabels.contact', 'Contact Us')} 
             externalOpenIcon={true}
           />
 
           { this.props.isGuestUser ? null :
             <MenuButton 
               onPress={this.signOut}
-              text={'Sign Out'}
+              text={ this.props.t('ZooHeader.UserMenu.userNavListLabels.signOut', 'Sign Out')} 
             />
           }
         </ScrollView>
@@ -251,6 +252,7 @@ const styles = EStyleSheet.create({
     letterSpacing: 1.5,
     color: '#fff',
     paddingVertical: 8,
+    textTransform: 'uppercase'
   },
   socialMediaContainer: {
     flexDirection: 'row',
@@ -314,4 +316,4 @@ SideDrawerContent.propTypes = {
   }).isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SideDrawerContent)
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(SideDrawerContent))

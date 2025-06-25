@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Гостьовий користувач"
+        },
+        "projectLabels": {
+            "allProjects": "Всі проєкти",
+            "recent": "Нещодавні",
+            "preview": "Попередній перегляд",
+            "humanitarian": "Гуманітарні"
+        },
+        "sideMenu": {
+            "home": "Головна",
+            "aboutTheZooniverse": "Про Zooniverse",
+            "help": "Довідка",
+            "version": "Версія"
+        },
+        "classifier": {
+            "help": "Довідка",
+            "loadingSubject": "Завантаження завдання",
+            "loadingSubjects": "Завантаження завдань",
+            "submit": "Надіслати",
+            "enterDrawingMode": "Увійти в режим малювання",
+            "countDrawn": "{{count}} намальовано",
+            "areYouSure": "Ви впевнені?",
+            "eraseRecentEdits": "Це призведе до видалення ваших останніх редагувань",
+            "eraseAllAnnotations": "Це призведе до видалення всіх ваших анотацій",
+            "yes": "Так"
+        },
+        "signIn": {
+            "continueWithout": "Продовжити без входу в систему",
+            "register": "Зареєструватися для отримання облікового запису"
+        }
+    }
+}

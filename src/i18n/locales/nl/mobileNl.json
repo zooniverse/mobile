@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Gastgebruiker"
+        },
+        "projectLabels": {
+            "allProjects": "Alle projecten",
+            "recent": "Recent",
+            "preview": "Voorbeeld",
+            "humanitarian": "Humanitair"
+        },
+        "sideMenu": {
+            "home": "Home",
+            "aboutTheZooniverse": "Over de Zooniverse",
+            "help": "Help",
+            "version": "Versie"
+        },
+        "classifier": {
+            "help": "Help",
+            "loadingSubject": "Onderwerp laden",
+            "loadingSubjects": "Onderwerpen laden",
+            "submit": "Verzenden",
+            "enterDrawingMode": "Tekenmodus openen",
+            "countDrawn": "{{count}} getekend",
+            "areYouSure": "Weet je het zeker?",
+            "eraseRecentEdits": "Hiermee worden je meest recente bewerkingen gewist",
+            "eraseAllAnnotations": "Hiermee worden al je aantekeningen gewist",
+            "yes": "Ja"
+        },
+        "signIn": {
+            "continueWithout": "Doorgaan zonder aanmelden",
+            "register": "Account maken"
+        }
+    }
+}
