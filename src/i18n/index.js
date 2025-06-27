@@ -357,7 +357,7 @@ export const changePlatformLanguage = async (language) => {
 };
 
 // Function to change project language
-export const changeProjectLanguage = async (language, translations) => {
+const changeProjectLanguage = async (language, translations) => {
 
   if (translations) {
     // Get the platform translations for this language from the static files

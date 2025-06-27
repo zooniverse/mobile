@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getLocales } from 'react-native-localize';
+import languages from '../i18n/languages';
 
 // Get device locale information
 const getDeviceLocales = () => {
@@ -11,14 +12,21 @@ const getDeviceLocales = () => {
   }
 };
 
-// Get primary device language
+// Get primary device language to use as a default.
 const getDeviceLanguage = () => {
   const locales = getDeviceLocales();
-  return locales[0]?.languageCode || 'en';
+  if (Array.isArray(locales)) {
+    for (const locale of locales) {
+      const languageCode = locale['languageCode'];
+      if (languageCode in languages) {
+        return languageCode;
+      }
+    }
+  }
+  return 'en';
 };
 
 const initialState = {
-  // Platform language settings
   platformLanguage: getDeviceLanguage(),
 };
 
@@ -26,21 +34,18 @@ export const languageSettings = createSlice({
   name: 'languageSettings',
   initialState,
   reducers: {
-    // Platform language actions
     setPlatformLanguage: (state, action) => {
       const language = action.payload;
-      state.platformLanguage = language;      
+      state.platformLanguage = language;
     },
-    
-  }
+  },
 });
 
-// Actions
 export const {
   setPlatformLanguage,
   updateDeviceLocales,
   setProjectLanguages,
-  clearProjectLanguages
+  clearProjectLanguages,
 } = languageSettings.actions;
 
 export default languageSettings.reducer;

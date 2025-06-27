@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import languageOptions from '../../i18n/languages';
 
 // Transform languageOptions to the format required by Dropdown
-console.log({ languageOptions });
 const dropdownLanguageOptions = Object.entries(languageOptions).map(
   ([value, label]) => ({
     label,
@@ -56,7 +55,6 @@ const LanguagePicker = () => {
 
 const styles = StyleSheet.create({
   languageSection: {
-    // paddingTop: 8,
     paddingBottom: 8,
   },
   dropdown: {

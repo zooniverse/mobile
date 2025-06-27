@@ -23,6 +23,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Sentry from '@sentry/react-native';
 import { PushNotifications, IncomingNotifications } from '../notifications';
 import '../i18n';
+import LanguageEffect from '../components/settings/LanguageEffect';
 
 Sentry.init({
     dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
@@ -76,6 +77,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor} onBeforeLift={this.onBeforeLift}>
+          <LanguageEffect />
           <SafeAreaContainer>
             <RootNavigator />
           </SafeAreaContainer>
