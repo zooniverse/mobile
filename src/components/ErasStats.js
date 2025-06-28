@@ -9,7 +9,7 @@ import theme from '../theme';
 
 function ErasStats({ user }) {
   const [erasStats, setErasStats] = useState(null);
-  const [showThisWeek, setShowThisWeek] = useState(true);
+  const [showThisWeek, setShowThisWeek] = useState(false);
 
   /**
    * useFocusEffect to refetch the eras stats everytime the user
@@ -48,7 +48,7 @@ function ErasStats({ user }) {
 
     // Use Promise.all to run these two async tasks in parallel
     const [thisWeek, allTime] = await Promise.all([
-      getErasStats(user?.id, getStatsDateString(thisWeekStart), todayUTC, 'day', `Bearer ${getToken}`),
+      getErerasStats(user?.id, getStatsDateString(thisWeekStart), todayUTC, 'day', `Bearer ${getToken}`),
       getErasStats(
         user?.id,
         getStatsDateString(user?.created_at),
