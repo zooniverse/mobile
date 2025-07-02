@@ -48,7 +48,7 @@ function ErasStats({ user }) {
 
     // Use Promise.all to run these two async tasks in parallel
     const [thisWeek, allTime] = await Promise.all([
-      getErerasStats(user?.id, getStatsDateString(thisWeekStart), todayUTC, 'day', `Bearer ${getToken}`),
+      getErasStats(user?.id, getStatsDateString(thisWeekStart), todayUTC, 'day', `Bearer ${getToken}`),
       getErasStats(
         user?.id,
         getStatsDateString(user?.created_at),
