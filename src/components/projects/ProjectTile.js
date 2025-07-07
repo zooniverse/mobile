@@ -20,6 +20,7 @@ import PopupMessage from './PopupMessage'
 import theme from '../../theme'
 
 import * as projectDisplay from '../../displayOptions/projectDisplay'
+import { withTranslation } from 'react-i18next';
 
 const horizontalPadding = 15
 
@@ -134,11 +135,11 @@ class ProjectTile extends Component {
                         <View style={styles.descriptionContainer}>
                             <View style={styles.descriptionContent}>
                                 <FontedText style={styles.title} numberOfLines={1}>
-                                    {this.props.project.title}
+                                    {this.props.t(`projectList.${this.props.project.id}.title`, this.props.project.title)}
                                 </FontedText> 
                                 <Separator style={styles.separator} />
                                 <FontedText style={styles.description} numberOfLines={3}>
-                                    {this.props.project.description}
+                                    {this.props.t(`projectList.${this.props.project.id}.description`, this.props.project.description)}
                                 </FontedText>
                             </View>
                         </View>
@@ -261,4 +262,4 @@ ProjectTile.propTypes = {
     navigateToClassifier: PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectTile);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(ProjectTile));

@@ -34,6 +34,9 @@ import { getDataForFeedbackModal, isFeedbackActive } from '../../utils/feedback'
 import FeedbackModal from './FeedbackModal';
 import Video from 'react-native-video'
 import ExpandImageIcon from './ExpandImageIcon';
+import { getCurrentProjectLanguage, getPreferredLanguageFromProject, loadProjectTranslations } from '../../i18n';
+import { withTranslation } from 'react-i18next';
+import TranslationsLoadingIndicator from '../common/TranslationsLoadingIndicator';
 class QuestionClassifier extends Component {
 
     constructor(props) {
@@ -47,8 +50,35 @@ class QuestionClassifier extends Component {
             imageDimensions: {width: 0, height: 0},
             answerSelected: -1,
             feedbackModal: {},
+            translationsLoading: false,
         }
+
+        this.loadedTranslationsRef = React.createRef();
     }
+
+    // Update the loadProjectTranslations method
+        async loadTranslations(language, project, workflow, guide, tutorial) {
+            try {
+                this.setState({
+                    translationsLoading: true,
+                })
+    
+                await loadProjectTranslations(
+                    language, 
+                    project, 
+                    workflow, 
+                    guide, 
+                    tutorial
+                );
+    
+            } catch (error) {
+                console.warn('Error loading project translations:', error);
+            } finally {
+                this.setState({
+                    translationsLoading: false,
+                })
+            }
+        }
 
     setQuestionVisibility() {
         return (isVisible) => {
@@ -113,6 +143,18 @@ class QuestionClassifier extends Component {
         })
     }
 
+    componentDidUpdate() {
+        const { project, workflow } = this.props.route.params;
+        const guide = this.props.guide;
+        const tutorial = this.props.tutorial;
+        const languages = project?.available_languages ?? [];
+        if (project?.id && workflow?.id && guide?.id && tutorial?.id && !this.loadedTranslationsRef.current) {
+            this.loadedTranslationsRef.current = true;
+            const defaultLanguage = getPreferredLanguageFromProject(languages);
+            this.loadTranslations(defaultLanguage, project, workflow, guide, tutorial)
+        }
+    }
+
     render() {
         const {
             isFetching,
@@ -154,7 +196,7 @@ class QuestionClassifier extends Component {
         const question =
             <View style={styles.questionContainer}>
                 <Question
-                    question={task.question}
+                    question={this.props.t('workflow.tasks.T0.question', task.question, {ns: 'project', lng: getCurrentProjectLanguage()})}
                     workflowID={workflow.id}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
                     onPressImage={(src, question) => {
@@ -258,7 +300,7 @@ class QuestionClassifier extends Component {
                                                 <View key={index} >
                                                     <ButtonAnswer 
                                                         selected={index === answerSelected}
-                                                        text={answer.label}
+                                                        text={this.props.t(`workflow.tasks.T0.answers.${index}.label`, answer.label, {ns: 'project', lng: getCurrentProjectLanguage()})}
                                                         onPress={this.onOptionSelected(index)}
                                                         fullWidth={fullWidthAnswers}
                                                     />
@@ -270,7 +312,7 @@ class QuestionClassifier extends Component {
                                     <View style={styles.buttonContainer}>
                                         <ButtonLarge
                                             disabled={answerSelected === -1}
-                                            text="Submit"
+                                            text={this.props.t('Mobile.classifier.submit', 'Submit')}
                                             onPress={() => this.submitClassificationPressed()}
                                         />
                                     </View>
@@ -314,7 +356,10 @@ class QuestionClassifier extends Component {
             </View>
         return (
             <SafeAreaView style={[styles.flex, styles.dropshadow]}>
-                <ClassifierHeader project={project}/>
+                <ClassifierHeader project={project} />
+                 {this.state.translationsLoading && (
+                    <TranslationsLoadingIndicator />
+                )}
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -435,4 +480,4 @@ const mapDispatchToProps = (dispatch) => ({
     classifierActions: bindActionCreators(classifierActions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionClassifier);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(QuestionClassifier));

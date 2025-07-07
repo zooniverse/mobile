@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "గెస్ట్ యూజర్"
+        },
+        "projectLabels": {
+            "allProjects": "అన్ని ప్రాజెక్టులు",
+            "recent": "ఇటీవల",
+            "preview": "ప్రీవ్యూ",
+            "humanitarian": "మానవతావాది"
+        },
+        "sideMenu": {
+            "home": "హోమ్",
+            "aboutTheZooniverse": "జూనివర్స్ గురించి",
+            "help": "సహాయం",
+            "version": "పాఠాంతరం"
+        },
+        "classifier": {
+            "help": "సహాయం",
+            "loadingSubject": "సబ్జెక్ట్‌ని లోడ్ చేస్తోంది",
+            "loadingSubjects": "సబ్జెక్టులని లోడ్ చేస్తోంది",
+            "submit": "సమర్పించండి",
+            "enterDrawingMode": "డ్రాయింగ్ మోడ్‌లోకి ప్రవేశించండి",
+            "countDrawn": "{{count}} తీసుకోబడింది",
+            "areYouSure": "మీరు నిశ్చితమేనా?",
+            "eraseRecentEdits": "ఇది మీ ఇటీవలి సవరణలను తొలగిస్తుంది.",
+            "eraseAllAnnotations": "ఇది మీ అన్ని వ్యాఖ్యానాలను తొలగిస్తుంది.",
+            "yes": "అవును"
+        },
+        "signIn": {
+            "continueWithout": "సైన్ ఇన్ చేయకుండా కొనసాగించండి",
+            "register": "ఖాాతా కోసం రిజిష్టర్ చేసుకోండి"
+        }
+    }
+}

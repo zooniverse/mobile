@@ -6,10 +6,12 @@ import DeviceInfo from 'react-native-device-info';
 import PropTypes from 'prop-types';
 
 import FontedText from '../common/FontedText';
+import { useTranslation } from 'react-i18next';
 
 function DrawingModeButton({ onPress }) {
   const isTablet = DeviceInfo.isTablet();
   const maxWidth = isTablet ? 400 : 280;
+  const {t} = useTranslation();
 
   return (
     <TouchableOpacity
@@ -17,7 +19,7 @@ function DrawingModeButton({ onPress }) {
       style={[styles.container, { height: isTablet ? 44 : 40, maxWidth }]}
     >
       <MaterialCommunityIcons name="vector-rectangle" size={22} color="#000" />
-      <FontedText style={styles.text}>Enter drawing mode</FontedText>
+      <FontedText style={styles.text}>{t('Mobile.classifier.enterDrawingMode', 'Enter drawing mode')}</FontedText>
     </TouchableOpacity>
   );
 }

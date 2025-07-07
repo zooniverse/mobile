@@ -5,18 +5,21 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 
 import FontedText from '../common/FontedText';
+import { useTranslation } from 'react-i18next';
+import { getCurrentProjectLanguage } from '../../i18n';
 
 function ToolNameDrawCount({ label, number }) {
+  const {t} = useTranslation()
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
         <FontAwesome5 name="shapes" size={18} color="#000000" />
         <FontedText numberOfLines={2} style={[styles.text, styles.toolText]}>
-          {label}
+          {t('workflow.tasks.T0.tools.0.label', label, {ns: 'project', lng: getCurrentProjectLanguage()})}
         </FontedText>
       </View>
       <FontedText style={[styles.text, styles.drawnText]}>
-        {number} drawn
+        {t('Mobile.classifier.countDrawn', `${number} drawn`, {count: number})}
       </FontedText>
     </View>
   );

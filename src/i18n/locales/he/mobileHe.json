@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "משתמש אורח"
+        },
+        "projectLabels": {
+            "allProjects": "כל הפרויקטים",
+            "recent": "לאחרונה",
+            "preview": "סקירה מוקדמת",
+            "humanitarian": "הומניטרי"
+        },
+        "sideMenu": {
+            "home": "בית",
+            "aboutTheZooniverse": "אודות ה-Zooniverse?",
+            "help": "עזרה",
+            "version": "גרסה"
+        },
+        "classifier": {
+            "help": "עזרה",
+            "loadingSubject": "טוען פריט",
+            "loadingSubjects": "טוען פריטים",
+            "submit": "שליחה",
+            "enterDrawingMode": "כניסה למצב ציור",
+            "countDrawn": "{{count}} צוירו",
+            "areYouSure": "בטוח?",
+            "eraseRecentEdits": "זה יימחק את העריכות האחרונות שלכם",
+            "eraseAllAnnotations": "זה יימחק את כל ההערות",
+            "yes": "כן"
+        },
+        "signIn": {
+            "continueWithout": "המשך בלי כניסה לחשבון",
+            "register": "הרשמה לחשבון"
+        }
+    }
+}

@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import FontedText from '../common/FontedText'
+import { withTranslation } from 'react-i18next';
 
 class ClassificationPanel extends Component {
   render() {
@@ -32,8 +33,8 @@ class ClassificationPanel extends Component {
         color={color}
         style={{paddingTop: tutorialIconPadding}}
       />
-    const TutorialText = () => <FontedText style={[styles.tabText, {fontWeight: tabRightFont, color}]}>
-      TUTORIAL
+    const TutorialText = () => <FontedText style={[styles.tabText, {fontWeight: tabRightFont, color, textTransform: 'uppercase'}]}>
+      {this.props.t('classifier.taskTabs.tutorialTab', 'TUTORIAL')}
     </FontedText>
 
     const TutorialTab = ({children}) => {
@@ -60,8 +61,8 @@ class ClassificationPanel extends Component {
             color="#005D69"
             style={{paddingTop: taskIconPadding}}
           />
-          <FontedText style={[styles.tabText, {fontWeight: tabLeftFont, color}]}>
-            TASK
+          <FontedText style={[styles.tabText, {fontWeight: tabLeftFont, color, textTransform: 'uppercase'}]}>
+            {this.props.t('classifier.taskTabs.taskTab', 'TASK')}
           </FontedText>
         </TouchableOpacity>
         <TutorialTab>
@@ -108,4 +109,4 @@ ClassificationPanel.propTypes = {
   setQuestionVisibility: PropTypes.func,
   inMuseumMode: PropTypes.bool,
 }
-export default ClassificationPanel
+export default withTranslation()(ClassificationPanel);

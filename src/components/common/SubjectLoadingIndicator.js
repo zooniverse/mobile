@@ -8,14 +8,20 @@ import PropTypes from 'prop-types'
 
 import FontedText from './FontedText'
 import Theme from '../../theme'
+import { useTranslation } from 'react-i18next'
 
 const SubjectLoadingIndicator = (props) => {
+    const { t } = useTranslation();
     return (
-        <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={ Theme.$zooniverseTeal } />
-            <FontedText style={styles.loadingText}> {`Loading Subject${props.multipleSubjects ? 's' : ''}`} </FontedText>
-        </View>
-    )
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={Theme.$zooniverseTeal} />
+        <FontedText style={styles.loadingText}>
+          {props.multipleSubjects
+            ? t('Mobile.classifier.loadingSubjects', 'Loading Subjects')
+            : t('Mobile.classifier.loadingSubject', 'Loading Subject')}
+        </FontedText>
+      </View>
+    );
 }
 
 SubjectLoadingIndicator.propTypes = {

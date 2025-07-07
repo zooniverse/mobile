@@ -17,6 +17,7 @@ import OverlaySpinner from './OverlaySpinner'
 import StyledText from './StyledText'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
+import { Translation } from 'react-i18next'
 
 const mapStateToProps = (state) => ({
   isFetching: state.main.isFetching,
@@ -89,52 +90,61 @@ export class SignIn extends React.Component {
       text={ this.props.errorMessage } />
 
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.signInContainer}>
-            <StyledText
-              textStyle={'headerText'}
-              text={'SIGN IN'} />
-            <Input
-              labelText={'Username or Email Address'}
-              handleOnChangeText={(login) => this.setState({login})} />
-            <Input
-              labelText={'Password'}
-              passwordField={true}
-              handleOnChangeText={(password) => this.setState({password})} />
-            { this.props.errorMessage ? errorMessage : null }
-            <TouchableOpacity
-              onPress={this.handleResetPassword} style={styles.forgotPasswordContainer}>
-              <StyledText
-                textStyle={'link'}
-                text={ 'Forget your password?' } />
-            </TouchableOpacity>
+      <Translation ns="project">
+        { (t) => (
+          <View style={styles.container}>
+            <ScrollView style={styles.scrollView}>
+              <View style={styles.signInContainer}>
+                <StyledText
+                  textStyle={'headerTextUppercase'}
+                  text={t('signIn.signIn', 'SIGN IN')}
+                  style={{textTransform: 'uppercase'} }
+                />
+                <Input
+                  labelText={t('AuthModal.LoginForm.login', 'Username or Email Address')}
+                  handleOnChangeText={(login) => this.setState({login})} />
+                <Input
+                  labelText={t('AuthModal.LoginForm.password', 'Password')}
+                  passwordField={true}
+                  handleOnChangeText={(password) => this.setState({password})} />
+                { this.props.errorMessage ? errorMessage : null }
+                <TouchableOpacity
+                  onPress={this.handleResetPassword} style={styles.forgotPasswordContainer}>
+                  <StyledText
+                    textStyle={'link'}
+                    text={t('AuthModal.LoginForm.forgot', 'Forget your password?')}
+                  />
+                </TouchableOpacity>
 
-            <Button
-              handlePress={this.handleSignIn}
-              disabled={signInDisabled}
-              buttonStyle={ signInDisabled ? 'disabledButton' : null }
-              text={'Sign In'} />
+                <Button
+                  handlePress={this.handleSignIn}
+                  disabled={signInDisabled}
+                  buttonStyle={ signInDisabled ? 'disabledButton' : null }
+                  text={t('AuthModal.LoginForm.signIn', 'Sign In')}
+                />
 
-            <View style={styles.lined}>
-              <View style={styles.lineThrough} />
-              <Text style={styles.centerText}>OR</Text>
-              <View style={styles.lineThrough} />
-            </View>
+                <View style={styles.lined}>
+                  <View style={styles.lineThrough} />
+                  <Text style={styles.centerText}>OR</Text>
+                  <View style={styles.lineThrough} />
+                </View>
 
-            <Button
-              handlePress={this.continueAsGuest}
-              buttonStyle={ continueTinted ? 'disabledButton' : null }
-              text={'Continue without signing in'} />
+                <Button
+                  handlePress={this.continueAsGuest}
+                  buttonStyle={ continueTinted ? 'disabledButton' : null }
+                  text={t('Mobile.signIn.continueWithout', 'Continue without signing in')} />
 
-            <Button
-              handlePress={this.handleRegistration}
-              buttonStyle={'registerButton'}
-              text={'Register for account'} />
+                <Button
+                  handlePress={this.handleRegistration}
+                  buttonStyle={'registerButton'}
+                  text={t('Mobile.signIn.register', 'Register for account')} />
+
+              </View>
+            </ScrollView>
+            { this.props.isFetching ? <OverlaySpinner /> : null }
           </View>
-        </ScrollView>
-        { this.props.isFetching ? <OverlaySpinner /> : null }
-      </View>
+        )}
+      </Translation>
     );
   }
 }

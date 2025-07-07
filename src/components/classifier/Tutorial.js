@@ -10,6 +10,8 @@ import FontedText from '../common/FontedText';
 
 import ButtonLarge from './ButtonLarge';
 import PaginateDot from './PaginateDot';
+import { withTranslation } from 'react-i18next';
+import { getCurrentProjectLanguage } from '../../i18n';
 
 const topPadding = (Platform.OS === 'ios') ? 10 : 0
 
@@ -28,7 +30,7 @@ export class Tutorial extends Component {
             return (
                 <TutorialStep
                     key={`TUTORIAL_STEP_${index}`}
-                    markdownContent={step.content}
+                    markdownContent={this.props.t(`tutorial.steps.${index}.content`, step.content, { ns: 'project', lng: getCurrentProjectLanguage() })}
                     inMuseumMode={this.props.inMuseumMode}
                     mediaUri={this.props.tutorial.mediaResources && this.props.tutorial.mediaResources[step.media] ? this.props.tutorial.mediaResources[step.media].src : null}
                     isActive={this.state.step === index}
@@ -62,12 +64,12 @@ export class Tutorial extends Component {
 
         const finishedButton =
             <ButtonLarge 
-                text="Let's Go!"
+                text={this.props.t(`classifier.letsGo`, "Let's Go!") }
                 onPress={this.props.finishTutorial}
             />
 
         const tutorialHeader =
-            <FontedText style={[styles.tutorialHeader]}>TUTORIAL</FontedText>
+            <FontedText style={[styles.tutorialHeader]}>{this.props.t(`classifier.taskTabs.tutorialTab`, "tutorial") }</FontedText>
 
         return (
             <View style={styles.container}>
@@ -175,7 +177,8 @@ const styles = EStyleSheet.create({
         paddingBottom: 0,
         fontWeight: '600',
         letterSpacing: 0.05,
-        color: '#005D69'
+        color: '#005D69',
+        textTransform: 'uppercase'
     },
     markdown: {
         flex: 1,
@@ -195,4 +198,4 @@ Tutorial.defaultProps = {
     inMuseumMode: false,
 }
 
-export default Tutorial
+export default withTranslation()(Tutorial);

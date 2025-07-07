@@ -9,9 +9,11 @@ import { setNavbarSettingsForPage } from '../actions/navBar';
 import PageKeys from '../constants/PageKeys';
 import Notification from './notifications/Notification';
 import OverlaySpinner from './OverlaySpinner';
+import { useTranslation } from 'react-i18next';
 
 function NotificationLandingPageScreen({ route }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { notifications } = useSelector((state) => state.notifications);
   const { projectList } = useSelector((state) => state.projects);
   const [loading, setLoading] = useState(false);
@@ -66,7 +68,10 @@ function NotificationLandingPageScreen({ route }) {
     dispatch(
       setNavbarSettingsForPage(
         {
-          title: 'NOTIFICATIONS',
+          title: t(
+            'ZooHeader.SignedInUserNavigation.navListLabels.notifications_zero',
+            'Notifications'
+          ),
           showBack: false,
           showIcon: true,
           centerType: 'title',

@@ -31,6 +31,9 @@ import ClassifierHeader from '../../navigation/ClassifierHeader';
 import ButtonAnswer from './ButtonAnswer';
 import ButtonLarge from './ButtonLarge';
 import ExpandImageIcon from './ExpandImageIcon';
+import TranslationsLoadingIndicator from '../common/TranslationsLoadingIndicator';
+import { withTranslation } from 'react-i18next';
+import { getCurrentProjectLanguage, getPreferredLanguageFromProject, loadProjectTranslations } from '../../i18n';
 
 class MultiAnswerClassifier extends Component {
 
@@ -44,6 +47,33 @@ class MultiAnswerClassifier extends Component {
             fullScreenQuestion: '',
             imageDimensions: {width: 0, height: 0},
             answersSelected: [],
+            translationsLoading: false,
+        }
+
+        this.loadedTranslationsRef = React.createRef();
+    }
+
+    // Update the loadProjectTranslations method
+    async loadTranslations(language, project, workflow, guide, tutorial) {
+        try {
+            this.setState({
+                translationsLoading: true,
+            })
+
+            await loadProjectTranslations(
+                language, 
+                project, 
+                workflow, 
+                guide, 
+                tutorial
+            );
+
+        } catch (error) {
+            console.warn('Error loading project translations:', error);
+        } finally {
+            this.setState({
+                translationsLoading: false,
+            })
         }
     }
 
@@ -103,6 +133,18 @@ class MultiAnswerClassifier extends Component {
         }
     }
 
+    componentDidUpdate() {
+        const { project, workflow } = this.props.route.params;
+        const guide = this.props.guide;
+        const tutorial = this.props.tutorial;
+        const languages = project?.available_languages ?? [];
+        if (project?.id && workflow?.id && guide?.id && tutorial?.id && !this.loadedTranslationsRef.current) {
+            this.loadedTranslationsRef.current = true;
+            const defaultLanguage = getPreferredLanguageFromProject(languages);
+            this.loadTranslations(defaultLanguage, project, workflow, guide, tutorial)
+        }
+    }
+
     render() {
         const {
             isFetching,
@@ -145,7 +187,7 @@ class MultiAnswerClassifier extends Component {
         const question =
             <View style={styles.questionContainer}>
                 <Question
-                    question={task.question}
+                    question={this.props.t('workflow.tasks.T0.question', task.question, {ns: 'project', lng: getCurrentProjectLanguage()})}
                     workflowID={workflow.id}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
                     onPressImage={(src, question) => {
@@ -248,7 +290,7 @@ class MultiAnswerClassifier extends Component {
                                     <View key={index} >
                                         <ButtonAnswer
                                             selected={answersSelected.includes(index)}
-                                            text={answer.label}
+                                            text={this.props.t(`workflow.tasks.T0.answers.${index}.label`, answer.label, {ns: 'project', lng: getCurrentProjectLanguage()})}
                                             onPress={this.onOptionSelected(answersSelected, index)}
                                             fullWidth={fullWidthAnswers}
                                         />   
@@ -259,7 +301,7 @@ class MultiAnswerClassifier extends Component {
                             </View>
                             <View style={styles.buttonContainer}>
                                 <ButtonLarge
-                                    text="Submit"
+                                    text={this.props.t('Mobile.classifier.submit', 'Submit')}
                                     onPress={this.submitClassification()}
                                 />
                             </View>
@@ -297,6 +339,9 @@ class MultiAnswerClassifier extends Component {
         return (
             <View style={[styles.container, styles.dropShadow, colorModes.framingBackgroundColorFor(this.props.route.params.project.in_museum_mode)]}>
                 <ClassifierHeader project={project} />
+                {this.state.translationsLoading && (
+                    <TranslationsLoadingIndicator />
+                )}
                 <ClassifierContainer
                     inBetaMode={inBetaMode}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -428,4 +473,4 @@ const mapDispatchToProps = (dispatch) => ({
     classifierActions: bindActionCreators(classifierActions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MultiAnswerClassifier);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(MultiAnswerClassifier));

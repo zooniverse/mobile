@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "গেস্ট ব্যবহারকারী"
+        },
+        "projectLabels": {
+            "allProjects": "সকল প্রোজেক্ট",
+            "recent": "সাম্প্রতিক",
+            "preview": "প্রিভিউ",
+            "humanitarian": "মানবিক"
+        },
+        "sideMenu": {
+            "home": "হোম",
+            "aboutTheZooniverse": "জুনিভার্স সম্পর্কে",
+            "help": "সাহায্য",
+            "version": "সংস্করণ"
+        },
+        "classifier": {
+            "help": "সাহায্য",
+            "loadingSubject": "বিষয়টি লোড হচ্ছে",
+            "loadingSubjects": "বিষয়গুলি লোড হচ্ছে",
+            "submit": "জমা দিন",
+            "enterDrawingMode": "ড্রয়িং মোডে প্রবেশ করুন",
+            "countDrawn": "{{count}} আঁকা হয়েছে",
+            "areYouSure": "আপনি কি নিশ্চিত?",
+            "eraseRecentEdits": "এটি আপনার সাম্প্রতিক এডিটগুলি মুছে ফেলবে",
+            "eraseAllAnnotations": "এটি আপনার সমস্ত অ্যানোটেশন মুছে ফেলবে",
+            "yes": "হ্যাঁ"
+        },
+        "signIn": {
+            "continueWithout": "সাইন ইন না করেই চালিয়ে যান",
+            "register": "অ্যাকাউন্টের জন্য নিবন্ধন করুন"
+        }
+    }
+}

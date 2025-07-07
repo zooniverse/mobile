@@ -17,9 +17,13 @@ import {
   PushNotifications,
   URGENT_HELP,
 } from '../../notifications/PushNotifications';
+import { useTranslation } from 'react-i18next';
+import LanguagePicker from './LanguagePicker';
 
 function Settings(props) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   const {
     enableNotifications,
     newProjects,
@@ -28,7 +32,10 @@ function Settings(props) {
     projectSpecificNotifications,
   } = useSelector((state) => state.notificationSettings);
 
-  const {isGuestUser} = useSelector(state => state.user)
+  const { isGuestUser } = useSelector((state) => state.user);
+  const platformLanguage = useSelector(
+    (state) => state.languageSettings.platformLanguage
+  );
 
   const sortedProjects = [...projectSpecificNotifications].sort((a, b) =>
     a.displayName.localeCompare(b.displayName)
@@ -39,32 +46,43 @@ function Settings(props) {
     dispatch(
       setNavbarSettingsForPage(
         {
-          title: 'Settings',
+          title: t(
+            'ZooHeader.UserMenu.userNavListLabels.settings',
+            'Settings'
+          ),
           showBack: true,
           centerType: 'title',
-          showIcon: true
+          showIcon: true,
         },
         PageKeys.Settings
       )
     );
-  }, []);
+  }, [dispatch, t, platformLanguage]);
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <LanguagePicker />
       {!isGuestUser && (
         <View>
           <View>
             <SettingHeader text="Platform Settings" />
           </View>
-          <PlatformSetting text="Zooniverse account information" link="https://www.zooniverse.org/settings" />
-          <PlatformSetting text="Delete my account" link="https://panoptes.zooniverse.org/profile" />
+          <PlatformSetting
+            text="Zooniverse account information"
+            link="https://www.zooniverse.org/settings"
+          />
+          <PlatformSetting
+            text="Delete my account"
+            link="https://panoptes.zooniverse.org/profile"
+          />
         </View>
       )}
       <View>
         <SettingHeader text="Notification Settings" />
       </View>
       <FontedText style={styles.disclosureText}>
-      The Zooniverse can occasionally send you updates about new projects or projects you might be interested in.
+        The Zooniverse can occasionally send you updates about new projects or
+        projects you might be interested in.
       </FontedText>
       <SettingsToggle
         style={styles.toggleSpacing}

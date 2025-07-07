@@ -4,15 +4,17 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 import FontedText from '../common/FontedText';
+import { useTranslation } from 'react-i18next';
 
 function ButtonsDrawingModal({ onCancel, onSave }) {
+  const {t} = useTranslation()
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={[styles.btn, styles.btnCancel]}
         onPress={onCancel}
       >
-        <FontedText style={[styles.text, styles.textCancel]}>Cancel</FontedText>
+        <FontedText style={[styles.text, styles.textCancel]}>{t('tasks.survey.cancel', 'Cancel')}</FontedText>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.btn, styles.btnSave]} onPress={onSave}>
         <FontedText style={[styles.text, styles.textSave]}>

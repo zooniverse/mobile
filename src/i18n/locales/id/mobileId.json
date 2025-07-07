@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Pengguna Tamu"
+        },
+        "projectLabels": {
+            "allProjects": "Semua Proyek",
+            "recent": "Terkini",
+            "preview": "Pratinjau",
+            "humanitarian": "Kemanusiaan"
+        },
+        "sideMenu": {
+            "home": "Beranda",
+            "aboutTheZooniverse": "Tentang Zooniverse",
+            "help": "Bantuan",
+            "version": "Versi"
+        },
+        "classifier": {
+            "help": "Bantuan",
+            "loadingSubject": "Memuat Subjek",
+            "loadingSubjects": "Memuat Subjek",
+            "submit": "Kirim",
+            "enterDrawingMode": "Masuk ke mode menggambar",
+            "countDrawn": "{{count}} gambar dibuat",
+            "areYouSure": "Yakin?",
+            "eraseRecentEdits": "Tindakan ini akan menghapus editan terakhir",
+            "eraseAllAnnotations": "Tindakan ini akan menghapus semua anotasi",
+            "yes": "Ya"
+        },
+        "signIn": {
+            "continueWithout": "Lanjutkan tanpa masuk",
+            "register": "Daftar"
+        }
+    }
+}

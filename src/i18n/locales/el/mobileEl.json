@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Επισκέπτης"
+        },
+        "projectLabels": {
+            "allProjects": "Όλα τα έργα",
+            "recent": "Πρόσφατα",
+            "preview": "Προεπισκόπηση",
+            "humanitarian": "Ανθρωπιστικά"
+        },
+        "sideMenu": {
+            "home": "Αρχική σελίδα",
+            "aboutTheZooniverse": "Σχετικά με το Zooniverse",
+            "help": "Βοήθεια",
+            "version": "Έκδοση"
+        },
+        "classifier": {
+            "help": "Βοήθεια",
+            "loadingSubject": "Φόρτωση θέματος",
+            "loadingSubjects": "Φόρτωση θεμάτων",
+            "submit": "Υποβολή",
+            "enterDrawingMode": "Έναρξη λειτουργίας σχεδίασης",
+            "countDrawn": "Σχεδιάστηκαν {{count}}",
+            "areYouSure": "Είστε σίγουροι;",
+            "eraseRecentEdits": "Αυτό θα διαγράψει τις πιο πρόσφατες αλλαγές σας",
+            "eraseAllAnnotations": "Αυτό θα διαγράψει όλους τους σχολιασμούς σας",
+            "yes": "Ναι"
+        },
+        "signIn": {
+            "continueWithout": "Συνεχίστε χωρίς είσοδο",
+            "register": "Εγγραφή για νέο λογαριασμό"
+        }
+    }
+}

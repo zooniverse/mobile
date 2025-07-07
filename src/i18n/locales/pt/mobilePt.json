@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Utilizador visitante"
+        },
+        "projectLabels": {
+            "allProjects": "Todos os projetos",
+            "recent": "Recente",
+            "preview": "Pré-visualização",
+            "humanitarian": "Humanitário"
+        },
+        "sideMenu": {
+            "home": "Início",
+            "aboutTheZooniverse": "Sobre o Zooniverse",
+            "help": "Ajuda",
+            "version": "Versão"
+        },
+        "classifier": {
+            "help": "Ajuda",
+            "loadingSubject": "A carregar objeto",
+            "loadingSubjects": "A carregar objetos",
+            "submit": "Submeter",
+            "enterDrawingMode": "Entrar no modo de desenho",
+            "countDrawn": "{{count}} desenhado(s)",
+            "areYouSure": "Tem a certeza?",
+            "eraseRecentEdits": "Isto irá apagar as suas edições mais recentes",
+            "eraseAllAnnotations": "Isto irá apagar todas as suas anotações",
+            "yes": "Sim"
+        },
+        "signIn": {
+            "continueWithout": "Continuar sem iniciar sessão",
+            "register": "Registar uma conta"
+        }
+    }
+}

@@ -12,8 +12,11 @@ import { DrawerActions, useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { BlurView } from '@react-native-community/blur';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import { getCurrentProjectLanguage } from '../i18n';
 
 function ClassifierHeader({ project }) {
+  const { t } = useTranslation();
   const isPreview = project?.isPreview ?? false;
   const navigation = useNavigation();
   const title = project?.display_name;
@@ -50,7 +53,9 @@ function ClassifierHeader({ project }) {
           />
         </TouchableOpacity>
       )}
-      <Text style={[styles.titleText, { width: titleWidth }]}>{title}</Text>
+      <Text style={[styles.titleText, { width: titleWidth }]}>
+        {t('project.title', title, { ns: 'project', lng: getCurrentProjectLanguage() })}
+      </Text>
       {!museumMode && (
         <TouchableOpacity
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}

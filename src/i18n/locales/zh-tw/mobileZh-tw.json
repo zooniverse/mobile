@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "訪客使用者"
+        },
+        "projectLabels": {
+            "allProjects": "所有專案",
+            "recent": "最近的",
+            "preview": "預覽",
+            "humanitarian": "人道主義"
+        },
+        "sideMenu": {
+            "home": "首頁",
+            "aboutTheZooniverse": "關於 Zooniverse",
+            "help": "幫助",
+            "version": "版本"
+        },
+        "classifier": {
+            "help": "幫助",
+            "loadingSubject": "載入題目中",
+            "loadingSubjects": "載入題目中",
+            "submit": "提交",
+            "enterDrawingMode": "啟用繪畫模式",
+            "countDrawn": "已畫 {{count}} 筆",
+            "areYouSure": "您確定要繼續嗎？",
+            "eraseRecentEdits": "此操作將清除您最近編輯內容",
+            "eraseAllAnnotations": "此操作將清除您的所有標注",
+            "yes": "是"
+        },
+        "signIn": {
+            "continueWithout": "不登入並繼續",
+            "register": "註冊帳戶"
+        }
+    }
+}
