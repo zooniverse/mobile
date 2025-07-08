@@ -9,7 +9,7 @@ import theme from '../theme';
 
 function ErasStats({ user }) {
   const [erasStats, setErasStats] = useState(null);
-  const [showThisWeek, setShowThisWeek] = useState(true);
+  const [showThisWeek, setShowThisWeek] = useState(false);
 
   /**
    * useFocusEffect to refetch the eras stats everytime the user
