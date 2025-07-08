@@ -405,7 +405,7 @@ PODS:
     - React-Core
   - react-native-netinfo (11.4.1):
     - React-Core
-  - react-native-safe-area-context (5.4.0):
+  - react-native-safe-area-context (4.10.1):
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
@@ -414,7 +414,7 @@ PODS:
     - react-native-video/Video (= 5.2.2)
   - react-native-video/Video (5.2.2):
     - React-Core
-  - react-native-webview (13.15.0):
+  - react-native-webview (13.12.4):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - React-NativeModulesApple (0.72.4):
@@ -549,31 +549,31 @@ PODS:
     - FirebaseCoreExtension (= 10.20.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.26.0):
+  - RNGestureHandler (2.21.1):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNLocalize (3.4.1):
+  - RNLocalize (3.4.2):
     - React-Core
   - RNReanimated (3.11.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - ReactCommon/turbomodule/core
-  - RNScreens (3.37.0):
+  - RNScreens (3.35.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-RCTImage
-  - RNSentry (6.15.1):
+  - RNSentry (6.16.1):
     - hermes-engine
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-hermes
-    - Sentry/HybridSDK (= 8.52.1)
-  - RNSVG (15.12.0):
+    - Sentry/HybridSDK (= 8.53.1)
+  - RNSVG (13.14.1):
     - React-Core
   - RNVectorIcons (10.2.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - Sentry/HybridSDK (8.52.1)
+  - Sentry/HybridSDK (8.53.1)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
 
@@ -826,10 +826,10 @@ SPEC CHECKSUMS:
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
   react-native-blur: db09583409bd872539bf6e915df484d792373810
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
-  react-native-safe-area-context: 8870dc3e45c8d241336cd8ee3fa3fc76f3a040ac
+  react-native-safe-area-context: dcab599c527c2d7de2d76507a523d20a0b83823d
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-video: 05b96aa6ab090579e2db5f3a3b81ffdb365016fd
-  react-native-webview: d37c4ce203f6e94ff7633126a9209c2b87354a29
+  react-native-webview: 19488de5e4c48782a2bedc335086eab16388fc66
   React-NativeModulesApple: 18496bbd735260b50cbe59b652cf1b05d8126465
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
   React-RCTActionSheet: 02904b932b50e680f4e26e7a686b33ebf7ef3c00
@@ -855,14 +855,14 @@ SPEC CHECKSUMS:
   RNFBAnalytics: aec413bc1623191bdb7d0378c49b92d8c289b05b
   RNFBApp: 9b25191f7a5e72c185b7e43fffb0d906869c4659
   RNFBMessaging: 99621af036e0aa85506390f77d79c9e6353aacca
-  RNGestureHandler: 66662e09940e944eb5945003b45a06a721f56067
-  RNLocalize: 06991b9c31e7a898a9fa6ddb204ce0f53a967248
+  RNGestureHandler: 9d1128ac15a6fbe49b2c4932e731fe17ff81a0c4
+  RNLocalize: eda9b753ea03e35a8a364ba20887c2edd3c67422
   RNReanimated: fc537c9a29e55eb01c620f29b39554cfd68eef35
-  RNScreens: caab7c9538736680e1768f105bab3b2185d1732f
-  RNSentry: e19fc04cd3c54f05a2a5ed10191b89c0dca89693
-  RNSVG: 17d11bd7464c6664f4e9cb6359c43cd3f8e7bf55
+  RNScreens: 8339eaea29177ee61983ec4b7b5df3ac2658b41f
+  RNSentry: a2c0e101e88bcad2f9a1b861ecf714649dc5f09a
+  RNSVG: af3907ac5d4fa26a862b75a16d8f15bc74f2ceda
   RNVectorIcons: b0f3ecdf598c397ae0c23e688a121b6eeadcf286
-  Sentry: 2cbbe3592f30050c60e916c63c7f5a2fa584005e
+  Sentry: 1e4e974d45f09d153af4b30b42acfb1c79e957d3
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
 

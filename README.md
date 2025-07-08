@@ -56,3 +56,16 @@ This project is setup with Reactotron. Learn more [here](https://github.com/infi
 1. Inspecting network requestsl.
 2. As an alternative for console.log (Separates the logs for each device/simulator being used).
 In order to use with an android device/emulator you must run `adb reverse tcp:9090 tcp:9090` before running the project.
+
+## Releasing
+
+### Android
+Note: It used to be standard to build the Android project in Android Studio but the preferred way is now through the command line.
+1) Reach out to a developer to get the upload key and the key.properties file. 
+2) Place both in the android/app folder. 
+3) Run `npx react-native build-android --mode=release`
+4) The file will be built to android/app/build/outputs/bundle/release/app-release.aab.
+5) Drag n drop the file into the "App bundles" in Google Play store where you would normally create the internal testing release.
+
+### iOS
+Note: Nothing has changed with the iOS release process, continue to build and archive via Xcode.
