@@ -60,7 +60,11 @@ In order to use with an android device/emulator you must run `adb reverse tcp:90
 ## Releasing
 
 ### Android
-Note: It used to be standard to build the Android project in Android Studio but the preferred way is now through the command line.
+Notes: 
+ - It used to be standard to build the Android project in Android Studio but the preferred way is now through the command line.
+ - Google requires API 35 but this requires a higher version of gradle than what our current version of React Native provides. Until we upgrade RN, add this line to the gradle.properties before you build for release `android.aapt2FromMavenOverride=/Users/XXX/Library/Android/sdk/build-tools/35.0.0/aapt2` and update the XXX to correct directory. If you do not have 35.0.0 open Android Studio and download the SDK 35. This suggestion comes from https://stackoverflow.com/questions/78678063/android-15-update-compilesdk-android-35-cause-an-error-res-table-type-type-e.
+
+Steps:
 1) Reach out to a developer to get the upload key and the key.properties file. 
 2) Place both in the android/app folder. 
 3) Run `npx react-native build-android --mode=release`
