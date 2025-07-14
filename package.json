@@ -41,7 +41,7 @@
     "@sentry/react-native": "^6.15.1",
     "color": "^4.2.3",
     "crypto-js": "^4.2.0",
-    "i18next": "^24.2.2",
+    "i18next": "^25.3.2",
     "lodash": "^4.17.21",
     "markdown-it": "^13.0.1",
     "panoptes-client": "^5.5.5",
