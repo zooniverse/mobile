@@ -71,7 +71,7 @@
     "react-native-swiper": "^1.6.0",
     "react-native-toggle-element": "^2.1.1",
     "react-native-vector-icons": "^10.0.0",
-    "react-native-video": "^5.2.1",
+    "react-native-video": "^6.16.1",
     "react-native-video-controls": "^2.8.1",
     "react-native-webview": "13.12.4",
     "react-redux": "^9.1.2",
