@@ -196,7 +196,8 @@ class QuestionClassifier extends Component {
         const question =
             <View style={styles.questionContainer}>
                 <Question
-                    question={this.props.t('workflow.tasks.T0.question', task.question, {ns: 'project', lng: getCurrentProjectLanguage()})}
+                    backupText={task.question}
+                    isDrawClassifier={false}
                     workflowID={workflow.id}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
                     onPressImage={(src, question) => {

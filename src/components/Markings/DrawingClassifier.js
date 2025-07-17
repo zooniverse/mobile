@@ -223,7 +223,8 @@ class DrawingClassifier extends Component {
                     question={
                         <View style={styles.questionContainer}>
                             <Question
-                                question={this.props.t('workflow.tasks.T0.instruction', this.props.route.params.instructions, {ns: 'project', lng: getCurrentProjectLanguage()})}
+                                backupText={this.props.route.params.instructions}
+                                isDrawClassifier={true}
                                 inMuseumMode={this.props.route.params.project.in_museum_mode}
                             />
                         </View>
