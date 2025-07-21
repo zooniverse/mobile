@@ -51,7 +51,7 @@ export class Question extends Component {
       <View style={styles.questionContainer}>
           <View>
             <SizedMarkdown inMuseumMode={this.props.inMuseumMode}>
-              {this.props.t('workflow.tasks.T0.question', 'bk', {ns: 'project', lng: getCurrentProjectLanguage()})}
+              {question}
             </SizedMarkdown>
           </View>
           {
