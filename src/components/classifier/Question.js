@@ -17,6 +17,8 @@ import {
   extractFirstLinkedImageFrom,
   removeImagesFrom
 } from '../../utils/markdownUtils'
+import { withTranslation } from 'react-i18next';
+import { getCurrentProjectLanguage } from '../../i18n';
 
 //questionContainerHeight is stored in redux because the swipeable component needs
 //to be absolutely positioned outside of the ContainerPanel for Android
@@ -36,33 +38,31 @@ export class Question extends Component {
 
   constructor(props) {
     super(props)
-
-    const imageSource = extractFirstLinkedImageFrom(props.question)
-    const questionWithoutImages = removeImagesFrom(props.question)
-    this.state = {
-      imageSource,
-      question: questionWithoutImages,
-    }
   }
 
 
   render() {
-      return (
+    const translationLocation = this.props.isDrawClassifier ? 'workflow.tasks.T0.instruction' : 'workflow.tasks.T0.question';
+    const questionTranslated = this.props.t(translationLocation, this.props.backupText, {ns: 'project', lng: getCurrentProjectLanguage()})
+    const imageSource = extractFirstLinkedImageFrom(questionTranslated)
+    const question = removeImagesFrom(questionTranslated)
+
+    return (
       <View style={styles.questionContainer}>
           <View>
             <SizedMarkdown inMuseumMode={this.props.inMuseumMode}>
-              {this.state.question}
+              {question}
             </SizedMarkdown>
           </View>
           {
-            this.state.imageSource ? 
+            imageSource ? 
               <TouchableOpacity 
-                onPress={() => {this.props.onPressImage(this.state.imageSource, this.state.question)}}
+                onPress={() => {this.props.onPressImage(imageSource, question)}}
                 style={styles.image}
               >
                 <Image 
                   style={styles.markdown} 
-                  source={{ uri: this.state.imageSource }}
+                  source={{ uri: imageSource }}
                   resizeMode="contain"
                 />
               </TouchableOpacity>
@@ -110,4 +110,4 @@ Question.defaultProps = {
   inMuseumMode: false,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Question)
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(Question))

@@ -227,7 +227,8 @@ export class SwipeClassifier extends React.Component {
         const question =
             <View style={styles.questionContainer}>
                 <Question
-                    question={this.props.t('workflow.tasks.T0.question', this.props.task.question, {ns: 'project', lng: getCurrentProjectLanguage()})}
+                    backupText={this.props.task.question}
+                    isDrawClassifier={false}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
                     workflowID={this.props.route.params.workflow.id}
                     onPressImage={(src, question) => {

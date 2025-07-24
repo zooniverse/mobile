@@ -215,7 +215,7 @@ class ProjectList extends Component {
                 // pull this conditional out.
             }
         }      
-        const translateProjects = projects.filter(p => p.available_languages.includes(i18next.language)).filter(p => !!p?.id).map(p => p.id);
+        const translateProjects = projects.filter(p => Array.isArray(p.available_languages) && p.available_languages.includes(i18next.language)).filter(p => !!p?.id).map(p => p.id);
         loadProjectListTranslations(i18next.language, translateProjects)
 
         return (
