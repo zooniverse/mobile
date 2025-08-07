@@ -25,6 +25,9 @@
           android:resource="@color/background_blue"
           tools:replace="android:resource"/>
       <meta-data android:name="google_analytics_adid_collection_enabled" android:value="false" tools:replace="android:value"/>
+      <meta-data
+        android:name="android.window.extensions.disableEdgeToEdge"
+        android:value="true" />
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
