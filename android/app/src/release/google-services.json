@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "846857930059",
+    "firebase_url": "https://zooniverse-production.firebaseio.com",
+    "project_id": "zooniverse-production",
+    "storage_bucket": "zooniverse-production.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846857930059:android:fb87f7b9896c4f38",
+        "android_client_info": {
+          "package_name": "com.zooniversemobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846857930059-m6t02dbs75j3va5hgls8763p6c9oeq41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOgbucS-ic3_9DAOzS0fghb6l16I6ZjtA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846857930059-m6t02dbs75j3va5hgls8763p6c9oeq41.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "846857930059-79s1p70q2r5vseasj5a2lkfje89ofd6i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.mobile.zooniverse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
