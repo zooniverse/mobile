@@ -1,0 +1,351 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sets a new state 1`] = `
+Object {
+  "app": Object {
+    "device": Object {
+      "height": 0,
+      "width": 0,
+    },
+  },
+  "classifier": Object {
+    "annotations": Object {},
+    "guide": Object {},
+    "inPreviewMode": false,
+    "isFailure": false,
+    "isFetching": false,
+    "isSuccess": false,
+    "needsTutorial": Object {},
+    "nextSubject": Object {},
+    "project": Object {},
+    "questionContainerHeight": Object {},
+    "seenThisSession": Object {},
+    "subject": null,
+    "subjectDimensions": Object {},
+    "subjectLists": Object {},
+    "subjectStartTime": Object {},
+    "tasks": Object {},
+    "tutorial": Object {},
+    "workflow": Object {},
+  },
+  "drawing": Object {
+    "actions": Array [],
+    "idCount": 0,
+    "shapes": Object {},
+    "shapesInProgress": Object {},
+  },
+  "images": Object {},
+  "main": Object {
+    "bobLoblaw": "Has a law blog",
+    "errorMessage": null,
+    "isConnected": null,
+    "isFetching": false,
+    "notificationPayload": Object {},
+    "notificationProject": Object {},
+    "notifications": Object {
+      "general": true,
+    },
+    "pushEnabled": false,
+    "pushPrompted": false,
+    "registration": Object {
+      "global_email_communication": true,
+    },
+    "selectedDiscipline": null,
+    "session": Object {},
+    "settings": Object {
+      "promptForWorkflow": false,
+    },
+    "webViewNavCounter": 0,
+  },
+  "navBar": Object {
+    "pageSettings": Object {},
+    "pageShowing": "",
+  },
+  "projects": Object {
+    "betaProjectList": Array [],
+    "collaboratorIds": Array [],
+    "isFailure": false,
+    "isLoading": false,
+    "isSuccess": false,
+    "ownerIds": Array [],
+    "previewProjectList": Array [],
+    "projectList": Array [],
+  },
+  "settings": Object {
+    "enableNotifications": true,
+    "fcmToken": "",
+    "newBetaNotifications": true,
+    "newProjectNotifications": true,
+    "projectSpecificNotifications": Array [],
+    "showAllWorkflows": true,
+    "urgentHelpNotification": true,
+  },
+  "user": Object {
+    "isGuestUser": true,
+    "projects": Object {},
+  },
+}
+`;
+
+exports[`sets state from initial state 1`] = `
+Object {
+  "app": Object {
+    "device": Object {
+      "height": 0,
+      "width": 0,
+    },
+  },
+  "classifier": Object {
+    "annotations": Object {},
+    "guide": Object {},
+    "inPreviewMode": false,
+    "isFailure": false,
+    "isFetching": false,
+    "isSuccess": false,
+    "needsTutorial": Object {},
+    "nextSubject": Object {},
+    "project": Object {},
+    "questionContainerHeight": Object {},
+    "seenThisSession": Object {},
+    "subject": null,
+    "subjectDimensions": Object {},
+    "subjectLists": Object {},
+    "subjectStartTime": Object {},
+    "tasks": Object {},
+    "tutorial": Object {},
+    "workflow": Object {},
+  },
+  "drawing": Object {
+    "actions": Array [],
+    "idCount": 0,
+    "shapes": Object {},
+    "shapesInProgress": Object {},
+  },
+  "images": Object {},
+  "main": Object {
+    "errorMessage": null,
+    "isConnected": true,
+    "isFetching": false,
+    "notificationPayload": Object {},
+    "notificationProject": Object {},
+    "notifications": Object {
+      "general": true,
+    },
+    "pushEnabled": false,
+    "pushPrompted": false,
+    "registration": Object {
+      "global_email_communication": true,
+    },
+    "selectedDiscipline": null,
+    "session": Object {},
+    "settings": Object {
+      "promptForWorkflow": false,
+    },
+    "webViewNavCounter": 0,
+  },
+  "navBar": Object {
+    "pageSettings": Object {},
+    "pageShowing": "",
+  },
+  "projects": Object {
+    "betaProjectList": Array [],
+    "collaboratorIds": Array [],
+    "isFailure": false,
+    "isLoading": false,
+    "isSuccess": false,
+    "ownerIds": Array [],
+    "previewProjectList": Array [],
+    "projectList": Array [],
+  },
+  "settings": Object {
+    "enableNotifications": true,
+    "fcmToken": "",
+    "newBetaNotifications": true,
+    "newProjectNotifications": true,
+    "projectSpecificNotifications": Array [],
+    "showAllWorkflows": true,
+    "urgentHelpNotification": true,
+  },
+  "user": Object {
+    "isGuestUser": true,
+    "projects": Object {},
+  },
+}
+`;
+
+exports[`sets user 1`] = `
+Object {
+  "app": Object {
+    "device": Object {
+      "height": 0,
+      "width": 0,
+    },
+  },
+  "classifier": Object {
+    "annotations": Object {},
+    "guide": Object {},
+    "inPreviewMode": false,
+    "isFailure": false,
+    "isFetching": false,
+    "isSuccess": false,
+    "needsTutorial": Object {},
+    "nextSubject": Object {},
+    "project": Object {},
+    "questionContainerHeight": Object {},
+    "seenThisSession": Object {},
+    "subject": null,
+    "subjectDimensions": Object {},
+    "subjectLists": Object {},
+    "subjectStartTime": Object {},
+    "tasks": Object {},
+    "tutorial": Object {},
+    "workflow": Object {},
+  },
+  "drawing": Object {
+    "actions": Array [],
+    "idCount": 0,
+    "shapes": Object {},
+    "shapesInProgress": Object {},
+  },
+  "images": Object {},
+  "main": Object {
+    "errorMessage": null,
+    "isConnected": null,
+    "isFetching": false,
+    "notificationPayload": Object {},
+    "notificationProject": Object {},
+    "notifications": Object {
+      "general": true,
+    },
+    "pushEnabled": false,
+    "pushPrompted": false,
+    "registration": Object {
+      "global_email_communication": true,
+    },
+    "selectedDiscipline": null,
+    "session": Object {},
+    "settings": Object {
+      "promptForWorkflow": false,
+    },
+    "user": Object {
+      "avatar": "Some avatar",
+      "display_name": "Me",
+    },
+    "webViewNavCounter": 0,
+  },
+  "navBar": Object {
+    "pageSettings": Object {},
+    "pageShowing": "",
+  },
+  "projects": Object {
+    "betaProjectList": Array [],
+    "collaboratorIds": Array [],
+    "isFailure": false,
+    "isLoading": false,
+    "isSuccess": false,
+    "ownerIds": Array [],
+    "previewProjectList": Array [],
+    "projectList": Array [],
+  },
+  "settings": Object {
+    "enableNotifications": true,
+    "fcmToken": "",
+    "newBetaNotifications": true,
+    "newProjectNotifications": true,
+    "projectSpecificNotifications": Array [],
+    "showAllWorkflows": true,
+    "urgentHelpNotification": true,
+  },
+  "user": Object {
+    "isGuestUser": true,
+    "projects": Object {},
+  },
+}
+`;
+
+exports[`unsets user 1`] = `
+Object {
+  "app": Object {
+    "device": Object {
+      "height": 0,
+      "width": 0,
+    },
+  },
+  "classifier": Object {
+    "annotations": Object {},
+    "guide": Object {},
+    "inPreviewMode": false,
+    "isFailure": false,
+    "isFetching": false,
+    "isSuccess": false,
+    "needsTutorial": Object {},
+    "nextSubject": Object {},
+    "project": Object {},
+    "questionContainerHeight": Object {},
+    "seenThisSession": Object {},
+    "subject": null,
+    "subjectDimensions": Object {},
+    "subjectLists": Object {},
+    "subjectStartTime": Object {},
+    "tasks": Object {},
+    "tutorial": Object {},
+    "workflow": Object {},
+  },
+  "drawing": Object {
+    "actions": Array [],
+    "idCount": 0,
+    "shapes": Object {},
+    "shapesInProgress": Object {},
+  },
+  "images": Object {},
+  "main": Object {
+    "errorMessage": null,
+    "isConnected": null,
+    "isFetching": false,
+    "notificationPayload": Object {},
+    "notificationProject": Object {},
+    "notifications": Object {
+      "general": true,
+    },
+    "pushEnabled": false,
+    "pushPrompted": false,
+    "registration": Object {
+      "global_email_communication": true,
+    },
+    "selectedDiscipline": null,
+    "session": Object {},
+    "settings": Object {
+      "promptForWorkflow": false,
+    },
+    "user": Object {},
+    "webViewNavCounter": 0,
+  },
+  "navBar": Object {
+    "pageSettings": Object {},
+    "pageShowing": "",
+  },
+  "projects": Object {
+    "betaProjectList": Array [],
+    "collaboratorIds": Array [],
+    "isFailure": false,
+    "isLoading": false,
+    "isSuccess": false,
+    "ownerIds": Array [],
+    "previewProjectList": Array [],
+    "projectList": Array [],
+  },
+  "settings": Object {
+    "enableNotifications": true,
+    "fcmToken": "",
+    "newBetaNotifications": true,
+    "newProjectNotifications": true,
+    "projectSpecificNotifications": Array [],
+    "showAllWorkflows": true,
+    "urgentHelpNotification": true,
+  },
+  "user": Object {
+    "isGuestUser": true,
+    "projects": Object {},
+  },
+}
+`;

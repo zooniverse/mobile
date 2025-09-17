@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Người dùng khách"
+        },
+        "projectLabels": {
+            "allProjects": "Tất cả các dự án",
+            "recent": "Gần đây",
+            "preview": "Xem trước",
+            "humanitarian": "Nhân đạo"
+        },
+        "sideMenu": {
+            "home": "Trang chủ",
+            "aboutTheZooniverse": "Giới thiệu về Zooniverse",
+            "help": "Trợ giúp",
+            "version": "Phiên bản"
+        },
+        "classifier": {
+            "help": "Trợ giúp",
+            "loadingSubject": "Đang tải chủ đề",
+            "loadingSubjects": "Đang tải các chủ đề",
+            "submit": "Gửi",
+            "enterDrawingMode": "Bật chế độ rút",
+            "countDrawn": "Đã rút {{count}}",
+            "areYouSure": "Bạn có chắc chắn không?",
+            "eraseRecentEdits": "Thao tác này sẽ xóa các chỉnh sửa gần nhất của bạn.",
+            "eraseAllAnnotations": "Thao tác này sẽ xóa tất cả các chú thích của bạn",
+            "yes": "Có"
+        },
+        "signIn": {
+            "continueWithout": "Tiếp tục mà không cần đăng nhập",
+            "register": "Đăng ký tài khoản"
+        }
+    }
+}

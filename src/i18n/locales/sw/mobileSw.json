@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Mtumiaji Mgeni"
+        },
+        "projectLabels": {
+            "allProjects": "Miradi Yote",
+            "recent": "Majuzi",
+            "preview": "Onyesho la kukagua",
+            "humanitarian": "Uhisani"
+        },
+        "sideMenu": {
+            "home": "Mwanzo",
+            "aboutTheZooniverse": "Kuhusu Zooniverse",
+            "help": "Usaidizi",
+            "version": "Toleo"
+        },
+        "classifier": {
+            "help": "Usaidizi",
+            "loadingSubject": "Inapakia Mada",
+            "loadingSubjects": "Inapakia Mada",
+            "submit": "Wasilisha",
+            "enterDrawingMode": "Ingia katika hali ya kuchora",
+            "countDrawn": "Umechora {{count}}",
+            "areYouSure": "Una hakika?",
+            "eraseRecentEdits": "Kitendo hiki kitafuta mabadiliko uliyofanya hivi majuzi",
+            "eraseAllAnnotations": "Kitendo hiki kitafuta manukuu yako yote",
+            "yes": "Ndiyo"
+        },
+        "signIn": {
+            "continueWithout": "Endelea bila kuingia katika akaunti",
+            "register": "Fungua akaunti"
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "访客用户"
+        },
+        "projectLabels": {
+            "allProjects": "所有项目",
+            "recent": "最近",
+            "preview": "预览",
+            "humanitarian": "人道主义"
+        },
+        "sideMenu": {
+            "home": "主页",
+            "aboutTheZooniverse": "关于 Zooniverse",
+            "help": "帮助",
+            "version": "版本"
+        },
+        "classifier": {
+            "help": "帮助",
+            "loadingSubject": "正在加载主体",
+            "loadingSubjects": "正在加载主体",
+            "submit": "提交",
+            "enterDrawingMode": "进入绘制模式",
+            "countDrawn": "已绘制 {{count}} 个",
+            "areYouSure": "您是否确定？",
+            "eraseRecentEdits": "这将擦除最近的编辑",
+            "eraseAllAnnotations": "这将擦除所有注释",
+            "yes": "是"
+        },
+        "signIn": {
+            "continueWithout": "不登录继续操作",
+            "register": "注册账户"
+        }
+    }
+}

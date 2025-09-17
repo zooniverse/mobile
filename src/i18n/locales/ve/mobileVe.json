@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Mushumisi wa Maṱhakheni"
+        },
+        "projectLabels": {
+            "allProjects": "Thandela dzoṱhe",
+            "recent": "Zwino",
+            "preview": "Mbonalonyangaredzi",
+            "humanitarian": "Zwa vhuthu"
+        },
+        "sideMenu": {
+            "home": "Haya",
+            "aboutTheZooniverse": "Nga ha Zooniverse",
+            "help": "Thuso",
+            "version": "Vesheni"
+        },
+        "classifier": {
+            "help": "Thuso",
+            "loadingSubject": "U dzhenisa thero",
+            "loadingSubjects": "U dzhenisa thero",
+            "submit": "Kha vha ḓise",
+            "enterDrawingMode": "Kha vha dzhenise moudu wa u ola.",
+            "countDrawn": "{{count}}Zwo tou olwa",
+            "areYouSure": "Vha na vhuṱanzi?",
+            "eraseRecentEdits": "Hezwi zwi ḓo thutha zwoṱhe zwo edithiwaho.",
+            "eraseAllAnnotations": "Hezwi zwi do thutha anothesheni dzavho dzoṱhe.",
+            "yes": "Ee"
+        },
+        "signIn": {
+            "continueWithout": "Kha vha bvelephanḓa vha songo dzhena nga ngomu",
+            "register": "Kha vha nwalise akhaunthu"
+        }
+    }
+}

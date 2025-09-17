@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Component
+  animationType="fade"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View>
+    <Connect(ZoomableImage)
+      handlePress={[Function]}
+      source={
+        Object {
+          "uri": "https://placekitten.com/200/300",
+        }
+      }
+    />
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        name="times"
+        size={12}
+      />
+    </TouchableOpacity>
+  </View>
+</Component>
+`;
+
+exports[`renders hidden correctly 1`] = `
+<Component
+  animationType="fade"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={false}
+>
+  <View>
+    <Connect(ZoomableImage)
+      handlePress={[Function]}
+      source={
+        Object {
+          "uri": "https://placekitten.com/200/300",
+        }
+      }
+    />
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        name="times"
+        size={12}
+      />
+    </TouchableOpacity>
+  </View>
+</Component>
+`;

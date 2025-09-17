@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "मेहमान उपयोगकर्ता"
+        },
+        "projectLabels": {
+            "allProjects": "सभी प्रोजेक्ट्स",
+            "recent": "हाल ही का",
+            "preview": "प्रीव्यू",
+            "humanitarian": "लोकोपकारी"
+        },
+        "sideMenu": {
+            "home": "होम",
+            "aboutTheZooniverse": "Zooniverse का परिचय",
+            "help": "सहायता",
+            "version": "संस्करण"
+        },
+        "classifier": {
+            "help": "सहायता",
+            "loadingSubject": "विषय लोड हो रहा है",
+            "loadingSubjects": "विषय लोड हो रहे हैं",
+            "submit": "सबमिट करें",
+            "enterDrawingMode": "ड्राइंग मोड में प्रवेश करें",
+            "countDrawn": "{{count}} निकाला गया",
+            "areYouSure": "क्या आप सुनिश्चित हैं?",
+            "eraseRecentEdits": "इससे आपके सबसे हाल के संपादन मिट जाएंगे",
+            "eraseAllAnnotations": "इससे आपके सभी एनोटेशन मिट जाएंगे",
+            "yes": "हाँ"
+        },
+        "signIn": {
+            "continueWithout": "साइन इन किए बिना जारी रखें",
+            "register": "खाते के लिए पंजीकरण करें"
+        }
+    }
+}

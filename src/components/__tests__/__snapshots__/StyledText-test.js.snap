@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders styles as array when style passed in 1`] = `
+<Text
+  style={
+    Array [
+      undefined,
+      undefined,
+    ]
+  }
+>
+  O Hai!
+</Text>
+`;
+
+exports[`renders text correctly 1`] = `
+<Text
+  style={
+    Array [
+      undefined,
+    ]
+  }
+>
+  O Hai!
+</Text>
+`;

@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Misafir Kullanıcı"
+        },
+        "projectLabels": {
+            "allProjects": "Tüm Projeler",
+            "recent": "Son",
+            "preview": "Önizleme",
+            "humanitarian": "İnsani Yardım"
+        },
+        "sideMenu": {
+            "home": "Ana sayfa",
+            "aboutTheZooniverse": "Zooniverse hakkında",
+            "help": "Yardım",
+            "version": "Sürüm"
+        },
+        "classifier": {
+            "help": "Yardım",
+            "loadingSubject": "Konu Yükleniyor",
+            "loadingSubjects": "Konular yükleniyor",
+            "submit": "Gönder",
+            "enterDrawingMode": "Çizim moduna gir",
+            "countDrawn": "{{count}} çizildi",
+            "areYouSure": "Emin misiniz?",
+            "eraseRecentEdits": "Bu işlemle en son düzenlemeleriniz silinecektir",
+            "eraseAllAnnotations": "Bu işlemle tüm açıklama notlarınız silinecektir",
+            "yes": "Evet"
+        },
+        "signIn": {
+            "continueWithout": "Oturum açmadan devam et",
+            "register": "Hesap için kayıt olun"
+        }
+    }
+}

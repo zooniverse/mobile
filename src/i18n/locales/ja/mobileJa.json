@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "ゲストユーザー"
+        },
+        "projectLabels": {
+            "allProjects": "すべてのプロジェクト",
+            "recent": "最近",
+            "preview": "プレビュー",
+            "humanitarian": "人道支援"
+        },
+        "sideMenu": {
+            "home": "ホーム",
+            "aboutTheZooniverse": "Zooniverseについて",
+            "help": "ヘルプ",
+            "version": "バージョン"
+        },
+        "classifier": {
+            "help": "ヘルプ",
+            "loadingSubject": "対象を読み込み中です",
+            "loadingSubjects": "対象を読み込み中です",
+            "submit": "送信",
+            "enterDrawingMode": "描画モードに入る",
+            "countDrawn": "描画済み{{count}}件",
+            "areYouSure": "本当によろしいですか？",
+            "eraseRecentEdits": "これにより直近の編集が消去されます",
+            "eraseAllAnnotations": "これによりすべての注釈が消去されます",
+            "yes": "はい"
+        },
+        "signIn": {
+            "continueWithout": "サインインせずに続ける",
+            "register": "アカウント新規登録"
+        }
+    }
+}

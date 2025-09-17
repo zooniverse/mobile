@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Drawer
+  closedDrawerOffset={-3}
+  content={<Connect(SideDrawerContent) />}
+  onClose={[Function]}
+  onOpen={[Function]}
+  open={true}
+  openDrawerOffset={0.3}
+  panCloseMask={0.2}
+  side="right"
+  styles={
+    Object {
+      "drawer": Object {
+        "backgroundColor": "white",
+        "elevation": 3,
+        "shadowColor": "black",
+        "shadowOpacity": 0.8,
+        "shadowRadius": 3,
+      },
+    }
+  }
+  tapToClose={true}
+  tweenHandler={[Function]}
+  type="overlay"
+>
+  <DefaultRenderer
+    navigationState={Object {}}
+    onNavigate={[Function]}
+  />
+</Drawer>
+`;

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly (without task help) 1`] = `
+<View>
+  <View>
+    <View
+      onLayout={[Function]}
+    >
+      <Markdown
+        rules={
+          Object {
+            "image": Object {
+              "match": [Function],
+            },
+          }
+        }
+        styles={
+          Object {
+            "image": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "text": Object {
+              "color": "black",
+              "fontFamily": "Karla",
+              "fontSize": 14,
+              "fontWeight": "normal",
+            },
+          }
+        }
+      >
+        Is this this?
+      </Markdown>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders correctly with task help 1`] = `
+<View>
+  <View>
+    <View
+      onLayout={[Function]}
+    >
+      <Markdown
+        rules={
+          Object {
+            "image": Object {
+              "match": [Function],
+            },
+          }
+        }
+        styles={
+          Object {
+            "image": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "text": Object {
+              "color": "black",
+              "fontFamily": "Karla",
+              "fontSize": 14,
+              "fontWeight": "normal",
+            },
+          }
+        }
+      >
+        Is this this?
+      </Markdown>
+    </View>
+  </View>
+</View>
+`;

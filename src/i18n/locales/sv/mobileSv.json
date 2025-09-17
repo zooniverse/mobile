@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Gästanvändare"
+        },
+        "projectLabels": {
+            "allProjects": "Alla projekt",
+            "recent": "Senaste",
+            "preview": "Förhandsvisning",
+            "humanitarian": "Humanitärt arbete"
+        },
+        "sideMenu": {
+            "home": "Hem",
+            "aboutTheZooniverse": "Om Zooniverse",
+            "help": "Hjälp",
+            "version": "Version"
+        },
+        "classifier": {
+            "help": "Hjälp",
+            "loadingSubject": "Laddar ämne",
+            "loadingSubjects": "Laddar ämnen",
+            "submit": "Skicka in",
+            "enterDrawingMode": "Gå in i ritningsläge",
+            "countDrawn": "{{count}} har ritats",
+            "areYouSure": "Är du säker?",
+            "eraseRecentEdits": "Detta kommer att radera dina senaste redigeringar",
+            "eraseAllAnnotations": "Detta kommer att radera alla dina kommentarer",
+            "yes": "Ja"
+        },
+        "signIn": {
+            "continueWithout": "Fortsätt utan att logga in",
+            "register": "Registrera konto"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<ImageZoom
+  cropHeight={1334}
+  cropWidth={750}
+  imageHeight={1259}
+  imageWidth={675}
+  longPressTime={300}
+  onLongPress={[Function]}
+  panToMove={true}
+  pinchToZoom={true}
+>
+  <Image
+    resizeMethod="resize"
+    resizeMode="contain"
+    source={
+      Object {
+        "uri": "https://placekitten.com/200/300",
+      }
+    }
+    style={
+      Object {
+        "height": 1259,
+        "width": 675,
+      }
+    }
+  />
+</ImageZoom>
+`;

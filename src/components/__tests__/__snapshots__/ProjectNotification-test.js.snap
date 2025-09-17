@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders checked 1`] = `
+<View>
+  <Switch
+    onValueChange={[Function]}
+    trackColor="rgba(0, 151, 157, 1)"
+    value={true}
+  />
+  <Text
+    style={
+      Array [
+        undefined,
+      ]
+    }
+  >
+    test
+  </Text>
+</View>
+`;
+
+exports[`renders not checked 1`] = `
+<View>
+  <Switch
+    onValueChange={[Function]}
+    trackColor="rgba(0, 151, 157, 1)"
+    value={false}
+  />
+  <Text
+    style={
+      Array [
+        undefined,
+      ]
+    }
+  >
+    test
+  </Text>
+</View>
+`;

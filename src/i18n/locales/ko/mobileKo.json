@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "게스트 사용자"
+        },
+        "projectLabels": {
+            "allProjects": "모든 프로젝트",
+            "recent": "최근",
+            "preview": "미리 보기",
+            "humanitarian": "인도적 지원"
+        },
+        "sideMenu": {
+            "home": "홈",
+            "aboutTheZooniverse": "Zooniverse 소개",
+            "help": "도움말",
+            "version": "버전"
+        },
+        "classifier": {
+            "help": "도움말",
+            "loadingSubject": "대상 불러오는 중",
+            "loadingSubjects": "대상 불러오는 중",
+            "submit": "제출",
+            "enterDrawingMode": "드로잉 모드 진입",
+            "countDrawn": "{{count}}개 그려짐",
+            "areYouSure": "계속할까요?",
+            "eraseRecentEdits": "가장 최근에 편집한 내용들이 지워집니다",
+            "eraseAllAnnotations": "내 주석이 모두 지워집니다",
+            "yes": "예"
+        },
+        "signIn": {
+            "continueWithout": "로그인하지 않고 계속",
+            "register": "계정 등록"
+        }
+    }
+}

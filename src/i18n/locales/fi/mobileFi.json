@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Vieraskäyttäjä"
+        },
+        "projectLabels": {
+            "allProjects": "Kaikki projektit",
+            "recent": "Viimeaikainen",
+            "preview": "Esikatselu",
+            "humanitarian": "Humanitaarinen"
+        },
+        "sideMenu": {
+            "home": "Koti",
+            "aboutTheZooniverse": "Tietoa Zooniversesta",
+            "help": "Ohje",
+            "version": "Versio"
+        },
+        "classifier": {
+            "help": "Ohje",
+            "loadingSubject": "Aihetta ladataan",
+            "loadingSubjects": "Aiheita ladataan",
+            "submit": "Lähetä",
+            "enterDrawingMode": "Siirry piirtotilaan",
+            "countDrawn": "{{count}} piirretty",
+            "areYouSure": "Oletko varma?",
+            "eraseRecentEdits": "Tämä poistaa viimeisimmät muokkauksesi",
+            "eraseAllAnnotations": "Tämä poistaa kaikki merkintäsi",
+            "yes": "Kyllä"
+        },
+        "signIn": {
+            "continueWithout": "Jatka ilman sisäänkirjautumista",
+            "register": "Rekisteröidy ja luo tili"
+        }
+    }
+}

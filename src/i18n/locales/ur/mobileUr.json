@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "صارفی گائیڈ"
+        },
+        "projectLabels": {
+            "allProjects": "تمام پروجکیٹس",
+            "recent": "حالیہ",
+            "preview": "پیش منظر",
+            "humanitarian": "انسانی امداد"
+        },
+        "sideMenu": {
+            "home": "ہوم",
+            "aboutTheZooniverse": "Zooniverse کے متعلق",
+            "help": "مدد",
+            "version": "ورژن"
+        },
+        "classifier": {
+            "help": "مدد",
+            "loadingSubject": "سبجیکٹ لوڈ ہو رہا ہے",
+            "loadingSubjects": "سبجیکٹس لوڈ ہو رہے ہیں",
+            "submit": "جمع کروائیں",
+            "enterDrawingMode": "ڈرائنگ موڈ میں داخل ہوں",
+            "countDrawn": "{{count}} ڈرا ہو گئے",
+            "areYouSure": "کیا آپ کو یقین ہے؟",
+            "eraseRecentEdits": "یہ آپ کی حالیہ ترین تدوین کاریوں کو مٹا دے گا",
+            "eraseAllAnnotations": "یہ آپ کی تمام تشریحات کو ہٹا دے گا",
+            "yes": "جی ہاں"
+        },
+        "signIn": {
+            "continueWithout": "سائن ان کیے بغیر جاری رکھیں",
+            "register": "اکاؤنٹ کے لیے رجسٹر کریں"
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Gastbenutzer"
+        },
+        "projectLabels": {
+            "allProjects": "Alle Projekte",
+            "recent": "Letzte",
+            "preview": "Vorschau",
+            "humanitarian": "Humanitär"
+        },
+        "sideMenu": {
+            "home": "Startseite",
+            "aboutTheZooniverse": "Über Zooniverse",
+            "help": "Hilfe",
+            "version": "Version"
+        },
+        "classifier": {
+            "help": "Hilfe",
+            "loadingSubject": "Thema wird geladen",
+            "loadingSubjects": "Themen werden geladen",
+            "submit": "Absenden",
+            "enterDrawingMode": "Zeichnungsmodus öffnen",
+            "countDrawn": "{{count}} gezeichnet",
+            "areYouSure": "Sind Sie sicher?",
+            "eraseRecentEdits": "Dies wird Ihre letzten Änderungen löschen",
+            "eraseAllAnnotations": "Dies wird alle Ihre Anmerkungen löschen",
+            "yes": "Ja"
+        },
+        "signIn": {
+            "continueWithout": "Ohne Anmeldung fortfahren",
+            "register": "Für Konto registrieren"
+        }
+    }
+}

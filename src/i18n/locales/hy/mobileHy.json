@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Հյուր օգտատեր"
+        },
+        "projectLabels": {
+            "allProjects": "Բոլոր պրոյեկտները",
+            "recent": "Վերջին",
+            "preview": "Նախադիտում",
+            "humanitarian": "Հումանիտար"
+        },
+        "sideMenu": {
+            "home": "Գլխավոր",
+            "aboutTheZooniverse": "Zooniverse-ի մասին",
+            "help": "Օգնություն",
+            "version": "Տարբերակ"
+        },
+        "classifier": {
+            "help": "Օգնություն",
+            "loadingSubject": "Սուբյեկտի բեռնում",
+            "loadingSubjects": "Սուբյեկտների բեռնում",
+            "submit": "Ուղարկել",
+            "enterDrawingMode": "Մտնել նկարելու ռեժիմ",
+            "countDrawn": "{{count}}նկարած",
+            "areYouSure": "Համոզվա՞ծ եք",
+            "eraseRecentEdits": "Սա կջնջի ձեր բոլոր վերջին խմբագրումները",
+            "eraseAllAnnotations": "Սա կջնջի ձեր բոլոր ծանոթագրությունները",
+            "yes": "Այո"
+        },
+        "signIn": {
+            "continueWithout": "Շարունակել առանց մուտք գործելու",
+            "register": "Գրանցվել հաշվի համար"
+        }
+    }
+}

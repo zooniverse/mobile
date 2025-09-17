@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "Vendégfelhasználó"
+        },
+        "projectLabels": {
+            "allProjects": "Összes projekt",
+            "recent": "Legutóbbi",
+            "preview": "Előnézet",
+            "humanitarian": "Humanitárius"
+        },
+        "sideMenu": {
+            "home": "Kezdőlap",
+            "aboutTheZooniverse": "A Zooniverse névjegye",
+            "help": "Súgó",
+            "version": "Verzió"
+        },
+        "classifier": {
+            "help": "Súgó",
+            "loadingSubject": "Tárgy betöltése",
+            "loadingSubjects": "Tárgyak betöltése",
+            "submit": "Beküldés",
+            "enterDrawingMode": "Belépés rajz módba",
+            "countDrawn": "{{count}} megrajzolva",
+            "areYouSure": "Biztos benne?",
+            "eraseRecentEdits": "Ez törli a legútóbbi szerkesztéseket",
+            "eraseAllAnnotations": "Ez törli az összes jegyzetét",
+            "yes": "Igen"
+        },
+        "signIn": {
+            "continueWithout": "Folytatás regisztráció nélkül",
+            "register": "Fiókregisztráció"
+        }
+    }
+}

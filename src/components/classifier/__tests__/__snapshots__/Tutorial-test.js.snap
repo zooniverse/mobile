@@ -1,0 +1,1521 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "backgroundColor": "white",
+      },
+    ]
+  }
+>
+  <View>
+    <Swiper
+      loop={false}
+      onIndexChanged={[Function]}
+      showsPagination={false}
+    >
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 400,
+                    },
+                    Object {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "justifyContent": "center",
+                    },
+                  ]
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source={
+                    Object {
+                      "uri": "http://notvalid",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 400,
+                      "width": 400,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    ### Welcome to Planet Four: Ridges
+----------
+This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
+
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 400,
+                    },
+                    Object {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "justifyContent": "center",
+                    },
+                  ]
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source={
+                    Object {
+                      "uri": "http://notvalid",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 400,
+                      "width": 400,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
+
+
+###### Image(c) : NASA/JPL/University of Arizona
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 400,
+                    },
+                    Object {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "justifyContent": "center",
+                    },
+                  ]
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source={
+                    Object {
+                      "uri": "http://notvalid",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 400,
+                      "width": 400,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </Swiper>
+  </View>
+  <View>
+    <View />
+    <View
+      accessible={true}
+      clickable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        Continue
+      </Text>
+    </View>
+    <View>
+      <View>
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              Array [
+                undefined,
+                undefined,
+              ],
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders header if initial tutorial 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "backgroundColor": "white",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "Karla",
+        },
+        Array [
+          undefined,
+          Object {
+            "color": "black",
+          },
+        ],
+      ]
+    }
+  >
+    Awesome project - Tutorial
+  </Text>
+  <View>
+    <Swiper
+      loop={false}
+      onIndexChanged={[Function]}
+      showsPagination={false}
+    >
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 400,
+                    },
+                    Object {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "justifyContent": "center",
+                    },
+                  ]
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source={
+                    Object {
+                      "uri": "http://notvalid",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 400,
+                      "width": 400,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    ### Welcome to Planet Four: Ridges
+----------
+This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
+
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 400,
+                    },
+                    Object {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "justifyContent": "center",
+                    },
+                  ]
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source={
+                    Object {
+                      "uri": "http://notvalid",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 400,
+                      "width": 400,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
+
+
+###### Image(c) : NASA/JPL/University of Arizona
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 400,
+                    },
+                    Object {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "justifyContent": "center",
+                    },
+                  ]
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source={
+                    Object {
+                      "uri": "http://notvalid",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 400,
+                      "width": 400,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </Swiper>
+  </View>
+  <View>
+    <View />
+    <View
+      accessible={true}
+      clickable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        Continue
+      </Text>
+    </View>
+    <View>
+      <View>
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              Array [
+                undefined,
+                undefined,
+              ],
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders with no media 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "backgroundColor": "white",
+      },
+    ]
+  }
+>
+  <View>
+    <Swiper
+      loop={false}
+      onIndexChanged={[Function]}
+      showsPagination={false}
+    >
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    ### Welcome to Planet Four: Ridges
+----------
+This brief tutorial will teach you how to discover polygonal ridges on Mars. By mapping these features, you are helping to explore Mars' past. 
+
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    You will be presented with a cutout from an image taken by the Context Camera aboard Mars Reconnaissance Orbiter. All you need to do is spot the polygonal ridges, if any are present in the image. 
+
+
+###### Image(c) : NASA/JPL/University of Arizona
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "margin": 25,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "marginTop": 15,
+                  }
+                }
+              >
+                <View
+                  onLayout={[Function]}
+                >
+                  <Markdown
+                    rules={
+                      Object {
+                        "image": Object {
+                          "match": [Function],
+                        },
+                      }
+                    }
+                    styles={
+                      Object {
+                        "image": Object {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "text": Object {
+                          "color": "black",
+                          "fontFamily": "Karla",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                        },
+                      }
+                    }
+                  >
+                    Polygonal ridges are intersecting, creating spider-web like patterns. Notice how the ridges intersect to form closed shapes of varying sizes. 
+                  </Markdown>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </Swiper>
+  </View>
+  <View>
+    <View />
+    <View
+      accessible={true}
+      clickable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "Karla",
+            },
+            Array [
+              undefined,
+              Array [
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        Continue
+      </Text>
+    </View>
+    <View>
+      <View>
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              Array [
+                undefined,
+                undefined,
+              ],
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        clickable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              undefined,
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

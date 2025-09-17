@@ -1,0 +1,35 @@
+{
+    "Mobile": {
+        "homeScreen": {
+            "guestUser": "مستخدم ضيف"
+        },
+        "projectLabels": {
+            "allProjects": "كل المشروعات",
+            "recent": "مؤخراً",
+            "preview": "معاينة",
+            "humanitarian": "إنساني"
+        },
+        "sideMenu": {
+            "home": "الرئيسية",
+            "aboutTheZooniverse": "نبذة عن Zooniverse",
+            "help": "الدعم",
+            "version": "الإصدار"
+        },
+        "classifier": {
+            "help": "الدعم",
+            "loadingSubject": "جارٍ تحميل الموضوع",
+            "loadingSubjects": "جارٍ تحميل الموضوعات",
+            "submit": "إرسال",
+            "enterDrawingMode": "دخول إلى وضع الرسم",
+            "countDrawn": "تم رسم {{count}}",
+            "areYouSure": "هل أنت متأكد؟",
+            "eraseRecentEdits": "سيؤدي هذا إلى محو أحدث تعديلاتك",
+            "eraseAllAnnotations": "سيؤدي هذا إلى محو كل التعليقات لديك",
+            "yes": "نعم"
+        },
+        "signIn": {
+            "continueWithout": "استمرار بدون تسجيل دخول",
+            "register": "تسجيل للحصول على حساب"
+        }
+    }
+}

@@ -1,0 +1,407 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <RCTScrollView>
+    <View>
+      <View>
+        <Text
+          style={
+            Array [
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          SIGN IN
+        </Text>
+        <View>
+          <View>
+            <Text
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Username or Email Address
+            </Text>
+          </View>
+          <View>
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              rejectResponderTermination={true}
+              returnKeyType="done"
+              secureTextEntry={false}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <View>
+          <View>
+            <Text
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Password
+            </Text>
+          </View>
+          <View>
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              rejectResponderTermination={true}
+              returnKeyType="done"
+              secureTextEntry={true}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            Forget your password?
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
+            Sign In
+          </Text>
+        </View>
+        <View>
+          <View />
+          <Text>
+            OR
+          </Text>
+          <View />
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
+            Continue without signing in
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
+            Register for account
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`renders error message 1`] = `
+<View>
+  <RCTScrollView>
+    <View>
+      <View>
+        <Text
+          style={
+            Array [
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          SIGN IN
+        </Text>
+        <View>
+          <View>
+            <Text
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Username or Email Address
+            </Text>
+          </View>
+          <View>
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              rejectResponderTermination={true}
+              returnKeyType="done"
+              secureTextEntry={false}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <View>
+          <View>
+            <Text
+              style={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              Password
+            </Text>
+          </View>
+          <View>
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              onChangeText={[Function]}
+              rejectResponderTermination={true}
+              returnKeyType="done"
+              secureTextEntry={true}
+              underlineColorAndroid="white"
+            />
+          </View>
+        </View>
+        <Text
+          style={
+            Array [
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          does not compute
+        </Text>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            Forget your password?
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
+            Sign In
+          </Text>
+        </View>
+        <View>
+          <View />
+          <Text>
+            OR
+          </Text>
+          <View />
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
+            Continue without signing in
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Karla",
+                },
+                undefined,
+              ]
+            }
+          >
+            Register for account
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
