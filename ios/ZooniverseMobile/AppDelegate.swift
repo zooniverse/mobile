@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
+    showSplashScreen()
     FirebaseApp.configure()
     let delegate = ReactNativeDelegate()
     let factory = RCTReactNativeFactory(delegate: delegate)
@@ -34,6 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     return true
   }
+
+   private func showSplashScreen() {
+      if let splashClass = NSClassFromString("SplashView") as? NSObject.Type,
+          let splashInstance = splashClass.perform(NSSelectorFromString("sharedInstance"))?.takeUnretainedValue() as? NSObject {
+          splashInstance.perform(NSSelectorFromString("showSplash"))
+          print("✅ Splash Screen Shown Successfully")
+      } else {
+          print("⚠️ SplashView module not found")
+      }
+    }
 }
 
 class ReactNativeDelegate: RCTDefaultReactNativeFactoryDelegate {

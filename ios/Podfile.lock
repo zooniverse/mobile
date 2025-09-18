@@ -1945,8 +1945,6 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-splash-screen (3.3.0):
-    - React-Core
   - react-native-video (5.2.2):
     - React-Core
     - react-native-video/Video (= 5.2.2)
@@ -2519,7 +2517,7 @@ PODS:
     - React
   - RNCPushNotificationIOS (1.11.0):
     - React-Core
-  - RNDeviceInfo (14.0.4):
+  - RNDeviceInfo (14.1.1):
     - React-Core
   - RNFBAnalytics (23.3.1):
     - FirebaseAnalytics/Core (= 12.2.0)
@@ -2798,7 +2796,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - RNSentry (7.0.1):
+  - RNSentry (7.1.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2825,7 +2823,7 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Sentry/HybridSDK (= 8.53.2)
+    - Sentry/HybridSDK (= 8.56.0)
     - SocketRocket
     - Yoga
   - RNSVG (15.13.0):
@@ -2913,8 +2911,36 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - Sentry/HybridSDK (8.53.2)
+  - Sentry/HybridSDK (8.56.0)
   - SocketRocket (0.7.1)
+  - SplashView (0.0.18):
+    - boost
+    - DoubleConversion
+    - fast_float
+    - fmt
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCT-Folly/Fabric
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SocketRocket
+    - Yoga
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -2963,7 +2989,6 @@ DEPENDENCIES:
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
-  - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -3012,6 +3037,7 @@ DEPENDENCIES:
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - SocketRocket (~> 0.7.1)
+  - SplashView (from `../node_modules/react-native-splash-view`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -3121,8 +3147,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
-  react-native-splash-screen:
-    :path: "../node_modules/react-native-splash-screen"
   react-native-video:
     :path: "../node_modules/react-native-video"
   react-native-webview:
@@ -3217,6 +3241,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  SplashView:
+    :path: "../node_modules/react-native-splash-view"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -3277,7 +3303,6 @@ SPEC CHECKSUMS:
   react-native-blur: 981b2ec64b3084ecf98812333f2a8c6e83643a1e
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
   react-native-safe-area-context: 3e0a25a843c40ad5efdf2bef93fdd95ad7229650
-  react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-video: 05b96aa6ab090579e2db5f3a3b81ffdb365016fd
   react-native-webview: 5887b6094417c75a9bee446261f89c32adf6b602
   React-NativeModulesApple: dcfbe72c5a47baec0699a2935c080b7de0c8657b
@@ -3314,7 +3339,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 8857fb173af29664cb90897903902dc8533e36cc
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNCPushNotificationIOS: 64218f3c776c03d7408284a819b2abfda1834bc8
-  RNDeviceInfo: feea80a690d2bde1fe51461cf548039258bd03f2
+  RNDeviceInfo: 8b6fa8379062949dd79a009cf3d6b02a9c03ca59
   RNFBAnalytics: 3e85ae61b51d5f10a5e97b85a21a28006f7af5f6
   RNFBApp: 8806c1d7dcdb983faf42b0a728d9753f4697e9a1
   RNFBMessaging: 71f64befb55011f65d4e2271c425d3cd2ab850ed
@@ -3322,11 +3347,12 @@ SPEC CHECKSUMS:
   RNLocalize: 3e9ccbfe89d6343864c322f258af95dfaf42ba10
   RNReanimated: 8d0f830cd94d0d9cc86eed5850e567a89807586e
   RNScreens: 871305075ddf1291411b051d86da9e0d9289de02
-  RNSentry: f6ae0276fbcb6fbe1adde773832724a7661de8f0
+  RNSentry: e17c08dbee8dbfe5541878f224773cab82a38edd
   RNSVG: eb89274c113e61716163564ce319f60fa4427984
   RNVectorIcons: 96c832d9134dfee90ce0be7a1e0bf4c1e41a8d11
-  Sentry: 59993bffde4a1ac297ba6d268dc4bbce068d7c1b
+  Sentry: 3d82977434c80381cae856c40b99c39e4be6bc11
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
+  SplashView: 4344216a32e7f903d41dbd8fac06cf0bf2549fe2
   Yoga: 55860ae3834d6b4093e259786a651d8eee28f041
 
 PODFILE CHECKSUM: 2772a9e3d25bba8e19f01be5f79ae6af3629bae6

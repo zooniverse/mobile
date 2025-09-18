@@ -10,7 +10,6 @@ import { setIsConnected, setState } from '../actions/index';
 import { loadUserData } from '../actions/user';
 import { setSession } from '../actions/session';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import SplashScreen from 'react-native-splash-screen';
 import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import SafeAreaContainer from './SafeAreaContainer';
@@ -22,6 +21,7 @@ import * as Sentry from '@sentry/react-native';
 import { PushNotifications, IncomingNotifications } from '../notifications';
 import '../i18n';
 import LanguageEffect from '../components/settings/LanguageEffect';
+import { hideSplash, showSplash } from 'react-native-splash-view';
 
 Sentry.init({
   dsn: 'https://334e2b2ca1c04dc4a7fc356e394e9ea8@o274434.ingest.sentry.io/5371400',
@@ -53,8 +53,11 @@ const persistor = persistStore(store, {}, () => {
 
 export default class App extends Component {
   componentDidMount() {
-    SplashScreen.hide();
+    showSplash(); // Show the splash screen (If you don't want to start it from native side)
 
+    setTimeout(() => {
+      hideSplash(); // Hide after some time
+    }, 2000);
     IncomingNotifications.handleIncomingNotifications();
 
     const handleAppStateChange = currentAppState => {
