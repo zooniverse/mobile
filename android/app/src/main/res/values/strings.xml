@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ZooniverseMobile</string>
+    <string name="app_name">Zooniverse</string>
+    <string name="acc_notification_icon">ic_Launcher</string>
 </resources>
