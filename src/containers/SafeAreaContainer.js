@@ -19,12 +19,12 @@ const SafeAreaContainer = (props) => {
         bottomBackgroundColor = styles.bottomClassiferColor;
     }
     return (
-        <View style={[styles.container, backgroundStyle]}>
+        <SafeAreaView style={[styles.container, backgroundStyle]}>
             <SafeAreaView style={[styles.topSafeAreaContainer, backgroundStyle]} />
             <SafeAreaView style={[styles.bottomSafeAreaView, bottomBackgroundColor]}>
                 { props.children }
             </SafeAreaView>
-        </View>
+        </SafeAreaView>
     );
 }
 
