@@ -5,6 +5,7 @@ if (__DEV__) {
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StatusBar, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import App from './src/containers/app';
 import theme from './src/theme';
@@ -12,10 +13,12 @@ import theme from './src/theme';
 class ZooniverseMobile extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <PlatformSpecificStatusBar />
-        <App />
-      </View>
+      <SafeAreaProvider>
+        <View style={styles.container}>
+          <PlatformSpecificStatusBar />
+          <App />
+        </View>
+      </SafeAreaProvider>
     );
   }
 }
