@@ -98,7 +98,7 @@ export class NavBar extends Component {
         )
       }
       
-      return (
+      return isActive ? (
         <View>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -108,7 +108,7 @@ export class NavBar extends Component {
             <Icon name="chevron-left" style={[styles.leftIcon, styles.icon, colorStyle]} />
           </TouchableOpacity>
         </View>
-      )
+      ) : null
     }
 
     const RightContainer = ({ isActive }) => {
