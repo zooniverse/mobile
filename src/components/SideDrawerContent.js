@@ -20,6 +20,7 @@ import PropTypes from 'prop-types';
 import {DrawerActions} from '@react-navigation/native';
 import PageKeys from '../constants/PageKeys'
 import { withTranslation } from 'react-i18next'
+import { navRef } from '../navigation/RootNavigator'
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -50,12 +51,12 @@ export class SideDrawerContent extends Component {
 
   goHome(){
     this.close()
-    this.props.navigation.navigate('ZooniverseApp', {refresh: true});
+    navRef.navigate('ZooniverseApp', {refresh: true});
   }
 
   signIn(){
     this.close()
-    this.props.navigation.navigate('SignIn');
+    navRef.navigate('SignIn');
   }
 
   signOut(){
@@ -65,17 +66,17 @@ export class SideDrawerContent extends Component {
 
   goToAbout(){
     this.close()
-    this.props.navigation.navigate('About');
+    navRef.navigate('About');
   }
 
   settings(){
     this.close()
-    this.props.navigation.navigate('Settings');
+    navRef.navigate('Settings');
   }
 
   notifications() {
     this.close()
-    this.props.navigation.navigate(PageKeys.NotificationLandingPageScreen)
+    navRef.navigate(PageKeys.NotificationLandingPageScreen)
   }
 
   openLink(link) {
