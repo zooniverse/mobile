@@ -10,7 +10,7 @@ import { getCurrentProjectLanguage } from '../../i18n';
 
 const FieldGuideItemRow = (props) => {
     const { t } = useTranslation();
-    const itemIcon = props.icons[props.item.icon]
+    const itemIcon = props?.icons ? props.icons[props?.item?.icon] : undefined
     return (
       <TouchableOpacity onPress={props.onPress} style={styles.itemRow}>
         {itemIcon !== undefined && itemIcon.src ? (
