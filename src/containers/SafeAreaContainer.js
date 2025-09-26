@@ -19,11 +19,12 @@ const SafeAreaContainer = (props) => {
         bottomBackgroundColor = styles.bottomClassiferColor;
     }
     return (
-        <SafeAreaView style={[styles.container, backgroundStyle]}>
-            <View style={[styles.bottomSafeAreaView, bottomBackgroundColor]}>
+        <View style={styles.container}>
+            <SafeAreaView style={backgroundStyle} edges={['top']} />
+            <SafeAreaView style={[styles.bottomSafeAreaView, bottomBackgroundColor]} edges={['bottom']}>
                 { props.children }
-            </View>
-        </SafeAreaView>
+            </SafeAreaView>
+        </View>
     );
 }
 
@@ -40,11 +41,14 @@ const styles = EStyleSheet.create({
     container: {
         flex: 1,
     },
+    // topSafeAreaContainer: {
+    //     flex: 0,
+    // },
     bottomSafeAreaView: {
         flex: 1,
     },
     bottomDefaultColor: {
-        backgroundColor: '$backgroundColor',
+        backgroundColor: 'white',
     },
     bottomClassiferColor: {
         backgroundColor: 'white', // White bottom safe area to blend with Field Guide button.
