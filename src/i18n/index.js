@@ -39,6 +39,7 @@ import zhCn from './locales/zh-cn';
 import zhTw from './locales/zh-tw';
 import apiClient from 'panoptes-client/lib/api-client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import reactotron from 'reactotron-react-native';
 
 // Keep track of current languages
 let currentPlatformLanguage = 'en';
@@ -373,13 +374,17 @@ const changeProjectLanguage = async (language, translations) => {
     };
 
     // Add the complete translations to the project namespace
+    // Use deep: false to replace the entire bundle instead of merging
     i18next.addResourceBundle(
       language,
       'project',
       completeTranslations,
-      true,
+      false,
       true
     );
+
+    // Force i18next to re-emit to trigger component updates
+    await i18next.changeLanguage(language);
   }
 
   currentProjectLanguage = language;
