@@ -31,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		096D79102E9A851C00102EA9 /* ZooniverseMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ZooniverseMobile.entitlements; path = ZooniverseMobile/ZooniverseMobile.entitlements; sourceTree = "<group>"; };
 		09AC63BA2E7ABD84003629B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		09AC63DC2E7D7287003629B0 /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Bold.ttf"; sourceTree = "<group>"; };
 		09AC63DD2E7D7287003629B0 /* Karla-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		13B07FAE1A68108700A75B9A /* ZooniverseMobile */ = {
 			isa = PBXGroup;
 			children = (
+				096D79102E9A851C00102EA9 /* ZooniverseMobile.entitlements */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -349,6 +351,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
 				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 888MXXMABP;
 				ENABLE_BITCODE = NO;
@@ -381,6 +384,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
 				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 888MXXMABP;
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;

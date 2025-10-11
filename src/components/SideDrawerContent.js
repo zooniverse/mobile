@@ -17,7 +17,7 @@ import FontedText from './common/FontedText'
 import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import {DrawerActions} from '@react-navigation/native';
+import {DrawerActions, StackActions} from '@react-navigation/native';
 import PageKeys from '../constants/PageKeys'
 import { withTranslation } from 'react-i18next'
 import { navRef } from '../navigation/RootNavigator'
@@ -51,11 +51,12 @@ export class SideDrawerContent extends Component {
 
   goHome(){
     this.close()
-    navRef.navigate('ZooniverseApp', {refresh: true});
+    navRef.dispatch(StackActions.popToTop());
   }
 
   signIn(){
     this.close()
+    navRef.dispatch(StackActions.popToTop());
     navRef.navigate('SignIn');
   }
 
@@ -66,17 +67,20 @@ export class SideDrawerContent extends Component {
 
   goToAbout(){
     this.close()
+    navRef.dispatch(StackActions.popToTop());
     navRef.navigate('About');
   }
 
   settings(){
     this.close()
+    navRef.dispatch(StackActions.popToTop());
     navRef.navigate('Settings');
   }
 
   notifications() {
     this.close()
-    navRef.navigate(PageKeys.NotificationLandingPageScreen)
+    navRef.dispatch(StackActions.popToTop());
+    navRef.navigate(PageKeys.NotificationLandingPageScreen);
   }
 
   openLink(link) {

@@ -120,6 +120,7 @@ const styles = EStyleSheet.create({
         justifyContent: 'flex-end',
         paddingTop: 40,
         height: 140,
+        paddingBottom: 20
     },
     blurView: {
         position: 'absolute',
@@ -152,7 +153,6 @@ const styles = EStyleSheet.create({
     modal: {
         flex: 1,
         width: '100%',
-        paddingBottom: 20,
         backgroundColor: 'white',
     }
 

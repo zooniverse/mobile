@@ -267,7 +267,7 @@ export class SwipeClassifier extends React.Component {
         };
 
         const classifier =
-            <View style={styles.container} onLayout={this.onClassifierLayout.bind(this)}>
+            <View style={styles.swiperWrapper} onLayout={this.onClassifierLayout.bind(this)}>
                <Swiper
                     ref={swiper => (this.swiper = swiper)}
                     cardHorizontalMargin={0}
@@ -418,6 +418,11 @@ export class SwipeClassifier extends React.Component {
 const styles = EStyleSheet.create({
     container: {
         flex: 1,
+    },
+    swiperWrapper: {
+        flex: 1,
+        // This ensures the swiper doesn't capture touches outside its bounds
+        overflow: 'hidden',
     },
     classificationContainer: {
         flex: 1,

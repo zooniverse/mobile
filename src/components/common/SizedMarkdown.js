@@ -1,12 +1,20 @@
+import React, { useState } from 'react';
 import { View, Image } from 'react-native';
 import Markdown from '@ronradtke/react-native-markdown-display';
 import PropTypes from 'prop-types';
 import DeviceInfo from 'react-native-device-info';
-import React from 'react';
 
 const SizedMarkdown = ({ children, style, forButton }) => {
   const isTablet = DeviceInfo.isTablet();
-  
+  const [viewDimensions, setViewDimensions] = useState({ width: 0, height: 0 });
+
+  const onViewLayout = ({ nativeEvent }) => {
+    setViewDimensions({
+      width: nativeEvent.layout.width,
+      height: nativeEvent.layout.width
+    });
+  };
+
   const addLineBreak = (content) => {
     return content ? content.replace(/\n/g, (n) => n + n) : content;
   };
@@ -20,7 +28,11 @@ const SizedMarkdown = ({ children, style, forButton }) => {
   };
 
   const fontSize = isTablet ? 22 : 14;
-  
+
+  // We limit the width and height so any button images
+  const buttonImageHeight = Math.min(viewDimensions.height, 50);
+  const buttonImageWidth = Math.min(viewDimensions.width, 50);
+
   const markdownStyles = {
     body: {
       fontFamily: 'Karla',
@@ -44,8 +56,8 @@ const SizedMarkdown = ({ children, style, forButton }) => {
       flexWrap: 'wrap',
     },
     image: {
-      width: forButton ? 50 : 60,
-      height: forButton ? 50 : 60,
+      width: forButton ? buttonImageWidth : viewDimensions.width,
+      height: forButton ? buttonImageHeight : viewDimensions.height,
       resizeMode: 'contain',
       marginRight: 10,
     },
@@ -55,16 +67,13 @@ const SizedMarkdown = ({ children, style, forButton }) => {
   const renderRules = {
     image: (node, children, parent, styles, inheritedStyles = {}) => {
       const { src, alt } = node.attributes;
-      
-      console.log('Rendering image:', src);
-      
       return (
         <Image
           key={`img-${src}`}
           source={{ uri: src }}
           style={{
-            width: forButton ? 50 : 60,
-            height: forButton ? 50 : 60,
+            width: forButton ? buttonImageWidth : viewDimensions.width,
+            height: forButton ? buttonImageHeight : viewDimensions.height,
             resizeMode: 'contain',
             marginRight: 10,
           }}
@@ -80,10 +89,10 @@ const SizedMarkdown = ({ children, style, forButton }) => {
   };
 
   const processedContent = addLineBreak(preprocessMarkdown(children));
-  
+
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-      <Markdown 
+    <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={onViewLayout}>
+      <Markdown
         style={markdownStyles}
         rules={renderRules}
       >
