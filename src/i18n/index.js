@@ -396,6 +396,26 @@ export const getCurrentProjectLanguage = () => {
   return currentProjectLanguage ?? 'en';
 }
 
+// Clear project translations (useful when navigating between projects)
+export const clearProjectTranslations = () => {
+  const currentLang = i18next.language || 'en';
+
+  // Remove the project namespace bundle
+  i18next.removeResourceBundle(currentLang, 'project');
+
+  // Re-add empty project namespace
+  i18next.addResourceBundle(
+    currentLang,
+    'project',
+    {},
+    false,
+    true
+  );
+
+  // Emit change event to update components
+  i18next.emit('languageChanged', currentLang);
+}
+
 export const loadProjectListTranslations = async (language, projectIds) => {
   // Check cache first
   if (projectListTranslationCache[language]) {

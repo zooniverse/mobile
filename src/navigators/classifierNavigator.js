@@ -5,6 +5,7 @@ import * as drawingActions from '../actions/drawing'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 import theme from '../theme'
+import { clearProjectTranslations } from '../i18n'
 
 const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, project, navigation, workflow) => {
     dispatch(setNavbarSettingsForPage({
@@ -48,6 +49,7 @@ function getPageKeyForWorkflowType(workflowType) {
 function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
+    clearProjectTranslations() // Clear old translations before navigating
     navigation.navigate("SwipeClassifier", {
       project,
       workflow,
@@ -60,6 +62,7 @@ function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow,
 function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
+    clearProjectTranslations() // Clear old translations before navigating
     navigation.navigate("QuestionClassifier", {
       project,
       workflow,
@@ -72,6 +75,7 @@ function navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workfl
 function navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
     dispatch(classifierActions.startNewClassification(workflow, project))
+    clearProjectTranslations() // Clear old translations before navigating
     navigation.navigate("MultiAnswerClassifier", {
       project,
       workflow,
@@ -85,6 +89,7 @@ function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflo
     dispatch(classifierActions.clearClassifierData())
     dispatch(drawingActions.clearShapes())
     dispatch(classifierActions.startNewClassification(workflow, project))
+    clearProjectTranslations() // Clear old translations before navigating
     navigation.navigate("DrawingClassifier", {
       ...parseDrawingTask(workflow),
       project,

@@ -53,7 +53,7 @@ function ClassifierHeader({ project }) {
           />
         </TouchableOpacity>
       )}
-      <Text style={[styles.titleText, { width: titleWidth }]}>
+      <Text numberOfLines={2} style={[styles.titleText, { width: titleWidth }]}>
         {t('project.title', title, { ns: 'project', lng: getCurrentProjectLanguage() })}
       </Text>
       {!museumMode && (

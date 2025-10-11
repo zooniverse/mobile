@@ -164,6 +164,9 @@ export class SwipeClassifier extends React.Component {
     }
 
     renderCard = (subject, index) => {
+        // Guard against undefined subject during navigation/unmounting
+        if (!subject || !subject.id) return null;
+
         const seenThisSession = R.indexOf(subject.id, this.props.subjectsSeenThisSession) >= 0
         // If mutliple images, only show top swipe card to prevent preformance issues.
         if (subject.displays.length > 1 && index !== this.state.swiperIndex) return null;
@@ -268,7 +271,7 @@ export class SwipeClassifier extends React.Component {
                <Swiper
                     ref={swiper => (this.swiper = swiper)}
                     cardHorizontalMargin={0}
-                    keyExtractor={cardData => cardData.id}
+                    keyExtractor={cardData => cardData?.id}
                     cards={this.props.subjectLists}
                     renderCard={(cardData, cardIndex) => this.renderCard(cardData, cardIndex)}
                     cardVerticalMargin={0}
