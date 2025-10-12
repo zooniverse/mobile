@@ -1,0 +1,9 @@
+{
+  "esversion": 6,
+  "node": true,
+  "browser": true,
+  "globals": {
+    "__DEV__": true,
+    "fetch": true
+  }
+}

@@ -38,6 +38,7 @@ export function signIn(login, password, navigation) {
       }).then(() => {
         dispatch(setIsFetching(false))
         navigation.dispatch(StackActions.popToTop());
+        navRef.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
         dispatch(setIsFetching(false))
@@ -68,6 +69,7 @@ export function register(navigation) {
         dispatch(setUser(user))
         dispatch(setIsFetching(false))
         navigation.dispatch(StackActions.popToTop());
+        navRef.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
         dispatch(setIsFetching(false))
