@@ -41,9 +41,6 @@ const styles = EStyleSheet.create({
     container: {
         flex: 1,
     },
-    // topSafeAreaContainer: {
-    //     flex: 0,
-    // },
     bottomSafeAreaView: {
         flex: 1,
     },

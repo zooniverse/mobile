@@ -39,7 +39,6 @@ import zhCn from './locales/zh-cn';
 import zhTw from './locales/zh-tw';
 import apiClient from 'panoptes-client/lib/api-client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import reactotron from 'reactotron-react-native';
 
 // Keep track of current languages
 let currentPlatformLanguage = 'en';
