@@ -17,9 +17,10 @@ import FontedText from './common/FontedText'
 import { signOut } from '../actions/auth'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import {DrawerActions} from '@react-navigation/native';
+import {DrawerActions, StackActions} from '@react-navigation/native';
 import PageKeys from '../constants/PageKeys'
 import { withTranslation } from 'react-i18next'
+import { navRef } from '../navigation/RootNavigator'
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -50,12 +51,13 @@ export class SideDrawerContent extends Component {
 
   goHome(){
     this.close()
-    this.props.navigation.navigate('ZooniverseApp', {refresh: true});
+    navRef.dispatch(StackActions.popToTop());
   }
 
   signIn(){
     this.close()
-    this.props.navigation.navigate('SignIn');
+    navRef.dispatch(StackActions.popToTop());
+    navRef.navigate('SignIn');
   }
 
   signOut(){
@@ -65,17 +67,20 @@ export class SideDrawerContent extends Component {
 
   goToAbout(){
     this.close()
-    this.props.navigation.navigate('About');
+    navRef.dispatch(StackActions.popToTop());
+    navRef.navigate('About');
   }
 
   settings(){
     this.close()
-    this.props.navigation.navigate('Settings');
+    navRef.dispatch(StackActions.popToTop());
+    navRef.navigate('Settings');
   }
 
   notifications() {
     this.close()
-    this.props.navigation.navigate(PageKeys.NotificationLandingPageScreen)
+    navRef.dispatch(StackActions.popToTop());
+    navRef.navigate(PageKeys.NotificationLandingPageScreen);
   }
 
   openLink(link) {

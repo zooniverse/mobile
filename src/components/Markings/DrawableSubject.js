@@ -3,9 +3,9 @@ import {
     Alert,
     Platform,
     Modal,
-    View,
-    SafeAreaView
+    View
 } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { BlurView } from '@react-native-community/blur';
@@ -120,6 +120,7 @@ const styles = EStyleSheet.create({
         justifyContent: 'flex-end',
         paddingTop: 40,
         height: 140,
+        paddingBottom: 20
     },
     blurView: {
         position: 'absolute',
@@ -152,7 +153,6 @@ const styles = EStyleSheet.create({
     modal: {
         flex: 1,
         width: '100%',
-        paddingBottom: 20,
         backgroundColor: 'white',
     }
 

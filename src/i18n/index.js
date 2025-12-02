@@ -373,13 +373,17 @@ const changeProjectLanguage = async (language, translations) => {
     };
 
     // Add the complete translations to the project namespace
+    // Use deep: false to replace the entire bundle instead of merging
     i18next.addResourceBundle(
       language,
       'project',
       completeTranslations,
-      true,
+      false,
       true
     );
+
+    // Force i18next to re-emit to trigger component updates
+    await i18next.changeLanguage(language);
   }
 
   currentProjectLanguage = language;
@@ -389,6 +393,26 @@ const changeProjectLanguage = async (language, translations) => {
 
 export const getCurrentProjectLanguage = () => {
   return currentProjectLanguage ?? 'en';
+}
+
+// Clear project translations (useful when navigating between projects)
+export const clearProjectTranslations = () => {
+  const currentLang = i18next.language || 'en';
+
+  // Remove the project namespace bundle
+  i18next.removeResourceBundle(currentLang, 'project');
+
+  // Re-add empty project namespace
+  i18next.addResourceBundle(
+    currentLang,
+    'project',
+    {},
+    false,
+    true
+  );
+
+  // Emit change event to update components
+  i18next.emit('languageChanged', currentLang);
 }
 
 export const loadProjectListTranslations = async (language, projectIds) => {

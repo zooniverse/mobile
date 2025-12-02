@@ -8,7 +8,7 @@ import {
   ImageBackground,
 } from 'react-native';
 
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { DrawerActions, useNavigation, StackActions } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { BlurView } from '@react-native-community/blur';
 import PropTypes from 'prop-types';
@@ -26,7 +26,7 @@ function ClassifierHeader({ project }) {
   const backgroundColor = isPreview ? '#e45a50' : '#005D69';
 
   const navigateHome = () => {
-    navigation.navigate('ZooniverseApp', { refresh: false });
+    navigation.dispatch(StackActions.popToTop());
   };
 
   /**
@@ -53,7 +53,7 @@ function ClassifierHeader({ project }) {
           />
         </TouchableOpacity>
       )}
-      <Text style={[styles.titleText, { width: titleWidth }]}>
+      <Text numberOfLines={2} style={[styles.titleText, { width: titleWidth }]}>
         {t('project.title', title, { ns: 'project', lng: getCurrentProjectLanguage() })}
       </Text>
       {!museumMode && (

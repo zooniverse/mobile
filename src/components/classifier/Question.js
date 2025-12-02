@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {
-  Dimensions,
   Image,
   TouchableOpacity,
   View
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
-import Markdown from 'react-native-simple-markdown'
 import { connect } from 'react-redux'
-import DeviceInfo from 'react-native-device-info'
 
 import SizedMarkdown from '../common/SizedMarkdown'
 import { setQuestionContainerHeight } from '../../actions/classifier'

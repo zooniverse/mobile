@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 16,
     alignSelf: 'flex-start',
     height: 40,
-    paddingHorizontal: 1, // small buffer to prevent clipping
+    paddingHorizontal: 12, // small buffer to prevent clipping
+    backgroundColor: 'white',
   },
   gradient: {
-    paddingHorizontal: 12,
     height: '100%',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,

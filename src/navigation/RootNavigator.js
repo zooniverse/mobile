@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Dimensions} from 'react-native';
 
 import {
   NavigationContainer,
@@ -38,13 +37,10 @@ const StackNavigator = () => {
       screenOptions={{
         header: ({ navigation }) => <NavBar navigation={navigation} />,
         gestureEnabled: false
-      }}
-      headerMode="float">
+      }}>
       <Stack.Screen
         name={PageKeys.SignIn}
         component={SignIn}
-        duration={0}
-        type="reset"
       />
       <Stack.Screen
         name={PageKeys.ZooniverseApp}
@@ -61,15 +57,12 @@ const StackNavigator = () => {
       <Stack.Screen
         name={PageKeys.SwipeClassifier}
         component={SwipeClassifier}
-        panHandlers={null}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
         name={PageKeys.DrawingClassifier}
-        drawerLockMode={'locked-closed'}
-        panHandlers={null}
         component={DrawingClassifier}
         options={{
           headerShown: false,
@@ -104,7 +97,6 @@ const DrawerNavigator = () => {
         drawerPosition: 'right',
         drawerType: 'front',
         headerShown: false,
-        headerMode: 'float',
         swipeEnabled: true,
         swipeEdgeWidth: 0, // These 2 swipe options allow the drawer to be swiped closed but NOT swiped open.
       }}

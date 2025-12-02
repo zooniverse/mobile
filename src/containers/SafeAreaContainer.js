@@ -1,8 +1,8 @@
 import React from 'react'
 import {
-    SafeAreaView,
     View
  } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { connect, useSelector }  from 'react-redux'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -19,9 +19,9 @@ const SafeAreaContainer = (props) => {
         bottomBackgroundColor = styles.bottomClassiferColor;
     }
     return (
-        <View style={[styles.container, backgroundStyle]}>
-            <SafeAreaView style={[styles.topSafeAreaContainer, backgroundStyle]} />
-            <SafeAreaView style={[styles.bottomSafeAreaView, bottomBackgroundColor]}>
+        <View style={styles.container}>
+            <SafeAreaView style={backgroundStyle} edges={['top']} />
+            <SafeAreaView style={[styles.bottomSafeAreaView, bottomBackgroundColor]} edges={['bottom']}>
                 { props.children }
             </SafeAreaView>
         </View>
@@ -45,7 +45,7 @@ const styles = EStyleSheet.create({
         flex: 1,
     },
     bottomDefaultColor: {
-        backgroundColor: '$backgroundColor',
+        backgroundColor: 'white',
     },
     bottomClassiferColor: {
         backgroundColor: 'white', // White bottom safe area to blend with Field Guide button.

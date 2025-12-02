@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { getCurrentProjectLanguage } from '../../i18n';
 
 const FieldGuideItemRow = (props) => {
-    const { t } = useTranslation();    
+    const { t } = useTranslation();
     const itemIcon = props?.icons ? props.icons[props?.item?.icon] : undefined
     return (
       <TouchableOpacity onPress={props.onPress} style={styles.itemRow}>

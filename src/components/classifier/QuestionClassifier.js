@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-    SafeAreaView,
     ScrollView,
     View,
     Platform,
@@ -148,7 +147,7 @@ class QuestionClassifier extends Component {
         const guide = this.props.guide;
         const tutorial = this.props.tutorial;
         const languages = project?.available_languages ?? [];
-        if (project?.id && workflow?.id && guide?.id && tutorial?.id && !this.loadedTranslationsRef.current) {
+        if (project?.id && workflow?.id && tutorial?.id && !this.loadedTranslationsRef.current) {
             this.loadedTranslationsRef.current = true;
             const defaultLanguage = getPreferredLanguageFromProject(languages);
             this.loadTranslations(defaultLanguage, project, workflow, guide, tutorial)
@@ -356,7 +355,7 @@ class QuestionClassifier extends Component {
                 )}
             </View>
         return (
-            <SafeAreaView style={[styles.flex, styles.dropshadow]}>
+            <View style={[styles.flex, styles.dropshadow]}>
                 <ClassifierHeader project={project} />
                  {this.state.translationsLoading && (
                     <TranslationsLoadingIndicator />
@@ -371,7 +370,7 @@ class QuestionClassifier extends Component {
                 >
                     {needsTutorial ? renderTutorial() : classificationPanel}
                 </ClassifierContainer>
-            </SafeAreaView>
+            </View>
         );
     }
 }

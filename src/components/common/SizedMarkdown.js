@@ -1,107 +1,111 @@
-import React, { Component } from 'react'
-import {
-    View
-} from 'react-native'
-import DeviceInfo from 'react-native-device-info'
-import Markdown from 'react-native-simple-markdown'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react';
+import { View, Image } from 'react-native';
+import Markdown from '@ronradtke/react-native-markdown-display';
+import PropTypes from 'prop-types';
+import DeviceInfo from 'react-native-device-info';
 
-import { markdownImageRule } from '../../utils/markdownUtils'
+const SizedMarkdown = ({ children, style, forButton }) => {
+  const isTablet = DeviceInfo.isTablet();
+  const [viewDimensions, setViewDimensions] = useState({ width: 0, height: 0 });
 
-/**
- * Component that wraps the markdown library we use.
- * 
- * There are a few custom things we want to add the the markdown library
- * we use to make it work the way we want. These are:
- * 1) Set Font to Karla
- * 2) Set Font Size
- * 3) Size Images to container
- * 4) Add a rule to recognize our image syntax
- * 
- * This component should be used for all Markdown in the app.
- */
-class SizedMarkdown extends Component {
-    constructor(props) {
-        super(props)
+  const onViewLayout = ({ nativeEvent }) => {
+    setViewDimensions({
+      width: nativeEvent.layout.width,
+      height: nativeEvent.layout.width
+    });
+  };
 
-        this.state = {
-            viewDimensions: {
-                width: 0,
-                height: 0
-            }
-        }
+  const addLineBreak = (content) => {
+    return content ? content.replace(/\n/g, (n) => n + n) : content;
+  };
 
-        this.onViewLayout = this.onViewLayout.bind(this)
-    }
+  const preprocessMarkdown = (text) => {
+    if (!text) return text;
+    return text.replace(
+      /!\[([^\]]*)\]\(([^\s)]+)\s*=\d+[xX]\d*\)/g,
+      '![$1]($2)'
+    );
+  };
 
-    onViewLayout({nativeEvent}) {
-        this.setState({
-            viewLayedOut: true,
-            viewDimensions: {
-                width: nativeEvent.layout.width,
-                height: nativeEvent.layout.width
-            }
-        })
-    }
+  const fontSize = isTablet ? 22 : 14;
 
-    // Fixes: https://github.com/zooniverse/mobile/issues/412
-    addLineBreak(content) {
-        return content ? content.replace(/\n/g, (n) => n + n) : content;
-    }
+  // We limit the width and height so any button images
+  const buttonImageHeight = Math.min(viewDimensions.height, 50);
+  const buttonImageWidth = Math.min(viewDimensions.width, 50);
 
-    render() {
-        const { viewDimensions } = this.state
+  const markdownStyles = {
+    body: {
+      fontFamily: 'Karla',
+      fontSize: fontSize,
+      fontWeight: isTablet ? 'bold' : 'normal',
+      color: 'black',
+      ...style,
+    },
+    text: {
+      fontFamily: 'Karla',
+      fontSize: fontSize,
+      fontWeight: isTablet ? 'bold' : 'normal',
+      color: 'black',
+      ...style,
+    },
+    paragraph: {
+      marginTop: 0,
+      marginBottom: 0,
+      flexDirection: 'row',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+    },
+    image: {
+      width: forButton ? buttonImageWidth : viewDimensions.width,
+      height: forButton ? buttonImageHeight : viewDimensions.height,
+      resizeMode: 'contain',
+      marginRight: 10,
+    },
+  };
 
-        //We limit the width and height so any button images
-        const buttonImageHeight = Math.min(viewDimensions.height, 50)
-        const buttonImageWidth = Math.min(viewDimensions.width, 50)
+  // Custom render rules to handle images without spinner
+  const renderRules = {
+    image: (node, children, parent, styles, inheritedStyles = {}) => {
+      const { src, alt } = node.attributes;
+      return (
+        <Image
+          key={`img-${src}`}
+          source={{ uri: src }}
+          style={{
+            width: forButton ? buttonImageWidth : viewDimensions.width,
+            height: forButton ? buttonImageHeight : viewDimensions.height,
+            resizeMode: 'contain',
+            marginRight: 10,
+          }}
+          onError={(error) => {
+            console.log('Image load error:', src, error.nativeEvent);
+          }}
+          onLoad={() => {
+            console.log('Image loaded successfully:', src);
+          }}
+        />
+      );
+    },
+  };
 
-        // Stylistic vertical centering options weren't affecting this view
-        // so we're vertically centering text manually on buttons.
-        // DRAWBACK: text longer than one line will look weird
-        const fontSize = isTablet ? 22 : 14
+  const processedContent = addLineBreak(preprocessMarkdown(children));
 
-        const customStyles = {
-            text: {
-                ...{
-                    fontFamily: 'Karla',
-                    fontSize: fontSize,
-                    fontWeight: isTablet ? 'bold' : 'normal',
-                    color: 'black',
-                    justifyContent: 'center',
-                    alignSelf: 'center',
-                },
-                ...this.props.style
-            },
-            image: {
-                width: this.props.forButton ? buttonImageWidth : viewDimensions.width,
-                height: this.props.forButton ? buttonImageHeight : viewDimensions.height,
-                marginRight: 10,
-            }
-        }
-
-        return (
-            <View onLayout={this.onViewLayout}>
-                <Markdown rules={markdownImageRule} styles={customStyles}>
-                    {this.addLineBreak(this.props.children)}
-                </Markdown>
-            </View>
-        )
-    }
-}
-
-const isTablet = DeviceInfo.isTablet()
+  return (
+    <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={onViewLayout}>
+      <Markdown
+        style={markdownStyles}
+        rules={renderRules}
+      >
+        {processedContent}
+      </Markdown>
+    </View>
+  );
+};
 
 SizedMarkdown.propTypes = {
-    children: PropTypes.node,
-    inMuseumMode: PropTypes.bool,
-    forButton: PropTypes.bool,
-    style: PropTypes.object,
-}
+  children: PropTypes.string,
+  style: PropTypes.object,
+  forButton: PropTypes.bool,
+};
 
-SizedMarkdown.defaultProps = {
-    inMuseumMode: false,
-    forButton: false
-}
-
-export default SizedMarkdown
+export default SizedMarkdown;

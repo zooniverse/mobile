@@ -7,6 +7,7 @@ import {
 import { loadUserAvatar, loadUserProjects, setIsGuestUser, setUser } from '../actions/user'
 import * as ActionConstants from '../constants/actions'
 import { navRef } from '../navigation/RootNavigator';
+import { StackActions } from '@react-navigation/native';
 import { PushNotifications } from '../notifications/PushNotifications';
 
 export function getAuthUser() {
@@ -36,7 +37,8 @@ export function signIn(login, password, navigation) {
         ])
       }).then(() => {
         dispatch(setIsFetching(false))
-        navigation.navigate('ZooniverseApp', {refresh: true});
+        navigation.dispatch(StackActions.popToTop());
+        navRef.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
         dispatch(setIsFetching(false))
@@ -66,7 +68,8 @@ export function register(navigation) {
         user.projects = {}
         dispatch(setUser(user))
         dispatch(setIsFetching(false))
-        navigation.navigate('ZooniverseApp', {refresh: true});
+        navigation.dispatch(StackActions.popToTop());
+        navRef.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
         dispatch(setIsFetching(false))
@@ -84,6 +87,7 @@ export function signOut(navigation) {
     auth.signOut()
     dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
+    navigation.dispatch(StackActions.popToTop());
     navRef.navigate('SignIn');
   }
 }
@@ -91,6 +95,6 @@ export function signOut(navigation) {
 export function continueAsGuest(navigation) {
   return dispatch => {
     dispatch(setIsGuestUser(true))
-    navRef.navigate('ZooniverseApp', {refresh: true});
+    navigation.dispatch(StackActions.popToTop());
   }
 }

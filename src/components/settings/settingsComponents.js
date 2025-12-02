@@ -83,6 +83,7 @@ export const SettingsToggle = ({
           disabled={disabled}
           trackBar={trackBarStyles}
           thumbButton={thumbButtonStyles}
+          trackBarStyle={{zIndex: -1}} // Needed for RN > 0.76
         />
         <View style={styles.toggleTextContainer}>
           <SettingText text={title} />
