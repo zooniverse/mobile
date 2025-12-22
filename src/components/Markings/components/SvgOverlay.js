@@ -56,9 +56,11 @@ class SvgOverlay extends Component {
             prevProps.nativeHeight !== this.props.nativeHeight
 
         if (sizeChange) {
+            const newRatioX = this.props.nativeWidth / this.props.width
+            const newRatioY = this.props.nativeHeight / this.props.height
             this.setState({
-                displayToNativeRatioX: this.props.nativeWidth / this.props.width,
-                displayToNativeRatioY: this.props.nativeHeight / this.props.height
+                displayToNativeRatioX: newRatioX,
+                displayToNativeRatioY: newRatioY
             })
         }
     }

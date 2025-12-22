@@ -1,7 +1,8 @@
 import React from 'react'
 import {
-    Dimensions,
-    View
+    View,
+    Text,
+    Dimensions
 } from 'react-native'
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -16,7 +17,8 @@ import NeedHelpButton from './NeedHelpButton'
 import OverlaySpinner from '../OverlaySpinner'
 import FullScreenMedia from '../FullScreenMedia'
 import UnlinkedTask from './UnlinkedTask'
-import Swiper from 'react-native-deck-swiper'
+import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
+import Animated, { useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated'
 import R from 'ramda'
 import * as classifierActions from '../../actions/classifier'
 import SwipeCard from './SwipeCard'
@@ -28,9 +30,91 @@ import ClassifierHeader from '../../navigation/ClassifierHeader';
 import FieldGuideBtn from './FieldGuideBtn';
 import { getDataForFeedbackModal, isFeedbackActive } from '../../utils/feedback';
 import FeedbackModal from './FeedbackModal';
-import { getCurrentProjectLanguage, getPreferredLanguageFromProject, loadProjectTranslations } from '../../i18n'
+import { getPreferredLanguageFromProject, loadProjectTranslations } from '../../i18n'
 import TranslationsLoadingIndicator from '../common/TranslationsLoadingIndicator';
 import { withTranslation } from 'react-i18next';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
+// Card wrapper that adds rotation transform based on swipe position
+const AnimatedCardWrapper = ({ xAnimatedPosition, children, width, height }) => {
+    const rotationStyle = useAnimatedStyle(() => {
+        const rotation = interpolate(
+            xAnimatedPosition.value,
+            [-1, 0, 1],
+            [-30, 0, 30], // Rotate up to 30 degrees (matches original)
+            Extrapolation.CLAMP
+        );
+        return {
+            transform: [{ rotate: `${rotation}deg` }]
+        };
+    });
+
+    return (
+        <Animated.View style={[{ width, height }, rotationStyle]}>
+            {children}
+        </Animated.View>
+    );
+};
+
+// Overlay component that shows Yes/No labels based on swipe position
+// Note: xAnimatedPosition is normalized (-1 to 1), not pixels
+const SwipeOverlay = ({ xAnimatedPosition, yesLabel = 'Yes', noLabel = 'No' }) => {
+    // Animated style for "Yes" label (swipe right)
+    const yesStyle = useAnimatedStyle(() => {
+        const opacity = interpolate(
+            xAnimatedPosition.value,
+            [0, 0.15], // Normalized values (0.15 = 15% of screen width)
+            [0, 1],
+            Extrapolation.CLAMP
+        );
+        return { opacity };
+    });
+
+    // Animated style for "No" label (swipe left)
+    const noStyle = useAnimatedStyle(() => {
+        const opacity = interpolate(
+            xAnimatedPosition.value,
+            [0, -0.15], // Normalized values
+            [0, 1],
+            Extrapolation.CLAMP
+        );
+        return { opacity };
+    });
+
+    return (
+        <>
+            {/* Yes overlay - appears when swiping right */}
+            <Animated.View style={[overlayStyles.labelContainer, yesStyle]} pointerEvents="none">
+                <Text style={overlayStyles.labelText}>{noLabel}</Text>
+            </Animated.View>
+            {/* No overlay - appears when swiping left */}
+            <Animated.View style={[overlayStyles.labelContainer, noStyle]} pointerEvents="none">
+                <Text style={overlayStyles.labelText}>{yesLabel}</Text>
+            </Animated.View>
+        </>
+    );
+};
+
+const overlayStyles = EStyleSheet.create({
+    labelContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 100,
+    },
+    labelText: {
+        color: 'white',
+        fontSize: 50,
+        fontWeight: 'normal',
+        fontFamily: 'Karla',
+        textAlign: 'center',
+    },
+});
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -59,11 +143,10 @@ export class SwipeClassifier extends React.Component {
         this.state = {
             isQuestionVisible: true,
             showFullSize: false,
-            swiperIndex: 0,
+            swipes: [], // Array of swipe directions for the card stack
             fullScreenImageSource: '',
             fullScreenQuestion: '',
             hasImageInQuestion: markdownContainsImage(this.props.task.question),
-            panX: null,
             swiperDimensions: {
                 width: 1,
                 height: 1
@@ -74,43 +157,27 @@ export class SwipeClassifier extends React.Component {
         }
 
         this.onAnswered = this.onAnswered.bind(this)
-        this.onSwiped = this.onSwiped.bind(this)
+        this.onSwipeEnded = this.onSwipeEnded.bind(this)
         this.expandImage = this.expandImage.bind(this)
         this.loadedTranslationsRef = React.createRef();
     }
 
-    // Update the loadProjectTranslations method
     async loadTranslations(language, project, workflow, guide, tutorial) {
         try {
-            this.setState({
-                translationsLoading: true,
-            })
-
-            await loadProjectTranslations(
-                language, 
-                project, 
-                workflow, 
-                guide, 
-                tutorial
-            );
-
+            this.setState({ translationsLoading: true })
+            await loadProjectTranslations(language, project, workflow, guide, tutorial);
         } catch (error) {
             console.warn('Error loading project translations:', error);
         } finally {
-            this.setState({
-                translationsLoading: false,
-            })
+            this.setState({ translationsLoading: false })
         }
     }
 
     onClassifierLayout({nativeEvent}) {
         const {width, height} = nativeEvent.layout
-        this.setState({
-            swiperDimensions: {width, height},
-        })
-
-        // Need to force update the swiper or else the first image will be height/width 0.
-        this.swiper.forceUpdate();
+        if (width !== this.state.swiperDimensions.width || height !== this.state.swiperDimensions.height) {
+            this.setState({ swiperDimensions: {width, height} })
+        }
     }
 
     setQuestionVisibility(isVisible) {
@@ -146,14 +213,28 @@ export class SwipeClassifier extends React.Component {
     submitClassification(id, first_task, answer, workflow, subject, feedbackMeta = null) {
         this.props.classifierActions.addAnnotationToTask(id, first_task, answer, false)
         this.props.classifierActions.saveClassification(workflow, subject, this.state.swiperDimensions, feedbackMeta)
-        this.setState({swiperIndex: this.state.swiperIndex + 1})
     }
 
-    onSwiped = (subjectIndex) => {
-        this.setState({swiperIndex: this.state.swiperIndex + 1})
-        if (subjectIndex > this.props.subjectLists.length - 8) {
-            this.props.classifierActions.addSubjectsForWorklow(this.props.route.params.workflow.id)
-        }
+    onSwipeEnded = (cardData, direction) => {
+        const currentIndex = this.state.swipes.length;
+        const subject = this.props.subjectLists[currentIndex];
+
+        if (!subject) return;
+
+        // Add swipe to array (controls the card stack)
+        this.setState(prev => ({
+            swipes: [...prev.swipes, direction]
+        }), () => {
+            // right = Yes (0), left = No (1)
+            const answer = direction === 'right' ? 0 : 1;
+            this.onAnswered(answer, subject);
+
+            // Load more subjects when running low
+            const newIndex = this.state.swipes.length;
+            if (newIndex > this.props.subjectLists.length - 8) {
+                this.props.classifierActions.addSubjectsForWorklow(this.props.route.params.workflow.id)
+            }
+        });
     }
 
     expandImage = (imageSource) => {
@@ -163,26 +244,49 @@ export class SwipeClassifier extends React.Component {
         })
     }
 
-    renderCard = (subject, index) => {
-        // Guard against undefined subject during navigation/unmounting
+    renderCard = (props) => {
+        // Library spreads item data into props, so subject fields are at top level
+        // xAnimatedPosition and yAnimatedPosition are also in props
+        const { xAnimatedPosition, yAnimatedPosition, ...subject } = props;
+
         if (!subject || !subject.id) return null;
 
         const seenThisSession = R.indexOf(subject.id, this.props.subjectsSeenThisSession) >= 0
-        // If mutliple images, only show top swipe card to prevent preformance issues.
-        if (subject.displays.length > 1 && index !== this.state.swiperIndex) return null;
+        const { width, height } = this.state.swiperDimensions;
 
-        return <SwipeCard
-            subject={subject}
-            seenThisSession={seenThisSession}
-            inMuseumMode={this.props.route.params.project.in_museum_mode}
-            panX={this.state.panX}
-            answers={this.props.answers}
-            onExpandButtonPressed={this.expandImage}
-            subjectDisplayWidth={this.state.swiperDimensions.width}
-            subjectDisplayHeight={this.state.swiperDimensions.height}
-            swiping={this.state.swiping}
-            currentCard={index === this.state.swiperIndex}
-        />
+        // Get answer labels from workflow
+        const yesLabel = this.props.answers[0]?.label || 'Yes';
+        const noLabel = this.props.answers[1]?.label || 'No';
+
+        // Wrap in AnimatedCardWrapper for rotation, or plain View if no animation
+        const CardWrapper = xAnimatedPosition ? AnimatedCardWrapper : View;
+        const wrapperProps = xAnimatedPosition
+            ? { xAnimatedPosition, width, height }
+            : { style: { width, height } };
+
+        return (
+            <CardWrapper {...wrapperProps}>
+                <SwipeCard
+                    subject={subject}
+                    seenThisSession={seenThisSession}
+                    inMuseumMode={this.props.route.params.project.in_museum_mode}
+                    panX={null}
+                    answers={this.props.answers}
+                    onExpandButtonPressed={this.expandImage}
+                    subjectDisplayWidth={width}
+                    subjectDisplayHeight={height}
+                    swiping={this.state.swiping}
+                    currentCard={true}
+                />
+                {xAnimatedPosition && (
+                    <SwipeOverlay
+                        xAnimatedPosition={xAnimatedPosition}
+                        yesLabel={yesLabel}
+                        noLabel={noLabel}
+                    />
+                )}
+            </CardWrapper>
+        );
     }
 
     onUnlinkedTaskAnswered = (task, value) => {
@@ -198,7 +302,6 @@ export class SwipeClassifier extends React.Component {
     componentDidMount() {
         const {inPreviewMode, classifierActions} = this.props
         classifierActions.setClassifierTestMode(inPreviewMode)
-
     }
 
     componentDidUpdate() {
@@ -240,81 +343,35 @@ export class SwipeClassifier extends React.Component {
                             fullScreenImageSource: src,
                             fullScreenQuestion: question
                         })
-                    }
-                    }
+                    }}
                 />
-                {
-                    this.state.hasImageInQuestion ?
-                        <Separator style={styles.questionSeparator}/>
-                        :
-                        null
-                }
+                {this.state.hasImageInQuestion ? <Separator style={styles.questionSeparator}/> : null}
             </View>
-        const windowWidth = Dimensions.get('window').width
 
-        const swiperLabelStyle = {
-            label: {
-                color: 'white',
-                fontWeight: 'normal',
-            },
-            wrapper: {
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: this.state.swiperDimensions.width,
-                height: this.state.swiperDimensions.height,
-            },
-        };
+        const { width, height } = this.state.swiperDimensions;
+        const hasDimensions = width > 1 && height > 1;
+
+        const currentIndex = this.state.swipes.length;
+        const currentSubject = this.props.subjectLists[currentIndex];
 
         const classifier =
             <View style={styles.swiperWrapper} onLayout={this.onClassifierLayout.bind(this)}>
-               <Swiper
-                    ref={swiper => (this.swiper = swiper)}
-                    cardHorizontalMargin={0}
-                    keyExtractor={cardData => cardData?.id}
-                    cards={this.props.subjectLists}
-                    renderCard={(cardData, cardIndex) => this.renderCard(cardData, cardIndex)}
-                    cardVerticalMargin={0}
-                    marginTop={0}
-                    backgroundColor="transparent"
-                    onSwipedAll={this.onSwiped}
-                    onSwipedRight={cardIndex =>
-                        this.onAnswered(0, this.props.subjectLists[cardIndex])
-                    }
-                    onSwipedLeft={cardIndex =>
-                        this.onAnswered(1, this.props.subjectLists[cardIndex])
-                    }
-                    dragStart={() => this.setState({swiping: true})}
-                    dragEnd={() => this.setState({swiping: false})}
-                    cardIndex={this.state.swiperIndex}
-                    disableTopSwipe
-                    disableBottomSwipe
-                    outputRotationRange={['-30deg', '0deg', '30deg']}
-                    overlayOpacityHorizontalThreshold={10}
-                    swipeAnimationDuration={500}
-                    animateOverlayLabelsOpacity
-                    animateCardOpacity
-                    inputOverlayLabelsOpacityRangeX={[
-                        -windowWidth / 4,
-                        0,
-                        windowWidth / 4,
-                    ]}
-                    outputOverlayLabelsOpacityRangeX={[1, 0, 1]}
-                    verticalSwipe={false}
-                    stackSeparation={-10}
-                    stackSize={2}
-                    overlayLabels={{
-                        left: {
-                            title: 'No',
-                            style: swiperLabelStyle,
-                        },
-                        right: {
-                            title: 'Yes',
-                            style: swiperLabelStyle,
-                        },
-                    }}
-                    loadMinimal={true}
-                />
+                {hasDimensions && (
+                    <SwipeableCardStack
+                        ref={swiper => (this.swiper = swiper)}
+                        data={this.props.subjectLists}
+                        renderCard={this.renderCard}
+                        keyExtractor={cardData => cardData?.id}
+                        swipes={this.state.swipes}
+                        onSwipeEnded={this.onSwipeEnded}
+                        onActiveCardUpdate={({ phase }) => {
+                            this.setState({ swiping: phase === 'active' });
+                        }}
+                        lockedDirections={['top', 'bottom']}
+                        numberOfUnswipedCardsToRender={2}
+                        horizontalRestingPosition={SCREEN_WIDTH * 1.5}
+                    />
+                )}
             </View>
 
         const unlinkedTask = this.props.task.unlinkedTask ?
@@ -333,10 +390,14 @@ export class SwipeClassifier extends React.Component {
                 inMuseumMode={this.props.route.params.project.in_museum_mode}
                 guide={this.props.guide}
                 onLeftButtonPressed={() => {
-                    this.swiper.swipeLeft()
+                    if (currentSubject) {
+                        this.onSwipeEnded(currentSubject, 'left');
+                    }
                 }}
                 onRightButtonPressed={() => {
-                    this.swiper.swipeRight()
+                    if (currentSubject) {
+                        this.onSwipeEnded(currentSubject, 'right');
+                    }
                 }}
                 onFieldGuidePressed={() => this.classifierContainer.displayFieldGuide()}
                 answers={this.props.answers}
@@ -352,31 +413,28 @@ export class SwipeClassifier extends React.Component {
                     setQuestionVisibility={this.setQuestionVisibility}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
                 >
-                    {
-                        this.state.isQuestionVisible ?
-                            <View style={styles.container}>
-                                {question}
-                                {classifier}
-                                {unlinkedTask}
-                                {this.state.isQuestionVisible ? swipeTabs : null}
-                                {this.state.isQuestionVisible && this.props.task.help ? (
-                                    <View style={styles.needHelpContainer}>
-                                        <NeedHelpButton
-                                            onPress={() => this.classifierContainer.displayHelpModal()}
-                                            inMuseumMode={this.props.route.params.project.in_museum_mode}
-                                        />
-                                    </View>
-                                ) : null}
-                                {this.props?.guide?.items?.length > 0 && (
-                                    <View style={styles.fieldGuideBtnContainer}>
-                                        <FieldGuideBtn onPress={() => this.classifierContainer.displayFieldGuide()} />
-                                    </View>
-                                )}
-                            </View>
-                            :
-                            tutorial
+                    {this.state.isQuestionVisible ?
+                        <View style={styles.container}>
+                            {question}
+                            {classifier}
+                            {unlinkedTask}
+                            {this.state.isQuestionVisible ? swipeTabs : null}
+                            {this.state.isQuestionVisible && this.props.task.help ? (
+                                <View style={styles.needHelpContainer}>
+                                    <NeedHelpButton
+                                        onPress={() => this.classifierContainer.displayHelpModal()}
+                                        inMuseumMode={this.props.route.params.project.in_museum_mode}
+                                    />
+                                </View>
+                            ) : null}
+                            {this.props?.guide?.items?.length > 0 && (
+                                <View style={styles.fieldGuideBtnContainer}>
+                                    <FieldGuideBtn onPress={() => this.classifierContainer.displayFieldGuide()} />
+                                </View>
+                            )}
+                        </View>
+                        : tutorial
                     }
-         
                 </ClassificationPanel>
                 <FullScreenMedia
                     source={{uri: this.state.fullScreenImageSource}}
@@ -397,9 +455,7 @@ export class SwipeClassifier extends React.Component {
         return (
             <View style={styles.container}>
                 <ClassifierHeader project={this.props.route?.params?.project} />
-                {this.state.translationsLoading && (
-                    <TranslationsLoadingIndicator />
-                )}
+                {this.state.translationsLoading && <TranslationsLoadingIndicator />}
                 <ClassifierContainer
                     inBetaMode={this.props.route.params.inBetaMode}
                     inMuseumMode={this.props.route.params.project.in_museum_mode}
@@ -421,46 +477,15 @@ const styles = EStyleSheet.create({
     },
     swiperWrapper: {
         flex: 1,
-        // This ensures the swiper doesn't capture touches outside its bounds
         overflow: 'hidden',
     },
     classificationContainer: {
         flex: 1,
         backgroundColor: '#EBEBEB',
     },
-    dropShadow: {
-        shadowColor: 'black',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-    },
     classificationPanel: {
         flex: 1,
         overflow: 'visible',
-    },
-    subjectContainer: {
-        alignSelf: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    unlinkedTaskContainer: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0
-    },
-    needHelpText: {
-        textAlign: 'center',
-        marginTop: 15,
-        color: 'rgba(0,93,105,1)'
-    },
-    separator: {
-        paddingTop: 10,
-        paddingHorizontal: 15
     },
     needHelpContainer: {
         alignItems: 'center',
