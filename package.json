@@ -46,7 +46,7 @@
     "react-native-image-pan-zoom": "^2.1.12",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-loading-spinner-overlay": "^3.0.1",
-    "react-native-localize": "^3.4.1",
+    "react-native-localize": "^3.6.1",
     "react-native-modal": "14.0.0-rc.1",
     "react-native-reanimated": "^3.18.0",
     "react-native-safe-area-context": "^5.6.1",
