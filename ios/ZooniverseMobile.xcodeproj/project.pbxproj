@@ -164,7 +164,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				93DD9C1B92DE309384E383B7 /* [CP] Embed Pods Frameworks */,
 				42F3C0216EB3B2700A786F0B /* [CP] Copy Pods Resources */,
-				B5DE7B86172438612E6F778A /* [CP-User] [RNFB] Core Configuration */,
+				FD1B78DFD7128AAEDF545771 /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
@@ -316,7 +316,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZooniverseMobile/Pods-ZooniverseMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B5DE7B86172438612E6F778A /* [CP-User] [RNFB] Core Configuration */ = {
+		FD1B78DFD7128AAEDF545771 /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -352,7 +352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = 275SK7D8Y2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
@@ -385,7 +385,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = 275SK7D8Y2;
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
