@@ -50,7 +50,7 @@
     "react-native-modal": "14.0.0-rc.1",
     "react-native-reanimated": "^3.18.0",
     "react-native-safe-area-context": "^5.6.2",
-    "react-native-screens": "^4.19.0",
+    "react-native-screens": "^4.23.0",
     "react-native-shadow-2": "^7.0.8",
     "react-native-splash-view": "^0.0.19",
     "react-native-svg": "^15.13.0",
