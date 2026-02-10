@@ -44,6 +44,8 @@ class MarkableImage extends Component {
             imageNativeHeight: 1,
             clientHeight: 1,
             clientWidth: 1,
+            containerHeight: 0,
+            containerWidth: 0,
             isImageLoaded: false
         }
 
@@ -83,7 +85,35 @@ class MarkableImage extends Component {
             isImageLoaded: true,
             clientHeight,
             clientWidth,
+            containerHeight,
+            containerWidth,
         })
+    }
+
+    componentDidUpdate(prevProps) {
+        const dimensionsChanged =
+            prevProps.subjectDimensions.naturalWidth !== this.props.subjectDimensions.naturalWidth ||
+            prevProps.subjectDimensions.naturalHeight !== this.props.subjectDimensions.naturalHeight
+
+        if (dimensionsChanged && this.state.containerWidth > 0) {
+            const { containerHeight, containerWidth } = this.state
+            const { naturalHeight, naturalWidth } = this.props.subjectDimensions
+            const aspectRatio = Math.min(containerHeight / naturalHeight, containerWidth / naturalWidth)
+            const clientHeight = naturalHeight * aspectRatio
+            const clientWidth = naturalWidth * aspectRatio
+
+            if (this.props.onContainerLayout) {
+                this.props.onContainerLayout({
+                    height: clientHeight,
+                    width: clientWidth,
+                })
+            }
+
+            this.setState({
+                clientHeight,
+                clientWidth,
+            })
+        }
     }
 
     render() {
