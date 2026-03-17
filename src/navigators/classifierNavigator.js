@@ -48,7 +48,10 @@ function getPageKeyForWorkflowType(workflowType) {
 
 function navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation) {
     dispatch(classifierActions.clearClassifierData())
-    dispatch(classifierActions.startNewClassification(workflow, project))
+    // Use startSwiperClassification instead of startNewClassification —
+    // the Swiper manages its own subject queue via useSubjectQueue hook,
+    // so we skip the Redux subject fetch to avoid a duplicate API call.
+    dispatch(classifierActions.startSwiperClassification(workflow, project))
     clearProjectTranslations() // Clear old translations before navigating
     navigation.navigate("SwipeClassifier", {
       project,

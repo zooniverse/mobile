@@ -1,9 +1,12 @@
+/**
+ * Displays a single image subject in the Swiper classifier.
+ * Tapping the image opens it in full screen view.
+ */
+
 import React from 'react';
 import { Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
-import PropTypes from 'prop-types';
-
-const SwipeSingleImage = ({ uri, onExpandButtonPressed }) => {
+const SwiperSingleImage = ({ uri, onExpandButtonPressed }) => {
   return (
     <TouchableWithoutFeedback
       style={styles.container}
@@ -33,14 +36,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  expandButton: {
-    padding: 16,
-  },
 });
 
-SwipeSingleImage.propTypes = {
-  uri: PropTypes.string,
-  onExpandButtonPressed: PropTypes.func,
-};
-
-export default SwipeSingleImage;
+export default SwiperSingleImage;
