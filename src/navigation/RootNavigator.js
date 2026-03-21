@@ -14,7 +14,7 @@ import About from '../components/About';
 import ProjectList from '../components/projects/ProjectList';
 import Register from '../components/Register';
 import Settings from '../components/settings/Settings';
-import SwipeClassifier from '../components/classifier/SwipeClassifier';
+import SwiperClassifier from '../components/classifier/Swiper/SwiperClassifier';
 import DrawingClassifier from '../components/Markings/DrawingClassifier';
 import QuestionClassifier from '../components/classifier/QuestionClassifier';
 import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier';
@@ -56,7 +56,7 @@ const StackNavigator = () => {
       <Stack.Screen name={PageKeys.Settings} component={Settings} />
       <Stack.Screen
         name={PageKeys.SwipeClassifier}
-        component={SwipeClassifier}
+        component={SwiperClassifier}
         options={{
           headerShown: false,
         }}

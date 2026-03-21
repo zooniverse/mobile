@@ -80,3 +80,6 @@ yarn-error.log
 
 # Used for tokens
 .env
+
+# Development plans
+.plans

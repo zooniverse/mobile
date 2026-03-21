@@ -15,13 +15,41 @@ import { PushNotifications } from '../notifications/PushNotifications'
 
 export function addSubjectsForWorklow(workflowId) {
   return dispatch => {
-    return apiClient.type('subjects').get({workflow_id: workflowId, sort: 'queued'}).then((subjects) => {
+    return apiClient.type('subjects').get({workflow_id: workflowId, sort: 'queued', page_size: 20}).then((subjects) => {
       subjects.forEach((subject) => subject.displays = getSubjectLocations(subject))
       dispatch({
         type: ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW,
         workflowId,
         subjects
       })
+    })
+  }
+}
+
+/**
+ * Like startNewClassification but skips subject fetching.
+ * The Swiper classifier manages its own subject queue via useSubjectQueue,
+ * so fetching subjects here would be a duplicate API call that goes into
+ * Redux state the Swiper never reads.
+ */
+export function startSwiperClassification(workflow, project) {
+  return dispatch => {
+    dispatch(clearSubjectsFromWorkflow(workflow.id))
+    Promise.all([
+      dispatch(requestClassifierData),
+      dispatch(setState('loadingText', 'Loading Workflow...')),
+      // No addSubjectsForWorklow — useSubjectQueue handles subject fetching
+      dispatch(setupProjectPreferences(workflow.id, project)),
+      dispatch(fetchFieldGuide(workflow.id, project.id)),
+      dispatch(fetchTutorials(workflow.id)).then(() => dispatch(setNeedsTutorial(workflow.id, project.id))),
+    ])
+    .then(() => {
+      dispatch(classifierDataSuccess)
+    })
+    .catch((error) => {
+      Alert.alert('Error', `Sorry, the following error occured when loading this workflow. ${error}`,
+        [{text: 'Go Back', onPress: () => {     navRef.goBack() }}]
+      )
     })
   }
 }
