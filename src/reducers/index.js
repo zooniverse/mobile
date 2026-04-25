@@ -5,6 +5,7 @@ import user from './userReducer';
 import projects from './projectsReducer';
 import navBar from './navBarReducer';
 import classifier from './classifierReducer'
+import classification from './classifierSlice'
 import images from './imagesReducer'
 import settings from './settingsReducer'
 import drawing from './drawingReducer'
@@ -73,6 +74,7 @@ export default combineReducers({
   projects,
   navBar,
   classifier,
+  classification,
   images,
   settings,
   drawing,

@@ -10,6 +10,7 @@ const PageKeys = {
     QuestionClassifier: 'QuestionClassifier',
     MultiAnswerClassifier: 'MultiAnswerClassifier',
     DrawingClassifier: 'DrawingClassifier',
+    ClassifierScreen: 'ClassifierScreen',
     NotificationLandingPageScreen: 'NotificationLandingPageScreen'
 }
 

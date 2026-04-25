@@ -144,13 +144,9 @@ export function saveClassification(workflow, subject, displayDimensions, feedbac
           PushNotifications.userClassifiedProject(res.links.project)
         }
       })
-      // Add more subjects if we are getting close to running out
-      const subjectList = classifier.subjectLists[workflow.id] || []
-      const subjectsSeenThisSession = classifier.seenThisSession[workflow.id] || []
-      const usableSubjects = subjectList.filter(subject => !subjectsSeenThisSession.includes(subject.id))
-      if (usableSubjects.length < 5) {
-        dispatch(addSubjectsForWorklow(workflow.id))
-      }
+      // Subject queue refill is owned by `useSubjectQueue` in the new
+      // flow; the legacy refill block that used to live here has been
+      // removed to avoid duplicate API calls.
     })
   }
 }
@@ -188,15 +184,11 @@ export function submitDrawingClassification(shapes, workflow, subject, {clientHe
         PushNotifications.userClassifiedProject(res.links.project)
       }
     })
-    
-    // Add more subjects if we are getting close to running out
-    const subjectList = classifier.subjectLists[workflow.id] || []
-    const subjectsSeenThisSession = classifier.seenThisSession[workflow.id] || []
-    const usableSubjects = subjectList.filter(subject => !subjectsSeenThisSession.includes(subject.id))
-    if (usableSubjects.length < 3) {
-      dispatch(addSubjectsForWorklow(workflow.id))
-    }
-    
+
+    // Subject queue refill is owned by `useSubjectQueue` in the new
+    // flow; the legacy refill block that used to live here has been
+    // removed to avoid duplicate API calls.
+
     // Mark the subject as completed and move on to the next
     dispatch(setSubjectSeenThisSession(workflow.id, subject.id))
     dispatch(setSubjectForWorkflow(workflow.id))
@@ -375,7 +367,7 @@ const clearSubjectsFromWorkflow = (workflowId) => ({
   workflowId,
 })
 
-const setSubjectStartTimeForWorkflow = (workflowId) => ({
+export const setSubjectStartTimeForWorkflow = (workflowId) => ({
   type: ActionConstants.SET_SUBJECT_START_TIME,
   workflowId
 })
