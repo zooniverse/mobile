@@ -3,16 +3,15 @@
  * with exactly two answers, classified via left/right swipe gestures.
  *
  * Owns the pieces unique to this workflow type:
- * - Subject queue with next-card prefetch (`useSubjectQueue`, `useImagePrefetch`)
+ * - Image prefetch on top of the shell-owned queue (`useImagePrefetch`)
  * - Swipe gesture handling (`useSwiperGesture`)
  * - Card rendering with current + next cards for instance preservation
  * - SwiperTabs (left/right programmatic buttons)
  * - No Submit button — the swipe gesture IS the submit action
  *
- * The shared shell (`ClassifierScreen`) provides header, tabs, question,
- * help, and field guide around this body. All gesture, prefetch, and
- * submission logic is ported from the legacy `SwiperClassifier`; the
- * sub-components (`SwiperCard`, `SwiperTabs`) and hooks are reused as-is.
+ * Phase 2 lifted the subject queue into `ClassifierScreen` so a chain
+ * advance from a Swipe T0 to a non-Swipe T1 doesn't lose the active
+ * subject. The body is now prop-driven for queue state.
  */
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
@@ -21,7 +20,6 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
 import R from 'ramda'
 
-import useSubjectQueue from '../../../hooks/useSubjectQueue'
 import useImagePrefetch from '../../../hooks/useImagePrefetch'
 import useSwiperGesture from '../../../hooks/useSwiperGesture'
 import useFeedbackFlow from '../../../hooks/useFeedbackFlow'
@@ -32,8 +30,28 @@ import UnlinkedTask from '../UnlinkedTask'
 
 import * as classifierActions from '../../../actions/classifier'
 import { submitSwiperClassification } from '../../../actions/swiperClassification'
+import { isMultiTaskWorkflow, getNextTaskKey } from '../../../utils/taskChain'
+import {
+  advanceTo,
+  recordAnnotation,
+  selectActiveAnnotations,
+  startChain,
+} from '../../../reducers/classifierSlice'
 
-const Swipe = ({ workflow, project, task, onExpandMedia }) => {
+const Swipe = ({
+  workflow,
+  project,
+  task,
+  taskKey,
+  subject: currentSubject,
+  nextSubject,
+  queue,
+  currentIndex,
+  hasSubjects,
+  fetchMoreSubjects,
+  onAdvance,
+  onExpandMedia,
+}) => {
   const dispatch = useDispatch()
 
   // Legacy reversal: answers[0] becomes the "left/No" button, answers[1]
@@ -49,22 +67,13 @@ const Swipe = ({ workflow, project, task, onExpandMedia }) => {
   const annotations = useSelector(
     (state) => state.classifier.annotations[workflow.id] || {}
   )
+  const priorAnnotations = useSelector(selectActiveAnnotations)
 
   const [cardDimensions, setCardDimensions] = useState({ width: 1, height: 1 })
   const hasDimensions = cardDimensions.width > 1 && cardDimensions.height > 1
 
   const subjectStartTimeRef = useRef(null)
   const prevSubjectIdRef = useRef(null)
-
-  const {
-    queue,
-    currentIndex,
-    currentSubject,
-    nextSubject,
-    hasSubjects,
-    fetchMoreSubjects,
-    advanceToNextSubject,
-  } = useSubjectQueue(workflow.id)
 
   const { isReady, getDimensions } = useImagePrefetch(queue, currentIndex)
   const { feedbackModal, withFeedback } = useFeedbackFlow(workflow, project)
@@ -83,18 +92,26 @@ const Swipe = ({ workflow, project, task, onExpandMedia }) => {
         sessionId,
         feedbackMeta,
         isPreviewMode: inPreviewMode,
+        priorAnnotations: priorAnnotations.filter((a) => a?.task !== taskKey),
+        taskKey,
       })
-      advanceToNextSubject()
+      // Reset chain so the next subject begins at first_task; no-op for
+      // single-task swipe workflows.
+      dispatch(startChain({ taskKey: workflow.first_task }))
+      onAdvance?.()
       subjectStartTimeRef.current = new Date().toISOString()
     },
     [
+      dispatch,
       workflow,
+      taskKey,
       getDimensions,
       cardDimensions,
       viewport,
       sessionId,
       inPreviewMode,
-      advanceToNextSubject,
+      priorAnnotations,
+      onAdvance,
     ]
   )
 
@@ -103,11 +120,31 @@ const Swipe = ({ workflow, project, task, onExpandMedia }) => {
       if (!currentSubject) return
       const answer = direction === 'right' ? 0 : 1
       const startTime = subjectStartTimeRef.current
+
+      // Multi-task: a Swipe task with a `next` (per-answer or task-level)
+      // routes to the next task instead of submitting. The same subject
+      // continues; the body switches when `currentTask.type` changes.
+      const nextTaskKey = isMultiTaskWorkflow(workflow)
+        ? getNextTaskKey(task, answer)
+        : null
+      if (nextTaskKey !== null) {
+        const annotation = { task: taskKey, value: answer }
+        dispatch(recordAnnotation({ taskKey, annotation }))
+        dispatch(
+          advanceTo({
+            fromTaskKey: taskKey,
+            answerValue: answer,
+            toTaskKey: nextTaskKey,
+          })
+        )
+        return
+      }
+
       withFeedback(currentSubject, answer, (feedbackMeta) => {
         doSubmit(answer, currentSubject, startTime, feedbackMeta)
       })
     },
-    [currentSubject, doSubmit, withFeedback]
+    [currentSubject, dispatch, workflow, task, taskKey, doSubmit, withFeedback]
   )
 
   const { translateX, isSwiping, panGesture, triggerSwipe, resetCard } =

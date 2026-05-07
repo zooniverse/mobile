@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { View, ActivityIndicator, StyleSheet } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import FontedText from '../common/FontedText'
@@ -21,7 +21,7 @@ import useSubjectQueue from '../../hooks/useSubjectQueue'
 import useWorkflowResources from '../../hooks/useWorkflowResources'
 import useProjectTranslations from '../../hooks/useProjectTranslations'
 import { setTutorialCompleted, setSubjectStartTimeForWorkflow } from '../../actions/classifier'
-import { setSubjectStartTime } from '../../reducers/classifierSlice'
+import { setSubjectStartTime, startChain } from '../../reducers/classifierSlice'
 import WorkflowTypes from '../../constants/WorkflowTypes'
 import TranslationsLoadingIndicator from '../common/TranslationsLoadingIndicator'
 
@@ -35,25 +35,27 @@ const ClassifierScreen = ({ route }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  // Swipe workflows manage their own subject queue inside the body (via
-  // `useSubjectQueue`), so the shell skips its own subject fetch to
-  // avoid a duplicate API call.
-  const isSwipeWorkflow = workflow.type === WorkflowTypes.Swipe
-
+  // Phase 2 lifted the subject queue out of the Swipe body so a chain
+  // advance from a Swipe T0 to a non-Swipe T1 doesn't lose the active
+  // subject. The Swipe body is now prop-driven for queue state.
   const {
+    queue,
+    currentIndex,
     currentSubject,
+    nextSubject,
+    hasSubjects,
     isLoading: subjectsLoading,
     advanceToNextSubject,
     fetchMoreSubjects,
-  } = useSubjectQueue(isSwipeWorkflow ? null : workflow.id)
+  } = useSubjectQueue(workflow.id)
 
-  // Kick off the initial fetch for non-Swipe workflows.
+  // Kick off the initial fetch.
   useEffect(() => {
-    if (!isSwipeWorkflow && workflow?.id && !currentSubject) {
+    if (workflow?.id && !currentSubject) {
       fetchMoreSubjects()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [workflow?.id, isSwipeWorkflow])
+  }, [workflow?.id])
   const {
     guide,
     tutorial,
@@ -67,8 +69,22 @@ const ClassifierScreen = ({ route }) => {
     tutorial
   )
 
-  const currentTaskKey = workflow.first_task
+  // The chain's current task lives in the `classification` slice. The
+  // navigator dispatches `reset()` before mount, so on the first render the
+  // slice value is null; fall back to `first_task` so the shell renders the
+  // correct task immediately. The effect below seeds the slice so future
+  // `advanceTo`/`goBack` actions take over.
+  const sliceCurrentTaskKey = useSelector(
+    (state) => state.classification?.currentTaskKey
+  )
+  const currentTaskKey = sliceCurrentTaskKey || workflow.first_task
   const currentTask = workflow.tasks?.[currentTaskKey]
+
+  useEffect(() => {
+    if (workflow?.first_task) {
+      dispatch(startChain({ taskKey: workflow.first_task }))
+    }
+  }, [dispatch, workflow?.id, workflow?.first_task])
 
   const [isHelpVisible, setIsHelpVisible] = useState(false)
   const [isFieldGuideVisible, setIsFieldGuideVisible] = useState(false)
@@ -112,9 +128,7 @@ const ClassifierScreen = ({ route }) => {
 
   // Match legacy: while the initial subject or workflow resources are still
   // loading, render only the spinner. No tabs, buttons, or modals yet.
-  // Swipe workflows handle their own subject loading inside the body, so
-  // the shell doesn't gate on `currentSubject` for them.
-  const waitingForSubject = !isSwipeWorkflow && !currentSubject
+  const waitingForSubject = !currentSubject
   if (waitingForSubject || resourcesLoading) {
     return (
       <View style={[styles.container, styles.dropShadow, framingBg]}>
@@ -144,7 +158,7 @@ const ClassifierScreen = ({ route }) => {
   // Drawing workflows render their own task instruction inside
   // `DrawingHeader` (matches legacy `DrawingClassifier` layout), so the
   // shell skips rendering it in the TaskPanel.
-  const isDrawingWorkflow = workflow.type === WorkflowTypes.Drawing
+  const isDrawingWorkflow = currentTask?.type === WorkflowTypes.Drawing
 
   const questionContent = !isDrawingWorkflow && (
     <View style={styles.questionContainer}>
@@ -176,16 +190,38 @@ const ClassifierScreen = ({ route }) => {
       onAdvance: advanceToNextSubject,
       onExpandMedia: openFullScreenMedia,
     }
-    switch (workflow.type) {
+    // Re-mount the body whenever the active task changes so each task's
+    // local selection state starts from a clean slate. Prior selections (on
+    // Back navigation) are seeded from the `classification` slice in the
+    // body's lazy useState initializer.
+    const key = `${workflow.id}:${currentTaskKey}`
+    // Body type resolution:
+    //   - First task: defer to `workflow.type` so single-task auto-typing
+    //     to "swipe" (2-answer single-choice) is preserved.
+    //   - Subsequent chain tasks: use the task's own `type` since the
+    //     workflow-level inference only describes the first task.
+    const bodyType =
+      currentTaskKey === workflow.first_task ? workflow.type : currentTask?.type
+    switch (bodyType) {
       case WorkflowTypes.Swipe:
-        return <Swipe {...bodyProps} />
+        return (
+          <Swipe
+            key={key}
+            {...bodyProps}
+            queue={queue}
+            currentIndex={currentIndex}
+            nextSubject={nextSubject}
+            hasSubjects={hasSubjects}
+            fetchMoreSubjects={fetchMoreSubjects}
+          />
+        )
       case WorkflowTypes.MultiSelect:
-        return <MultiSelect {...bodyProps} />
+        return <MultiSelect key={key} {...bodyProps} />
       case WorkflowTypes.Drawing:
-        return <Drawing {...bodyProps} />
+        return <Drawing key={key} {...bodyProps} />
       case WorkflowTypes.SingleChoice:
       default:
-        return <SingleChoice {...bodyProps} />
+        return <SingleChoice key={key} {...bodyProps} />
     }
   }
 

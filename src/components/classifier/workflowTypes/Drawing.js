@@ -24,12 +24,18 @@ import DrawingHeader from '../../Markings/components/DrawingHeader'
 import DrawingModeButton from '../../Markings/DrawingModeButton'
 import ToolNameDrawCount from '../../Markings/ToolNameDrawCount'
 import ButtonLarge from '../ButtonLarge'
+import ChainBackButton from '../ChainBackButton'
 import TaskQuestion from '../TaskQuestion'
 
 import * as imageActions from '../../../actions/images'
 import * as classifierActions from '../../../actions/classifier'
 import * as drawingActions from '../../../actions/drawing'
 import { submitDrawing } from '../../../actions/drawingClassification'
+import { isMultiTaskWorkflow, getNextTaskKey } from '../../../utils/taskChain'
+import {
+  selectActiveAnnotations,
+  startChain,
+} from '../../../reducers/classifierSlice'
 
 const isPortrait = () => {
   const dim = Dimensions.get('screen')
@@ -60,6 +66,10 @@ const Drawing = ({ subject, task, taskKey, project, workflow, onAdvance, onExpan
     width: state?.app?.device?.width,
     height: state?.app?.device?.height,
   }))
+  // Drawing is restricted to terminal position in a chain (Phase 2 risk
+  // call-out: avoids per-task shape-storage refactor). When reached, prior
+  // tasks' annotations are passed through to the submission helper.
+  const priorAnnotations = useSelector(selectActiveAnnotations)
 
   const numberOfShapesDrawn = R.keys(shapes).length
   const subjectStartTimeRef = useRef(new Date().toISOString())
@@ -176,12 +186,17 @@ const Drawing = ({ subject, task, taskKey, project, workflow, onAdvance, onExpan
       viewport,
       sessionId,
       isPreviewMode,
+      taskKey,
+      priorAnnotations: priorAnnotations.filter((a) => a?.task !== taskKey),
     })
     // Clear the shapes so the next subject starts with a fresh canvas.
     // Mirrors what the legacy thunk did internally.
     dispatch(drawingActions.clearShapes())
     setModalHasBeenClosedOnce(false)
     setImageIsLoaded(false)
+    // Reset chain so the next subject begins at first_task. No-op for
+    // single-task drawing workflows.
+    dispatch(startChain({ taskKey: workflow.first_task }))
     onAdvance?.()
   }, [
     dispatch,
@@ -189,11 +204,13 @@ const Drawing = ({ subject, task, taskKey, project, workflow, onAdvance, onExpan
     tools,
     workflow,
     subject,
+    taskKey,
     subjectDimensions,
     clientDimensions,
     viewport,
     sessionId,
     isPreviewMode,
+    priorAnnotations,
     onAdvance,
   ])
 
@@ -260,9 +277,16 @@ const Drawing = ({ subject, task, taskKey, project, workflow, onAdvance, onExpan
         <DrawingModeButton onPress={() => setIsModalVisible(true)} />
       </View>
       <View style={styles.buttonContainer}>
+        <ChainBackButton />
         <ButtonLarge
           disabled={numberOfShapesDrawn < tool.min || !imageIsLoaded}
-          text={t('Mobile.classifier.submit', 'Submit')}
+          text={
+            !isMultiTaskWorkflow(workflow)
+              ? t('Mobile.classifier.submit', 'Submit')
+              : getNextTaskKey(task) !== null
+                ? t('Mobile.classifier.next', 'Next')
+                : t('Mobile.classifier.done', 'Done')
+          }
           onPress={handleSubmit}
         />
       </View>

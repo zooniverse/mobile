@@ -10,17 +10,34 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import SubjectViewer from '../SubjectViewer'
 import AnswerButtons from '../AnswerButtons'
 import ButtonLarge from '../ButtonLarge'
+import ChainBackButton from '../ChainBackButton'
 import { submitChoiceClassification } from '../../../actions/choiceClassification'
+import { isMultiTaskWorkflow, getNextTaskKey } from '../../../utils/taskChain'
+import {
+  advanceTo,
+  recordAnnotation,
+  selectActiveAnnotations,
+  startChain,
+} from '../../../reducers/classifierSlice'
 
 const MultiSelect = ({ subject, task, taskKey, workflow, project, onAdvance, onExpandMedia }) => {
   const { t } = useTranslation()
-  const [selectedIndices, setSelectedIndices] = useState([])
+  const dispatch = useDispatch()
+
+  // Restore prior selection on Back navigation — slice keeps the recorded
+  // array so the toggles re-render with the user's previous picks.
+  const priorAnnotations = useSelector(selectActiveAnnotations)
+  const initialSelectedIndices = useState(() => {
+    const prior = priorAnnotations.find((a) => a?.task === taskKey)
+    return Array.isArray(prior?.value) ? prior.value : []
+  })[0]
+  const [selectedIndices, setSelectedIndices] = useState(initialSelectedIndices)
   const [displayDimensions, setDisplayDimensions] = useState({ width: 0, height: 0 })
   const subjectStartTimeRef = useRef(new Date().toISOString())
   const scrollViewRef = useRef(null)
@@ -48,14 +65,35 @@ const MultiSelect = ({ subject, task, taskKey, workflow, project, onAdvance, onE
   }, [])
 
   const handleSubmit = useCallback(() => {
+    // Multi-task chain: multi-select itself never branches per-answer (the
+    // builder doesn't expose that), so we only honor `task.next`.
+    const nextTaskKey = isMultiTaskWorkflow(workflow) ? getNextTaskKey(task) : null
+    const annotation = { task: taskKey, value: selectedIndices }
+
+    if (nextTaskKey !== null) {
+      dispatch(recordAnnotation({ taskKey, annotation }))
+      dispatch(
+        advanceTo({
+          fromTaskKey: taskKey,
+          answerValue: selectedIndices,
+          toTaskKey: nextTaskKey,
+        })
+      )
+      return
+    }
+
     // Matches legacy: reset scroll before submitting.
     scrollViewRef.current?.scrollTo?.({ x: 0, y: 0 })
+    // `asList=false` semantics preserved: the array of selected indices is
+    // itself the annotation value, not items to push onto a list.
+    const annotations = [
+      ...priorAnnotations.filter((a) => a?.task !== taskKey),
+      annotation,
+    ]
     submitChoiceClassification({
       workflow,
       subject,
-      // Mirrors legacy `asList=false`: the entire array of selected
-      // indices is the annotation value, not a list of items.
-      annotations: [{ task: taskKey, value: selectedIndices }],
+      annotations,
       startTime: subjectStartTimeRef.current,
       displayDimensions,
       viewport,
@@ -63,9 +101,12 @@ const MultiSelect = ({ subject, task, taskKey, workflow, project, onAdvance, onE
       isPreviewMode,
     })
     setSelectedIndices([])
+    dispatch(startChain({ taskKey: workflow.first_task }))
     onAdvance?.()
   }, [
+    dispatch,
     workflow,
+    task,
     subject,
     taskKey,
     selectedIndices,
@@ -73,6 +114,7 @@ const MultiSelect = ({ subject, task, taskKey, workflow, project, onAdvance, onE
     viewport,
     sessionId,
     isPreviewMode,
+    priorAnnotations,
     onAdvance,
   ])
 
@@ -99,8 +141,21 @@ const MultiSelect = ({ subject, task, taskKey, workflow, project, onAdvance, onE
             />
           </View>
           <View style={styles.submitContainer}>
+            <ChainBackButton />
             <ButtonLarge
-              text={t('Mobile.classifier.submit', 'Submit')}
+              // In a multi-task workflow we surface FEM's "Done disabled until
+              // a selection is made" rule. Legacy single-task multi-select
+              // keeps the always-enabled behavior.
+              disabled={
+                isMultiTaskWorkflow(workflow) && selectedIndices.length === 0
+              }
+              text={
+                !isMultiTaskWorkflow(workflow)
+                  ? t('Mobile.classifier.submit', 'Submit')
+                  : getNextTaskKey(task) !== null
+                    ? t('Mobile.classifier.next', 'Next')
+                    : t('Mobile.classifier.done', 'Done')
+              }
               onPress={handleSubmit}
             />
           </View>

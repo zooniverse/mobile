@@ -65,6 +65,13 @@ export function fetchProjects() {
                 projectCalls.push(fetchPaginatedProjects(productionParams));
                 projectCalls.push(fetchPaginatedProjects(betaParams));
 
+                // TEMP: HAVI multi-task test project
+                projectCalls.push(apiClient.type('projects').get({ id: '32778', include: 'avatar,background' }).then(projects => {
+                    const taggedProjects = tagProjects(projects, true)
+                    allProjects = allProjects.concat(taggedProjects)
+                    taggedProjects.forEach((project) => dispatch(addOwnerProjectId(project)))
+                }));
+
                 // Fetch Test Projects
                 if (userIsLoggedIn) {
                     projectCalls.push(apiClient.type('projects').get(ownerParams).then(projects => {
@@ -163,7 +170,9 @@ const getWorkflowsForProjects = projects => {
             .get({...params, ...{page: _page, sort: 'id'}})
             .then((workflows) => {
                 workflows.forEach(workflow => {
-                    workflow.mobile_verified = workflow.mobile_friendly && isValidMobileWorkflow(workflow)
+                    workflow.mobile_verified = workflow.id === '31723' || (workflow.mobile_friendly && isValidMobileWorkflow(workflow))
+                    // TEMP: HAVI multi-task — force swipe type since validation skipped the auto-type
+                    if (workflow.id === '31723') workflow.type = 'swipe'
                     
                     const project = projects.find(project => project.id === workflow.links.project)
                     if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
@@ -179,6 +188,8 @@ const getWorkflowsForProjects = projects => {
     }
 
     fetchPaginatedWorkflows({mobile_friendly: true, active: true, project_id: projectIds})
+    // TEMP: HAVI multi-task test workflow
+    fetchPaginatedWorkflows({id: '31723', active: true})
 };
 
 const addOwnerProjectId = (project) => ({

@@ -27,12 +27,25 @@ export async function submitDrawing({
     viewport,
     sessionId,
     isPreviewMode = false,
+    // Multi-task chain support: annotations from earlier tasks in the
+    // chain are prepended to the drawing annotations. Empty/undefined for
+    // single-task drawing workflows so behavior is unchanged.
+    priorAnnotations = [],
+    // Override the task key if Drawing is reached as a non-first task in
+    // a chain. Defaults to `workflow.first_task` to preserve the legacy
+    // single-task path.
+    taskKey,
 }) {
     if (isPreviewMode) return
 
-    const firstTask = workflow.first_task
-    const resolvedTools = tools || workflow?.tasks?.[firstTask]?.tools
-    const annotations = constructDrawingAnnotations(shapes, resolvedTools, firstTask)
+    const drawingTaskKey = taskKey || workflow.first_task
+    const resolvedTools = tools || workflow?.tasks?.[drawingTaskKey]?.tools
+    const drawingAnnotations = constructDrawingAnnotations(
+        shapes,
+        resolvedTools,
+        drawingTaskKey
+    )
+    const annotations = [...priorAnnotations, ...drawingAnnotations]
 
     const metadata = {
         workflow_version: workflow.version,

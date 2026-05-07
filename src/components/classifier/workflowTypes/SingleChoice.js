@@ -8,19 +8,48 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import SubjectViewer from '../SubjectViewer'
 import AnswerButtons from '../AnswerButtons'
 import ButtonLarge from '../ButtonLarge'
+import ChainBackButton from '../ChainBackButton'
 import FeedbackModal from '../FeedbackModal'
 import { submitChoiceClassification } from '../../../actions/choiceClassification'
 import useFeedbackFlow from '../../../hooks/useFeedbackFlow'
+import { isMultiTaskWorkflow, getNextTaskKey } from '../../../utils/taskChain'
+import {
+  advanceTo,
+  recordAnnotation,
+  selectActiveAnnotations,
+  startChain,
+} from '../../../reducers/classifierSlice'
+
+/**
+ * Submit button label rules: Phase 2 multi-task workflows show "Next" or
+ * "Done" depending on whether the chain continues; legacy single-task
+ * workflows keep "Submit" so existing UX is unchanged.
+ */
+const resolveSubmitLabel = ({ isMulti, nextTaskKey, t }) => {
+  if (!isMulti) return t('Mobile.classifier.submit', 'Submit')
+  if (nextTaskKey !== null) return t('Mobile.classifier.next', 'Next')
+  return t('Mobile.classifier.done', 'Done')
+}
 
 const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, onExpandMedia }) => {
   const { t } = useTranslation()
-  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const dispatch = useDispatch()
+
+  // Restore the prior selection if the user just navigated Back to this task.
+  // The slice keeps the recorded annotation; we lazy-init from it so the body
+  // mounts with the correct radio button highlighted.
+  const priorAnnotations = useSelector(selectActiveAnnotations)
+  const initialSelectedIndex = useState(() => {
+    const prior = priorAnnotations.find((a) => a?.task === taskKey)
+    return typeof prior?.value === 'number' ? prior.value : -1
+  })[0]
+  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex)
   const [displayDimensions, setDisplayDimensions] = useState({ width: 0, height: 0 })
   const subjectStartTimeRef = useRef(new Date().toISOString())
   const scrollViewRef = useRef(null)
@@ -47,12 +76,21 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
     setTimeout(() => scrollViewRef.current?.scrollToEnd?.(), 300)
   }, [])
 
-  const submit = useCallback(
+  const finalize = useCallback(
     (feedbackMeta) => {
+      const annotation = { task: taskKey, value: selectedIndex }
+      // Combine annotations from earlier tasks in the chain (if any) with
+      // this task's. `priorAnnotations` may already include a stale entry
+      // for this task if the user advanced, came back, and re-submits; we
+      // overwrite by keying on `task`.
+      const annotations = [
+        ...priorAnnotations.filter((a) => a?.task !== taskKey),
+        annotation,
+      ]
       submitChoiceClassification({
         workflow,
         subject,
-        annotations: [{ task: taskKey, value: selectedIndex }],
+        annotations,
         startTime: subjectStartTimeRef.current,
         displayDimensions,
         viewport,
@@ -61,9 +99,14 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
         isPreviewMode,
       })
       setSelectedIndex(-1)
+      // Clear chain state so the next subject begins at first_task with
+      // no carried-over annotations. For single-task workflows this is a
+      // no-op aside from resetting `currentTaskKey` to its existing value.
+      dispatch(startChain({ taskKey: workflow.first_task }))
       onAdvance?.()
     },
     [
+      dispatch,
       workflow,
       subject,
       taskKey,
@@ -72,15 +115,42 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
       viewport,
       sessionId,
       isPreviewMode,
+      priorAnnotations,
       onAdvance,
     ]
   )
 
+  const advanceChain = useCallback(
+    (toTaskKey) => {
+      const annotation = { task: taskKey, value: selectedIndex }
+      dispatch(recordAnnotation({ taskKey, annotation }))
+      dispatch(
+        advanceTo({
+          fromTaskKey: taskKey,
+          answerValue: selectedIndex,
+          toTaskKey,
+        })
+      )
+      // Body unmounts via `key={currentTaskKey}` in the shell; no need to
+      // reset local state here.
+    },
+    [dispatch, taskKey, selectedIndex]
+  )
+
   const handleSubmit = useCallback(() => {
+    // Multi-task: branch through the chain when this task has a `next`
+    // (per-answer for single-choice, falling back to `task.next`).
+    const nextTaskKey = isMultiTaskWorkflow(workflow)
+      ? getNextTaskKey(task, selectedIndex)
+      : null
+    if (nextTaskKey !== null) {
+      advanceChain(nextTaskKey)
+      return
+    }
     // Matches legacy: reset scroll before showing feedback modal or submitting.
     scrollViewRef.current?.scrollTo?.({ x: 0, y: 0 })
-    withFeedback(subject, selectedIndex, submit)
-  }, [subject, selectedIndex, withFeedback, submit])
+    withFeedback(subject, selectedIndex, finalize)
+  }, [workflow, task, subject, selectedIndex, withFeedback, finalize, advanceChain])
 
   return (
     <>
@@ -104,9 +174,15 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
             />
           </View>
           <View style={styles.submitContainer}>
+            <ChainBackButton />
             <ButtonLarge
               disabled={selectedIndex === -1}
-              text={t('Mobile.classifier.submit', 'Submit')}
+              text={resolveSubmitLabel({
+                isMulti: isMultiTaskWorkflow(workflow),
+                nextTaskKey:
+                  selectedIndex === -1 ? null : getNextTaskKey(task, selectedIndex),
+                t,
+              })}
               onPress={handleSubmit}
             />
           </View>
