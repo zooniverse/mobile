@@ -21,6 +21,7 @@ import { submitChoiceClassification } from '../../../actions/choiceClassificatio
 import { isMultiTaskWorkflow, getNextTaskKey } from '../../../utils/taskChain'
 import {
   advanceTo,
+  incrementClassificationCount,
   recordAnnotation,
   selectActiveAnnotations,
   startChain,
@@ -55,6 +56,7 @@ const MultiSelect = ({ subject, task, taskKey, workflow, project, onAdvance, onE
     height: state?.app?.device?.height,
   }))
   const isPreviewMode = useSelector((state) => state?.classifier?.inPreviewMode)
+  const isGuestUser = useSelector((state) => state?.user?.isGuestUser)
 
   // Matches legacy: after toggling an answer, scroll to the submit button.
   const onSelect = useCallback((index) => {
@@ -102,6 +104,7 @@ const MultiSelect = ({ subject, task, taskKey, workflow, project, onAdvance, onE
     })
     setSelectedIndices([])
     dispatch(startChain({ taskKey: workflow.first_task }))
+    if (!isGuestUser) dispatch(incrementClassificationCount())
     onAdvance?.()
   }, [
     dispatch,
@@ -116,6 +119,7 @@ const MultiSelect = ({ subject, task, taskKey, workflow, project, onAdvance, onE
     isPreviewMode,
     priorAnnotations,
     onAdvance,
+    isGuestUser,
   ])
 
   return (

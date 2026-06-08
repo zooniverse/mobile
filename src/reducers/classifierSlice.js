@@ -18,6 +18,18 @@ const initialState = {
   currentTaskKey: null,
   taskHistory: [],
   annotationsByTask: {},
+
+  // Mini-course resource keyed by workflow id. Stored separately from the
+  // tutorial state so the two never share a slot. Value is the panoptes
+  // resource (with `mediaResources` attached for images) or null when the
+  // workflow has no mini-course.
+  miniCoursesByWorkflow: {},
+
+  // Per-session classification counter for the mini-course trigger.
+  // Incremented only for signed-in users (guests don't see mini-course, so
+  // their classifications never enter the count). Not persisted; resets on
+  // app launch.
+  classificationCount: 0,
 }
 
 const classifierSlice = createSlice({
@@ -56,6 +68,17 @@ const classifierSlice = createSlice({
       const popped = state.taskHistory.pop()
       state.currentTaskKey = popped.taskKey
     },
+    setMiniCourse: (state, action) => {
+      const { workflowId, miniCourse } = action.payload || {}
+      if (!workflowId) return
+      state.miniCoursesByWorkflow[workflowId] = miniCourse ?? null
+    },
+    incrementClassificationCount: (state) => {
+      state.classificationCount += 1
+    },
+    resetClassificationCount: (state) => {
+      state.classificationCount = 0
+    },
   },
 })
 
@@ -83,6 +106,9 @@ export const {
   recordAnnotation,
   advanceTo,
   goBack,
+  setMiniCourse,
+  incrementClassificationCount,
+  resetClassificationCount,
 } = classifierSlice.actions
 
 export default classifierSlice.reducer

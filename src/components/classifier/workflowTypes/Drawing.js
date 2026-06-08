@@ -33,6 +33,7 @@ import * as drawingActions from '../../../actions/drawing'
 import { submitDrawing } from '../../../actions/drawingClassification'
 import { isMultiTaskWorkflow, getNextTaskKey } from '../../../utils/taskChain'
 import {
+  incrementClassificationCount,
   selectActiveAnnotations,
   startChain,
 } from '../../../reducers/classifierSlice'
@@ -61,6 +62,7 @@ const Drawing = ({ subject, task, taskKey, project, workflow, onAdvance, onExpan
       subject?.id ? state.classifier.subjectDimensions?.[subject.id] : null
     ) || { naturalHeight: 1, naturalWidth: 1 }
   const isPreviewMode = useSelector((state) => state.classifier.isPreviewMode)
+  const isGuestUser = useSelector((state) => state?.user?.isGuestUser)
   const sessionId = useSelector((state) => state?.main?.session?.id)
   const viewport = useSelector((state) => ({
     width: state?.app?.device?.width,
@@ -197,6 +199,7 @@ const Drawing = ({ subject, task, taskKey, project, workflow, onAdvance, onExpan
     // Reset chain so the next subject begins at first_task. No-op for
     // single-task drawing workflows.
     dispatch(startChain({ taskKey: workflow.first_task }))
+    if (!isGuestUser) dispatch(incrementClassificationCount())
     onAdvance?.()
   }, [
     dispatch,
@@ -212,6 +215,7 @@ const Drawing = ({ subject, task, taskKey, project, workflow, onAdvance, onExpan
     isPreviewMode,
     priorAnnotations,
     onAdvance,
+    isGuestUser,
   ])
 
   if (!tool) return null

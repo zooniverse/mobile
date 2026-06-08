@@ -415,6 +415,52 @@ export const clearProjectTranslations = () => {
   i18next.emit('languageChanged', currentLang);
 }
 
+/**
+ * Load translations for a mini-course resource into a dedicated `miniCourse`
+ * i18next namespace. Intentionally NOT calling `loadProjectTranslations`
+ * or sharing the `project` namespace — mini-course translations must stay
+ * separate from tutorial translations.
+ *
+ * The API discriminator `translated_type` only knows about `tutorial` (the
+ * underlying resource type), so that's what we send. The response shape is
+ * the same as a tutorial's: `{ steps: [{ content }, ...], display_name }`.
+ * It lands in `i18next` under namespace `miniCourse`, accessed as
+ * `t('steps.${index}.content', { ns: 'miniCourse' })`.
+ */
+export const loadMiniCourseTranslations = async (language, miniCourse) => {
+  if (!miniCourse?.id || !language) return;
+
+  try {
+    const result = await apiClient.type('translations').get({
+      language,
+      translated_type: 'tutorial',
+      translated_id: miniCourse.id,
+    });
+
+    const { strings } = (Array.isArray(result) && result[0]) || {};
+    const bundle = strings || {};
+
+    i18next.addResourceBundle(language, 'miniCourse', bundle, false, true);
+    i18next.emit('languageChanged', language);
+  } catch (error) {
+    console.warn('Error loading mini-course translations:', error);
+    // Reset to empty so a stale bundle from a prior project doesn't leak.
+    i18next.addResourceBundle(language, 'miniCourse', {}, false, true);
+  }
+};
+
+/**
+ * Clear mini-course translations. Mirrors `clearProjectTranslations` but
+ * targets the `miniCourse` namespace only. Call when navigating between
+ * projects/workflows.
+ */
+export const clearMiniCourseTranslations = () => {
+  const currentLang = i18next.language || 'en';
+  i18next.removeResourceBundle(currentLang, 'miniCourse');
+  i18next.addResourceBundle(currentLang, 'miniCourse', {}, false, true);
+  i18next.emit('languageChanged', currentLang);
+};
+
 export const loadProjectListTranslations = async (language, projectIds) => {
   // Check cache first
   if (projectListTranslationCache[language]) {

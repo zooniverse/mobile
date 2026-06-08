@@ -8,6 +8,11 @@ export const SET_USER = 'SET_USER_FROM_USER';
 export const SIGN_OUT = 'SIGN_OUT';
 export const SET_PUSH_PROMPTED = 'SET_PUSH_PROMPTED';
 
+// Mini-course preference actions (separate from tutorials).
+export const SET_MINICOURSE_OPT_OUT = 'SET_MINICOURSE_OPT_OUT';
+export const SET_MINICOURSE_STEP_PROGRESS = 'SET_MINICOURSE_STEP_PROGRESS';
+export const SET_MINICOURSE_COMPLETED = 'SET_MINICOURSE_COMPLETED';
+
 // Project Action Names
 export const PROJECTS_REQUEST = 'PROJECTS_REQUEST';
 export const PROJECTS_SUCCESS = 'PROJECTS_SUCCESS';

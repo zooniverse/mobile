@@ -6,10 +6,11 @@ import { getAuthUser } from '../actions/auth'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 import * as ActionConstants from '../constants/actions'
 import getSubjectLocations from '../utils/get-subject-location'
-import { 
+import {
   constructDrawingAnnotations
 } from '../utils/annotationUtils'
 import { clearShapes } from './drawing'
+import { setMiniCourse } from '../reducers/classifierSlice'
 import { navRef } from '../navigation/RootNavigator';
 import { PushNotifications } from '../notifications/PushNotifications'
 
@@ -227,8 +228,18 @@ export function fetchFieldGuide(workflowId, projectId) {
 export function fetchTutorials(workflowID) {
   return dispatch => {
     return new Promise ((resolve) => {
-      apiClient.type('tutorials').get({workflow_id: workflowID}).then(([tutorial]) => {
-        let tutorialResource = tutorial
+      apiClient.type('tutorials').get({workflow_id: workflowID}).then((tutorials) => {
+        // The /tutorials endpoint returns both tutorials AND mini-courses for
+        // a workflow. Filter to standard tutorials only — null `kind` is the
+        // legacy backwards-compat case (matches PFE's tutorial.jsx:38–40).
+        const onlyStandardTutorials = (tutorials || []).filter(
+          (t) => t && (t.kind === 'tutorial' || t.kind === null || t.kind === undefined)
+        )
+        const tutorialResource = onlyStandardTutorials[0]
+        if (!tutorialResource) {
+          dispatch(addTutorial(workflowID, {}))
+          return resolve()
+        }
         let mediaByID = {}
         tutorialResource.get('attached_images').then((mediaResources) => {
           R.forEach((mediaResource) => mediaByID[mediaResource.id] = mediaResource, mediaResources)
@@ -241,6 +252,61 @@ export function fetchTutorials(workflowID) {
         dispatch(addTutorial(workflowID, {}))
         resolve()
       })
+    })
+  }
+}
+
+/**
+ * Mini-course fetch. Intentionally NOT sharing code with `fetchTutorials` —
+ * mini-courses are a separate feature and must remain so. Skipped entirely
+ * for guest users (mini-course is signed-in only, matching PFE).
+ *
+ * Server-side filter via `kind=mini-course` returns only mini-course
+ * tutorial resources. Takes the first result only (matches PFE: a workflow
+ * may technically have multiple mini-courses attached but only the first is
+ * shown).
+ */
+export function fetchMiniCourse(workflowID) {
+  return (dispatch, getState) => {
+    return new Promise((resolve) => {
+      if (getState().user.isGuestUser) {
+        dispatch(setMiniCourse({ workflowId: workflowID, miniCourse: null }))
+        return resolve()
+      }
+
+      apiClient
+        .type('tutorials')
+        .get({ workflow_id: workflowID, kind: 'mini-course' })
+        .then(([miniCourse]) => {
+          if (!miniCourse) {
+            dispatch(setMiniCourse({ workflowId: workflowID, miniCourse: null }))
+            return resolve()
+          }
+
+          const mediaByID = {}
+          miniCourse
+            .get('attached_images')
+            .then((mediaResources) => {
+              R.forEach(
+                (mediaResource) => (mediaByID[mediaResource.id] = mediaResource),
+                mediaResources
+              )
+            })
+            .catch(() => {
+              // No attached images is normal — leave mediaByID empty.
+            })
+            .finally(() => {
+              miniCourse.mediaResources = mediaByID
+              dispatch(
+                setMiniCourse({ workflowId: workflowID, miniCourse })
+              )
+              resolve()
+            })
+        })
+        .catch(() => {
+          dispatch(setMiniCourse({ workflowId: workflowID, miniCourse: null }))
+          resolve()
+        })
     })
   }
 }
@@ -323,6 +389,153 @@ export function setTutorialCompleted(workflowId, projectId) {
         dispatch(saveTutorialAsComplete(projectId, tutorialId, now));
       })
     })
+  }
+}
+
+/**
+ * Mini-course preference writes. All three follow PFE's persistence
+ * pattern: a single key under `preferences.minicourses.<field>.id_<id>`
+ * on the user's `project_preferences` resource. The `id_` prefix is
+ * critical — without it the API serializes as a sparse array and breaks
+ * round-tripping (same workaround tutorials use for
+ * `tutorials_completed_at`).
+ *
+ * Each thunk short-circuits for guests as belt-and-suspenders; the modal
+ * never opens for them, but matching PFE's three-guard pattern keeps the
+ * behavior consistent if the modal is ever forced into view via dev tools
+ * or a future test path.
+ *
+ * Optimistic Redux update: we dispatch immediately and let `.save()` ride
+ * along. Matches the existing `setTutorialCompleted` pattern.
+ */
+export function setMiniCourseOptOut(projectId, miniCourseId, value) {
+  return (dispatch, getState) => {
+    if (getState().user.isGuestUser) return
+
+    dispatch({
+      type: ActionConstants.SET_MINICOURSE_OPT_OUT,
+      projectId,
+      miniCourseId,
+      value,
+    })
+
+    getAuthUser().then((userResource) => {
+      userResource.get('project_preferences', { project_id: projectId }).then(
+        ([projectPreferences]) => {
+          if (!projectPreferences) return
+          projectPreferences
+            .update({
+              [`preferences.minicourses.opt_out.id_${miniCourseId}`]: value,
+            })
+            .save()
+        }
+      )
+    })
+  }
+}
+
+export function setMiniCourseStepProgress(projectId, miniCourseId, slideIndex) {
+  return (dispatch, getState) => {
+    if (getState().user.isGuestUser) return
+
+    dispatch({
+      type: ActionConstants.SET_MINICOURSE_STEP_PROGRESS,
+      projectId,
+      miniCourseId,
+      slideIndex,
+    })
+
+    getAuthUser().then((userResource) => {
+      userResource.get('project_preferences', { project_id: projectId }).then(
+        ([projectPreferences]) => {
+          if (!projectPreferences) return
+          projectPreferences
+            .update({
+              [`preferences.minicourses.slide_to_start.id_${miniCourseId}`]: slideIndex,
+            })
+            .save()
+        }
+      )
+    })
+  }
+}
+
+export function setMiniCourseCompleted(projectId, miniCourseId) {
+  return (dispatch, getState) => {
+    if (getState().user.isGuestUser) return
+
+    const completedAt = new Date().toISOString()
+
+    dispatch({
+      type: ActionConstants.SET_MINICOURSE_COMPLETED,
+      projectId,
+      miniCourseId,
+      completedAt,
+    })
+
+    getAuthUser().then((userResource) => {
+      userResource.get('project_preferences', { project_id: projectId }).then(
+        ([projectPreferences]) => {
+          if (!projectPreferences) return
+          projectPreferences
+            .update({
+              [`preferences.minicourses.completed_at.id_${miniCourseId}`]: completedAt,
+            })
+            .save()
+        }
+      )
+    })
+  }
+}
+
+/**
+ * Restart a mini-course: clear opt-out, reset to step 0, clear completed.
+ * Mirrors PFE's `MiniCourse.restart`. Writes all three prefs in a single
+ * API update + save so the server-side state is consistent.
+ *
+ * Returns the save Promise so the caller can chain "open the modal" after
+ * the write completes (matches PFE's `.save().then(@start ...)`).
+ */
+export function restartMiniCourse(projectId, miniCourseId) {
+  return (dispatch, getState) => {
+    if (getState().user.isGuestUser) return Promise.resolve()
+
+    // Optimistic Redux mirror — reuses the same three reducer cases as
+    // the individual setters so there's a single source of truth for
+    // mini-course pref state shape.
+    dispatch({
+      type: ActionConstants.SET_MINICOURSE_OPT_OUT,
+      projectId,
+      miniCourseId,
+      value: false,
+    })
+    dispatch({
+      type: ActionConstants.SET_MINICOURSE_STEP_PROGRESS,
+      projectId,
+      miniCourseId,
+      slideIndex: 0,
+    })
+    dispatch({
+      type: ActionConstants.SET_MINICOURSE_COMPLETED,
+      projectId,
+      miniCourseId,
+      completedAt: null,
+    })
+
+    return getAuthUser().then((userResource) =>
+      userResource
+        .get('project_preferences', { project_id: projectId })
+        .then(([projectPreferences]) => {
+          if (!projectPreferences) return
+          return projectPreferences
+            .update({
+              [`preferences.minicourses.opt_out.id_${miniCourseId}`]: false,
+              [`preferences.minicourses.slide_to_start.id_${miniCourseId}`]: 0,
+              [`preferences.minicourses.completed_at.id_${miniCourseId}`]: null,
+            })
+            .save()
+        })
+    )
   }
 }
 

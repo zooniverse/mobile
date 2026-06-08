@@ -67,6 +67,7 @@ export function loadUserProjects() {
           const classifications = classificationCounts(sortedPreferences)
           const sortOrders = orderProjects(sortedPreferences)
           const completedTutorials = getCompletedTutorials(sortedPreferences)
+          const minicourses = getMinicourses(sortedPreferences)
 
           return apiClient.type('projects').get({ id: projectIDs, page_size: sortedPreferences.length }).catch(() => {
             return null
@@ -77,7 +78,8 @@ export function loadUserProjects() {
                 slug: project.slug,
                 activity_count: classifications[project.id],
                 sort_order: sortOrders[project.id],
-                tutorials_completed_at: completedTutorials[project.id] || {}
+                tutorials_completed_at: completedTutorials[project.id] || {},
+                minicourses: minicourses[project.id] || {}
               };
               dispatch(setUserProjectData(project.id, projectData));
             }, projects)
@@ -155,6 +157,17 @@ function getCompletedTutorials(projectPreferences){
   const preferencesWithTutorials = filter((pref) => { return !isNil(pref.preferences.tutorials_completed_at) }, projectPreferences)
   const extractPreference = (pref) => { return [ pref.links.project, pref.preferences.tutorials_completed_at ] }
   return fromPairs(map(extractPreference, preferencesWithTutorials))
+}
+
+// Mirror getCompletedTutorials but for mini-course preferences. Pulls the
+// `preferences.minicourses` blob (with `opt_out`, `slide_to_start`,
+// `completed_at`) keyed by project id. Kept separate from
+// `getCompletedTutorials` so any future change to either flow stays
+// isolated.
+function getMinicourses(projectPreferences){
+  const preferencesWithMinicourses = filter((pref) => { return !isNil(pref.preferences.minicourses) }, projectPreferences)
+  const extractPreference = (pref) => { return [ pref.links.project, pref.preferences.minicourses ] }
+  return fromPairs(map(extractPreference, preferencesWithMinicourses))
 }
 
 function classificationCounts(projectPreferences) {

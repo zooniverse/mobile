@@ -33,6 +33,7 @@ import { submitSwiperClassification } from '../../../actions/swiperClassificatio
 import { isMultiTaskWorkflow, getNextTaskKey } from '../../../utils/taskChain'
 import {
   advanceTo,
+  incrementClassificationCount,
   recordAnnotation,
   selectActiveAnnotations,
   startChain,
@@ -64,6 +65,7 @@ const Swipe = ({
     height: state.app.device.height,
   }))
   const sessionId = useSelector((state) => state.main.session?.id)
+  const isGuestUser = useSelector((state) => state?.user?.isGuestUser)
   const annotations = useSelector(
     (state) => state.classifier.annotations[workflow.id] || {}
   )
@@ -98,6 +100,7 @@ const Swipe = ({
       // Reset chain so the next subject begins at first_task; no-op for
       // single-task swipe workflows.
       dispatch(startChain({ taskKey: workflow.first_task }))
+      if (!isGuestUser) dispatch(incrementClassificationCount())
       onAdvance?.()
       subjectStartTimeRef.current = new Date().toISOString()
     },
@@ -112,6 +115,7 @@ const Swipe = ({
       inPreviewMode,
       priorAnnotations,
       onAdvance,
+      isGuestUser,
     ]
   )
 

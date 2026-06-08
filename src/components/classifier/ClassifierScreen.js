@@ -13,6 +13,8 @@ import FieldGuideBtn from './FieldGuideBtn'
 import FieldGuidePanel from './FieldGuidePanel'
 import TaskPanel from './TaskPanel'
 import Tutorial from './Tutorial'
+import MiniCourse from './MiniCourse'
+import MiniCourseRestartButton from './MiniCourseRestartButton'
 import Separator from '../common/Separator'
 import FullScreenMedia from '../FullScreenMedia'
 import * as colorModes from '../../displayOptions/colorModes'
@@ -20,10 +22,20 @@ import { markdownContainsImage } from '../../utils/markdownUtils'
 import useSubjectQueue from '../../hooks/useSubjectQueue'
 import useWorkflowResources from '../../hooks/useWorkflowResources'
 import useProjectTranslations from '../../hooks/useProjectTranslations'
-import { setTutorialCompleted, setSubjectStartTimeForWorkflow } from '../../actions/classifier'
+import useMiniCourseTranslations from '../../hooks/useMiniCourseTranslations'
+import {
+  setTutorialCompleted,
+  setSubjectStartTimeForWorkflow,
+  setMiniCourseOptOut,
+  setMiniCourseStepProgress,
+  setMiniCourseCompleted,
+  restartMiniCourse,
+} from '../../actions/classifier'
 import { setSubjectStartTime, startChain } from '../../reducers/classifierSlice'
 import WorkflowTypes from '../../constants/WorkflowTypes'
 import TranslationsLoadingIndicator from '../common/TranslationsLoadingIndicator'
+import { shouldShowMiniCourse } from '../../utils/miniCourseTrigger'
+import { getCurrentProjectLanguage } from '../../i18n'
 
 import SingleChoice from './workflowTypes/SingleChoice'
 import MultiSelect from './workflowTypes/MultiSelect'
@@ -60,6 +72,7 @@ const ClassifierScreen = ({ route }) => {
     guide,
     tutorial,
     needsTutorial,
+    miniCourse,
     isLoading: resourcesLoading,
   } = useWorkflowResources(workflow, project)
   const { isLoading: translationsLoading } = useProjectTranslations(
@@ -68,6 +81,23 @@ const ClassifierScreen = ({ route }) => {
     guide,
     tutorial
   )
+  // Mini-course translations live in their own i18next namespace
+  // (`miniCourse`) — separate from project/tutorial translations on
+  // purpose. The hook is a no-op for guests / workflows without a
+  // mini-course attached.
+  useMiniCourseTranslations(project, miniCourse)
+
+  // Mini-course state. Trigger gating reads `classificationCount` plus the
+  // user's per-mini-course preferences (opt_out / slide_to_start /
+  // completed_at, all keyed by `id_<minicourse.id>` matching PFE).
+  const classificationCount = useSelector(
+    (state) => state.classification?.classificationCount ?? 0
+  )
+  const isGuestUser = useSelector((state) => state?.user?.isGuestUser)
+  const miniCoursePrefs = useSelector(
+    (state) => state.user?.projects?.[project?.id]?.minicourses
+  )
+  const [isMiniCourseVisible, setIsMiniCourseVisible] = useState(false)
 
   // The chain's current task lives in the `classification` slice. The
   // navigator dispatches `reset()` before mount, so on the first render the
@@ -125,6 +155,88 @@ const ClassifierScreen = ({ route }) => {
       setIsQuestionVisible(true)
     }
   }
+
+  // Compute the current step index for the active mini-course (matches
+  // PFE: read `slide_to_start.id_<id>`; default to 0 for first appearance).
+  const miniCourseStepIndex = miniCourse?.id
+    ? miniCoursePrefs?.slide_to_start?.[`id_${miniCourse.id}`] ?? 0
+    : 0
+  const miniCourseOptedOut = miniCourse?.id
+    ? Boolean(miniCoursePrefs?.opt_out?.[`id_${miniCourse.id}`])
+    : false
+  const miniCourseCompletedAt = miniCourse?.id
+    ? miniCoursePrefs?.completed_at?.[`id_${miniCourse.id}`]
+    : null
+  const miniCourseFrequency =
+    miniCourse?.configuration?.minicourse_frequency
+
+  // Trigger the modal after each new classification submit. Mirrors PFE's
+  // `maybeLaunchMiniCourse` gate. We watch `classificationCount` rather
+  // than the body's onAdvance so the trigger is decoupled from any
+  // particular workflow type.
+  useEffect(() => {
+    if (classificationCount === 0) return
+    if (isGuestUser) return
+    if (needsTutorial) return
+    if (!miniCourse?.steps?.length) return
+    if (miniCourseOptedOut) return
+    if (miniCourseCompletedAt) return
+    if (!shouldShowMiniCourse(classificationCount, miniCourseFrequency)) return
+    setIsMiniCourseVisible(true)
+    // We intentionally only re-evaluate when the count changes; the rest
+    // are reads against the latest state at that moment.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [classificationCount])
+
+  // Modal close = the user has seen this step. Match PFE's unmount
+  // behavior: if at last step, mark complete; else advance step pointer.
+  const handleMiniCourseClose = useCallback(() => {
+    setIsMiniCourseVisible(false)
+    if (!miniCourse?.id) return
+    const lastIndex = (miniCourse.steps?.length ?? 0) - 1
+    if (miniCourseStepIndex >= lastIndex) {
+      dispatch(setMiniCourseCompleted(project.id, miniCourse.id))
+    } else {
+      dispatch(
+        setMiniCourseStepProgress(
+          project.id,
+          miniCourse.id,
+          miniCourseStepIndex + 1
+        )
+      )
+    }
+  }, [dispatch, miniCourse, miniCourseStepIndex, project.id])
+
+  // Opt-out checkbox saves immediately (matches PFE — not on close).
+  const handleMiniCourseOptOutChange = useCallback(
+    (value) => {
+      if (!miniCourse?.id) return
+      dispatch(setMiniCourseOptOut(project.id, miniCourse.id, value))
+    },
+    [dispatch, miniCourse, project.id]
+  )
+
+  // Restart: clear all three prefs, then re-open the modal at step 0.
+  // We `await` the API write so the modal opens against fresh state.
+  const handleMiniCourseRestart = useCallback(async () => {
+    if (!miniCourse?.id) return
+    await dispatch(restartMiniCourse(project.id, miniCourse.id))
+    setIsMiniCourseVisible(true)
+  }, [dispatch, miniCourse, project.id])
+
+  // Translated step content; falls back to the raw `content` from the
+  // mini-course resource if no translation is loaded for the active
+  // language.
+  const miniCourseStepContent = miniCourse?.steps?.[miniCourseStepIndex]
+    ? t(
+        `steps.${miniCourseStepIndex}.content`,
+        miniCourse.steps[miniCourseStepIndex].content,
+        { ns: 'miniCourse', lng: getCurrentProjectLanguage() }
+      )
+    : ''
+
+  const showRestartButton =
+    !isGuestUser && Boolean(miniCourse?.steps?.length)
 
   // Match legacy: while the initial subject or workflow resources are still
   // loading, render only the spinner. No tabs, buttons, or modals yet.
@@ -250,6 +362,9 @@ const ClassifierScreen = ({ route }) => {
               <FieldGuideBtn onPress={() => setIsFieldGuideVisible(true)} />
             </View>
           )}
+          {showRestartButton && (
+            <MiniCourseRestartButton onPress={handleMiniCourseRestart} />
+          )}
         </>
       ) : (
         tutorialContent
@@ -283,6 +398,17 @@ const ClassifierScreen = ({ route }) => {
         handlePress={closeFullScreenMedia}
         question={fullScreenMedia.question}
       />
+      {miniCourse?.steps?.length > 0 && (
+        <MiniCourse
+          isVisible={isMiniCourseVisible}
+          miniCourse={miniCourse}
+          stepIndex={miniCourseStepIndex}
+          translatedContent={miniCourseStepContent}
+          onClose={handleMiniCourseClose}
+          onOptOutChange={handleMiniCourseOptOutChange}
+          inMuseumMode={project.in_museum_mode}
+        />
+      )}
     </View>
   )
 }

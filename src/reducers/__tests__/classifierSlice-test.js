@@ -7,6 +7,9 @@ import reducer, {
   advanceTo,
   goBack,
   selectActiveAnnotations,
+  setMiniCourse,
+  incrementClassificationCount,
+  resetClassificationCount,
 } from '../classifierSlice'
 
 const initialState = {
@@ -14,6 +17,8 @@ const initialState = {
   currentTaskKey: null,
   taskHistory: [],
   annotationsByTask: {},
+  miniCoursesByWorkflow: {},
+  classificationCount: 0,
 }
 
 describe('classifierSlice', () => {
@@ -126,6 +131,60 @@ describe('classifierSlice', () => {
     state = reducer(state, recordAnnotation({ taskKey: 'T0', annotation: { task: 'T0', value: 0 } }))
     const cleared = reducer(state, reset())
     expect(cleared).toEqual(initialState)
+  })
+
+  it('setMiniCourse stores the resource keyed by workflow', () => {
+    const miniCourse = { id: '8682', steps: [{ content: 'hi' }] }
+    const next = reducer(
+      initialState,
+      setMiniCourse({ workflowId: '26859', miniCourse })
+    )
+    expect(next.miniCoursesByWorkflow).toEqual({ '26859': miniCourse })
+  })
+
+  it('setMiniCourse normalizes missing miniCourse to null', () => {
+    const next = reducer(
+      initialState,
+      setMiniCourse({ workflowId: '26859' })
+    )
+    expect(next.miniCoursesByWorkflow).toEqual({ '26859': null })
+  })
+
+  it('setMiniCourse is a no-op when workflowId is missing', () => {
+    const next = reducer(
+      initialState,
+      setMiniCourse({ miniCourse: { id: '8682' } })
+    )
+    expect(next.miniCoursesByWorkflow).toEqual({})
+  })
+
+  it('setMiniCourse does not affect other workflow entries', () => {
+    const seeded = {
+      ...initialState,
+      miniCoursesByWorkflow: { '11111': { id: 'a' } },
+    }
+    const next = reducer(
+      seeded,
+      setMiniCourse({ workflowId: '26859', miniCourse: { id: '8682' } })
+    )
+    expect(next.miniCoursesByWorkflow).toEqual({
+      '11111': { id: 'a' },
+      '26859': { id: '8682' },
+    })
+  })
+
+  it('incrementClassificationCount adds 1', () => {
+    let state = reducer(initialState, incrementClassificationCount())
+    expect(state.classificationCount).toBe(1)
+    state = reducer(state, incrementClassificationCount())
+    state = reducer(state, incrementClassificationCount())
+    expect(state.classificationCount).toBe(3)
+  })
+
+  it('resetClassificationCount sets count to 0', () => {
+    const seeded = { ...initialState, classificationCount: 7 }
+    const next = reducer(seeded, resetClassificationCount())
+    expect(next.classificationCount).toBe(0)
   })
 })
 

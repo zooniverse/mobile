@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
   fetchFieldGuide,
+  fetchMiniCourse,
   fetchTutorials,
   setNeedsTutorial,
   setupProjectPreferences,
@@ -30,6 +31,9 @@ const useWorkflowResources = (workflow, project) => {
   const needsTutorial = useSelector(
     (state) => state.classifier.needsTutorial?.[workflowId]
   )
+  const miniCourse = useSelector(
+    (state) => state.classification?.miniCoursesByWorkflow?.[workflowId]
+  )
 
   const [isLoading, setIsLoading] = useState(Boolean(workflowId && projectId))
 
@@ -44,18 +48,21 @@ const useWorkflowResources = (workflow, project) => {
     //   returning logged-in user.
     // - Tutorial fetch is followed by setNeedsTutorial to flag first-time
     //   users.
+    // - Mini-course fetch runs in parallel and short-circuits internally
+    //   for guest users (signed-in only, matching PFE).
     Promise.all([
       dispatch(setupProjectPreferences(workflowId, project)),
       dispatch(fetchFieldGuide(workflowId, projectId)),
       dispatch(fetchTutorials(workflowId)).then(() =>
         dispatch(setNeedsTutorial(workflowId, projectId))
       ),
+      dispatch(fetchMiniCourse(workflowId)),
     ]).finally(() => {
       setIsLoading(false)
     })
   }, [workflowId, projectId])
 
-  return { guide, tutorial, needsTutorial, isLoading }
+  return { guide, tutorial, needsTutorial, miniCourse, isLoading }
 }
 
 export default useWorkflowResources

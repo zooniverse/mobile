@@ -21,6 +21,7 @@ import useFeedbackFlow from '../../../hooks/useFeedbackFlow'
 import { isMultiTaskWorkflow, getNextTaskKey } from '../../../utils/taskChain'
 import {
   advanceTo,
+  incrementClassificationCount,
   recordAnnotation,
   selectActiveAnnotations,
   startChain,
@@ -69,6 +70,7 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
     height: state?.app?.device?.height,
   }))
   const isPreviewMode = useSelector((state) => state?.classifier?.inPreviewMode)
+  const isGuestUser = useSelector((state) => state?.user?.isGuestUser)
 
   // Matches legacy: after selecting an answer, scroll to the submit button.
   const handleSelect = useCallback((index) => {
@@ -103,6 +105,7 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
       // no carried-over annotations. For single-task workflows this is a
       // no-op aside from resetting `currentTaskKey` to its existing value.
       dispatch(startChain({ taskKey: workflow.first_task }))
+      if (!isGuestUser) dispatch(incrementClassificationCount())
       onAdvance?.()
     },
     [
@@ -117,6 +120,7 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
       isPreviewMode,
       priorAnnotations,
       onAdvance,
+      isGuestUser,
     ]
   )
 
