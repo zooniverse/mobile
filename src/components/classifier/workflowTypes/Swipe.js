@@ -220,7 +220,13 @@ const Swipe = ({
   // Both cards render with the same component type keyed by subject ID
   // so React preserves the component instance (and any Video/image state)
   // when the next card becomes current.
-  const cards = [nextSubject, currentSubject].filter(Boolean)
+  //
+  // Multi-task workflows skip the peek-of-the-next-subject stacking card,
+  // since advancing inside a chain stays on the same subject — showing a
+  // different subject's image underneath was misleading.
+  const cards = isMultiTaskWorkflow(workflow)
+    ? [currentSubject].filter(Boolean)
+    : [nextSubject, currentSubject].filter(Boolean)
   const alreadySeen = currentSubject?.already_seen || false
 
   return (

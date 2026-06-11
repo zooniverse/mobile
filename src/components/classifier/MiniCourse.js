@@ -14,7 +14,7 @@
  * mini-course translations land in Step 3.
  */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Dimensions,
   Platform,
@@ -47,6 +47,16 @@ const MiniCourse = ({
 }) => {
   const { t } = useTranslation()
   const [optOut, setOptOut] = useState(false)
+
+  // react-native-modal keeps children mounted when `isVisible` is false, so
+  // the local `optOut` value from a previous open can leak into the next.
+  // PFE doesn't have this issue because its `Dialog.alert` mounts fresh each
+  // time. Reset to false whenever the modal reopens — the trigger gate
+  // guarantees opt-out is false at that point (the gate filters out
+  // opted-out mini-courses), and restart explicitly clears it.
+  useEffect(() => {
+    if (isVisible) setOptOut(false)
+  }, [isVisible])
 
   const step = miniCourse?.steps?.[stepIndex]
   if (!step) return null
@@ -154,6 +164,7 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingVertical: 5,
+    paddingHorizontal: 8,
   },
   mediaContainer: {
     alignSelf: 'center',

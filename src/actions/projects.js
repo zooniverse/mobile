@@ -72,13 +72,6 @@ export function fetchProjects() {
                     taggedProjects.forEach((project) => dispatch(addOwnerProjectId(project)))
                 }));
 
-                // TEMP: mini-course test project (lcjohnso/lcj-pfe-project)
-                projectCalls.push(apiClient.type('projects').get({ id: '20616', include: 'avatar,background' }).then(projects => {
-                    const taggedProjects = tagProjects(projects, true)
-                    allProjects = allProjects.concat(taggedProjects)
-                    taggedProjects.forEach((project) => dispatch(addOwnerProjectId(project)))
-                }));
-
                 // Fetch Test Projects
                 if (userIsLoggedIn) {
                     projectCalls.push(apiClient.type('projects').get(ownerParams).then(projects => {
@@ -177,13 +170,22 @@ const getWorkflowsForProjects = projects => {
             .get({...params, ...{page: _page, sort: 'id'}})
             .then((workflows) => {
                 workflows.forEach(workflow => {
-                    // TEMP: include HAVI multi-task workflow (31723) and mini-course test workflow (26859) regardless of mobile_friendly flag.
-                    workflow.mobile_verified = workflow.id === '31723' || workflow.id === '26859' || (workflow.mobile_friendly && isValidMobileWorkflow(workflow))
-                    // TEMP: HAVI multi-task — force swipe type since validation skipped the auto-type
-                    if (workflow.id === '31723') workflow.type = 'swipe'
-                    // TEMP: mini-course test workflow — same reason. 2-answer single-choice would normally auto-type to 'swipe' inside isValidMobileWorkflow, but we bypassed that validation.
-                    if (workflow.id === '26859') workflow.type = 'swipe'
-                    
+                    // TEMP: HAVI test project — every workflow except [desktop] box adjustment (31986)
+                    // is allowed through regardless of mobile_friendly flag. Limited to project 32778.
+                    const isHaviProject = workflow.links?.project === '32778'
+                    const isExcludedHaviWorkflow = workflow.id === '31986'
+                    const isAllowedHaviWorkflow = isHaviProject && !isExcludedHaviWorkflow
+
+                    workflow.mobile_verified = isAllowedHaviWorkflow || (workflow.mobile_friendly && isValidMobileWorkflow(workflow))
+
+                    // TEMP: HAVI workflows bypass isValidMobileWorkflow, which is what would
+                    // normally set workflow.type. Force it ourselves: single-choice → swipe,
+                    // otherwise use the first task's type as-is.
+                    if (isAllowedHaviWorkflow) {
+                        const firstTaskType = workflow.tasks?.[workflow.first_task]?.type
+                        workflow.type = firstTaskType === 'single' ? 'swipe' : firstTaskType
+                    }
+
                     const project = projects.find(project => project.id === workflow.links.project)
                     if (!project.workflows.find((projectWorkflow) => projectWorkflow.id === workflow.id)) {
                         project.workflows = R.append(workflow, project.workflows)
@@ -198,10 +200,9 @@ const getWorkflowsForProjects = projects => {
     }
 
     fetchPaginatedWorkflows({mobile_friendly: true, active: true, project_id: projectIds})
-    // TEMP: HAVI multi-task test workflow
-    fetchPaginatedWorkflows({id: '31723', active: true})
-    // TEMP: mini-course test workflow
-    fetchPaginatedWorkflows({id: '26859', active: true})
+    // TEMP: HAVI project — fetch all active workflows (no mobile_friendly filter).
+    // The forEach above handles excluding 31986 and setting mobile_verified / type.
+    fetchPaginatedWorkflows({project_id: '32778', active: true})
 };
 
 const addOwnerProjectId = (project) => ({
