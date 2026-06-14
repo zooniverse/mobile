@@ -7,8 +7,14 @@ const initialProjectState = {
     isFailure: false,
     projectList: [],
     previewProjectList: [],
+    betaProjectList: [],
     collaboratorIds: [],
-    ownerIds: []
+    ownerIds: [],
+    categoryProjects: {},
+    categoryLoading: {},
+    categoryErrors: {},
+    projectDetails: {},
+    projectDetailsLoading: {},
 };
 
 test('test projects request', () => {
@@ -94,4 +100,31 @@ test('test add collaborator ids', () => {
     expect(modifiedState.collaboratorIds).toEqual(['ia'])
     modifiedState = projects(modifiedState, collaboratorIdAction)
     expect(modifiedState.collaboratorIds).toEqual(['ia'])
+})
+
+test('stores projects by category', () => {
+    const requestState = projects(initialProjectState, {
+        type: ActionConstants.CATEGORY_PROJECTS_REQUEST,
+        categoryKey: 'biology',
+    })
+    expect(requestState.categoryLoading.biology).toBeTruthy()
+
+    const categoryProjects = [{ id: '1' }]
+    const successState = projects(requestState, {
+        type: ActionConstants.CATEGORY_PROJECTS_SUCCESS,
+        categoryKey: 'biology',
+        projects: categoryProjects,
+    })
+    expect(successState.categoryProjects.biology).toEqual(categoryProjects)
+    expect(successState.categoryLoading.biology).toBeFalsy()
+})
+
+test('stores selected project details', () => {
+    const project = { id: '1', workflows: [{ id: '2' }] }
+    const modifiedState = projects(initialProjectState, {
+        type: ActionConstants.PROJECT_DETAILS_SUCCESS,
+        project,
+    })
+    expect(modifiedState.projectDetails['1']).toEqual(project)
+    expect(modifiedState.projectDetailsLoading['1']).toBeFalsy()
 })

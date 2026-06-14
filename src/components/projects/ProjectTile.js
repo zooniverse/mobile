@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
     Alert,
+    ActivityIndicator,
     Animated,
     Image,
-    Linking,
     TouchableOpacity,
     View,
 } from 'react-native';
@@ -21,15 +21,24 @@ import theme from '../../theme'
 
 import * as projectDisplay from '../../displayOptions/projectDisplay'
 import { withTranslation } from 'react-i18next';
+import * as projectActions from '../../actions/projects';
 
 const horizontalPadding = 15
 
 const mapStateToProps = (state, ownProps) => ({
-    containsNativeWorkflows: ownProps.project.workflows.length > 0,
+    containsNativeWorkflows: (ownProps.project.workflows || []).length > 0,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    navigateToClassifier: navigateToClassifier(dispatch, ownProps.inPreviewMode, ownProps.inBetaMode, ownProps.project, ownProps.navigation)
+    loadProject: (project) => dispatch(projectActions.fetchProjectForClassification(project)),
+    navigateToClassifier: (project, workflow) => navigateToClassifier(
+        dispatch,
+        ownProps.inPreviewMode,
+        ownProps.inBetaMode,
+        project,
+        ownProps.navigation,
+        workflow
+    ),
 })
 
 class ProjectTile extends Component {
@@ -38,7 +47,9 @@ class ProjectTile extends Component {
 
         this.state = {
             popupOpacity: new Animated.Value(0),
-            popupHeight: 0
+            popupHeight: 0,
+            project: props.project,
+            loading: false,
         }
         this._onMainViewPress = this._onMainViewPress.bind(this)
     }
@@ -55,7 +66,7 @@ class ProjectTile extends Component {
     }
 
     _workFlowList = () => {
-        const mobileVerifiedWorkflows = this.props.project.workflows.filter( workflow => workflow.mobile_verified)
+        const mobileVerifiedWorkflows = this.state.project.workflows.filter(workflow => workflow.mobile_verified)
         const overlayBanner = 
             <View style={styles.bannerView}>
                 {this._overlayBanner()}
@@ -67,7 +78,7 @@ class ProjectTile extends Component {
                     <Separator />
                     <View>
                         <TouchableOpacity 
-                            onPress={() => this.props.navigateToClassifier(workflow) }
+                            onPress={() => this.props.navigateToClassifier(this.state.project, workflow)}
                         >
                             <View style={styles.cell}>
                                 <View style={ styles.descriptionContent }>
@@ -92,9 +103,22 @@ class ProjectTile extends Component {
         )
     }
 
-    _onMainViewPress() {
-        const { workflows, display_name } = this.props.project
-        
+    async _onMainViewPress() {
+        if (this.state.loading) return
+
+        this.setState({ loading: true })
+        let project
+        try {
+            project = await this.props.loadProject(this.props.project)
+        } catch (error) {
+            Alert.alert('Unable to load project', 'Please try again.')
+            this.setState({ loading: false })
+            return
+        }
+
+        const workflows = project.workflows || []
+        this.setState({ project, loading: false })
+
         if (workflows.length > 1) {
             Animated.timing(this.state.popupOpacity, { toValue: 1, duration: 300 }).start(() => {
                 setTimeout(() => {
@@ -102,19 +126,26 @@ class ProjectTile extends Component {
                 }, 1200);
             });
         } else if (workflows.length === 1) {
-            this.props.navigateToClassifier(R.head(workflows))
+            this.props.navigateToClassifier(project, R.head(workflows))
+        } else {
+            Alert.alert(
+                'No mobile workflows available',
+                'This project does not currently have a workflow supported by the mobile app.'
+            )
         }
     }
 
 
     render() {
-        shouldDisplayIsOutOfData = projectDisplay.mobileWorkflowsCompleteFor(
-            this.props.project,
+        const project = this.state.project
+        const workflowsLoaded = project.workflows?.length > 0
+        const shouldDisplayIsOutOfData = workflowsLoaded && projectDisplay.mobileWorkflowsCompleteFor(
+            project,
             this.props.containsNativeWorkflows,
             this.props.containsMultipleNativeWorkflows
         )
 
-        const avatarUri = R.prop('avatar_src', this.props.project);
+        const avatarUri = R.prop('avatar_src', project);
         const avatarSource = avatarUri !== undefined ? { uri: avatarUri } : require('../../../images/teal-wallpaper.png');
         const borderColorTransform = this.state.popupOpacity.interpolate({
             inputRange: [0, 1],
@@ -135,11 +166,11 @@ class ProjectTile extends Component {
                         <View style={styles.descriptionContainer}>
                             <View style={styles.descriptionContent}>
                                 <FontedText style={styles.title} numberOfLines={1}>
-                                    {this.props.t(`projectList.${this.props.project.id}.title`, this.props.project.title)}
+                                    {this.props.t(`projectList.${project.id}.title`, project.title || project.display_name)}
                                 </FontedText> 
                                 <Separator style={styles.separator} />
                                 <FontedText style={styles.description} numberOfLines={3}>
-                                    {this.props.t(`projectList.${this.props.project.id}.description`, this.props.project.description)}
+                                    {this.props.t(`projectList.${project.id}.description`, project.description)}
                                 </FontedText>
                             </View>
                         </View>
@@ -153,7 +184,12 @@ class ProjectTile extends Component {
                     > 
                         <PopupMessage />
                     </Animated.View>
-                    { this.props.project.workflows.length > 1 ? this._workFlowList() : null }
+                    {this.state.loading ? (
+                        <View style={styles.loadingOverlay}>
+                            <ActivityIndicator size="large" />
+                        </View>
+                    ) : null}
+                    {project.workflows.length > 1 ? this._workFlowList() : null}
                 </TouchableOpacity>
             </Animated.View>
         );
@@ -248,7 +284,18 @@ const styles = EStyleSheet.create({
         width: 129
     },
     contentContainer: {
-        overflow: 'hidden'
+        overflow: 'hidden',
+        position: 'relative',
+    },
+    loadingOverlay: {
+        bottom: 0,
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 255, 255, 0.75)',
+        justifyContent: 'center',
     }
 });
 

@@ -9,7 +9,12 @@ const InitialProjectState = {
     previewProjectList: [],
     betaProjectList: [],
     collaboratorIds: [],
-    ownerIds: []
+    ownerIds: [],
+    categoryProjects: {},
+    categoryLoading: {},
+    categoryErrors: {},
+    projectDetails: {},
+    projectDetailsLoading: {},
 };
 
 export default function projects(state=InitialProjectState, action) {
@@ -33,6 +38,80 @@ export default function projects(state=InitialProjectState, action) {
             const projectList = action.projects.filter( project => !project.isPreview && project.launch_approved )
             const betaProjectList = action.projects.filter( project => project.beta_approved && !project.launch_approved )
             return { ...state, previewProjectList, projectList, betaProjectList }
+        }
+        case ActionConstants.CATEGORY_PROJECTS_REQUEST: {
+            return {
+                ...state,
+                categoryLoading: {
+                    ...state.categoryLoading,
+                    [action.categoryKey]: true,
+                },
+                categoryErrors: {
+                    ...state.categoryErrors,
+                    [action.categoryKey]: null,
+                },
+            }
+        }
+        case ActionConstants.CATEGORY_PROJECTS_SUCCESS: {
+            return {
+                ...state,
+                categoryProjects: {
+                    ...state.categoryProjects,
+                    [action.categoryKey]: action.projects,
+                },
+                categoryLoading: {
+                    ...state.categoryLoading,
+                    [action.categoryKey]: false,
+                },
+                categoryErrors: {
+                    ...state.categoryErrors,
+                    [action.categoryKey]: null,
+                },
+            }
+        }
+        case ActionConstants.CATEGORY_PROJECTS_FAILURE: {
+            return {
+                ...state,
+                categoryLoading: {
+                    ...state.categoryLoading,
+                    [action.categoryKey]: false,
+                },
+                categoryErrors: {
+                    ...state.categoryErrors,
+                    [action.categoryKey]: action.error,
+                },
+            }
+        }
+        case ActionConstants.PROJECT_DETAILS_REQUEST: {
+            return {
+                ...state,
+                projectDetailsLoading: {
+                    ...state.projectDetailsLoading,
+                    [action.projectId]: true,
+                },
+            }
+        }
+        case ActionConstants.PROJECT_DETAILS_SUCCESS: {
+            return {
+                ...state,
+                projectDetails: {
+                    ...state.projectDetails,
+                    [action.project.id]: action.project,
+                },
+                projectDetailsLoading: {
+                    ...state.projectDetailsLoading,
+                    [action.project.id]: false,
+                },
+            }
+        }
+        case ActionConstants.PROJECT_DETAILS_FAILURE: {
+            return {
+                ...state,
+                projectDetailsLoading: {
+                    ...state.projectDetailsLoading,
+                    [action.projectId]: false,
+                },
+            }
         }
         case ActionConstants.PROJECTS_FAILURE: {
             return {

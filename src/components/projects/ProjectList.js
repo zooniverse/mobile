@@ -14,56 +14,30 @@ import ProjectTile from './ProjectTile';
 import FontedText from '../common/FontedText'
 import * as navBarActions from '../../actions/navBar'
 import { GLOBALS } from '../../constants/globals'
-import { extractNonSwipeEnabledProjects, extractSwipeEnabledProjects } from '../../utils/projectUtils'
 import PageKeys from '../../constants/PageKeys'
-
-import * as projectDisplay from '../../displayOptions/projectDisplay'
 
 import theme from '../../theme'
 import { withTranslation } from 'react-i18next'
 import i18next from 'i18next';
 import { loadProjectListTranslations } from '../../i18n'
 import languageOptions from '../../i18n/languages';
+import * as projectActions from '../../actions/projects'
 
 const mapStateToProps = (state, ownProps) => {
     const { selectedProjectTag } = ownProps.route.params;
+    const categoryKey = selectedProjectTag === 'translated projects'
+        ? `${selectedProjectTag}:${state.languageSettings.platformLanguage}`
+        : selectedProjectTag;
     const inPreviewMode = selectedProjectTag === 'preview'
     const inBetaMode = selectedProjectTag === 'beta'
-    let projectList
-
-    projectList = projectDisplay.sortUnfinishedFirst(state.projects.projectList)
-
-    // Grab all of the projects from the selected Project Tag
-    if (selectedProjectTag === 'recent') {
-        const activeProjects = R.filter((project) => {
-            return project.activity_count > 0
-        }, state.user.projects);
-        projectList = projectList.filter((project) => R.keys(activeProjects).includes(project.id));
-    } else if (selectedProjectTag === 'all projects') {
-        projectList = projectList
-    } else if (inPreviewMode) {
-        projectList = state.projects.previewProjectList
-    } else if (inBetaMode) {
-        projectList = state.projects.betaProjectList
-    } else if (selectedProjectTag === 'translated projects') {
-        projectList = projectList.filter(project => project.available_languages.includes(state.languageSettings.platformLanguage))
-    } else {
-        projectList = projectList.filter((project) => R.contains(selectedProjectTag, project.tags))
-    }
-
-    // Seperate out the native workflows and non-native workflows    
-    const swipeEnabledProjects = extractSwipeEnabledProjects(projectList)
-    const nonSwipeEnabledProjects = state.settings.showAllWorkflows ?
-        extractNonSwipeEnabledProjects(projectList)
-        : []
+    const projectList = state.projects.categoryProjects[categoryKey] || []
 
     return {
-        swipeEnabledProjects,
-        nonSwipeEnabledProjects,
+        swipeEnabledProjects: projectList,
+        nonSwipeEnabledProjects: [],
         promptForWorkflow: state.main.settings.promptForWorkflow || false,
-        isLoading: state.projects.isLoading,
-        collaboratorIds: state.projects.collaboratorIds,
-        ownerIds: state.projects.ownerIds,
+        isLoading: state.projects.categoryLoading[categoryKey] || false,
+        loadError: state.projects.categoryErrors[categoryKey],
         inPreviewMode,
         inBetaMode,
         platformLanguage: state.languageSettings.platformLanguage
@@ -71,7 +45,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    navBarActions: bindActionCreators(navBarActions, dispatch)
+    navBarActions: bindActionCreators(navBarActions, dispatch),
+    projectActions: bindActionCreators(projectActions, dispatch),
 })
 
 const ColumnNumbers = DeviceInfo.isTablet() ? 2 : 1
@@ -108,9 +83,16 @@ class ProjectList extends Component {
             backgroundColor: inPreviewMode ? theme.$testRed : theme.$zooniverseTeal,
             centerType: 'title',
         }, PageKeys.ProjectList)
+
+        this.props.projectActions
+            .fetchProjectsForCategory(selectedProjectTag, platformLanguage)
+            .catch(() => {})
     }
 
     emptyText() {
+        if (this.props.loadError) {
+            return 'Unable to load projects. Please go back and try again.'
+        }
         if (!this.props.isLoading) {
             return 'Sorry, but you have no mobile friendly projects to display'
         } else {
@@ -133,35 +115,7 @@ class ProjectList extends Component {
         }
     }
 
-    /**
-     * A note on how we are rendering the list view here:
-     * 
-     * On handset we render the list view with 1 column and on tablet
-     * we render it with 2 columns. In addition, the list view requires 
-     * two section headers: 
-     *      In Preview: 1) Your Projects. 2) Collaborations
-     *      In Normal mode: 1) Made for mobile. 2) In Browser experience.
-     * 
-     * Normally to create a list with section headers, you would use a SectionList,
-     * but they don't ship with any column number integrations.
-     * 
-     * In order to get around this, we use a Flatlist (which does have column number integrations)
-     * and push cells that appear to be section headers. We achieve the correct spacing by
-     * adding spacer components that will fill in cells for the rest of the line.
-     * 
-     * For example:
-     * 
-     * If the first section of the list has 3 projects, our list of items to display would be:
-     * [Header, spacer, project, project, project, spacer]
-     * 
-     * With two columns it will display as:
-     * 
-     *  Header, Spacer
-     *  Project, Project
-     *  Project, Spacer
-     * 
-     * This way when our next section starts, the header will be at the beginning of a line   
-     */
+    // FlatList uses spacer cells to keep the final tablet row aligned.
     render() {
         const fillLineWithSpacers = (projects) => {
             while (projects.length % ColumnNumbers !== 0) {
@@ -170,30 +124,11 @@ class ProjectList extends Component {
         }
 
         const tagAsProject = (project) => R.set(R.lensProp('displayType'), 'project', project)
-        const {inPreviewMode, ownerIds, collaboratorIds, swipeEnabledProjects, nonSwipeEnabledProjects } = this.props
+        const {inPreviewMode, swipeEnabledProjects, nonSwipeEnabledProjects } = this.props
         let projects = []
         if (inPreviewMode) {
-            if (!R.isEmpty(ownerIds)) {
-                // Add Header
-                projects.push({ displayType: 'header', text: 'Your Projects'})
-                fillLineWithSpacers(projects)
-
-                // Add Projects
-                const ownerProjects = swipeEnabledProjects.filter((project) => ownerIds.includes(project.id)).map(tagAsProject)
-                projects = [...projects, ...ownerProjects]
-                fillLineWithSpacers(projects)
-            }
-
-            if (!R.isEmpty(collaboratorIds)) {
-                // Add Header
-                projects.push({displayType: 'header', text: 'Collaborations'})
-                fillLineWithSpacers(projects)
-
-                // Add Projects
-                const collaboratorProjects = swipeEnabledProjects.filter((project) => collaboratorIds.includes(project.id)).map(tagAsProject)
-                projects = [...projects, ...collaboratorProjects]
-                fillLineWithSpacers(projects)
-            }
+            projects = [...projects, ...swipeEnabledProjects.map(tagAsProject)]
+            fillLineWithSpacers(projects)
         } else {
             if (!R.isEmpty(swipeEnabledProjects)) {
 
@@ -215,8 +150,10 @@ class ProjectList extends Component {
                 // pull this conditional out.
             }
         }      
-        const translateProjects = projects.filter(p => Array.isArray(p.available_languages) && p.available_languages.includes(i18next.language)).filter(p => !!p?.id).map(p => p.id);
-        loadProjectListTranslations(i18next.language, translateProjects)
+        const translateProjects = projects.filter(p => !!p?.id).map(p => p.id);
+        if (i18next.language !== 'en') {
+            loadProjectListTranslations(i18next.language, translateProjects)
+        }
 
         return (
             <FlatList
@@ -294,8 +231,6 @@ ProjectList.propTypes = {
     navBarActions: PropTypes.any,
     inPreviewMode: PropTypes.bool,
     inBetaMode: PropTypes.bool,
-    collaboratorIds: PropTypes.array,
-    ownerIds: PropTypes.array
 }
 
 export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(ProjectList))

@@ -2933,7 +2933,7 @@ PODS:
     - Sentry (= 9.7.0)
     - SocketRocket
     - Yoga
-  - RNSVG (15.15.3):
+  - RNSVG (15.15.4):
     - boost
     - DoubleConversion
     - fast_float
@@ -2959,10 +2959,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNSVG/common (= 15.15.3)
+    - RNSVG/common (= 15.15.4)
     - SocketRocket
     - Yoga
-  - RNSVG/common (15.15.3):
+  - RNSVG/common (15.15.4):
     - boost
     - DoubleConversion
     - fast_float
@@ -3409,11 +3409,11 @@ SPEC CHECKSUMS:
   React-logger: 6aa0606d9b8746a0df076bf77cc9940a6405452b
   React-Mapbuffer: f137b397c7457f8fd7ca06dfaf543ccf5fc7dd56
   React-microtasksnativemodule: f4762eb5cc8d2287f2513c9e404e48b30bf9fc69
-  react-native-blur: 96c4aa8c02134e1e316048a9a516b78e19f61029
-  react-native-netinfo: f1fdacc2e037af3c2c3820d0b5fad695b55841c9
-  react-native-safe-area-context: 743077b5768e79a92aadb11f3fbeec12bdf57941
-  react-native-video: 4f246a765844e91e3cae8a2d1199767c16443de0
-  react-native-webview: f0f2b2ddcf492466764f3eefcb82f661447f9372
+  react-native-blur: b83ffbc5380d8bd2f06804b4b0e848be3507e65c
+  react-native-netinfo: 64f05e94821ee3f3adcd9b67b35c1480e5564915
+  react-native-safe-area-context: eda63a662750758c1fdd7e719c9f1026c8d161cb
+  react-native-video: 15a8286469ec8098852debb32ce6a32906695e1d
+  react-native-webview: 83c663c5bdf1357d3e7c00986260cb888ea0e328
   React-NativeModulesApple: 76d9e54adf2b333d0939bbd18102c62bdfebb934
   React-oscompat: d5e3366fbd6c7150e17c1bda85eab583a6fa9fce
   React-perflogger: 2e4ca29b2bc69c80ef5133de127f5a3c2357c583
@@ -3445,24 +3445,24 @@ SPEC CHECKSUMS:
   ReactCodegen: ea1262fbae5146071488a8e86d093f560c397e07
   ReactCommon: 66eb46e6696f1f4816b250ab2807389018bacd78
   rn-fetch-blob: 25612b6d6f6e980c6f17ed98ba2f58f5696a51ca
-  RNCAsyncStorage: 2c6e0c422f3369b8f8eb0a524adbd5f2280deb3b
-  RNCMaskedView: 15677a702a5f1aa61e12d5ce238e0a3abdb7a43f
-  RNCPushNotificationIOS: 431eee956d1d6916eb6058ee942505bdf043e74f
-  RNDeviceInfo: 21e826e81a90eface342dde9a3669fc78cbf5d6a
+  RNCAsyncStorage: fd44f4b03e007e642e98df6726737bc66e9ba609
+  RNCMaskedView: 4c5ee1c8667d56077246cc6d1977f77393923560
+  RNCPushNotificationIOS: 85957a0534fd1309b4c028ccbe5b1baf9ab5cf57
+  RNDeviceInfo: 4c852998208b60dc192ae3529e5867817719ad1e
   RNFBAnalytics: 7bdccdc2b978d06f9be3ff92298f6b11cf9c9be0
   RNFBApp: 6e0c3ee6cfbc76b5d1237ebf37240cd48a55c6e2
   RNFBMessaging: e25c512cfcf4718bcecb65090608c9c570f51826
   RNGestureHandler: 043d32e7e7ae6bdcca06264682d5a078712903a1
-  RNLocalize: 5d0c4ca964ef71d7bab111904da7d1d1fadd66a0
+  RNLocalize: c46dd4008dc8990a098fcafd6ee051122a1ccfda
   RNReanimated: f3095e44e172cbda017738ed872afdba88fb6fa0
   RNScreens: e902eba58a27d3ad399a495d578e8aba3ea0f490
   RNSentry: 0f198b04559bfb3273f49227cad1d710658143ab
-  RNSVG: 5757b40cdede37b5db4ecb27b3e643996e2d5a5f
+  RNSVG: b1cb00d54dbc3066a3e98732e5418c8361335124
   RNVectorIcons: e355dd0998d6b9020e560922a66614eb9636501b
   Sentry: 0fe17abdc98f83a3799c02564382d8b2afabadef
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  SplashView: f2d15e43cf017fc03bc1b7a5ea2b769521fd40ae
-  Yoga: c7d9adcf9fca72e6219bdc5f1f11b76b38c4a030
+  SplashView: 67876cce990b87449bf32819a6fe22813500efa6
+  Yoga: ff16d80456ce825ffc9400eeccc645a0dfcccdf5
 
 PODFILE CHECKSUM: 2772a9e3d25bba8e19f01be5f79ae6af3629bae6
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, FlatList, Image, Alert } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,19 +10,18 @@ import PageKeys from '../constants/PageKeys';
 import Notification from './notifications/Notification';
 import OverlaySpinner from './OverlaySpinner';
 import { useTranslation } from 'react-i18next';
+import { fetchProjectsForNotifications } from '../actions/projects';
 
 function NotificationLandingPageScreen({ route }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { notifications } = useSelector((state) => state.notifications);
-  const { projectList } = useSelector((state) => state.projects);
+  const { categoryProjects } = useSelector((state) => state.projects);
+  const projectList = categoryProjects.notifications || [];
   const [loading, setLoading] = useState(false);
   const [expandedNotification, setExpandedNotification] = useState(
     route?.params?.newNotification ?? null
   );
-  const checkedForProjects = useRef(false); // Used to ensure the setTimeout is only run once.
-
-
   // Take the list of notifications and associate with a cooresponding project.
   const notificationsWithProject = [];
   notifications.forEach((notification) => {
@@ -32,36 +31,25 @@ function NotificationLandingPageScreen({ route }) {
     }
   });
 
-  /**
-   * Projects are loaded into state when the app is opened. 
-   * In the event that the app is closed and the user clicks on a notification,
-   * you will need to wait for the projects to load before showing anything.
-   * This code will show a loading indicator that is removed as soon as projects are available.
-   * If for some reason after 20 seconds the projects still haven't loaded,
-   * then it will stop loading and show an error message. This is to prevent the user from
-   * being stuck in a loading state.
-   */
+  // Notification projects are fetched only when this screen is opened.
   useEffect(() => {
-    if (checkedForProjects.current) return;
-    let projectTimeout;
-
-    if (projectList.length === 0) {
-      setLoading(true);
-      projectTimeout = setTimeout(() => {
-        checkedForProjects.current = true;
-        setLoading(false);
+    const projectIds = [...new Set(
+      notifications
+        .map(notification => notification.projectId)
+        .filter(Boolean)
+    )];
+    setLoading(true);
+    dispatch(fetchProjectsForNotifications(projectIds))
+      .catch(() => {
         Alert.alert(
           'Cannot retrieve projects',
-          'There was an issue retrieving the projects for your notifications. Please try again by clicking "Notifications" from the menu on the right.'
+          'There was an issue retrieving the projects for your notifications. Please try again.'
         );
-      }, 20000);
-    } else {
-      setLoading(false);
-      checkedForProjects.current = true;
-    }
-
-    return () => clearTimeout(projectTimeout);
-  }, [projectList]);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [notifications]);
 
   // Update the navigation header with the title and zoon icon.
   useEffect(() => {

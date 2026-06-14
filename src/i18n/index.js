@@ -44,6 +44,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 let currentPlatformLanguage = 'en';
 let currentProjectLanguage = 'en';
 const projectListTranslationCache = {};
+const projectListTranslationRequests = {};
+const PROJECT_TRANSLATION_BATCH_SIZE = 100;
 
 // Redux store is not initialized yet so grab the preferred language from async storage.
 const getPreferredLanguageFromStorage = async () => {
@@ -462,58 +464,88 @@ export const clearMiniCourseTranslations = () => {
 };
 
 export const loadProjectListTranslations = async (language, projectIds) => {
-  // Check cache first
-  if (projectListTranslationCache[language]) {
-    const cachedTranslations = projectListTranslationCache[language];
-    const missingProjectIds = projectIds.filter(
-      (id) => !cachedTranslations[id]
-    );
+  const uniqueProjectIds = [...new Set(projectIds.map(String))];
+  projectListTranslationCache[language] =
+    projectListTranslationCache[language] || {};
+  projectListTranslationRequests[language] =
+    projectListTranslationRequests[language] || {};
 
-    // If all projects are cached, return cached translations
-    if (missingProjectIds.length === 0) {
-      return cachedTranslations;
-    }
-
-    // If some projects are not cached, fetch only those
-    projectIds = missingProjectIds;
-  }
+  const cachedTranslations = projectListTranslationCache[language];
+  const pendingRequests = projectListTranslationRequests[language];
+  const missingProjectIds = uniqueProjectIds.filter(
+    (id) =>
+      !Object.prototype.hasOwnProperty.call(cachedTranslations, id) &&
+      !pendingRequests[id]
+  );
 
   try {
-    const projectListTranslations = await Promise.all(
-      projectIds.map((projectId) =>
-        apiClient.type('translations').get({
-          language: language,
-          translated_type: 'project',
-          translated_id: projectId,
-        })
-      )
-    );
-
-    // Initialize cache for this language if not exists
-    projectListTranslationCache[language] =
-      projectListTranslationCache[language] || {};
-
-    // Add new translations to cache
-    projectListTranslations.forEach((translations, index) => {
-      if (translations && translations.length > 0) {
-        const projectId = projectIds[index];
-        projectListTranslationCache[language][projectId] =
-          translations[0].strings;
+    if (missingProjectIds.length > 0) {
+      const batches = [];
+      for (
+        let index = 0;
+        index < missingProjectIds.length;
+        index += PROJECT_TRANSLATION_BATCH_SIZE
+      ) {
+        batches.push(
+          missingProjectIds.slice(index, index + PROJECT_TRANSLATION_BATCH_SIZE)
+        );
       }
-    });
+
+      const request = Promise.all(
+        batches.map((batch) =>
+          apiClient.type('translations').get({
+            language,
+            translated_type: 'project',
+            translated_id: batch,
+            page_size: batch.length,
+          })
+        )
+      )
+        .then((translationGroups) => {
+          missingProjectIds.forEach((projectId) => {
+            cachedTranslations[projectId] = {};
+          });
+
+          translationGroups.flat().forEach((translation) => {
+            if (translation?.translated_id) {
+              cachedTranslations[translation.translated_id] =
+                translation.strings || {};
+            }
+          });
+        })
+        .finally(() => {
+          missingProjectIds.forEach((projectId) => {
+            delete pendingRequests[projectId];
+          });
+        });
+
+      missingProjectIds.forEach((projectId) => {
+        pendingRequests[projectId] = request;
+      });
+    }
+
+    const requestsToAwait = [
+      ...new Set(
+        uniqueProjectIds
+          .map((projectId) => pendingRequests[projectId])
+          .filter(Boolean)
+      ),
+    ];
+
+    await Promise.all(requestsToAwait);
 
     // Add to i18next resources
     i18next.addResourceBundle(
       language,
       'platform',
       {
-        projectList: projectListTranslationCache[language],
+        projectList: cachedTranslations,
       },
       true,
       true
     );
 
-    return projectListTranslationCache[language];
+    return cachedTranslations;
   } catch (error) {
     console.warn('Error loading project list translations:', error);
     return null;
