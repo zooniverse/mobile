@@ -42,6 +42,7 @@ const MiniCourse = ({
   stepIndex,
   translatedContent,
   onClose,
+  onHidden,
   onOptOutChange,
   inMuseumMode = false,
 }) => {
@@ -77,7 +78,12 @@ const MiniCourse = ({
     : t('classifier.close', 'Close')
 
   return (
-    <Modal isVisible={isVisible} animationIn="slideInUp" animationOut="slideOutDown">
+    <Modal
+      isVisible={isVisible}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
+      onModalHide={onHidden}
+    >
       <View style={styles.container}>
         <View style={styles.closeRow}>
           <TouchableOpacity
@@ -208,6 +214,7 @@ MiniCourse.propTypes = {
   stepIndex: PropTypes.number.isRequired,
   translatedContent: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+  onHidden: PropTypes.func,
   onOptOutChange: PropTypes.func,
   inMuseumMode: PropTypes.bool,
 }

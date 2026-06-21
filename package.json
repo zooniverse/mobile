@@ -30,7 +30,7 @@
     "crypto-js": "^4.2.0",
     "i18next": "^25.10.4",
     "lodash": "^4.18.1",
-    "markdown-it": "^14.1.1",
+    "markdown-it": "^14.2.0",
     "panoptes-client": "^5.5.5",
     "prop-types": "^15.8.1",
     "ramda": "^0.25.0",
@@ -67,7 +67,7 @@
     "url": "^0.11.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
+    "@babel/core": "^7.29.6",
     "@babel/preset-env": "^7.29.0",
     "@babel/runtime": "^7.29.2",
     "@react-native-community/cli": "^20.1.2",

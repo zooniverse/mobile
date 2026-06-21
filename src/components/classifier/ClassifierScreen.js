@@ -190,8 +190,16 @@ const ClassifierScreen = ({ route }) => {
 
   // Modal close = the user has seen this step. Match PFE's unmount
   // behavior: if at last step, mark complete; else advance step pointer.
+  //
+  // The step-advance dispatch is deferred to `handleMiniCourseHidden` (fires
+  // after `react-native-modal`'s slide-out animation completes). Dispatching
+  // immediately on close causes a visible flash of the next step's content
+  // during the animation, because the component re-renders mid-slide-out.
   const handleMiniCourseClose = useCallback(() => {
     setIsMiniCourseVisible(false)
+  }, [])
+
+  const handleMiniCourseHidden = useCallback(() => {
     if (!miniCourse?.id) return
     const lastIndex = (miniCourse.steps?.length ?? 0) - 1
     if (miniCourseStepIndex >= lastIndex) {
@@ -405,6 +413,7 @@ const ClassifierScreen = ({ route }) => {
           stepIndex={miniCourseStepIndex}
           translatedContent={miniCourseStepContent}
           onClose={handleMiniCourseClose}
+          onHidden={handleMiniCourseHidden}
           onOptOutChange={handleMiniCourseOptOutChange}
           inMuseumMode={project.in_museum_mode}
         />

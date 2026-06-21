@@ -6,10 +6,14 @@ import * as ActionConstants from '../constants/actions'
 import { isValidMobileWorkflow } from '../utils/workflow-utils'
 
 const PAGE_SIZE = 100
+// TEMP: hardcoded HAVI test project bypass. Surfaces the HAVI multi-task project
+// in the user's project list and allows all of its active workflows (except
+// `[desktop] box adjustment`, `31986`) regardless of the `mobile_friendly`
+// backend flag. Remove once HAVI is marked mobile_friendly and
+// `isValidMobileWorkflow` is relaxed to accept multi-task chains.
+// See mobile/.plans/CLEANUP.md for full context and removal conditions.
 const MULTI_TASK_PROJECT_ID = '32778'
 const EXCLUDED_MULTI_TASK_WORKFLOW_ID = '31986'
-const MINI_COURSE_PROJECT_ID = '20616'
-const MINI_COURSE_WORKFLOW_ID = '26859'
 
 const productionParams = {
     mobile_friendly: true,
@@ -79,20 +83,19 @@ const sortProjectCards = projects => {
 }
 
 const configureWorkflow = (workflow) => {
+    // TEMP: HAVI bypass — force-allow every HAVI workflow except 31986 and
+    // set the workflow type ourselves since isValidMobileWorkflow is skipped.
     const isMultiTaskProject = workflow.links?.project === MULTI_TASK_PROJECT_ID
     const isAllowedMultiTaskWorkflow =
         isMultiTaskProject && workflow.id !== EXCLUDED_MULTI_TASK_WORKFLOW_ID
 
     workflow.mobile_verified =
         isAllowedMultiTaskWorkflow ||
-        workflow.id === MINI_COURSE_WORKFLOW_ID ||
         (workflow.mobile_friendly && isValidMobileWorkflow(workflow))
 
     if (isAllowedMultiTaskWorkflow) {
         const firstTaskType = workflow.tasks?.[workflow.first_task]?.type
         workflow.type = firstTaskType === 'single' ? 'swipe' : firstTaskType
-    } else if (workflow.id === MINI_COURSE_WORKFLOW_ID) {
-        workflow.type = 'swipe'
     }
     return workflow
 }
@@ -134,6 +137,8 @@ const addSupportedWorkflows = async projects => {
             sort: 'id',
             page_size: PAGE_SIZE,
         }),
+        // TEMP: HAVI bypass — pull all active HAVI workflows regardless of
+        // the mobile_friendly flag.
         projectIds.includes(MULTI_TASK_PROJECT_ID)
             ? fetchPaginated('workflows', {
                 project_id: MULTI_TASK_PROJECT_ID,
@@ -141,9 +146,6 @@ const addSupportedWorkflows = async projects => {
                 sort: 'id',
                 page_size: PAGE_SIZE,
             })
-            : Promise.resolve([]),
-        projectIds.includes(MINI_COURSE_PROJECT_ID)
-            ? apiClient.type('workflows').get({ id: MINI_COURSE_WORKFLOW_ID, active: true })
             : Promise.resolve([]),
     ])
 
@@ -165,18 +167,18 @@ const fetchPreviewCards = async () => {
     const user = await getAuthUser()
     if (!user) return []
 
-    const [ownerProjects, collaboratorProjects, multiTaskProjects, miniCourseProjects] = await Promise.all([
+    const [ownerProjects, collaboratorProjects, multiTaskProjects] = await Promise.all([
         fetchPaginated('projects', ownerParams),
         fetchPaginated('projects', collaboratorParams),
+        // TEMP: HAVI bypass — fetch the HAVI test project directly so it
+        // shows in the preview list even if the user isn't owner/collab.
         apiClient.type('projects').get({ id: MULTI_TASK_PROJECT_ID, cards: true }),
-        apiClient.type('projects').get({ id: MINI_COURSE_PROJECT_ID, cards: true }),
     ])
 
     const previewProjects = [
         ...ownerProjects,
         ...collaboratorProjects,
         ...multiTaskProjects,
-        ...miniCourseProjects,
     ].map(project => normalizeProjectCard(project, true))
 
     return addSupportedWorkflows(R.uniqBy(project => project.id, previewProjects))
@@ -336,6 +338,8 @@ const fetchProjectWorkflows = async (project) => {
         }),
     ]
 
+    // TEMP: HAVI bypass — when the project being looked at is HAVI, pull all
+    // its active workflows regardless of mobile_friendly.
     if (project.id === MULTI_TASK_PROJECT_ID) {
         calls.push(fetchPaginated('workflows', {
             project_id: MULTI_TASK_PROJECT_ID,
@@ -343,9 +347,6 @@ const fetchProjectWorkflows = async (project) => {
             sort: 'id',
             page_size: PAGE_SIZE,
         }))
-    }
-    if (project.id === MINI_COURSE_PROJECT_ID) {
-        calls.push(apiClient.type('workflows').get({ id: MINI_COURSE_WORKFLOW_ID, active: true }))
     }
 
     const workflowGroups = await Promise.all(calls)
