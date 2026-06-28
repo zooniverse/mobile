@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   View,
   StyleSheet,
   Image,
@@ -17,41 +18,54 @@ import Timestamp from './Timestamp';
 import PopupMessage from '../projects/PopupMessage';
 import NotificationWorkflows from './NotificationWorkflows';
 import navigateToClassifier from '../../navigators/classifierNavigator';
+import { fetchProjectForClassification } from '../../actions/projects';
 
 function ExpandedNotification({ notification }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState();
+  const [project, setProject] = useState(notification.project);
 
-  const onPress = () => {
-    const project = notification.project;
-    const workflows = project.workflows;
+  const onPress = async () => {
+    let loadedProject
+    try {
+      loadedProject = await dispatch(fetchProjectForClassification(project));
+    } catch (error) {
+      return
+    }
+    setProject(loadedProject);
+    const workflows = loadedProject.workflows;
 
     if (workflows.length === 1) {
-      const isbeta = project.beta_approved && !project.launch_approved;
+      const isbeta = loadedProject.beta_approved && !loadedProject.launch_approved;
       navigateToClassifier(
         dispatch,
-        project.isPreview,
+        loadedProject.isPreview,
         isbeta,
-        project,
+        loadedProject,
         navigation,
         workflows[0]
       );
-    } else {
+    } else if (workflows.length > 1) {
       setShowPopup(true);
       setTimeout(() => {
         setShowPopup(false);
       }, 1200);
+    } else {
+      Alert.alert(
+        'No mobile workflows available',
+        'This project does not currently have a workflow supported by the mobile app.'
+      );
     }
   };
 
   return (
     <View style={styles.card}>
-      {notification?.project?.avatar_src && (
+      {project?.avatar_src && (
         <Image
           resizeMode="cover"
           style={[styles.image]}
-          source={{ uri: notification.project.avatar_src }}
+          source={{ uri: project.avatar_src }}
         />
       )}
       <View style={styles.innerExpandedContainer}>
@@ -76,13 +90,13 @@ function ExpandedNotification({ notification }) {
         </TouchableOpacity>
         {showPopup && <PopupMessage />}
       </View>
-      {notification?.project?.workflows.length > 1 && (
+      {project?.workflows?.length > 1 && (
         <FlatList
-          data={notification?.project?.workflows}
+          data={project.workflows}
           renderItem={({ item }) => (
             <NotificationWorkflows
               workflow={item}
-              notification={notification}
+              notification={{ ...notification, project }}
             />
           )}
         />

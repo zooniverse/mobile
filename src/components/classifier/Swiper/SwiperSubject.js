@@ -2,20 +2,19 @@
  * Routes subject rendering to the appropriate display component
  * based on the subject's media type:
  * - Single image → SwiperSingleImage
- * - Multiple images → SwiperMultiImage (auto-play carousel)
+ * - Multiple images → MultiImageCarousel (auto-play carousel)
  * - Video (.mp4) → inline video player
  *
  * Shows SubjectLoadingIndicator while images are being prefetched.
  */
 
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import Video from 'react-native-video';
+import { View, StyleSheet } from 'react-native';
 import { isTablet } from 'react-native-device-info';
 import SubjectLoadingIndicator from '../../common/SubjectLoadingIndicator';
 import SwiperSingleImage from './SwiperSingleImage';
-import SwiperMultiImage from './SwiperMultiImage';
-import ExpandImageIcon from '../ExpandImageIcon';
+import MultiImageCarousel from '../MultiImageCarousel';
+import SubjectVideo from '../SubjectVideo';
 
 const SwiperSubject = ({
   subject,
@@ -46,12 +45,13 @@ const SwiperSubject = ({
   const renderMedia = () => {
     if (hasMultipleImages) {
       return (
-        <SwiperMultiImage
+        <MultiImageCarousel
           images={imageUris}
           subjectId={subject.id}
           swiping={swiping}
-          expandImage={onExpandImage}
-          isCurrentCard={isCurrentCard}
+          onExpandImage={onExpandImage}
+          showPagination={isCurrentCard}
+          dotsStyle="overlay"
         />
       );
     }
@@ -62,23 +62,12 @@ const SwiperSubject = ({
     if (isVideo) {
       const height = isTablet() ? containerDimensions.height : 300;
       return (
-        <View>
-          <Video
-            source={{ uri }}
-            style={{ width: containerDimensions.width, height }}
-            controls={true}
-            repeat={true}
-            resizeMode="contain"
-          />
-          {Platform.OS === 'android' && (
-            <TouchableOpacity
-              onPress={() => onExpandImage(uri)}
-              style={styles.videoExpandButton}
-            >
-              <ExpandImageIcon />
-            </TouchableOpacity>
-          )}
-        </View>
+        <SubjectVideo
+          uri={uri}
+          onExpandImage={onExpandImage}
+          style={{ width: containerDimensions.width, height }}
+          expandButtonStyle={swiperExpandButtonStyle}
+        />
       );
     }
 
@@ -94,6 +83,10 @@ const SwiperSubject = ({
   );
 };
 
+// Matches legacy Swiper's videoExpandButton position (36pt from bottom
+// vs 16pt for non-Swipe).
+const swiperExpandButtonStyle = { bottom: 36 };
+
 const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
@@ -101,11 +94,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  videoExpandButton: {
-    position: 'absolute',
-    bottom: 36,
-    right: 16,
   },
 });
 

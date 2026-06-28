@@ -33,7 +33,28 @@ export default function user(state=InitialUserState, action) {
             const modifiedState = R.set(R.lensPath(['projects', action.projectId, 'tutorials_completed_at', action.tutorialId]), action.completionTime, state);
             return modifiedState;
         }
-        default: 
+        case ActionConstants.SET_MINICOURSE_OPT_OUT: {
+            return R.set(
+                R.lensPath(['projects', action.projectId, 'minicourses', 'opt_out', `id_${action.miniCourseId}`]),
+                action.value,
+                state
+            );
+        }
+        case ActionConstants.SET_MINICOURSE_STEP_PROGRESS: {
+            return R.set(
+                R.lensPath(['projects', action.projectId, 'minicourses', 'slide_to_start', `id_${action.miniCourseId}`]),
+                action.slideIndex,
+                state
+            );
+        }
+        case ActionConstants.SET_MINICOURSE_COMPLETED: {
+            return R.set(
+                R.lensPath(['projects', action.projectId, 'minicourses', 'completed_at', `id_${action.miniCourseId}`]),
+                action.completedAt,
+                state
+            );
+        }
+        default:
             return state;
-    }      
+    }
 }

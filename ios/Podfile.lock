@@ -1884,7 +1884,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-safe-area-context (5.7.0):
+  - react-native-safe-area-context (5.8.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -1902,8 +1902,8 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-safe-area-context/common (= 5.7.0)
-    - react-native-safe-area-context/fabric (= 5.7.0)
+    - react-native-safe-area-context/common (= 5.8.0)
+    - react-native-safe-area-context/fabric (= 5.8.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1914,7 +1914,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-safe-area-context/common (5.7.0):
+  - react-native-safe-area-context/common (5.8.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -1942,7 +1942,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-safe-area-context/fabric (5.7.0):
+  - react-native-safe-area-context/fabric (5.8.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -1971,7 +1971,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-video (6.19.0):
+  - react-native-video (6.19.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -1989,7 +1989,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-video/Video (= 6.19.0)
+    - react-native-video/Video (= 6.19.2)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -2000,7 +2000,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-video/Fabric (6.19.0):
+  - react-native-video/Fabric (6.19.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2028,7 +2028,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-video/Video (6.19.0):
+  - react-native-video/Video (6.19.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2057,7 +2057,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-webview (13.16.1):
+  - react-native-webview (13.17.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2638,7 +2638,7 @@ PODS:
     - FirebaseCoreExtension
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.30.0):
+  - RNGestureHandler (2.32.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2844,7 +2844,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - RNScreens (4.24.0):
+  - RNScreens (4.25.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2871,10 +2871,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNScreens/common (= 4.24.0)
+    - RNScreens/common (= 4.25.2)
     - SocketRocket
     - Yoga
-  - RNScreens/common (4.24.0):
+  - RNScreens/common (4.25.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2903,7 +2903,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - RNSentry (8.4.0):
+  - RNSentry (8.15.1):
     - boost
     - DoubleConversion
     - fast_float
@@ -2930,10 +2930,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Sentry (= 9.7.0)
+    - Sentry (= 9.18.0)
     - SocketRocket
     - Yoga
-  - RNSVG (15.15.3):
+  - RNSVG (15.15.5):
     - boost
     - DoubleConversion
     - fast_float
@@ -2959,10 +2959,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNSVG/common (= 15.15.3)
+    - RNSVG/common (= 15.15.5)
     - SocketRocket
     - Yoga
-  - RNSVG/common (15.15.3):
+  - RNSVG/common (15.15.5):
     - boost
     - DoubleConversion
     - fast_float
@@ -3018,9 +3018,9 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - Sentry (9.7.0):
-    - Sentry/Core (= 9.7.0)
-  - Sentry/Core (9.7.0)
+  - Sentry (9.18.0):
+    - Sentry/Core (= 9.18.0)
+  - Sentry/Core (9.18.0)
   - SocketRocket (0.7.1)
   - SplashView (0.0.19):
     - boost
@@ -3411,9 +3411,9 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: f4762eb5cc8d2287f2513c9e404e48b30bf9fc69
   react-native-blur: 96c4aa8c02134e1e316048a9a516b78e19f61029
   react-native-netinfo: f1fdacc2e037af3c2c3820d0b5fad695b55841c9
-  react-native-safe-area-context: 743077b5768e79a92aadb11f3fbeec12bdf57941
-  react-native-video: 4f246a765844e91e3cae8a2d1199767c16443de0
-  react-native-webview: f0f2b2ddcf492466764f3eefcb82f661447f9372
+  react-native-safe-area-context: 2ba6c0ce7ea792aea88e71420834fd43539a007c
+  react-native-video: c0a4a39e2a34f072c457aaacac2d6dd42e56d1b8
+  react-native-webview: 617d9d872bb40e8c91fe2b2d32fc6a93917e020f
   React-NativeModulesApple: 76d9e54adf2b333d0939bbd18102c62bdfebb934
   React-oscompat: d5e3366fbd6c7150e17c1bda85eab583a6fa9fce
   React-perflogger: 2e4ca29b2bc69c80ef5133de127f5a3c2357c583
@@ -3452,17 +3452,17 @@ SPEC CHECKSUMS:
   RNFBAnalytics: 7bdccdc2b978d06f9be3ff92298f6b11cf9c9be0
   RNFBApp: 6e0c3ee6cfbc76b5d1237ebf37240cd48a55c6e2
   RNFBMessaging: e25c512cfcf4718bcecb65090608c9c570f51826
-  RNGestureHandler: 043d32e7e7ae6bdcca06264682d5a078712903a1
+  RNGestureHandler: 4520d3f8e588f9df99d5cb2a749f4918f5145038
   RNLocalize: 5d0c4ca964ef71d7bab111904da7d1d1fadd66a0
   RNReanimated: f3095e44e172cbda017738ed872afdba88fb6fa0
-  RNScreens: e902eba58a27d3ad399a495d578e8aba3ea0f490
-  RNSentry: 0f198b04559bfb3273f49227cad1d710658143ab
-  RNSVG: 5757b40cdede37b5db4ecb27b3e643996e2d5a5f
+  RNScreens: cfb11dc33b79eac5e09a10b25e1ad0c2499d5b8b
+  RNSentry: 5a35c551c4f6b76819dbcd852bb10b33887f4753
+  RNSVG: f1367a7f88773c530b6d299dbc745fe3897edaa2
   RNVectorIcons: e355dd0998d6b9020e560922a66614eb9636501b
-  Sentry: 0fe17abdc98f83a3799c02564382d8b2afabadef
+  Sentry: 84407b02cd318a63ef0345ad51eaaee555028723
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   SplashView: f2d15e43cf017fc03bc1b7a5ea2b769521fd40ae
-  Yoga: c7d9adcf9fca72e6219bdc5f1f11b76b38c4a030
+  Yoga: ff16d80456ce825ffc9400eeccc645a0dfcccdf5
 
 PODFILE CHECKSUM: 2772a9e3d25bba8e19f01be5f79ae6af3629bae6
 

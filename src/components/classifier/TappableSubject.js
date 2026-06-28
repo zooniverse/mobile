@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 import LoadableMedia from '../common/LoadableMedia'
-import AutoPlayMultiImage from './AutoPlayMultiImage'
+import MultiImageCarousel from './MultiImageCarousel'
 
 class TappableSubject extends Component {
     constructor(props) {
@@ -69,14 +69,14 @@ class TappableSubject extends Component {
                 />
             </TouchableOpacity> 
         } else if (imageUris.length > 1) {
-            return <AutoPlayMultiImage
+            return <MultiImageCarousel
                 images={imageUris}
-                subjectDisplayWidth={width}
-                subjectDisplayHeight={height}
-                expandImage={onPress}
+                onExpandImage={onPress}
                 swiping={false}
-                currentCard={true}
-            />  
+                showPagination={true}
+                dotsStyle="flowed"
+                subjectId={subject?.id}
+            />
         }
     }
 }

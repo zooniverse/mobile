@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -11,7 +11,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import R from 'ramda'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { GLOBALS, loggedInDisciplineTags } from '../constants/globals'
+import { GLOBALS } from '../constants/globals'
 import PropTypes from 'prop-types';
 import Discipline from './Discipline'
 import { setPushPrompted } from '../actions/user'
@@ -19,30 +19,20 @@ import FontedText from '../components/common/FontedText'
 import * as projectActions from '../actions/projects'
 import * as settingsActions from '../actions/settings'
 import { makeCancelable } from '../utils/promiseUtils'
-import { extractSwipeEnabledProjects } from '../utils/projectUtils'
 import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useRoute } from '@react-navigation/native';
-import { PushNotifications } from '../notifications/PushNotifications';
 import ErasStats from './ErasStats';
 import theme from '../theme';
 import { useTranslation } from 'react-i18next';
 import languageOptions from '../i18n/languages';
 
 const mapStateToProps = (state) => {
-  const nativePreviewProjects = state.projects.previewProjectList.filter(
-      (project) => R.any((workflow) => workflow.mobile_verified)(project.workflows)
-  )
-  const hasPreviewProjects = !R.isEmpty(nativePreviewProjects)
-  const hasBetaProjects = !R.isEmpty(state.projects.betaProjectList.count)
   return {
     user: state.user,
     isGuestUser: state.user.isGuestUser,
     isConnected: state.main.isConnected,
-    projectList: state.projects.projectList || [],
-    hasPreviewProjects,
-    hasBetaProjects,
     hasRecentProjects: state.user.projects && !R.isEmpty(state.user.projects),
     isSuccess: state.projects.isSuccess,
     isLoading: state.projects.isLoading,
@@ -61,6 +51,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 function ProjectDisciplines({ ...props }) {
   const [refreshing, setRefreshing] = useState(true);
+  const fetchProjectPromise = useRef(null);
   const route = useRoute();
   const { t } = useTranslation('platform');
 
@@ -80,8 +71,8 @@ function ProjectDisciplines({ ...props }) {
     refreshProjects();
 
     return () => {
-      if (this.fetchProjectPromise) {
-        this.fetchProjectPromise.cancel();
+      if (fetchProjectPromise.current) {
+        fetchProjectPromise.current.cancel();
       }
     };
   }, []);
@@ -158,18 +149,12 @@ function ProjectDisciplines({ ...props }) {
 
   function refreshProjects() {
     setRefreshing(true);
-    fetchProjectPromise = makeCancelable(props.projectActions.fetchProjects());
+    fetchProjectPromise.current = makeCancelable(props.projectActions.fetchProjects());
 
-    fetchProjectPromise.promise
+    fetchProjectPromise.current.promise
       .then((projectList) => {
-        fetchProjectPromise = null;
+        fetchProjectPromise.current = null;
         setRefreshing(false);
-
-        // Handle push subscriptions
-        const notificationProjects = extractSwipeEnabledProjects(
-          projectList.filter( project => !project.isPreview && project.launch_approved )
-        );
-        PushNotifications.updateProjectListNotifications(notificationProjects, props.user)
       })
       .catch((error) => {
         if (!error.isCanceled) {
@@ -190,26 +175,15 @@ function ProjectDisciplines({ ...props }) {
   );
 
   const disciplineInProjectList = (discipline) => {
-    const { user, hasPreviewProjects, hasRecentProjects, hasBetaProjects } =
-      props;
-    const isForLoggedInUser =
-      !user.isGuestUser &&
-      loggedInDisciplineTags(hasRecentProjects, hasPreviewProjects).includes(
-        discipline.value
-      );
-    const isTagged =
-      props.projectList.find((project) =>
-        project.tags.includes(discipline.value)
-      ) !== undefined;
-    const isBeta = hasBetaProjects && discipline.value === 'beta';
-    const isForAllProjects = discipline.value === 'all projects';
-
+    const isRecent = discipline.value === 'recent';
+    const isPreview = discipline.value === 'preview';
     const translated =
       props.platformLanguage !== 'en' &&
       discipline.value === 'translated projects';
-    return (
-      isForLoggedInUser || isTagged || isBeta || isForAllProjects || translated
-    );
+    if (isRecent) return !props.user.isGuestUser && props.hasRecentProjects;
+    if (isPreview) return !props.user.isGuestUser;
+    if (discipline.value === 'translated projects') return translated;
+    return true;
   };
   const disciplineList = props.isSuccess
     ? R.filter(disciplineInProjectList, GLOBALS.DISCIPLINES)

@@ -69,7 +69,7 @@ export default function classifier(state=InitialClassifier, action) {
             const workflowIdLens = R.lensProp(action.workflowId)
             const subjectsSeenArray = state.seenThisSession[action.workflowId] || []
             subjectsSeenArray.push(action.subjectId)
-            const updatedSubjects = state.subjectLists[action.workflowId].map(subject => {
+            const updatedSubjects = (state.subjectLists[action.workflowId] || []).map(subject => {
                 if (subject.id === action.subjectId) {
                     return R.set(R.lensProp('already_seen'), true, subject)
                 } else {

@@ -21,8 +21,12 @@ const SizedMarkdown = ({ children, style, forButton }) => {
 
   const preprocessMarkdown = (text) => {
     if (!text) return text;
+    // Strip markdown-it-imsize sizing hints (`=200x300`, `=200x`, `=x300`,
+    // `=200`) from image syntax. The previous regex required digits before
+    // the `x` and silently failed on height-only forms like `=x200`, which
+    // left the literal hint in the URL and broke the markdown parse.
     return text.replace(
-      /!\[([^\]]*)\]\(([^\s)]+)\s*=\d+[xX]\d*\)/g,
+      /!\[([^\]]*)\]\(([^\s)]+)\s*=[\dxX]+\)/g,
       '![$1]($2)'
     );
   };

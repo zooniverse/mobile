@@ -7,8 +7,10 @@
  */
 
 import { useState, useCallback, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import apiClient from 'panoptes-client/lib/api-client';
 import getSubjectLocations from '../utils/get-subject-location';
+import * as ActionConstants from '../constants/actions';
 
 // How many unclassified subjects should remain before we fetch more
 const REFILL_THRESHOLD = 8;
@@ -20,6 +22,8 @@ const PAGE_SIZE = 20;
 const TRIM_INTERVAL = 10;
 
 const useSubjectQueue = (workflowId) => {
+  const dispatch = useDispatch();
+
   // The queue of subjects waiting to be (or already) classified
   const [queue, setQueue] = useState([]);
 
@@ -28,6 +32,10 @@ const useSubjectQueue = (workflowId) => {
 
   // Total classifications this session (doesn't reset on trim)
   const [classificationCount, setClassificationCount] = useState(0);
+
+  // Reactive loading flag for the shell to show a spinner while a fetch
+  // is in flight.
+  const [isLoading, setIsLoading] = useState(false);
 
   // Prevents duplicate API requests when a refill is already in flight
   const isFetchingRef = useRef(false);
@@ -41,6 +49,7 @@ const useSubjectQueue = (workflowId) => {
     if (isFetchingRef.current || !workflowId) return;
 
     isFetchingRef.current = true;
+    setIsLoading(true);
 
     try {
       const subjects = await apiClient.type('subjects').get({
@@ -64,13 +73,23 @@ const useSubjectQueue = (workflowId) => {
         newSubjects.forEach((s) => queuedIdsRef.current.add(s.id));
 
         setQueue((prev) => [...prev, ...newSubjects]);
+
+        // Mirror the fetched subjects into the legacy Redux slot so legacy
+        // thunks that still read `classifier.subjectLists[workflowId]`
+        // (e.g. the `setSubjectSeenThisSession` reducer) stay in sync.
+        dispatch({
+          type: ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW,
+          workflowId,
+          subjects: newSubjects,
+        });
       }
     } catch (error) {
       console.warn('Failed to fetch more subjects:', error);
     } finally {
       isFetchingRef.current = false;
+      setIsLoading(false);
     }
-  }, [workflowId]);
+  }, [workflowId, dispatch]);
 
   // Advances to the next subject. Triggers a refill if running low.
   const advanceToNextSubject = useCallback(() => {
@@ -131,6 +150,7 @@ const useSubjectQueue = (workflowId) => {
     hasSubjects,
     remaining,
     classificationCount,
+    isLoading,
     fetchMoreSubjects,
     advanceToNextSubject,
     resetQueue,

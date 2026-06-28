@@ -3,6 +3,7 @@ import R from 'ramda'
 import * as classifierActions from '../actions/classifier'
 import * as drawingActions from '../actions/drawing'
 import { setNavbarSettingsForPage } from '../actions/navBar'
+import { reset } from '../reducers/classifierSlice'
 import PageKeys from '../constants/PageKeys'
 import theme from '../theme'
 import { clearProjectTranslations } from '../i18n'
@@ -15,22 +16,20 @@ const navigateToClassifier = R.curry((dispatch, inPreviewMode, inBetaMode, proje
         hamburgerMenuShowing: !project.in_museum_mode,
         centerType: 'title',
         backgroundColor: inPreviewMode ? 'rgba(228,89,80,1)' : theme.$zooniverseTeal
-    }, getPageKeyForWorkflowType(workflow.type)))
+    }, PageKeys.ClassifierScreen))
 
-    switch (workflow.type) {
-        case 'drawing':
-            navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
-            break;
-        case 'single':
-            navigateToQuestionClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
-            break;
-        case 'multiple':
-            navigateToMultiAnswerClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
-            break;
-        case 'swipe':
-            navigateToSwipeClassifier(inPreviewMode, inBetaMode, project, workflow, dispatch, navigation);
-            break;
-    }
+    dispatch(reset())
+    dispatch(classifierActions.clearClassifierData())
+    dispatch(drawingActions.clearShapes())
+    clearProjectTranslations()
+
+    navigation.navigate("ClassifierScreen", {
+      project,
+      workflow,
+      display_name: project.display_name,
+      inPreviewMode,
+      inBetaMode,
+    })
 })
 
 function getPageKeyForWorkflowType(workflowType) {
@@ -39,7 +38,7 @@ function getPageKeyForWorkflowType(workflowType) {
             return PageKeys.DrawingClassifier;
         case 'single':
             return PageKeys.QuestionClassifier;
-        case 'swipe': 
+        case 'swipe':
             return PageKeys.SwipeClassifier;
         case 'multiple':
             return PageKeys.MultiAnswerClassifier;
@@ -105,9 +104,9 @@ function navigateToDrawingClassifier(inPreviewMode, inBetaMode, project, workflo
 
 /**
  * Parses out all of the task information from the workflow and forms it into an object
- * @param {workflow to be parsed} workflow 
+ * @param {workflow to be parsed} workflow
  * @returns {
- * 
+ *
  * }
  */
 function parseDrawingTask(workflow) {

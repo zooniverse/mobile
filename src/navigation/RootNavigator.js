@@ -18,6 +18,7 @@ import SwiperClassifier from '../components/classifier/Swiper/SwiperClassifier';
 import DrawingClassifier from '../components/Markings/DrawingClassifier';
 import QuestionClassifier from '../components/classifier/QuestionClassifier';
 import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier';
+import ClassifierScreen from '../components/classifier/ClassifierScreen';
 import ZooniverseApp from '../containers/zooniverseApp';
 import SideDrawerContent from '../components/SideDrawerContent';
 import NavBar from '../components/NavBar';
@@ -78,6 +79,13 @@ const StackNavigator = () => {
       <Stack.Screen
         name={PageKeys.MultiAnswerClassifier}
         component={MultiAnswerClassifier}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={PageKeys.ClassifierScreen}
+        component={ClassifierScreen}
         options={{
           headerShown: false,
         }}

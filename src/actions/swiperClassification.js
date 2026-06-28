@@ -14,6 +14,13 @@ export async function submitSwiperClassification({
   sessionId,
   feedbackMeta = null,
   isPreviewMode = false,
+  // Multi-task chain support: any annotations from earlier tasks in the
+  // chain are prepended to the swipe annotation. Empty/undefined for
+  // single-task swipe workflows so the legacy POST shape is unchanged.
+  priorAnnotations = [],
+  // Override the swipe annotation's task key when this Swipe task is
+  // reached as a non-first task in a chain. Defaults to first_task.
+  taskKey,
 }) {
   // In preview/test mode, don't submit to the API
   if (isPreviewMode) return;
@@ -52,12 +59,15 @@ export async function submitSwiperClassification({
     metadata.feedback = feedbackMeta;
   }
 
+  const swipeAnnotation = { task: taskKey || workflow.first_task, value: answer };
+  const annotations = [...priorAnnotations, swipeAnnotation];
+
   try {
     const result = await apiClient
       .type('classifications')
       .create({
         completed: true,
-        annotations: [{ task: workflow.first_task, value: answer }],
+        annotations,
         metadata,
         links: {
           project: workflow.links.project,
