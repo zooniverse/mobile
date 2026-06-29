@@ -34,7 +34,7 @@
     "panoptes-client": "^5.5.5",
     "prop-types": "^15.8.1",
     "ramda": "^0.25.0",
-    "react": "19.1.4",
+    "react": "19.2.7",
     "react-i18next": "^16.6.1",
     "react-native": "^0.81.1",
     "react-native-checkbox-field": "^2.0.2",
