@@ -51,7 +51,7 @@
     "react-native-safe-area-context": "^5.6.2",
     "react-native-screens": "^4.23.0",
     "react-native-shadow-2": "^7.0.8",
-    "react-native-splash-view": "^0.0.19",
+    "react-native-splash-view": "^0.0.21",
     "react-native-svg": "^15.15.4",
     "react-native-swiper": "^1.6.0",
     "react-native-toggle-element": "^2.1.1",
