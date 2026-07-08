@@ -1,6 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
 
-import { navRef } from '../navigation/RootNavigator';
+import { navigateWhenReady } from '../navigation/RootNavigator';
 import PageKeys from '../constants/PageKeys';
 import { store } from '../containers/app';
 import { addNotification } from '../reducers/notificationsSlice';
@@ -11,7 +11,7 @@ class HandleIncomingNotifications {
     // App in background - save notification to local storage and navigate to notifications screen.
     messaging().onNotificationOpenedApp((msg) => {
       this.saveMessageToLocalStorage(msg);
-      navRef.navigate(PageKeys.NotificationLandingPageScreen, {
+      navigateWhenReady(PageKeys.NotificationLandingPageScreen, {
         newNotification: msg?.messageId,
       });
     });
@@ -22,7 +22,7 @@ class HandleIncomingNotifications {
       .then((remoteMessage) => {
         if (remoteMessage) {
           this.saveMessageToLocalStorage(remoteMessage);
-          navRef.navigate(PageKeys.NotificationLandingPageScreen, {
+          navigateWhenReady(PageKeys.NotificationLandingPageScreen, {
             newNotification: remoteMessage?.messageId,
           });
         }

@@ -1,9 +1,9 @@
 import { Platform, PermissionsAndroid } from 'react-native';
 
 import messaging from '@react-native-firebase/messaging';
+import * as Sentry from '@sentry/react-native';
 
 import { store } from '../containers/app';
-import { sendEmailTestingToken } from '../api/email';
 import {
   setInitialSettings,
   setNotificationProjects,
@@ -15,7 +15,6 @@ import {
 } from '../reducers/notificationSettingsSlice';
 import { pushTesters } from './testers';
 import { getAllUserClassifications } from '../api';
-import { getTestingTokenEmailed, setTestingTokenEmailed } from './testingTokenStorage';
 
 export const ALL_NOTIFICATIONS = 'all_notifications';
 export const NEW_PROJECTS = 'new_projects';
@@ -125,10 +124,10 @@ class FirebaseNotifications {
 
   /**
    * The user is logged in and has notifications enabled.
-   * See if they are a tester and email the token.
+   * See if they are a tester and log the token to Sentry.
    * This is used to send test messages in Firebase console.
    */
-  async emailTestingToken(user) {
+  async logTestingToken(user) {
     const enabled = await this.checkIfEnabled();
     if (!enabled) {
       return;
@@ -139,23 +138,28 @@ class FirebaseNotifications {
     try {
       const pushTester = pushTesters.find((p) => p.userName === userName);
       if (pushTester) {
-        // Check if the token has already been emailed, it should only email once.
-        const alreadyEmailed = await getTestingTokenEmailed(userName);
-        if (!alreadyEmailed) {
-          // Get the token, email it, and then mark in local storage that it has been sent.
-          const token = await messaging().getToken();
-          const sendEmail = await sendEmailTestingToken(
-            token,
-            pushTester,
-            Platform.OS
-          );
-          if (sendEmail) {
-            setTestingTokenEmailed(userName);
-          }
-        }
+        // Get the token and log it to Sentry every time for test users.
+        const token = await messaging().getToken();
+        const apnsToken = await messaging().getAPNSToken();
+        Sentry.withScope((scope) => {
+          scope.setTag('push_test_token', 'true');
+          scope.setTag('platform', Platform.OS);
+          scope.setUser({
+            id: user?.id,
+            username: userName,
+          });
+          scope.setContext('push_notification_test', {
+            userName,
+            platform: Platform.OS,
+            fcmRegistrationId: token,
+            applePushRegistrationId: apnsToken,
+          });
+
+          Sentry.captureMessage('Firebase push testing token generated');
+        });
       }
-    } catch {
-      throw new Error('Issue emailing the testing token');
+    } catch (e) {
+      Sentry.captureException(e);
     }
   }
 

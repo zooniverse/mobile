@@ -30,6 +30,23 @@ import { gaTrackScreen } from './screenTracking';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 export const navRef = createNavigationContainerRef();
+const pendingNavigationActions = [];
+
+export const navigateWhenReady = (name, params) => {
+  if (navRef.isReady()) {
+    navRef.navigate(name, params);
+    return;
+  }
+
+  pendingNavigationActions.push({ name, params });
+};
+
+const flushPendingNavigationActions = () => {
+  while (pendingNavigationActions.length > 0 && navRef.isReady()) {
+    const { name, params } = pendingNavigationActions.shift();
+    navRef.navigate(name, params);
+  }
+};
 
 const StackNavigator = () => {
   return (
@@ -119,6 +136,7 @@ const RootNavigator = () => {
   return (
     <NavigationContainer
       ref={navRef}
+      onReady={flushPendingNavigationActions}
       onStateChange={() => {
         const newRoute = navRef.getCurrentRoute();
         gaTrackScreen(newRoute)
