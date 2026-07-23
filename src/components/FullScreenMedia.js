@@ -9,7 +9,7 @@ import Modal from "react-native-modal";
 import FontedText from './common/FontedText'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import ZoomableImage from './ZoomableImage'
-import Icon from 'react-native-vector-icons/Fontisto'
+import Icon from '@react-native-vector-icons/fontisto/static'
 import PropTypes from 'prop-types'
 import VideoPlayer from 'react-native-video-controls';
 import { BlurView } from '@react-native-community/blur';

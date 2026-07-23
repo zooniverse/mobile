@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from '@react-native-vector-icons/fontawesome5/static';
 import PropTypes from 'prop-types';
 
 import FontedText from '../common/FontedText';

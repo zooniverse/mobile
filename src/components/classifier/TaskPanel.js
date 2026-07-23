@@ -15,7 +15,7 @@ import {
   StyleSheet,
 } from 'react-native'
 import DeviceInfo from 'react-native-device-info'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import FontAwesome from '@react-native-vector-icons/fontawesome/static'
 import { useTranslation } from 'react-i18next'
 
 import FontedText from '../common/FontedText'

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import { DrawerActions, useNavigation, StackActions } from '@react-navigation/native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from '@react-native-vector-icons/fontawesome/static';
 import { BlurView } from '@react-native-community/blur';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';

@@ -34,7 +34,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import FontAwesome from '@react-native-vector-icons/fontawesome/static'
 
 import ExpandImageIcon from './ExpandImageIcon'
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator'
@@ -228,7 +228,6 @@ const MultiImageCarousel = ({
               style={styles.dotContainer}
             >
               <FontAwesome
-                solid
                 size={16}
                 name={idx === slideIndex ? 'circle' : 'circle-thin'}
                 color="gray"

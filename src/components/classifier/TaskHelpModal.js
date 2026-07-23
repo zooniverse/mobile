@@ -11,7 +11,7 @@ import Modal from "react-native-modal";
 
 import ButtonLarge from './ButtonLarge'
 import FontedText from '../common/FontedText'
-import Icon from 'react-native-vector-icons/Fontisto'
+import Icon from '@react-native-vector-icons/fontisto/static'
 import { withTranslation } from 'react-i18next';
 
 

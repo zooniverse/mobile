@@ -10,7 +10,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from '@react-native-vector-icons/fontawesome/static'
 import * as R from 'ramda';
 
 import navigateToClassifier from '../../navigators/classifierNavigator'

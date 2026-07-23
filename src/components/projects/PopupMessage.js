@@ -3,7 +3,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from '@react-native-vector-icons/fontawesome/static'
 
 import FontedText from '../common/FontedText'
 

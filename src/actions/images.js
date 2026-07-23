@@ -1,4 +1,4 @@
-import RNFetchBlob from 'rn-fetch-blob'
+import ReactNativeBlobUtil from 'react-native-blob-util'
 import * as ActionConstants from '../constants/actions'
 import { loadRemoteImageToCache } from '../utils/imageUtils'
 
@@ -17,7 +17,7 @@ export const loadImageToCache = (remoteSource) => {
 
             const cachedImagePath = getState().images[remoteSource]
             if (cachedImagePath) {
-                RNFetchBlob.fs.exists(cachedImagePath)
+                ReactNativeBlobUtil.fs.exists(cachedImagePath)
                 .then((fileExists) => {
                     if (fileExists) {
                         resolve(cachedImagePath)

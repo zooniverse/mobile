@@ -13,7 +13,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import FieldGuideItemDetail from './FieldGuideItemDetail'
 import FieldGuideItemRow from './FieldGuideItemRow'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from '@react-native-vector-icons/material-design-icons/static'
 import PropTypes from 'prop-types';
 import {isEmpty} from 'ramda'
 

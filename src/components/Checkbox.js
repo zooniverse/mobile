@@ -1,7 +1,7 @@
 import React from 'react'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { CheckboxField } from 'react-native-checkbox-field'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from '@react-native-vector-icons/fontawesome/static'
 import PropTypes from 'prop-types';
 
 const Checkbox = (props) => {

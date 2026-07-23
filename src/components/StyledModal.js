@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
+import FontAwesome5Icon from '@react-native-vector-icons/fontawesome5/static'
 import PropTypes from 'prop-types';
 import DeviceInfo from 'react-native-device-info'
 

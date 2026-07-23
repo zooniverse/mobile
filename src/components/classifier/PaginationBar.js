@@ -5,8 +5,8 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import EStyleSheets from 'react-native-extended-stylesheet'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import SimpleLineIcons from '@react-native-vector-icons/simple-line-icons/static'
+import FontAwesome5 from '@react-native-vector-icons/fontawesome5/static'
 import DeviceInfo from 'react-native-device-info'
 
 const dotSize = DeviceInfo.isTablet() ? 15 : 10
@@ -18,7 +18,7 @@ const PaginationBar = (props) => {
         paginationDots.push(
             <FontAwesome5
                 key={`PAGINATION_DOT_${count}`}
-                solid
+                iconStyle="solid"
                 size={dotSize}
                 name="circle"
                 style={[

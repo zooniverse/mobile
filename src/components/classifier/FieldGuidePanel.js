@@ -24,7 +24,7 @@ import {
   View,
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from '@react-native-vector-icons/material-design-icons/static'
 import { isEmpty } from 'ramda'
 
 import FieldGuideItemDetail from './FieldGuideItemDetail'

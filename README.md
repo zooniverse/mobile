@@ -5,11 +5,12 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
 
 ### Preparing The React Native Framework
 #### Requirements:
- - Node >= 16 (Recommend >= 18)
+ - Node 24.18.0 (use `nvm use` to load the version in `.nvmrc`)
+ - Ruby 4.0.6, Bundler 4.0.15, and CocoaPods 1.17.0 (Ruby is pinned in `.ruby-version`)
 #### Steps:
 1. Follow the instructions for Android and iOS setup in [this guide](https://reactnative.dev/docs/environment-setup).
 2. Clone down this repo and navigate to its directory (called `mobile`).
-3. Run `npm install` (later, if you need to reinstall dependencies for some reason, you can run `rm -rf node_modules/ && npm install`)
+3. Run `npm ci`.
 4. Run `npm start`.
 #### Troubleshooting:
 - [Troubleshooting wiki](https://github.com/zooniverse/mobile/wiki/Troubleshooting) for additional help
@@ -21,12 +22,15 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
  - To run on an iOS device see [Running on device - iOS]https://reactnative.dev/docs/running-on-device?platform=ios
 #### Steps:
 On the command line, from the `mobile` directory, run:
-1. `cd ios && rm -rf Podfile.lock && pod install && cd ..`. You may need to `brew install cocoapods` first.
+1. Run `bundle install`, then `cd ios && bundle exec pod install && cd ..`.
 2. `npm run ios`
 
 ### Android
 #### Requirements:
  - Android Studio
+ - The following local files are intentionally excluded from Git and must be created or obtained before building:
+    * `android/local.properties` identifies the local Android SDK path. Android Studio normally creates it; otherwise add `sdk.dir=/absolute/path/to/Android/sdk`.
+    * `android/app/key.properties` contains the release keystore path and credentials. Obtain it and the referenced keystore securely from an existing maintainer. The current Gradle configuration reads this file during debug and release builds.
  - You'll need at least one emulator.  To get one:
     *  Within Android Studio, open the "AVD Manager" -  in the toolbar click the icon with the purple device and small android (fourth from the right)
     *  Click 'Create Virtual Device' - bottom left-hand corner

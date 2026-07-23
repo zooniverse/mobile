@@ -7,7 +7,7 @@
 import React from 'react'
 import { View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
 import Modal from 'react-native-modal'
-import Icon from 'react-native-vector-icons/Fontisto'
+import Icon from '@react-native-vector-icons/fontisto/static'
 import { useTranslation } from 'react-i18next'
 
 import SizedMarkdown from '../common/SizedMarkdown'

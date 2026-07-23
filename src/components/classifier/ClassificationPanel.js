@@ -7,7 +7,7 @@ import {
 import DeviceInfo from 'react-native-device-info'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import FontAwesome from '@react-native-vector-icons/fontawesome/static'
 
 import FontedText from '../common/FontedText'
 import { withTranslation } from 'react-i18next';

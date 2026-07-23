@@ -24,7 +24,7 @@ import {
   View,
 } from 'react-native'
 import Modal from 'react-native-modal'
-import Icon from 'react-native-vector-icons/Fontisto'
+import Icon from '@react-native-vector-icons/fontisto/static'
 import Video from 'react-native-video'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'

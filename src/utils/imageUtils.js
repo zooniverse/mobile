@@ -1,16 +1,16 @@
-import RNFetchBlob from 'rn-fetch-blob'
+import ReactNativeBlobUtil from 'react-native-blob-util'
 import R from 'ramda'
 
 export const removeLeftOverImages = imageDictionary => {
     R.values(imageDictionary).forEach((localSource) => {
-        RNFetchBlob.fs.unlink(localSource)
+        ReactNativeBlobUtil.fs.unlink(localSource)
     })
 }
 
 export const loadRemoteImageToCache = (remoteUri) => {
     return new Promise((resolve, reject) => {
         const appendExt = remoteUri.split('.').pop().split('?')[0];
-        const task = RNFetchBlob.config({
+        const task = ReactNativeBlobUtil.config({
                         fileCache: true,
                         appendExt
                     })
