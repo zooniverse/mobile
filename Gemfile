@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # You may use http://rbenv.org/ or https://rvm.io/ to install and use this version
-ruby "4.0.6"
+ruby '4.0.6'
 
 gem 'bundler', '4.0.15'
 gem 'cocoapods', '1.17.0'
