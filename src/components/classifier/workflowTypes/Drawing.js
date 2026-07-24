@@ -13,7 +13,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Dimensions, Image, Platform, TouchableOpacity, View, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import R from 'ramda'
+import * as R from 'ramda'
 
 import { useTranslation } from 'react-i18next'
 

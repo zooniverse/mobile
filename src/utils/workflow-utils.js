@@ -2,7 +2,7 @@
  * Helper utils for workflows
  */
 
-import R from 'ramda'
+import * as R from 'ramda'
 
 export const getTaskFromWorkflow = (workflow) => {
     const key = workflow.first_task

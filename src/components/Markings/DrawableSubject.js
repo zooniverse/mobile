@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { BlurView } from '@react-native-community/blur';
 import { bindActionCreators } from 'redux'
-import R from 'ramda'
+import * as R from 'ramda'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import DrawingToolView from './components/DrawingToolView'
 

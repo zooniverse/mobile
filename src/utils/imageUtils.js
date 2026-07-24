@@ -1,5 +1,5 @@
 import ReactNativeBlobUtil from 'react-native-blob-util'
-import R from 'ramda'
+import * as R from 'ramda'
 
 export const removeLeftOverImages = imageDictionary => {
     R.values(imageDictionary).forEach((localSource) => {

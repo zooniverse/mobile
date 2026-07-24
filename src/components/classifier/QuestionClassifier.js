@@ -9,7 +9,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
-import R from 'ramda';
+import * as R from 'ramda';
 
 import {getTaskFromWorkflow, getAnswersFromWorkflow} from '../../utils/workflow-utils'
 import {markdownContainsImage} from '../../utils/markdownUtils'

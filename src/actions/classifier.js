@@ -1,5 +1,5 @@
 import apiClient from 'panoptes-client/lib/api-client'
-import R from 'ramda'
+import * as R from 'ramda'
 import { setState } from '../actions/index'
 import { Alert, Platform, Image} from 'react-native'
 import { getAuthUser } from '../actions/auth'

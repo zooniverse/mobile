@@ -7,7 +7,7 @@ import {
     Rect,
     Svg,
 } from 'react-native-svg'
-import R from 'ramda'
+import * as R from 'ramda'
 import PropTypes from 'prop-types'
 import EditableRect from './EditableRect'
 import {
@@ -119,7 +119,7 @@ class ShapeEditorSvg extends Component {
 
                 // If a shape isn't being touched, then we should begin drawing a new shape
                 else if (!this.props.maxShapesDrawn) {
-                    const previewShapeDimensions = R.merge(this.state.previewShapeDimensions, {
+                    const previewShapeDimensions = R.mergeRight(this.state.previewShapeDimensions, {
                         x: (locationX - INITIAL_PREVIEW_SHAPE_SIDE) * this.props.displayToNativeRatioX,
                         y: (locationY - INITIAL_PREVIEW_SHAPE_SIDE) * this.props.displayToNativeRatioY,
                     })
@@ -154,7 +154,7 @@ class ShapeEditorSvg extends Component {
                 }
 
                 if (isDrawing) {
-                    const previewShapeStartDimensions = R.merge(this.state.previewShapeDimensions, { width: 0, height: 0 })
+                    const previewShapeStartDimensions = R.mergeRight(this.state.previewShapeDimensions, { width: 0, height: 0 })
 
                     const deltas = calculateShapeChanges(drawingTouchState, dx + INITIAL_PREVIEW_SHAPE_SIDE, dy + INITIAL_PREVIEW_SHAPE_SIDE,
                         this.props.displayToNativeRatioX, this.props.displayToNativeRatioY,
@@ -166,7 +166,7 @@ class ShapeEditorSvg extends Component {
                     }
 
                     this.setState({
-                        previewShapeDimensions: R.merge(this.state.previewShapeDimensions, previewShapesUpdates)
+                        previewShapeDimensions: R.mergeRight(this.state.previewShapeDimensions, previewShapesUpdates)
                     })
                 }
             },

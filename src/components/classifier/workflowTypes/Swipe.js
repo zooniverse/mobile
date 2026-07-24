@@ -18,7 +18,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
-import R from 'ramda'
+import * as R from 'ramda'
 
 import useImagePrefetch from '../../../hooks/useImagePrefetch'
 import useSwiperGesture from '../../../hooks/useSwiperGesture'
@@ -195,7 +195,7 @@ const Swipe = ({
   const onUnlinkedTaskAnswered = useCallback(
     (taskKey, value) => {
       const existing = annotations[taskKey] || []
-      if (R.contains(value, existing)) {
+      if (R.includes(value, existing)) {
         dispatch(
           classifierActions.removeAnnotationFromTask(workflow.id, taskKey, value)
         )

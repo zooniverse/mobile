@@ -1,4 +1,4 @@
-import R from 'ramda';
+import * as R from 'ramda';
 import * as ActionConstants from '../constants/actions';
 
 export const InitialNavBarState = {
@@ -19,7 +19,7 @@ export default function navBar(state=InitialNavBarState, action) {
         case ActionConstants.SET_NAVBAR:
             return { 
                 ...state,
-                pageSettings: R.set(R.lensProp(action.page), R.merge(defaultNavBarSettings, action.settings), state.pageSettings)
+                pageSettings: R.set(R.lensProp(action.page), R.mergeRight(defaultNavBarSettings, action.settings), state.pageSettings)
             } 
         case ActionConstants.SET_PAGE_SHOWING:
             return { ...state, pageShowing: action.page }
