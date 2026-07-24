@@ -15,6 +15,12 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
 #### Troubleshooting:
 - [Troubleshooting wiki](https://github.com/zooniverse/mobile/wiki/Troubleshooting) for additional help
 
+### Push Notification Troubleshooting
+- When using Firebase Console "Test on device", confirm the FCM token has no leading or trailing spaces.
+- In Firebase Console -> Project settings -> Cloud Messaging, confirm the iOS APNs Key ID and Team ID match the current Apple Developer account.
+- Direct APNs delivery can work while Firebase Cloud Messaging still fails; use FCM v1 REST/API sends to get the real Firebase/APNs error.
+- Android debug uses the dev Firebase project, Android release uses production, and iOS uses the bundled `ios/GoogleService-Info.plist`.
+
 ### iOS
 #### Requirements:
  - XCode

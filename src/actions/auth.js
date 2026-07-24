@@ -29,8 +29,8 @@ export function signIn(login, password, navigation) {
         user.projects = {}
         dispatch(setUser(user));
 
-        // Check if logged in user is a tester and email a testing push token.
-        PushNotifications.emailTestingToken(user);
+        // Check if logged in user is a tester and log a testing push token.
+        PushNotifications.logTestingToken(user);
         return Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),
