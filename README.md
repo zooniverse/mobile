@@ -10,8 +10,12 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
 #### Steps:
 1. Follow the instructions for Android and iOS setup in [this guide](https://reactnative.dev/docs/environment-setup).
 2. Clone down this repo and navigate to its directory (called `mobile`).
-3. Run `npm ci`.
-4. Run `npm start`.
+3. Copy or create the local files that are not checked into Git:
+   - `local.properties` goes in `android/local.properties`. It contains the local Android SDK path and is excluded because that path is specific to each developer's machine.
+   - `key.properties` goes in `android/app/key.properties`. It contains the release keystore filename, key alias, and signing passwords and is excluded because it contains credentials.
+   - `my-upload-key.keystore` goes in `android/app/my-upload-key.keystore`. It contains the private Android upload signing key and is excluded because committing it would expose a sensitive release credential.
+4. Run `npm ci`.
+5. Run `npm start`.
 #### Troubleshooting:
 - [Troubleshooting wiki](https://github.com/zooniverse/mobile/wiki/Troubleshooting) for additional help
 

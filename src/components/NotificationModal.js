@@ -56,7 +56,7 @@ class NotificationModal extends Component {
   }
 
   isMobileProject(projectID) {
-    return findIndex(()=>propEq('id', projectID), this.props.projectList) >= 0
+    return findIndex(() => propEq(projectID, 'id'), this.props.projectList) >= 0
   }
 
   handleClick() {
