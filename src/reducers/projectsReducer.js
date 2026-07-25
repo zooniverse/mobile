@@ -138,7 +138,11 @@ export default function projects(state=InitialProjectState, action) {
             }
         }
         case ActionConstants.SIGN_OUT: {
-            return InitialProjectState;
+            return {
+                ...InitialProjectState,
+                // The discipline list is public and remains ready after user data is cleared.
+                isSuccess: true,
+            };
         }
         default:
             return state;

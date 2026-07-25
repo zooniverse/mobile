@@ -6,7 +6,7 @@ import {
 } from '../actions/index'
 import { loadUserAvatar, loadUserProjects, setIsGuestUser, setUser } from '../actions/user'
 import * as ActionConstants from '../constants/actions'
-import { navRef } from '../navigation/RootNavigator';
+import { navRef, navigateWhenReady } from '../navigation/RootNavigator';
 import { StackActions } from '@react-navigation/native';
 import { PushNotifications } from '../notifications/PushNotifications';
 
@@ -87,8 +87,8 @@ export function signOut(navigation) {
     auth.signOut()
     dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
-    navigation.dispatch(StackActions.popToTop());
-    navRef.navigate('SignIn');
+    navigation?.dispatch(StackActions.popToTop());
+    navigateWhenReady('SignIn');
   }
 }
 

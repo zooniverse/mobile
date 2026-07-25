@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   blur: {
     flex: 1,
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
   container: {
     flex: 1,

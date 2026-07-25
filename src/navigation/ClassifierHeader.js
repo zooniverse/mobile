@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     flex: 1,
   },
   drawerIconContainer: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   fullSize: {
     flex: 1,
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
   headerContainer: {
     flex: 1,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
   titleText: {
     color: '#fff',

@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   stackedImage: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     width: undefined,
     height: undefined,
     flex: 1,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     bottom: 16,
   },
   loadingOverlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -82,7 +82,7 @@ class FullScreenMedia extends React.Component {
 const styles = EStyleSheet.create({
     blur: {
         flex: 1,
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFill,
     },
     container: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
