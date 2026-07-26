@@ -82,13 +82,13 @@ export function register(navigation) {
 }
 
 
-export function signOut(navigation) {
+export function signOut(navigation, destination = 'SignIn') {
   return dispatch => {
     auth.signOut()
     dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
     navigation?.dispatch(StackActions.popToTop());
-    navigateWhenReady('SignIn');
+    navigateWhenReady(destination);
   }
 }
 
