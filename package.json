@@ -30,7 +30,7 @@
     "crypto-js": "^4.2.0",
     "i18next": "^25.10.4",
     "lodash": "^4.18.1",
-    "markdown-it": "^14.2.0",
+    "markdown-it": "^14.3.0",
     "panoptes-client": "^5.5.5",
     "prop-types": "^15.8.1",
     "ramda": "^0.25.0",
