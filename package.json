@@ -87,7 +87,7 @@
     "jest": "^30.2.0",
     "jest-cli": "^30.2.0",
     "prettier": "^3.3.3",
-    "react-native-dotenv": "^3.4.9",
+    "react-native-dotenv": "^3.4.12",
     "react-test-renderer": "19.1.4",
     "reactotron-react-native": "^5.1.14",
     "typescript": "^5.8.3"
