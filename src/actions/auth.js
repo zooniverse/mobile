@@ -14,7 +14,13 @@ export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
   /* eslint-disable no-console */
   console.reportErrorsAsExceptions = false
-  return auth.checkCurrent();
+  // Refresh the bearer token before resolving the user, matching the web
+  // app. This renews an expired-but-refreshable session so returning users
+  // keep working instead of failing silently. Falls back to checkCurrent if
+  // the refresh fails, which resolves null for a truly expired session.
+  return auth.checkBearerToken()
+    .then(() => auth.checkCurrent())
+    .catch(() => auth.checkCurrent());
 }
 
 export function signIn(login, password, navigation) {

@@ -41,7 +41,7 @@
     "panoptes-client": "^5.5.5",
     "prop-types": "^15.8.1",
     "ramda": "^0.32.0",
-    "react": "19.2.7",
+    "react": "19.2.8",
     "react-i18next": "^17.0.11",
     "react-native": "0.86.0",
     "react-native-blob-util": "^0.24.10",
@@ -80,7 +80,7 @@
     "@react-native-community/cli": "20.2.0",
     "@react-native-community/cli-platform-android": "20.2.0",
     "@react-native-community/cli-platform-ios": "20.2.0",
-    "@react-native/babel-preset": "0.86.1",
+    "@react-native/babel-preset": "0.86.2",
     "@react-native/eslint-config": "0.86.0",
     "@react-native/jest-preset": "0.86.0",
     "@react-native/metro-config": "0.86.1",
@@ -97,11 +97,19 @@
     "jest-cli": "^29.7.0",
     "prettier": "^3.3.3",
     "react-native-dotenv": "^3.4.9",
-    "react-test-renderer": "19.2.7",
+    "react-test-renderer": "19.2.8",
     "reactotron-react-native": "^5.1.14",
     "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=24.18.0 <25"
+  },
+  "allowScripts": {
+    "@firebase/util@1.15.1": true,
+    "@sentry/cli@2.58.6": true,
+    "@sentry/cli@3.6.2": true,
+    "core-js@3.50.0": true,
+    "fsevents@2.3.3": true,
+    "protobufjs@7.6.5": true
   }
 }

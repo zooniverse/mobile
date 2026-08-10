@@ -2,7 +2,7 @@ import apiClient from 'panoptes-client/lib/api-client'
 import * as R from 'ramda'
 import { setState } from '../actions/index'
 import { Alert, Platform, Image} from 'react-native'
-import { getAuthUser } from '../actions/auth'
+import { getAuthUser, signOut } from '../actions/auth'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 import * as ActionConstants from '../constants/actions'
 import getSubjectLocations from '../utils/get-subject-location'
@@ -319,6 +319,14 @@ export function setupProjectPreferences(workflowID, project) {
       }
 
       getAuthUser().then((userResource)=> {
+        // The session expired and could not be refreshed. Sign the user out
+        // to the home screen (matching loadUserData / PR #858) and resolve so
+        // the classifier does not hang on the loading overlay.
+        if (userResource === null) {
+          dispatch(signOut(undefined, 'ZooniverseApp'))
+          return resolve()
+        }
+
         userResource.get('project_preferences', {project_id: project.id}).then (([projectPreferences]) => {
           //Before being able to classify on a project, the user needs to have their preference created if it doesn't exist
           if (projectPreferences) {
@@ -345,6 +353,11 @@ export function setupProjectPreferences(workflowID, project) {
           })
         })
       })
+      // Any failure above (a rejected auth check, an expired session that
+      // 401s on project_preferences, a network drop) must reject. Without
+      // this the outer promise never settles and startNewClassification's
+      // Promise.all waits forever behind the "Loading Workflow..." overlay.
+      .catch(reject)
     })
   }
 }
