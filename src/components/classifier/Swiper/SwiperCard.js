@@ -44,13 +44,22 @@ const SwiperCard = ({
   const isCurrentShared = useSharedValue(isCurrent);
   useEffect(() => {
     isCurrentShared.value = isCurrent;
-  }, [isCurrent]);
+  }, [isCurrent, isCurrentShared]);
 
   // Delays overlay rendering by one frame after becoming current,
   // so resetCard has time to set translateX back to 0 first.
   const [overlayReady, setOverlayReady] = useState(isCurrent);
   useEffect(() => {
-    setOverlayReady(isCurrent);
+    if (!isCurrent) {
+      setOverlayReady(false);
+      return undefined;
+    }
+
+    const animationFrame = requestAnimationFrame(() => {
+      setOverlayReady(true);
+    });
+
+    return () => cancelAnimationFrame(animationFrame);
   }, [isCurrent]);
 
   // Disabled gesture for the next card — keeps the component tree

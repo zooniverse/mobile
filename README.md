@@ -18,6 +18,7 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
 5. Run `npm start`.
 #### Troubleshooting:
 - [Troubleshooting wiki](https://github.com/zooniverse/mobile/wiki/Troubleshooting) for additional help
+- `react-native-blob-util` is pinned to `0.24.9` because `0.24.10` interrupts Android file downloads, preventing drawing subjects from loading. Do not upgrade it until the upstream Android regression is fixed.
 
 ### Push Notification Troubleshooting
 - When using Firebase Console "Test on device", confirm the FCM token has no leading or trailing spaces.

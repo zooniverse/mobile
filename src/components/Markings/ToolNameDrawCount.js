@@ -13,7 +13,7 @@ function ToolNameDrawCount({ label, number }) {
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <FontAwesome5 name="shapes" size={18} color="#000000" />
+        <FontAwesome5 name="shapes" iconStyle="solid" size={18} color="#000000" />
         <FontedText numberOfLines={2} style={[styles.text, styles.toolText]}>
           {t('workflow.tasks.T0.tools.0.label', label, {ns: 'project', lng: getCurrentProjectLanguage()})}
         </FontedText>

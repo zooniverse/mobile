@@ -7,6 +7,7 @@ function ExpandImageIcon() {
   return (
     <FontAwesome5
       name="expand-arrows-alt"
+      iconStyle="solid"
       size={24}
       style={styles.iconContainer}
     />

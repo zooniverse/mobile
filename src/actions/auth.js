@@ -10,6 +10,20 @@ import { navRef, navigateWhenReady } from '../navigation/RootNavigator';
 import { StackActions } from '@react-navigation/native';
 import { PushNotifications } from '../notifications/PushNotifications';
 
+const USER_DATA_LOAD_TIMEOUT = 15000;
+
+function waitForUserData(promise) {
+  let timeout;
+  const timeoutPromise = new Promise((resolve) => {
+    timeout = setTimeout(resolve, USER_DATA_LOAD_TIMEOUT);
+  });
+
+  return Promise.race([
+    promise.catch(() => undefined),
+    timeoutPromise,
+  ]).finally(() => clearTimeout(timeout));
+}
+
 export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
   /* eslint-disable no-console */
@@ -37,16 +51,16 @@ export function signIn(login, password, navigation) {
 
         // Check if logged in user is a tester and log a testing push token.
         PushNotifications.logTestingToken(user);
-        return Promise.all([
+        return waitForUserData(Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),
-        ])
+        ]))
       }).then(() => {
-        dispatch(setIsFetching(false))
         navigation.dispatch(StackActions.popToTop());
         navRef.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
+      }).finally(() => {
         dispatch(setIsFetching(false))
       })
     }).catch((error) => {

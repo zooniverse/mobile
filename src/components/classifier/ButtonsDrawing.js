@@ -35,6 +35,7 @@ function ButtonsDrawing({ canUndo, onUndo, onDelete, onDraw }) {
   const UndoFont = () => (
     <FontAwesome5
       name={'undo'}
+      iconStyle="solid"
       color={canUndo ? '#000000' : '#CBCCCB'}
       size={16}
     />
