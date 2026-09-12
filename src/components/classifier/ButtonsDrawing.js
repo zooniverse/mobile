@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from '@react-native-vector-icons/fontawesome5/static';
+import FontAwesome from '@react-native-vector-icons/fontawesome/static';
+import MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons/static';
 import PropTypes from 'prop-types';
 
 import FontedText from '../common/FontedText';
@@ -35,6 +35,7 @@ function ButtonsDrawing({ canUndo, onUndo, onDelete, onDraw }) {
   const UndoFont = () => (
     <FontAwesome5
       name={'undo'}
+      iconStyle="solid"
       color={canUndo ? '#000000' : '#CBCCCB'}
       size={16}
     />

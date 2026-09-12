@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from '@react-native-vector-icons/fontawesome5/static';
 import PropTypes from 'prop-types';
 
 import FontedText from '../common/FontedText';
@@ -13,7 +13,7 @@ function ToolNameDrawCount({ label, number }) {
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <FontAwesome5 name="shapes" size={18} color="#000000" />
+        <FontAwesome5 name="shapes" iconStyle="solid" size={18} color="#000000" />
         <FontedText numberOfLines={2} style={[styles.text, styles.toolText]}>
           {t('workflow.tasks.T0.tools.0.label', label, {ns: 'project', lng: getCurrentProjectLanguage()})}
         </FontedText>

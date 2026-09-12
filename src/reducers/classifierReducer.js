@@ -1,5 +1,5 @@
 import * as ActionConstants from '../constants/actions';
-import R from 'ramda'
+import * as R from 'ramda'
 
 const InitialClassifier = {
     workflow: {},

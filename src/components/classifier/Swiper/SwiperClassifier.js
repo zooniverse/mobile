@@ -10,7 +10,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useSelector, useDispatch } from 'react-redux';
-import R from 'ramda';
+import * as R from 'ramda';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import useSubjectQueue from '../../../hooks/useSubjectQueue';
@@ -230,7 +230,7 @@ const SwiperClassifier = ({ route }) => {
   const onUnlinkedTaskAnswered = useCallback(
     (taskKey, value) => {
       const taskAnnotations = annotations[taskKey] || [];
-      if (R.contains(value, taskAnnotations)) {
+      if (R.includes(value, taskAnnotations)) {
         dispatch(classifierActions.removeAnnotationFromTask(workflow.id, taskKey, value));
       } else {
         dispatch(classifierActions.addAnnotationToTask(workflow.id, taskKey, value, true));

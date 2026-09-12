@@ -17,7 +17,7 @@ export function loadUserData() {
       getAuthUser().then((userResource) => {
         // We are no longer authenticated. Sign the user out
         if (userResource === null) {
-          dispatch(signOut())
+          dispatch(signOut(undefined, 'ZooniverseApp'))
           return Promise.resolve()
         }
         

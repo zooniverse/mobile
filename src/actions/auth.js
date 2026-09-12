@@ -6,15 +6,35 @@ import {
 } from '../actions/index'
 import { loadUserAvatar, loadUserProjects, setIsGuestUser, setUser } from '../actions/user'
 import * as ActionConstants from '../constants/actions'
-import { navRef } from '../navigation/RootNavigator';
+import { navRef, navigateWhenReady } from '../navigation/RootNavigator';
 import { StackActions } from '@react-navigation/native';
 import { PushNotifications } from '../notifications/PushNotifications';
+
+const USER_DATA_LOAD_TIMEOUT = 15000;
+
+function waitForUserData(promise) {
+  let timeout;
+  const timeoutPromise = new Promise((resolve) => {
+    timeout = setTimeout(resolve, USER_DATA_LOAD_TIMEOUT);
+  });
+
+  return Promise.race([
+    promise.catch(() => undefined),
+    timeoutPromise,
+  ]).finally(() => clearTimeout(timeout));
+}
 
 export function getAuthUser() {
   //prevent red screen of death thrown by a console.error in javascript-client
   /* eslint-disable no-console */
   console.reportErrorsAsExceptions = false
-  return auth.checkCurrent();
+  // Refresh the bearer token before resolving the user, matching the web
+  // app. This renews an expired-but-refreshable session so returning users
+  // keep working instead of failing silently. Falls back to checkCurrent if
+  // the refresh fails, which resolves null for a truly expired session.
+  return auth.checkBearerToken()
+    .then(() => auth.checkCurrent())
+    .catch(() => auth.checkCurrent());
 }
 
 export function signIn(login, password, navigation) {
@@ -29,18 +49,18 @@ export function signIn(login, password, navigation) {
         user.projects = {}
         dispatch(setUser(user));
 
-        // Check if logged in user is a tester and email a testing push token.
-        PushNotifications.emailTestingToken(user);
-        return Promise.all([
+        // Check if logged in user is a tester and log a testing push token.
+        PushNotifications.logTestingToken(user);
+        return waitForUserData(Promise.all([
           dispatch(loadUserAvatar()),
           dispatch(loadUserProjects()),
-        ])
+        ]))
       }).then(() => {
-        dispatch(setIsFetching(false))
         navigation.dispatch(StackActions.popToTop());
         navRef.navigate('ZooniverseApp', {refresh: true});
       }).catch((error) => {
         dispatch(setState('errorMessage', error.message))
+      }).finally(() => {
         dispatch(setIsFetching(false))
       })
     }).catch((error) => {
@@ -82,13 +102,13 @@ export function register(navigation) {
 }
 
 
-export function signOut(navigation) {
+export function signOut(navigation, destination = 'SignIn') {
   return dispatch => {
     auth.signOut()
     dispatch({ type: ActionConstants.SIGN_OUT });
     dispatch(setState('errorMessage', null))
-    navigation.dispatch(StackActions.popToTop());
-    navRef.navigate('SignIn');
+    navigation?.dispatch(StackActions.popToTop());
+    navigateWhenReady(destination);
   }
 }
 

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import { DrawerActions, useNavigation, StackActions } from '@react-navigation/native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from '@react-native-vector-icons/fontawesome/static';
 import { BlurView } from '@react-native-community/blur';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     flex: 1,
   },
   drawerIconContainer: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   fullSize: {
     flex: 1,
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
   headerContainer: {
     flex: 1,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
   titleText: {
     color: '#fff',

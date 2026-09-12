@@ -6,7 +6,7 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types';
 import FontedText from '../common/FontedText'
-import { addIndex, contains, map } from 'ramda'
+import { addIndex, includes, map } from 'ramda'
 import Toggle from 'react-native-toggle-element'
 
 const trackBarStyles = {
@@ -31,7 +31,7 @@ const UnlinkedTask = (props) => {
     return (
       <View key={ idx } style={styles.rowContainer}>
         <Toggle
-          value={contains(idx, annotationValues)}
+          value={includes(idx, annotationValues)}
           onPress={()=>props.onAnswered(props.unlinkedTaskKey, idx)}
           trackBar={trackBarStyles}
           thumbButton={thumbButtonStyles}

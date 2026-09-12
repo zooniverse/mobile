@@ -5,14 +5,26 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
 
 ### Preparing The React Native Framework
 #### Requirements:
- - Node >= 16 (Recommend >= 18)
+ - Node 24.18.0 (use `nvm use` to load the version in `.nvmrc`)
+ - Ruby 4.0.6, Bundler 4.0.15, and CocoaPods 1.17.0 (Ruby is pinned in `.ruby-version`)
 #### Steps:
 1. Follow the instructions for Android and iOS setup in [this guide](https://reactnative.dev/docs/environment-setup).
 2. Clone down this repo and navigate to its directory (called `mobile`).
-3. Run `npm install` (later, if you need to reinstall dependencies for some reason, you can run `rm -rf node_modules/ && npm install`)
-4. Run `npm start`.
+3. Copy or create the local files that are not checked into Git:
+   - `local.properties` goes in `android/local.properties`. It contains the local Android SDK path and is excluded because that path is specific to each developer's machine.
+   - `key.properties` goes in `android/app/key.properties`. It contains the release keystore filename, key alias, and signing passwords and is excluded because it contains credentials.
+   - `my-upload-key.keystore` goes in `android/app/my-upload-key.keystore`. It contains the private Android upload signing key and is excluded because committing it would expose a sensitive release credential.
+4. Run `npm ci`.
+5. Run `npm start`.
 #### Troubleshooting:
 - [Troubleshooting wiki](https://github.com/zooniverse/mobile/wiki/Troubleshooting) for additional help
+- `react-native-blob-util` is pinned to `0.24.9` because `0.24.10` interrupts Android file downloads, preventing drawing subjects from loading. Do not upgrade it until the upstream Android regression is fixed.
+
+### Push Notification Troubleshooting
+- When using Firebase Console "Test on device", confirm the FCM token has no leading or trailing spaces.
+- In Firebase Console -> Project settings -> Cloud Messaging, confirm the iOS APNs Key ID and Team ID match the current Apple Developer account.
+- Direct APNs delivery can work while Firebase Cloud Messaging still fails; use FCM v1 REST/API sends to get the real Firebase/APNs error.
+- Android debug uses the dev Firebase project, Android release uses production, and iOS uses the bundled `ios/GoogleService-Info.plist`.
 
 ### iOS
 #### Requirements:
@@ -21,12 +33,15 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
  - To run on an iOS device see [Running on device - iOS]https://reactnative.dev/docs/running-on-device?platform=ios
 #### Steps:
 On the command line, from the `mobile` directory, run:
-1. `cd ios && rm -rf Podfile.lock && pod install && cd ..`. You may need to `brew install cocoapods` first.
+1. Run `bundle install`, then `cd ios && bundle exec pod install && cd ..`.
 2. `npm run ios`
 
 ### Android
 #### Requirements:
  - Android Studio
+ - The following local files are intentionally excluded from Git and must be created or obtained before building:
+    * `android/local.properties` identifies the local Android SDK path. Android Studio normally creates it; otherwise add `sdk.dir=/absolute/path/to/Android/sdk`.
+    * `android/app/key.properties` contains the release keystore path and credentials. Obtain it and the referenced keystore securely from an existing maintainer. The current Gradle configuration reads this file during debug and release builds.
  - You'll need at least one emulator.  To get one:
     *  Within Android Studio, open the "AVD Manager" -  in the toolbar click the icon with the purple device and small android (fourth from the right)
     *  Click 'Create Virtual Device' - bottom left-hand corner

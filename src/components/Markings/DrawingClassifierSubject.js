@@ -7,9 +7,9 @@ import PropTypes from 'prop-types'
 import {
     Rect
 } from 'react-native-svg'
-import R from 'ramda'
+import * as R from 'ramda'
 import { BlurView } from '@react-native-community/blur';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from '@react-native-vector-icons/fontawesome/static'
 import AlreadySeenBanner from '../classifier/AlreadySeenBanner'
 import DrawingToolView from './components/DrawingToolView';
 

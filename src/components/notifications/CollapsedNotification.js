@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from '@react-native-vector-icons/ionicons/static';
 import PropTypes from 'prop-types';
 
 import Timestamp from './Timestamp';

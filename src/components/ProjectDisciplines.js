@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import R from 'ramda'
+import * as R from 'ramda'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { GLOBALS } from '../constants/globals'
@@ -27,6 +27,7 @@ import ErasStats from './ErasStats';
 import theme from '../theme';
 import { useTranslation } from 'react-i18next';
 import languageOptions from '../i18n/languages';
+import * as Sentry from '@sentry/react-native';
 
 const mapStateToProps = (state) => {
   return {
@@ -52,6 +53,7 @@ const mapDispatchToProps = (dispatch) => ({
 function ProjectDisciplines({ ...props }) {
   const [refreshing, setRefreshing] = useState(true);
   const fetchProjectPromise = useRef(null);
+  const hasReportedEmptyState = useRef(false);
   const route = useRoute();
   const { t } = useTranslation('platform');
 
@@ -83,6 +85,25 @@ function ProjectDisciplines({ ...props }) {
       refreshProjects();
     }
   }, [route]);
+
+  useEffect(() => {
+    const isUnexpectedGuestEmptyState =
+      !refreshing && props.isGuestUser && !props.isLoading && !props.isSuccess;
+
+    if (isUnexpectedGuestEmptyState && !hasReportedEmptyState.current) {
+      hasReportedEmptyState.current = true;
+      Sentry.withScope((scope) => {
+        scope.setTag('home_screen_state', 'guest_disciplines_empty');
+        scope.setContext('project_disciplines', {
+          isGuestUser: props.isGuestUser,
+          isLoading: props.isLoading,
+          isSuccess: props.isSuccess,
+          refreshCompleted: !refreshing,
+        });
+        Sentry.captureMessage('Home screen discipline list unavailable');
+      });
+    }
+  }, [refreshing, props.isGuestUser, props.isLoading, props.isSuccess]);
 
   function shouldPromptForPermissions() {
     return Platform.OS === 'ios' && !props.user.pushPrompted;

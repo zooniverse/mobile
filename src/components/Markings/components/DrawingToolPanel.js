@@ -4,8 +4,8 @@
  * No Redux reads; everything comes from props.
  */
 
-import React, { useEffect, useRef, useState } from 'react'
-import { Animated, View } from 'react-native'
+import React, { useState } from 'react'
+import { View } from 'react-native'
 import PropTypes from 'prop-types'
 
 import DrawingCanvas from './DrawingCanvas'
@@ -28,27 +28,16 @@ const DrawingToolPanel = ({
     onShapeRemoved,
     onShapeMutated,
 }) => {
-    const scaleRef = useRef(new Animated.Value(1))
     const [mode, setMode] = useState('draw')
     // Preserved so `DrawingCanvas` can report out-of-bounds updates. The
     // flag isn't consumed locally today but is kept in case a future
     // parent wants to react to it.
     const [, setAShapeIsOutOfBounds] = useState(false)
 
-    useEffect(() => {
-        if (!imageIsLoaded) {
-            scaleRef.current.setValue(0.8)
-            return
-        }
-        Animated.spring(scaleRef.current, { toValue: 1 }).start()
-    }, [imageIsLoaded])
-
     return (
         <View style={styles.container}>
             {imageIsLoaded ? (
-                <Animated.View
-                    style={[styles.container, { transform: [{ scale: scaleRef.current }] }]}
-                >
+                <View style={styles.container}>
                     <DrawingCanvas
                         onContainerLayout={onContainerLayout}
                         drawingColor={drawingColor}
@@ -63,7 +52,7 @@ const DrawingToolPanel = ({
                         onShapeRemoved={onShapeRemoved}
                         onShapeMutated={onShapeMutated}
                     />
-                </Animated.View>
+                </View>
             ) : (
                 <SubjectLoadingIndicator />
             )}

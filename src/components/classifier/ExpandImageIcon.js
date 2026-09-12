@@ -1,12 +1,13 @@
 import React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from '@react-native-vector-icons/fontawesome5/static';
 
 function ExpandImageIcon() {
   return (
     <FontAwesome5
       name="expand-arrows-alt"
+      iconStyle="solid"
       size={24}
       style={styles.iconContainer}
     />

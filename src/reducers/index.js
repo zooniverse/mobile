@@ -1,4 +1,4 @@
-import { append, equals, lensPath, merge, reject, set, view } from 'ramda';
+import { append, equals, lensPath, mergeRight, reject, set, view } from 'ramda';
 import { combineReducers } from 'redux';
 import app from './appReducer'
 import user from './userReducer';
@@ -47,19 +47,19 @@ export const InitialState = {
         ), state)
 
     case 'SET_USER':
-      return merge(state, {
+      return mergeRight(state, {
         user: action.user
       })
     case 'SET_IS_FETCHING':
-      return merge(state, {
+      return mergeRight(state, {
         isFetching: action.isFetching
       })
     case 'SET_ERROR':
-      return merge(state, {
+      return mergeRight(state, {
         errorMessage: action.errorMessage
       })
     case 'SET_PROJECT_LIST':
-      return merge(state, {
+      return mergeRight(state, {
         projectList: action.projectList
       })
     default:

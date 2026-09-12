@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import Feather from 'react-native-vector-icons/Feather';
+import Feather from '@react-native-vector-icons/feather/static';
 import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 

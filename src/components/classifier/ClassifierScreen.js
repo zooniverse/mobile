@@ -437,7 +437,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   loadingOverlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
     alignItems: 'center',
   },

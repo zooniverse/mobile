@@ -4,8 +4,8 @@ import {
     TouchableOpacity
 } from 'react-native'
 import PropTypes from 'prop-types'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import FontAwesome5 from '@react-native-vector-icons/fontawesome5/static'
+import SimpleLineIcons from '@react-native-vector-icons/simple-line-icons/static'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import DeviceInfo from 'react-native-device-info';
 
@@ -48,7 +48,7 @@ const ButtonIcon = ({type, ...props}) => {
         case 'expand':
             return <SimpleLineIcons name={'size-fullscreen'} {...props} />
         case 'edit':
-            return <FontAwesome5 name={'edit'} {...props} solid />
+            return <FontAwesome5 name={'edit'} {...props} iconStyle="solid" />
         case 'draw':
             return <FontAwesome5 name={'plus'} {...props} />
         case 'erase':

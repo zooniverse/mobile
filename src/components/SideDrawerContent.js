@@ -8,9 +8,9 @@ import {
   View
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import Feather from 'react-native-vector-icons/Feather'
-import Fontisto from 'react-native-vector-icons/Fontisto'
+import Icon from '@react-native-vector-icons/fontawesome/static'
+import Feather from '@react-native-vector-icons/feather/static'
+import Fontisto from '@react-native-vector-icons/fontisto/static'
 import LinearGradient from 'react-native-linear-gradient';
 import DeviceInfo from 'react-native-device-info'
 import FontedText from './common/FontedText'

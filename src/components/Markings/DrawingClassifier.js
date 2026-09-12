@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import R from 'ramda'
+import * as R from 'ramda'
 
 import ClassificationPanel from '../classifier/ClassificationPanel'
 import DrawingClassifierSubject from './DrawingClassifierSubject'

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Linking, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
-import Feather from 'react-native-vector-icons/Feather';
+import Feather from '@react-native-vector-icons/feather/static';
 import Toggle from 'react-native-toggle-element'
 
 import FontedText from '../common/FontedText';

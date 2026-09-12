@@ -47,7 +47,6 @@
 		09AC63E72E7D7287003629B0 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		09AC63E82E7D7287003629B0 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		09AC63E92E7D7287003629B0 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
-		09AC63EA2E7D7287003629B0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		09AC63EB2E7D7287003629B0 /* zoo-font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "zoo-font.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ZooniverseMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooniverseMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ZooniverseMobile/Images.xcassets; sourceTree = "<group>"; };
@@ -119,7 +118,6 @@
 				09AC63E72E7D7287003629B0 /* OpenSans-Regular.ttf */,
 				09AC63E82E7D7287003629B0 /* OpenSans-Semibold.ttf */,
 				09AC63E92E7D7287003629B0 /* OpenSans-SemiboldItalic.ttf */,
-				09AC63EA2E7D7287003629B0 /* SimpleLineIcons.ttf */,
 				09AC63EB2E7D7287003629B0 /* zoo-font.ttf */,
 				09AC63BA2E7ABD84003629B0 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* ZooniverseMobile */,
@@ -250,7 +248,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$REACT_NATIVE_XCODE\\\"\"\n";
 		};
 		10811169B778E8D383BE1DDC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -352,7 +350,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = 275SK7D8Y2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
@@ -361,7 +359,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.16.0;
+				MARKETING_VERSION = 2.17.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -385,7 +383,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
-				CURRENT_PROJECT_VERSION = 45;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = 275SK7D8Y2;
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -393,7 +393,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.16.0;
+				MARKETING_VERSION = 2.17.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -401,6 +401,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mobile.zooniverse;
 				PRODUCT_NAME = ZooniverseMobile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -470,6 +471,19 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+					"${PODS_ROOT}/ReactCommon",
+					"${PODS_ROOT}/ReactCommon/react/nativemodule/core",
+					"${PODS_ROOT}/React-runtimeexecutor",
+					"${PODS_ROOT}/React-runtimeexecutor/platform/ios",
+					"${PODS_ROOT}/ReactCommon-Samples",
+					"${PODS_ROOT}/ReactCommon-Samples/platform/ios",
+					"${PODS_ROOT}/React-Fabric/react/renderer/components/view/platform/cxx",
+					"${PODS_ROOT}/React-NativeModulesApple",
+					"${PODS_ROOT}/React-graphics",
+					"${PODS_ROOT}/React-graphics/react/renderer/graphics/platform/ios",
+					"${PODS_ROOT}/React-featureflags",
+					"${PODS_ROOT}/React-renderercss",
+					"${PODS_ROOT}/React-bridging",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,6 +497,10 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DRCT_REMOVE_LEGACY_ARCH=1",
+				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -490,10 +508,13 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+					"-DRCT_REMOVE_LEGACY_ARCH=1",
 				);
+				PODFILE_DIR = "$(SRCROOT)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				USE_HERMES = true;
 			};
 			name = Debug;
@@ -552,6 +573,19 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+					"${PODS_ROOT}/ReactCommon",
+					"${PODS_ROOT}/ReactCommon/react/nativemodule/core",
+					"${PODS_ROOT}/React-runtimeexecutor",
+					"${PODS_ROOT}/React-runtimeexecutor/platform/ios",
+					"${PODS_ROOT}/ReactCommon-Samples",
+					"${PODS_ROOT}/ReactCommon-Samples/platform/ios",
+					"${PODS_ROOT}/React-Fabric/react/renderer/components/view/platform/cxx",
+					"${PODS_ROOT}/React-NativeModulesApple",
+					"${PODS_ROOT}/React-graphics",
+					"${PODS_ROOT}/React-graphics/react/renderer/graphics/platform/ios",
+					"${PODS_ROOT}/React-featureflags",
+					"${PODS_ROOT}/React-renderercss",
+					"${PODS_ROOT}/React-bridging",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -564,6 +598,10 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DRCT_REMOVE_LEGACY_ARCH=1",
+				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -571,9 +609,12 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+					"-DRCT_REMOVE_LEGACY_ARCH=1",
 				);
+				PODFILE_DIR = "$(SRCROOT)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};

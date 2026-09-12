@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 
 import * as classifierActions from '../actions/classifier'
 import * as drawingActions from '../actions/drawing'
