@@ -38,7 +38,7 @@ const resolveSubmitLabel = ({ isMulti, nextTaskKey, t }) => {
   return t('Mobile.classifier.done', 'Done')
 }
 
-const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, onExpandMedia }) => {
+const SingleChoice = ({ subject, subjectText, task, taskKey, workflow, project, onAdvance, onExpandMedia }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -164,6 +164,7 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
       >
         <SubjectViewer
           subject={subject}
+          subjectText={subjectText}
           onPress={onExpandMedia}
         />
       </View>

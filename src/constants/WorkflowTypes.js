@@ -8,6 +8,7 @@ const WorkflowTypes = {
   SingleChoice: 'single',
   MultiSelect: 'multiple',
   Drawing: 'drawing',
+  TextFromSubject: 'textFromSubject',
   Swipe: 'swipe',
 }
 

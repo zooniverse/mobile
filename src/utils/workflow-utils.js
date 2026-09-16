@@ -21,7 +21,30 @@ const workflowHasSingleTask = (workflow) => {
 }
 
 export const isValidMobileWorkflow = workflow => {
-  return isValidDrawingWorkflow(workflow) || isValidQuestionWorkflow(workflow)
+  return isValidOCRWorkflow(workflow) || isValidDrawingWorkflow(workflow) || isValidQuestionWorkflow(workflow)
+}
+
+const isValidOCRWorkflow = (workflow) => {
+  if (!workflow?.tasks || !workflow.first_task) return false
+  // OCR support currently covers sequential correction and multi-select
+  // reporting tasks, including the HAVI 32497 workflow. Do not silently
+  // enable task bodies with different submission semantics.
+  if (Object.values(workflow.tasks).some(task => task?.type === 'textFromSubject')) {
+    const visited = new Set()
+    let key = workflow.first_task
+    while (key) {
+      if (visited.has(key)) return false
+      visited.add(key)
+      const task = workflow.tasks[key]
+      if (!task || !['textFromSubject', 'multiple'].includes(task.type)) return false
+      if (task.type === 'multiple' && (!Array.isArray(task.answers) || !task.answers.length || typeof task.question !== 'string')) return false
+      if (task.unlinkedTask || task.feedback?.enabled) return false
+      key = task.next
+    }
+    workflow.type = workflow.tasks[workflow.first_task].type
+    return true
+  }
+  return false
 }
 
 const isValidQuestionWorkflow = (workflow) => {

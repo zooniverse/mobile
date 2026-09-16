@@ -15,6 +15,19 @@
             "help": "Help",
             "version": "Version"
         },
+        "ocr": {
+            "answer": "Correct the text",
+            "image": "Image",
+            "originalText": "Original text",
+            "previousMedia": "Previous subject media",
+            "nextMedia": "Next subject media",
+            "expandImage": "Enlarge subject image",
+            "retryImage": "Retry image",
+            "retryText": "Retry loading text",
+            "reset": "Reset",
+            "saving": "Submitting…",
+            "saveError": "Could not submit. Your answers are saved here. Please try again."
+        },
         "classifier": {
             "help": "Help",
             "loadingSubject": "Loading Subject",
