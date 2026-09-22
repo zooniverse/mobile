@@ -28,7 +28,7 @@ const SUBJECT_HEIGHT = 300
 
 const isVideoSrc = (src = '') => src.slice(-4).toLowerCase() === '.mp4'
 
-const SubjectViewer = ({ subject, subjectText, onLayoutChange, onPress }) => {
+const SubjectViewer = ({ subject, subjectText, onLayoutChange, onPress, adaptiveHeight = false }) => {
   const displays = subject?.displays
   const firstSrc = displays?.[0]?.src
   const [singleImageLoaded, setSingleImageLoaded] = useState(false)
@@ -42,7 +42,7 @@ const SubjectViewer = ({ subject, subjectText, onLayoutChange, onPress }) => {
   if (!displays?.length || !firstSrc) return null
 
   if (displays.some(display => display.type === 'text')) {
-    return <ImageAndTextViewer key={subject.id} subject={subject} original={subjectText} onPress={onPress} />
+    return <ImageAndTextViewer key={subject.id} subject={subject} original={subjectText} onPress={onPress} adaptiveHeight={adaptiveHeight} />
   }
 
   const renderMedia = () => {

@@ -119,6 +119,7 @@ export default function TextFromSubject({
         >
           <ImageAndTextViewer
             original={original}
+            adaptiveHeight
             subject={subject}
             onPress={onExpandMedia}
             height={Math.min(200, viewport.height * 0.24)}
@@ -181,8 +182,9 @@ export default function TextFromSubject({
 }
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  content: { padding: 12, gap: 12 },
+  content: { paddingVertical: 12, gap: 12 },
   input: {
+    marginHorizontal: 12,
     minHeight: 80,
     maxHeight: 160,
     borderWidth: 1,

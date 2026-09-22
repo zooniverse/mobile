@@ -147,12 +147,13 @@ const MultiSelect = ({ subject, subjectText, task, taskKey, workflow, project, o
   return (
     <>
       <View
-        style={styles.subjectArea}
+        style={hasOCR ? undefined : styles.subjectArea}
         onLayout={(e) => setDisplayDimensions(e.nativeEvent.layout)}
       >
         <SubjectViewer
           subject={subject}
           subjectText={subjectText}
+          adaptiveHeight={hasOCR}
           onPress={onExpandMedia}
         />
       </View>

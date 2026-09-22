@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   View,
   Image,
@@ -18,7 +18,8 @@ export default function ImageAndTextViewer({
   subject,
   original,
   onPress,
-  height = 220
+  height = 220,
+  adaptiveHeight = false
 }) {
   const { t } = useTranslation()
   const image = subject.displays?.find(display => display.type === 'image')
@@ -26,9 +27,28 @@ export default function ImageAndTextViewer({
   const [imageFailed, setImageFailed] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageAttempt, setImageAttempt] = useState(0)
+  const [availableWidth, setAvailableWidth] = useState(0)
+  const [imageSize, setImageSize] = useState(null)
+  const [textHeight, setTextHeight] = useState(48)
+  useEffect(() => {
+    if (!adaptiveHeight || !image?.src) return
+    let active = true
+    setImageSize(null)
+    Image.getSize(image.src, (width, naturalHeight) => {
+      if (active) setImageSize({ width, height: naturalHeight })
+    }, () => {})
+    return () => { active = false }
+  }, [adaptiveHeight, image?.src, imageAttempt])
+  const imageScale = imageSize && availableWidth
+    ? Math.min(1, availableWidth / imageSize.width, height / imageSize.height)
+    : null
+  const imageHeight = imageScale !== null ? imageSize.height * imageScale : height
+  const viewerHeight = !adaptiveHeight ? height
+    : mode === 'image' ? (imageFailed ? height : imageHeight)
+      : original.status === 'success' ? Math.min(textHeight, height) : height
   return (
-    <View style={styles.container}>
-      <View style={{ height }}>
+    <View style={styles.container} onLayout={event => setAvailableWidth(event.nativeEvent.layout.width)}>
+      <View style={{ height: viewerHeight, marginVertical: adaptiveHeight ? 12 : 0 }}>
         {mode === 'image' && image ? (
           imageFailed ? (
             <ButtonLarge
@@ -52,8 +72,10 @@ export default function ImageAndTextViewer({
               <Image
                 key={imageAttempt}
                 source={{ uri: image.src }}
-                resizeMode="contain"
-                style={styles.flex}
+                resizeMode={adaptiveHeight ? 'contain' : 'center'}
+                style={adaptiveHeight && imageScale !== null
+                  ? { width: imageSize.width * imageScale, height: imageHeight, alignSelf: 'center' }
+                  : styles.flex}
                 onLoad={() => setImageLoaded(true)}
                 onError={() => setImageFailed(true)}
               />
@@ -68,7 +90,7 @@ export default function ImageAndTextViewer({
             onPress={original.retry}
           />
         ) : (
-          <ScrollView>
+          <ScrollView onContentSizeChange={adaptiveHeight ? (_width, contentHeight) => setTextHeight(contentHeight) : undefined}>
             <Text selectable style={styles.text}>
               {original.text}
             </Text>
