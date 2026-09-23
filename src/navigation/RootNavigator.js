@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 
 import {
   NavigationContainer,
@@ -54,7 +55,9 @@ const StackNavigator = () => {
       initialRouteName={PageKeys.ZooniverseApp}
       screenOptions={{
         header: ({ navigation }) => <NavBar navigation={navigation} />,
-        gestureEnabled: false
+        gestureEnabled: false,
+        // Diagnostic: test whether Android transitions cause persistent transparency.
+        animation: Platform.OS === 'android' ? 'none' : 'default',
       }}>
       <Stack.Screen
         name={PageKeys.SignIn}
