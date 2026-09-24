@@ -1,4 +1,5 @@
 eslint:
   enabled: true
   version: 8.1.0
+  # Rules from the historical .eslintrc, before its removal in 28890c6d.
   config_file: .eslintrc.hound.json
