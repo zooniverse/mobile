@@ -56,7 +56,7 @@ const StackNavigator = () => {
       screenOptions={{
         header: ({ navigation }) => <NavBar navigation={navigation} />,
         gestureEnabled: false,
-        // Diagnostic: test whether Android transitions cause persistent transparency.
+        // Disable Android transitions to prevent persistent screen transparency (#918).
         animation: Platform.OS === 'android' ? 'none' : 'default',
       }}>
       <Stack.Screen
