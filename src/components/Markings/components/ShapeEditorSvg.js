@@ -103,7 +103,7 @@ class ShapeEditorSvg extends Component {
 
                 // Determine if the user is touching a shape and where in the shape they are touching
                 const analyzedLocations = R.mapObjIndexed((shape, key) => {
-                    return analyzeCoordinateWithShape(locationX, locationY, shape, this.cornerLocations[key])
+                    return analyzeCoordinateWithShape(locationX, locationY, shape, this.cornerLocations[key], this.props.compactMarks)
                 }, this.shapeLocations)
                 const allShapesTouched = R.pickBy((analysis) => analysis.withinSquare, analyzedLocations)
 
@@ -243,7 +243,7 @@ class ShapeEditorSvg extends Component {
                 return (
                     <Rect
                         stroke="black"
-                        strokeWidth={4 * this.props.displayToNativeRatioX}
+                        strokeWidth={(this.props.compactMarks ? 2 : 4) * this.props.displayToNativeRatioX}
                         fill="rgba(0, 0, 0, .5)"
                         {... this.state.previewShapeDimensions}
                     />
@@ -277,6 +277,8 @@ class ShapeEditorSvg extends Component {
                             disabled={this.state.shapeToRemoveIndex === index}
                             displayToNativeRatioX={this.props.displayToNativeRatioX}
                             displayToNativeRatioY={this.props.displayToNativeRatioY}
+                            handleRadius={this.props.handleRadius}
+                            compactMarks={this.props.compactMarks}
                             showCorners={this.props.mode === 'draw' && selectedShape}
                             isDeletable={this.props.mode === 'erase'}
                             ref={ref => {
@@ -326,7 +328,13 @@ ShapeEditorSvg.propTypes = {
     onShapeDeleted: PropTypes.func,
     drawingShape: PropTypes.string,
     onShapeIsOutOfBoundsUpdates: PropTypes.func,
-    maxShapesDrawn: PropTypes.bool
+    maxShapesDrawn: PropTypes.bool,
+    handleRadius: PropTypes.number,
+    compactMarks: PropTypes.bool,
+}
+
+ShapeEditorSvg.defaultProps = {
+    handleRadius: 16,
 }
 
 export default ShapeEditorSvg

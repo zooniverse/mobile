@@ -20,6 +20,7 @@ import FullScreenMedia from '../FullScreenMedia'
 import * as colorModes from '../../displayOptions/colorModes'
 import { markdownContainsImage } from '../../utils/markdownUtils'
 import useSubjectQueue from '../../hooks/useSubjectQueue'
+import useSubjectText from '../../hooks/useSubjectText'
 import useWorkflowResources from '../../hooks/useWorkflowResources'
 import useProjectTranslations from '../../hooks/useProjectTranslations'
 import useMiniCourseTranslations from '../../hooks/useMiniCourseTranslations'
@@ -37,6 +38,7 @@ import TranslationsLoadingIndicator from '../common/TranslationsLoadingIndicator
 import { shouldShowMiniCourse } from '../../utils/miniCourseTrigger'
 import { getCurrentProjectLanguage } from '../../i18n'
 
+import TextFromSubject from './workflowTypes/TextFromSubject'
 import SingleChoice from './workflowTypes/SingleChoice'
 import MultiSelect from './workflowTypes/MultiSelect'
 import Drawing from './workflowTypes/Drawing'
@@ -60,6 +62,8 @@ const ClassifierScreen = ({ route }) => {
     advanceToNextSubject,
     fetchMoreSubjects,
   } = useSubjectQueue(workflow.id)
+  // Retain the current subject text across tasks, releasing it with this screen.
+  const subjectText = useSubjectText(currentSubject)
 
   // Kick off the initial fetch.
   useEffect(() => {
@@ -303,6 +307,7 @@ const ClassifierScreen = ({ route }) => {
   const renderBody = () => {
     const bodyProps = {
       subject: currentSubject,
+      subjectText,
       task: currentTask,
       taskKey: currentTaskKey,
       workflow,
@@ -313,8 +318,12 @@ const ClassifierScreen = ({ route }) => {
     // Re-mount the body whenever the active task changes so each task's
     // local selection state starts from a clean slate. Prior selections (on
     // Back navigation) are seeded from the `classification` slice in the
-    // body's lazy useState initializer.
-    const key = `${workflow.id}:${currentTaskKey}`
+    // body's lazy useState initializer. OCR bodies also remount per subject
+    // so an edited string cannot carry over to the next image.
+    const hasOCR = Object.values(workflow.tasks || {}).some(task => task?.type === 'textFromSubject')
+    const key = hasOCR
+      ? `${workflow.id}:${currentSubject?.id}:${currentTaskKey}`
+      : `${workflow.id}:${currentTaskKey}`
     // Body type resolution:
     //   - First task: defer to `workflow.type` so single-task auto-typing
     //     to "swipe" (2-answer single-choice) is preserved.
@@ -335,6 +344,8 @@ const ClassifierScreen = ({ route }) => {
             fetchMoreSubjects={fetchMoreSubjects}
           />
         )
+      case WorkflowTypes.TextFromSubject:
+        return <TextFromSubject key={key} {...bodyProps} />
       case WorkflowTypes.MultiSelect:
         return <MultiSelect key={key} {...bodyProps} />
       case WorkflowTypes.Drawing:

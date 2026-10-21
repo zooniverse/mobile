@@ -155,9 +155,10 @@ const addSupportedWorkflows = async projects => {
     ).filter(workflow => workflow.mobile_verified)
 
     projects.forEach(project => {
-        project.workflows = workflows.filter(
+        const projectWorkflows = workflows.filter(
             workflow => workflow.links.project === project.id
         )
+        project.workflows = projectWorkflows
     })
 
     return projects.filter(project => project.workflows.length > 0)
@@ -167,7 +168,11 @@ const fetchPreviewCards = async () => {
     const user = await getAuthUser()
     if (!user) return []
 
-    const [ownerProjects, collaboratorProjects, multiTaskProjects] = await Promise.all([
+    const [
+        ownerProjects,
+        collaboratorProjects,
+        multiTaskProjects,
+    ] = await Promise.all([
         fetchPaginated('projects', ownerParams),
         fetchPaginated('projects', collaboratorParams),
         // TEMP: HAVI bypass — fetch the HAVI test project directly so it
