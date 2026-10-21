@@ -22,6 +22,14 @@ const DrawingSubjectViewer = ({
     drawingColor,
     imageSource,
     canUndo,
+    canDraw,
+    handleRadius,
+    compactMarks = false,
+    drawingMode,
+    zoomScale,
+    canPan,
+    onPanAvailabilityChange,
+    onPanStateChange,
     showHelpButton,
     onHelpButtonPressed,
     inMuseumMode,
@@ -69,7 +77,14 @@ const DrawingSubjectViewer = ({
                     imageSource={imageSource}
                     canUndo={canUndo}
                     showDrawingButtons={showDrawingButtons}
-                    canDraw={showDrawingButtons}
+                    canDraw={canDraw}
+                    handleRadius={handleRadius}
+                        compactMarks={compactMarks}
+                    drawingMode={drawingMode}
+                    zoomScale={zoomScale}
+                    canPan={canPan}
+                    onPanAvailabilityChange={onPanAvailabilityChange}
+                    onPanStateChange={onPanStateChange}
                     inMuseumMode={inMuseumMode}
                     subjectDimensions={subjectDimensions}
                     shapes={shapes}
@@ -101,6 +116,14 @@ DrawingSubjectViewer.propTypes = {
     drawingColor: PropTypes.string,
     imageSource: PropTypes.string,
     canUndo: PropTypes.bool,
+    canDraw: PropTypes.bool,
+    handleRadius: PropTypes.number,
+    compactMarks: PropTypes.bool,
+    drawingMode: PropTypes.oneOf(['draw', 'erase', 'view']),
+    zoomScale: PropTypes.number,
+    canPan: PropTypes.bool,
+    onPanAvailabilityChange: PropTypes.func,
+    onPanStateChange: PropTypes.func,
     showHelpButton: PropTypes.bool,
     onHelpButtonPressed: PropTypes.func,
     inMuseumMode: PropTypes.bool,
@@ -108,6 +131,13 @@ DrawingSubjectViewer.propTypes = {
     onShapeAdded: PropTypes.func,
     onShapeRemoved: PropTypes.func,
     onShapeMutated: PropTypes.func,
+}
+
+DrawingSubjectViewer.defaultProps = {
+    canPan: false,
+    canDraw: false,
+    handleRadius: 16,
+    zoomScale: 1,
 }
 
 export default DrawingSubjectViewer

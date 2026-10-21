@@ -105,11 +105,11 @@ const isValidDrawingWorkflow = (workflow) => {
   }
 
   const taskTools = firstTask.tools
-  if (taskTools.length !== 1) {
+  if (taskTools.length === 0) {
     return false
   }
 
-  if (taskTools[0].type !== 'rectangle') {
+  if (taskTools.some(tool => tool.type !== 'rectangle')) {
     return false
   }
 
