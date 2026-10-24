@@ -18,6 +18,7 @@ import ToolNameDrawCount from './ToolNameDrawCount'
 
 const DrawingModalSheet = ({
     visible,
+    compactMarks = false,
     onClose,
     tool,
     imageSource,
@@ -96,6 +97,8 @@ const DrawingModalSheet = ({
                 )}
                 <View style={styles.modalContainer}>
                     <DrawingToolPanel
+                        compactMarks={compactMarks}
+                        handleRadius={compactMarks ? 10 : 16}
                         onUndoButtonSelected={onUndoMostRecentEdit}
                         maxShapesDrawn={numberOfShapesDrawn >= tool?.max}
                         drawingColor={tool?.color}
@@ -155,6 +158,7 @@ const styles = EStyleSheet.create({
 
 DrawingModalSheet.propTypes = {
     visible: PropTypes.bool,
+    compactMarks: PropTypes.bool,
     onClose: PropTypes.func,
     tool: PropTypes.shape({
         max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

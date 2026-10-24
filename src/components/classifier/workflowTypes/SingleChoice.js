@@ -38,7 +38,7 @@ const resolveSubmitLabel = ({ isMulti, nextTaskKey, t }) => {
   return t('Mobile.classifier.done', 'Done')
 }
 
-const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, onExpandMedia }) => {
+const SingleChoice = ({ subject, subjectText, task, taskKey, workflow, project, onAdvance, onExpandMedia, questionContent }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -158,17 +158,19 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
 
   return (
     <>
+      <ScrollView ref={scrollViewRef} style={styles.flex}>
+        {questionContent}
       <View
         style={styles.subjectArea}
         onLayout={(e) => setDisplayDimensions(e.nativeEvent.layout)}
       >
         <SubjectViewer
           subject={subject}
+          subjectText={subjectText}
           onPress={onExpandMedia}
         />
       </View>
-      <View style={styles.flex}>
-        <ScrollView ref={scrollViewRef}>
+      <View>
           <View style={styles.answersPadding}>
             <AnswerButtons
               answers={task?.answers || []}
@@ -190,8 +192,8 @@ const SingleChoice = ({ subject, task, taskKey, workflow, project, onAdvance, on
               onPress={handleSubmit}
             />
           </View>
-        </ScrollView>
       </View>
+      </ScrollView>
       {feedbackModal?.show && (
         <FeedbackModal
           correct={feedbackModal.correct}
@@ -209,14 +211,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   subjectArea: {
-    flex: 1,
+    height: 300,
+    flexShrink: 0,
   },
   answersPadding: {
     paddingVertical: 15,
   },
   submitContainer: {
     marginTop: 10,
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 16,
