@@ -314,6 +314,7 @@ const ClassifierScreen = ({ route }) => {
       project,
       onAdvance: advanceToNextSubject,
       onExpandMedia: openFullScreenMedia,
+      questionContent,
     }
     // Re-mount the body whenever the active task changes so each task's
     // local selection state starts from a clean slate. Prior selections (on
@@ -356,6 +357,9 @@ const ClassifierScreen = ({ route }) => {
     }
   }
 
+  const bodyType = currentTaskKey === workflow.first_task ? workflow.type : currentTask?.type
+  const hasScrollableQuestion = [WorkflowTypes.SingleChoice, WorkflowTypes.MultiSelect].includes(bodyType)
+
   const classificationArea = (
     <View style={styles.classificationPanel}>
       <TaskPanel
@@ -363,7 +367,7 @@ const ClassifierScreen = ({ route }) => {
         setQuestionVisibility={setIsQuestionVisible}
         hasTutorial={hasTutorial}
       >
-        {isQuestionVisible && questionContent}
+        {isQuestionVisible && !hasScrollableQuestion && questionContent}
       </TaskPanel>
       {isQuestionVisible ? (
         <>

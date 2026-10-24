@@ -27,7 +27,7 @@ import {
   startChain,
 } from '../../../reducers/classifierSlice'
 
-const MultiSelect = ({ subject, subjectText, task, taskKey, workflow, project, onAdvance, onExpandMedia }) => {
+const MultiSelect = ({ subject, subjectText, task, taskKey, workflow, project, onAdvance, onExpandMedia, questionContent }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -146,6 +146,8 @@ const MultiSelect = ({ subject, subjectText, task, taskKey, workflow, project, o
 
   return (
     <>
+      <ScrollView ref={scrollViewRef} style={styles.flex}>
+        {questionContent}
       <View
         style={hasOCR ? undefined : styles.subjectArea}
         onLayout={(e) => setDisplayDimensions(e.nativeEvent.layout)}
@@ -157,8 +159,7 @@ const MultiSelect = ({ subject, subjectText, task, taskKey, workflow, project, o
           onPress={onExpandMedia}
         />
       </View>
-      <View style={styles.flex}>
-        <ScrollView ref={scrollViewRef}>
+      <View>
           <View style={styles.answersPadding}>
             <AnswerButtons
               answers={task?.answers || []}
@@ -188,8 +189,8 @@ const MultiSelect = ({ subject, subjectText, task, taskKey, workflow, project, o
               onPress={handleSubmit}
             />
           </View>
-        </ScrollView>
       </View>
+      </ScrollView>
     </>
   )
 }
@@ -200,14 +201,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   subjectArea: {
-    flex: 1,
+    height: 300,
+    flexShrink: 0,
   },
   answersPadding: {
     paddingVertical: 15,
   },
   submitContainer: {
     marginTop: 10,
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 16,
