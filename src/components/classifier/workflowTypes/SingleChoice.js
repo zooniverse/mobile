@@ -7,9 +7,10 @@
  */
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
+import { View, ScrollView, StyleSheet, Platform, useWindowDimensions } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import DeviceInfo from 'react-native-device-info'
 
 import SubjectViewer from '../SubjectViewer'
 import AnswerButtons from '../AnswerButtons'
@@ -41,6 +42,13 @@ const resolveSubmitLabel = ({ isMulti, nextTaskKey, t }) => {
 const SingleChoice = ({ subject, subjectText, task, taskKey, workflow, project, onAdvance, onExpandMedia, questionContent }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const { width, height } = useWindowDimensions()
+  const tabletMedia = Platform.OS === 'ios' && DeviceInfo.isTablet()
+    && !Object.values(workflow.tasks || {}).some(item => item?.type === 'textFromSubject')
+    && !subject?.displays?.some(display => display.type === 'text')
+  // Enlarge tablet media while leaving room for the question and answers.
+  const subjectHeight = tabletMedia ? Math.max(300, Math.min(width * 0.8, height * 0.40)) : 300
+
 
   // Restore the prior selection if the user just navigated Back to this task.
   // The slice keeps the recorded annotation; we lazy-init from it so the body
@@ -161,12 +169,13 @@ const SingleChoice = ({ subject, subjectText, task, taskKey, workflow, project, 
       <ScrollView ref={scrollViewRef} style={styles.flex}>
         {questionContent}
       <View
-        style={styles.subjectArea}
+        style={[styles.subjectArea, { height: subjectHeight }]}
         onLayout={(e) => setDisplayDimensions(e.nativeEvent.layout)}
       >
         <SubjectViewer
           subject={subject}
           subjectText={subjectText}
+          height={subjectHeight}
           onPress={onExpandMedia}
         />
       </View>

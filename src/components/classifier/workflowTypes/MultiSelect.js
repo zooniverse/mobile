@@ -9,9 +9,10 @@
  */
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Platform, useWindowDimensions } from 'react-native'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import DeviceInfo from 'react-native-device-info'
 
 import SubjectViewer from '../SubjectViewer'
 import AnswerButtons from '../AnswerButtons'
@@ -30,6 +31,13 @@ import {
 const MultiSelect = ({ subject, subjectText, task, taskKey, workflow, project, onAdvance, onExpandMedia, questionContent }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const { width, height } = useWindowDimensions()
+  const tabletMedia = Platform.OS === 'ios' && DeviceInfo.isTablet()
+    && !Object.values(workflow.tasks || {}).some(item => item?.type === 'textFromSubject')
+    && !subject?.displays?.some(display => display.type === 'text')
+  // Enlarge tablet media while leaving room for the question and answers.
+  const subjectHeight = tabletMedia ? Math.max(300, Math.min(width * 0.8, height * 0.40)) : 300
+
 
   // Restore prior selection on Back navigation — slice keeps the recorded
   // array so the toggles re-render with the user's previous picks.
@@ -149,12 +157,13 @@ const MultiSelect = ({ subject, subjectText, task, taskKey, workflow, project, o
       <ScrollView ref={scrollViewRef} style={styles.flex}>
         {questionContent}
       <View
-        style={hasOCR ? undefined : styles.subjectArea}
+        style={hasOCR ? undefined : [styles.subjectArea, { height: subjectHeight }]}
         onLayout={(e) => setDisplayDimensions(e.nativeEvent.layout)}
       >
         <SubjectViewer
           subject={subject}
           subjectText={subjectText}
+          height={subjectHeight}
           adaptiveHeight={hasOCR}
           onPress={onExpandMedia}
         />

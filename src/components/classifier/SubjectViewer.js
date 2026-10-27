@@ -5,7 +5,7 @@
  *     with pagination dots and auto-play
  *   - Video (MP4) → native `Video` with controls + Android expand button
  *
- * Fixed 300pt height matches the legacy Question/Multi layout. Exposes
+ * Defaults to 300pt; choice workflows can supply a larger tablet height. Exposes
  * `onLayoutChange` so bodies can capture display dimensions for submission
  * metadata, and `onPress` for full-screen expand (opened by the shell).
  */
@@ -28,7 +28,7 @@ const SUBJECT_HEIGHT = 300
 
 const isVideoSrc = (src = '') => src.slice(-4).toLowerCase() === '.mp4'
 
-const SubjectViewer = ({ subject, subjectText, onLayoutChange, onPress, adaptiveHeight = false }) => {
+const SubjectViewer = ({ subject, subjectText, onLayoutChange, onPress, adaptiveHeight = false, height = SUBJECT_HEIGHT }) => {
   const displays = subject?.displays
   const firstSrc = displays?.[0]?.src
   const [singleImageLoaded, setSingleImageLoaded] = useState(false)
@@ -66,7 +66,7 @@ const SubjectViewer = ({ subject, subjectText, onLayoutChange, onPress, adaptive
         <SubjectVideo
           uri={firstSrc}
           onExpandImage={onPress}
-          style={styles.video}
+          style={[styles.video, { height }]}
         />
       )
     }
@@ -101,7 +101,7 @@ const SubjectViewer = ({ subject, subjectText, onLayoutChange, onPress, adaptive
 
   return (
     <View
-      style={styles.container}
+      style={[styles.container, { height }]}
       onLayout={(e) => onLayoutChange?.(e.nativeEvent.layout)}
     >
       {renderMedia()}
