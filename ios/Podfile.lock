@@ -1594,7 +1594,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-safe-area-context (5.10.1):
+  - react-native-safe-area-context (5.11.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1606,8 +1606,8 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-safe-area-context/common (= 5.10.1)
-    - react-native-safe-area-context/fabric (= 5.10.1)
+    - react-native-safe-area-context/common (= 5.11.0)
+    - react-native-safe-area-context/fabric (= 5.11.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1618,7 +1618,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-safe-area-context/common (5.10.1):
+  - react-native-safe-area-context/common (5.11.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1640,7 +1640,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-safe-area-context/fabric (5.10.1):
+  - react-native-safe-area-context/fabric (5.11.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1666,7 +1666,7 @@ PODS:
   - react-native-vector-icons-feather (13.1.5)
   - react-native-vector-icons-fontawesome (13.1.5)
   - react-native-vector-icons-fontawesome5 (13.1.5)
-  - react-native-vector-icons-fontisto (13.1.5)
+  - react-native-vector-icons-fontisto (14.0.0)
   - react-native-vector-icons-ionicons (13.1.5)
   - react-native-vector-icons-material-design-icons (13.1.5)
   - react-native-vector-icons-simple-line-icons (13.1.5)
@@ -3000,11 +3000,11 @@ SPEC CHECKSUMS:
   react-native-blob-util: 91b174f9c6d6969d366a8cc79035288556062a05
   react-native-blur: 2c15b7e68450a2aa01a064f99d6045b86ee42fe0
   react-native-netinfo: a05f9b897e76ad24b53f615fed1cbb731932363d
-  react-native-safe-area-context: 7a07ea6aba7be03a32428b14b334ff9afe3773cf
+  react-native-safe-area-context: 5655f46ed395ed3411940df735b00dbeade80e83
   react-native-vector-icons-feather: 97025b189d9584d77215cec3445cec275e92c4f7
   react-native-vector-icons-fontawesome: c293d5990f222b3e2bb655aa8ab059481a6282e5
   react-native-vector-icons-fontawesome5: 511df73acde14c37d062a62cf8b8151198d6ef46
-  react-native-vector-icons-fontisto: 9769b2f1a256f6635e99889eeb860b094fa36d4c
+  react-native-vector-icons-fontisto: 3f21607e206a288f5d8813cca36a639769b2492a
   react-native-vector-icons-ionicons: 7ac17e91143285b016bfcd034fadf1e49317555e
   react-native-vector-icons-material-design-icons: 8d696a2371e2bd5bb5254370c33b5ffbc503e840
   react-native-vector-icons-simple-line-icons: 1eadd56ea46d23f2e0b64e9d3fdc5f83b7d4fbd1
@@ -3061,6 +3061,6 @@ SPEC CHECKSUMS:
   SplashView: 28a6aeed634e06ab29c120c8b3f63905dd1d47e9
   Yoga: c30c859b7e9b75e547b600b486fe33165f60de00
 
-PODFILE CHECKSUM: f3b25a9287a84d8d1dc9c0c3ed71a59ecd4af620
+PODFILE CHECKSUM: 39c4c429fe1027c883d740c11538ae2a9d0f1994
 
 COCOAPODS: 1.17.0

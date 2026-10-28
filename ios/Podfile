@@ -42,6 +42,13 @@ target 'ZooniverseMobile' do
 
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |build_config|
+        # Resource bundles can retain older deployment targets after React
+        # Native's post-install step; Xcode 27 requires these to be raised too.
+        deployment_target = build_config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
+        if deployment_target.nil? || Gem::Version.new(deployment_target) < Gem::Version.new(min_ios_version_supported)
+          build_config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = min_ios_version_supported
+        end
+
         build_config.build_settings[
           'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'
         ] = 'YES'
