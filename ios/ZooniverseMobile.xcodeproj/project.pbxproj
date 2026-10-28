@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		936000012CF0000000000001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936000012CF0000000000002 /* SceneDelegate.swift */; };
 		09AC63BB2E7ABD84003629B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09AC63BA2E7ABD84003629B0 /* GoogleService-Info.plist */; };
 		09AC63EC2E7D7287003629B0 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09AC63E42E7D7287003629B0 /* OpenSans-Italic.ttf */; };
 		09AC63ED2E7D7287003629B0 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09AC63E22E7D7287003629B0 /* OpenSans-ExtraBold.ttf */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		936000012CF0000000000002 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ZooniverseMobile/SceneDelegate.swift; sourceTree = "<group>"; };
 		096D79102E9A851C00102EA9 /* ZooniverseMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ZooniverseMobile.entitlements; path = ZooniverseMobile/ZooniverseMobile.entitlements; sourceTree = "<group>"; };
 		09AC63BA2E7ABD84003629B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		09AC63DC2E7D7287003629B0 /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Bold.ttf"; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				096D79102E9A851C00102EA9 /* ZooniverseMobile.entitlements */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
+				936000012CF0000000000002 /* SceneDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
@@ -327,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
+				936000012CF0000000000001 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
