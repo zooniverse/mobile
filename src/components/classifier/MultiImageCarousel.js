@@ -22,7 +22,8 @@
  * The one visual option that differs between legacy consumers is where
  * the pagination dots sit: Swipe overlaid the dots on the image (legacy
  * Swiper), while Question/Multi put them in the flowed space below
- * (legacy AutoPlay). Both are preserved via `dotsStyle`.
+ * (legacy AutoPlay). Both are preserved via `dotsStyle`; the image leaves
+ * room for the measured overlay so wrapped dots cannot cover the image.
  */
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
@@ -63,6 +64,7 @@ const MultiImageCarousel = ({
   const [isPlaying, setIsPlaying] = useState(false)
   const [longPress, setLongPress] = useState(false)
   const [decodedCount, setDecodedCount] = useState(0)
+  const [paginationHeight, setPaginationHeight] = useState(0)
 
   const imagesLoaded = decodedCount >= uris.length && uris.length > 0
 
@@ -184,11 +186,16 @@ const MultiImageCarousel = ({
 
   const dotsContainerStyle =
     dotsStyle === 'overlay' ? styles.dotsOverlay : styles.dotsFlowed
+  // Include the overlay's bottom inset and a gap above the dots. Measuring
+  // the actual height also accounts for wrapping after a resize.
+  const paginationSpace = dotsStyle === 'overlay' && showPagination
+    ? paginationHeight + 16
+    : 0
 
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
-        <View style={styles.imageStack}>
+        <View style={[styles.imageStack, { marginBottom: paginationSpace }]}>
           {uris.map((uri, idx) => (
             <Image
               key={uri}
@@ -213,14 +220,17 @@ const MultiImageCarousel = ({
       {!isPlaying && !longPress && onExpandImage && (
         <TouchableOpacity
           onPress={() => onExpandImage(uris[slideIndex])}
-          style={styles.expandContainer}
+          style={[styles.expandContainer, { bottom: 16 + paginationSpace }]}
         >
           <ExpandImageIcon />
         </TouchableOpacity>
       )}
 
       {showPagination && (
-        <View style={dotsContainerStyle}>
+        <View
+          style={dotsContainerStyle}
+          onLayout={({ nativeEvent }) => setPaginationHeight(nativeEvent.layout.height)}
+        >
           {uris.map((_uri, idx) => (
             <TouchableOpacity
               key={idx}

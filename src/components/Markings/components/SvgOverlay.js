@@ -97,6 +97,8 @@ class SvgOverlay extends Component {
                         drawingShape={this.props.drawingShape}
                         onShapeIsOutOfBoundsUpdates={this.props.onShapeIsOutOfBoundsUpdates}
                         maxShapesDrawn={this.props.maxShapesDrawn}
+                        handleRadius={this.props.handleRadius}
+                            compactMarks={this.props.compactMarks}
                     />
                 </View>
             </View>
@@ -132,6 +134,8 @@ SvgOverlay.propTypes = {
     drawingShape: PropTypes.oneOf(['rect']),
     shapes: PropTypes.object,
     maxShapesDrawn: PropTypes.bool,
+    handleRadius: PropTypes.number,
+    compactMarks: PropTypes.bool,
     mode: PropTypes.oneOf(['draw', 'erase', 'view']),
     onShapeDeleted: PropTypes.func,
     onShapeCreated: PropTypes.func,
@@ -140,7 +144,8 @@ SvgOverlay.propTypes = {
 }
 
 SvgOverlay.defaultProps = {
-    color: 'black'
+    color: 'black',
+    handleRadius: 16,
 }
 
 export default SvgOverlay

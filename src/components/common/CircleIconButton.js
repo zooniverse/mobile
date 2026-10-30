@@ -50,11 +50,11 @@ const ButtonIcon = ({type, ...props}) => {
         case 'edit':
             return <FontAwesome5 name={'edit'} {...props} iconStyle="solid" />
         case 'draw':
-            return <FontAwesome5 name={'plus'} {...props} />
+            return <FontAwesome5 name={'plus'} {...props} iconStyle="solid" />
         case 'erase':
-            return <FontAwesome5 name={'trash'} {...props} />
+            return <FontAwesome5 name={'trash'} {...props} iconStyle="solid" />
         case 'undo':
-            return <FontAwesome5 name={'undo'} {...props} />
+            return <FontAwesome5 name={'undo'} {...props} iconStyle="solid" />
     }
 }
 

@@ -10,21 +10,25 @@
 
 import apiClient from 'panoptes-client/lib/api-client'
 import { Image, Platform } from 'react-native'
+import DeviceInfo from 'react-native-device-info'
 import { PushNotifications } from '../notifications/PushNotifications'
 
 // Resolves each display's natural dimensions and builds the metadata entry
 // the Panoptes API expects, matching the legacy `saveClassification` shape.
-const buildSubjectDimensions = async (subject, displayDimensions) => {
+const buildSubjectDimensions = async (subject, displayDimensions, isOCR) => {
     if (!subject?.displays?.length) return []
-    const sizePromises = subject.displays.map(
-        ({ src }) =>
-            new Promise((resolve) => {
+    const displays = isOCR
+        ? subject.displays.filter(display => display.type === 'image')
+        : subject.displays
+    const sizePromises = displays.map(
+        ({ src, type }) =>
+            type && type !== 'image' ? Promise.resolve({}) : new Promise((resolve) => {
                 Image.getSize(
                     src,
                     (naturalWidth, naturalHeight) => {
                         const aspectRatio = Math.min(
-                            displayDimensions.height / naturalHeight,
-                            displayDimensions.width / naturalWidth
+                            (displayDimensions?.height || 0) / naturalHeight,
+                            (displayDimensions?.width || 0) / naturalWidth
                         )
                         resolve({
                             naturalWidth,
@@ -56,11 +60,19 @@ export async function submitChoiceClassification({
     viewport,
     sessionId,
     feedbackMeta = null,
+    userLanguage = 'en',
     isPreviewMode = false,
 }) {
-    if (isPreviewMode) return
+    if (isPreviewMode) return true
 
-    const subjectDimensions = await buildSubjectDimensions(subject, displayDimensions)
+    const isOCR = Object.values(workflow.tasks || {}).some(task => task?.type === 'textFromSubject')
+    const subjectDimensions = await buildSubjectDimensions(subject, displayDimensions, isOCR)
+    const submittedAnnotations = isOCR
+        ? annotations.map(annotation => ({
+            ...annotation,
+            taskType: workflow.tasks[annotation.task]?.type,
+        }))
+        : annotations
 
     const metadata = {
         workflow_version: workflow.version,
@@ -77,12 +89,31 @@ export async function submitChoiceClassification({
         metadata.feedback = feedbackMeta
     }
 
+    if (isOCR) {
+        Object.assign(metadata, {
+            classifier_version: DeviceInfo.getVersion(),
+            revision: DeviceInfo.getBuildNumber(),
+            user_language: userLanguage,
+            source: subject.metadata?.intervention ? 'sugar' : 'api',
+            feedback: feedbackMeta ?? {},
+            subject_flagged: false,
+            subject_selection_state: {
+                already_seen: subject.already_seen,
+                finished_workflow: subject.finished_workflow,
+                retired: subject.retired,
+                selected_at: subject.selected_at,
+                selection_state: subject.selection_state,
+                user_has_finished_workflow: subject.user_has_finished_workflow,
+            },
+        })
+    }
+
     try {
         const result = await apiClient
             .type('classifications')
             .create({
                 completed: true,
-                annotations,
+                annotations: submittedAnnotations,
                 metadata,
                 links: {
                     project: workflow.links.project,
@@ -95,9 +126,11 @@ export async function submitChoiceClassification({
         if (result.completed && result?.links?.project) {
             PushNotifications.userClassifiedProject(result.links.project)
         }
+        return Boolean(result.completed)
     } catch (error) {
-        // Submission failures are non-blocking; the user advances
-        // regardless, matching the legacy behavior.
+        // OCR callers await this result and retain the chain for retry.
+        // Legacy callers can continue using their existing advance behavior.
         console.warn('Classification submission failed:', error)
+        return false
     }
 }

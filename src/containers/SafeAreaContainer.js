@@ -3,12 +3,14 @@ import {
     View
  } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { DefaultTheme } from '@react-navigation/native'
 import { connect, useSelector }  from 'react-redux'
 import PropTypes from 'prop-types'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 const SafeAreaContainer = (props) => {
     const { pageShowing } = useSelector(state => state.navBar)
+    const isHomePage = ['ZooniverseApp', 'ProjectDisciplines'].includes(pageShowing)
 
     // Apply different colors for preview, classifier, and everything else.
     let backgroundStyle = props.isPreview ? styles.previewBackground : styles.defaultBackground
@@ -21,7 +23,7 @@ const SafeAreaContainer = (props) => {
     return (
         <View style={styles.container}>
             <SafeAreaView style={backgroundStyle} edges={['top']} />
-            <SafeAreaView style={[styles.bottomSafeAreaView, bottomBackgroundColor]} edges={['bottom']}>
+            <SafeAreaView style={[styles.bottomSafeAreaView, bottomBackgroundColor]} edges={isHomePage ? [] : ['bottom']}>
                 { props.children }
             </SafeAreaView>
         </View>
@@ -45,7 +47,7 @@ const styles = EStyleSheet.create({
         flex: 1,
     },
     bottomDefaultColor: {
-        backgroundColor: 'white',
+        backgroundColor: DefaultTheme.colors.background,
     },
     bottomClassiferColor: {
         backgroundColor: 'white', // White bottom safe area to blend with Field Guide button.
