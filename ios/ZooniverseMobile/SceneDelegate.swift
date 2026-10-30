@@ -7,6 +7,9 @@ import ReactAppDependencyProvider
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
 
+  // Keep the React Native delegate alive for the lifetime of this scene.
+  // RCTReactNativeFactory does not retain it.
+  // swiftlint:disable:next weak_delegate
   private var reactNativeDelegate: ReactNativeDelegate?
   private var reactNativeFactory: RCTReactNativeFactory?
   private var needsSplashScreen = true
