@@ -15,7 +15,7 @@ const SafeAreaContainer = (props) => {
     // Apply different colors for preview, classifier, and everything else.
     let backgroundStyle = props.isPreview ? styles.previewBackground : styles.defaultBackground
     let bottomBackgroundColor = styles.bottomDefaultColor
-    const classifierPages = ['QuestionClassifier', 'SwipeClassifier', 'MultiAnswerClassifier', 'DrawingClassifier', 'ClassifierScreen']
+    const classifierPages = ['ClassifierScreen']
     if (classifierPages.includes(pageShowing)) {
         backgroundStyle = styles.classifier;
         bottomBackgroundColor = styles.bottomClassiferColor;

@@ -2,6 +2,13 @@
 
 This document captures the context and decisions behind the Swiper classifier refactor. It replaces the old class-based `SwipeClassifier` and its associated components (`SwipeCard`, `SwipeTabs`, `SwipeableSubject`, `SwipeSingleImage`). The old files have been deleted.
 
+## Current architecture
+
+`ClassifierScreen` now hosts `workflowTypes/Swipe`, which reuses the swipe card,
+subject, controls, and gesture hook described below. The standalone
+`SwiperClassifier` screen and the old per-type navigation paths have been removed.
+The remaining sections describe the earlier refactor history.
+
 ## Why the refactor
 
 The old SwipeClassifier had five interconnected issues:
