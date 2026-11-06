@@ -29,12 +29,21 @@ export const undoMostRecentEdit = () => ({
     type: ActionConstants.UNDO_EDIT
 })
 
+export const redoMostRecentEdit = () => ({
+    type: ActionConstants.REDO_EDIT
+})
+
 export const clearShapes = () => ({
     type: ActionConstants.CLEAR_SHAPES
 })
 
 export const clearShapesInProgress = () => ({
     type: ActionConstants.CLEAR_SHAPES_IN_PROGRESS
+})
+
+export const initializeShapes = (shapes) => ({
+    type: ActionConstants.INITIALIZE_SHAPES,
+    shapes
 })
 
 export const saveEdits = () => ({

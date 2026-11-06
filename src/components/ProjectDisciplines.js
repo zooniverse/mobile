@@ -23,6 +23,7 @@ import { setNavbarSettingsForPage } from '../actions/navBar'
 import PageKeys from '../constants/PageKeys'
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useRoute } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ErasStats from './ErasStats';
 import theme from '../theme';
 import { useTranslation } from 'react-i18next';
@@ -51,6 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 function ProjectDisciplines({ ...props }) {
+  const insets = useSafeAreaInsets();
   const [refreshing, setRefreshing] = useState(true);
   const fetchProjectPromise = useRef(null);
   const hasReportedEmptyState = useRef(false);
@@ -211,7 +213,7 @@ function ProjectDisciplines({ ...props }) {
     : [];
   const listView = (
     <FlatList
-      contentContainerStyle={styles.listContainer}
+      contentContainerStyle={[styles.listContainer, { paddingBottom: 25 + insets.bottom }]}
       data={disciplineList}
       renderItem={(item) => renderItem(item, props.navigation)}
       keyExtractor={(item, index) => `${index}`}

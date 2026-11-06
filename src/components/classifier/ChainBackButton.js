@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import FontedText from '../common/FontedText'
 import { goBack } from '../../reducers/classifierSlice'
 
-const ChainBackButton = () => {
+const ChainBackButton = ({ disabled = false }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const hasHistory = useSelector(
@@ -26,6 +26,8 @@ const ChainBackButton = () => {
     <TouchableOpacity
       style={[styles.button, { height: isTablet ? 44 : 40 }]}
       onPress={() => dispatch(goBack())}
+      disabled={disabled}
+      accessibilityState={{ disabled }}
       accessibilityRole="button"
     >
       <FontedText style={styles.text}>

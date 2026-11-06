@@ -15,10 +15,6 @@ import About from '../components/About';
 import ProjectList from '../components/projects/ProjectList';
 import Register from '../components/Register';
 import Settings from '../components/settings/Settings';
-import SwiperClassifier from '../components/classifier/Swiper/SwiperClassifier';
-import DrawingClassifier from '../components/Markings/DrawingClassifier';
-import QuestionClassifier from '../components/classifier/QuestionClassifier';
-import MultiAnswerClassifier from '../components/classifier/MultiAnswerClassifier';
 import ClassifierScreen from '../components/classifier/ClassifierScreen';
 import ZooniverseApp from '../containers/zooniverseApp';
 import SideDrawerContent from '../components/SideDrawerContent';
@@ -75,34 +71,6 @@ const StackNavigator = () => {
       <Stack.Screen name={PageKeys.ProjectList} component={ProjectList} />
       <Stack.Screen name={PageKeys.Register} component={Register} />
       <Stack.Screen name={PageKeys.Settings} component={Settings} />
-      <Stack.Screen
-        name={PageKeys.SwipeClassifier}
-        component={SwiperClassifier}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name={PageKeys.DrawingClassifier}
-        component={DrawingClassifier}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name={PageKeys.QuestionClassifier}
-        component={QuestionClassifier}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name={PageKeys.MultiAnswerClassifier}
-        component={MultiAnswerClassifier}
-        options={{
-          headerShown: false,
-        }}
-      />
       <Stack.Screen
         name={PageKeys.ClassifierScreen}
         component={ClassifierScreen}
