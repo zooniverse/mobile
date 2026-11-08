@@ -20,6 +20,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const LABEL_REVEAL_DISTANCE = SCREEN_WIDTH * 0.15;
 
 const SwiperOverlay = ({ translateX, yesLabel = 'Yes', noLabel = 'No' }) => {
+  const labelStyle = [styles.labelText, styles.labelContrast];
   // "Yes" label appears when swiping right (positive translateX)
   const yesStyle = useAnimatedStyle(() => {
     const opacity = interpolate(
@@ -45,10 +46,10 @@ const SwiperOverlay = ({ translateX, yesLabel = 'Yes', noLabel = 'No' }) => {
   return (
     <>
       <Animated.View style={[styles.labelContainer, yesStyle]} pointerEvents="none">
-        <Text style={styles.labelText}>{noLabel}</Text>
+        <Text style={labelStyle}>{noLabel}</Text>
       </Animated.View>
       <Animated.View style={[styles.labelContainer, noStyle]} pointerEvents="none">
-        <Text style={styles.labelText}>{yesLabel}</Text>
+        <Text style={labelStyle}>{yesLabel}</Text>
       </Animated.View>
     </>
   );
@@ -68,9 +69,14 @@ const styles = EStyleSheet.create({
   labelText: {
     color: 'white',
     fontSize: 50,
-    fontWeight: 'normal',
+    fontWeight: 'bold',
     fontFamily: 'Karla',
     textAlign: 'center',
+  },
+  labelContrast: {
+    textShadowColor: 'black',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 4,
   },
 });
 

@@ -28,6 +28,7 @@ const DrawingCanvas = ({
     canDraw,
     handleRadius,
     compactMarks = false,
+    zoomScale = 1,
     onShapeAdded,
     onShapeRemoved,
     onShapeMutated,
@@ -101,6 +102,7 @@ const DrawingCanvas = ({
                         maxShapesDrawn={maxShapesDrawn}
                         handleRadius={handleRadius}
                         compactMarks={compactMarks}
+                        zoomScale={zoomScale}
                         onShapeCreated={onShapeAdded}
                         onShapeDeleted={onShapeRemoved}
                         onShapeModified={onShapeMutated}
@@ -139,6 +141,7 @@ DrawingCanvas.propTypes = {
     canDraw: PropTypes.bool,
     handleRadius: PropTypes.number,
     compactMarks: PropTypes.bool,
+    zoomScale: PropTypes.number,
     onShapeAdded: PropTypes.func,
     onShapeRemoved: PropTypes.func,
     onShapeMutated: PropTypes.func,

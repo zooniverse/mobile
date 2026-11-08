@@ -131,7 +131,9 @@ class ShapeEditorSvg extends Component {
             },
             onPanResponderMove: (evt, gestureState) => {
                 const { shapeIndex, touchState, isDrawing } = this.state
-                const { dx, dy } = gestureState
+                // Gesture distances are in screen points; shapes use the unzoomed canvas.
+                const dx = gestureState.dx / this.props.zoomScale
+                const dy = gestureState.dy / this.props.zoomScale
                 const dragLocation = {
                     x: this.state.dragOrigin.x + dx,
                     y: this.state.dragOrigin.y + dy
@@ -180,7 +182,8 @@ class ShapeEditorSvg extends Component {
                 }
                 // If the user is editing a shape, update the shape changes
                 else if (shapeIndex >= 0) {
-                    const { dx, dy } = gestureState;
+                    const dx = gestureState.dx / this.props.zoomScale
+                    const dy = gestureState.dy / this.props.zoomScale
                     const dragLocation = {
                         x: this.state.dragOrigin.x + dx,
                         y: this.state.dragOrigin.y + dy
@@ -331,9 +334,11 @@ ShapeEditorSvg.propTypes = {
     maxShapesDrawn: PropTypes.bool,
     handleRadius: PropTypes.number,
     compactMarks: PropTypes.bool,
+    zoomScale: PropTypes.number,
 }
 
 ShapeEditorSvg.defaultProps = {
+    zoomScale: 1,
     handleRadius: 16,
 }
 

@@ -72,7 +72,11 @@ class SvgOverlay extends Component {
             ...shapeDimensions
         }
 
-        if (Math.abs(shapeDimensions.width) > (20 * this.state.displayToNativeRatioX) || Math.abs(shapeDimensions.height) > (20 * this.state.displayToNativeRatioY)) {
+        // Keep the accidental-mark cutoff the same visible size at every zoom level.
+        const zoomScale = this.props.zoomScale ?? 1
+        const minimumWidth = 20 * this.state.displayToNativeRatioX / zoomScale
+        const minimumHeight = 20 * this.state.displayToNativeRatioY / zoomScale
+        if (Math.abs(shapeDimensions.width) > minimumWidth || Math.abs(shapeDimensions.height) > minimumHeight) {
             this.props.onShapeCreated(shape)
         }
     }
@@ -98,7 +102,8 @@ class SvgOverlay extends Component {
                         onShapeIsOutOfBoundsUpdates={this.props.onShapeIsOutOfBoundsUpdates}
                         maxShapesDrawn={this.props.maxShapesDrawn}
                         handleRadius={this.props.handleRadius}
-                            compactMarks={this.props.compactMarks}
+                        compactMarks={this.props.compactMarks}
+                        zoomScale={this.props.zoomScale}
                     />
                 </View>
             </View>
@@ -136,6 +141,7 @@ SvgOverlay.propTypes = {
     maxShapesDrawn: PropTypes.bool,
     handleRadius: PropTypes.number,
     compactMarks: PropTypes.bool,
+    zoomScale: PropTypes.number,
     mode: PropTypes.oneOf(['draw', 'erase', 'view']),
     onShapeDeleted: PropTypes.func,
     onShapeCreated: PropTypes.func,

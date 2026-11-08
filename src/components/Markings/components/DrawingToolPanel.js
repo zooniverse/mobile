@@ -134,6 +134,7 @@ const DrawingToolPanel = ({
                         maxShapesDrawn={maxShapesDrawn}
                         handleRadius={handleRadius}
                         compactMarks={compactMarks}
+                        zoomScale={zoomScale}
                         canDraw={canDraw}
                         subjectDimensions={subjectDimensions}
                         shapes={shapes}
