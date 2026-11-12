@@ -23,6 +23,8 @@ const IS_ANDROID = Platform.OS === 'android';
 const SwiperOverlay = ({ translateX, yesLabel = 'Yes', noLabel = 'No' }) => {
   // "Yes" label appears when swiping right (positive translateX)
   const yesStyle = useAnimatedStyle(() => {
+    // On Android, fading white text over its black shadow makes the letters look dark.
+    // Show the label at full opacity during the swipe to keep the letters white.
     if (IS_ANDROID) return { opacity: translateX.value > 0 ? 1 : 0 };
     const opacity = interpolate(
       translateX.value,
@@ -35,6 +37,7 @@ const SwiperOverlay = ({ translateX, yesLabel = 'Yes', noLabel = 'No' }) => {
 
   // "No" label appears when swiping left (negative translateX)
   const noStyle = useAnimatedStyle(() => {
+    // Skip the fade on Android for the same text/shadow contrast issue.
     if (IS_ANDROID) return { opacity: translateX.value < 0 ? 1 : 0 };
     const opacity = interpolate(
       translateX.value,
