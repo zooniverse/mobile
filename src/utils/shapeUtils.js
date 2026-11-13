@@ -104,10 +104,11 @@ const analyzeCorners = (xCoord, yCoord, corners) => {
  * @param {coordinate information for shape} shape
  * @param {coordinate information for shape's corners} corners
  */
-export const analyzeCoordinateWithShape = (xCoord, yCoord, shape, corners) => {
+export const analyzeCoordinateWithShape = (xCoord, yCoord, shape, corners, allowInteriorDrag = false) => {
     const analyzedCorners = analyzeCorners(xCoord, yCoord, corners)
     const touchingCorners = analyzedCorners.upperLeft || analyzedCorners.upperRight || analyzedCorners.bottomLeft || analyzedCorners.bottomRight
-    const touchingPerimeter = isCoordinateTouchingPerimeter(xCoord, yCoord, shape)
+    const touchingPerimeter = isCoordinateTouchingPerimeter(xCoord, yCoord, shape) ||
+        (allowInteriorDrag && isCoordinateWithinSquare(xCoord, yCoord, shape))
     const withinSquare = touchingCorners || touchingPerimeter
     return {
         ...analyzedCorners,

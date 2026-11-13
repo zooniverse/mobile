@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 
-const convertShapesToAnnotationArray = (shapes) => {
+const convertShapesToAnnotationArray = (shapes, toolIndex = 0) => {
     return R.values(R.mapObjIndexed((shape) => {
         // If a shape has negative width and/or height we want convert
         // the coordinates so that they are positive
@@ -13,20 +13,19 @@ const convertShapesToAnnotationArray = (shapes) => {
         return {
             details: 0,
             frame: 0,
-            tool: 0,
+            tool: toolIndex,
             height: fixedHeight,
             width: fixedWidth,
             x: fixedX,
             y: fixedY
         }
-    }, shapes))
+    }, R.filter((shape) => (shape.toolIndex || 0) === toolIndex, shapes)))
 }
 
 export const constructDrawingAnnotations = (shapes, tools, task) => {
-    return tools.map(() => {
-        return {
-            task,
-            value: convertShapesToAnnotationArray(shapes)
-        }
-    })
+    return [{
+        task,
+        value: tools.flatMap((_tool, toolIndex) =>
+            convertShapesToAnnotationArray(shapes, toolIndex))
+    }]
 }

@@ -6,6 +6,7 @@ import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 import com.splashview.SplashView
+import com.swmansion.rnscreens.fragment.restoration.RNScreensFragmentFactory
 
 class MainActivity : ReactActivity() {
 
@@ -23,6 +24,8 @@ class MainActivity : ReactActivity() {
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
 
   override fun onCreate(savedInstanceState: Bundle?) {
+      // Discard stale navigation fragments when Android recreates the activity.
+      supportFragmentManager.fragmentFactory = RNScreensFragmentFactory()
       SplashView.showSplashView(this) // Show the splash screen
       super.onCreate(savedInstanceState)
   }

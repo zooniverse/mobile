@@ -27,6 +27,7 @@
 		3280D4EEF3D54A395D738C24 /* Pods_ZooniverseMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09A864E4944FCC7C073EB1A /* Pods_ZooniverseMobile.framework */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		936000012CF0000000000001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936000012CF0000000000002 /* SceneDelegate.swift */; };
 		FCE72D6ABE9B4BC79C7722CE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = ZooniverseMobile/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ZooniverseMobile/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ZooniverseMobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		936000012CF0000000000002 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ZooniverseMobile/SceneDelegate.swift; sourceTree = "<group>"; };
 		A2BFBA425D1E67CBCEA05D8E /* Pods-ZooniverseMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooniverseMobile.debug.xcconfig"; path = "Target Support Files/Pods-ZooniverseMobile/Pods-ZooniverseMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		B28B3AE939F9D34221CFB25D /* Pods-ZooniverseMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooniverseMobile.release.xcconfig"; path = "Target Support Files/Pods-ZooniverseMobile/Pods-ZooniverseMobile.release.xcconfig"; sourceTree = "<group>"; };
 		D09A864E4944FCC7C073EB1A /* Pods_ZooniverseMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZooniverseMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,7 @@
 				096D79102E9A851C00102EA9 /* ZooniverseMobile.entitlements */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
+				936000012CF0000000000002 /* SceneDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
@@ -337,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
+				936000012CF0000000000001 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +354,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 76;
 				DEVELOPMENT_TEAM = 275SK7D8Y2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
@@ -359,7 +363,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.17.0;
+				MARKETING_VERSION = 2.18.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -385,7 +389,7 @@
 				CODE_SIGN_ENTITLEMENTS = ZooniverseMobile/ZooniverseMobile.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 76;
 				DEVELOPMENT_TEAM = 275SK7D8Y2;
 				INFOPLIST_FILE = ZooniverseMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -393,7 +397,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.17.0;
+				MARKETING_VERSION = 2.18.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

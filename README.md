@@ -28,8 +28,8 @@ The Zooniverse Mobile app is a [React Native](https://facebook.github.io/react-n
 
 ### iOS
 #### Requirements:
- - XCode
- - An iPhone X Simulator, which you can run from XCode.
+ - Xcode 27 or later for all iOS builds going forward, including development and release builds.
+ - An iPhone simulator installed through Xcode. Use the iPhone Duo simulator to test folded and unfolded layouts.
  - To run on an iOS device see [Running on device - iOS]https://reactnative.dev/docs/running-on-device?platform=ios
 #### Steps:
 On the command line, from the `mobile` directory, run:
@@ -87,4 +87,4 @@ Steps:
 5) Drag n drop the file into the "App bundles" in Google Play store where you would normally create the internal testing release.
 
 ### iOS
-Note: Nothing has changed with the iOS release process, continue to build and archive via Xcode.
+Build and archive iOS releases using Xcode 27 or later.
