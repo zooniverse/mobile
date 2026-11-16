@@ -8,14 +8,14 @@ import FontedText from '../common/FontedText';
 import { useTranslation } from 'react-i18next';
 import { getCurrentProjectLanguage } from '../../i18n';
 
-function ToolNameDrawCount({ label, number }) {
+function ToolNameDrawCount({ label, number, taskKey = 'T0' }) {
   const {t} = useTranslation()
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
         <FontAwesome5 name="shapes" iconStyle="solid" size={18} color="#000000" />
         <FontedText numberOfLines={2} style={[styles.text, styles.toolText]}>
-          {t('workflow.tasks.T0.tools.0.label', label, {ns: 'project', lng: getCurrentProjectLanguage()})}
+          {t(`workflow.tasks.${taskKey}.tools.0.label`, label, {ns: 'project', lng: getCurrentProjectLanguage()})}
         </FontedText>
       </View>
       <FontedText style={[styles.text, styles.drawnText]}>

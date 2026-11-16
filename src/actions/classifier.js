@@ -1,206 +1,9 @@
 import apiClient from 'panoptes-client/lib/api-client'
 import * as R from 'ramda'
-import { setState } from '../actions/index'
-import { Alert, Platform, Image} from 'react-native'
 import { getAuthUser, signOut } from '../actions/auth'
 import { saveTutorialAsComplete, setUserProjectData } from '../actions/user';
 import * as ActionConstants from '../constants/actions'
-import getSubjectLocations from '../utils/get-subject-location'
-import {
-  constructDrawingAnnotations
-} from '../utils/annotationUtils'
-import { clearShapes } from './drawing'
 import { setMiniCourse } from '../reducers/classifierSlice'
-import { navRef } from '../navigation/RootNavigator';
-import { PushNotifications } from '../notifications/PushNotifications'
-
-export function addSubjectsForWorklow(workflowId) {
-  return dispatch => {
-    return apiClient.type('subjects').get({workflow_id: workflowId, sort: 'queued', page_size: 20}).then((subjects) => {
-      subjects.forEach((subject) => subject.displays = getSubjectLocations(subject))
-      dispatch({
-        type: ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW,
-        workflowId,
-        subjects
-      })
-    })
-  }
-}
-
-/**
- * Like startNewClassification but skips subject fetching.
- * The Swiper classifier manages its own subject queue via useSubjectQueue,
- * so fetching subjects here would be a duplicate API call that goes into
- * Redux state the Swiper never reads.
- */
-export function startSwiperClassification(workflow, project) {
-  return dispatch => {
-    dispatch(clearSubjectsFromWorkflow(workflow.id))
-    Promise.all([
-      dispatch(requestClassifierData),
-      dispatch(setState('loadingText', 'Loading Workflow...')),
-      // No addSubjectsForWorklow — useSubjectQueue handles subject fetching
-      dispatch(setupProjectPreferences(workflow.id, project)),
-      dispatch(fetchFieldGuide(workflow.id, project.id)),
-      dispatch(fetchTutorials(workflow.id)).then(() => dispatch(setNeedsTutorial(workflow.id, project.id))),
-    ])
-    .then(() => {
-      dispatch(classifierDataSuccess)
-    })
-    .catch((error) => {
-      Alert.alert('Error', `Sorry, the following error occured when loading this workflow. ${error}`,
-        [{text: 'Go Back', onPress: () => {     navRef.goBack() }}]
-      )
-    })
-  }
-}
-
-export function startNewClassification(workflow, project) {
-  return dispatch => {
-    dispatch(clearSubjectsFromWorkflow(workflow.id))
-    Promise.all([
-      dispatch(requestClassifierData),
-      dispatch(setState('loadingText', 'Loading Workflow...')),
-      dispatch(addSubjectsForWorklow(workflow.id)),
-      dispatch(setupProjectPreferences(workflow.id, project)),
-      dispatch(fetchFieldGuide(workflow.id, project.id)),
-      dispatch(fetchTutorials(workflow.id)).then(() => dispatch(setNeedsTutorial(workflow.id, project.id))),
-      dispatch(setSubjectStartTimeForWorkflow(workflow.id))
-    ])
-    .then(() => {
-      dispatch(setSubjectForWorkflow(workflow.id))
-      dispatch(classifierDataSuccess)
-    })
-    .catch((error) => {
-      Alert.alert('Error', `Sorry, the following error occured when loading this workflow. ${error}`,
-        [{text: 'Go Back', onPress: () => {     navRef.goBack() }}]
-      )
-    })
-  }
-}
-
-export function saveClassification(workflow, subject, displayDimensions, feedbackMetadata = null) {
-  return (dispatch, getState) => {
-    const classifier = getState().classifier
-    const subjectStartTime = classifier.subjectStartTime[workflow.id]
-    const subjectCompletionTime = (new Date).toISOString()
-    const annotations = R.map(a => ({task: a[0], value: a[1]}), R.toPairs(classifier.annotations[workflow.id]))
-    dispatch(setSubjectSeenThisSession(workflow.id, subject.id))
-    
-    dispatch(setSubjectStartTimeForWorkflow(workflow.id))
-    dispatch(initializeAnnotation(workflow.id))
-    dispatch(setSubjectForWorkflow(workflow.id))
-
-    // If we are in preview mode, we skip reporting classifications
-    if (classifier.inPreviewMode) {
-      return
-    }
-    
-    // Report classification
-    let subjectDimensions = []
-    const sizePromises = subject.displays.map(({src}) => {
-      return new Promise((resolve, reject) => {
-        Image.getSize(src, (naturalWidth, naturalHeight) => {
-          const aspectRatio = Math.min(displayDimensions.height/naturalHeight, displayDimensions.width/naturalWidth)
-          const subjectDimensions = {
-            naturalWidth,
-            naturalHeight,
-            clientWidth: displayDimensions.width * aspectRatio,
-            clientHeight: displayDimensions.height * aspectRatio
-          }
-          resolve(subjectDimensions)
-        }, reject)
-      })
-    })
-
-    Promise.all(sizePromises).then((imageDimensions) => {
-      subjectDimensions = imageDimensions
-    }).finally(() => {
-      const metadata = {
-        workflow_version: workflow.version,
-        started_at: subjectStartTime,
-        finished_at: subjectCompletionTime,
-        user_agent: `${Platform.OS} Mobile App`,
-        user_language: 'en',
-        utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
-        subject_dimensions: subjectDimensions,
-        viewport: { width: getState().app.device.width, height: getState().app.device.height },
-        session: getState().main.session.id
-      };
-      if (feedbackMetadata) {
-        metadata['feedback'] = feedbackMetadata;
-      }
-      apiClient.type('classifications').create({
-        completed: true,
-        annotations,
-        metadata,
-        links: {
-          project: workflow.links.project,
-          workflow: workflow.id,
-          subjects: [subject.id]
-        }
-      }).save().then(res => {
-        if (res.completed && res?.links?.project) {
-          // If user classified on project for the first time, toggle on the notification setting.
-          PushNotifications.userClassifiedProject(res.links.project)
-        }
-      })
-      // Subject queue refill is owned by `useSubjectQueue` in the new
-      // flow; the legacy refill block that used to live here has been
-      // removed to avoid duplicate API calls.
-    })
-  }
-}
-
-export function submitDrawingClassification(shapes, workflow, subject, {clientHeight, clientWidth}) {
-  return (dispatch, getState) => {
-    const { classifier } = getState()
-    const subjectStartTime = classifier.subjectStartTime[workflow.id]
-    const subjectCompletionTime = (new Date).toISOString()
-    const firstTask = workflow.first_task
-    const tools = workflow.tasks[firstTask].tools
-    const annotations = constructDrawingAnnotations(shapes, tools, firstTask)
-    apiClient.type('classifications').create({
-      completed: true,
-      annotations,
-      metadata: {
-        workflow_version: workflow.version,
-        started_at: subjectStartTime,
-        finished_at: subjectCompletionTime,
-        user_agent: `${Platform.OS} Mobile App`,
-        user_language: 'en',
-        utc_offset: ((new Date).getTimezoneOffset() * 60).toString(),
-        subject_dimensions: { ...classifier.subjectDimensions[subject.id], clientHeight, clientWidth },
-        viewport: { width: getState().app.device.width, height: getState().app.device.height },
-        session: getState().main.session.id
-      },
-      links: {
-        project: workflow.links.project,
-        workflow: workflow.id,
-        subjects: [subject.id]
-      }
-    }).save().then(res => {
-      if (res.completed && res?.links?.project) {
-        // If user classified on project for the first time, toggle on the notification setting.
-        PushNotifications.userClassifiedProject(res.links.project)
-      }
-    })
-
-    // Subject queue refill is owned by `useSubjectQueue` in the new
-    // flow; the legacy refill block that used to live here has been
-    // removed to avoid duplicate API calls.
-
-    // Mark the subject as completed and move on to the next
-    dispatch(setSubjectSeenThisSession(workflow.id, subject.id))
-    dispatch(setSubjectForWorkflow(workflow.id))
-    dispatch(clearShapes())
-  }
-}
-
-const setSubjectForWorkflow = (workflowId) => ({
-  type: ActionConstants.SET_SUBJECT_FOR_WORKFLOW,
-  workflowId
-})
 
 export function fetchFieldGuide(workflowId, projectId) {
   return (dispatch) => {
@@ -355,8 +158,8 @@ export function setupProjectPreferences(workflowID, project) {
       })
       // Any failure above (a rejected auth check, an expired session that
       // 401s on project_preferences, a network drop) must reject. Without
-      // this the outer promise never settles and startNewClassification's
-      // Promise.all waits forever behind the "Loading Workflow..." overlay.
+      // this the outer promise never settles and the workflow resources stay
+      // behind the "Loading Workflow..." overlay.
       .catch(reject)
     })
   }
@@ -567,18 +370,6 @@ export const removeAnnotationFromTask = (workflowId, task, annotation) => ({
   annotation,
 })
 
-const setSubjectSeenThisSession = (workflowId, subjectId) => ({
-  type: ActionConstants.SET_SUBJECT_SEEN_THIS_SESSION,
-  workflowId,
-  subjectId
-})
-
-export const setQuestionContainerHeight = (workflowId, questionContainerHeight) => ({
-  type: ActionConstants.SET_QUESTION_CONTAINER_HEIGHT,
-  workflowId,
-  questionContainerHeight
-})
-
 export const clearClassifierData = () => ({
   type: ActionConstants.CLEAR_CLASSIFIER_DATA
 })
@@ -586,11 +377,6 @@ export const clearClassifierData = () => ({
 export const setClassifierTestMode = (isTestMode) => ({
   type: ActionConstants.SET_CLASSIFIER_TEST_MODE,
   isTestMode
-})
-
-const clearSubjectsFromWorkflow = (workflowId) => ({
-  type: ActionConstants.CLEAR_SUBJECTS_FROM_WORKFLOW,
-  workflowId,
 })
 
 export const setSubjectStartTimeForWorkflow = (workflowId) => ({
@@ -621,20 +407,3 @@ const setGuideForWorkflow = (workflowId, guide) => ({
   workflowId,
   guide
 })
-
-const initializeAnnotation = (workflowId) => ({
-  type: ActionConstants.INITIALIZE_ANNOTATION,
-  workflowId,
-})
-
-const requestClassifierData = {
-  type: ActionConstants.REQUEST_CLASSIFIER_DATA
-}
-
-const classifierDataSuccess = {
-  type: ActionConstants.CLASSIFIER_DATA_SUCCESS
-}
-
-const classifierDataFailure = {
-  type: ActionConstants.CLASSIFIER_DATA_FAILURE
-}

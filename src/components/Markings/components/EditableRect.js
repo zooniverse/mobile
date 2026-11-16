@@ -71,45 +71,59 @@ class EditableRect extends Component {
 
     renderCorners() {
         const {
-            width, height, x, y, displayToNativeRatioX, onCornerLayout, isDeletable, color
+            width, height, x, y, displayToNativeRatioX, onCornerLayout, isDeletable, color, handleRadius
         } = this.props
 
         const cornerColor = isDeletable ? 'red' : color
+        const radius = (this.props.compactMarks ? 4 : handleRadius) * displayToNativeRatioX
+        const reportCornerLayout = (event, corner) => {
+            if (!this.props.compactMarks) return onCornerLayout(event, corner)
+            // Preserve the original hit area while drawing smaller corner dots.
+            const layout = event.nativeEvent.layout
+            const extraWidth = layout.width * (handleRadius / 4 - 1) / 2
+            const extraHeight = layout.height * (handleRadius / 4 - 1) / 2
+            onCornerLayout({ nativeEvent: { layout: {
+                x: layout.x - extraWidth,
+                y: layout.y - extraHeight,
+                width: layout.width + extraWidth * 2,
+                height: layout.height + extraHeight * 2,
+            } } }, corner)
+        }
 
         return (
             <G>
                 <Circle
                     ref={ref => this.upperLeftCircle = ref}
-                    onLayout={(event) => onCornerLayout(event, RectCorners.upperLeft)}
+                    onLayout={(event) => reportCornerLayout(event, RectCorners.upperLeft)}
                     cx={x}
                     cy={y}
                     fill={cornerColor}
-                    r={16 * displayToNativeRatioX}
+                    r={radius}
                 />
 
                 <Circle
                     ref={ref => this.upperRightCircle = ref}
-                    onLayout={(event) => onCornerLayout(event, RectCorners.upperRight)}
+                    onLayout={(event) => reportCornerLayout(event, RectCorners.upperRight)}
                     cx={x + width}
                     cy={y}
                     fill={cornerColor}
-                    r={16 * displayToNativeRatioX}
+                    r={radius}
                 />
                 <Circle
                     ref={ref => this.bottomLeftCircle = ref}
-                    onLayout={(event) => onCornerLayout(event, RectCorners.bottomLeft)}
+                    onLayout={(event) => reportCornerLayout(event, RectCorners.bottomLeft)}
                     cx={x}
                     cy={height + y}
                     fill={cornerColor}
-                    r={16 * displayToNativeRatioX}
+                    r={radius}
                 />
                 <Circle
                     ref={ref => this.bottomRightCircle = ref}
-                    onLayout={(event) => onCornerLayout(event, RectCorners.bottomRight)}
+                    onLayout={(event) => reportCornerLayout(event, RectCorners.bottomRight)}
                     cx={width + x}
                     cy={height + y}
                     fill={cornerColor}
-                    r={16 * displayToNativeRatioX}
+                    r={radius}
                 />
             </G> : null
         )
@@ -127,7 +141,7 @@ class EditableRect extends Component {
                     width={this.props.width}
                     height={this.props.height}
                     stroke={rectangleModeColor}
-                    strokeWidth={4 * this.props.displayToNativeRatioX}
+                    strokeWidth={(this.props.compactMarks ? 2 : 4) * this.props.displayToNativeRatioX}
                     fill={this.props.isDeletable ? Color(rectangleModeColor).alpha(0.5).toString() : 'transparent'}
                 />
                 {
@@ -147,6 +161,8 @@ EditableRect.propTypes = {
     nativeWidth: PropTypes.number.isRequired,
     width: PropTypes.number,
     height: PropTypes.number,
+    handleRadius: PropTypes.number,
+    compactMarks: PropTypes.bool,
     color: PropTypes.string,
     showCorners: PropTypes.bool,
     isDeletable: PropTypes.bool,
@@ -155,6 +171,10 @@ EditableRect.propTypes = {
     onCornerLayout: PropTypes.func,
     onCloseLayout: PropTypes.func,
     onDelete: PropTypes.func
+}
+
+EditableRect.defaultProps = {
+    handleRadius: 16,
 }
 
 export default EditableRect

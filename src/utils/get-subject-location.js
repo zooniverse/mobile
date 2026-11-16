@@ -10,6 +10,10 @@ function getSubjectLocation(locationRef) {
     src = locationRef[mimeType];
     ref1 = mimeType.split('/'), type = ref1[0], format = ref1[1]
 
+    if (mimeType === 'text/plain') {
+      break
+    }
+
     if (type in READABLE_FORMATS && indexOf.call(format, READABLE_FORMATS[type]) >= 0) {
       break
     }

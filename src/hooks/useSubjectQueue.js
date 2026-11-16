@@ -7,10 +7,8 @@
  */
 
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import apiClient from 'panoptes-client/lib/api-client';
 import getSubjectLocations from '../utils/get-subject-location';
-import * as ActionConstants from '../constants/actions';
 
 // How many unclassified subjects should remain before we fetch more
 const REFILL_THRESHOLD = 8;
@@ -22,8 +20,6 @@ const PAGE_SIZE = 20;
 const TRIM_INTERVAL = 10;
 
 const useSubjectQueue = (workflowId) => {
-  const dispatch = useDispatch();
-
   // The queue of subjects waiting to be (or already) classified
   const [queue, setQueue] = useState([]);
 
@@ -74,14 +70,6 @@ const useSubjectQueue = (workflowId) => {
 
         setQueue((prev) => [...prev, ...newSubjects]);
 
-        // Mirror the fetched subjects into the legacy Redux slot so legacy
-        // thunks that still read `classifier.subjectLists[workflowId]`
-        // (e.g. the `setSubjectSeenThisSession` reducer) stay in sync.
-        dispatch({
-          type: ActionConstants.APPEND_SUBJECTS_TO_WORKFLOW,
-          workflowId,
-          subjects: newSubjects,
-        });
       }
     } catch (error) {
       console.warn('Failed to fetch more subjects:', error);
@@ -89,7 +77,7 @@ const useSubjectQueue = (workflowId) => {
       isFetchingRef.current = false;
       setIsLoading(false);
     }
-  }, [workflowId, dispatch]);
+  }, [workflowId]);
 
   // Advances to the next subject. Triggers a refill if running low.
   const advanceToNextSubject = useCallback(() => {

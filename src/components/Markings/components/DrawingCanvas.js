@@ -26,6 +26,9 @@ const DrawingCanvas = ({
     onContainerLayout,
     onShapeIsOutOfBoundsUpdates,
     canDraw,
+    handleRadius,
+    compactMarks = false,
+    zoomScale = 1,
     onShapeAdded,
     onShapeRemoved,
     onShapeMutated,
@@ -97,6 +100,9 @@ const DrawingCanvas = ({
                         drawingShape="rect"
                         mode={mode}
                         maxShapesDrawn={maxShapesDrawn}
+                        handleRadius={handleRadius}
+                        compactMarks={compactMarks}
+                        zoomScale={zoomScale}
                         onShapeCreated={onShapeAdded}
                         onShapeDeleted={onShapeRemoved}
                         onShapeModified={onShapeMutated}
@@ -133,9 +139,16 @@ DrawingCanvas.propTypes = {
     onContainerLayout: PropTypes.func,
     onShapeIsOutOfBoundsUpdates: PropTypes.func,
     canDraw: PropTypes.bool,
+    handleRadius: PropTypes.number,
+    compactMarks: PropTypes.bool,
+    zoomScale: PropTypes.number,
     onShapeAdded: PropTypes.func,
     onShapeRemoved: PropTypes.func,
     onShapeMutated: PropTypes.func,
+}
+
+DrawingCanvas.defaultProps = {
+    handleRadius: 16,
 }
 
 export default DrawingCanvas

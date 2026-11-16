@@ -12,20 +12,8 @@ export const gaTrackScreen = (route) => {
     });
   };
 
-  // For classifiers use the project slug. For project list add the type of project list. For anything else convert to title case.
+  // For project lists include the category; otherwise convert the route name to title case.
   switch (route.name) {
-    case 'QuestionClassifier':
-      name = route?.params?.project?.slug ?? route.name;
-      break;
-    case 'SwipeClassifier':
-      name = route?.params?.project?.slug ?? route.name;
-      break;
-    case 'DrawingClassifier':
-      name = route?.params?.project?.slug ?? route.name;
-      break;
-    case 'MultiAnswerClassifier':
-      name = route?.params?.project?.slug ?? route.name;
-      break;
     case 'ProjectList':
       name = route?.params?.selectedProjectTag
         ? `Project List - ${titleCase(route.params.selectedProjectTag)}`

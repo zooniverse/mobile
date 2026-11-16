@@ -6,10 +6,6 @@ const PageKeys = {
     ProjectList: 'ProjectList',
     Register: 'Register',
     Settings: 'Settings',
-    SwipeClassifier: 'SwipeClassifier',
-    QuestionClassifier: 'QuestionClassifier',
-    MultiAnswerClassifier: 'MultiAnswerClassifier',
-    DrawingClassifier: 'DrawingClassifier',
     ClassifierScreen: 'ClassifierScreen',
     NotificationLandingPageScreen: 'NotificationLandingPageScreen'
 }

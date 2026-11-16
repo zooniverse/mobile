@@ -14,11 +14,6 @@ export const setNavbarSettingsForPage = (settings, page) => ({
     page
 })
 
-export const NavBarPageTitles = {
-    classifier: 'Classifier',
-    drawingClassifier: 'DrawingClassifier'
-}
-
 export const setPageShowing = (page) => ({
     type: ActionConstants.SET_PAGE_SHOWING,
     page

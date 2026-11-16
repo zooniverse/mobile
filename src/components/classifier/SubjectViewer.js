@@ -1,11 +1,11 @@
 /**
- * Displays the current subject. Handles three media shapes:
+ * Displays the current subject. Handles image, video, and image/text subjects:
  *   - Single image → plain `Image` (tappable for full-screen expand)
  *   - Multi-image (`subject.displays.length > 1`) → `MultiImageCarousel`
  *     with pagination dots and auto-play
  *   - Video (MP4) → native `Video` with controls + Android expand button
  *
- * Fixed 300pt height matches the legacy Question/Multi layout. Exposes
+ * Defaults to 300pt; choice workflows can supply a larger tablet height. Exposes
  * `onLayoutChange` so bodies can capture display dimensions for submission
  * metadata, and `onPress` for full-screen expand (opened by the shell).
  */
@@ -18,6 +18,8 @@ import {
   StyleSheet,
 } from 'react-native'
 
+import ImageAndTextViewer from './ImageAndTextViewer'
+
 import MultiImageCarousel from './MultiImageCarousel'
 import SubjectVideo from './SubjectVideo'
 import SubjectLoadingIndicator from '../common/SubjectLoadingIndicator'
@@ -26,7 +28,7 @@ const SUBJECT_HEIGHT = 300
 
 const isVideoSrc = (src = '') => src.slice(-4).toLowerCase() === '.mp4'
 
-const SubjectViewer = ({ subject, onLayoutChange, onPress }) => {
+const SubjectViewer = ({ subject, subjectText, onLayoutChange, onPress, adaptiveHeight = false, height = SUBJECT_HEIGHT }) => {
   const displays = subject?.displays
   const firstSrc = displays?.[0]?.src
   const [singleImageLoaded, setSingleImageLoaded] = useState(false)
@@ -38,6 +40,10 @@ const SubjectViewer = ({ subject, onLayoutChange, onPress }) => {
   }, [subject?.id])
 
   if (!displays?.length || !firstSrc) return null
+
+  if (displays.some(display => display.type === 'text')) {
+    return <ImageAndTextViewer key={subject.id} subject={subject} original={subjectText} onPress={onPress} adaptiveHeight={adaptiveHeight} />
+  }
 
   const renderMedia = () => {
     // Multi-image: auto-play carousel with pagination dots.
@@ -60,7 +66,7 @@ const SubjectViewer = ({ subject, onLayoutChange, onPress }) => {
         <SubjectVideo
           uri={firstSrc}
           onExpandImage={onPress}
-          style={styles.video}
+          style={[styles.video, { height }]}
         />
       )
     }
@@ -95,7 +101,7 @@ const SubjectViewer = ({ subject, onLayoutChange, onPress }) => {
 
   return (
     <View
-      style={styles.container}
+      style={[styles.container, { height }]}
       onLayout={(e) => onLayoutChange?.(e.nativeEvent.layout)}
     >
       {renderMedia()}
